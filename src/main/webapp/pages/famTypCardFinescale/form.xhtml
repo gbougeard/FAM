@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        >
+
+    <h:panelGrid columns="3">
+        <!--                     <h:outputLabel value="#{bundle.EditFamTypCardFinescaleLabel_idTypCardFinescale}" for="idTypCardFinescale" />
+     <p:inputText id="idTypCardFinescale"
+                  value="#{bean.idTypCardFinescale}"
+                  title="#{bundle.EditFamTypCardFinescaleTitle_idTypCardFinescale}"
+                  >
+         <p:ajax event="blur" update="msg_idTypCardFinescale"/>
+     </p:inputText>
+     <p:message id="msg_idTypCardFinescale" for="idTypCardFinescale"/> -->
+
+        <h:outputLabel value="#{bundle.EditFamTypCardFinescaleLabel_libTypCardFinescale}" for="libTypCardFinescale"/>
+        <p:inputText id="libTypCardFinescale"
+                     value="#{bean.libTypCardFinescale}"
+                     title="#{bundle.EditFamTypCardFinescaleTitle_libTypCardFinescale}"
+                >
+            <p:ajax event="blur" update="msg_libTypCardFinescale"/>
+        </p:inputText>
+        <p:message id="msg_libTypCardFinescale" for="libTypCardFinescale"/>
+
+        <h:outputLabel value="#{bundle.EditFamTypCardFinescaleLabel_codTypCardFinescale}" for="codTypCardFinescale"/>
+        <p:inputText id="codTypCardFinescale"
+                     value="#{bean.codTypCardFinescale}"
+                     title="#{bundle.EditFamTypCardFinescaleTitle_codTypCardFinescale}"
+                >
+            <p:ajax event="blur" update="msg_codTypCardFinescale"/>
+        </p:inputText>
+        <p:message id="msg_codTypCardFinescale" for="codTypCardFinescale"/>
+
+        <h:outputLabel value="#{bundle.EditFamTypCardFinescaleLabel_famTypCard}" for="famTypCard"/>
+        <h:selectOneMenu id="famTypCard"
+                         value="#{bean.famTypCard}"
+                         title="#{bundle.EditFamTypCardFinescaleTitle_famTypCard}"
+                >
+            <!--                        <f:selectItems value="#{famTypCardController.itemsAvailableSelectOne}"/>-->
+            <f:selectItem itemLabel="TypCard"
+                          noSelectionOption="true"/>
+            <f:selectItems value="#{cacheBean.listTypCard}"
+                           var="n"
+                           itemValue="#{n}"
+                           itemLabel="#{n.libTypCard}"/>
+            <p:ajax event="blur" update="msg_famTypCard"/>
+        </h:selectOneMenu>
+        <p:message id="msg_famTypCard" for="famTypCard"/>
+
+        <h:outputLabel value="#{bundle.EditFamTypCardFinescaleLabel_price}" for="price"/>
+        <p:inputText id="price"
+                     value="#{bean.price}"
+                     title="#{bundle.EditFamTypCardFinescaleTitle_price}"
+                >
+            <p:ajax event="blur" update="msg_price"/>
+        </p:inputText>
+        <p:message id="msg_price" for="price"/>
+
+        <!--                    <h:outputLabel value="#{bundle.EditFamTypCardFinescaleLabel_dtCreat}" for="dtCreat" />
+     <p:inputText id="dtCreat"
+                  value="#{bean.dtCreat}"
+                  title="#{bundle.EditFamTypCardFinescaleTitle_dtCreat}"
+                  >
+         <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+         <p:ajax event="blur" update="msg_dtCreat"/>
+     </p:inputText>
+     <p:message id="msg_dtCreat" for="dtCreat"/>
+
+     <h:outputLabel value="#{bundle.EditFamTypCardFinescaleLabel_dtModif}" for="dtModif" />
+     <p:inputText id="dtModif"
+                  value="#{bean.dtModif}"
+                  title="#{bundle.EditFamTypCardFinescaleTitle_dtModif}"
+                  >
+         <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+         <p:ajax event="blur" update="msg_dtModif"/>
+     </p:inputText>
+     <p:message id="msg_dtModif" for="dtModif"/> -->
+
+    </h:panelGrid>
+</ui:composition>

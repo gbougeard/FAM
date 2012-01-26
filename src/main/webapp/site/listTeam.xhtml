@@ -1,0 +1,144 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+
+    <ui:define name="title">Teams</ui:define>
+    <ui:define name="body">
+        <!--        Form Detail-->
+        <p:panel header="Edition - Team">
+            <h:form id="formEdit">
+                <p:ajaxStatus style="width:16px;height:16px;">
+                    <f:facet name="start">
+                        <h:graphicImage value="../../design/ajaxloading.gif"/>
+                    </f:facet>
+                    <f:facet name="complete">
+                        <h:outputText value=""/>
+                    </f:facet>
+                </p:ajaxStatus>
+
+                <h:panelGrid columns="3" id="edit">
+                    <h:outputLabel value="Id :" for="lbl_idTeam"></h:outputLabel>
+                    <p:inputText id="lbl_idTeam"
+                                 value="#{teamController.selected.idTeam}"
+                                 readonly="true">
+                        <p:ajax event="blur" update="msgId"/>
+                    </p:inputText>
+                    <p:message id="msgId" for="lbl_idTeam"/>
+
+                    <h:outputLabel value="Libellé :" for="lbl_libTeam"></h:outputLabel>
+                    <p:inputText id="lbl_libTeam"
+                                 value="#{teamController.selected.libTeam}">
+                        <p:ajax event="keyup" update="msgLib" process="@this"/>
+                    </p:inputText>
+                    <p:message id="msgLib" for="lbl_libTeam"/>
+
+                    <h:outputLabel value="Code :" for="lbl_code"></h:outputLabel>
+                    <p:inputText id="lbl_code"
+                                 value="#{teamController.selected.codTeam}">
+                        <p:ajax event="blur" update="msgCode"/>
+                    </p:inputText>
+                    <p:message id="msgCode" for="lbl_code"/>
+
+                    <h:outputLabel value="Club :" for="selectClub"></h:outputLabel>
+                    <h:selectOneMenu id="selectClub"
+                                     value="#{teamController.selected.famClub}"
+                                     label="Label">
+                        <f:selectItem itemLabel="Club"
+                                      noSelectionOption="true"/>
+                        <f:selectItems value="#{cacheBean.listClub}"
+                                       var="n"
+                                       itemValue="#{n}"
+                                       itemLabel="#{n.libClub}"/>
+                        <p:ajax event="blur" update="msgClub"/>
+                    </h:selectOneMenu>
+                    <p:message id="msgClub" for="selectClub"/>
+
+                    <h:outputLabel value="Date creat. :" for="lbl_dtCreat"></h:outputLabel>
+                    <p:inputText id="lbl_dtCreat"
+                                 value="#{teamController.selected.dtCreat}"
+                                 readonly="true">
+                        <f:convertDateTime type="both" dateStyle="medium"/>
+                        <p:ajax event="blur" update="msgDtCreat"/>
+                    </p:inputText>
+                    <p:message id="msgDtCreat" for="lbl_dtCreat"/>
+
+                    <h:outputLabel value="Date modif. :" for="lbl_dtModif"></h:outputLabel>
+                    <p:inputText id="lbl_dtModif"
+                                 value="#{teamController.selected.dtModif}"
+                                 readonly="true">
+                        <f:convertDateTime type="both" dateStyle="medium"/>
+                        <p:ajax event="blur" update="msgDtModif"/>
+                    </p:inputText>
+                    <p:message id="msgDtModif" for="lbl_dtModif"/>
+
+                    <p:commandButton value="Nouveau"
+                                     action="#{teamController.nouveau}"
+                                     update="formEdit:edit"/>
+                    <p:commandButton value="Enregistrer"
+                                     action="#{teamController.save}"
+                                     update="formList:grid formEdit:edit"/>
+
+                </h:panelGrid>
+            </h:form>
+        </p:panel>
+
+        <!--        Liste Master-->
+        <center>
+            <h:form id="formList">
+                <p:panel header="Teams">
+
+                    <p:dataTable
+                            var="team"
+                            value="#{teamController.list}"
+                            selection="#{teamController.selected}"
+                            selectionMode="single"
+                            update="formEdit:edit"
+                            id="grid"
+                            scrollable="true"
+                            height="100">
+
+                        <f:facet name="header">
+                        </f:facet>
+
+                        <p:column sortBy="#{team.idTeam}"
+                                  filterBy="#{team.idTeam}"
+                                  headerText="Id"
+                                  style="width:200px">
+                            <h:outputText value="#{team.idTeam}"/>
+                        </p:column>
+
+                        <p:column sortBy="#{team.libTeam}"
+                                  filterBy="#{team.libTeam}"
+                                  headerText="Libellé"
+                                  style="width:200px">
+                            <h:outputText value="#{team.libTeam}"/>
+                        </p:column>
+
+                        <p:column sortBy="#{team.codTeam}"
+                                  filterBy="#{team.codTeam}"
+                                  headerText="Code "
+                                  style="width:200px">
+                            <h:outputText value="#{team.codTeam}"/>
+                        </p:column>
+
+                        <p:column sortBy="#{team.famClub.libClub}"
+                                  filterBy="#{team.famClub.libClub}"
+                                  headerText="Club "
+                                  style="width:200px">
+                            <h:outputText value="#{team.famClub.libClub}"/>
+                        </p:column>
+
+                        <f:facet name="footer">
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+        </center>
+
+    </ui:define>
+</ui:composition>

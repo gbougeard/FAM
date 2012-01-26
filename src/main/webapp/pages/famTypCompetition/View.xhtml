@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+    <ui:define name="title">
+        <h:outputText value="#{bundle.ViewFamTypCompetitionTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <p:panel header="#{bundle.ViewFamTypCompetitionTitle}">
+            <h:form>
+                <h:panelGrid columns="2">
+                    <!--                    <h:outputText value="#{bundle.ViewFamTypCompetitionLabel_idCompetition}"/>
+      <h:outputText value="#{famTypCompetitionController.selected.idCompetition}"
+                    title="#{bundle.ViewFamTypCompetitionTitle_idCompetition}"/>-->
+
+                    <h:outputText value="#{bundle.ViewFamTypCompetitionLabel_libCompetition}"/>
+                    <h:outputText value="#{famTypCompetitionController.selected.libCompetition}"
+                                  title="#{bundle.ViewFamTypCompetitionTitle_libCompetition}"/>
+
+                    <h:outputText value="#{bundle.ViewFamTypCompetitionLabel_codCompetition}"/>
+                    <h:outputText value="#{famTypCompetitionController.selected.codCompetition}"
+                                  title="#{bundle.ViewFamTypCompetitionTitle_codCompetition}"/>
+
+                    <h:outputText value="#{bundle.ViewFamTypCompetitionLabel_isChampionship}"/>
+                    <p:selectBooleanCheckbox value="#{famTypCompetitionController.selected.isChampionship}"/>
+
+                    <h:outputText value="#{bundle.ViewFamTypCompetitionLabel_typMatch}"/>
+                    <h:outputText value="#{famTypCompetitionController.selected.typMatch}"
+                                  title="#{bundle.ViewFamTypCompetitionTitle_typMatch}"/>
+
+                    />
+
+                    <!--                    <h:outputText value="#{bundle.ViewFamTypCompetitionLabel_dtCreat}"/>
+                    <h:outputText value="#{famTypCompetitionController.selected.dtCreat}"
+                                  title="#{bundle.ViewFamTypCompetitionTitle_dtCreat}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewFamTypCompetitionLabel_dtModif}"/>
+                    <h:outputText value="#{famTypCompetitionController.selected.dtModif}"
+                                  title="#{bundle.ViewFamTypCompetitionTitle_dtModif}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                    </h:outputText>-->
+                </h:panelGrid>
+                <br/>
+                <p:commandButton action="#{famTypCompetitionController.prepareEdit}"
+                                 value="#{bundle.ViewFamTypCompetitionEditLink}"/>
+                <p:commandButton action="#{famTypCompetitionController.prepareCreate}"
+                                 value="#{bundle.ViewFamTypCompetitionCreateLink}"/>
+                <p:commandButton action="#{famTypCompetitionController.prepareList}"
+                                 value="#{bundle.ViewFamTypCompetitionShowAllLink}"/>
+            </h:form>
+        </p:panel>
+    </ui:define>
+</ui:composition>

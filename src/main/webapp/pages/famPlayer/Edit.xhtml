@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+
+    <!--    <f:metadata>
+        <f:viewParam name="id" value="#{famPlayerController.id}"/>
+        <f:event type="preRenderView" listener="#{famPlayerController.loadAction}" />	
+    </f:metadata>-->
+
+    <ui:define name="title">
+        <h:outputText value="#{bundle.EditFamPlayerTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <h:form>
+            <p:panel header="#{bundle.EditFamPlayerTitle} - #{famPlayerController.selected.displayName}">
+
+                <ui:include src="form.xhtml">
+                    <ui:param name="bean" value="#{famPlayerController.selected}"/>
+                </ui:include>
+                <br/>
+                <p:commandButton value="#{bundle.EditFamPlayerSaveLink}"
+                                 action="#{famPlayerController.update}"
+                        />
+                <p:commandButton value="#{bundle.EditFamPlayerCancelLink}"
+                                 action="#{famPlayerController.prepareList}"
+                                 immediate="true"/>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        >
+    <script type="text/javascript">
+        function handleDrop(event, ui) {
+            var droppedCar = ui.draggable;
+
+            droppedCar.fadeOut('fast');
+        }
+    </script>
+    <h:panelGrid columns="3">
+        <h:outputLabel value="#{bundle.EditFamFormationLabel_libFormation}" for="libFormation"/>
+        <p:inputText id="libFormation"
+                     value="#{bean.libFormation}"
+                     title="#{bundle.EditFamFormationTitle_libFormation}"
+                >
+            <p:ajax event="blur" update="msg_libFormation"/>
+        </p:inputText>
+        <p:message id="msg_libFormation" for="libFormation"/>
+
+        <h:outputLabel value="#{bundle.EditFamFormationLabel_codFormation}" for="codFormation"/>
+        <p:inputText id="codFormation"
+                     value="#{bean.codFormation}"
+                     title="#{bundle.EditFamFormationTitle_codFormation}"
+                >
+            <p:ajax event="blur" update="msg_codFormation"/>
+        </p:inputText>
+        <p:message id="msg_codFormation" for="codFormation"/>
+
+        <h:outputLabel value="#{bundle.EditFamFormationLabel_byDefault}" for="byDefault"/>
+        <p:selectBooleanCheckbox id="byDefault"
+                                 value="#{bean.byDefault}"
+                                 title="#{bundle.EditFamFormationTitle_byDefault}"
+                >
+            <p:ajax event="blur" update="msg_byDefault"/>
+        </p:selectBooleanCheckbox>
+        <p:message id="msg_byDefault" for="byDefault"/>
+
+        <h:outputLabel value="#{bundle.EditFamFormationTitlel_typMatch}" for="typMatch"/>
+        <p:selectOneMenu id="typMatch"
+                         value="#{bean.famTypMatch}"
+                         readonly="#{not create}">
+            <!--                          valueChangeListener="#{famFormationController.genImage}">-->
+            <f:selectItem itemLabel="TypMatch" itemValue=""/>
+            <!--                          noSelectionOption="true"/>-->
+            <f:selectItems value="#{cacheBean.listTypMatch}"
+                           var="t"
+                           itemLabel="#{t.libTypMatch}"
+                           itemValue="#{t}"/>
+            <p:ajax event="blur" update="@form msg_typMatch " listener="#{famFormationController.genImage}"/>
+            <p:ajax event="itemSelect" listener="#{famFormationController.genTarget}" update="@form"/>
+        </p:selectOneMenu>
+        <p:message id="msg_typMatch" for="typMatch"/>
+
+        <!--        <p:commandButton value="targets" action="#{famFormationController.genTarget}"
+      immediate="true" update="@form trgField"/>-->
+
+    </h:panelGrid>
+
+    <!--    <p:fieldset legend="Disposition">-->
+    <h:panelGrid columns="1">
+
+        <!--        <p:panel header="Squad" style="width:80px;height:520px;">
+            <p:dataGrid id="dgSquad" value="#{famFormationController.lstNumber}" 
+                        var="i" columns="1">  
+                <p:column>  
+                    <p:outputPanel id="player" 
+                                   style="font-size:12px;display:block;text-align:center;width:20px;height:20px;border:1px solid #666666;">
+                        <h:outputText value="#{i}"/> 
+                    </p:outputPanel>
+                    <p:draggable for="player" revert="true" handle=".ui-panel-titlebar" stack=".ui-panel"/>  
+
+                </p:column>  
+                                <p:column>  
+                                    <p:panel id="pnl" header="#{i}" style="text-align:center">  
+                
+                                    </p:panel>  
+                                    <p:draggable for="pnl" revert="true"  
+                                                 handle=".ui-panel-titlebar" stack=".ui-panel"/>  
+                                </p:column>
+            </p:dataGrid> 
+        </p:panel>-->
+        <!--        <p:panel header="Canvas "
+                 style="width:300px;height:520px;">  
+            <p:dataGrid  value="#{famFormationController.lstTarget}"
+                        var="i" columns="1">  
+                <p:column>  
+                    <h:outputText value="#{i.famFormationItem.numItem} - #{i.famFormationItem.coord}" rendered="#{not empty i.famFormationItem.coord}"/> 
+                </p:column>  
+            </p:dataGrid> 
+        </p:panel>-->
+        <p:panel header="Field" styleClass="soccer_field">
+            <p:dataGrid id="trgField" value="#{famFormationController.lstTarget}"
+                        var="t" columns="5"
+                        style="padding-top: 25px;margin-left: 20px;">
+                <p:column>
+                    <p:panel id="trg"
+                             style="width:50px;height:63px;opacity:0.5;"
+                            >
+                        <p:panel id="item"
+                                 rendered="#{!empty t.famFormationItem.numItem}"
+                                 style="width:24px;height:47px;">
+                            <h:outputText value="#{t.famFormationItem.numItem}"
+                                          style="text-align:center;font-weight: bolder;"/>
+                        </p:panel>
+                        <p:draggable for="item" revert="true" handle=".ui-panel-titlebar" stack=".ui-panel"/>
+
+                    </p:panel>
+                    <p:droppable for="trg"
+                                 tolerance="touch"
+                                 activeStyleClass="slotActive"
+                                 datasource="trgField"
+                                 onDrop="handleDrop"
+                            >
+                        <p:ajax listener="#{famFormationController.onDrop}"
+                                update="@form"
+                                />
+                    </p:droppable>
+                </p:column>
+            </p:dataGrid>
+        </p:panel>
+        <!--        <p:panel header="FormationItems "
+                 style="width:300px;height:520px;">  
+            <p:dataGrid id="items" value="#{famFormationController.selected.famFormationItemList}"
+                        var="i" columns="1">  
+                <p:column>  
+                    <h:outputText value="#{i.numItem} - #{i.coord}"/> 
+                </p:column>  
+            </p:dataGrid> 
+        </p:panel>-->
+    </h:panelGrid>
+
+    <!--    </p:fieldset>-->
+
+
+</ui:composition>

@@ -1,0 +1,23 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+
+    <ui:define name="titre">Login</ui:define>
+    <ui:define name="centre">
+        <p:panel header="Login">
+            <form method="POST" action="j_security_check">
+                Username: <input type="text" name="j_username"/>
+                Password: <input type="password" name="j_password"/>
+                <br/>
+                <input type="submit" value="Login"/>
+                <input type="reset" value="Reset"/>
+            </form>
+
+        </p:panel>
+    </ui:define>
+</ui:composition>

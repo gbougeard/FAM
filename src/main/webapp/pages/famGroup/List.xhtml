@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{bundle.ListFamGroupTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <h:form>
+            <p:panel header="#{bundle.FamGroup}">
+
+                <p:dataTable
+                        value="#{famGroupController.lazyModel}"
+                        lazy="true"
+                        var="item"
+                        selectionMode="single"
+                        paginator="true" rows="10"
+                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                        rowsPerPageTemplate="5,10,15"
+                        >
+                    <p:ajax event="rowSelect" listener="#{famGroupController.onRowSelect}" update="@form"/>
+                    <p:ajax event="rowUnselect" listener="#{famGroupController.onRowUnselect}" update="@form"/>
+                    <f:facet name="header">
+                        <p:toolbar>
+                            <p:toolbarGroup align="left">
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamGroupViewLink}"
+                                                 action="#{famGroupController.prepareView}"
+                                                 disabled="#{!famGroupController.select}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamGroupCreateLink}"
+                                                 action="#{famGroupController.prepareCreate}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamGroupEditLink}"
+                                                 action="#{famGroupController.prepareEdit}"
+                                                 disabled="#{!famGroupController.select}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamGroupDeleteLink}"
+                                                 action="#{famGroupController.prepareDelete}"
+                                                 disabled="#{!famGroupController.select}"/>
+                            </p:toolbarGroup>
+                        </p:toolbar>
+                    </f:facet>
+                    <!--                    <p:column sortBy="#{item.idGroup}"
+                              filterBy="#{item.idGroup}"
+                              headerText="#{bundle.ListFamGroupTitle_idGroup}" >
+                        <h:outputText value="#{item.idGroup}"/>
+                    </p:column>-->
+                    <p:column sortBy="#{item.groupname}"
+                              filterBy="#{item.groupname}"
+                              headerText="#{bundle.ListFamGroupTitle_groupname}">
+                        <h:outputText value="#{item.groupname}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.login}"
+                              filterBy="#{item.login}"
+                              headerText="#{bundle.ListFamGroupTitle_login}">
+                        <h:outputText value="#{item.login}"/>
+                    </p:column>
+                    <!--                    <p:column sortBy="#{item.dtCreat}"
+                              filterBy="#{item.dtCreat}"
+                              headerText="#{bundle.ListFamGroupTitle_dtCreat}" >
+                        <h:outputText value="#{item.dtCreat}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column sortBy="#{item.dtModif}"
+                              filterBy="#{item.dtModif}"
+                              headerText="#{bundle.ListFamGroupTitle_dtModif}" >
+                        <h:outputText value="#{item.dtModif}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:column>-->
+                    <f:facet name="footer">
+
+                    </f:facet>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

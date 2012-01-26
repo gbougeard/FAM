@@ -1,0 +1,27 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+
+    <ui:define name="titre">Signup</ui:define>
+
+    <ui:define name="centre">
+        <p:panel header="Login Error">
+            Sorry, you made an Error. Please try again: <a
+                href="#{facesContext.externalContext.requestContextPath}/auth/loginForm.jsf">Login</a>
+        </p:panel>
+        <c:if test="${request.remoteUser!=null}">
+            <h:form>
+                You are logged as  ${request.remoteUser}
+                <h:commandLink action="#{authentificationBean.deconnexion}">Logout</h:commandLink>
+            </h:form>
+        </c:if>
+        <c:if test="${request.remoteUser==null}">pas loggué</c:if>
+    </ui:define>
+
+</ui:composition>
+

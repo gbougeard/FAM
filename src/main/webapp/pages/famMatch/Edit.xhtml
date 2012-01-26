@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{bundle.EditFamMatchTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <h:form>
+            <p:panel header="#{bundle.EditFamMatchTitle}">
+                <h:panelGrid columns="3">
+                    <!--                    <h:outputLabel value="#{bundle.EditFamMatchLabel_idMatch}" for="idMatch" />
+                 <p:inputText id="idMatch"
+                              value="#{famMatchController.selected.idMatch}"
+                              title="#{bundle.EditFamMatchTitle_idMatch}"
+                              >
+                     <p:ajax event="blur" update="msg_idMatch"/>
+                 </p:inputText>
+                 <p:message id="msg_idMatch" for="idMatch"/> -->
+
+                    <h:outputLabel value="#{bundle.EditFamMatchLabel_famEvent}" for="famEvent"/>
+                    <!--                    <h:selectOneMenu id="famEvent" 
+                                                         value="#{famMatchController.selected.famEvent.libEvent}" 
+                                                         title="#{bundle.EditFamMatchTitle_famEvent}" 
+                                                         >
+                                            <f:selectItem itemLabel="Event" 
+                                                          noSelectionOption="true"/>
+                                            <f:selectItems  value="#{cacheBean.listEvent}"
+                                                            var="e"
+                                                            itemValue="#{e}"
+                                                            itemLabel="#{e.libEvent}"/>
+                                            <p:ajax event="blur" update="msg_famEvent"/>
+                                        </h:selectOneMenu>-->
+                    <h:outputText id="famEvent"
+                                  value="#{famMatchController.selected.famEvent.libEvent}"/>
+                    <p:message id="msg_famEvent" for="famEvent"/>
+
+                    <h:outputLabel value="#{bundle.EditFamMatchLabel_famSeasonCompetition}" for="famSeasonCompetition"/>
+                    <h:outputText id="famSeasonCompetition"
+                                  value="#{famMatchController.selected.famSeasonCompetition.displayName}"/>
+                    <!--                    <h:selectOneMenu id="famSeasonCompetition" 
+                                     value="#{famMatchController.selected.famSeasonCompetition.displayName}" 
+                                     title="#{bundle.EditFamMatchTitle_famSeasonCompetition}" 
+                                     >
+                        <f:selectItem itemLabel="Competition" 
+                                      noSelectionOption="true"/>
+                        <f:selectItems  value="#{cacheBean.listSeasonCompetition}"
+                                        var="c"
+                                        itemValue="#{c}"
+                                        itemLabel="#{c.displayName}"/>
+                        <p:ajax event="blur" update="msg_famSeasonCompetition"/>
+                    </h:selectOneMenu>-->
+                    <p:message id="msg_famSeasonCompetition" for="famSeasonCompetition"/>
+
+                    <c:if test="${famMatchController.selected.famSeasonCompetition.famTypCompetition.isChampionship}">
+                        <h:outputLabel value="#{bundle.EditFamMatchLabel_famFixture}" for="famFixture"/>
+                        <h:selectOneMenu id="famFixture"
+                                         value="${famMatchController.selected.famFixture}"
+                                         converter="fixtureConverter"
+                                >
+                            <f:selectItem itemLabel="Journée"
+                                          noSelectionOption="true"/>
+                            <f:selectItems value="${famMatchController.fixtureList}"
+                                           var="f"
+                                           itemValue="${f}"
+                                           itemLabel="${f.libFixture}"/>
+                            <p:ajax event="blur" update="msg_famFixture"/>
+                        </h:selectOneMenu>
+                        <p:message id="msg_famFixture" for="famFixture"/>
+                    </c:if>
+
+                    <!--                    <h:outputLabel value="#{bundle.EditFamMatchLabel_dtCreat}" for="dtCreat" />
+                 <p:inputText id="dtCreat"
+                              value="#{famMatchController.selected.dtCreat}"
+                              title="#{bundle.EditFamMatchTitle_dtCreat}"
+                              >
+                     <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                     <p:ajax event="blur" update="msg_dtCreat"/>
+                 </p:inputText>
+                 <p:message id="msg_dtCreat" for="dtCreat"/>
+
+                 <h:outputLabel value="#{bundle.EditFamMatchLabel_dtModif}" for="dtModif" />
+                 <p:inputText id="dtModif"
+                              value="#{famMatchController.selected.dtModif}"
+                              title="#{bundle.EditFamMatchTitle_dtModif}"
+                              >
+                     <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                     <p:ajax event="blur" update="msg_dtModif"/>
+                 </p:inputText>
+                 <p:message id="msg_dtModif" for="dtModif"/> -->
+
+                </h:panelGrid>
+                <p:commandButton value="#{bundle.EditFamMatchSaveLink}"
+                                 action="#{famMatchController.update}"
+                        />
+                <p:commandButton value="#{bundle.EditFamMatchCancelLink}"
+                                 action="#{famMatchController.prepareList}"
+                                 immediate="true"/>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

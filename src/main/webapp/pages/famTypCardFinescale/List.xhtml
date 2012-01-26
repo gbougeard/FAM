@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{bundle.ListFamTypCardFinescaleTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <h:form>
+            <p:panel header="#{bundle.FamTypCardFinescale}">
+
+                <p:dataTable
+                        value="#{famTypCardFinescaleController.lazyModel}"
+                        lazy="true"
+                        var="item"
+                        selection="#{famTypCardFinescaleController.selected}"
+                        selectionMode="single"
+                        paginator="true" rows="10"
+                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                        rowsPerPageTemplate="5,10,15"
+                        sortBy="#{item.libTypCardFinescale}"
+                        emptyMessage="#{bundle.NoDataFound}"
+                        paginatorAlwaysVisible="false"
+                        >
+                    <p:ajax event="rowSelect" update="tb"/>
+                    <p:ajax event="rowUnselect" update="tb"/>
+                    <f:facet name="header">
+                        <p:toolbar id="tb">
+                            <p:toolbarGroup align="left">
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamTypCardFinescaleViewLink}"
+                                                 action="#{famTypCardFinescaleController.prepareView}"
+                                                 disabled="#{empty famTypCardFinescaleController.selected.idTypCardFinescale}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamTypCardFinescaleCreateLink}"
+                                                 action="#{famTypCardFinescaleController.prepareCreate}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamTypCardFinescaleEditLink}"
+                                                 action="#{famTypCardFinescaleController.prepareEdit}"
+                                                 disabled="#{empty famTypCardFinescaleController.selected.idTypCardFinescale}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamTypCardFinescaleDeleteLink}"
+                                                 action="#{famTypCardFinescaleController.prepareDelete}"
+                                                 disabled="#{empty famTypCardFinescaleController.selected.idTypCardFinescale}"/>
+                            </p:toolbarGroup>
+                        </p:toolbar>
+                    </f:facet>
+                    <!--                     <p:column sortBy="#{item.idTypCardFinescale}"
+                              filterBy="#{item.idTypCardFinescale}"
+                              headerText="#{bundle.ListFamTypCardFinescaleTitle_idTypCardFinescale}" >
+                        <h:outputText value="#{item.idTypCardFinescale}"/>
+                    </p:column>-->
+                    <p:column sortBy="#{item.libTypCardFinescale}"
+                              filterBy="#{item.libTypCardFinescale}"
+                              headerText="#{bundle.ListFamTypCardFinescaleTitle_libTypCardFinescale}">
+                        <h:outputText value="#{item.libTypCardFinescale}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.codTypCardFinescale}"
+                              filterBy="#{item.codTypCardFinescale}"
+                              headerText="#{bundle.ListFamTypCardFinescaleTitle_codTypCardFinescale}">
+                        <h:outputText value="#{item.codTypCardFinescale}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.famTypCard.libTypCard}"
+                              filterBy="#{item.famTypCard.libTypCard}"
+                              headerText="#{bundle.ListFamTypCardFinescaleTitle_famTypCard}">
+                        <h:outputText value="#{item.famTypCard.libTypCard}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.price}"
+                              filterBy="#{item.price}"
+                              headerText="#{bundle.ListFamTypCardFinescaleTitle_price}">
+                        <h:outputText value="#{item.price}"/>
+                    </p:column>
+
+                    <!--                    <p:column sortBy="#{item.dtCreat}"
+                              filterBy="#{item.dtCreat}"
+                              headerText="#{bundle.ListFamTypCardFinescaleTitle_dtCreat}" >
+                        <h:outputText value="#{item.dtCreat}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column sortBy="#{item.dtModif}"
+                              filterBy="#{item.dtModif}"
+                              headerText="#{bundle.ListFamTypCardFinescaleTitle_dtModif}" >
+                        <h:outputText value="#{item.dtModif}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:column>-->
+                    <f:facet name="footer">
+
+                    </f:facet>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

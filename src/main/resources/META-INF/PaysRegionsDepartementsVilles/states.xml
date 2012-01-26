@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+-
+- phpMyAdmin XML Dump
+- version 3.2.0.1
+- http://www.phpmyadmin.net
+-
+- Serveur: localhost
+- Généré le : Ven 30 Avril 2010 à 17:30
+- Version du serveur: 5.1.36
+- Version de PHP: 5.2.11
+-->
+
+<!--
+- Base de données: 'vilaloka'
+-->
+<vilaloka>
+  <!-- Table state -->
+    <state>
+        <id_region>1</id_region>
+        <name_state>Aquitaine</name_state>
+        <name_state_uppercase>AQUITAINE</name_state_uppercase>
+        <state_slug>aquitaine</state_slug>
+        <id_country>1</id_country>
+    </state>
+    <state>
+        <id_region>2</id_region>
+        <name_state>Auvergne</name_state>
+        <name_state_uppercase>AUVERGNE</name_state_uppercase>
+        <state_slug>auvergne</state_slug>
+        <id_country>1</id_country>
+    </state>
+    <state>
+        <id_region>3</id_region>
+        <name_state>Bourgogne</name_state>
+        <name_state_uppercase>BOURGOGNE</name_state_uppercase>
+        <state_slug>bourgogne</state_slug>
+        <id_country>1</id_country>
+    </state>
+    <state>
+        <id_region>4</id_region>
+        <name_state>Bretagne</name_state>
+        <name_state_uppercase>BRETAGNE</name_state_uppercase>
+        <state_slug>bretagne</state_slug>
+        <id_country>1</id_country>
+    </state>
+    <state>
+        <id_region>5</id_region>
+        <name_state>Centre</name_state>
+        <name_state_uppercase>CENTRE</name_state_uppercase>
+        <state_slug>centre</state_slug>
+        <id_country>1</id_country>
+    </state>
+    <state>
+        <id_region>6</id_region>
+        <name_state>Champagne Ardenne</name_state>
+        <name_state_uppercase>CHAMPAGNE ARDENNE</name_state_uppercase>
+        <state_slug>champagne-ardenne</state_slug>
+        <id_country>1</id_country>
+    </state>
+    <state>
+        <id_region>7</id_region>
+        <name_state>Corse</name_state>
+        <name_state_uppercase>CORSE</name_state_uppercase>
+        <state_slug>corse</state_slug>
+        <id_country>1</id_country>
+    </state>
+    <state>
+        <id_region>8</id_region>
+        <name_state>DOM/TOM</name_state>
+        <name_state_uppercase>DOM/TOM</name_state_uppercase>
+        <state_slug>dom-tom</state_slug>
+        <id_country>1</id_country>
+    </state>
+    <state>
+        <id_region>9</id_region>
+        <name_state>Franche Comté</name_state>
+        <name_state_uppercase>FRANCHE COMTÉ</name_state_uppercase>
+        <state_slug>franche-comte</state_slug>
+        <id_country>1</id_country>
+    </state>
+    <state>
+        <id_region>10</id_region>
+        <name_state>Ile de France</name_state>
+        <name_state_uppercase>ILE DE FRANCE</name_state_uppercase>
+        <state_slug>ile-de-france</state_slug>
+        <id_country>1</id_country>
+    </state>
+    <state>
+        <id_region>11</id_region>
+        <name_state>Languedoc Roussillon</name_state>
+        <name_state_uppercase>LANGUEDOC ROUSSILLON</name_state_uppercase>
+        <state_slug>languedoc-roussillon</state_slug>
+        <id_country>1</id_country>
+    </state>
+    <state>
+        <id_region>12</id_region>
+        <name_state>Limousin</name_state>
+        <name_state_uppercase>LIMOUSIN</name_state_uppercase>
+        <state_slug>limousin</state_slug>
+        <id_country>1</id_country>
+    </state>
+    <state>
+        <id_region>13</id_region>
+        <name_state>Lorraine</name_state>
+        <name_state_uppercase>LORRAINE</name_state_uppercase>
+        <state_slug>lorraine</state_slug>
+        <id_country>1</id_country>
+    </state>
+    <state>
+        <id_region>14</id_region>
+        <name_state>Midi Pyrénées</name_state>
+        <name_state_uppercase>MIDI PYRÉNÉES</name_state_uppercase>
+        <state_slug>midi-pyrenees</state_slug>
+        <id_country>1</id_country>
+    </state>
+    <state>
+        <id_region>15</id_region>
+        <name_state>Nord Pas de Calais</name_state>
+        <name_state_uppercase>NORD PAS DE CALAIS</name_state_uppercase>
+        <state_slug>nord-pas-de-calais</state_slug>
+        <id_country>1</id_country>
+    </state>
+     <state>
+        <id_region>16</id_region>
+        <name_state>Basse-Normandie</name_state>
+        <name_state_uppercase>BASSE-NORMANDIE</name_state_uppercase>
+        <state_slug>basse-normandie</state_slug>
+        <id_country>1</id_country>
+    </state>
+    <state>
+        <id_region>17</id_region>
+        <name_state>Haute Normandie </name_state>
+        <name_state_uppercase>HAUTE NORMANDIE </name_state_uppercase>
+        <state_slug>haute-normandie-</state_slug>
+        <id_country>1</id_country>
+    </state>
+    <state>
+        <id_region>18</id_region>
+        <name_state>Pays de la Loire</name_state>
+        <name_state_uppercase>PAYS DE LA LOIRE</name_state_uppercase>
+        <state_slug>pays-de-la-loire</state_slug>
+        <id_country>1</id_country>
+    </state>
+    <state>
+        <id_region>19</id_region>
+        <name_state>Picardie</name_state>
+        <name_state_uppercase>PICARDIE</name_state_uppercase>
+        <state_slug>picardie</state_slug>
+        <id_country>1</id_country>
+    </state>
+    <state>
+        <id_region>20</id_region>
+        <name_state>Poitou Charentes</name_state>
+        <name_state_uppercase>POITOU CHARENTES</name_state_uppercase>
+        <state_slug>poitou-charentes</state_slug>
+        <id_country>1</id_country>
+    </state>
+    <state>
+        <id_region>21</id_region>
+        <name_state>Provence Alpes Côte d'azur</name_state>
+        <name_state_uppercase>PROVENCE ALPES CÔTE D'AZUR</name_state_uppercase>
+        <state_slug>provence-alpes-cote-dazur</state_slug>
+        <id_country>1</id_country>
+    </state>
+    <state>
+        <id_region>22</id_region>
+        <name_state>Rhône Alpes</name_state>
+        <name_state_uppercase>RHÔNE ALPES</name_state_uppercase>
+        <state_slug>rhone-alpes</state_slug>
+        <id_country>1</id_country>
+    </state>
+    <state>
+        <id_region>23</id_region>
+        <name_state>Alsace</name_state>
+        <name_state_uppercase>ALSACE</name_state_uppercase>
+        <state_slug>alsace</state_slug>
+        <id_country>1</id_country>
+    </state>
+   
+</vilaloka>

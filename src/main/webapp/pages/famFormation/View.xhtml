@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+    <ui:define name="title">
+        <h:outputText value="#{bundle.ViewFamFormationTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <p:panel header="#{bundle.ViewFamFormationTitle}">
+            <h:form>
+                <h:panelGrid columns="2">
+                    <!--                    <h:outputText value="#{bundle.ViewFamFormationLabel_idFormation}"/>
+      <h:outputText value="#{famFormationController.selected.idFormation}"
+                    title="#{bundle.ViewFamFormationTitle_idFormation}"/>-->
+
+                    <h:outputText value="#{bundle.ViewFamFormationLabel_libFormation}"/>
+                    <h:outputText value="#{famFormationController.selected.libFormation}"
+                                  title="#{bundle.ViewFamFormationTitle_libFormation}"/>
+
+                    <h:outputText value="#{bundle.ViewFamFormationLabel_codFormation}"/>
+                    <h:outputText value="#{famFormationController.selected.codFormation}"
+                                  title="#{bundle.ViewFamFormationTitle_codFormation}"/>
+
+                    <h:outputText value="#{bundle.ViewFamFormationLabel_byDefault}"/>
+                    <p:selectBooleanCheckbox value="#{famFormationController.selected.byDefault}"
+                            />
+
+
+                    <!--                    <h:outputText value="#{bundle.ViewFamFormationLabel_dtCreat}"/>
+                    <h:outputText value="#{famFormationController.selected.dtCreat}"
+                                  title="#{bundle.ViewFamFormationTitle_dtCreat}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewFamFormationLabel_dtModif}"/>
+                    <h:outputText value="#{famFormationController.selected.dtModif}"
+                                  title="#{bundle.ViewFamFormationTitle_dtModif}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                    </h:outputText>-->
+                </h:panelGrid>
+                <br/>
+                <p:commandButton action="#{famFormationController.prepareEdit}"
+                                 value="#{bundle.ViewFamFormationEditLink}"/>
+                <p:commandButton action="#{famFormationController.prepareCreate}"
+                                 value="#{bundle.ViewFamFormationCreateLink}"/>
+                <p:commandButton action="#{famFormationController.prepareList}"
+                                 value="#{bundle.ViewFamFormationShowAllLink}"/>
+            </h:form>
+        </p:panel>
+    </ui:define>
+</ui:composition>
+

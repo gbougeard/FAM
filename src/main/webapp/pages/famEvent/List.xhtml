@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{bundle.ListFamEventTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <h:form>
+            <p:panel header="#{bundle.FamEvent}">
+
+                <p:dataTable
+                        value="#{famEventController.lazyModel}"
+                        lazy="true"
+                        var="item"
+                        selection="#{famEventController.selected}"
+                        selectionMode="single"
+                        paginator="true" rows="10"
+                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                        rowsPerPageTemplate="5,10,15"
+                        sortBy="#{item.dtEvent}"
+                        emptyMessage="#{bundle.NoDataFound}"
+                        paginatorAlwaysVisible="false"
+                        >
+                    <p:ajax event="rowSelect" update="tb"/>
+                    <p:ajax event="rowUnselect" update="tb"/>
+                    <f:facet name="header">
+                        <p:toolbar id="tb">
+                            <p:toolbarGroup align="left">
+                                <p:commandButton value="Agenda"
+                                                 action="#{famEventController.prepareAgenda}"/>
+                                <p:divider/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamEventViewLink}"
+                                                 action="#{famEventController.prepareView}"
+                                                 disabled="#{empty famEventController.selected.idEvent}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamEventCreateLink}"
+                                                 action="#{famEventController.prepareCreate}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamEventEditLink}"
+                                                 action="#{famEventController.prepareEdit}"
+                                                 disabled="#{empty famEventController.selected.idEvent}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamEventDeleteLink}"
+                                                 action="#{famEventController.prepareDelete}"
+                                                 disabled="#{empty famEventController.selected.idEvent}"/>
+
+                            </p:toolbarGroup>
+                        </p:toolbar>
+                    </f:facet>
+                    <!--                    <p:column sortBy="#{item.idEvent}"
+                              filterBy="#{item.idEvent}"
+                              headerText="#{bundle.ListFamEventTitle_idEvent}" >
+                        <h:outputText value="#{item.idEvent}"/>
+                    </p:column>-->
+                    <p:column sortBy="#{item.dtEvent}"
+                              filterBy="#{item.dtEvent}"
+                              headerText="#{bundle.ListFamEventTitle_dtEvent}">
+                        <h:outputText value="#{item.dtEvent}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="#{cacheBean.timeZone}"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column sortBy="#{item.famEventStatus.libEventStatus}"
+                              filterBy="#{item.famEventStatus.libEventStatus}"
+                              headerText="#{bundle.ListFamEventTitle_famEventStatus}"
+                              styleClass="#{item.famEventStatus.libEventStatus}">
+                        <h:outputText value="#{item.famEventStatus.libEventStatus}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.famTypEvent.libTypEvent}"
+                              filterBy="#{item.famTypEvent.libTypEvent}"
+                              headerText="#{bundle.ListFamEventTitle_famTypEvent}">
+                        <h:outputText value="#{item.famTypEvent.libTypEvent}"/>
+                    </p:column>
+
+                    <p:column sortBy="#{item.libEvent}"
+                              filterBy="#{item.libEvent}"
+                              headerText="#{bundle.ListFamEventTitle_libEvent}">
+                        <h:outputText value="#{item.libEvent}"/>
+                    </p:column>
+
+                    <!--                    <p:column sortBy="#{item.comments}"
+                              filterBy="#{item.comments}"
+                              headerText="#{bundle.ListFamEventTitle_comments}" >
+                        <h:outputText value="#{item.comments}"/>
+                    </p:column>-->
+                    <p:column sortBy="#{item.famPlace.libPlace}"
+                              filterBy="#{item.famPlace.libPlace}"
+                              headerText="#{bundle.ListFamEventTitle_famPlace}">
+                        <h:outputText value="#{item.famPlace.libPlace}"/>
+                    </p:column>
+
+                    <!--                    <p:column sortBy="#{item.duration}"
+                    filterBy="#{item.duration}"
+                    headerText="#{bundle.ListFamEventTitle_duration}" >
+                    <h:outputText value="#{item.duration}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.famSeason}"
+                    filterBy="#{item.famSeason}"
+                    headerText="#{bundle.ListFamEventTitle_famSeason}" >
+                    <h:outputText value="#{item.famSeason.libSeason}"/>
+                    </p:column>-->
+                    <!--                    <p:column sortBy="#{item.dtCreat}"
+                              filterBy="#{item.dtCreat}"
+                              headerText="#{bundle.ListFamEventTitle_dtCreat}" >
+                        <h:outputText value="#{item.dtCreat}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column sortBy="#{item.dtModif}"
+                              filterBy="#{item.dtModif}"
+                              headerText="#{bundle.ListFamEventTitle_dtModif}" >
+                        <h:outputText value="#{item.dtModif}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:column>-->
+                    <f:facet name="footer">
+
+                    </f:facet>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

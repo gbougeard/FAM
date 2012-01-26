@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+
+    <f:metadata>
+        <f:viewParam name="id" value="#{famSeasonCompetitionController.id}"/>
+        <f:event type="preRenderView" listener="#{famSeasonCompetitionController.loadAction}"/>
+    </f:metadata>
+
+    <ui:define name="title">
+        <h:outputText value="#{bundle.ViewFamSeasonCompetitionTitle}"/>
+    </ui:define>
+
+    <ui:define name="body">
+        <p:panel
+                header="#{bundle.ViewFamSeasonCompetitionTitle} - #{famSeasonCompetitionController.selected.displayName}">
+            <h:form>
+
+                <ui:include src="view.xhtml">
+                    <ui:param name="bean" value="#{famSeasonCompetitionController.selected}"/>
+                </ui:include>
+
+                <p:commandButton action="#{famSeasonCompetitionController.prepareEdit}"
+                                 value="#{bundle.ViewFamSeasonCompetitionEditLink}"/>
+                <p:commandButton action="#{famSeasonCompetitionController.prepareCreate}"
+                                 value="#{bundle.ViewFamSeasonCompetitionCreateLink}"/>
+                <p:commandButton action="#{famSeasonCompetitionController.prepareList}"
+                                 value="#{bundle.ViewFamSeasonCompetitionShowAllLink}"/>
+            </h:form>
+        </p:panel>
+    </ui:define>
+</ui:composition>
+

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/template.xhtml">
+    <ui:define name="title">
+        <h:outputText value="#{bundle.CreateFamFormationItemTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <h:panelGroup id="messagePanel" layout="block">
+            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+        </h:panelGroup>
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputLabel value="#{bundle.CreateFamFormationItemLabel_idFormationItem}" for="idFormationItem"/>
+                <h:inputText id="idFormationItem" value="#{famFormationItemController.selected.idFormationItem}"
+                             title="#{bundle.CreateFamFormationItemTitle_idFormationItem}" required="true"
+                             requiredMessage="#{bundle.CreateFamFormationItemRequiredMessage_idFormationItem}"/>
+                <h:outputLabel value="#{bundle.CreateFamFormationItemLabel_famFormation}" for="famFormation"/>
+                <h:selectOneMenu id="famFormation" value="#{famFormationItemController.selected.famFormation}"
+                                 title="#{bundle.CreateFamFormationItemTitle_famFormation}">
+                    <f:selectItems value="#{famFormationController.itemsAvailableSelectOne}"/>
+                </h:selectOneMenu>
+                <h:outputLabel value="#{bundle.CreateFamFormationItemLabel_numItem}" for="numItem"/>
+                <h:inputText id="numItem" value="#{famFormationItemController.selected.numItem}"
+                             title="#{bundle.CreateFamFormationItemTitle_numItem}" required="true"
+                             requiredMessage="#{bundle.CreateFamFormationItemRequiredMessage_numItem}"/>
+                <h:outputLabel value="#{bundle.CreateFamFormationItemLabel_coord}" for="coord"/>
+                <h:inputText id="coord" value="#{famFormationItemController.selected.coord}"
+                             title="#{bundle.CreateFamFormationItemTitle_coord}" required="true"
+                             requiredMessage="#{bundle.CreateFamFormationItemRequiredMessage_coord}"/>
+                <h:outputLabel value="#{bundle.CreateFamFormationItemLabel_dtCreat}" for="dtCreat"/>
+                <h:inputText id="dtCreat" value="#{famFormationItemController.selected.dtCreat}"
+                             title="#{bundle.CreateFamFormationItemTitle_dtCreat}" required="true"
+                             requiredMessage="#{bundle.CreateFamFormationItemRequiredMessage_dtCreat}">
+                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
+                </h:inputText>
+                <h:outputLabel value="#{bundle.CreateFamFormationItemLabel_dtModif}" for="dtModif"/>
+                <h:inputText id="dtModif" value="#{famFormationItemController.selected.dtModif}"
+                             title="#{bundle.CreateFamFormationItemTitle_dtModif}">
+                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
+                </h:inputText>
+            </h:panelGrid>
+            <br/>
+            <h:commandLink action="#{famFormationItemController.create}"
+                           value="#{bundle.CreateFamFormationItemSaveLink}"/>
+            <br/>
+            <br/>
+            <h:commandLink action="#{famFormationItemController.prepareList}"
+                           value="#{bundle.CreateFamFormationItemShowAllLink}" immediate="true"/>
+            <br/>
+            <br/>
+            <h:commandLink value="#{bundle.CreateFamFormationItemIndexLink}" action="/index" immediate="true"/>
+        </h:form>
+    </ui:define>
+</ui:composition>
+
+</html>

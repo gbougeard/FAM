@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/template.xhtml">
+    <ui:define name="title">
+        <h:outputText value="#{bundle.CreateFamStaffFunctionTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <h:panelGroup id="messagePanel" layout="block">
+            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+        </h:panelGroup>
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputLabel value="#{bundle.CreateFamStaffFunctionLabel_idStaffFunction}" for="idStaffFunction"/>
+                <h:inputText id="idStaffFunction" value="#{famStaffFunctionController.selected.idStaffFunction}"
+                             title="#{bundle.CreateFamStaffFunctionTitle_idStaffFunction}" required="true"
+                             requiredMessage="#{bundle.CreateFamStaffFunctionRequiredMessage_idStaffFunction}"/>
+                <h:outputLabel value="#{bundle.CreateFamStaffFunctionLabel_libStaffFunction}" for="libStaffFunction"/>
+                <h:inputText id="libStaffFunction" value="#{famStaffFunctionController.selected.libStaffFunction}"
+                             title="#{bundle.CreateFamStaffFunctionTitle_libStaffFunction}" required="true"
+                             requiredMessage="#{bundle.CreateFamStaffFunctionRequiredMessage_libStaffFunction}"/>
+                <h:outputLabel value="#{bundle.CreateFamStaffFunctionLabel_codStaffFunction}" for="codStaffFunction"/>
+                <h:inputText id="codStaffFunction" value="#{famStaffFunctionController.selected.codStaffFunction}"
+                             title="#{bundle.CreateFamStaffFunctionTitle_codStaffFunction}" required="true"
+                             requiredMessage="#{bundle.CreateFamStaffFunctionRequiredMessage_codStaffFunction}"/>
+                <h:outputLabel value="#{bundle.CreateFamStaffFunctionLabel_famClub}" for="famClub"/>
+                <h:selectOneMenu id="famClub" value="#{famStaffFunctionController.selected.famClub}"
+                                 title="#{bundle.CreateFamStaffFunctionTitle_famClub}">
+                    <f:selectItems value="#{famClubController.itemsAvailableSelectOne}"/>
+                </h:selectOneMenu>
+                <h:outputLabel value="#{bundle.CreateFamStaffFunctionLabel_dtCreat}" for="dtCreat"/>
+                <h:inputText id="dtCreat" value="#{famStaffFunctionController.selected.dtCreat}"
+                             title="#{bundle.CreateFamStaffFunctionTitle_dtCreat}" required="true"
+                             requiredMessage="#{bundle.CreateFamStaffFunctionRequiredMessage_dtCreat}">
+                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
+                </h:inputText>
+                <h:outputLabel value="#{bundle.CreateFamStaffFunctionLabel_dtModif}" for="dtModif"/>
+                <h:inputText id="dtModif" value="#{famStaffFunctionController.selected.dtModif}"
+                             title="#{bundle.CreateFamStaffFunctionTitle_dtModif}">
+                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
+                </h:inputText>
+            </h:panelGrid>
+            <br/>
+            <h:commandLink action="#{famStaffFunctionController.create}"
+                           value="#{bundle.CreateFamStaffFunctionSaveLink}"/>
+            <br/>
+            <br/>
+            <h:commandLink action="#{famStaffFunctionController.prepareList}"
+                           value="#{bundle.CreateFamStaffFunctionShowAllLink}" immediate="true"/>
+            <br/>
+            <br/>
+            <h:commandLink value="#{bundle.CreateFamStaffFunctionIndexLink}" action="/index" immediate="true"/>
+        </h:form>
+    </ui:define>
+</ui:composition>
+
+</html>

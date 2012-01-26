@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<h:panelGrid columns="4" columnClasses="verticalTop,verticalTop,verticalTop,verticalTop">
+    <!--                            <p:fieldset id="test" legend="Préselection">-->
+
+    <!--                                <p:pickList value="#{famMatchController.dlmPlayer}"
+                                              var="player"
+                                              iconOnly="true"
+                                              itemLabel="#{player.displayName}"
+                                              itemValue="#{player}"
+                                              converter="playerConverter"
+                                              showSourceControls="false"
+                                              showTargetControls="true"
+                                              valueChangeListener="#{famMatchController.onValueChange}"
+
+                                              >
+                                      <f:facet name="sourceCaption">Available</f:facet>
+                                      <f:facet name="targetCaption">Starting</f:facet>
+
+                                      <p:column style="width:25%">
+                                          <p:graphicImage value="#{initParam['org.fam.jsf.PLAYERS_PHOTO_PATH']}#{initParam['org.fam.jsf.DEFAULT_PHOTO']}#{initParam['org.fam.jsf.DEFAULT_IMAGE_EXTENSION']}"
+                                                          width="30"/>
+                                      </p:column>
+
+                                      <p:column style="width:75%;">
+          #{player.displayName} - #{player.principalPosition.libPosition}
+      </p:column>
+  </p:pickList>  -->
+
+    <p:dataTable id="dtPlayers"
+                 value="#{famMatchController.preselectedLst}"
+                 var="item"
+                 selectionMode="single"
+                 emptyMessage="#{bundle.NoDataFound}"
+                 rowKey="#{item.idPlayer}"
+
+            >
+        <!--                                    <p:ajax event="rowSelect" update="tb"/>
+      <p:ajax event="rowUnselect" update="tb"/>-->
+
+        <p:column sortBy="#{item.displayName}"
+                  headerText="Joueur">
+            <h:outputText value="#{item.displayName}"/>
+
+        </p:column>
+        <p:column style="width:24px">
+            <h:outputText id="dragIcon"
+                          styleClass="ui-icon ui-icon-arrow-4"/>
+            <p:draggable for="dragIcon" revert="true"/>
+        </p:column>
+
+    </p:dataTable>
+
+
+    <!--                                <p:outputPanel id="dropArea">
+      <h:outputText value="!!!Drop here!!!"
+                    style="font-size:24px;" />
+  </p:outputPanel>
+  <p:droppable for="dropArea" tolerance="touch"
+               activeStyleClass="ui-state-highlight"
+               datasource="dtPlayers"
+               onDrop="handleDrop">
+      <p:ajax listener="#{famMatchController.onDrop}" update="dropArea dtPlayers" />
+  </p:droppable>  -->
+    <!--                            </p:fieldset>-->
+
+    <h:panelGrid columns="1" style="vertical-align: top;">
+        <!--            <p:outputPanel
+            style="width:50px;height:63px;opacity:0.5;display: block;border-style: solid"
+            >
+            <p:droppable
+                tolerance="touch"
+                activeStyleClass="ui-state-highlight"
+                datasource="dtPlayers"
+                >
+                <p:ajax listener="#{famMatchController.onDrop}"
+                        />
+            </p:droppable>
+        </p:outputPanel>-->
+        <h:panelGrid columns="3">
+            <h:outputLabel value="Formation" for="formation"/>
+            <p:selectOneMenu id="formation"
+                             value="#{famMatchController.famMatchTeam.famFormation}"
+                             converter="formationConverter">
+                <f:selectItem itemLabel="Formation" itemValue=""/>
+                <!--                                        noSelectionOption="true"/>-->
+                <f:selectItems value="#{cachedLstFormation}"
+                               var="f"
+                               itemLabel="#{f.libFormation}"
+                               itemValue="#{f}"/>
+                <!--                    <p:ajax event="blur" update="@form"/>-->
+                <!--                                        listener="#{famMatchController.changeFormation}"/>-->
+                <p:ajax event="valueChange" listener="#{famMatchController.genTarget}" update="dgField lst"/>
+            </p:selectOneMenu>
+            <p:message id="msg_formation" for="formation"/>
+        </h:panelGrid>
+
+        <!--                                <div>-->
+        <p:panel header="Lineup" id="soccer_field" styleClass="soccer_field">
+            <p:dataGrid id="dgField" value="#{famMatchController.lstTarget}"
+                        var="t" columns="5"
+                        style="padding-top: 50px;margin-left: 40px;">
+                <p:column>
+                    <p:panel id="trg"
+                             style="width:50px;height:63px;opacity:0.5;"
+                             rendered="#{!empty t.famFormationItem.numItem}"
+                            >
+                        <h:outputText value="#{t.famFormationItem.numItem}"
+                                      style="text-align:center;font-weight: bolder;"/>
+                        <br/>
+                        <h:outputText value="#{t.famPlayer.displayName}" style="text-align:center;font-weight: bolder;"
+                                      rendered="#{not empty t.famPlayer}"/>
+                        <p:droppable
+                                tolerance="touch"
+                                activeStyleClass="ui-state-highlight"
+                                datasource=":tabs:dtPlayers"
+                                >
+                            <f:attribute name="num" value="#{t.famFormationItem.numItem}"/>
+                            <p:ajax listener="#{famMatchController.onDrop}"
+                                    update=":tabs:dtMP trg"
+                                    />
+                        </p:droppable>
+                    </p:panel>
+
+                </p:column>
+            </p:dataGrid>
+
+        </p:panel>
+
+    </h:panelGrid>
+    <h:panelGrid columns="1" cellpadding="10">
+        <p:graphicImage value="/images/dock/soccer_2_128.png"/>
+        <p:dataGrid id="dgSubs" value="#{famMatchController.lstSubs}"
+                    var="t" columns="2"
+                    style="padding-top: 25px;margin-left: 20px;">
+            <p:column>
+                <p:panel id="sub"
+                         style="width:50px;height:63px;opacity:0.5;margin-left: 5px;"
+                        >
+                    <h:outputText value="#{t.strIdx}"
+                                  style="text-align:center;font-weight: bolder;"/>
+                    <br/>
+                    <h:outputText value="#{t.famPlayer.displayName}"
+                                  style="text-align:center;font-weight: bolder;"
+                                  rendered="#{not empty t.famPlayer}"/>
+                </p:panel>
+                <p:droppable for="sub"
+                             tolerance="touch"
+                             activeStyleClass="ui-state-highlight"
+                             datasource=":tabs:dtPlayers"
+                        >
+                    <f:attribute name="num" value="#{t.strIdx}"/>
+                    <p:ajax listener="#{famMatchController.onSubDrop}"
+                            update=":myForm:tabs:dtMP sub"
+                            />
+                </p:droppable>
+            </p:column>
+        </p:dataGrid>
+    </h:panelGrid>
+    <p:dataTable id="dtMP"
+                 value="#{famMatchController.famMatchTeam.famMatchPlayerList}"
+                 var="mp"
+                 emptyMessage="#{bundle.NoDataFound}"
+                 rowKey="#{mp.num}"
+                 rowStyleClass="#{mp.num gt famMatchController.selected.famSeasonCompetition.famTypCompetition.famTypMatch.nbPlayer ? 'row-sub' : null}">
+        <p:column headerText="Poste">
+            <h:outputText value="#{mp.num}"/>
+        </p:column>
+        <p:column headerText="Joueur">
+            <h:outputText value="#{mp.famPlayer.displayName}"/>
+        </p:column>
+        <!--                <p:column style="width:24px">
+          <h:outputText id="dragIconMP"
+                        styleClass="ui-icon ui-icon-arrow-4" />
+          <p:draggable for="dragIcon" revert="true" />
+      </p:column>  -->
+    </p:dataTable>
+    <p:orderList
+            value="#{famMatchController.famMatchTeam.famMatchPlayerList}"
+            var="mp"
+            iconOnly="true"
+            effect="clip"
+            itemValue="#{mp}"
+            converter="matchPlayerConverter"
+            controlsLocation="left">
+        <f:facet name="caption">Available</f:facet>
+
+        <p:column style="width:25%">
+            <h:outputText value="#{mp.num}"/>
+        </p:column>
+        <p:column style="width:25%">
+            <p:graphicImage
+                    value="#{initParam['org.fam.jsf.PLAYERS_PHOTO_PATH']}#{initParam['org.fam.jsf.DEFAULT_PHOTO']}#{initParam['org.fam.jsf.DEFAULT_IMAGE_EXTENSION']}"
+                    width="30"/>
+        </p:column>
+        <p:column style="width:50%;">
+            <h:outputText value="#{mp.famPlayer.displayName}"/>
+        </p:column>
+    </p:orderList>
+
+</h:panelGrid>
+<p:commandLink value="Enregistrer"
+               action="#{famMatchController.saveLineup}"
+               immediate="true"
+               update="@form"/>
+
+</ui:composition>
+

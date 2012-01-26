@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{bundle.ListFamMatchTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <h:form>
+            <p:panel header="#{bundle.FamMatch}">
+
+                <p:dataTable
+                        value="#{famMatchController.lazyModel}"
+                        lazy="true"
+                        var="item"
+                        selection="#{famMatchController.selected}"
+                        selectionMode="single"
+                        paginator="true" rows="10"
+                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                        rowsPerPageTemplate="5,10,15"
+                        emptyMessage="#{bundle.NoDataFound}"
+                        paginatorAlwaysVisible="false"
+                        >
+                    <p:ajax event="rowSelect" update="tb"/>
+                    <p:ajax event="rowUnselect" update="tb"/>
+                    <f:facet name="header">
+                        <p:toolbar id="tb">
+                            <p:toolbarGroup align="left">
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamMatchViewLink}"
+                                                 action="#{famMatchController.prepareView}"
+                                                 disabled="#{empty famMatchController.selected.idMatch}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamMatchCreateLink}"
+                                                 action="#{famMatchController.prepareCreate}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamMatchEditLink}"
+                                                 action="#{famMatchController.prepareEdit}"
+                                                 disabled="#{empty famMatchController.selected.idMatch}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamMatchDeleteLink}"
+                                                 action="#{famMatchController.prepareDestroy}"
+                                                 disabled="#{empty famMatchController.selected.idMatch}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="Préparer"
+                                                 action="#{famMatchController.prepareCompose}"
+                                                 disabled="#{empty famMatchController.selected.idMatch}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="Débriefer"
+                                                 action="#{famMatchController.prepareDebrief}"
+                                                 disabled="#{empty famMatchController.selected.idMatch}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="Reporter"
+                                                 action="#{famMatchController.prepareDestroy}"
+                                                 disabled="#{empty famMatchController.selected.idMatch}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="Annuler"
+                                                 action="#{famMatchController.prepareDestroy}"
+                                                 disabled="#{empty famMatchController.selected.idMatch}"/>
+                            </p:toolbarGroup>
+                        </p:toolbar>
+                    </f:facet>
+                    <!--                    <p:column sortBy="#{item.idMatch}"
+                              filterBy="#{item.idMatch}"
+                              headerText="#{bundle.ListFamMatchTitle_idMatch}" >
+                        <h:outputText value="#{item.idMatch}"/>
+                    </p:column>-->
+                    <p:column sortBy="#{item.famEvent.dtEvent}"
+                              filterBy="#{item.famEvent.dtEvent}"
+                              headerText="#{bundle.ListFamMatchTitle_famEvent}">
+                        <h:outputText value="#{item.famEvent.dtEvent}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="#{cacheBean.timeZone}"/>
+                        </h:outputText>
+                    </p:column>
+
+                    <p:column sortBy="#{item.famEvent.libEvent}"
+                              filterBy="#{item.famEvent.libEvent}"
+                              headerText="#{bundle.ListFamMatchTitle_famEvent}">
+                        <h:outputText value="#{item.famEvent.libEvent}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.famEvent.famEventStatus.libEventStatus}"
+                              filterBy="#{item.famEvent.famEventStatus.libEventStatus}"
+                              headerText="#{bundle.ListFamMatchTitle_famEvent}"
+                              styleClass="#{item.famEvent.famEventStatus.libEventStatus}">
+                        <h:outputText value="#{item.famEvent.famEventStatus.libEventStatus}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.famSeasonCompetition.displayName}"
+                              filterBy="#{item.famSeasonCompetition.displayName}"
+                              headerText="#{bundle.ListFamMatchTitle_famSeasonCompetition}">
+                        <h:outputText value="#{item.famSeasonCompetition.displayName}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.famFixture.libFixture}"
+                              filterBy="#{item.famFixture.libFixture}"
+                              headerText="#{bundle.ListFamMatchTitle_famFixture}">
+                        <h:outputText value="#{item.famFixture.libFixture}"/>
+                    </p:column>
+                    <!--                    <p:column sortBy="#{item.dtCreat}"
+                              filterBy="#{item.dtCreat}"
+                              headerText="#{bundle.ListFamMatchTitle_dtCreat}" >
+                        <h:outputText value="#{item.dtCreat}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column sortBy="#{item.dtModif}"
+                              filterBy="#{item.dtModif}"
+                              headerText="#{bundle.ListFamMatchTitle_dtModif}" >
+                        <h:outputText value="#{item.dtModif}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:column>-->
+                    <f:facet name="footer">
+
+                    </f:facet>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        >
+
+    <h:panelGrid columns="3">
+        <!--                    <h:outputLabel value="#{bundle.EditFamAbsenceLabel_idAbsence}" for="idAbsence" />
+     <p:inputText id="idAbsence"
+                  value="#{bean.idAbsence}"
+                  title="#{bundle.EditFamAbsenceTitle_idAbsence}"
+                  required="true"
+                  requiredMessage="#{bundle.EditFamAbsenceRequiredMessage_idAbsence}"
+                  >
+         <p:ajax event="blur" update="msg_idAbsence"/>
+     </p:inputText>
+     <p:message id="msg_idAbsence" for="idAbsence"/> -->
+
+        <h:outputLabel value="#{bundle.EditFamAbsenceLabel_dtBegAbsence}" for="dtBegAbsence"/>
+        <p:calendar id="dtBegAbsence"
+                    value="#{bean.dtBegAbsence}"
+                    title="#{bundle.EditFamAbsenceTitle_dtBegAbsence}"
+                    showOn="button"
+                >
+            <f:convertDateTime pattern="dd/MM/yyyy "/>
+            <p:ajax event="blur" update="msg_dtBegAbsence"/>
+        </p:calendar>
+        <p:message id="msg_dtBegAbsence" for="dtBegAbsence"/>
+
+        <h:outputLabel value="#{bundle.EditFamAbsenceLabel_dtEndAbsence}" for="dtEndAbsence"/>
+        <p:calendar id="dtEndAbsence"
+                    value="#{bean.dtEndAbsence}"
+                    title="#{bundle.EditFamAbsenceTitle_dtEndAbsence}"
+                    showOn="button"
+                >
+            <f:convertDateTime pattern="dd/MM/yyyy"/>
+            <p:ajax event="blur" update="msg_dtEndAbsence"/>
+        </p:calendar>
+        <p:message id="msg_dtEndAbsence" for="dtEndAbsence"/>
+
+        <h:outputLabel value="#{bundle.EditFamAbsenceLabel_comments}" for="comments"/>
+        <p:editor id="comments"
+                  value="#{bean.comments}"
+                  width="600"
+                >
+            <p:ajax event="blur" update="msg_comments"/>
+        </p:editor>
+        <p:message id="msg_comments" for="comments"/>
+
+        <!--                    <h:outputLabel value="#{bundle.EditFamAbsenceLabel_dtCreat}" for="dtCreat" />
+     <p:inputText id="dtCreat"
+                  value="#{bean.dtCreat}"
+                  title="#{bundle.EditFamAbsenceTitle_dtCreat}"
+                  >
+         <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+         <p:ajax event="blur" update="msg_dtCreat"/>
+     </p:inputText>
+     <p:message id="msg_dtCreat" for="dtCreat"/>
+
+     <h:outputLabel value="#{bundle.EditFamAbsenceLabel_dtModif}" for="dtModif" />
+     <p:inputText id="dtModif"
+                  value="#{bean.dtModif}"
+                  title="#{bundle.EditFamAbsenceTitle_dtModif}"
+                  >
+         <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+         <p:ajax event="blur" update="msg_dtModif"/>
+     </p:inputText>
+     <p:message id="msg_dtModif" for="dtModif"/> -->
+
+    </h:panelGrid>
+</ui:composition>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+        template="/common/template.xhtml">
+
+    <f:metadata>
+        <f:viewParam name="activeTab" value="#{authentificationBean.activeTab}"/>
+    </f:metadata>
+
+    <ui:define name="title">
+        <h:outputText value="Signup"></h:outputText>
+    </ui:define>
+
+    <ui:define name="body">
+        <h:form>
+            <h:outputText id="test" value="#{authentificationBean.activeTab}"/>
+            <p:tabView activeIndex="#{authentificationBean.activeTab}">
+                <p:ajax event="tabChange" listener="#{authentificationBean.onTabChange}" update="test"/>
+                <p:tab title="Tab The First">
+
+                    <h:panelGrid columns="3">
+                        <h:outputLabel for="mail" value="Email"/>
+                        <p:inputText id="mail" value="#{authentificationBean.signupBean.email}">
+                            <p:ajax event="blur" update="msg_mail"/>
+                        </p:inputText>
+                        <p:message id="msg_mail" for="mail"/>
+
+                        <h:outputLabel for="pwd1" value="Password"/>
+                        <p:password id="pwd1" value="#{authentificationBean.signupBean.password}" feedback="false"
+                                    match="pwd2"
+                                    label="Password 1"
+                                    required="true">
+                            <p:ajax event="blur" update="msg_pwd1"/>
+                        </p:password>
+                        <p:message id="msg_pwd1" for="pwd1"/>
+
+                        <h:outputLabel for="pwd2" value="Confirm password"/>
+                        <p:password id="pwd2" value="#{authentificationBean.signupBean.password}" feedback="false"
+                                    label="Password 2"
+                                    required="true">
+                            <p:ajax event="blur" update="msg_pwd2"/>
+                        </p:password>
+                        <p:message id="msg_pwd2" for="pwd2"/>
+                    </h:panelGrid>
+                    <p:commandButton action="#{authentificationBean.doSignup}" value="Valider"/>
+                </p:tab>
+                <p:tab title="Second Tab">
+                    Second Tab Stuff Goes Here
+                </p:tab>
+                <p:tab title="Tab 3">
+                    Everything about 3
+                </p:tab>
+            </p:tabView>
+
+        </h:form>
+    </ui:define>
+</ui:composition>
+

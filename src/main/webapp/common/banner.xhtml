@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+        >
+<ui:component>
+    <p:panel id="banner">
+        <!--            <p:themeSwitcher initialText="Change Skin" buttonPreText="Skin: "/>  -->
+        <!-- utilisateur authentifie -->
+        <!--
+        <c:if test="${request.remoteUser!=null}">
+            You are logged as  ${request.remoteUser} + ${request.userPrincipal}
+            <h:form id="logout">
+                <h:commandLink action="#{authentificationBean.deconnexion}">Logout</h:commandLink>
+            </h:form>
+            <c:if test="${authentificationBean.isAdmin}">
+                et vous etes admin!
+            </c:if>
+            <c:if test="${!authentificationBean.isAdmin}">
+                et vous etes grouillot!
+            </c:if>
+        </c:if>-->
+        <!--                <c:if test="${request.remoteUser==null}">
+        <h:form id="login">
+            <h:outputLabel value="Login : " for="lbl_login"></h:outputLabel>
+            <p:inputText id="lbl_login"
+                         value="#{loginBean.email}" required="true">
+            </p:inputText>
+
+            <h:outputLabel value="Password : " for="lbl_pwd"></h:outputLabel>
+            <p:password id="lbl_pwd"
+                        value="#{loginBean.password}"
+                        required="true"
+                        feedback="false">
+            </p:password>
+            <p:commandButton value="Login"
+                             ajax="false"
+                             actionListener="#{authentificationBean.login}"/>
+        </h:form>-->
+        <h:outputText value="Hello, #{login.currentUser.displayName}"
+                      rendered="#{login.loggedIn}"/>
+        <!--<p>Hi, <shiro:guest>Guest</shiro:guest>-->
+            <!--<shiro:user><shiro:principal/></shiro:user>!-->
+        <!--</p>-->
+
+        <h:form id="navSignup">
+            <p:commandLink action="#{login.home}">
+                <h:outputText value="Home"/>
+            </p:commandLink>
+            <h:commandLink action="#{login.logout}"
+                           rendered="#{login.loggedIn}">
+                <h:outputText value=" Se déconnecter"/>
+            </h:commandLink>
+            <h:commandLink action="#{authentificationBean.navSignup}"
+                           rendered="#{!login.loggedIn}">
+                <h:outputText value=" S'inscrire"/>
+            </h:commandLink>
+            <h:commandLink action="#{authentificationBean.navLogin}"
+                           rendered="#{!login.loggedIn}">
+                S'identifier
+            </h:commandLink>
+            <p:commandLink action="pretty:myAccount"
+                           rendered="#{login.loggedIn}">
+                <h:outputText value=" My Account"/>
+            </p:commandLink>
+            <p:commandButton action="#{cacheBean.initCache()}" value="Refresh Cache"/>
+            <p:commandButton action="#{login.logout}" value="Logout"/>
+        </h:form>
+        <!--                </c:if>-->
+    </p:panel>
+</ui:component>
+</html>
+

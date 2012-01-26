@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+    <ui:define name="title">
+        <h:outputText value="#{bundle.ViewFamCardTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <p:panel header="#{bundle.ViewFamCardTitle}">
+            <h:form>
+                <h:panelGrid columns="2">
+                    <!--                    <h:outputText value="#{bundle.ViewFamCardLabel_idCard}"/>
+      <h:outputText value="#{famCardController.selected.idCard}"
+                    title="#{bundle.ViewFamCardTitle_idCard}"/>-->
+
+                    <h:outputText value="#{bundle.ViewFamCardLabel_famMatchPlayer}"/>
+                    <h:outputText value="#{famCardController.selected.famMatchPlayer.famPlayer.displayName}"
+                                  title="#{bundle.ViewFamCardTitle_famMatchPlayer}"/>
+
+                    <h:outputText value="#{bundle.ViewFamCardLabel_famTypCard.libTypCard}"/>
+                    <h:outputText value="#{famCardController.selected.famTypCard}"
+                                  title="#{bundle.ViewFamCardTitle_famTypCard}"/>
+
+                    <h:outputText value="#{bundle.ViewFamCardLabel_cardTime}"/>
+                    <h:outputText value="#{famCardController.selected.cardTime}"
+                                  title="#{bundle.ViewFamCardTitle_cardTime}"/>
+
+                    <!--                    <h:outputText value="#{bundle.ViewFamCardLabel_dtCreat}"/>
+                    <h:outputText value="#{famCardController.selected.dtCreat}" 
+                                  title="#{bundle.ViewFamCardTitle_dtCreat}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewFamCardLabel_dtModif}"/>
+                    <h:outputText value="#{famCardController.selected.dtModif}" 
+                                  title="#{bundle.ViewFamCardTitle_dtModif}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                    </h:outputText>-->
+                </h:panelGrid>
+                <br/>
+                <p:commandButton action="#{famCardController.prepareEdit}" value="#{bundle.ViewFamCardEditLink}"/>
+                <p:commandButton action="#{famCardController.prepareCreate}" value="#{bundle.ViewFamCardCreateLink}"/>
+                <p:commandButton action="#{famCardController.prepareList}" value="#{bundle.ViewFamCardShowAllLink}"/>
+            </h:form>
+        </p:panel>
+    </ui:define>
+</ui:composition>
+

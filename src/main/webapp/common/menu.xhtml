@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
+<ui:component>
+    <div id="menu">
+        <!--            <c:if test="${request.remoteUser!=null}">-->
+        <h:form id="menu">
+            <!--                    <c:if test="${authentificationBean.isAdminSite}">-->
+            <p:commandButton value="Saisons" action="#{seasonController.findAll}" ajax="false"/>
+            <p:commandButton value="Clubs" action="#{clubController.findAll}" ajax="false"/>
+
+            <!--                    </c:if>
+           <c:if test="${authentificationBean.isAdmin}">-->
+            <p:commandButton value="Equipes" action="#{teamController.findAll}" ajax="false"/>
+            <!--                    </c:if>-->
+            <p:commandButton value="Agenda" action="#{agendaController.findAll}" ajax="false"/>
+            <p:commandButton value="Organizations" action="#{organizationController.findAll}" ajax="false"/>
+
+        </h:form>
+        <!--            </c:if>-->
+    </div>
+</ui:component>
+</html>
+

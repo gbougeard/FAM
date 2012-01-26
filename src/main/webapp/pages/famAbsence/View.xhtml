@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+    <ui:define name="title">
+        <h:outputText value="#{bundle.ViewFamAbsenceTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <p:panel header="#{bundle.ViewFamAbsenceTitle}">
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewFamAbsenceLabel_dtBegAbsence}"/>
+                    <h:outputText value="#{famAbsenceController.selected.dtBegAbsence}"
+                                  title="#{bundle.ViewFamAbsenceTitle_dtBegAbsence}">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </h:outputText>
+
+                    <h:outputText value="#{bundle.ViewFamAbsenceLabel_dtEndAbsence}"/>
+                    <h:outputText value="#{famAbsenceController.selected.dtEndAbsence}"
+                                  title="#{bundle.ViewFamAbsenceTitle_dtEndAbsence}">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </h:outputText>
+
+                    <h:outputText value="#{bundle.ViewFamAbsenceLabel_idAbsence}"/>
+                    <h:outputText value="#{famAbsenceController.selected.idAbsence}"
+                                  title="#{bundle.ViewFamAbsenceTitle_idAbsence}"/>
+
+                    <h:outputText value="#{bundle.ViewFamAbsenceLabel_comments}"/>
+                    <h:outputText value="#{famAbsenceController.selected.comments}"
+                                  title="#{bundle.ViewFamAbsenceTitle_comments}"/>
+
+
+                    <!--                    <h:outputText value="#{bundle.ViewFamAbsenceLabel_dtCreat}"/>
+                    <h:outputText value="#{famAbsenceController.selected.dtCreat}" 
+                                  title="#{bundle.ViewFamAbsenceTitle_dtCreat}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewFamAbsenceLabel_dtModif}"/>
+                    <h:outputText value="#{famAbsenceController.selected.dtModif}"
+                                  title="#{bundle.ViewFamAbsenceTitle_dtModif}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                    </h:outputText>-->
+                </h:panelGrid>
+                <br/>
+                <p:commandButton action="#{famAbsenceController.prepareEdit}" value="#{bundle.ViewFamAbsenceEditLink}"/>
+                <p:commandButton action="#{famAbsenceController.prepareCreate}"
+                                 value="#{bundle.ViewFamAbsenceCreateLink}"/>
+                <p:commandButton action="#{famAbsenceController.prepareList}"
+                                 value="#{bundle.ViewFamAbsenceShowAllLink}"/>
+            </h:form>
+        </p:panel>
+    </ui:define>
+</ui:composition>
+
+        </html>

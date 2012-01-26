@@ -1,0 +1,47 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+
+    <ui:define name="titre">Signup Successful</ui:define>
+    <ui:define name="body">
+        <center>
+            <h:form>
+
+                <h:inputHidden value="#{openid.onLoad}"/>
+                <p:panel header="Bienvenue!">
+                    <p:fieldset>
+                        <h:panelGrid columns="2">
+
+                            <h:outputLabel for="email" value="Email "/>
+                            <h:outputText id="email" value="#{profileController.famUser.email}"/>
+
+                            <h:outputLabel for="firstname" value="Firstname: "/>
+                            <h:outputText id="firstname" value="#{profileController.famUser.firstName}"/>
+
+                            <h:outputLabel for="lastname" value="Lastname: "/>
+                            <h:outputText id="lastname" value="#{profileController.famUser.lastName}"/>
+
+                        </h:panelGrid>
+                    </p:fieldset>
+
+                    <p:fieldset rendered="#{not empty profileController.listPlayer}">
+                        <h:outputText value="Peut-être es tu un de ces joueurs?"/>
+
+                        <p:dataList value="#{profileController.listPlayer}"
+                                    var="p">
+                            #{p.displayName}
+                        </p:dataList>
+
+
+                    </p:fieldset>
+                </p:panel>
+            </h:form>
+        </center>
+    </ui:define>
+</ui:composition>
+

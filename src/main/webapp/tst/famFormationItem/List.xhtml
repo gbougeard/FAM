@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{bundle.ListFamFormationItemTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <h:form>
+            <h:panelGroup id="messagePanel" layout="block">
+            </h:panelGroup>
+            <p:panel header="Clubs">
+
+                <p:dataTable
+                        value="#{famFormationItemController.items}"
+                        var="item"
+                        selectionMode="single"
+                        selection="#{famFormationItemController.selected}"
+                        paginator="true" rows="10"
+                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                        rowsPerPageTemplate="5,10,15">
+                    <f:facet name="header">
+                        <p:toolbar>
+                            <p:toolbarGroup align="left">
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamFormationItemViewLink}"
+                                                 action="#{famFormationItemController.prepareView}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamFormationItemCreateLink}"
+                                                 action="#{famFormationItemController.prepareCreate}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamFormationItemEditLink}"
+                                                 action="#{famFormationItemController.prepareEdit}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamFormationItemDeleteLink}"
+                                                 action="#{famFormationItemController.prepareDelete}"/>
+                            </p:toolbarGroup>
+                        </p:toolbar>
+                    </f:facet>
+                    <p:column sortBy="#{item.idFormationItem}"
+                              filterBy="#{item.idFormationItem}"
+                              headerText="#{bundle.ListFamFormationItemTitle_idFormationItem}">
+                        <h:outputText value="#{item.idFormationItem}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.famFormation}"
+                              filterBy="#{item.famFormation}"
+                              headerText="#{bundle.ListFamFormationItemTitle_famFormation}">
+                        <h:outputText value="#{item.famFormation}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.numItem}"
+                              filterBy="#{item.numItem}"
+                              headerText="#{bundle.ListFamFormationItemTitle_numItem}">
+                        <h:outputText value="#{item.numItem}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.coord}"
+                              filterBy="#{item.coord}"
+                              headerText="#{bundle.ListFamFormationItemTitle_coord}">
+                        <h:outputText value="#{item.coord}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.dtCreat}"
+                              filterBy="#{item.dtCreat}"
+                              headerText="#{bundle.ListFamFormationItemTitle_dtCreat}">
+                        <h:outputText value="#{item.dtCreat}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column sortBy="#{item.dtModif}"
+                              filterBy="#{item.dtModif}"
+                              headerText="#{bundle.ListFamFormationItemTitle_dtModif}">
+                        <h:outputText value="#{item.dtModif}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
+                        </h:outputText>
+                    </p:column>
+                    <f:facet name="footer">
+
+                    </f:facet>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

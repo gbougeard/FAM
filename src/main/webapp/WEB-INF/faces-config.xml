@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!-- =========== FULL CONFIGURATION FILE ================================== -->
+
+<faces-config version="2.0"
+              xmlns="http://java.sun.com/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+    <application>
+        <resource-bundle>
+            <base-name>/Bundle</base-name>
+            <var>bundle</var>
+        </resource-bundle>
+    </application>
+    <lifecycle>
+        <phase-listener>org.fam.jsf.common.BasePhaseListener
+        </phase-listener>
+
+    </lifecycle>
+    <lifecycle>
+        <phase-listener>com.ocpsoft.pretty.faces.event.MultiPageMessagesSupport</phase-listener>
+    </lifecycle>
+
+   <!-- <navigation-rule>
+        <from-view-id>/callback.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{oauthAuthenticator.connect}</from-action>
+            <if>#{true}</if>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>-->
+</faces-config>

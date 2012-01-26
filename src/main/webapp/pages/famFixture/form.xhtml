@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        >
+    <h:panelGrid columns="3">
+        <!--                    <h:outputLabel value="#{bundle.EditFamFixtureLabel_idFixture}" for="idFixture" />
+     <p:inputText id="idFixture"
+                  value="#{bean.idFixture}"
+                  title="#{bundle.EditFamFixtureTitle_idFixture}"
+                  >
+         <p:ajax event="blur" update="msg_idFixture"/>
+     </p:inputText>
+     <p:message id="msg_idFixture" for="idFixture"/> -->
+
+        <h:outputLabel value="#{bundle.EditFamFixtureLabel_famSeasonCompetition}" for="famSeasonCompetition"/>
+        <p:selectOneMenu id="famSeasonCompetition"
+                         value="#{bean.famSeasonCompetition}"
+                         converter="competConverter"
+
+                >
+            <!--            <f:selectItem itemLabel="Compétition"
+            noSelectionOption="true"/>-->
+            <f:selectItems value="#{cacheBean.listSeasonCompetition}"
+                           var="c"
+                           itemValue="#{c}"
+                           itemLabel="#{c.displayName}"/>
+            <p:ajax event="blur" update="msg_famSeasonCompetition"/>
+        </p:selectOneMenu>
+        <p:message id="msg_famSeasonCompetition" for="famSeasonCompetition"/>
+
+        <h:outputLabel value="#{bundle.EditFamFixtureLabel_libFixture}" for="libFixture"/>
+        <p:inputText id="libFixture"
+                     value="#{bean.libFixture}"
+                     title="#{bundle.EditFamFixtureTitle_libFixture}"
+                >
+            <!--            <p:ajax event="blur" update="msg_libFixture"/>-->
+        </p:inputText>
+        <p:message id="msg_libFixture" for="libFixture"/>
+
+        <h:outputLabel value="#{bundle.EditFamFixtureLabel_dtFixture}" for="dtFixture"/>
+        <p:calendar id="dtFixture"
+                    value="#{bean.dtFixture}"
+                    pattern="dd/MM/yyyy HH:mm"
+                    locale="fr"
+                    maxHour="23"
+                    minHour="9"
+                    mindate="#{cacheBean.now}"><!--
+                    locale="fr"
+                    lang="fr">-->
+            <p:ajax event="blur" update="msg_dtFixture"/>
+        </p:calendar>
+        <p:message id="msg_dtFixture" for="dtFixture"/>
+
+        <!--                    <h:outputLabel value="#{bundle.EditFamFixtureLabel_dtCreat}" for="dtCreat" />
+     <p:inputText id="dtCreat"
+                  value="#{bean.dtCreat}"
+                  title="#{bundle.EditFamFixtureTitle_dtCreat}"
+                  >
+         <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+         <p:ajax event="blur" update="msg_dtCreat"/>
+     </p:inputText>
+     <p:message id="msg_dtCreat" for="dtCreat"/>
+
+     <h:outputLabel value="#{bundle.EditFamFixtureLabel_dtModif}" for="dtModif" />
+     <p:inputText id="dtModif"
+                  value="#{bean.dtModif}"
+                  title="#{bundle.EditFamFixtureTitle_dtModif}"
+                  >
+         <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+         <p:ajax event="blur" update="msg_dtModif"/>
+     </p:inputText>
+     <p:message id="msg_dtModif" for="dtModif"/> -->
+
+    </h:panelGrid>
+</ui:composition>

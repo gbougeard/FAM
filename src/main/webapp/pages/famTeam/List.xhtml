@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{bundle.ListFamTeamTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <h:form>
+            <p:panel header="#{bundle.FamTeam}">
+
+                <p:dataTable
+                        value="#{famTeamController.lazyModel}"
+                        lazy="true"
+                        var="item"
+                        selectionMode="single"
+                        selection="#{famTeamController.selected}"
+                        paginator="true" rows="10"
+                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                        rowsPerPageTemplate="5,10,15"
+                        scrollHeight="250"
+                        sortBy="#{item.libTeam}"
+                        emptyMessage="#{bundle.NoDataFound}"
+                        paginatorAlwaysVisible="false"
+                        >
+                    <p:ajax event="rowSelect" update="tb sel1 sel2"/>
+                    <p:ajax event="rowUnselect" update="tb sel1 sel2"/>
+                    <f:facet name="header">
+                        <h:outputText id="sel1" value="#{empty famTeamController.selected.idTeam}"/>
+                        <h:outputText id="sel2" value="#{famTeamController.id}"/>
+                        <p:toolbar id="tb">
+                            <p:toolbarGroup align="left">
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamTeamViewLink}"
+                                                 action="#{famTeamController.prepareView}"
+                                                 disabled="#{empty famTeamController.selected.idTeam}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamTeamCreateLink}"
+                                                 action="#{famTeamController.prepareCreate}"
+                                                 immediate="true"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamTeamEditLink}"
+                                                 action="#{famTeamController.prepareEdit}"
+                                                 disabled="#{empty famTeamController.selected.idTeam}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamTeamDeleteLink}"
+                                                 action="#{famTeamController.destroy}"
+                                                 disabled="#{empty famTeamController.selected.idTeam}"/>
+                            </p:toolbarGroup>
+                        </p:toolbar>
+                    </f:facet>
+                    <!--                    <p:column sortBy="#{item.idTeam}"
+                              filterBy="#{item.idTeam}"
+                              headerText="#{bundle.ListFamTeamTitle_idTeam}" >
+                        <h:outputText value="#{item.idTeam}"/>
+                    </p:column>-->
+                    <p:column sortBy="#{item.libTeam}"
+                              filterBy="#{item.libTeam}"
+                              headerText="#{bundle.ListFamTeamTitle_libTeam}"
+                              style="width:30%">
+                        <h:outputText value="#{item.libTeam}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.codTeam}"
+                              filterBy="#{item.codTeam}"
+                              headerText="#{bundle.ListFamTeamTitle_codTeam}"
+                              style="width:20%">
+                        <h:outputText value="#{item.codTeam}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.famClub.libClub}"
+                              filterBy="#{item.famClub.libClub}"
+                              headerText="#{bundle.ListFamTeamTitle_famClub}"
+                              style="width:40%">
+                        <h:outputText value="#{item.famClub.libClub}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.famPlace.libPlace}"
+                              filterBy="#{item.famPlace.libPlace}"
+                              headerText="#{bundle.ListFamTeamTitle_famPlace}"
+                              style="width:20%">
+                        <h:outputText value="#{item.famPlace.libPlace}"/>
+                    </p:column>
+                    <!--                    <p:column sortBy="#{item.dtCreat}"
+                              filterBy="#{item.dtCreat}"
+                              headerText="#{bundle.ListFamTeamTitle_dtCreat}" >
+                        <h:outputText value="#{item.dtCreat}">
+                            <f:convertDateTime type="both" dateStyle="medium" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column sortBy="#{item.dtModif}"
+                              filterBy="#{item.dtModif}"
+                              headerText="#{bundle.ListFamTeamTitle_dtModif}" >
+                        <h:outputText value="#{item.dtModif}">
+                            <f:convertDateTime type="both" dateStyle="medium" />
+                        </h:outputText>
+                    </p:column>-->
+                    <f:facet name="footer">
+
+                    </f:facet>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

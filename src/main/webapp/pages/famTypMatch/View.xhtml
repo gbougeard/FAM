@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{bundle.ViewFamTypMatchTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <p:panel header="#{bundle.ViewFamTypMatchTitle}">
+            <h:form>
+                <h:panelGrid columns="2">
+                    <!--<h:outputText value="#{bundle.ViewFamTypMatchLabel_idTypMatch}"/>
+                    <h:outputText value="#{famTypMatchController.selected.idTypMatch}" 
+                                  title="#{bundle.ViewFamTypMatchTitle_idTypMatch}"/>-->
+
+                    <h:outputText value="#{bundle.ViewFamTypMatchLabel_libTypMatch}"/>
+                    <h:outputText value="#{famTypMatchController.selected.libTypMatch}"
+                                  title="#{bundle.ViewFamTypMatchTitle_libTypMatch}"/>
+
+                    <h:outputText value="#{bundle.ViewFamTypMatchLabel_codTypMatch}"/>
+                    <h:outputText value="#{famTypMatchController.selected.codTypMatch}"
+                                  title="#{bundle.ViewFamTypMatchTitle_codTypMatch}"/>
+
+                    <h:outputText value="#{bundle.ViewFamTypMatchLabel_nbPlayer}"/>
+                    <h:outputText value="#{famTypMatchController.selected.nbPlayer}"
+                                  title="#{bundle.ViewFamTypMatchTitle_nbPlayer}"/>
+
+                    <h:outputText value="#{bundle.ViewFamTypMatchLabel_nbSubstitute}"/>
+                    <h:outputText value="#{famTypMatchController.selected.nbSubstitute}"
+                                  title="#{bundle.ViewFamTypMatchTitle_nbSubstitute}"/>
+
+                    <h:outputText value="#{bundle.ViewFamTypMatchLabel_infiniteSubs}"/>
+                    <p:selectBooleanCheckbox value="#{famTypMatchController.selected.infiniteSubs}"
+                                             readonly="true"/>
+
+                    <h:outputText value="#{bundle.ViewFamTypMatchLabel_periodDuration}"/>
+                    <h:outputText value="#{famTypMatchController.selected.periodDuration}"
+                                  title="#{bundle.ViewFamTypMatchTitle_periodDuration}"/>
+
+                    <h:outputText value="#{bundle.ViewFamTypMatchLabel_extraTime}"/>
+                    <p:selectBooleanCheckbox value="#{famTypMatchController.selected.extraTime}"
+                                             readonly="true"/>
+
+                    <h:outputText value="#{bundle.ViewFamTypMatchLabel_extraTimeDuration}"
+                                  rendered="#{famTypMatchController.selected.extraTime}"/>
+                    <h:outputText value="#{famTypMatchController.selected.extraTimeDuration}"
+                                  title="#{bundle.ViewFamTypMatchTitle_extraTimeDuration}"
+                                  rendered="#{famTypMatchController.selected.extraTime}"/>
+
+                    <h:outputText value="#{bundle.ViewFamTypMatchLabel_penalties}"/>
+                    <p:selectBooleanCheckbox value="#{famTypMatchController.selected.penalties}"
+                                             readonly="true"/>
+
+                    <h:outputText value="#{bundle.ViewFamTypMatchLabel_nbPenalties}"
+                                  rendered="#{famTypMatchController.selected.penalties}"/>
+                    <h:outputText value="#{famTypMatchController.selected.nbPenalties}"
+                                  title="#{bundle.ViewFamTypMatchTitle_nbPenalties}"
+                                  rendered="#{famTypMatchController.selected.penalties}"/>
+
+                    <!--                    <h:outputText value="#{bundle.ViewFamTypMatchLabel_dtCreat}"/>
+                    <h:outputText value="#{famTypMatchController.selected.dtCreat}"
+                                  title="#{bundle.ViewFamTypMatchTitle_dtCreat}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                    </h:outputText>
+
+                    <h:outputText value="#{bundle.ViewFamTypMatchLabel_dtModif}"/>
+                    <h:outputText value="#{famTypMatchController.selected.dtModif}"
+                                  title="#{bundle.ViewFamTypMatchTitle_dtModif}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                    </h:outputText>-->
+                </h:panelGrid>
+                <br/>
+                <p:commandButton action="#{famTypMatchController.prepareEdit}"
+                                 value="#{bundle.ViewFamTypMatchEditLink}"/>
+                <p:commandButton action="#{famTypMatchController.prepareCreate}"
+                                 value="#{bundle.ViewFamTypMatchCreateLink}"/>
+                <p:commandButton action="#{famTypMatchController.prepareList}"
+                                 value="#{bundle.ViewFamTypMatchShowAllLink}"/>
+            </h:form>
+        </p:panel>
+    </ui:define>
+</ui:composition>
+

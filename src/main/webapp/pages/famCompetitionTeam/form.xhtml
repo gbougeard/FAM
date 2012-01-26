@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        >
+
+    <h:panelGrid columns="3">
+        <!--                    <h:outputLabel value="#{bundle.EditFamCompetitionTeamLabel_idCompetitionTeam}" for="idCompetitionTeam" />
+     <p:inputText id="idCompetitionTeam"
+                  value="#{bean.idCompetitionTeam}"
+                  title="#{bundle.EditFamCompetitionTeamTitle_idCompetitionTeam}"
+                  >
+         <p:ajax event="blur" update="msg_idCompetitionTeam"/>
+     </p:inputText>
+     <p:message id="msg_idCompetitionTeam" for="idCompetitionTeam"/> -->
+
+        <h:outputLabel value="#{bundle.EditFamCompetitionTeamLabel_famSeasonCompetition}" for="famSeasonCompetition"/>
+        <h:selectOneMenu id="famSeasonCompetition"
+                         value="#{bean.famSeasonCompetition}"
+                         title="#{bundle.EditFamCompetitionTeamTitle_famSeasonCompetition}"
+                >
+            <!--                        <f:selectItems value="#{famSeasonCompetitionController.itemsAvailableSelectOne}"/>-->
+            <f:selectItem itemLabel="Competition"
+                          noSelectionOption="true"/>
+            <f:selectItems value="#{cacheBean.listSeasonCompetition}"
+                           var="n"
+                           itemValue="#{n}"
+                           itemLabel="#{n.displayName}"/>
+            <p:ajax event="blur" update="msg_famSeasonCompetition"/>
+        </h:selectOneMenu>
+        <p:message id="msg_famSeasonCompetition" for="famSeasonCompetition"/>
+
+        <h:outputLabel value="#{bundle.EditFamCompetitionTeamLabel_famTeam}" for="famTeam"/>
+        <h:selectOneMenu id="famTeam"
+                         value="#{bean.famTeam}"
+                         title="#{bundle.EditFamCompetitionTeamTitle_famTeam}"
+                >
+            <!--                        <f:selectItems value="#{famTeamController.itemsAvailableSelectOne}"/>-->
+            <f:selectItem itemLabel="Team"
+                          noSelectionOption="true"/>
+            <f:selectItems value="#{cacheBean.listTeam}"
+                           var="n"
+                           itemValue="#{n}"
+                           itemLabel="#{n.libTeam}"/>
+            <p:ajax event="blur" update="msg_famTeam"/>
+        </h:selectOneMenu>
+        <p:message id="msg_famTeam" for="famTeam"/>
+
+    </h:panelGrid>
+</ui:composition>

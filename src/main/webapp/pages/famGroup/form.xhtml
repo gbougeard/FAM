@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        >
+
+    <h:panelGrid columns="3">
+        <!--                    <h:outputLabel value="#{bundle.EditFamGroupLabel_idGroup}" for="idGroup" />
+     <p:inputText id="idGroup"
+                  value="#{bean.idGroup}"
+                  title="#{bundle.EditFamGroupTitle_idGroup}"
+                  >
+         <p:ajax event="blur" update="msg_idGroup"/>
+     </p:inputText>
+     <p:message id="msg_idGroup" for="idGroup"/> -->
+
+        <h:outputLabel value="#{bundle.EditFamGroupLabel_groupname}" for="groupname"/>
+        <p:inputText id="groupname"
+                     value="#{bean.groupname}"
+                     title="#{bundle.EditFamGroupTitle_groupname}"
+                >
+            <p:ajax event="blur" update="msg_groupname"/>
+        </p:inputText>
+        <p:message id="msg_groupname" for="groupname"/>
+
+        <h:outputLabel value="#{bundle.EditFamGroupLabel_login}" for="login"/>
+        <p:inputText id="login"
+                     value="#{bean.login}"
+                     title="#{bundle.EditFamGroupTitle_login}"
+                >
+            <p:ajax event="blur" update="msg_login"/>
+        </p:inputText>
+        <p:message id="msg_login" for="login"/>
+
+        <!--                    <h:outputLabel value="#{bundle.EditFamGroupLabel_dtCreat}" for="dtCreat" />
+     <p:inputText id="dtCreat"
+                  value="#{bean.dtCreat}"
+                  title="#{bundle.EditFamGroupTitle_dtCreat}"
+                  >
+         <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+         <p:ajax event="blur" update="msg_dtCreat"/>
+     </p:inputText>
+     <p:message id="msg_dtCreat" for="dtCreat"/>
+
+     <h:outputLabel value="#{bundle.EditFamGroupLabel_dtModif}" for="dtModif" />
+     <p:inputText id="dtModif"
+                  value="#{bean.dtModif}"
+                  title="#{bundle.EditFamGroupTitle_dtModif}"
+                  >
+         <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+         <p:ajax event="blur" update="msg_dtModif"/>
+     </p:inputText>
+     <p:message id="msg_dtModif" for="dtModif"/> -->
+
+    </h:panelGrid>
+</ui:composition>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+    <ui:define name="title">
+        <h:outputText value="#{bundle.CreateFamFormationTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <h:form prependId="false">
+            <p:panel header="#{bundle.CreateFamFormationTitle}">
+                <ui:include src="form.xhtml">
+                    <ui:param name="bean" value="#{famFormationController.selected}"/>
+                    <ui:param name="create" value="#{true}"/>
+                </ui:include>
+
+                <p:commandButton value="#{bundle.EditFamFormationSaveLink}"
+                                 action="#{famFormationController.create}"
+                        />
+                <p:commandButton value="#{bundle.EditFamFormationCancelLink}"
+                                 action="#{famFormationController.prepareList}"
+                                 immediate="true"/>
+
+                <!--                <p:outputPanel id="con" layout="block" 
+                             style="width:300px;height:400px;border:1px solid #666666;">
+                  <p:outputPanel id="con1"  style="width:30px;height:40px;border:1px solid #666666;"/>
+                  <p:outputPanel id="con2"  style="display:block;width:30px;height:40px;border:1px solid #666666;"/>
+                  <h:graphicImage id="conpnl" value="/images/silk/user.png"/>
+                  <p:graphicText id="P1" value="1" fontName="Georgia"/>
+              </p:outputPanel>  -->
+                <!--                <h:panelGroup >
+     <h:panelGrid columns="5"
+                  style="margin-left:40px;width:360px;height:496px;border:1px solid #666666;"
+                  styleClass="soccer_field">
+         <c:forEach begin="0" end="5" step="1" var="i">
+             <c:forEach begin="0" end="4" step="1" var="j">
+                 <p:outputPanel id="trg#{i}#{j}"
+                                style="display:block;text-align:center;width:55px;height:65px;border:1px solid #666666;">
+                     #{i}#{j}
+                 </p:outputPanel>
+             </c:forEach>
+         </c:forEach>
+
+     </h:panelGrid>
+     <h:graphicImage id="conpnl" value="/images/silk/user.png"/>
+     <p:graphicText id="P1" value="1" fontName="Georgia"/>
+ </h:panelGroup>
+ <c:forEach begin="0" end="5" step="1" var="i">
+     <c:forEach begin="0" end="4" step="1" var="j">
+         <p:droppable for="trg#{i}#{j}"
+                      dropListener="#{initData.testDrag}"
+                      scope="test"
+                      />
+     </c:forEach>
+ </c:forEach>
+
+
+ <p:draggable for="conpnl"
+              containment="parent"
+              grid="30,40"
+              opacity="0.3"
+              scope="test"
+              revert="true"
+              />
+ <p:draggable for="P1"
+              containment="parent"
+              grid="30,40"
+              opacity="0.3"
+              scope="test2"
+              revert="true"
+              />  -->
+                <!--          <p:droppable for="con1"
+                                       dropListener="#{initData.testDrag}"
+                                       scope="test"
+                                       />
+                          <p:droppable for="con2"
+                                       dropListener="#{initData.testDrag}"
+                                       scope="test2"
+                                       />-->
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

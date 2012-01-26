@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        >
+
+    <h:panelGrid columns="3">
+        <!--                    <h:outputLabel value="#{bundle.EditFamPositionLabel_idPosition}" for="idPosition" />
+     <p:inputText id="idPosition"
+                  value="#{bean.idPosition}"
+                  title="#{bundle.EditFamPositionTitle_idPosition}"
+                  >
+         <p:ajax event="blur" update="msg_idPosition"/>
+     </p:inputText>
+     <p:message id="msg_idPosition" for="idPosition"/> -->
+
+        <h:outputLabel value="#{bundle.EditFamPositionLabel_libPosition}" for="libPosition"/>
+        <p:inputText id="libPosition"
+                     value="#{bean.libPosition}"
+                     title="#{bundle.EditFamPositionTitle_libPosition}"
+                >
+            <p:ajax event="blur" update="msg_libPosition"/>
+        </p:inputText>
+        <p:message id="msg_libPosition" for="libPosition"/>
+
+        <h:outputLabel value="#{bundle.EditFamPositionLabel_codPosition}" for="codPosition"/>
+        <p:inputText id="codPosition"
+                     value="#{bean.codPosition}"
+                     title="#{bundle.EditFamPositionTitle_codPosition}"
+                >
+            <p:ajax event="blur" update="msg_codPosition"/>
+        </p:inputText>
+        <p:message id="msg_codPosition" for="codPosition"/>
+
+        <!--                    <h:outputLabel value="#{bundle.EditFamPositionLabel_dtCreat}" for="dtCreat" />
+     <p:inputText id="dtCreat"
+                  value="#{bean.dtCreat}"
+                  title="#{bundle.EditFamPositionTitle_dtCreat}"
+                  >
+         <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+         <p:ajax event="blur" update="msg_dtCreat"/>
+     </p:inputText>
+     <p:message id="msg_dtCreat" for="dtCreat"/>
+
+     <h:outputLabel value="#{bundle.EditFamPositionLabel_dtModif}" for="dtModif" />
+     <p:inputText id="dtModif"
+                  value="#{bean.dtModif}"
+                  title="#{bundle.EditFamPositionTitle_dtModif}"
+                  >
+         <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+         <p:ajax event="blur" update="msg_dtModif"/>
+     </p:inputText>
+     <p:message id="msg_dtModif" for="dtModif"/> -->
+
+    </h:panelGrid>
+</ui:composition>

@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        >
+
+    <h:panelGrid columns="3">
+        <!--                    <h:outputLabel value="#{bundle.EditFamEventLabel_idEvent}" for="idEvent" />-->
+        <!--                    <p:inputText id="idEvent" 
+                                         value="#{bean.idEvent}" 
+                                         title="#{bundle.EditFamEventTitle_idEvent}" 
+                                         >-->
+        <!--                        <p:ajax event="blur" update="msg_idEvent"/>-->
+        <!--                    </p:inputText>-->
+        <!-- <p:message id="msg_idEvent" for="idEvent"/> -->
+
+        <!--        <h:outputLabel value="#{bundle.EditFamEventLabel_famSeason}" for="famSeason" />
+     <h:selectOneMenu id="famSeason"
+                       value="#{bean.famSeason}"
+                       title="#{bundle.EditFamEventTitle_famSeason}"
+
+                       >
+                      <f:selectItems value="#{famSeasonController.itemsAvailableSelectOne}"/>
+          <f:selectItem itemLabel="Season"
+                        noSelectionOption="true"/>
+          <f:selectItems  value="#{cacheBean.listSeason}"
+                          var="s"
+                          itemValue="#{s}"
+                          itemLabel="#{s.libSeason}"/>
+          <p:ajax event="blur" update="msg_famSeason"/>
+      </h:selectOneMenu>
+      <p:message id="msg_famSeason" for="famSeason"/>-->
+        <!--mindate="#{cacheBean.now}"-->
+        <h:outputLabel value="#{bundle.EditFamEventLabel_dtEvent}" for="dtEvent"/>
+        <p:calendar id="dtEvent"
+                    value="#{bean.dtEvent}"
+                    maxHour="23"
+                    minHour="9"
+
+                    locale="fr"
+                    navigator="true"
+                    pattern="dd/MM/yyyy HH:mm"
+                >
+            <p:ajax event="blur" update="msg_dtEvent"/>
+        </p:calendar>
+        <!--                    <p:inputText id="dtEvent"
+                     value="#{bean.dtEvent}"
+                     title="#{bundle.EditFamEventTitle_dtEvent}"
+                     >
+            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+            <p:ajax event="blur" update="msg_dtEvent"/>
+        </p:inputText>-->
+        <p:message id="msg_dtEvent" for="dtEvent"/>
+
+        <h:outputLabel value="#{bundle.EditFamEventLabel_famTypEvent}" for="famTypEvent"
+                       rendered="#{isNotWorkoutOrMatch}"/>
+        <p:selectOneMenu id="famTypEvent"
+                         value="#{bean.famTypEvent}"
+                         title="#{bundle.EditFamEventTitle_famTypEvent}"
+                         style="width:160px;"
+                         rendered="#{isNotWorkoutOrMatch}"
+                >
+            <f:selectItem itemLabel="TypEvent" itemValue=""/>
+            <!--                          noSelectionOption="true"/>-->
+            <f:selectItems value="#{cacheBean.listTypEvent}"
+                           var="te"
+                           itemValue="#{te}"
+                           itemLabel="#{te.libTypEvent}"/>
+            <p:ajax event="blur" update="msg_famTypEvent"/>
+        </p:selectOneMenu>
+        <p:message id="msg_famTypEvent" for="famTypEvent"
+                   rendered="#{isNotWorkoutOrMatch}"/>
+
+        <h:outputLabel value="#{bundle.EditFamEventLabel_libEvent}" for="libEvent"/>
+        <p:inputText id="libEvent"
+                     value="#{bean.libEvent}"
+                     title="#{bundle.EditFamEventTitle_libEvent}"
+                >
+            <p:ajax event="blur" update="msg_libEvent"/>
+        </p:inputText>
+        <p:message id="msg_libEvent" for="libEvent"/>
+
+        <h:outputLabel value="#{bundle.EditFamEventLabel_famPlace}" for="famPlace"/>
+        <p:selectOneMenu id="famPlace"
+                         value="#{bean.famPlace}"
+                         title="#{bundle.EditFamEventTitle_famPlace}"
+                         style="width:160px;"
+                >
+            <f:selectItem itemLabel="Place" itemValue=""/>
+            <!--                          noSelectionOption="true"/>-->
+            <f:selectItems value="#{cacheBean.listPlace}"
+                           var="p"
+                           itemValue="#{p}"
+                           itemLabel="#{p.libPlace}"/>
+            <p:ajax event="blur" update="msg_famPlace"/>
+        </p:selectOneMenu>
+        <p:message id="msg_famPlace" for="famPlace"/>
+
+        <h:outputLabel value="#{bundle.EditFamEventLabel_famEventStatus}" for="famEventStatus"/>
+        <p:selectOneMenu id="famEventStatus"
+                         value="#{bean.famEventStatus}"
+                         title="#{bundle.EditFamEventTitle_famEventStatus}"
+                         style="width:160px;"
+                >
+            <f:selectItem itemLabel="Status" itemValue=""/>
+            <!--                          noSelectionOption="true"/>-->
+            <f:selectItems value="#{cacheBean.listEventStatus}"
+                           var="es"
+                           itemValue="#{es}"
+                           itemLabel="#{es.libEventStatus}"/>
+            <p:ajax event="blur" update="msg_famEventStatus"/>
+        </p:selectOneMenu>
+        <p:message id="msg_famEventStatus" for="famEventStatus"/>
+
+        <h:outputLabel value="#{bundle.EditFamEventLabel_allDay}" for="allDay"
+                       rendered="#{isNotWorkoutOrMatch}"/>
+        <p:selectBooleanCheckbox id="allDay"
+                                 value="#{bean.allDay}"
+                                 binding="#{showAllDay}"
+                                 rendered="#{isNotWorkoutOrMatch}"
+                >
+            <p:ajax event="change" process="@this" update="@form"/>
+        </p:selectBooleanCheckbox>
+        <p:message id="msg_allDay" for="allDay"
+                   rendered="#{isNotWorkoutOrMatch}"/>
+
+        <h:outputLabel value="#{bundle.EditFamEventLabel_duration}" for="duration"
+                />
+        <p:inputText id="duration"
+                     value="#{bean.duration}"
+                     title="#{bundle.EditFamEventTitle_duration}"
+                >
+            <p:ajax event="blur" update="msg_duration"/>
+        </p:inputText>
+        <p:message id="msg_duration" for="duration"/>
+
+        <h:outputLabel value="#{bundle.EditFamEventLabel_comments}" for="comments"/>
+        <p:editor id="comments"
+                  value="#{bean.comments}"
+                  widgetVar="editor" width="600"/>
+        <!--                    <p:inputTextarea rows="4" cols="30" 
+                                             id="comments" 
+                                             value="#{bean.comments}" 
+                                             title="#{bundle.EditFamEventTitle_comments}" 
+                                             >
+                                <p:ajax event="blur" update="msg_comments"/>
+                            </p:inputTextarea>-->
+        <p:message id="msg_comments" for="comments"/>
+
+        <h:outputLabel value="Equipes" for="teams"/>
+        <!--                                                <p:pickList id="teams"
+      value="#{famEventController.teams}"
+      var="t"
+      itemLabel="#{t.libTeam}"
+      itemValue="#{t}"
+      converter="teamConverter"
+      />  -->
+        <p:selectManyMenu id="teams"
+                          value="#{bean.famTeamList}"
+                          converter="teamConverter">
+            <f:selectItems value="#{login.currentUser.famPlayer.currentPlayerSeason.famClub.famTeamList}"
+                           var="t" itemLabel="#{t.libTeam}"
+                           itemValue="#{t}"/>
+            <p:ajax event="blur" update="msg_teams"/>
+        </p:selectManyMenu>
+        <p:message id="msg_teams" for="teams"/>
+
+        <!--                    <h:outputLabel value="#{bundle.EditFamEventLabel_dtCreat}" for="dtCreat" />
+     <p:inputText id="dtCreat"
+                  value="#{bean.dtCreat}"
+                  title="#{bundle.EditFamEventTitle_dtCreat}"
+                  >
+         <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+         <p:ajax event="blur" update="msg_dtCreat"/>
+     </p:inputText>
+     <p:message id="msg_dtCreat" for="dtCreat"/>
+
+     <h:outputLabel value="#{bundle.EditFamEventLabel_dtModif}" for="dtModif" />
+     <p:inputText id="dtModif"
+                  value="#{bean.dtModif}"
+                  title="#{bundle.EditFamEventTitle_dtModif}"
+                  >
+         <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+         <p:ajax event="blur" update="msg_dtModif"/>
+     </p:inputText>
+     <p:message id="msg_dtModif" for="dtModif"/> -->
+
+    </h:panelGrid>
+</ui:composition>

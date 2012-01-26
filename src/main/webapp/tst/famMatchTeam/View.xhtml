@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+    <ui:define name="title">
+        <h:outputText value="#{bundle.ViewFamMatchTeamTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <p:panel header="#{bundle.ViewFamMatchTeamTitle}">
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewFamMatchTeamLabel_famMatch}"/>
+                    <h:outputText value="#{famMatchTeamController.selected.famMatch}"
+                                  title="#{bundle.ViewFamMatchTeamTitle_famMatch}"/>
+                    <h:outputText value="#{bundle.ViewFamMatchTeamLabel_famTeam}"/>
+                    <h:outputText value="#{famMatchTeamController.selected.famTeam}"
+                                  title="#{bundle.ViewFamMatchTeamTitle_famTeam}"/>
+                    <h:outputText value="#{bundle.ViewFamMatchTeamLabel_defeat}"/>
+                    <h:outputText value="#{famMatchTeamController.selected.defeat}"
+                                  title="#{bundle.ViewFamMatchTeamTitle_defeat}"/>
+                    <h:outputText value="#{bundle.ViewFamMatchTeamLabel_draw}"/>
+                    <h:outputText value="#{famMatchTeamController.selected.draw}"
+                                  title="#{bundle.ViewFamMatchTeamTitle_draw}"/>
+                    <h:outputText value="#{bundle.ViewFamMatchTeamLabel_goalScored}"/>
+                    <h:outputText value="#{famMatchTeamController.selected.goalScored}"
+                                  title="#{bundle.ViewFamMatchTeamTitle_goalScored}"/>
+                    <h:outputText value="#{bundle.ViewFamMatchTeamLabel_goalShipped}"/>
+                    <h:outputText value="#{famMatchTeamController.selected.goalShipped}"
+                                  title="#{bundle.ViewFamMatchTeamTitle_goalShipped}"/>
+                    <h:outputText value="#{bundle.ViewFamMatchTeamLabel_home}"/>
+                    <h:outputText value="#{famMatchTeamController.selected.home}"
+                                  title="#{bundle.ViewFamMatchTeamTitle_home}"/>
+                    <h:outputText value="#{bundle.ViewFamMatchTeamLabel_points}"/>
+                    <h:outputText value="#{famMatchTeamController.selected.points}"
+                                  title="#{bundle.ViewFamMatchTeamTitle_points}"/>
+                    <h:outputText value="#{bundle.ViewFamMatchTeamLabel_victory}"/>
+                    <h:outputText value="#{famMatchTeamController.selected.victory}"
+                                  title="#{bundle.ViewFamMatchTeamTitle_victory}"/>
+                </h:panelGrid>
+                <br/>
+                <p:commandButton action="Edit" value="#{bundle.ViewFamMatchTeamEditLink}"/>
+                <p:commandButton action="#{famMatchTeamController.prepareCreate}"
+                                 value="#{bundle.ViewFamMatchTeamCreateLink}"/>
+                <p:commandButton action="#{famMatchTeamController.prepareList}"
+                                 value="#{bundle.ViewFamMatchTeamShowAllLink}"/>
+            </h:form>
+        </p:panel>
+    </ui:define>
+</ui:composition>
+
+        </html>

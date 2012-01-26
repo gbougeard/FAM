@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{bundle.ListFamPlayerSeasonTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <h:form>
+            <h:panelGroup id="messagePanel" layout="block">
+            </h:panelGroup>
+            <p:panel header="Clubs">
+
+                <p:dataTable
+                        value="#{famPlayerSeasonController.items}"
+                        var="item"
+                        selectionMode="single"
+                        selection="#{famPlayerSeasonController.selected}"
+                        paginator="true" rows="10"
+                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                        rowsPerPageTemplate="5,10,15">
+                    <f:facet name="header">
+                        <p:toolbar>
+                            <p:toolbarGroup align="left">
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamPlayerSeasonViewLink}"
+                                                 action="#{famPlayerSeasonController.prepareView}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamPlayerSeasonCreateLink}"
+                                                 action="#{famPlayerSeasonController.prepareCreate}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamPlayerSeasonEditLink}"
+                                                 action="#{famPlayerSeasonController.prepareEdit}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamPlayerSeasonDeleteLink}"
+                                                 action="#{famPlayerSeasonController.prepareDelete}"/>
+                            </p:toolbarGroup>
+                        </p:toolbar>
+                    </f:facet>
+                    <p:column sortBy="#{item.famPlayer}"
+                              filterBy="#{item.famPlayer}"
+                              headerText="#{bundle.ListFamPlayerSeasonTitle_famPlayer}">
+                        <h:outputText value="#{item.famPlayer}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.famPlayerProfile}"
+                              filterBy="#{item.famPlayerProfile}"
+                              headerText="#{bundle.ListFamPlayerSeasonTitle_famPlayerProfile}">
+                        <h:outputText value="#{item.famPlayerProfile}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.famSeason}"
+                              filterBy="#{item.famSeason}"
+                              headerText="#{bundle.ListFamPlayerSeasonTitle_famSeason}">
+                        <h:outputText value="#{item.famSeason}"/>
+                    </p:column>
+                    <f:facet name="footer">
+
+                    </f:facet>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

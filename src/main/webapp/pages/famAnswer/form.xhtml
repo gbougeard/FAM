@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        >
+
+    <h:panelGrid columns="3">
+        <!--                    <h:outputLabel value="#{bundle.EditFamAnswerLabel_idAnswer}" for="idAnswer" />
+     <p:inputText id="idAnswer"
+                  value="#{bean.idAnswer}"
+                  title="#{bundle.EditFamAnswerTitle_idAnswer}"
+                  >
+         <p:ajax event="blur" update="msg_idAnswer"/>
+     </p:inputText>
+     <p:message id="msg_idAnswer" for="idAnswer"/> -->
+
+        <h:outputLabel value="#{bundle.EditFamAnswerLabel_famEvent}" for="famEvent"/>
+        <h:selectOneMenu id="famEvent"
+                         value="#{bean.famEvent}"
+                         title="#{bundle.EditFamAnswerTitle_famEvent}"
+                >
+            <f:selectItems value="#{famEventController.itemsAvailableSelectOne}"/>
+            <p:ajax event="blur" update="msg_famEvent"/>
+        </h:selectOneMenu>
+        <p:message id="msg_famEvent" for="famEvent"/>
+
+        <h:outputLabel value="#{bundle.EditFamAnswerLabel_famTypAnswer}" for="famTypAnswer"/>
+        <h:selectOneMenu id="famTypAnswer"
+                         value="#{bean.famTypAnswer}"
+                         title="#{bundle.EditFamAnswerTitle_famTypAnswer}"
+                >
+            <f:selectItems value="#{famTypAnswerController.itemsAvailableSelectOne}"/>
+            <p:ajax event="blur" update="msg_famTypAnswer"/>
+        </h:selectOneMenu>
+        <p:message id="msg_famTypAnswer" for="famTypAnswer"/>
+
+        <h:outputLabel value="#{bundle.EditFamAnswerLabel_famPlayer}" for="famPlayer"/>
+        <h:selectOneMenu id="famPlayer"
+                         value="#{bean.famPlayer}"
+                         title="#{bundle.EditFamAnswerTitle_famPlayer}"
+                >
+            <f:selectItems value="#{famPlayerController.itemsAvailableSelectOne}"/>
+            <p:ajax event="blur" update="msg_famPlayer"/>
+        </h:selectOneMenu>
+        <p:message id="msg_famPlayer" for="famPlayer"/>
+
+        <h:outputLabel value="#{bundle.EditFamAnswerLabel_comments}" for="comments"/>
+        <p:editor id="comments"
+                  value="#{bean.comments}"
+                  width="600"
+                >
+            <p:ajax event="blur" update="msg_comments"/>
+        </p:editor>
+        <p:message id="msg_comments" for="comments"/>
+
+        <!--                    <h:outputLabel value="#{bundle.EditFamAnswerLabel_dtCreat}" for="dtCreat" />
+     <p:inputText id="dtCreat"
+                  value="#{bean.dtCreat}"
+                  title="#{bundle.EditFamAnswerTitle_dtCreat}"
+                  >
+         <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+         <p:ajax event="blur" update="msg_dtCreat"/>
+     </p:inputText>
+     <p:message id="msg_dtCreat" for="dtCreat"/>
+
+     <h:outputLabel value="#{bundle.EditFamAnswerLabel_dtModif}" for="dtModif" />
+     <p:inputText id="dtModif"
+                  value="#{bean.dtModif}"
+                  title="#{bundle.EditFamAnswerTitle_dtModif}"
+                  >
+         <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+         <p:ajax event="blur" update="msg_dtModif"/>
+     </p:inputText>
+     <p:message id="msg_dtModif" for="dtModif"/> -->
+
+    </h:panelGrid>
+</ui:composition>

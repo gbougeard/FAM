@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{bundle.EditFamMatchTeamTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <h:form>
+            <p:panel header="#{bundle.EditFamMatchTeamTitle}">
+                <h:panelGrid columns="3">
+                    <h:outputLabel value="#{bundle.EditFamMatchTeamLabel_famMatch}" for="famMatch"/>
+                    <h:selectOneMenu id="famMatch"
+                                     value="#{famMatchTeamController.selected.famMatch}"
+                                     title="#{bundle.EditFamMatchTeamTitle_famMatch}"
+                            >
+                        <f:selectItems value="#{famMatchController.itemsAvailableSelectOne}"/>
+                        <p:ajax event="blur" update="msg_famMatch"/>
+                    </h:selectOneMenu>
+                    <p:message id="msg_famMatch" for="famMatch"/>
+
+                    <h:outputLabel value="#{bundle.EditFamMatchTeamLabel_famTeam}" for="famTeam"/>
+                    <h:selectOneMenu id="famTeam"
+                                     value="#{famMatchTeamController.selected.famTeam}"
+                                     title="#{bundle.EditFamMatchTeamTitle_famTeam}"
+                            >
+                        <f:selectItems value="#{famTeamController.itemsAvailableSelectOne}"/>
+                        <p:ajax event="blur" update="msg_famTeam"/>
+                    </h:selectOneMenu>
+                    <p:message id="msg_famTeam" for="famTeam"/>
+
+                    <h:outputLabel value="#{bundle.EditFamMatchTeamLabel_defeat}" for="defeat"/>
+                    <p:inputText id="defeat"
+                                 value="#{famMatchTeamController.selected.defeat}"
+                                 title="#{bundle.EditFamMatchTeamTitle_defeat}"
+                                 required="true"
+                                 requiredMessage="#{bundle.EditFamMatchTeamRequiredMessage_defeat}"
+                            >
+                        <p:ajax event="blur" update="msg_defeat"/>
+                    </p:inputText>
+                    <p:message id="msg_defeat" for="defeat"/>
+
+                    <h:outputLabel value="#{bundle.EditFamMatchTeamLabel_draw}" for="draw"/>
+                    <p:inputText id="draw"
+                                 value="#{famMatchTeamController.selected.draw}"
+                                 title="#{bundle.EditFamMatchTeamTitle_draw}"
+                                 required="true"
+                                 requiredMessage="#{bundle.EditFamMatchTeamRequiredMessage_draw}"
+                            >
+                        <p:ajax event="blur" update="msg_draw"/>
+                    </p:inputText>
+                    <p:message id="msg_draw" for="draw"/>
+
+                    <h:outputLabel value="#{bundle.EditFamMatchTeamLabel_goalScored}" for="goalScored"/>
+                    <p:inputText id="goalScored"
+                                 value="#{famMatchTeamController.selected.goalScored}"
+                                 title="#{bundle.EditFamMatchTeamTitle_goalScored}"
+                            >
+                        <p:ajax event="blur" update="msg_goalScored"/>
+                    </p:inputText>
+                    <p:message id="msg_goalScored" for="goalScored"/>
+
+                    <h:outputLabel value="#{bundle.EditFamMatchTeamLabel_goalShipped}" for="goalShipped"/>
+                    <p:inputText id="goalShipped"
+                                 value="#{famMatchTeamController.selected.goalShipped}"
+                                 title="#{bundle.EditFamMatchTeamTitle_goalShipped}"
+                            >
+                        <p:ajax event="blur" update="msg_goalShipped"/>
+                    </p:inputText>
+                    <p:message id="msg_goalShipped" for="goalShipped"/>
+
+                    <h:outputLabel value="#{bundle.EditFamMatchTeamLabel_home}" for="home"/>
+                    <p:inputText id="home"
+                                 value="#{famMatchTeamController.selected.home}"
+                                 title="#{bundle.EditFamMatchTeamTitle_home}"
+                            >
+                        <p:ajax event="blur" update="msg_home"/>
+                    </p:inputText>
+                    <p:message id="msg_home" for="home"/>
+
+                    <h:outputLabel value="#{bundle.EditFamMatchTeamLabel_points}" for="points"/>
+                    <p:inputText id="points"
+                                 value="#{famMatchTeamController.selected.points}"
+                                 title="#{bundle.EditFamMatchTeamTitle_points}"
+                                 required="true"
+                                 requiredMessage="#{bundle.EditFamMatchTeamRequiredMessage_points}"
+                            >
+                        <p:ajax event="blur" update="msg_points"/>
+                    </p:inputText>
+                    <p:message id="msg_points" for="points"/>
+
+                    <h:outputLabel value="#{bundle.EditFamMatchTeamLabel_victory}" for="victory"/>
+                    <p:inputText id="victory"
+                                 value="#{famMatchTeamController.selected.victory}"
+                                 title="#{bundle.EditFamMatchTeamTitle_victory}"
+                                 required="true"
+                                 requiredMessage="#{bundle.EditFamMatchTeamRequiredMessage_victory}"
+                            >
+                        <p:ajax event="blur" update="msg_victory"/>
+                    </p:inputText>
+                    <p:message id="msg_victory" for="victory"/>
+
+                </h:panelGrid>
+                <p:commandButton value="#{bundle.EditFamMatchTeamSaveLink}"
+                                 action="#{famMatchTeamController.update}"
+                                 immediate="true"/>
+                <p:commandButton value="#{bundle.EditFamMatchTeamCancelLink}"
+                                 action="#{famMatchTeamController.prepareList}"
+                                 immediate="true"/>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

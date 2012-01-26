@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        >
+
+    <h:panelGrid columns="2">
+
+        <h:outputText value="#{bundle.ViewFamClubLabel_libClub}"/>
+        <h:outputText value="#{bean.libClub}"
+                      title="#{bundle.ViewFamClubTitle_libClub}"/>
+
+        <h:outputText value="#{bundle.ViewFamClubLabel_codeFff}"/>
+        <h:outputText value="#{bean.codeFff}"
+                      title="#{bundle.ViewFamClubTitle_codeFff}"/>
+
+        <h:outputText value="#{bundle.ViewFamClubLabel_country}"/>
+        <h:outputText value="#{bean.famCountry.libCountry}"
+                      title="#{bundle.ViewFamClubLabel_country}"/>
+
+        <h:outputText value="#{bundle.ViewFamClubLabel_state}"/>
+        <h:outputText value="#{bean.famState.libState}"
+                      title="#{bundle.ViewFamClubLabel_state}"/>
+
+        <h:outputText value="#{bundle.ViewFamClubLabel_province}"/>
+        <h:outputText value="#{bean.famProvince.libProvince}"
+                      title="#{bundle.ViewFamClubLabel_province}"/>
+
+        <h:outputText value="#{bundle.ViewFamClubLabel_city}"/>
+        <h:outputText value="#{bean.famCity.libCity}"
+                      title="#{bundle.ViewFamClubLabel_city}"/>
+    </h:panelGrid>
+    <br/>
+    <p:tabView var="t" value="#{bean.famTeamList}">
+        <p:tab title="#{t.libTeam}">
+            <ui:include src="/pages/famTeam/view.xhtml">
+                <ui:param name="bean" value="#{t}"/>
+            </ui:include>
+        </p:tab>
+    </p:tabView>
+    <br/>
+
+    <p:fieldset legend="Debug" rendered="#{initParam['javax.faces.PROJECT_STAGE'] eq 'Development'}">
+
+        <h:panelGrid columns="2">
+            <h:outputText value="#{bundle.ViewFamClubLabel_idClub}"/>
+            <h:outputText value="#{bean.idClub}"
+                          title="#{bundle.ViewFamClubTitle_idClub}"/>
+
+            <h:outputText value="#{bundle.ViewFamPlaceLabel_dtCreat}"/>
+            <h:outputText value="#{bean.dtCreat}"
+                          title="#{bundle.ViewFamPlaceTitle_dtCreat}">
+                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
+            </h:outputText>
+
+            <h:outputText value="#{bundle.ViewFamPlaceLabel_dtModif}"/>
+            <h:outputText value="#{bean.dtModif}"
+                          title="#{bundle.ViewFamPlaceTitle_dtModif}">
+                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
+            </h:outputText>
+
+        </h:panelGrid>
+    </p:fieldset>
+
+</ui:composition>
+
+
+
+

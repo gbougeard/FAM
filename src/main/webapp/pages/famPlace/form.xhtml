@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        >
+
+    <h:panelGrid columns="3">
+
+        <h:outputLabel value="#{bundle.EditFamPlaceLabel_libPlace}" for="libPlace"/>
+        <p:inputText id="libPlace"
+                     value="#{bean.libPlace}"
+                     title="#{bundle.EditFamPlaceTitle_libPlace}"
+                >
+            <p:ajax event="blur" update="msg_libPlace"/>
+        </p:inputText>
+        <p:message id="msg_libPlace" for="libPlace"/>
+
+        <h:outputLabel value="#{bundle.EditFamPlaceLabel_address}" for="address"/>
+        <p:inputText id="address"
+                     value="#{bean.address}"
+                     title="#{bundle.EditFamPlaceTitle_address}"
+                >
+            <p:ajax event="blur" update="msg_address"/>
+        </p:inputText>
+        <p:message id="msg_address" for="address"/>
+
+        <h:outputLabel value="#{bundle.EditFamPlaceLabel_zipcode}" for="zipcode"/>
+        <p:inputText id="zipcode"
+                     value="#{bean.zipcode}"
+                     title="#{bundle.EditFamPlaceTitle_zipcode}"
+                >
+            <p:ajax event="blur" update="msg_zipcode"/>
+        </p:inputText>
+        <p:message id="msg_zipcode" for="zipcode"/>
+
+        <h:outputLabel value="#{bundle.EditFamPlaceLabel_city}" for="city"/>
+        <p:inputText id="city"
+                     value="#{bean.city}"
+                     title="#{bundle.EditFamPlaceTitle_city}"
+                >
+            <p:ajax event="blur" update="msg_city"/>
+        </p:inputText>
+        <p:message id="msg_city" for="city"/>
+
+        <h:outputLabel value="#{bundle.EditFamPlaceLabel_latitude}" for="latitude"/>
+        <p:inputText id="latitude"
+                     value="#{bean.latitude}"
+                     title="#{bundle.EditFamPlaceTitle_latitude}"
+                     readonly="true"
+                >
+            <p:ajax event="blur" update="msg_latitude"/>
+        </p:inputText>
+        <p:message id="msg_latitude" for="latitude"/>
+
+        <h:outputLabel value="#{bundle.EditFamPlaceLabel_longitude}" for="longitude"/>
+        <p:inputText id="longitude"
+                     value="#{bean.longitude}"
+                     title="#{bundle.EditFamPlaceTitle_longitude}"
+                     readonly="true"
+                >
+            <p:ajax event="blur" update="msg_longitude"/>
+        </p:inputText>
+        <p:message id="msg_longitude" for="longitude"/>
+
+        <h:outputLabel value="#{bundle.EditFamPlaceLabel_famTypPlace}" for="famTypPlace"/>
+        <p:selectOneMenu id="famTypPlace"
+                         value="#{bean.famTypPlace}"
+                         title="#{bundle.EditFamPlaceTitle_famTypPlace}"
+                         style="width:160px"
+                >
+            <f:selectItem itemLabel="Type" itemValue=""/>
+            <!--                          noSelectionOption="true"/>-->
+            <f:selectItems value="#{cacheBean.listTypPlace}"
+                           var="n"
+                           itemValue="#{n}"
+                           itemLabel="#{n.libTypPlace}"/>
+            <p:ajax event="blur" update="msg_famTypPlace"/>
+        </p:selectOneMenu>
+        <p:message id="msg_famTypPlace" for="famTypPlace"/>
+    </h:panelGrid>
+
+    <!--    <p:gmap id="map" center="#{item.latitude}, #{item.longitude}" zoom="15" type="HYBRID"
+  style="width:600px;height:400px"
+  mapTypeControl="false" navigationControl="false" />-->
+    <!--        rendered="#{!empty item.latitude}"/>  -->
+
+    <p:fieldset legend="Debug" rendered="#{initParam['javax.faces.PROJECT_STAGE'] eq 'Development'}">
+        <h:panelGrid columns="2">
+
+            <h:outputText value="#{bundle.ViewFamPlaceLabel_idPlace}"/>
+            <h:outputText value="#{bean.idPlace}"
+                          title="#{bundle.ViewFamPlaceTitle_idPlace}"/>
+
+            <h:outputText value="#{bundle.ViewFamPlaceLabel_fullAddress}"/>
+            <h:outputText value="#{bean.fullAddress}"
+                          title="#{bundle.ViewFamPlaceTitle_fullAddress}"/>
+
+            <h:outputText value="#{bundle.ViewFamPlaceLabel_dtCreat}"/>
+            <h:outputText value="#{bean.dtCreat}"
+                          title="#{bundle.ViewFamPlaceTitle_dtCreat}">
+                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
+            </h:outputText>
+            <h:outputText value="#{bundle.ViewFamPlaceLabel_dtModif}"/>
+            <h:outputText value="#{bean.dtModif}"
+                          title="#{bundle.ViewFamPlaceTitle_dtModif}">
+                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
+            </h:outputText>
+
+        </h:panelGrid>
+    </p:fieldset>
+</ui:composition>

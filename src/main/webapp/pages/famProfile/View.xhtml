@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+    <ui:define name="title">
+        <h:outputText value="#{bundle.ViewFamProfileTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <p:panel header="#{bundle.ViewFamProfileTitle}">
+            <h:form>
+                <h:panelGrid columns="2">
+                    <!--                    <h:outputText value="#{bundle.ViewFamProfileLabel_idProfile}"/>
+      <h:outputText value="#{famProfileController.selected.idProfile}"
+                    title="#{bundle.ViewFamProfileTitle_idProfile}"/>-->
+
+                    <h:outputText value="#{bundle.ViewFamProfileLabel_libProfile}"/>
+                    <h:outputText value="#{famProfileController.selected.libProfile}"
+                                  title="#{bundle.ViewFamProfileTitle_libProfile}"/>
+
+                    <h:outputText value="#{bundle.ViewFamProfileLabel_codProfile}"/>
+                    <h:outputText value="#{famProfileController.selected.codProfile}"
+                                  title="#{bundle.ViewFamProfileTitle_codProfile}"/>
+
+                    <!--                    <h:outputText value="#{bundle.ViewFamProfileLabel_dtCreat}"/>
+                    <h:outputText value="#{famProfileController.selected.dtCreat}" 
+                                  title="#{bundle.ViewFamProfileTitle_dtCreat}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewFamProfileLabel_dtModif}"/>
+                    <h:outputText value="#{famProfileController.selected.dtModif}" 
+                                  title="#{bundle.ViewFamProfileTitle_dtModif}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                    </h:outputText>-->
+                </h:panelGrid>
+                <br/>
+                <p:commandButton action="#{famProfileController.prepareEdit}" value="#{bundle.ViewFamProfileEditLink}"/>
+                <p:commandButton action="#{famProfileController.prepareCreate}"
+                                 value="#{bundle.ViewFamProfileCreateLink}"/>
+                <p:commandButton action="#{famProfileController.prepareList}"
+                                 value="#{bundle.ViewFamProfileShowAllLink}"/>
+            </h:form>
+        </p:panel>
+    </ui:define>
+</ui:composition>
+

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{bundle.ListFamAbsenceTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <h:form>
+            <p:panel header="#{bundle.FamAbsence}">
+
+                <p:dataTable
+                        value="#{famAbsenceController.lazyModel}"
+                        lazy="true"
+                        var="item"
+                        selection="#{famAbsenceController.selected}"
+                        selectionMode="single"
+                        paginator="true" rows="10"
+                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                        rowsPerPageTemplate="5,10,15"
+                        sortBy="#{item.dtBegAbsence}"
+                        emptyMessage="#{bundle.NoDataFound}"
+                        paginatorAlwaysVisible="false"
+                        >
+                    <p:ajax event="rowSelect" update="tb"/>
+                    <p:ajax event="rowUnselect" update="tb"/>
+                    <f:facet name="header">
+                        <p:toolbar id="tb">
+                            <p:toolbarGroup align="left">
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamAbsenceViewLink}"
+                                                 action="#{famAbsenceController.prepareView}"
+                                                 disabled="#{empty famAbsenceController.selected.idAbsence}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamAbsenceCreateLink}"
+                                                 action="#{famAbsenceController.prepareCreate}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamAbsenceEditLink}"
+                                                 action="#{famAbsenceController.prepareEdit}"
+                                                 disabled="#{empty famAbsenceController.selected.idAbsence}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamAbsenceDeleteLink}"
+                                                 action="#{famAbsenceController.prepareDestroy}"
+                                                 disabled="#{empty famAbsenceController.selected.idAbsence}"/>
+                            </p:toolbarGroup>
+                        </p:toolbar>
+                    </f:facet>
+
+                    <p:column sortBy="#{item.dtBegAbsence}"
+                              filterBy="#{item.dtBegAbsence}"
+                              headerText="#{bundle.ListFamAbsenceTitle_dtBegAbsence}">
+                        <h:outputText value="#{item.dtBegAbsence}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column sortBy="#{item.dtEndAbsence}"
+                              filterBy="#{item.dtEndAbsence}"
+                              headerText="#{bundle.ListFamAbsenceTitle_dtEndAbsence}">
+                        <h:outputText value="#{item.dtEndAbsence}">
+                            <f:convertDateTime pattern="dd/MM/yyyy "/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column sortBy="#{item.famTypAbsence.libTypAbsence}"
+                              filterBy="#{item.famTypAbsence.libTypAbsence}"
+                              headerText="#{bundle.ListFamAbsenceTitle_typAbsence}">
+                        <h:outputText value="#{item.famTypAbsence.libTypAbsence}"/>
+                    </p:column>
+                    <!--                    <p:column sortBy="#{item.comments}"
+                              filterBy="#{item.comments}"
+                              headerText="#{bundle.ListFamAbsenceTitle_comments}" >
+                        <h:outputText value="#{item.comments}"/>
+                    </p:column>-->
+                    <!--                    <p:column sortBy="#{item.idAbsence}"
+                              filterBy="#{item.idAbsence}"
+                              headerText="#{bundle.ListFamAbsenceTitle_idAbsence}" >
+                        <h:outputText value="#{item.idAbsence}"/>
+                    </p:column>-->
+                    <!--                    <p:column sortBy="#{item.dtCreat}"
+                              filterBy="#{item.dtCreat}"
+                              headerText="#{bundle.ListFamAbsenceTitle_dtCreat}" >
+                        <h:outputText value="#{item.dtCreat}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column sortBy="#{item.dtModif}"
+                              filterBy="#{item.dtModif}"
+                              headerText="#{bundle.ListFamAbsenceTitle_dtModif}" >
+                        <h:outputText value="#{item.dtModif}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:column>-->
+                    <f:facet name="footer">
+
+                    </f:facet>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

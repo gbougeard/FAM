@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+    <ui:define name="title">
+        <h:outputText value="#{bundle.ViewFamTypCardFinescaleTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <p:panel header="#{bundle.ViewFamTypCardFinescaleTitle}">
+            <h:form>
+                <h:panelGrid columns="2">
+                    <!--                     <h:outputText value="#{bundle.ViewFamTypCardFinescaleLabel_idTypCardFinescale}"/>
+      <h:outputText value="#{famTypCardFinescaleController.selected.idTypCardFinescale}"
+                    title="#{bundle.ViewFamTypCardFinescaleTitle_idTypCardFinescale}"/>-->
+
+                    <h:outputText value="#{bundle.ViewFamTypCardFinescaleLabel_libTypCardFinescale}"/>
+                    <h:outputText value="#{famTypCardFinescaleController.selected.libTypCardFinescale}"
+                                  title="#{bundle.ViewFamTypCardFinescaleTitle_libTypCardFinescale}"/>
+
+                    <h:outputText value="#{bundle.ViewFamTypCardFinescaleLabel_codTypCardFinescale}"/>
+                    <h:outputText value="#{famTypCardFinescaleController.selected.codTypCardFinescale}"
+                                  title="#{bundle.ViewFamTypCardFinescaleTitle_codTypCardFinescale}"/>
+
+                    <h:outputText value="#{bundle.ViewFamTypCardFinescaleLabel_famTypCard}"/>
+                    <h:outputText value="#{famTypCardFinescaleController.selected.famTypCard.libTypCard}"
+                                  title="#{bundle.ViewFamTypCardFinescaleTitle_famTypCard}"/>
+
+                    <h:outputText value="#{bundle.ViewFamTypCardFinescaleLabel_price}"/>
+                    <h:outputText value="#{famTypCardFinescaleController.selected.price}"
+                                  title="#{bundle.ViewFamTypCardFinescaleTitle_price}"/>
+
+
+                    <!--                    <h:outputText value="#{bundle.ViewFamTypCardFinescaleLabel_dtCreat}"/>
+                    <h:outputText value="#{famTypCardFinescaleController.selected.dtCreat}" 
+                                  title="#{bundle.ViewFamTypCardFinescaleTitle_dtCreat}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewFamTypCardFinescaleLabel_dtModif}"/>
+                    <h:outputText value="#{famTypCardFinescaleController.selected.dtModif}" 
+                                  title="#{bundle.ViewFamTypCardFinescaleTitle_dtModif}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                    </h:outputText>-->
+                </h:panelGrid>
+                <br/>
+                <p:commandButton action="#{famTypCardFinescaleController.prepareEdit}"
+                                 value="#{bundle.ViewFamTypCardFinescaleEditLink}"/>
+                <p:commandButton action="#{famTypCardFinescaleController.prepareCreate}"
+                                 value="#{bundle.ViewFamTypCardFinescaleCreateLink}"/>
+                <p:commandButton action="#{famTypCardFinescaleController.prepareList}"
+                                 value="#{bundle.ViewFamTypCardFinescaleShowAllLink}"/>
+            </h:form>
+        </p:panel>
+    </ui:define>
+</ui:composition>
+

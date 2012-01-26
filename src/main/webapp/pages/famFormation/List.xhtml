@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{bundle.ListFamFormationTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <h:form>
+            <p:panel header="#{bundle.FamFormation}">
+
+                <p:dataTable
+                        value="#{famFormationController.lazyModel}"
+                        lazy="true"
+                        var="item"
+                        selection="#{famFormationController.selected}"
+                        selectionMode="single"
+                        paginator="true" rows="10"
+                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                        rowsPerPageTemplate="5,10,15"
+                        sortBy="#{item.libFormation}"
+                        emptyMessage="#{bundle.NoDataFound}"
+                        paginatorAlwaysVisible="false"
+                        >
+                    <p:ajax event="rowSelect" update="tb"/>
+                    <p:ajax event="rowUnselect" update="tb"/>
+                    <f:facet name="header">
+                        <p:toolbar id="tb">
+                            <p:toolbarGroup align="left">
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamFormationViewLink}"
+                                                 action="#{famFormationController.prepareView}"
+                                                 disabled="#{empty famFormationController.selected.idFormation}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamFormationCreateLink}"
+                                                 action="#{famFormationController.prepareCreate}"
+                                                 immediate="true"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamFormationEditLink}"
+                                                 action="#{famFormationController.prepareEdit}"
+                                                 disabled="#{empty famFormationController.selected.idFormation}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamFormationDeleteLink}"
+                                                 action="#{famFormationController.prepareDelete}"
+                                                 disabled="#{empty famFormationController.selected.idFormation}"/>
+                            </p:toolbarGroup>
+                        </p:toolbar>
+                    </f:facet>
+                    <!--                    <p:column sortBy="#{item.idFormation}"
+                              filterBy="#{item.idFormation}"
+                              headerText="#{bundle.ListFamFormationTitle_idFormation}" >
+                        <h:outputText value="#{item.idFormation}"/>
+                    </p:column>-->
+                    <p:column sortBy="#{item.libFormation}"
+                              filterBy="#{item.libFormation}"
+                              headerText="#{bundle.ListFamFormationTitle_libFormation}">
+                        <h:outputText value="#{item.libFormation}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.codFormation}"
+                              filterBy="#{item.codeFormation}"
+                              headerText="#{bundle.ListFamFormationTitle_codFormation}">
+                        <h:outputText value="#{item.codFormation}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.byDefault}"
+                              filterBy="#{item.byDefault}"
+                              headerText="#{bundle.ListFamFormationTitle_byDefault}">
+                        <p:selectBooleanCheckbox value="#{item.byDefault}"/>
+                    </p:column>
+                    <!--                    <p:column sortBy="#{item.dtCreat}"
+                              filterBy="#{item.dtCreat}"
+                              headerText="#{bundle.ListFamFormationTitle_dtCreat}" >
+                        <h:outputText value="#{item.dtCreat}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column sortBy="#{item.dtModif}"
+                              filterBy="#{item.dtModif}"
+                              headerText="#{bundle.ListFamFormationTitle_dtModif}" >
+                        <h:outputText value="#{item.dtModif}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:column>-->
+                    <f:facet name="footer">
+
+                    </f:facet>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

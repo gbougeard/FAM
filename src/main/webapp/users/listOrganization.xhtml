@@ -1,0 +1,140 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+
+    <ui:define name="titre">Liste des organizations</ui:define>
+    <ui:define name="centre">
+        <center>
+            <!--Boite de dialogue d'edition-->
+            <p:dialog header="Organization Detail"
+                      widgetVar="organizationDialog" resizable="true"
+                      width="600" showEffect="explode" hideEffect="drop">
+                <h:form id="formEdit">
+                    <p:ajaxStatus style="width:16px;height:16px;">
+                        <f:facet name="start">
+                            <h:graphicImage value="../../design/ajaxloading.gif"/>
+                        </f:facet>
+                        <f:facet name="complete">
+                            <h:outputText value=""/>
+                        </f:facet>
+                    </p:ajaxStatus>
+
+                    <h:panelGrid columns="3" id="formOrganization">
+                        <h:outputLabel value="Id :" for="lbl_idOrganization"></h:outputLabel>
+                        <p:inputText id="lbl_idOrganization"
+                                     value="#{organizationController.selected.idOrganization}"
+                                     readonly="true">
+                            <p:ajax event="blur" update="msgId"/>
+                        </p:inputText>
+                        <p:message id="msgId" for="lbl_idOrganization"/>
+
+                        <h:outputLabel value="Libellé :" for="lbl_libOrganization"></h:outputLabel>
+                        <p:inputText id="lbl_libOrganization"
+                                     value="#{organizationController.selected.libOrganization}">
+                            <p:ajax event="blur" update="msgLib"/>
+                        </p:inputText>
+                        <p:message id="msgLib" for="lbl_libOrganization"/>
+
+                        <h:outputLabel value="Code :" for="lbl_code"></h:outputLabel>
+                        <p:inputText id="lbl_code"
+                                     value="#{organizationController.selected.codeOrganization}">
+                            <p:ajax event="keyup" update="msgCode"/>
+                        </p:inputText>
+                        <p:message id="msgCode" for="lbl_code"/>
+
+                        <h:outputLabel value="Parent :" for="selectParent"></h:outputLabel>
+                        <h:selectOneMenu id="selectParent">
+                            <f:selectItem itemLabel="Parents" noSelectionOption="null"/>
+                            <f:selectItems value="#{cacheBean.listOrganization}"
+                                           var="n"
+                                           itemValue="#{n}"
+                                           itemLabel="#{n.libOrganization}"
+                                           itemDescription="#{n.codeOrganization}"/>
+                            <p:ajax event="blur" update="msgParent"/>
+                        </h:selectOneMenu>
+                        <p:message id="msgParent" for="selectParent"/>
+
+                        <!--                            <p:commandButton value="Nouveau"   
+                    action="#{organizationController.nouveau}" update="formEdit:formOrganization" />  -->
+                        <p:commandButton value="Enregistrer"
+                                         action="#{organizationController.save}"
+
+                                         onerror="alert('error')"
+                                         onsuccess="organizationDialog.hide()"/>
+
+                    </h:panelGrid>
+                </h:form>
+            </p:dialog>
+
+
+            <p:panel header="Organisations" style="height:300px;">
+                <h:form id="formList" prependId="false">
+
+                    <p:dataTable
+                            var="organization"
+                            value="#{organizationController.list}"
+                            selection="#{organizationController.selected}"
+                            selectionMode="single"
+                            id="list"
+                            update="formEdit:formOrganization">
+                        <f:facet name="header">
+
+                            <p:toolbar>
+                                <p:toolbarGroup align="left">
+                                    <p:commandButton
+                                            value="New"
+                                            image="ui-icon-document"
+                                            action="#{organizationController.nouveau}"
+                                            onerror="alert('error')"
+                                            onsuccess="organizationDialog.show()"
+                                            />
+                                    <p:commandButton
+                                            value="Open"
+                                            image="ui-icon-folder-open"
+                                            onsuccess="organizationDialog.show()"/>
+                                    <p:divider/>
+                                    <p:commandButton type="button"
+                                                     title="Save"
+                                                     image="ui-icon-disk"/>
+                                    <p:commandButton type="button"
+                                                     title="Delete"
+                                                     image="ui-icon-trash"/>
+                                    <p:commandButton type="button"
+                                                     title="Print"
+                                                     image="ui-icon-print"/>
+                                </p:toolbarGroup>
+                            </p:toolbar>
+                        </f:facet>
+
+                        <p:column sortBy="#{organization.idOrganization}" filterBy="#{organization.idOrganization}"
+                                  headerText="Id" style="width:200px">
+                            <h:outputText value="#{organization.idOrganization}"/>
+                        </p:column>
+
+                        <p:column sortBy="#{organization.libOrganization}" filterBy="#{organization.libOrganization}"
+                                  headerText="Lib" style="width:200px">
+                            <h:outputText value="#{organization.libOrganization}"/>
+                        </p:column>
+
+                        <p:column sortBy="#{organization.codeOrganization}" filterBy="#{organization.codeOrganization}"
+                                  headerText="Code " style="width:200px">
+                            <h:outputText value="#{organization.codeOrganization}"/>
+                        </p:column>
+
+                        <p:column sortBy="#{organization.parent.libOrganization}"
+                                  filterBy="#{organization.parent.libOrganization}" headerText="Parent "
+                                  style="width:200px">
+                            <h:outputText value="#{organization.parent.libOrganization}"/>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </p:panel>
+
+        </center>
+    </ui:define>
+</ui:composition>

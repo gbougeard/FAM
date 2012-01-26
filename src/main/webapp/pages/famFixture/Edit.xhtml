@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{bundle.EditFamFixtureTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <h:form>
+            <p:panel header="#{bundle.EditFamFixtureTitle}">
+                <ui:include src="form.xhtml">
+                    <ui:param name="bean" value="#{famFixtureController.selected}"/>
+                </ui:include>
+                <p:commandButton value="#{bundle.EditFamFixtureSaveLink}"
+                                 action="#{famFixtureController.updateAndNoRedirect}"
+                                 onsuccess="confirmation.show()"
+                                 update="messages growl"
+                        />
+                <p:commandButton value="#{bundle.EditFamFixtureCancelLink}"
+                                 action="#{famFixtureController.prepareList}"
+                                 immediate="true"/>
+
+                <p:dialog
+                        header="Propagation dates" widgetVar="confirmation"
+                        closable="false">
+                    <h:outputText value="Voulez-vous propager la date de la journée aux matchs?"/>
+                    <p:commandButton value="Oui" actionListener="#{famFixtureController.propagateDate}"
+                                     update="messages" onsuccess="confirmation.hide()"
+                                     action="#{famFixtureController.prepareList}"/>
+                    <p:commandButton value="Non" onclick="confirmation.hide()"
+                                     action="#{famFixtureController.prepareList}" type="button"/>
+
+                </p:dialog>
+
+            </p:panel>
+
+
+        </h:form>
+    </ui:define>
+</ui:composition>
+

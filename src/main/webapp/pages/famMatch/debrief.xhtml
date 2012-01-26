@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+        template="/common/template.xhtml">
+
+<ui:define name="title">
+    <h:outputText value="#{bundle.EditFamMatchTitle}"></h:outputText>
+</ui:define>
+<ui:define name="body">
+<p:panel
+        header="Feuille de match de #{famMatchController.famTeam.libTeam} pour #{famMatchController.selected.famEvent.libEvent}">
+<h:form>
+<p:tabView style="height:400px">
+
+
+<p:tab title="Score">
+    <h:panelGrid columns="5">
+        <h:outputText value="#{famMatchController.selected.homeTeam.famTeam.libTeam}"/>
+        <p:inputText value="#{famMatchController.selected.homeTeam.goalScored}" size="2"/>
+        <h:outputText value=" - "/>
+        <p:inputText value="#{famMatchController.selected.awayTeam.goalScored}" size="2"/>
+        <h:outputText value="#{famMatchController.selected.awayTeam.famTeam.libTeam}"/>
+    </h:panelGrid>
+    <br/>
+    <br/>
+    <p:fieldset id="fsGoals" legend="Buts">
+
+        <h:panelGrid columns="3">
+            <h:outputLabel value="#{bundle.EditFamGoalLabel_famMatchPlayerStriker}" for="famMatchPlayerStriker"/>
+            <p:selectOneMenu id="famMatchPlayerStriker"
+                             value="#{famMatchController.famGoal.famMatchPlayerStriker}"
+                             title="#{bundle.EditFamGoalTitle_famMatchPlayerStriker}"
+                             styleClass="famCombo"
+                             converter="matchPlayerConverter"
+                    >
+                <f:selectItem itemLabel="Buteur" itemValue=""/>
+                <f:selectItems value="#{famMatchController.famMatchTeam.famMatchPlayerList}"
+                               var="p"
+                               itemLabel="#{p.famPlayer.displayName}"
+                               itemValue="#{p}"/>
+                <p:ajax event="blur" update="msg_famMatchPlayerStriker"/>
+            </p:selectOneMenu>
+            <p:message id="msg_famMatchPlayerStriker" for="famMatchPlayerStriker"/>
+
+            <h:outputLabel value="#{bundle.EditFamGoalLabel_famMatchPlayerAssist}" for="famMatchPlayerAssist"/>
+            <p:selectOneMenu id="famMatchPlayerAssist"
+                             value="#{famMatchController.famGoal.famMatchPlayerAssist}"
+                             title="#{bundle.EditFamGoalTitle_famMatchPlayerAssist}"
+                             styleClass="famCombo"
+                             converter="matchPlayerConverter"
+
+                    >
+                <f:selectItem itemLabel="Passeur" itemValue=""/>
+                <f:selectItems value="#{famMatchController.famMatchTeam.famMatchPlayerList}"
+                               var="p"
+                               itemLabel="#{p.famPlayer.displayName}"
+                               itemValue="#{p}"/>
+                <p:ajax event="blur" update="msg_famMatchPlayerAssist"/>
+            </p:selectOneMenu>
+            <p:message id="msg_famMatchPlayerAssist" for="famMatchPlayerAssist"/>
+
+            <h:outputLabel value="#{bundle.EditFamGoalLabel_goalTime}" for="goalTime"/>
+            <p:inputText id="goalTime"
+                         value="#{famMatchController.famGoal.goalTime}"
+                         title="#{bundle.EditFamGoalTitle_goalTime}"
+                    >
+                <p:ajax event="blur" update="msg_goalTime"/>
+            </p:inputText>
+            <p:message id="msg_goalTime" for="goalTime"/>
+
+            <h:outputLabel value="#{bundle.EditFamGoalLabel_csc}" for="csc"/>
+            <p:selectBooleanCheckbox id="csc"
+                                     value="#{famMatchController.famGoal.csc}"
+                                     title="#{bundle.EditFamGoalTitle_csc}"
+                    >
+                <p:ajax event="blur" update="msg_csc"/>
+            </p:selectBooleanCheckbox>
+            <p:message id="msg_csc" for="csc"/>
+
+            <h:outputLabel value="#{bundle.EditFamGoalLabel_penalty}" for="penalty"/>
+            <p:selectBooleanCheckbox id="penalty"
+                                     value="#{famMatchController.famGoal.penalty}"
+                                     title="#{bundle.EditFamGoalTitle_penalty}"
+                    >
+                <p:ajax event="blur" update="msg_penalty"/>
+            </p:selectBooleanCheckbox>
+            <p:message id="msg_penalty" for="penalty"/>
+        </h:panelGrid>
+
+        <p:commandButton value="Add goal"
+                         action="#{famMatchController.addGoal}"
+                         update="fsGoals"
+                         process="fsGoals"
+                />
+
+        <p:dataList value="#{famMatchController.lstGoal}"
+                    var="g"
+                    rendered="#{not empty famMatchController.lstGoal}">
+            <h:outputText value="#{g.goalTime} "/>
+            <h:outputText value="(csc) " rendered="#{g.csc}"/>
+            <h:outputText value="(sp) " rendered="#{g.penalty}"/>
+            <h:outputText value="But de #{g.famMatchPlayerStriker.famPlayer.displayName} "/>
+            <h:outputText value="sur une passe de #{g.famMatchPlayerAssist.famPlayer.displayName}"/>
+        </p:dataList>
+    </p:fieldset>
+
+</p:tab>
+<p:tab id="tabCard" title="Cartons">
+    <h:panelGrid columns="3">
+
+        <h:outputLabel value="#{bundle.EditFamCardLabel_famMatchPlayer}" for="famMatchPlayer"/>
+        <p:selectOneMenu id="famMatchPlayer"
+                         value="#{famMatchController.famCard.famMatchPlayer}"
+                         title="#{bundle.EditFamCardTitle_famMatchPlayer}"
+                         styleClass="famCombo"
+                         converter="matchPlayerConverter"
+                >
+            <f:selectItem itemLabel="Joueur" itemValue=""/>
+            <f:selectItems value="#{famMatchController.famMatchTeam.famMatchPlayerList}"
+                           var="p"
+                           itemLabel="#{p.famPlayer.displayName}"
+                           itemValue="#{p}"/>
+            <p:ajax event="blur" update="msg_famMatchPlayer"/>
+        </p:selectOneMenu>
+        <p:message id="msg_famMatchPlayer" for="famMatchPlayer"/>
+
+        <h:outputLabel value="#{bundle.EditFamCardLabel_famTypCard}" for="famTypCard"/>
+        <p:selectOneMenu id="famTypCard"
+                         value="#{famMatchController.famCard.famTypCard}"
+                         converter="typCardConverter"
+                         styleClass="famCombo"
+                >
+            <f:selectItem itemLabel="TypCard " itemValue=""/>
+            <f:selectItems value="#{cacheBean.listTypCard}"
+                           var="tc"
+                           itemLabel="#{tc.libTypCard}"
+                           itemValue="#{tc}"/>
+            <p:ajax event="blur" update="msg_famTypCard"/>
+        </p:selectOneMenu>
+        <p:message id="msg_famTypCard" for="famTypCard"/>
+
+        <h:outputLabel value="#{bundle.EditFamCardLabel_cardTime}" for="cardTime"/>
+        <p:inputText id="cardTime"
+                     value="#{famMatchController.famCard.cardTime}"
+                     title="#{bundle.EditFamCardTitle_cardTime}"
+                >
+            <p:ajax event="blur" update="msg_cardTime"/>
+        </p:inputText>
+        <p:message id="msg_cardTime" for="cardTime"/>
+    </h:panelGrid>
+
+    <p:commandButton value="Add card"
+                     action="#{famMatchController.addCard}"
+                     update="dlCard"
+                     process="tabCard"/>
+
+    <p:dataList id="dlCard"
+                value="#{famMatchController.lstCard}"
+                var="c"
+                rendered="#{not empty famMatchController.lstCard}">
+        <h:outputText value="#{c.cardTime} "/>
+        <h:outputText value="#{c.famTypCard.libTypCard} "/>
+        <h:outputText value="#{c.famMatchPlayer.famPlayer.displayName}"/>
+    </p:dataList>
+
+</p:tab>
+<p:tab id="tabSub" title="Remplacements">
+    <h:panelGrid columns="3">
+        <h:outputLabel value="#{bundle.EditFamSubstitutionLabel_famMatchPlayerIn}"
+                       for="famMatchPlayerIn"/>
+        <p:selectOneMenu id="famMatchPlayerIn"
+                         value="#{famMatchController.famSubstitution.famMatchPlayerIn}"
+                         title="#{bundle.EditFamSubstitutionLabel_famMatchPlayerIn}"
+                         styleClass="famCombo"
+                         converter="matchPlayerConverter"
+                >
+            <f:selectItem itemLabel="Entrant" itemValue=""/>
+            <f:selectItems value="#{famMatchController.famMatchTeam.famMatchPlayerList}"
+                           var="p"
+                           itemLabel="#{p.famPlayer.displayName}"
+                           itemValue="#{p}"/>
+            <p:ajax event="blur" update="msg_famMatchPlayerIn"/>
+        </p:selectOneMenu>
+        <p:message id="msg_famMatchPlayerIn" for="famMatchPlayerIn"/>
+
+        <h:outputLabel value="#{bundle.EditFamSubstitutionLabel_famMatchPlayerOut}"
+                       for="famMatchPlayerOut"/>
+        <p:selectOneMenu id="famMatchPlayerOut"
+                         value="#{famMatchController.famSubstitution.famMatchPlayerOut}"
+                         title="#{bundle.EditFamSubstitutionLabel_famMatchPlayerOut}"
+                         styleClass="famCombo"
+                         converter="matchPlayerConverter"
+                >
+            <f:selectItem itemLabel="Sortant" itemValue=""/>
+            <f:selectItems value="#{famMatchController.famMatchTeam.famMatchPlayerList}"
+                           var="p"
+                           itemLabel="#{p.famPlayer.displayName}"
+                           itemValue="#{p}"/>
+            <p:ajax event="blur" update="msg_famMatchPlayerOut"/>
+        </p:selectOneMenu>
+        <p:message id="msg_famMatchPlayerOut" for="famMatchPlayerOut"/>
+
+        <h:outputLabel value="#{bundle.EditFamSubstitutionLabel_substitutionTime}" for="substitutionTime"/>
+        <p:inputText id="substitutionTime"
+                     value="#{famMatchController.famSubstitution.substitutionTime}"
+                     title="#{bundle.EditFamSubstitutionTitle_substitutionTime}"
+                >
+            <p:ajax event="blur" update="msg_substitutionTime"/>
+        </p:inputText>
+        <p:message id="msg_substitutionTime" for="substitutionTime"/>
+
+    </h:panelGrid>
+
+    <p:commandButton value="Add Sub"
+                     action="#{famMatchController.addSubstitution}"
+                     update="@form"
+                     process="tabSub"/>
+
+    <p:dataList value="#{famMatchController.lstSubstitution}"
+                var="g"
+                rendered="#{not empty famMatchController.lstSubstitution}">
+        <h:outputText value="#{g.substitutionTime} "/>
+        <h:outputText value="#{g.famMatchPlayerIn.famPlayer.displayName}"/>
+        <h:outputText value=" remplace #{g.famMatchPlayerOut.famPlayer.displayName}"/>
+    </p:dataList>
+</p:tab>
+
+<p:tab id="tabPlayer" title="Joueurs">
+    <p:accordionPanel value="#{famMatchController.famMatchTeam.famMatchPlayerList}"
+                      var="matchPlayer"
+                      multiple="true"
+            >
+        <p:tab title="#{matchPlayer.num} - #{matchPlayer.famPlayer.displayName}">
+            <h:panelGrid columns="2" cellpadding="10" columnClasses="verticalTop,verticalTop">
+                <p:graphicImage
+                        value="#{initParam['org.fam.jsf.PLAYERS_PHOTO_PATH']}#{initParam['org.fam.jsf.DEFAULT_PHOTO']}#{initParam['org.fam.jsf.DEFAULT_IMAGE_EXTENSION']}"
+                        width="60"/>
+
+                <h:panelGrid columns="3">
+                    <h:outputLabel value="Name: " for="player_name"/>
+                    <h:outputText id="player_name" value="#{matchPlayer.famPlayer.displayName}"
+                                  style="font-weight: bold"/>
+                    <p:message id="msg_player_name" for="player_name"/>
+
+                    <h:outputLabel value="Note: " for="player_note"/>
+                    <p:inputText id="player_note" value="#{matchPlayer.note}"/>
+                    <p:message id="msg_player_note" for="player_note"/>
+
+                    <h:outputLabel value="Capitaine " for="player_captain"/>
+                    <p:selectBooleanCheckbox id="player_captain" value="#{matchPlayer.captain}"/>
+                    <p:message id="msg_player_captain" for="player_captain"/>
+
+                    <h:outputLabel value="Commentaire: " for="player_com"/>
+                    <p:editor id="player_com" value="#{matchPlayer.comments}" width="600" height="150"/>
+                    <p:message id="msg_player_com" for="player_com"/>
+
+                </h:panelGrid>
+            </h:panelGrid>
+
+        </p:tab>
+    </p:accordionPanel>
+
+</p:tab>
+<p:tab title="Résumé">
+    <p:editor value="#{selected.comment}" width="600"/>
+</p:tab>
+
+</p:tabView>
+<p:commandButton value="Enregistrer"
+                 action="#{famMatchController.addCard}"
+                 update="@form"/>
+
+</h:form>
+</p:panel>
+</ui:define>
+</ui:composition>

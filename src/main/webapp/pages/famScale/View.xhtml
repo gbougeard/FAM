@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+    <ui:define name="title">
+        <h:outputText value="#{bundle.ViewFamScaleTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <p:panel header="#{bundle.ViewFamScaleTitle}">
+            <h:form>
+                <h:panelGrid columns="2">
+                    <!--                    <h:outputText value="#{bundle.ViewFamScaleLabel_idScale}"/>
+      <h:outputText value="#{famScaleController.selected.idScale}"
+                    title="#{bundle.ViewFamScaleTitle_idScale}"/>-->
+
+                    <h:outputText value="#{bundle.ViewFamScaleLabel_libScale}"/>
+                    <h:outputText value="#{famScaleController.selected.libScale}"
+                                  title="#{bundle.ViewFamScaleTitle_libScale}"/>
+
+                    <h:outputText value="#{bundle.ViewFamScaleLabel_codScale}"/>
+                    <h:outputText value="#{famScaleController.selected.codScale}"
+                                  title="#{bundle.ViewFamScaleTitle_codScale}"/>
+
+                    <h:outputText value="#{bundle.ViewFamScaleLabel_ptsDefeat}"/>
+                    <h:outputText value="#{famScaleController.selected.ptsDefeat}"
+                                  title="#{bundle.ViewFamScaleTitle_ptsDefeat}"/>
+
+                    <h:outputText value="#{bundle.ViewFamScaleLabel_ptsDraw}"/>
+                    <h:outputText value="#{famScaleController.selected.ptsDraw}"
+                                  title="#{bundle.ViewFamScaleTitle_ptsDraw}"/>
+
+                    <h:outputText value="#{bundle.ViewFamScaleLabel_ptsVictory}"/>
+                    <h:outputText value="#{famScaleController.selected.ptsVictory}"
+                                  title="#{bundle.ViewFamScaleTitle_ptsVictory}"/>
+
+                    <!--                    <h:outputText value="#{bundle.ViewFamScaleLabel_dtCreat}"/>
+                    <h:outputText value="#{famScaleController.selected.dtCreat}" 
+                                  title="#{bundle.ViewFamScaleTitle_dtCreat}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewFamScaleLabel_dtModif}"/>
+                    <h:outputText value="#{famScaleController.selected.dtModif}" 
+                                  title="#{bundle.ViewFamScaleTitle_dtModif}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                    </h:outputText>-->
+                </h:panelGrid>
+                <br/>
+                <p:commandButton action="#{famScaleController.prepareEdit}" value="#{bundle.ViewFamScaleEditLink}"/>
+                <p:commandButton action="#{famScaleController.prepareCreate}" value="#{bundle.ViewFamScaleCreateLink}"/>
+                <p:commandButton action="#{famScaleController.prepareList}" value="#{bundle.ViewFamScaleShowAllLink}"/>
+            </h:form>
+        </p:panel>
+    </ui:define>
+</ui:composition>
+

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{bundle.ListFamPlayerTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <h:form>
+            <p:panel header="#{bundle.FamPlayer}">
+
+                <p:dataTable
+                        value="#{famPlayerController.lazyModel}"
+                        lazy="true"
+                        var="item"
+                        selection="#{famPlayerController.selected}"
+                        selectionMode="single"
+                        paginator="true" rows="10"
+                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                        rowsPerPageTemplate="5,10,15"
+                        scrollHeight="250"
+                        sortBy="#{item.numLicense}"
+                        emptyMessage="#{bundle.NoDataFound}"
+                        paginatorAlwaysVisible="false"
+
+
+                        >
+                    <p:ajax event="rowSelect" update="tb"/>
+                    <p:ajax event="rowUnselect" update="tb"/>
+                    <f:facet name="header">
+                        <p:toolbar id="tb">
+                            <p:toolbarGroup align="left">
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamPlayerViewLink}"
+                                                 action="#{famPlayerController.prepareView}"
+                                                 disabled="#{empty famPlayerController.selected.idPlayer}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamPlayerCreateLink}"
+                                                 action="#{famPlayerController.prepareCreate}"
+                                                 immediate="true"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamPlayerEditLink}"
+                                                 action="#{famPlayerController.prepareEdit}"
+                                                 disabled="#{empty famPlayerController.selected.idPlayer}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamPlayerDeleteLink}"
+                                                 action="#{famPlayerController.prepareDelete}"
+                                                 disabled="#{empty famPlayerController.selected.idPlayer}"/>
+                            </p:toolbarGroup>
+                        </p:toolbar>
+                    </f:facet>
+                    <!--                    <p:column sortBy="#{item.idPlayer}"
+                              filterBy="#{item.idPlayer}"
+                              headerText="#{bundle.ListFamPlayerTitle_idPlayer}" >
+                        <h:outputText value="#{item.idPlayer}"/>
+                    </p:column>-->
+                    <!--                    <p:column sortBy="#{item.famUser}"
+                              filterBy="#{item.famUser}"
+                              headerText="#{bundle.ListFamPlayerTitle_famUser}" >
+                        <h:outputText value="#{item.famUser.login}"/>
+                    </p:column>-->
+
+                    <p:column sortBy="#{item.displayName}"
+                              filterBy="#{item.displayName}"
+                              headerText="#{bundle.ListFamPlayerTitle_displayName}">
+                        <h:outputText value="#{item.displayName}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.age}"
+                              filterBy="#{item.age}"
+                              headerText="#{bundle.ListFamPlayerTitle_age}">
+                        <h:outputText value="#{item.age}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.numLicense}"
+                              filterBy="#{item.numLicense}"
+                              headerText="#{bundle.ListFamPlayerTitle_numLicense}">
+                        <h:outputText value="#{item.numLicense}"/>
+                    </p:column>
+                    <!--                    <p:column sortBy="#{item.address}"
+          filterBy="#{item.address}"
+          headerText="#{bundle.ListFamUserTitle_address}" >
+    <h:outputText value="#{item.address}"/>
+</p:column>-->
+                    <!--                    <p:column sortBy="#{item.city}"
+                              filterBy="#{item.city}"
+                              headerText="#{bundle.ListFamUserTitle_city}" >
+                        <h:outputText value="#{item.city}"/>
+                    </p:column>-->
+
+                    <!--                    <p:column sortBy="#{item.dtArrival}"
+                              filterBy="#{item.dtArrival}"
+                              headerText="#{bundle.ListFamUserTitle_dtArrival}" >
+                        <h:outputText value="#{item.dtArrival}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column sortBy="#{item.dtBirth}"
+                              filterBy="#{item.dtBirth}"
+                              headerText="#{bundle.ListFamUserTitle_dtBirth}" >
+                        <h:outputText value="#{item.dtBirth}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column sortBy="#{item.email}"
+                              filterBy="#{item.email}"
+                              headerText="#{bundle.ListFamUserTitle_email}" >
+                        <h:outputText value="#{item.email}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.firstName}"
+                              filterBy="#{item.firstName}"
+                              headerText="#{bundle.ListFamUserTitle_firstName}" >
+                        <h:outputText value="#{item.firstName}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.lastName}"
+                              filterBy="#{item.lastName}"
+                              headerText="#{bundle.ListFamUserTitle_lastName}" >
+                        <h:outputText value="#{item.lastName}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.seniority}"
+                              filterBy="#{item.seniority}"
+                              headerText="#{bundle.ListFamUserTitle_seniority}" >
+                        <h:outputText value="#{item.seniority}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.tel}"
+                              filterBy="#{item.tel}"
+                              headerText="#{bundle.ListFamUserTitle_tel}" >
+                        <h:outputText value="#{item.tel}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.zipcode}"
+                              filterBy="#{item.zipcode}"
+                              headerText="#{bundle.ListFamUserTitle_zipcode}" >
+                        <h:outputText value="#{item.zipcode}"/>
+                    </p:column>-->
+                    <!--                    <p:column sortBy="#{item.dtCreat}"
+                              filterBy="#{item.dtCreat}"
+                              headerText="#{bundle.ListFamPlayerTitle_dtCreat}" >
+                        <h:outputText value="#{item.dtCreat}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column sortBy="#{item.dtModif}"
+                              filterBy="#{item.dtModif}"
+                              headerText="#{bundle.ListFamPlayerTitle_dtModif}" >
+                        <h:outputText value="#{item.dtModif}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:column>-->
+                    <f:facet name="footer">
+
+                    </f:facet>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

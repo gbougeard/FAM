@@ -1,0 +1,26 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+
+    <ui:define name="titre">Titre : Index</ui:define>
+
+    <ui:define name="centre">
+        <h1>Centre : Index</h1>
+        <!-- utilisateur authentifie -->
+        <div id="utilisateur">
+            <c:if test="${request.remoteUser!=null}">
+                <h:form>
+                    <h:commandLink action="#{authentificationBean.deconnexion}"><img
+                            src="images/utilisateur.png" alt="utilisateur" border="0"
+                            align="absmiddle"/></h:commandLink> #{b.utilisateur} : ${request.remoteUser}
+                </h:form>
+            </c:if>
+        </div>
+    </ui:define>
+
+</ui:composition>

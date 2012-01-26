@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+    <ui:define name="title">
+        <h:outputText value="#{bundle.ViewFamCompetitionTeamTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <p:panel header="#{bundle.ViewFamCompetitionTeamTitle}">
+            <h:form>
+                <h:panelGrid columns="2">
+                    <!--                    <h:outputText value="#{bundle.ViewFamCompetitionTeamLabel_idCompetitionTeam}"/>
+      <h:outputText value="#{famCompetitionTeamController.selected.idCompetitionTeam}"
+                    title="#{bundle.ViewFamCompetitionTeamTitle_idCompetitionTeam}"/>-->
+
+                    <h:outputText value="#{bundle.ViewFamCompetitionTeamLabel_famSeasonCompetition}"/>
+                    <h:outputText value="#{famCompetitionTeamController.selected.famSeasonCompetition.displayName}"
+                                  title="#{bundle.ViewFamCompetitionTeamTitle_famSeasonCompetition}"/>
+
+                    <h:outputText value="#{bundle.ViewFamCompetitionTeamLabel_famTeam}"/>
+                    <h:outputText value="#{famCompetitionTeamController.selected.famTeam.libTeam}"
+                                  title="#{bundle.ViewFamCompetitionTeamTitle_famTeam}"/>
+                </h:panelGrid>
+                <br/>
+                <p:commandButton action="#{famCompetitionTeamController.prepareEdit}"
+                                 value="#{bundle.ViewFamCompetitionTeamEditLink}"/>
+                <p:commandButton action="#{famCompetitionTeamController.prepareCreate}"
+                                 value="#{bundle.ViewFamCompetitionTeamCreateLink}"/>
+                <p:commandButton action="#{famCompetitionTeamController.prepareList}"
+                                 value="#{bundle.ViewFamCompetitionTeamShowAllLink}"/>
+            </h:form>
+        </p:panel>
+    </ui:define>
+</ui:composition>
+

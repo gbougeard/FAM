@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+    <ui:define name="title">
+        <h:outputText value="#{bundle.ViewFamEventStatusTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <p:panel header="#{bundle.ViewFamEventStatusTitle}">
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewFamEventStatusLabel_idEventStatus}"/>
+                    <h:outputText value="#{famEventStatusController.selected.idEventStatus}"
+                                  title="#{bundle.ViewFamEventStatusTitle_idEventStatus}"/>
+
+                    <h:outputText value="#{bundle.ViewFamEventStatusLabel_libEventStatus}"/>
+                    <h:outputText value="#{famEventStatusController.selected.libEventStatus}"
+                                  title="#{bundle.ViewFamEventStatusTitle_libEventStatus}"/>
+
+                    <h:outputText value="#{bundle.ViewFamEventStatusLabel_codEventStatus}"/>
+                    <h:outputText value="#{famEventStatusController.selected.codEventStatus}"
+                                  title="#{bundle.ViewFamEventStatusTitle_codEventStatus}"/>
+
+                    <!--                    <h:outputText value="#{bundle.ViewFamEventStatusLabel_dtCreat}"/>
+                    <h:outputText value="#{famEventStatusController.selected.dtCreat}" 
+                                  title="#{bundle.ViewFamEventStatusTitle_dtCreat}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewFamEventStatusLabel_dtModif}"/>
+                    <h:outputText value="#{famEventStatusController.selected.dtModif}" 
+                                  title="#{bundle.ViewFamEventStatusTitle_dtModif}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                    </h:outputText>-->
+                </h:panelGrid>
+                <br/>
+                <p:commandButton action="#{famEventStatusController.prepareEdit}"
+                                 value="#{bundle.ViewFamEventStatusEditLink}"/>
+                <p:commandButton action="#{famEventStatusController.prepareCreate}"
+                                 value="#{bundle.ViewFamEventStatusCreateLink}"/>
+                <p:commandButton action="#{famEventStatusController.prepareList}"
+                                 value="#{bundle.ViewFamEventStatusShowAllLink}"/>
+            </h:form>
+        </p:panel>
+    </ui:define>
+</ui:composition>
+

@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        >
+<h:panelGrid columns="2">
+    <p:graphicImage id="photo"
+                    value="#{initParam['org.fam.jsf.PLAYERS_PHOTO_PATH']}#{empty bean.idPlayer ? initParam['org.fam.jsf.DEFAULT_PHOTO'] : bean.idPlayer}#{initParam['org.fam.jsf.DEFAULT_IMAGE_EXTENSION']}"
+                    cache="false"
+                    width="120"
+                    style="border-width:4px;border-color:#6F6E6E;border-style:double"
+            />
+
+    <h:panelGrid columns="3">
+        <!--                    <h:outputLabel value="#{bundle.EditFamPlayerLabel_idPlayer}" for="idPlayer" />
+     <p:inputText id="idPlayer"
+                  value="#{bean.idPlayer}"
+                  title="#{bundle.EditFamPlayerTitle_idPlayer}"
+                  >
+         <p:ajax event="blur" update="msg_idPlayer"/>
+     </p:inputText>
+     <p:message id="msg_idPlayer" for="idPlayer"/> -->
+
+        <h:outputLabel value="#{bundle.EditFamUserLabel_firstName}" for="firstName"/>
+        <p:inputText id="firstName"
+                     value="#{bean.firstName}"
+                     title="#{bundle.EditFamUserTitle_firstName}"
+                >
+            <p:ajax event="blur" update="msg_firstName"/>
+        </p:inputText>
+        <p:message id="msg_firstName" for="firstName"/>
+
+        <h:outputLabel value="#{bundle.EditFamUserLabel_lastName}" for="lastName"/>
+        <p:inputText id="lastName"
+                     value="#{bean.lastName}"
+                     title="#{bundle.EditFamUserTitle_lastName}"
+                >
+            <p:ajax event="blur" update="msg_lastName"/>
+        </p:inputText>
+        <p:message id="msg_lastName" for="lastName"/>
+
+        <h:outputLabel value="#{bundle.EditFamUserLabel_dtBirth}" for="dtBirth"/>
+        <p:calendar id="dtBirth"
+                    value="#{bean.dtBirth}"
+                    title="#{bundle.EditFamUserTitle_dtBirth}"
+                    navigator="true"
+                    maxdate="#{cacheBean.now}"
+                    mindate="01/01/1930"
+                    locale="fr"
+                    pattern="dd/MM/yyyy"
+                >
+            <p:ajax event="blur" update="msg_dtBirth"/>
+        </p:calendar>
+        <p:message id="msg_dtBirth" for="dtBirth"/>
+
+        <h:panelGrid columns="3" rendered="#{not empty bean.idPlayer}">
+            <h:outputLabel value="Club actuel" for="famClub"/>
+            <p:selectOneMenu id="famClub"
+                             value="#{bean.currentPlayerSeason.famClub}"
+                             style="width:200px;"
+                             converter="clubConverter"
+                    >
+                <f:selectItem itemLabel="Club" itemValue=""/>
+                <!--                              noSelectionOption="true"/>-->
+                <f:selectItems value="#{cacheBean.listClub}"
+                               var="n"
+                               itemValue="#{n}"
+                               itemLabel="#{n.libClub}"/>
+                <p:ajax process="@this" update="msg_famClub famTeam"/>
+            </p:selectOneMenu>
+            <p:message id="msg_famClub" for="famClub"/>
+
+
+            <h:outputLabel value="Equipe actuelle" for="famTeam"
+                    />
+            <p:selectOneMenu id="famTeam"
+                             value="#{bean.currentPlayerSeason.famTeam}"
+                             converter="teamConverter"
+                             style="width:200px;"
+                    >
+                <f:selectItem itemLabel="Team"
+                              itemValue=""/>
+                <!--                              noSelectionOption="true"/>-->
+                <f:selectItems value="#{bean.currentPlayerSeason.famClub.famTeamList}"
+                               var="t"
+                               itemValue="#{t}"
+                               itemLabel="#{t.libTeam}"/>
+                <p:ajax event="blur" update="msg_famTeam"/>
+            </p:selectOneMenu>
+            <p:message id="msg_famTeam" for="famTeam"
+                    />
+        </h:panelGrid>
+    </h:panelGrid>
+</h:panelGrid>
+
+<p:tabView style="height:300px;">
+    <p:tab title="Etat-Civil">
+        <p:tabView style="height:250px;">
+            <p:tab title="Contact">
+                <h:panelGrid columns="3">
+                    <h:outputLabel value="#{bundle.EditFamUserLabel_email}" for="email"/>
+                    <p:inputText id="email"
+                                 value="#{bean.email}"
+                                 title="#{bundle.EditFamUserTitle_email}"
+                            >
+                        <p:ajax event="blur" update="msg_email"/>
+                    </p:inputText>
+                    <p:message id="msg_email" for="email"/>
+
+                    <h:outputLabel value="#{bundle.EditFamUserLabel_tel}" for="tel"/>
+                    <p:inputText id="tel"
+                                 value="#{bean.tel}"
+                                 title="#{bundle.EditFamUserTitle_tel}"
+                            >
+                        <p:ajax event="blur" update="msg_tel"/>
+                    </p:inputText>
+                    <p:message id="msg_tel" for="tel"/>
+                </h:panelGrid>
+            </p:tab>
+
+            <p:tab title="Adresse">
+                <h:panelGrid columns="3">
+
+                    <h:outputLabel value="#{bundle.EditFamUserLabel_address}" for="address"/>
+                    <p:inputText id="address"
+                                 value="#{bean.address}"
+                                 title="#{bundle.EditFamUserTitle_address}"
+                            >
+                        <p:ajax event="blur" update="msg_address"/>
+                    </p:inputText>
+                    <p:message id="msg_address" for="address"/>
+
+                    <h:outputLabel value="#{bundle.EditFamUserLabel_zipcode}" for="zipcode"/>
+                    <p:inputText id="zipcode"
+                                 value="#{bean.zipcode}"
+                                 title="#{bundle.EditFamUserTitle_zipcode}"
+                            >
+                        <p:ajax event="blur" update="msg_zipcode"/>
+                    </p:inputText>
+                    <p:message id="msg_zipcode" for="zipcode"/>
+
+                    <h:outputLabel value="#{bundle.EditFamUserLabel_city}" for="city"/>
+                    <p:inputText id="city"
+                                 value="#{bean.city}"
+                                 title="#{bundle.EditFamUserTitle_city}"
+                            >
+                        <p:ajax event="blur" update="msg_city"/>
+                    </p:inputText>
+                    <p:message id="msg_city" for="city"/>
+
+                </h:panelGrid>
+            </p:tab>
+
+            <p:tab title="Infos Club">
+                <h:panelGrid columns="3">
+                    <h:outputLabel value="#{bundle.EditFamPlayerLabel_numLicense}" for="numLicense"/>
+                    <p:inputText id="numLicense"
+                                 value="#{bean.numLicense}"
+                                 title="#{bundle.EditFamPlayerTitle_numLicense}"
+                            >
+                        <p:ajax event="blur" update="msg_numLicense"/>
+                    </p:inputText>
+                    <p:message id="msg_numLicense" for="numLicense"/>
+
+                    <h:outputLabel value="#{bundle.EditFamUserLabel_dtArrival}" for="dtArrival"/>
+                    <p:calendar id="dtArrival"
+                                value="#{bean.dtArrival}"
+                                title="#{bundle.EditFamUserTitle_dtArrival}"
+                                navigator="true"
+                                maxdate="#{cacheBean.now}"
+                                locale="fr"
+                                pattern="dd/MM/yyyy"
+                            >
+                        <!--                        <f:convertDateTime pattern="dd/MM/yyyy" />-->
+                        <p:ajax event="blur" update="msg_dtArrival"/>
+                    </p:calendar>
+                    <p:message id="msg_dtArrival" for="dtArrival"/>
+                </h:panelGrid>
+            </p:tab>
+
+            <p:tab title="Postes">
+                <h:panelGrid columns="3">
+                    <p:pickList id="positions"
+                                value="#{famPlayerController.positions}"
+                                var="p"
+                                itemLabel="#{p.libPosition}"
+                                itemValue="#{p}"
+                                converter="positionConverter"
+                                showTargetControls="true"
+
+                            />
+                </h:panelGrid>
+            </p:tab>
+
+            <p:tab title="En cas d'urgence">
+                <h:panelGrid columns="3">
+                    <h:outputLabel value="Personne à contacter" for="iceContact"/>
+                    <p:inputText id="iceContact"
+                                 value="#{bean.iceContact}"
+                                 title="#{bundle.EditFamUserTitle_iceContact}"
+                            >
+                        <p:ajax event="blur" update="msg_iceContact"/>
+                    </p:inputText>
+                    <p:message id="msg_iceContact" for="iceContact"/>
+
+                    <h:outputLabel value="Téléphone" for="iceTel"/>
+                    <p:inputText id="iceTel"
+                                 value="#{bean.iceTel}"
+                                 title="#{bundle.EditFamUserTitle_iceTel}"
+                            >
+                        <p:ajax event="blur" update="msg_iceTel"/>
+                    </p:inputText>
+                    <p:message id="msg_iceTel" for="iceTel"/>
+
+                    <h:outputLabel value="Commentaires" for="iceComment"/>
+                    <p:editor id="iceComment"
+                              value="#{bean.iceComment}"
+                              width="600"
+                              height="150"
+                            />
+                    <p:message id="msg_iceComment" for="iceComment"/>
+                </h:panelGrid>
+            </p:tab>
+            <!--                ONGLET PHOTO-->
+            <p:tab title="Photo" rendered="#{not empty bean.idPlayer}">
+                <!--                <h:form enctype="multipart/form-data" >-->
+                <p:fileUpload
+                        fileUploadListener="#{fileUploadController.handleFileUpload}"
+                        sizeLimit="1000000"
+                        mode="advanced"
+                        allowTypes="png,gif,jpg"
+                        update="photoTab"
+                        />
+
+                <!--                    <h:outputText id="fnTmp" value="#{famPlayerController.tmpImgUrl}"/>-->
+
+                <!--                </h:form>-->
+
+                <h:panelGrid columns="2"
+                             rendered="#{famPlayerController.showPhoto}"
+                        >
+
+                    <p:imageCropper value="#{famPlayerController.croppedImage}"
+                                    image="#{famPlayerController.tmpImgUrl}"
+                                    aspectRatio=".75"
+                                    initialCoords="0,0,30,40"
+                            />
+
+                    <p:graphicImage id="localCroppedImage"
+                                    value="#{famPlayerController.urlPhoto}"
+                                    cache="false"/>
+                </h:panelGrid>
+
+                <p:commandButton value="Crop"
+                                 action="#{famPlayerController.crop}"
+                                 update="tabPhoto photo"
+                                 rendered="#{not empty bean.idPlayer}"/>
+            </p:tab>
+        </p:tabView>
+    </p:tab>
+    <!--        ONGLET PROFIL-->
+    <p:tab title="Profil" rendered="#{not empty bean.idPlayer}">
+        <ui:include src="profile.xhtml">
+            <ui:param name="bean" value="#{bean.currentProfile}"/>
+        </ui:include>
+    </p:tab>
+    <p:tab title="Stats" rendered="#{not empty bean.idPlayer}">
+        <ui:include src="stats.xhtml">
+            <ui:param name="bean" value="#{bean.currentStat}"/>
+        </ui:include>
+    </p:tab>
+    <!--ONGLET SAISON-->
+    <p:tab title="Saisons" rendered="#{not empty bean.idPlayer}">
+        <!--            <p:dataList value="#{bean.famPlayerSeasons}"
+                    var="s">
+            <h:outputText value="#{s.famSeason.libSeason}"/>
+        </p:dataList>-->
+        <p:tabView var="s" value="#{bean.famPlayerSeasons}" style="height:250px;">
+            <p:tab title="#{s.famSeason.libSeason}">
+                <h:panelGrid columns="2">
+                    <h:graphicImage id="chart" height="200"
+                                    style="border-width:4px;border-color:#6F6E6E;border-style:double"
+                                    url="#{s.famPlayerProfile.profileChartUrl}"/>
+                    <ui:include src="stats.xhtml">
+                        <ui:param name="bean" value="#{s.famPlayerStat}"/>
+                    </ui:include>
+                </h:panelGrid>
+            </p:tab>
+        </p:tabView>
+
+    </p:tab>
+</p:tabView>
+
+</ui:composition>
