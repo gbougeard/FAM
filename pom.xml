@@ -597,18 +597,7 @@
         </plugins>
     </reporting>
 
-    <profiles>
-        <profile>
-            <id>jelastic</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <jelastic.username>gbougeard@gmail.com</jelastic.username>
-                <jelastic.password>ireland2006</jelastic.password>
-            </properties>
-        </profile>
-    </profiles>
+
 
 
 </project>
