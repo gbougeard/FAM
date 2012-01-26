@@ -158,19 +158,19 @@
             <version>${primefaces.version}</version>
         </dependency>
 
-       <!-- <dependency>
+        <dependency>
             <groupId>org.jboss.seam.faces</groupId>
             <artifactId>seam-faces-api</artifactId>
-            &lt;!&ndash; Override the Seam 3 BOM managed version, because Seam 3 Faces 3.0.1 is required to use Seam 3 Faces on Glassfish 3.1 &ndash;&gt;
+            <!-- Override the Seam 3 BOM managed version, because Seam 3 Faces 3.0.1 is required to use Seam 3 Faces on Glassfish 3.1 -->
             <version>3.0.1.Final</version>
         </dependency>
         <dependency>
             <groupId>org.jboss.seam.faces</groupId>
             <artifactId>seam-faces-impl</artifactId>
             <scope>runtime</scope>
-            &lt;!&ndash; Override the Seam 3 BOM managed version, because Seam 3 Faces 3.0.1 is required to use Seam 3 Faces on Glassfish 3.1 &ndash;&gt;
+            <!-- Override the Seam 3 BOM managed version, because Seam 3 Faces 3.0.1 is required to use Seam 3 Faces on Glassfish 3.1 -->
             <version>3.0.1.Final</version>
-        </dependency>-->
+        </dependency>
 
         <!-- Required by Seam Faces (via Seam Solder and/or Seam International) on GF 3.1, but not explicitly depended on -->
         <!--<dependency>
@@ -185,7 +185,7 @@
             <scope>runtime</scope>
         </dependency>
 -->
-       <!-- <dependency>
+        <dependency>
             <groupId>org.jboss.seam.social</groupId>
             <artifactId>seam-social</artifactId>
             <version>${seam-social.version}</version>
@@ -216,21 +216,20 @@
             <artifactId>seam-faces</artifactId>
             <version>3.0.0.Alpha3</version>
         </dependency>
-
         <dependency>
             <groupId>org.jboss.seam.security</groupId>
             <artifactId>seam-security</artifactId>
             <version>3.1.0.Final</version>
             <scope>compile</scope>
-        </dependency>-->
+        </dependency>
 
         <!-- JSF -->
-       <!-- <dependency>
+        <dependency>
             <groupId>org.jboss.spec.javax.faces</groupId>
             <artifactId>jboss-jsf-api_2.0_spec</artifactId>
             <version>1.0.0.Final</version>
             <scope>provided</scope>
-        </dependency>-->
+        </dependency>
 
         <!-- <dependency>
             <groupId>org.jboss.arquillian.ajocado</groupId>
@@ -239,7 +238,7 @@
             <scope>test</scope>
         </dependency>-->
 
-       <!-- <dependency>
+        <dependency>
             <groupId>org.jboss.seam.social</groupId>
             <artifactId>seam-social-twitter</artifactId>
             <version>${seam-social.version}</version>
@@ -256,7 +255,7 @@
             <artifactId>seam-social-linkedin</artifactId>
             <version>${seam-social.version}</version>
             <scope>runtime</scope>
-        </dependency>-->
+        </dependency>
 
         <!-- Logging and Language dependencies -->
         <dependency>
@@ -597,18 +596,6 @@
         </plugins>
     </reporting>
 
-    <profiles>
-        <profile>
-            <id>jelastic</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <jelastic.username>gbougeard@gmail.com</jelastic.username>
-                <jelastic.password>ireland2006</jelastic.password>
-            </properties>
-        </profile>
-    </profiles>
 
 
 </project>
