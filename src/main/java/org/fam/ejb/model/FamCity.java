@@ -82,9 +82,9 @@ public class FamCity extends FamEntity implements Serializable {
     @JoinColumn(name = COL_ID_PROVINCE, referencedColumnName = FamProvince.COL_ID)
     private FamProvince famProvince;
     //
-    public static final String PROP_CLUBS = "famClubList";
+    /*public static final String PROP_CLUBS = "famClubList";
     @OneToMany(mappedBy = FamClub.PROP_CITY)
-    private List<FamClub> famClubList;
+    private List<FamClub> famClubList;*/
 
     public FamCity() {
     }

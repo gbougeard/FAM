@@ -5,9 +5,10 @@
 package org.fam.ejb.session;
 
 import org.fam.ejb.common.AuditInterceptor;
-import org.fam.common.log.LogUtil;
 import org.fam.ejb.common.LoggingInterceptor;
 import org.fam.ejb.exception.FamException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
@@ -20,12 +21,13 @@ import java.util.*;
 import java.util.logging.Level;
 
 /**
- *
  * @param <T>
  * @author gbougear
  */
 @Interceptors({AuditInterceptor.class, LoggingInterceptor.class})
 public abstract class AbstractFacade<T> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractFacade.class);
 
     @Inject
     private Event<T> event;
@@ -34,7 +36,6 @@ public abstract class AbstractFacade<T> {
     private CriteriaQuery<T> criteriaQuery;
 
     /**
-     * 
      * @param entityClass
      */
     public AbstractFacade(Class<T> entityClass) {
@@ -42,13 +43,11 @@ public abstract class AbstractFacade<T> {
     }
 
     /**
-     * 
      * @return
      */
     protected abstract EntityManager getEntityManager();
 
     /**
-     * 
      * @return
      */
     public CriteriaBuilder getCriteriaBuilder() {
@@ -56,7 +55,6 @@ public abstract class AbstractFacade<T> {
     }
 
     /**
-     * 
      * @return
      */
     public CriteriaQuery<T> getCriteriaQuery() {
@@ -67,7 +65,6 @@ public abstract class AbstractFacade<T> {
     }
 
     /**
-     * 
      * @return
      */
     public Root<T> getRoot() {
@@ -75,86 +72,73 @@ public abstract class AbstractFacade<T> {
     }
 
     /**
-     * 
+     *
      */
     protected abstract void genData();
 
     /**
-     * 
      * @param entity
      */
     public void create(T entity) {
         try {
             getEntityManager().persist(entity);
 
-        }
-        catch (ConstraintViolationException e) {
+        } catch (ConstraintViolationException e) {
             handleConstraintViolation(e);
-            LogUtil.log(entity.toString(), Level.SEVERE, e);
+            LOGGER.error(entity.toString());
             throw new FamException("Create - ContraintViolation", e);
-        }
-        catch (EntityExistsException e) {
+        } catch (EntityExistsException e) {
             // if the entity already exists. (If the entity already exists, the EntityExistsException may be thrown when the persist operation is invoked, or the EntityExistsException or another PersistenceException may be thrown at flush or commit time.)
-            LogUtil.log("EntityExistsException", Level.SEVERE, e);
-        }
-        catch (IllegalArgumentException e) {
+            LOGGER.error("EntityExistsException");
+        } catch (IllegalArgumentException e) {
             // if the instance is not an entity
-            LogUtil.log("IllegalArgumentException", Level.SEVERE, e);
-        }
-        catch (TransactionRequiredException e) {
+            LOGGER.error("IllegalArgumentException");
+        } catch (TransactionRequiredException e) {
             // if invoked on a container-managed entity manager of type  PersistenceContextType.TRANSACTION and there is no transaction
-            LogUtil.log("TransactionRequiredException", Level.SEVERE, e);
-        }
-        catch (Exception e) {
-            LogUtil.log(entity.toString(), Level.SEVERE, e);
+            LOGGER.error("TransactionRequiredException");
+        } catch (Exception e) {
+            LOGGER.error(entity.toString());
         }
 
         event.fire(entity);
     }
 
     /**
-     * 
      * @param entity
      */
     public void edit(T entity) {
         try {
             getEntityManager().merge(entity);
-        }
-        catch (ConstraintViolationException e) {
+        } catch (ConstraintViolationException e) {
             handleConstraintViolation(e);
-            LogUtil.log(entity.toString(), Level.WARNING, e);
+            LOGGER.error(entity.toString(), Level.WARNING, e);
             throw new FamException("Create - ContraintViolation", e);
-        }
-        catch (Exception e) {
-            LogUtil.log(entity.toString(), Level.SEVERE, e);
+        } catch (Exception e) {
+            LOGGER.error(entity.toString());
         }
         event.fire(entity);
     }
 
     /**
-     * 
      * @param entity
      */
     public void remove(T entity) {
         try {
             getEntityManager().remove(getEntityManager().merge(entity));
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             // if the instance is not an entity
-            LogUtil.log("IllegalArgumentException", Level.SEVERE, e);
-        }
-        catch (TransactionRequiredException e) {
+            LOGGER.error("IllegalArgumentException");
+        } catch (TransactionRequiredException e) {
             // if invoked on a container-managed entity manager of type  PersistenceContextType.TRANSACTION and there is no transaction
-            LogUtil.log("TransactionRequiredException", Level.SEVERE, e);
-        }
-        catch (Exception e) {
-            LogUtil.log(entity.toString(), Level.SEVERE, e);
+            LOGGER.error("TransactionRequiredException");
+        } catch (Exception e) {
+            LOGGER.error(entity.toString());
         }
         event.fire(entity);
     }
 
     /**
-     * 
+     *
      */
     public void truncate() {
         getCriteriaQuery().select(getRoot());
@@ -165,7 +149,6 @@ public abstract class AbstractFacade<T> {
     }
 
     /**
-     * 
      * @param id
      * @return
      */
@@ -173,16 +156,14 @@ public abstract class AbstractFacade<T> {
         T result = null;
         try {
             result = getEntityManager().find(entityClass, id);
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             // if the instance is not an entity
-            LogUtil.log("IllegalArgumentException", Level.SEVERE, e);
+            LOGGER.error("IllegalArgumentException");
         }
         return result;
     }
 
     /**
-     * 
      * @return
      */
     public List<T> findAll() {
@@ -196,45 +177,36 @@ public abstract class AbstractFacade<T> {
         List<T> result = new ArrayList<T>();
         try {
             result = query.getResultList();
-        }
-        catch (NoResultException e) {
+        } catch (NoResultException e) {
             //- if there is no result}
-            LogUtil.log("NoResultException", Level.SEVERE, e);
-        }
-        catch (NonUniqueResultException e) {
+            LOGGER.error("NoResultException");
+        } catch (NonUniqueResultException e) {
             //- if more than one result
-             LogUtil.log("NonUniqueResultException", Level.SEVERE, e);
-        }
-        catch (IllegalStateException e) {
+            LOGGER.error("NonUniqueResultException");
+        } catch (IllegalStateException e) {
             //- if called for a Java Persistence query language UPDATE or DELETE statement
-             LogUtil.log("IllegalStateException", Level.SEVERE, e);
-        }
-        catch (QueryTimeoutException e) {
+            LOGGER.error("IllegalStateException");
+        } catch (QueryTimeoutException e) {
             // - if the query execution exceeds the query timeout value set and only the statement is rolled back
-             LogUtil.log("QueryTimeoutException", Level.SEVERE, e);
-        }
-        catch (TransactionRequiredException e) {
+            LOGGER.error("QueryTimeoutException");
+        } catch (TransactionRequiredException e) {
             // - if a lock mode has been set and there is no transaction
-             LogUtil.log("TransactionRequiredException", Level.SEVERE, e);
-        }
-        catch (PessimisticLockException e) {
+            LOGGER.error("TransactionRequiredException");
+        } catch (PessimisticLockException e) {
             //- if pessimistic locking fails and the transaction is rolled back
-             LogUtil.log("PessimisticLockException", Level.SEVERE, e);
-        }
-        catch (LockTimeoutException e) {
+            LOGGER.error("PessimisticLockException");
+        } catch (LockTimeoutException e) {
             // - if pessimistic locking fails and only the statement is rolled back
-             LogUtil.log("LockTimeoutException", Level.SEVERE, e);
-        }
-        catch (PersistenceException e) {
+            LOGGER.error("LockTimeoutException");
+        } catch (PersistenceException e) {
             // - if the query execution exceeds the query timeout value set and the transaction is rolled back
-             LogUtil.log("PersistenceException", Level.SEVERE, e);
+            LOGGER.error("PersistenceException");
         }
 
         return result;
     }
 
     /**
-     * 
      * @param range
      * @return
      */
@@ -248,7 +220,6 @@ public abstract class AbstractFacade<T> {
     }
 
     /**
-     * 
      * @return
      */
     public int count() {
@@ -256,11 +227,10 @@ public abstract class AbstractFacade<T> {
         cq.select(getCriteriaBuilder().count(getRoot()));
         Query q = getEntityManager().createQuery(cq);
 
-        return ( (Long) q.getSingleResult() ).intValue();
+        return ((Long) q.getSingleResult()).intValue();
     }
 
     /**
-     * 
      * @param attributes
      * @return
      */
@@ -286,7 +256,6 @@ public abstract class AbstractFacade<T> {
     }
 
     /**
-     *
      * @return
      */
     public Class getEntityClass() {
@@ -294,7 +263,6 @@ public abstract class AbstractFacade<T> {
     }
 
     /**
-     *
      * @param entityClass
      */
     public void setEntityClass(Class entityClass) {
@@ -302,7 +270,7 @@ public abstract class AbstractFacade<T> {
     }
 
     private void handleConstraintViolation(ConstraintViolationException cve) {
-        LogUtil.log("handleConstraintViolation", Level.INFO, null);
+        LOGGER.error("handleConstraintViolation");
         Set<ConstraintViolation<?>> cvs = cve.getConstraintViolations();
         for (ConstraintViolation<?> cv : cvs) {
             System.out.println("------------------------------------------------");
@@ -319,7 +287,6 @@ public abstract class AbstractFacade<T> {
     }
 
     /**
-     * 
      * @param cq
      * @return
      */
@@ -329,7 +296,6 @@ public abstract class AbstractFacade<T> {
     }
 
     /**
-     * 
      * @param first
      * @param pageSize
      * @param sortField
@@ -338,21 +304,21 @@ public abstract class AbstractFacade<T> {
      * @return
      */
     public List<T> findAllLazy(final int first,
-            final int pageSize,
-            final String sortField,
-            final boolean sortOrder,
-            final Map<String, String> filters) {
+                               final int pageSize,
+                               final String sortField,
+                               final boolean sortOrder,
+                               final Map<String, String> filters) {
 
         StringBuilder sb = new StringBuilder();
         sb.append("first ").append(first).append(" pageSize ").append(pageSize);
-        LogUtil.log(sb.toString(), Level.INFO, null);
+        LOGGER.debug(sb.toString());
         sb = new StringBuilder();
         sb.append("sortField ").append(sortField).append(" sortOrder ").append(sortOrder);
-        LogUtil.log(sb.toString(), Level.INFO, null);
+        LOGGER.debug(sb.toString());
         for (String s : filters.keySet()) {
             sb = new StringBuilder();
             sb.append("filtre ").append(s).append(" value ").append(filters.get(s));
-            LogUtil.log(sb.toString(), Level.INFO, null);
+            LOGGER.debug(sb.toString());
         }
 
         CriteriaBuilder cb = getCriteriaBuilder();
@@ -364,27 +330,27 @@ public abstract class AbstractFacade<T> {
         Predicate criteria = cb.conjunction();
         for (String s : filters.keySet()) {
 //            sb.append("filtre ").append(s).append(" type ").append(root.get(s).getJavaType());
-//            LogUtil.log(sb.toString(), Level.INFO, null);
+//           LOGGER.debug(sb.toString());
             sb = new StringBuilder();
             sb.append("filtre ").append(s).append(" value ").append(filters.get(s));
-            LogUtil.log(sb.toString(), Level.INFO, null);
+            LOGGER.debug(sb.toString());
 
             sb = new StringBuilder();
             sb.append("%").append(filters.get(s).toUpperCase()).append("%");
 //            Expression<String> literal = cb.upper(cb.literal(sb.toString()));
 
             if (s.contains(".")) {
-                LogUtil.log("filtre  avec . " + sb.toString(), Level.INFO, null);
+                LOGGER.debug("filtre  avec . " + sb.toString());
                 String[] splitted = s.split(".");
-                LogUtil.log("splitted " + splitted, Level.INFO, null);
+                LOGGER.debug("splitted " + splitted);
                 StringTokenizer token = new StringTokenizer(s);
-                LogUtil.log("tokens " + token.countTokens(), Level.INFO, null);
+                LOGGER.debug("tokens " + token.countTokens());
 //                predicates.add(cb.like(cb.upper(cb.literal(s)), str));
                 predicates.add(cb.like(cb.upper(root.get(token.nextToken(".")).get(token.nextToken("."))), sb.toString()));
 
 
             } else if (root.get(s) != null) {
-                LogUtil.log("filtre " + s + " - " + sb.toString(), Level.INFO, null);
+                LOGGER.debug("filtre " + s + " - " + sb.toString());
                 predicates.add(cb.like(cb.upper(root.get(s)), sb.toString()));
 
             }
@@ -408,7 +374,7 @@ public abstract class AbstractFacade<T> {
 //
 //        }
 
-        if (( sortField != null ) && ( sortField.isEmpty() == false )) {
+        if ((sortField != null) && (sortField.isEmpty() == false)) {
             if (sortOrder) {
                 cq.orderBy(cb.asc(root.get(sortField)));
             } else {
@@ -422,13 +388,12 @@ public abstract class AbstractFacade<T> {
         q.setMaxResults(pageSize);
 
         List<T> list = q.getResultList();
-        LogUtil.log("nb result " + list.size(), Level.INFO, null);
+        LOGGER.debug("nb result " + list.size());
 
         return list;
     }
 
     /**
-     * 
      * @param filters
      * @return
      */
@@ -450,11 +415,11 @@ public abstract class AbstractFacade<T> {
             Expression<String> literal = cb.upper(cb.literal(sb.toString()));
 
             if (s.contains(".")) {
-                LogUtil.log("filtre  avec . " + sb.toString(), Level.INFO, null);
+                LOGGER.debug("filtre  avec . " + sb.toString());
                 String[] splitted = s.split(".");
-                LogUtil.log("splitted " + splitted, Level.INFO, null);
+                LOGGER.debug("splitted " + splitted);
                 StringTokenizer token = new StringTokenizer(s);
-                LogUtil.log("tokens " + token.countTokens(), Level.INFO, null);
+                LOGGER.debug("tokens " + token.countTokens());
 //                predicates.add(cb.like(cb.upper(cb.literal(s)), str));
                 predicates.add(cb.like(cb.upper(root.get(token.nextToken(".")).get(token.nextToken("."))), sb.toString()));
 
@@ -469,6 +434,6 @@ public abstract class AbstractFacade<T> {
 
         Query q = getEntityManager().createQuery(cq);
 
-        return ( (Long) q.getSingleResult() ).intValue();
+        return ((Long) q.getSingleResult()).intValue();
     }
 }

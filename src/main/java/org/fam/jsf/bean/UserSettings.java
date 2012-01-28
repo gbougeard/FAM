@@ -1,9 +1,9 @@
 package org.fam.jsf.bean;
 
 import javax.enterprise.context.SessionScoped;
-import javax.faces.bean.ManagedBean;
 import java.io.Serializable;
 import java.util.List;
+import javax.inject.Named;
 
 /**
  * Created by IntelliJ IDEA.
@@ -12,7 +12,7 @@ import java.util.List;
  * Time: 00:00
  * To change this template use File | Settings | File Templates.
  */
-@ManagedBean
+@Named
 @SessionScoped
 public class UserSettings implements Serializable {
 
@@ -26,19 +26,19 @@ public class UserSettings implements Serializable {
         availableThemes = AvailableThemes.getInstance().getThemes();
     }
 
-    public final List<Theme> getAvailableThemes() {
+    public  List<Theme> getAvailableThemes() {
         return availableThemes;
     }
 
-    public final void setAvailableThemes(List<Theme> availableThemes) {
+    public  void setAvailableThemes(List<Theme> availableThemes) {
         this.availableThemes = availableThemes;
     }
 
-    public final Theme getCurrentTheme() {
+    public  Theme getCurrentTheme() {
         return currentTheme;
     }
 
-    public final void setCurrentTheme(Theme currentTheme) {
+    public  void setCurrentTheme(Theme currentTheme) {
         this.currentTheme = currentTheme;
     }
 }

@@ -30,6 +30,8 @@
         <eclipselink.version>2.3.0</eclipselink.version>
         <persistence.version>2.0.3</persistence.version>
         <junit.version>4.8.2</junit.version>
+        <netbeans.hint.deploy.server>gfv3ee6</netbeans.hint.deploy.server>
+        <netbeans.hint.j2eeVersion>1.6</netbeans.hint.j2eeVersion>
     </properties>
 
     <repositories>
@@ -529,6 +531,8 @@
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
+               
+
             </plugin>
             <!--            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
