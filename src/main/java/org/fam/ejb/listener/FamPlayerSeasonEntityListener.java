@@ -4,8 +4,9 @@
  */
 package org.fam.ejb.listener;
 
-import org.fam.ejb.common.LogUtil;
 import org.fam.ejb.model.FamPlayerSeason;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -17,16 +18,17 @@ import java.util.logging.Level;
  */
 public class FamPlayerSeasonEntityListener {
 
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(FamPlayerSeasonEntityListener.class);
+    
     @PrePersist
     void beforeCreate(final FamPlayerSeason entity) {
-        LogUtil.log("FamPlayerSeasonEntityListener::beforeCreate", Level.OFF, null);
+       LOGGER.trace("FamPlayerSeasonEntityListener::beforeCreate");
         setClubAndTeam(entity);
     }
 
     @PreUpdate
     void beforeUpdate(final FamPlayerSeason entity) {
-         LogUtil.log("FamPlayerSeasonEntityListener::beforeUpdate", Level.OFF, null);
+        LOGGER.trace("FamPlayerSeasonEntityListener::beforeUpdate");
          setClubAndTeam(entity);
     }
 

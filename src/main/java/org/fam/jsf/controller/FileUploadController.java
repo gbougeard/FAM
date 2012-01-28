@@ -4,7 +4,7 @@
  */
 package org.fam.jsf.controller;
 
-import org.fam.ejb.common.LogUtil;
+import org.fam.common.log.LogUtil;
 import org.primefaces.event.FileUploadEvent;
 
 import javax.annotation.PostConstruct;

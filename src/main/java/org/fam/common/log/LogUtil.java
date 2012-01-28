@@ -4,8 +4,10 @@
  */
 package org.fam.common.log;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -13,12 +15,13 @@ import java.util.logging.Logger;
  */
 public class LogUtil {
 
-    private static final Logger logger;
+//    private static final java.util.logging.Logger logger;
+    private static final Logger LOGGER = LoggerFactory.getLogger("FAM");
 
-    static {
-        logger = Logger.getLogger("FAM-org.fam.ejb");
-        logger.setLevel(Level.ALL);
-    }
+//    static {
+//        logger =  java.util.logging.Logger.getLogger("FAM-org.fam.ejb");
+//        logger.setLevel(Level.ALL);
+//    }
 
     /**
      * 
@@ -27,7 +30,8 @@ public class LogUtil {
      * @param ex
      */
     public static void log(String info, Level level, Throwable ex) {
-        logger.log(level, info, ex);
+//        logger.log(level, info, ex);
+        LOGGER.info(info, ex);
 
     }
 
@@ -35,8 +39,8 @@ public class LogUtil {
      * 
      * @return
      */
-    public static Logger getLogger() {
-        return logger;
+    public static  Logger getLogger() {
+        return LOGGER;
     }
 
 }

@@ -5,8 +5,10 @@
 package org.fam.ejb.util;
 
 import com.googlecode.charts4j.*;
-import org.fam.ejb.common.LogUtil;
+import org.fam.common.log.LogUtil;
 import org.fam.ejb.model.FamPlayerProfile;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 import java.util.logging.Level;
@@ -16,10 +18,13 @@ import java.util.logging.Level;
  * @author mask_hot
  */
 public class ChartUtil {
+    
+    public static final Logger LOGGER = LoggerFactory.getLogger(ChartUtil.class);
+
 
     public static String radarProfile(FamPlayerProfile profile) {
 
-        LogUtil.log("radarProfile : " + profile.toString(), Level.INFO, null);
+        LOGGER.trace("radarProfile : " + profile.toString());
 
         if (profile != null) {
 

@@ -5,7 +5,7 @@ import com.google.code.geocoder.GeocoderRequestBuilder;
 import com.google.code.geocoder.model.GeocodeResponse;
 import com.google.code.geocoder.model.GeocoderRequest;
 import com.google.code.geocoder.model.GeocoderResult;
-import org.fam.ejb.common.LogUtil;
+import org.fam.common.log.LogUtil;
 import org.fam.ejb.model.FamPlace;
 import org.fam.ejb.session.FamPlaceFacade;
 import org.primefaces.model.map.DefaultMapModel;

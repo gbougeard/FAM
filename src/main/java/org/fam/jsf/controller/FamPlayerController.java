@@ -1,7 +1,7 @@
 package org.fam.jsf.controller;
 
+import org.fam.common.log.LogUtil;
 import org.fam.ejb.common.AuditInterceptor;
-import org.fam.ejb.common.LogUtil;
 import org.fam.ejb.common.LoggingInterceptor;
 import org.fam.ejb.model.*;
 import org.fam.ejb.session.FamPlayerFacade;

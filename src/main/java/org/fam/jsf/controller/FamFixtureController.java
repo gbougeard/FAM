@@ -1,6 +1,6 @@
 package org.fam.jsf.controller;
 
-import org.fam.ejb.common.LogUtil;
+import org.fam.common.log.LogUtil;
 import org.fam.ejb.model.FamFixture;
 import org.fam.ejb.model.FamSeasonCompetition;
 import org.fam.ejb.session.FamFixtureFacade;

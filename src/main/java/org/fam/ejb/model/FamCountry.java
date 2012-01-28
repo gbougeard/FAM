@@ -5,31 +5,30 @@ package org.fam.ejb.model;
  * and open the template in the editor.
  */
 
-import org.fam.ejb.common.LogUtil;
+import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
-import java.lang.reflect.Field;
-import java.util.logging.Level;
 
 /**
  * @author gbougear
  */
+@Data
 @Entity
 @Table(name = FamCountry.TABLE_NAME,
-uniqueConstraints = {
-    @UniqueConstraint(columnNames = {FamCountry.COL_COD})
-})
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {FamCountry.COL_COD})
+        })
 @NamedQueries({
-    @NamedQuery(name = "FamCountry.findAll", query = "SELECT f FROM FamCountry f ORDER BY f.libUpper ASC"),
-    @NamedQuery(name = "FamCountry.findByIdCountry", query = "SELECT f FROM FamCountry f WHERE f.idCountry = :idCountry"),
-    @NamedQuery(name = "FamCountry.findByLibCountry", query = "SELECT f FROM FamCountry f WHERE f.libCountry = :libCountry"),
-    @NamedQuery(name = "FamCountry.findByCodCountry", query = "SELECT f FROM FamCountry f WHERE f.codCountry = :codCountry"),
-    @NamedQuery(name = "FamCountry.findByDtCreat", query = "SELECT f FROM FamCountry f WHERE f.dtCreat = :dtCreat"),
-    @NamedQuery(name = "FamCountry.findByDtModif", query = "SELECT f FROM FamCountry f WHERE f.dtModif = :dtModif")})
+        @NamedQuery(name = "FamCountry.findAll", query = "SELECT f FROM FamCountry f ORDER BY f.libUpper ASC"),
+        @NamedQuery(name = "FamCountry.findByIdCountry", query = "SELECT f FROM FamCountry f WHERE f.idCountry = :idCountry"),
+        @NamedQuery(name = "FamCountry.findByLibCountry", query = "SELECT f FROM FamCountry f WHERE f.libCountry = :libCountry"),
+        @NamedQuery(name = "FamCountry.findByCodCountry", query = "SELECT f FROM FamCountry f WHERE f.codCountry = :codCountry"),
+        @NamedQuery(name = "FamCountry.findByDtCreat", query = "SELECT f FROM FamCountry f WHERE f.dtCreat = :dtCreat"),
+        @NamedQuery(name = "FamCountry.findByDtModif", query = "SELECT f FROM FamCountry f WHERE f.dtModif = :dtModif")})
 @XmlRootElement
 public class FamCountry extends FamEntity implements Serializable {
 
@@ -43,11 +42,12 @@ public class FamCountry extends FamEntity implements Serializable {
     @OrderBy
     @Column(name = COL_ID)
     private Long idCountry;
-    
+
     @Override
-    public Long getId(){
+    public Long getId() {
         return this.getIdCountry();
     }
+
     //
     public static final String PROP_LIB = "libCountry";
     public static final String COL_LIB = "lib_country";
@@ -88,110 +88,4 @@ public class FamCountry extends FamEntity implements Serializable {
     public FamCountry() {
     }
 
-    public FamCountry(Long idCountry) {
-        this.idCountry = idCountry;
-    }
-
-    public Long getIdCountry() {
-        return idCountry;
-    }
-
-    public void setIdCountry(Long idCountry) {
-        this.idCountry = idCountry;
-    }
-
-    public String getLibCountry() {
-        return libCountry;
-    }
-
-    public void setLibCountry(String libCountry) {
-        this.libCountry = libCountry;
-    }
-
-    public String getCodCountry() {
-        return codCountry;
-    }
-
-    public void setCodCountry(String codCountry) {
-        this.codCountry = codCountry;
-    }
-
-//    public List<FamState> getFamStateList() {
-//        return famStateList;
-//    }
-//
-//    public void setFamStateList(List<FamState> famStateList) {
-//        this.famStateList = famStateList;
-//    }
-
-    public String getLibLower() {
-        return libLower;
-    }
-
-    public void setLibLower(String libLower) {
-        this.libLower = libLower;
-    }
-
-    public String getLibUpper() {
-        return libUpper;
-    }
-
-    public void setLibUpper(String libUpper) {
-        this.libUpper = libUpper;
-    }
-
-//    public List<FamClub> getFamClubList() {
-//        return famClubList;
-//    }
-//
-//    public void setFamClubList(List<FamClub> famClubList) {
-//        this.famClubList = famClubList;
-//    }
-    
-    
-    
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += ( idCountry != null ? idCountry.hashCode() : 0 );
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!( object instanceof FamCountry)) {
-            return false;
-        }
-        FamCountry other = (FamCountry) object;
-        if (( this.idCountry == null && other.idCountry != null ) || ( this.idCountry != null && !this.idCountry.equals(other.idCountry) )) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-
-        Class cls = this.getClass();
-        int ii = 0;
-        builder.append(this.getClass()).append(" [");
-        for (Field f : cls.getDeclaredFields()) {
-//            if ((f.getName().equals(PROP_STATES) == false) ){
-//            && (f.getName().equals(PROP_CLUBS) == false)){
-                try {
-                    builder.append(ii++ == 0 ? "\n" : "\n,").append(f.getName()).append(" : ").append(f.get(this));
-                }
-                catch (IllegalArgumentException e) {
-                    LogUtil.log("Erreur!", Level.SEVERE, e);
-                }
-                catch (IllegalAccessException e) {
-                    LogUtil.log("Erreur!", Level.SEVERE, e);
-                }
-            }
-//        }
-        builder.append("\n]");
-        return builder.toString();
-    }
 }

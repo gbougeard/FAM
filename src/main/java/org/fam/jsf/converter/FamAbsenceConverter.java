@@ -4,7 +4,7 @@
  */
 package org.fam.jsf.converter;
 
-import org.fam.ejb.common.LogUtil;
+import org.fam.common.log.LogUtil;
 import org.fam.ejb.model.FamAbsence;
 import org.fam.jsf.controller.FamAbsenceController;
 

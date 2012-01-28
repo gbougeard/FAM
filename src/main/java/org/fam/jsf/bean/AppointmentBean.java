@@ -4,7 +4,7 @@
  */
 package org.fam.jsf.bean;
 
-import org.fam.ejb.common.LogUtil;
+import org.fam.common.log.LogUtil;
 import org.fam.ejb.model.FamAnswer;
 import org.fam.ejb.model.FamEvent;
 import org.fam.ejb.model.FamPlayer;

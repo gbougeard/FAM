@@ -5,7 +5,7 @@
 package org.fam.ejb.session;
 
 import org.fam.ejb.common.AuditInterceptor;
-import org.fam.ejb.common.LogUtil;
+import org.fam.common.log.LogUtil;
 import org.fam.ejb.common.LoggingInterceptor;
 import org.fam.ejb.model.FamProvince;
 import org.fam.ejb.model.FamState;

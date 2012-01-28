@@ -4,7 +4,7 @@
  */
 package org.fam.jsf.bean;
 
-import org.fam.ejb.common.LogUtil;
+import org.fam.common.log.LogUtil;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;

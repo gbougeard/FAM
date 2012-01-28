@@ -1,6 +1,6 @@
 package org.fam.jsf.controller;
 
-import org.fam.ejb.common.LogUtil;
+import org.fam.common.log.LogUtil;
 import org.fam.ejb.model.FamAbsence;
 import org.fam.ejb.session.AbstractFacade;
 import org.fam.ejb.session.FamAbsenceFacade;

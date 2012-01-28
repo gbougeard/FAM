@@ -5,7 +5,7 @@ package org.fam.ejb.model;
  * the editor.
  */
 
-import org.fam.ejb.common.LogUtil;
+import org.fam.common.log.LogUtil;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 

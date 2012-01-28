@@ -4,7 +4,7 @@
  */
 package org.fam.jsf.common;
 
-import org.fam.ejb.common.LogUtil;
+import org.fam.common.log.LogUtil;
 
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;

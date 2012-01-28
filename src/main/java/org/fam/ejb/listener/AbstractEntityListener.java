@@ -4,83 +4,76 @@
  */
 package org.fam.ejb.listener;
 
-import org.fam.ejb.common.LogUtil;
 import org.fam.ejb.model.FamEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.logging.Level;
 
 /**
- *
  * @author gbougear
  */
 public class AbstractEntityListener {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractEntityListener.class);
+
     /**
-     * 
      * @param entity
      */
     @PrePersist
     public void doPrePersist(final Object entity) {
-        LogUtil.log("doPrePersist " + entity, Level.FINEST, null);
+        LOGGER.debug("doPrePersist " + entity);
         ((FamEntity) entity).setDtCreat(new Date());
     }
 
     /**
-     * 
      * @param entity
      */
     @PostPersist
     public void doPostPersist(Object entity) {
-        LogUtil.log("doPostPersist " + entity, Level.FINEST, null);
+        LOGGER.debug("doPostPersist " + entity);
     }
 
     /**
-     * 
      * @param entity
      */
     @PreRemove
     public void doPreRemove(final Object entity) {
-        LogUtil.log("doPreRemove " + entity, Level.FINEST, null);
+        LOGGER.debug("doPreRemove " + entity);
     }
 
     /**
-     * 
      * @param entity
      */
     @PostRemove
     public void doPostRemove(final Object entity) {
-        LogUtil.log("doPostRemove " + entity, Level.FINEST, null);
+        LOGGER.debug("doPostRemove " + entity);
     }
 
     /**
-     * 
      * @param entity
      */
     @PreUpdate
     public void doPreUpdate(final Object entity) {
-        LogUtil.log("doPreUpdate " + entity, Level.FINEST, null);
+        LOGGER.debug("doPreUpdate " + entity);
         ((FamEntity) entity).setDtModif(new Date());
     }
 
     /**
-     * 
      * @param entity
      */
     @PostUpdate
     public void doPostUpdate(final Object entity) {
-        LogUtil.log("doPostUpdate " + entity, Level.FINEST, null);
-       
+        LOGGER.debug("doPostUpdate " + entity);
+
     }
 
     /**
-     * 
      * @param entity
      */
     @PostLoad
     public void doPostLoad(final Object entity) {
-        LogUtil.log("doPostLoad ", Level.FINEST, null);
-//        LogUtil.log("doPostLoad " + entity, Level.FINEST, null);
+//        LOGGER.debug("doPostLoad ", Level.FINEST, null);
     }
 }

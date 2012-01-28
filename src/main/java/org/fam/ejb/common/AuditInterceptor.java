@@ -4,10 +4,11 @@
  */
 package org.fam.ejb.common;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -15,12 +16,7 @@ import java.util.logging.Logger;
  */
 public class AuditInterceptor {
 
-    private static final Logger logger;
-
-    static {
-        logger = Logger.getLogger("FAM-org.fam.ejb");
-        logger.setLevel(Level.ALL);
-    }
+     private static final Logger LOGGER = LoggerFactory.getLogger(AuditInterceptor.class);
 
     /**
      * 
@@ -36,7 +32,8 @@ public class AuditInterceptor {
         }
         finally {
             long diffTime = System.currentTimeMillis() - initTime;
-            logger.log(Level.FINE, "{0} took {1} milliseconds.", new Object[]{ic.getMethod(), diffTime});
+
+            LOGGER.trace("{0} took {1} milliseconds.", new Object[]{ic.getMethod(), diffTime});
         }
     }
 }

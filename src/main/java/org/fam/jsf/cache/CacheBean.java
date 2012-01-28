@@ -4,7 +4,7 @@
  */
 package org.fam.jsf.cache;
 
-import org.fam.ejb.common.LogUtil;
+import org.fam.common.log.LogUtil;
 import org.fam.ejb.event.DBUpdated;
 import org.fam.ejb.model.*;
 import org.fam.ejb.session.*;

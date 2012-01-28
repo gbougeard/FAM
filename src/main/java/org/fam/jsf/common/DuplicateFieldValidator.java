@@ -4,7 +4,7 @@
  */
 package org.fam.jsf.common;
 
-import org.fam.ejb.common.LogUtil;
+import org.fam.common.log.LogUtil;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;

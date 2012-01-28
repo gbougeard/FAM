@@ -4,12 +4,13 @@
  */
 package org.fam.ejb.listener;
 
-import org.fam.ejb.common.LogUtil;
 import org.fam.ejb.event.FamEventUpdated;
 import org.fam.ejb.model.FamEvent;
 import org.fam.ejb.session.FamEventStatusFacade;
 import org.fam.ejb.session.FamSeasonFacade;
 import org.joda.time.DateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ejb.EJB;
 import javax.enterprise.event.Event;
@@ -18,13 +19,13 @@ import javax.persistence.PostPersist;
 import javax.persistence.PostUpdate;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
-import java.util.logging.Level;
 
 /**
- *
  * @author gbougear
  */
 public class FamEventEntityListener {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(FamEventEntityListener.class);
 
     @EJB
     private FamEventStatusFacade ejbEventStatus;
@@ -35,7 +36,7 @@ public class FamEventEntityListener {
 
     @PrePersist
     void beforeCreate(final Object entity) {
-        LogUtil.log("FamEventEntityListener::beforeCreate", Level.OFF, null);
+        LOGGER.trace("FamEventEntityListener::beforeCreate");
         if (((FamEvent) entity).getFamEventStatus() == null) {
             ((FamEvent) entity).setFamEventStatus(ejbEventStatus.getScheduled());
         }
@@ -47,7 +48,7 @@ public class FamEventEntityListener {
         }
         DateTime dtStart = new DateTime(((FamEvent) entity).getDtEvent());
         ((FamEvent) entity).setDtEnd((dtStart.plusMinutes(((FamEvent) entity).getDuration())).toDate());
-        LogUtil.log(((FamEvent) entity).toString(), Level.OFF, null);
+        LOGGER.trace(((FamEvent) entity).toString());
     }
 
     @PreUpdate
@@ -59,12 +60,11 @@ public class FamEventEntityListener {
     @PostPersist
     @PostUpdate
     void afterPersist(final Object entity) {
-        LogUtil.log("fire FamEventUpdated", Level.OFF, null);
+        LOGGER.trace("fire FamEventUpdated");
 //        event.fire(new FamEventUpdated());
     }
 
     /**
-     * 
      * @return
      */
     public FamEventStatusFacade getEjbEventStatus() {
@@ -72,7 +72,6 @@ public class FamEventEntityListener {
     }
 
     /**
-     * 
      * @param ejbEventStatus
      */
     public void setEjbEventStatus(FamEventStatusFacade ejbEventStatus) {
@@ -80,7 +79,6 @@ public class FamEventEntityListener {
     }
 
     /**
-     * 
      * @return
      */
     public FamSeasonFacade getEjbSeason() {
@@ -88,7 +86,6 @@ public class FamEventEntityListener {
     }
 
     /**
-     * 
      * @param ejbSeason
      */
     public void setEjbSeason(FamSeasonFacade ejbSeason) {
@@ -96,7 +93,6 @@ public class FamEventEntityListener {
     }
 
     /**
-     * 
      * @return
      */
     public Event<FamEventUpdated> getEvent() {
@@ -104,11 +100,10 @@ public class FamEventEntityListener {
     }
 
     /**
-     * 
      * @param event
      */
     public void setEvent(Event<FamEventUpdated> event) {
         this.event = event;
     }
-    
+
 }

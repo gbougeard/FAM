@@ -1,6 +1,6 @@
 package org.fam.jsf.bean;
 
-import org.fam.ejb.common.LogUtil;
+import org.fam.common.log.LogUtil;
 import org.fam.ejb.model.FamMatchTeam;
 import org.fam.ejb.session.FamMatchTeamFacade;
 import org.fam.jsf.bean.util.JsfUtil;

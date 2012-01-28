@@ -4,7 +4,6 @@
  */
 package org.fam.jsf.controller;
 
-import org.fam.ejb.common.LogUtil;
 import org.fam.ejb.model.FamEntity;
 import org.fam.ejb.session.AbstractFacade;
 import org.fam.jsf.bean.util.JsfUtil;
@@ -13,6 +12,8 @@ import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.faces.event.ActionEvent;
 import java.util.ArrayList;
@@ -25,6 +26,8 @@ import java.util.logging.Level;
  * @author mask_hot
  */
 public abstract class AbstractController<T> extends AbstractBackingBean {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractController.class);
 
     public final static String PRETTY_PREFIX = "pretty:";
     protected T current;
@@ -49,13 +52,13 @@ public abstract class AbstractController<T> extends AbstractBackingBean {
     }
 
     public void initLazyModel() {
-        LogUtil.log("initLazyModel", Level.INFO, null);
+        LOGGER.debug("initLazyModel");
 
         lazyModel = new LazyDataModel<T>() {
 
             @Override
             public List<T> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, String> filters) {
-                LogUtil.log("Loading the lazy data between " + first + " " + pageSize, Level.INFO, null);
+                LOGGER.debug("Loading the lazy data between " + first + " " + pageSize);
 
                 try {
                     lazyItems = getFacade().findAllLazy(first, pageSize,
@@ -66,12 +69,12 @@ public abstract class AbstractController<T> extends AbstractBackingBean {
                      */
                     int count = getFacade().countLazy(filters);
 
-                    LogUtil.log("nb items " + lazyItems.size() + " count " + count, Level.INFO, null);
+                    LOGGER.debug("nb items " + lazyItems.size() + " count " + count);
 
                     lazyModel.setRowCount(count);
 
                 } catch (Exception e) {
-                    LogUtil.log("LazyLoad", Level.SEVERE, e);
+                    LOGGER.debug("LazyLoad", Level.SEVERE, e);
                     JsfUtil.addErrorMessage("LazyLoad", e.getMessage());
                 }
 
@@ -97,7 +100,7 @@ public abstract class AbstractController<T> extends AbstractBackingBean {
     }
 
     public void setSelected(T current) {
-        LogUtil.log(this.getClass() + " - Abstract - setSelected", Level.INFO, null);
+        LOGGER.debug(this.getClass() + " - Abstract - setSelected");
         this.current = current;
     }
 
@@ -133,7 +136,7 @@ public abstract class AbstractController<T> extends AbstractBackingBean {
     }
 
     public void onRowSelect(SelectEvent event) {
-        LogUtil.log("onRowSelect", Level.INFO, null);
+        LOGGER.debug("onRowSelect");
 //        select = Boolean.TRUE;
 
         T o = (T) event.getObject();
@@ -141,7 +144,7 @@ public abstract class AbstractController<T> extends AbstractBackingBean {
     }
 
     public void onRowUnselect(UnselectEvent event) {
-        LogUtil.log("onRowUnselect", Level.INFO, null);
+        LOGGER.debug("onRowUnselect");
 //        select = Boolean.FALSE;
         current = null;
     }
@@ -159,7 +162,7 @@ public abstract class AbstractController<T> extends AbstractBackingBean {
     }
 
     public String prepareList() {
-        LogUtil.log("prepareList", Level.INFO, null);
+        LOGGER.debug("prepareList");
         initLazyModel();
 //        setSelect(Boolean.FALSE);
         return "List?faces-redirect=true";
@@ -169,7 +172,7 @@ public abstract class AbstractController<T> extends AbstractBackingBean {
         try {
             items = getFacade().findAll();
         } catch (Exception e) {
-            LogUtil.log("FindAll", Level.SEVERE, e);
+            LOGGER.debug("FindAll", Level.SEVERE, e);
             JsfUtil.addErrorMessage("FindAll", e.getMessage());
         }
     }
@@ -179,7 +182,7 @@ public abstract class AbstractController<T> extends AbstractBackingBean {
             getFacade().remove(current);
             return prepareList();
         } catch (Exception e) {
-            LogUtil.log("Destroy", Level.SEVERE, e);
+            LOGGER.debug("Destroy", Level.SEVERE, e);
             JsfUtil.addErrorMessage("Destroy", e.getMessage());
             return null;
         }
@@ -187,7 +190,7 @@ public abstract class AbstractController<T> extends AbstractBackingBean {
     }
 
     public String create() {
-        LogUtil.log(this.getClass() + ":create " + current.getClass(), Level.INFO, null);
+        LOGGER.debug(this.getClass() + ":create " + current.getClass());
         try {
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("FamTeamCreated"));
@@ -199,7 +202,7 @@ public abstract class AbstractController<T> extends AbstractBackingBean {
     }
 
     public String update() {
-        LogUtil.log(this.getClass() + ":update " + current, Level.INFO, null);
+        LOGGER.debug(this.getClass() + ":update " + current);
         try {
             getFacade().edit(current);
             JsfUtil.addSuccessMessage("Update Done");//ResourceBundle.getBundle("/Bundle").getString("FamTeamUpdated"));
@@ -212,7 +215,7 @@ public abstract class AbstractController<T> extends AbstractBackingBean {
     }
 
     public String updateAndNoRedirect() {
-        LogUtil.log(this.getClass() + ":update " + current, Level.INFO, null);
+        LOGGER.debug(this.getClass() + ":update " + current);
         try {
             getFacade().edit(current);
             JsfUtil.addSuccessMessage("Update Done");//ResourceBundle.getBundle("/Bundle").getString("FamTeamUpdated"));
@@ -225,7 +228,7 @@ public abstract class AbstractController<T> extends AbstractBackingBean {
 
     //    @URLAction(phaseId = PhaseId.RENDER_RESPONSE, onPostback = false)
     public String loadAction() {
-        LogUtil.log(this.getClass() + " - loadAction " + id, Level.INFO, null);
+        LOGGER.debug(this.getClass() + " - loadAction " + id);
         if (id != null) {
 
             try {
@@ -233,7 +236,7 @@ public abstract class AbstractController<T> extends AbstractBackingBean {
                 return null;
 
             } catch (Exception e) {
-                LogUtil.log("Load Action", Level.SEVERE, e);
+                LOGGER.debug("Load Action", Level.SEVERE, e);
                 JsfUtil.addErrorMessage(e, "Load Action id=" + id);
                 return "pretty:";
             }

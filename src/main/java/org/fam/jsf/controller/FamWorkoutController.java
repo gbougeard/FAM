@@ -2,7 +2,7 @@ package org.fam.jsf.controller;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.fam.ejb.common.LogUtil;
+import org.fam.common.log.LogUtil;
 import org.fam.ejb.model.FamAnswer;
 import org.fam.ejb.model.FamPlayer;
 import org.fam.ejb.model.FamWorkout;

@@ -4,10 +4,11 @@
  */
 package org.fam.ejb.listener;
 
-import org.fam.ejb.common.LogUtil;
 import org.fam.ejb.model.FamPlayer;
 import org.fam.ejb.model.FamPlayerProfile;
 import org.fam.ejb.util.ChartUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -18,6 +19,8 @@ import java.util.logging.Level;
  * @author gbougear
  */
 public class FamPlayerProfileEntityListener {
+    
+    public static final Logger LOGGER = LoggerFactory.getLogger(FamPlayerProfileEntityListener.class);
 
 //    @EJB
 //    private FamTypEventFacade ejbTypEvent;
@@ -25,7 +28,7 @@ public class FamPlayerProfileEntityListener {
     @PrePersist
     @PreUpdate
     void buildChart(final Object entity) {
-        LogUtil.log("FamPlayerProfileEntityListener::buildChart", Level.INFO, null);
+        LOGGER.trace("FamPlayerProfileEntityListener::buildChart");
         
         FamPlayerProfile profile = null;
         

@@ -4,7 +4,7 @@
  */
 package org.fam.jsf.bean;
 
-import org.fam.ejb.common.LogUtil;
+import org.fam.common.log.LogUtil;
 import org.fam.ejb.model.FamUser;
 import org.fam.ejb.session.FamUserFacade;
 import org.fam.jsf.bean.util.JsfUtil;
