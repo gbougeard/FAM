@@ -24,7 +24,6 @@ import org.openid4java.message.ax.FetchResponse;
 
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Produces;
-import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -46,7 +45,7 @@ public class Login implements Serializable {
     private static final long serialVersionUID = 7965455427888195913L;
     //
     @Inject
-    private Credentials credentials;
+    private FamCredentials famCredentials;
     @Inject
     private FamUserFacade userManager;
 
@@ -76,10 +75,10 @@ public class Login implements Serializable {
 
     public String login() {
         StringBuilder sb = new StringBuilder();
-        sb.append("login ").append(credentials.getUsername()).append(" / ").append(credentials.getPassword());
+        sb.append("login ").append(famCredentials.getUsername()).append(" / ").append(famCredentials.getPassword());
         LogUtil.log(sb.toString(), Level.INFO, null);
 
-//        UsernamePasswordToken token = new UsernamePasswordToken(credentials.getUsername(), credentials.getPassword());
+//        UsernamePasswordToken token = new UsernamePasswordToken(famCredentials.getUsername(), famCredentials.getPassword());
 
 //”Remember Me” built-in, just do this:
 //        token.setRememberMe(true);
@@ -110,7 +109,7 @@ public class Login implements Serializable {
         }*/
 //No problems, show authenticated view…
 
-        FamUser user = userManager.login(credentials.getUsername(), credentials.getPassword());
+        FamUser user = userManager.login(famCredentials.getUsername(), famCredentials.getPassword());
         if (user != null) {
             this.currentUser = user;
             JsfUtil.addSuccessMessage("Welcome, " + currentUser.getDisplayName());
@@ -235,7 +234,7 @@ public class Login implements Serializable {
     private String authRequest(String returnToUrl) throws IOException {
 //        System.out.println("authRequest");
         LogUtil.log("authRequest " + userSuppliedId, Level.INFO, null);
-        LogUtil.log("cred.username " + credentials.getUsername(), Level.INFO, null);
+        LogUtil.log("cred.username " + famCredentials.getUsername(), Level.INFO, null);
         try {
             List discoveries = manager.discover(userSuppliedId);
             discovered = manager.associate(discoveries);
@@ -383,8 +382,8 @@ public class Login implements Serializable {
         if (currentUser == null) {
             // Signup classique, si OpenId currentUser not null
             currentUser = new FamUser();
-            currentUser.setEmail(credentials.getUsername());
-            currentUser.setPassword(credentials.getPassword());
+            currentUser.setEmail(famCredentials.getUsername());
+            currentUser.setPassword(famCredentials.getPassword());
         }
         userManager.create(currentUser);
         return prepareMyAccount();

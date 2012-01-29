@@ -102,7 +102,7 @@
         </pluginRepository>
     </pluginRepositories>
 
-    <!-- <dependencyManagement>
+    <!--<dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>org.jboss.seam</groupId>
@@ -194,7 +194,7 @@
             <scope>runtime</scope>
         </dependency>
 -->
-        <!-- <dependency>
+        <!--<dependency>
             <groupId>org.jboss.seam.social</groupId>
             <artifactId>seam-social</artifactId>
             <version>${seam-social.version}</version>
@@ -247,6 +247,40 @@
             <type>pom</type>
             <scope>test</scope>
         </dependency>-->
+
+        <dependency>
+            <groupId>org.jboss.seam.social</groupId>
+            <artifactId>seam-social-api</artifactId>
+            <version>${seam-social.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.seam.social</groupId>
+            <artifactId>seam-social</artifactId>
+            <version>${seam-social.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- If using Twitter, add the following dependency -->
+        <dependency>
+            <groupId>org.jboss.seam.social</groupId>
+            <artifactId>seam-social-twitter</artifactId>
+            <version>${seam-social.version}</version>
+        </dependency>
+
+        <!-- If using Facebook, add the following dependency -->
+        <dependency>
+            <groupId>org.jboss.seam.social</groupId>
+            <artifactId>seam-social-facebook</artifactId>
+            <version>${seam-social.version}</version>
+        </dependency>
+
+        <!-- If using LinkedIn, add the following dependency -->
+        <dependency>
+            <groupId>org.jboss.seam.social</groupId>
+            <artifactId>seam-social-linkedin</artifactId>
+            <version>${seam-social.version}</version>
+        </dependency>
 
         <!-- <dependency>
             <groupId>org.jboss.seam.social</groupId>
@@ -531,7 +565,7 @@
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
-               
+
 
             </plugin>
             <!--            <plugin>

@@ -11,9 +11,9 @@
     <ui:define name="body">
         <center>
             <h:form id="loginForm">
-                toto@gmail.com/toto
 
-                <!--<h1>Seam Social Security Integration Example</h1>
+
+                <h1>Seam Social Security Integration Example</h1>
 
                 <h:panelGroup rendered="#{not identity.loggedIn}">
                     <p>Please select the service Below to connect Seam Social to your
@@ -31,17 +31,18 @@
                 </h:panelGroup>
 
                 <h:panelGroup rendered="#{identity.loggedIn}">
-                    <img src="#{identity.user.userProfile.profileImageUrl}"/>
+                    <img src="#{identity.user.userProfile.profileImageUrl}" alt="profil"/>
                     <h:outputText value="Hello, #{identity.user.userProfile.fullName}!"/>
                     <h:commandButton action="#{identity.logout}" value="Logout"/>
-                </h:panelGroup>-->
+                </h:panelGroup>
 
 
+                toto@gmail.com/toto
                 <h:panelGrid columns="2" rendered="#{!login.loggedIn}">
                     <h:outputLabel for="username">Username:</h:outputLabel>
-                    <p:inputText id="username" value="#{credentials.username}"/>
+                    <p:inputText id="username" value="#{famCredentials.username}"/>
                     <h:outputLabel for="password">Password:</h:outputLabel>
-                    <p:password id="password" value="#{credentials.password}"
+                    <p:password id="password" value="#{famCredentials.password}"
                                 feedback="false"/>
                 </h:panelGrid>
                 <p:commandButton id="login" value="Login"

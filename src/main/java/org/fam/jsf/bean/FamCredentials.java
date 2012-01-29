@@ -17,7 +17,7 @@ import java.util.logging.Level;
  */
 
 @Model
-public class Credentials implements Serializable{
+public class FamCredentials implements Serializable {
 
 
     @NotNull
@@ -69,6 +69,6 @@ public class Credentials implements Serializable{
 //    }
     @PostConstruct
     void init() {
-        LogUtil.log("construct Credentials", Level.INFO, null);
+        LogUtil.log("construct FamCredentials", Level.INFO, null);
     }
 }
