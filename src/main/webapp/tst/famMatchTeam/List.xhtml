@@ -11,7 +11,7 @@
         template="/common/template.xhtml">
 
     <ui:define name="title">
-        <h:outputText value="#{bundle.ListFamMatchTeamTitle}"></h:outputText>
+        <h:outputText value="#{bundle.ListFamMatchTeamTitle}"/>
     </ui:define>
     <ui:define name="body">
         <h:form>
@@ -44,7 +44,7 @@
                                                  action="#{famMatchTeamController.prepareEdit}"/>
                                 <p:commandButton type="push"
                                                  image="ui-icon-document"
-                                                 value="#{bundle.ListFamMatchTeamDeleteLink}"
+                                                 value="#{bundle.DeleteLink}"
                                                  action="#{famMatchTeamController.prepareDelete}"/>
                             </p:toolbarGroup>
                         </p:toolbar>

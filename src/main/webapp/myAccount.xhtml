@@ -18,9 +18,9 @@
         <h:form>
             <p:panel header="Mon compte">
                 <!--<p>Hi, <shiro:guest>Guest</shiro:guest>-->
-                    <!--<shiro:user><shiro:principal/></shiro:user>!-->
+                <!--<shiro:user><shiro:principal/></shiro:user>!-->
                 <!--</p>-->
-                <p:tabView style="height:500px;">
+                <p:tabView>
                     <p:tab title="User">
                         <h:panelGrid columns="3">
                             <!--                    <h:outputLabel value="#{bundle.EditFamUserLabel_idUser}" for="idUser" />
@@ -97,7 +97,7 @@
                         <p:commandButton value="#{bundle.EditFamUserSaveLink}"
                                          action="#{login.update}"
                                          immediate="true"/>
-                        <p:commandButton value="#{bundle.EditFamUserCancelLink}"
+                        <p:commandButton value="#{bundle.Cancel}"
                                          action="#{login.prepareMyAccount}"
                                          immediate="true"/>
                     </p:tab>

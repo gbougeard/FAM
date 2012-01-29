@@ -11,7 +11,7 @@
         template="/common/template.xhtml">
 
     <ui:define name="title">
-        <h:outputText value="#{bundle.ListFamTypAbsenceTitle}"></h:outputText>
+        <h:outputText value="#{bundle.ListFamTypAbsenceTitle}"/>
     </ui:define>
     <ui:define name="body">
         <h:form>
@@ -51,7 +51,7 @@
                                                  disabled="#{empty famTypAbsenceController.selected.idTypAbsence}"/>
                                 <p:commandButton type="push"
                                                  image="ui-icon-document"
-                                                 value="#{bundle.ListFamTypAbsenceDeleteLink}"
+                                                 value="#{bundle.DeleteLink}"
                                                  action="#{famTypAbsenceController.prepareDelete}"
                                                  disabled="#{empty famTypAbsenceController.selected.idTypAbsence}"/>
                             </p:toolbarGroup>

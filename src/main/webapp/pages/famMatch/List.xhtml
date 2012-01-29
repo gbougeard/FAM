@@ -50,7 +50,7 @@
                                                  disabled="#{empty famMatchController.selected.idMatch}"/>
                                 <p:commandButton type="push"
                                                  image="ui-icon-document"
-                                                 value="#{bundle.ListFamMatchDeleteLink}"
+                                                 value="#{bundle.DeleteLink}"
                                                  action="#{famMatchController.prepareDestroy}"
                                                  disabled="#{empty famMatchController.selected.idMatch}"/>
                                 <p:commandButton type="push"
@@ -66,12 +66,12 @@
                                 <p:commandButton type="push"
                                                  image="ui-icon-document"
                                                  value="Reporter"
-                                                 action="#{famMatchController.prepareDestroy}"
+                                                 action="#{famMatchController.prepareDelay}"
                                                  disabled="#{empty famMatchController.selected.idMatch}"/>
                                 <p:commandButton type="push"
                                                  image="ui-icon-document"
                                                  value="Annuler"
-                                                 action="#{famMatchController.prepareDestroy}"
+                                                 action="#{famMatchController.prepareCancel}"
                                                  disabled="#{empty famMatchController.selected.idMatch}"/>
                             </p:toolbarGroup>
                         </p:toolbar>

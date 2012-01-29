@@ -20,7 +20,7 @@
     </h:head>
 
     <ui:define name="title">
-        <h:outputText value="#{bundle.EditFamPlaceTitle}"></h:outputText>
+        <h:outputText value="#{bundle.EditFamPlaceTitle}"/>
     </ui:define>
     <ui:define name="body">
         <h:form>
@@ -33,7 +33,7 @@
                 <p:commandButton value="#{bundle.EditFamPlaceSaveLink}"
                                  action="#{famPlaceController.update}"
                         />
-                <p:commandButton value="#{bundle.EditFamPlaceCancelLink}"
+                <p:commandButton value="#{bundle.CancelLink}"
                                  action="#{famPlaceController.prepareList}"
                                  immediate="true"/>
                 <p:commandButton value="#{bundle.EditFamPlaceGeocodeLink}"

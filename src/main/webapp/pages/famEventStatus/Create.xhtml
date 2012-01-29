@@ -10,7 +10,7 @@
         xmlns:p="http://primefaces.org/ui"
         template="/common/template.xhtml">
     <ui:define name="title">
-        <h:outputText value="#{bundle.CreateFamEventStatusTitle}"></h:outputText>
+        <h:outputText value="#{bundle.CreateFamEventStatusTitle}"/>
     </ui:define>
     <ui:define name="body">
         <h:form>
@@ -22,7 +22,7 @@
                 <p:commandButton value="#{bundle.EditFamEventStatusSaveLink}"
                                  action="#{famEventStatusController.create}"
                         />
-                <p:commandButton value="#{bundle.EditFamEventStatusCancelLink}"
+                <p:commandButton value="#{bundle.CancelLink}"
                                  action="#{famEventStatusController.prepareList}"
                                  immediate="true"/>
             </p:panel>

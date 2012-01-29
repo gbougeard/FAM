@@ -75,7 +75,7 @@
 </p:fieldset>
 
 <p:separator/>
-login #{login.currentUser.famPlayer.displayName}  event #{appointmentBean.currentUser.famPlayer.displayName}
+<!--login #{login.currentUser.famPlayer.displayName}  event #{appointmentBean.currentUser.famPlayer.displayName}
 <h:selectOneMenu id="famPlayer"
                  value="#{login.currentUser.famPlayer}"
                  title="#{bundle.EditFamEventTitle_famTypAnswer}"
@@ -87,7 +87,7 @@ login #{login.currentUser.famPlayer.displayName}  event #{appointmentBean.curren
                    var="s"
                    itemValue="#{s}"
                    itemLabel="#{s.displayName}"/>
-</h:selectOneMenu>
+</h:selectOneMenu>-->
 
 <p:fieldset legend="Ma réponse">
     <h:panelGrid columns="2" cellpadding="10">
@@ -123,7 +123,7 @@ login #{login.currentUser.famPlayer.displayName}  event #{appointmentBean.curren
                              action="#{appointmentBean.saveAnswer}"
                              update="@form"
                     />
-            <p:commandButton value="#{bundle.EditFamClubCancelLink}"
+            <p:commandButton value="#{bundle.CancelLink}"
                              action="#{appointmentBean.cancelAnswer}"
                              update="@form"
                              immediate="true"

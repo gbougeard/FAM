@@ -11,11 +11,11 @@
         template="/common/template.xhtml">
 
     <ui:define name="title">
-        <h:outputText value="#{bundle.FamTypMatch}"></h:outputText>
+        <h:outputText value="#{bundle.FamTypMatch}"/>
     </ui:define>
     <ui:define name="body">
         <h:form>
-            <p:panel header="Clubs">
+            <p:panel header="#{bundle.FamTypMatch}">
 
                 <p:dataTable
                         value="#{famTypMatchController.lazyModel}"
@@ -51,7 +51,7 @@
                                                  disabled="#{empty famTypMatchController.selected.idTypMatch}"/>
                                 <p:commandButton type="push"
                                                  image="ui-icon-document"
-                                                 value="#{bundle.ListFamTypMatchDeleteLink}"
+                                                 value="#{bundle.DeleteLink}"
                                                  action="#{famTypMatchController.prepareDelete}"
                                                  disabled="#{empty famTypMatchController.selected.idTypMatch}"/>
                             </p:toolbarGroup>

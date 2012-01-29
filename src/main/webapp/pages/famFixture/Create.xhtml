@@ -10,7 +10,7 @@
         xmlns:p="http://primefaces.org/ui"
         template="/common/template.xhtml">
     <ui:define name="title">
-        <h:outputText value="#{bundle.CreateFamFixtureTitle}"></h:outputText>
+        <h:outputText value="#{bundle.CreateFamFixtureTitle}"/>
     </ui:define>
     <ui:define name="body">
         <h:form>
@@ -22,7 +22,7 @@
                 <p:commandButton value="#{bundle.EditFamFixtureSaveLink}"
                                  action="#{famFixtureController.create}"
                         />
-                <p:commandButton value="#{bundle.EditFamFixtureCancelLink}"
+                <p:commandButton value="#{bundle.CancelLink}"
                                  action="#{famFixtureController.prepareList}"
                                  immediate="true"/>
             </p:panel>

@@ -10,7 +10,7 @@
         xmlns:p="http://primefaces.org/ui"
         template="/common/template.xhtml">
     <ui:define name="title">
-        <h:outputText value="#{bundle.CreateFamCommentTitle}"></h:outputText>
+        <h:outputText value="#{bundle.CreateFamCommentTitle}"/>
     </ui:define>
     <ui:define name="body">
         <h:form>
@@ -22,7 +22,7 @@
                 <p:commandButton value="#{bundle.EditFamCommentSaveLink}"
                                  action="#{famCommentController.create}"
                         />
-                <p:commandButton value="#{bundle.EditFamCommentCancelLink}"
+                <p:commandButton value="#{bundle.CancelLink}"
                                  action="#{famCommentController.prepareList}"
                                  immediate="true"/>
             </p:panel>

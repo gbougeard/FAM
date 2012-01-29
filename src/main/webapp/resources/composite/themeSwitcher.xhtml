@@ -16,7 +16,9 @@
     <h:outputStylesheet library="css" name="themeSwitcher.css"/>
     <h:panelGrid columns="2" styleClass="themeRoller" columnClasses="themeText,themeSelect">
         <h:outputText value="Theme"/>
-        <p:selectOneMenu id="themeSelectMenu" value="#{userSettings.currentTheme}" var="theme" effect="drop"
+        <p:selectOneMenu id="themeSelectMenu"
+                         value="#{userSettings.currentTheme}"
+                         var="theme" effect="drop"
                          onchange="submit();">
             <f:converter converterId="org.fam.jsf.converter.converter.ThemeConverter"/>
             <f:selectItems var="t"

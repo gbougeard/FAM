@@ -56,7 +56,7 @@
                            itemLabel="#{t.libTypMatch}"
                            itemValue="#{t}"/>
             <p:ajax event="blur" update="@form msg_typMatch " listener="#{famFormationController.genImage}"/>
-            <p:ajax event="itemSelect" listener="#{famFormationController.genTarget}" update="@form"/>
+            <!--<p:ajax event="itemSelect" listener="#{famFormationController.genTarget}" update="@form"/>-->
         </p:selectOneMenu>
         <p:message id="msg_typMatch" for="typMatch"/>
 

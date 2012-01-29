@@ -10,7 +10,7 @@
         xmlns:p="http://primefaces.org/ui"
         template="/common/template.xhtml">
     <ui:define name="title">
-        <h:outputText value="#{bundle.CreateFamWorkoutTitle}"></h:outputText>
+        <h:outputText value="#{bundle.CreateFamWorkoutTitle}"/>
     </ui:define>
     <ui:define name="body">
         <h:form>
@@ -20,10 +20,10 @@
                     <ui:param name="isNotWorkoutOrMatch" value="#{false}"/>
                 </ui:include>
 
-                <p:commandButton value="#{bundle.EditFamWorkoutSaveLink}"
+                <p:commandButton value="#{bundle.SaveLink}"
                                  action="#{famWorkoutController.create}"
                         />
-                <p:commandButton value="#{bundle.EditFamWorkoutCancelLink}"
+                <p:commandButton value="#{bundle.CancelLink}"
                                  action="#{famWorkoutController.prepareList}"
                                  immediate="true"/>
             </p:panel>

@@ -43,17 +43,18 @@
                              ajax="false"
                              actionListener="#{authentificationBean.login}"/>
         </h:form>-->
-        <h:outputText value="Hello, #{login.currentUser.displayName}"
-                      rendered="#{login.loggedIn}"/>
+
         <!--<p>Hi, <shiro:guest>Guest</shiro:guest>-->
         <!--<shiro:user><shiro:principal/></shiro:user>!-->
         <!--</p>-->
 
-        <h:form id="navSignup">
-            <p:layout style="min-width:400px;min-height:200px;" id="layout">
 
-                <p:layoutUnit position="center">
+        <p:layout style="min-width:400px;min-height:200px;" id="layout">
 
+            <p:layoutUnit position="center">
+                <h:outputText value="Hello, #{login.currentUser.displayName}"
+                              rendered="#{login.loggedIn}"/>
+                <h:form id="navSignup">
                     <p:commandLink action="#{login.home}">
                         <h:outputText value="Home"/>
                     </p:commandLink>
@@ -75,32 +76,51 @@
                     </p:commandLink>
                     <p:commandButton action="#{cacheBean.initCache()}" value="Refresh Cache"/>
                     <p:commandButton action="#{login.logout}" value="Logout"/>
-                </p:layoutUnit>
+                </h:form>
+            </p:layoutUnit>
+            <p:layoutUnit position="west" size="50" resizable="false">
+                <p:ajaxStatus style="width:16px;height:16px;">
+                    <f:facet name="start">
+                        <h:graphicImage value="/images/ajaxloading.gif"/>
+                    </f:facet>
+                    <f:facet name="complete">
+                        <h:outputText value=""/>
+                    </f:facet>
+                    <!--                         <f:facet name="prestart">
+                      <h:outputText value="" />
+                  </f:facet>
+                   <f:facet name="success">
+                      <h:outputText value="Success!" />
+                  </f:facet>  -->
+                    <f:facet name="error">
+                        <h:outputText value="Error!"/>
+                    </f:facet>
+                </p:ajaxStatus>
+            </p:layoutUnit>
+            <p:layoutUnit position="east" resizable="false" size="300">
 
-                <p:layoutUnit position="east" resizable="false" size="200">
+                <!-- <p:themeSwitcher style="width:200px" effect="fade" var="t">
+                    <f:selectItem itemLabel="Choose Theme" itemValue=""/>
+                    <f:selectItems value="#{availableThemes.themes}"
+                                   var="theme"
+                                   itemLabel="#{theme.name}"
+                                   itemValue="#{theme}"/>
 
-                   <!-- <p:themeSwitcher style="width:200px" effect="fade" var="t">
-                        <f:selectItem itemLabel="Choose Theme" itemValue=""/>
-                        <f:selectItems value="#{availableThemes.themes}"
-                                       var="theme"
-                                       itemLabel="#{theme.name}"
-                                       itemValue="#{theme}"/>
+                    <p:column>
+                        <p:graphicImage value="/images/themes/#{t.image}" width="90" height="60"/>
+                    </p:column>
+                    <p:column>
+                        #{t.name}
+                    </p:column>
+                </p:themeSwitcher>-->
+                <h:form prependId="false">
+                    <cc:themeSwitcher id="themeSwitcher"/>
+                </h:form>
 
-                        <p:column>
-                            <p:graphicImage value="/images/themes/#{t.image}" width="90" height="60"/>
-                        </p:column>
-                        <p:column>
-                            #{t.name}
-                        </p:column>
-                    </p:themeSwitcher>-->
-                    <h:form prependId="false">
-                        <cc:themeSwitcher id="themeSwitcher"/>
-                    </h:form>
+            </p:layoutUnit>
+        </p:layout>
 
-                </p:layoutUnit>
-            </p:layout>
 
-        </h:form>
         <!--                </c:if>-->
     </p:panel>
 </ui:component>

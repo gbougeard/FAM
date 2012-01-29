@@ -10,7 +10,7 @@
         xmlns:p="http://primefaces.org/ui"
         template="/common/template.xhtml">
 <ui:define name="title">
-    <h:outputText value="#{bundle.CreateFamMatchTitle}"></h:outputText>
+    <h:outputText value="#{bundle.CreateFamMatchTitle}"/>
 </ui:define>
 <ui:define name="body">
 <h:form>
@@ -220,7 +220,7 @@
 <p:commandButton value="#{bundle.EditFamMatchSaveLink}"
                  action="#{famMatchController.create}"
         />
-<p:commandButton value="#{bundle.EditFamMatchCancelLink}"
+<p:commandButton value="#{bundle.CancelLink}"
                  action="#{famMatchController.prepareList}"
                  immediate="true"/>
 </p:panel>

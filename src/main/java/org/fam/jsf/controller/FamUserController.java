@@ -16,6 +16,7 @@ import java.util.logging.Level;
 @ViewScoped
 public class FamUserController extends AbstractController<FamUser> implements Serializable {
 
+
     @EJB
     private FamUserFacade ejbFacade;
 

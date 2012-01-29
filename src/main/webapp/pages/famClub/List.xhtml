@@ -35,31 +35,35 @@
                     <p:ajax event="rowSelect" update="tb sel1 sel2"/>
                     <p:ajax event="rowUnselect" update="tb sel1 sel2"/>
                     <f:facet name="header">
-                        <h:outputText id="sel1" value="#{empty famClubController.selected.idClub}"/>
-                        <h:outputText id="sel2" value="#{famClubController.selected.libClub}"/>
-                        <p:menubar id="tb">
-                            <!--                            <p:toolbarGroup  align="left"> -->
-                            <p:menuitem
-                                    value="#{bundle.ListFamClubViewLink}"
-                                    action="#{famClubController.prepareView}"
-                                    disabled="#{empty famClubController.selected.idClub}"/>
-                            <p:menuitem
-                                    icon="ui-icon ui-icon-document"
-                                    value="#{bundle.ListFamClubCreateLink}"
-                                    action="#{famClubController.prepareCreate}"
-                                    immediate="true"/>
-                            <p:menuitem
-                                    icon="ui-icon ui-icon-document"
-                                    value="#{bundle.ListFamClubEditLink}"
-                                    action="#{famClubController.prepareEdit}"
-                                    disabled="#{empty famClubController.selected.idClub}"/>
-                            <p:menuitem
-                                    icon="ui-icon ui-icon-document"
-                                    value="#{bundle.ListFamClubDeleteLink}"
-                                    action="#{famClubController.prepareDestroy}"
-                                    disabled="#{empty famClubController.selected.idClub}"/>
-                            <!--                            </p:toolbarGroup>  -->
-                        </p:menubar>
+                        <!--<h:outputText id="sel1" value="#{empty famClubController.selected.idClub}"/>-->
+                        <!--<h:outputText id="sel2" value="#{famClubController.selected.libClub}"/>-->
+                        <!--<p:menubar id="tb">-->
+                        <p:toolbar id="tb">
+                            <p:toolbarGroup align="left">
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamClubViewLink}"
+                                                 action="#{famClubController.prepareView}"
+                                                 disabled="#{empty famClubController.selected.idClub}"/>
+                                <p:commandButton
+                                        icon="ui-icon ui-icon-document"
+                                        value="#{bundle.ListFamClubCreateLink}"
+                                        action="#{famClubController.prepareCreate}"
+                                        immediate="true"/>
+                                <p:commandButton
+                                        icon="ui-icon ui-icon-document"
+                                        value="#{bundle.ListFamClubEditLink}"
+                                        action="#{famClubController.prepareEdit}"
+                                        disabled="#{empty famClubController.selected.idClub}"/>
+                                <p:commandButton
+                                        icon="ui-icon ui-icon-document"
+                                        value="#{bundle.DeleteLink}"
+                                        action="#{famClubController.prepareDestroy}"
+                                        disabled="#{empty famClubController.selected.idClub}"/>
+                            </p:toolbarGroup>
+                        </p:toolbar>
+
+                        <!--</p:menubar>-->
                     </f:facet>
                     <!--                    <p:column sortBy="#{item.idClub}"
                               filterBy="#{item.idClub}"

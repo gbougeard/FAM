@@ -15,7 +15,7 @@
     </h:head>
 
     <ui:define name="title">
-        <h:outputText value="#{bundle.CreateFamPlaceTitle}"></h:outputText>
+        <h:outputText value="#{bundle.CreateFamPlaceTitle}"/>
     </ui:define>
 
     <ui:define name="body">
@@ -29,7 +29,7 @@
                 <p:commandButton value="#{bundle.EditFamPlaceSaveLink}"
                                  action="#{famPlaceController.create}"
                         />
-                <p:commandButton value="#{bundle.EditFamPlaceCancelLink}"
+                <p:commandButton value="#{bundle.CancelLink}"
                                  action="#{famPlaceController.prepareList}"
                                  immediate="true"/>
                 <p:commandButton value="Géocoder"
