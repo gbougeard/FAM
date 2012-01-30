@@ -5,9 +5,10 @@
 package org.fam.ejb.session;
 
 import org.fam.ejb.common.AuditInterceptor;
-import org.fam.common.log.LogUtil;
 import org.fam.ejb.common.LoggingInterceptor;
 import org.fam.ejb.model.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
@@ -18,10 +19,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
 
 /**
- *
  * @author gbougear
  */
 @Stateless
@@ -29,23 +28,24 @@ import java.util.logging.Level;
 @Interceptors({AuditInterceptor.class, LoggingInterceptor.class})
 public class FamSeasonCompetitionFacade extends AbstractFacade<FamSeasonCompetition> {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(FamSeasonCompetitionFacade.class);
+
     @PersistenceContext//(unitName = "FAM-test-ejbPU")
     private EntityManager em;
     @EJB
-    FamFixtureFacade ejbFixture;
+    private FamFixtureFacade ejbFixture;
     @EJB
-    FamMatchFacade ejbMatch;
+    private FamMatchFacade ejbMatch;
     @EJB
-    FamMatchTeamFacade ejbMatchTeam;
+    private FamMatchTeamFacade ejbMatchTeam;
     @EJB
-    FamTypEventFacade ejbTypEvent;
-//    @EJB
+    private FamTypEventFacade ejbTypEvent;
+    //    @EJB
 //    FamEventStatusFacade ejbEventStatus;
     @EJB
-FamEventFacade ejbEvent;
+    private FamEventFacade ejbEvent;
 
     /**
-     * 
      * @return
      */
     @Override
@@ -54,14 +54,14 @@ FamEventFacade ejbEvent;
     }
 
     /**
-     * 
+     *
      */
     public FamSeasonCompetitionFacade() {
         super(FamSeasonCompetition.class);
     }
 
     /**
-     * 
+     *
      */
     @Override
     public void genData() {
@@ -75,29 +75,21 @@ FamEventFacade ejbEvent;
         List<FamFixture> result = new ArrayList<FamFixture>();
         try {
             result = query.getResultList();
-        }
-        catch (NoResultException e) {
+        } catch (NoResultException e) {
             //- if there is no result}
-        }
-        catch (NonUniqueResultException e) {
+        } catch (NonUniqueResultException e) {
             //- if more than one result
-        }
-        catch (IllegalStateException e) {
+        } catch (IllegalStateException e) {
             //- if called for a Java Persistence query language UPDATE or DELETE statement
-        }
-        catch (QueryTimeoutException e) {
+        } catch (QueryTimeoutException e) {
             // - if the query execution exceeds the query timeout value set and only the statement is rolled back
-        }
-        catch (TransactionRequiredException e) {
+        } catch (TransactionRequiredException e) {
             // - if a lock mode has been set and there is no transaction
-        }
-        catch (PessimisticLockException e) {
+        } catch (PessimisticLockException e) {
             //- if pessimistic locking fails and the transaction is rolled back
-        }
-        catch (LockTimeoutException e) {
+        } catch (LockTimeoutException e) {
             // - if pessimistic locking fails and only the statement is rolled back
-        }
-        catch (PersistenceException e) {
+        } catch (PersistenceException e) {
             // - if the query execution exceeds the query timeout value set and the transaction is rolled back
         }
         if (result != null & !result.isEmpty()) {
@@ -109,22 +101,22 @@ FamEventFacade ejbEvent;
 
     public void genChampionship(FamSeasonCompetition entity, Boolean bFixture) {
 
-        LogUtil.log("genChampionship " + entity.getDisplayName() + " " + bFixture, Level.INFO, null);
+        LOGGER.debug("genChampionship " + entity.getDisplayName() + " " + bFixture);
         // On sauvegarde la conf de la competition
         this.edit(entity);
 
-        if (entity.getFamTypCompetition().getIsChampionship() != true) {
+        if (!entity.getFamTypCompetition().getIsChampionship()) {
             // ERREUR! ce n'est pas un championat!
             throw new IllegalArgumentException();
         }
 
         if (bFixture) {
-            LogUtil.log("GENERATION AVEC JOURNEES", Level.OFF, null);
+            LOGGER.debug("GENERATION AVEC JOURNEES");
             // On recharge les données
             FamSeasonCompetition famSeasonCompetition = this.find(entity.getIdSeasonCompetition());
-            List<FamTeam> teams = famSeasonCompetition.getFamTeamList();
+            List<FamTeam> teams = famSeasonCompetition.getFamTeamList().isEmpty() ? entity.getFamTeamList() : famSeasonCompetition.getFamTeamList();
 
-            LogUtil.log("Suppression des journées existantes", Level.WARNING, null);
+            LOGGER.debug("Suppression des journées existantes");
             // Suppression des journées existantes
             ejbFixture.deleteByCompetition(famSeasonCompetition);
 
@@ -155,15 +147,15 @@ FamEventFacade ejbEvent;
 
                 ejbFixture.create(fixture);
 
-                LogUtil.log("Suppression des matches existants", Level.WARNING, null);
+                LOGGER.debug("Suppression des matches existants");
                 // Suppression des matches existants
                 ejbMatch.deleteByCompetition(famSeasonCompetition);
 
-                LogUtil.log("Génération des matchs", Level.WARNING, null);
+                LOGGER.debug("Génération des matchs");
 
                 for (int match = 0; match < matchesPerRound; match++) {
-                    int home = ( round + match ) % ( nbTeams - 1 );
-                    int away = ( nbTeams - 1 - match + round ) % ( nbTeams - 1 );
+                    int home = (round + match) % (nbTeams - 1);
+                    int away = (nbTeams - 1 - match + round) % (nbTeams - 1);
                     // Last team stays in the same place while the others
                     // rotate around it.
                     if (match == 0) {
@@ -171,7 +163,7 @@ FamEventFacade ejbEvent;
                     }
                     // Add one so teams are number 1 to teams not 0 to teams - 1
                     // upon display.
-                    rounds[round][match] = ( home + 1 ) + " v " + ( away + 1 );
+                    rounds[round][match] = (home + 1) + " v " + (away + 1);
                 }
             }
 
@@ -179,7 +171,7 @@ FamEventFacade ejbEvent;
             String[][] interleaved = new String[totalRounds][matchesPerRound];
 
             int evn = 0;
-            int odd = ( nbTeams / 2 );
+            int odd = (nbTeams / 2);
             for (int i = 0; i < rounds.length; i++) {
                 if (i % 2 == 0) {
                     interleaved[i] = rounds[evn++];
@@ -200,17 +192,16 @@ FamEventFacade ejbEvent;
 
             // Display the fixtures
             for (int i = 0; i < rounds.length; i++) {
-                System.out.println("Round " + ( i + 1 ));
-                System.out.println(Arrays.asList(rounds[i]));
-                System.out.println();
+                LOGGER.debug("Round " + (i + 1));
+                LOGGER.debug(Arrays.asList(rounds[i]).toString());
 
                 // Get Fixture
                 String libFixture = "J" + String.format("%02d", i + 1);
                 FamFixture fixtureA = findByLibAndCompetition(libFixture, famSeasonCompetition);
-                libFixture = "J" + String.format("%02d", ( rounds.length * 2 ) - i);
+                libFixture = "J" + String.format("%02d", (rounds.length * 2) - i);
                 FamFixture fixtureR = findByLibAndCompetition(libFixture, famSeasonCompetition);
 
-                for (int j = 0; j < ( rounds[i] ).length; j++) {
+                for (int j = 0; j < (rounds[i]).length; j++) {
                     String[] components = rounds[i][j].split(" v ");
                     Integer idxHome = Integer.parseInt(components[0]);
                     Integer idxAway = Integer.parseInt(components[1]);
@@ -225,17 +216,15 @@ FamEventFacade ejbEvent;
                 }
             }
 
-            System.out.println();
 
             if (ghost) {
-                System.out.println("Matches against team " + teams + " are byes.");
+                LOGGER.debug("Matches against team " + teams + " are byes.");
             }
 
-            System.out.println("Use mirror image of these rounds for "
-                    + "return fixtures.");
+            LOGGER.debug("Use mirror image of these rounds for return fixtures.");
 //            for ( int journee = 1; journee <= teams.size()-1; ++journee )
 //            {
-//                LogUtil.log("-----------------------", Level.OFF, null);
+//               LOGGER.debug("-----------------------");
 //                for (int equipe = 0; equipe < teams.size(); ++equipe) {
 //                    int idxHome = equipe;
 //                    int idxVisitor = teams.size() - 1 - ( equipe + journee - 1 ) % teams.size() ;
@@ -243,7 +232,7 @@ FamEventFacade ejbEvent;
 //                    sb.append("J").append(journee).append( " : [")
 //                            .append(teams.get(idxHome).getLibTeam()).append("] joue contre [")
 //                            .append(teams.get(idxVisitor).getLibTeam()).append("]");
-//                    LogUtil.log(sb.toString(), Level.OFF, null);
+//                   LOGGER.debug(sb.toString());
 //                }
 //            }
 
@@ -259,9 +248,9 @@ FamEventFacade ejbEvent;
         StringBuilder sb = new StringBuilder();
         sb.append(home.getLibTeam()).append(" - ").append(visitor.getLibTeam());
         String lib = sb.toString();
-        LogUtil.log(lib, Level.WARNING, null);
+        LOGGER.debug(lib);
 
-        LogUtil.log("Event", Level.WARNING, null);
+        LOGGER.debug("Event");
         // Event
         FamEvent eventMatch = ejbEvent.newEvent();
         eventMatch.setFamTypEvent(typEvent);
@@ -292,7 +281,7 @@ FamEventFacade ejbEvent;
             eventMatch.setFamPlace(home.getFamPlace());
         }
 
-        LogUtil.log("EventMatch " + eventMatch, Level.WARNING, null);
+        LOGGER.debug("EventMatch " + eventMatch);
         ejbEvent.create(eventMatch);
 
         // Match
@@ -302,7 +291,7 @@ FamEventFacade ejbEvent;
         match.setFamFixture(fixture);
         ejbMatch.create(match);
 
-        LogUtil.log("MAJ MatchTeam", Level.WARNING, null);
+        LOGGER.debug("MAJ MatchTeam");
         // MatchTeam
         match.setFamMatchTeamList(new ArrayList<FamMatchTeam>());
 
@@ -314,8 +303,8 @@ FamEventFacade ejbEvent;
 //                    ejbMatchTeam.create(matchTeamHome);
         ejbMatch.edit(match);
 
-//                    LogUtil.log("match " + match.toString(), Level.WARNING, null);
-//                    LogUtil.log("match from matchTeamHome" + matchTeamHome.getFamMatch().toString(), Level.WARNING, null);
+//                   LOGGER.debug("match " + match.toString());
+//                   LOGGER.debug("match from matchTeamHome" + matchTeamHome.getFamMatch().toString());
 
         FamMatchTeam matchTeamVisitor = new FamMatchTeam();
         matchTeamVisitor.setFamTeam(visitor);
@@ -332,10 +321,9 @@ FamEventFacade ejbEvent;
     }
 
     /**
-     * 
      * @param entity
      */
-    public void genChampionship(FamSeasonCompetition entity) {
+    public void genChampionship(FamSeasonCompetition entity) throws IllegalArgumentException {
 
 //#include <iostream>
 //#include <string>
@@ -380,12 +368,13 @@ FamEventFacade ejbEvent;
 //        }
 //    }
 //}
-        LogUtil.log("GENERATION SANS JOURNEES", Level.OFF, null);
+        LOGGER.debug("GENERATION SANS JOURNEES");
 
         // On sauvegarde la conf de la competition
         this.edit(entity);
 
-        if (entity.getFamTypCompetition().getIsChampionship() != true) {
+        if (!entity.getFamTypCompetition().getIsChampionship()) {
+            LOGGER.error("Ce n'est pas un championat!");
             // ERREUR! ce n'est pas un championat!
             throw new IllegalArgumentException();
         }
@@ -394,18 +383,18 @@ FamEventFacade ejbEvent;
         FamSeasonCompetition famSeasonCompetition = this.find(entity.getIdSeasonCompetition());
         List<FamTeam> teams = famSeasonCompetition.getFamTeamList();
 
-        LogUtil.log("Equipes de la competition", Level.WARNING, null);
+        LOGGER.debug("Equipes de la competition");
         for (FamTeam t : teams) {
-            LogUtil.log(t.getLibTeam(), Level.WARNING, null);
+            LOGGER.debug(t.getLibTeam());
         }
 
-        LogUtil.log("Suppression des journées existantes", Level.WARNING, null);
+        LOGGER.debug("Suppression des journées existantes");
         // Suppression des journées existantes
         ejbFixture.deleteByCompetition(famSeasonCompetition);
 
-        LogUtil.log("Génération des journées", Level.WARNING, null);
+        LOGGER.debug("Génération des journées");
         // Génération des journées
-        for (int i = 0; i < ( teams.size() - 1 ) * 2; i++) {
+        for (int i = 0; i < (teams.size() - 1) * 2; i++) {
             // Journée
             FamFixture fixture = new FamFixture();
             fixture.setLibFixture("J" + String.format("%02d", i + 1));
@@ -414,30 +403,30 @@ FamEventFacade ejbEvent;
             ejbFixture.create(fixture);
 
         }
-        LogUtil.log((teams.size() - 1) * 2 + " journées générées", Level.WARNING, null);
+        LOGGER.debug((teams.size() - 1) * 2 + " journées générées");
 
         FamTypEvent typEvent = ejbTypEvent.getMatch();
 //        FamEventStatus status = ejbEventStatus.getScheduled();
 
-        LogUtil.log("Suppression des matches existants", Level.WARNING, null);
+        LOGGER.debug("Suppression des matches existants");
         // Suppression des matches existants
         ejbMatch.deleteByCompetition(famSeasonCompetition);
 
-        LogUtil.log("Génération des matchs", Level.WARNING, null);
+        LOGGER.debug("Génération des matchs");
         // Génération des matchs
         int i = 0;
         for (FamTeam home : teams) {
             for (FamTeam visitor : teams) {
-                if (home.equals(visitor) == false) {
+                if (!home.equals(visitor)) {
                     i++;
-                    LogUtil.log("===============================", Level.WARNING, null);
-                    LogUtil.log("Match " + i, Level.WARNING, null);
+                    LOGGER.debug("===============================");
+                    LOGGER.debug("Match " + i);
                     StringBuilder sb = new StringBuilder();
                     sb.append(home.getLibTeam()).append(" - ").append(visitor.getLibTeam());
                     String lib = sb.toString();
-                    LogUtil.log(lib, Level.WARNING, null);
+                    LOGGER.debug(lib);
 
-                    LogUtil.log("Event", Level.WARNING, null);
+                    LOGGER.debug("Event");
                     // Event
                     FamEvent eventMatch = ejbEvent.newEvent();
                     eventMatch.setFamTypEvent(typEvent);
@@ -468,7 +457,7 @@ FamEventFacade ejbEvent;
                         eventMatch.setFamPlace(home.getFamPlace());
                     }
 
-                    LogUtil.log("EventMatch " + eventMatch, Level.WARNING, null);
+                    LOGGER.debug("EventMatch " + eventMatch);
                     ejbEvent.create(eventMatch);
 
                     // Match
@@ -478,7 +467,7 @@ FamEventFacade ejbEvent;
 
                     ejbMatch.create(match);
 
-                    LogUtil.log("MAJ MatchTeam", Level.WARNING, null);
+                    LOGGER.debug("MAJ MatchTeam");
                     // MatchTeam
                     match.setFamMatchTeamList(new ArrayList<FamMatchTeam>());
 
@@ -490,8 +479,8 @@ FamEventFacade ejbEvent;
 //                    ejbMatchTeam.create(matchTeamHome);
                     ejbMatch.edit(match);
 
-//                    LogUtil.log("match " + match.toString(), Level.WARNING, null);
-//                    LogUtil.log("match from matchTeamHome" + matchTeamHome.getFamMatch().toString(), Level.WARNING, null);
+//                   LOGGER.debug("match " + match.toString());
+//                   LOGGER.debug("match from matchTeamHome" + matchTeamHome.getFamMatch().toString());
 
                     FamMatchTeam matchTeamVisitor = new FamMatchTeam();
                     matchTeamVisitor.setFamTeam(visitor);
@@ -501,8 +490,8 @@ FamEventFacade ejbEvent;
 //                    ejbMatchTeam.create(matchTeamVisitor);
                     ejbMatch.edit(match);
 
-//                    LogUtil.log("match " + match.toString(), Level.WARNING, null);
-//                    LogUtil.log("match from matchTeamVisitor" + matchTeamVisitor.getFamMatch().toString(), Level.WARNING, null);
+//                   LOGGER.debug("match " + match.toString());
+//                   LOGGER.debug("match from matchTeamVisitor" + matchTeamVisitor.getFamMatch().toString());
 
                 }
             }

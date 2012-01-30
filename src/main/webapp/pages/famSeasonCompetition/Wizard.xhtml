@@ -12,70 +12,55 @@
     </ui:define>
 
     <ui:define name="body">
-        <center>
-            <h:form>
-                <p:panel header="#{famSeasonCompetitinController.selected.displayName}">
-                    <p:wizard widgetVar="wiz"
-                              flowListener="#{famSeasonCompetitionController.onFlowProcess}">
-                        <!--                        <c:if test="#{famSeasonCompetitinController.warningExisting}">-->
+        <h:form>
+            <p:panel header="#{famSeasonCompetitionController.selected.displayName}">
+                <!-- <p:wizard widgetVar="wiz"
+                flowListener="#{famSeasonCompetitionController.onFlowProcess}">-->
 
-                        <p:tab id="competition" title="Warning"
-                               rendered="#{famSeasonCompetitinController.warningExisting}">
-                            <p:panel header="Warning">
-                                <h:outputText value="Le championnat a déjà été généré.
+                <!-- <p:tab id="competition" title="Warning"
+                rendered="#{famSeasonCompetitionController.warningExisting}">-->
+                <p:panel header="Warning" rendered="#{famSeasonCompetitionController.warningExisting}">
+                    <h:outputText value="Le championnat a déjà été généré.
                                     Continuer entraînera la suppression des journées existantes!"/>
-                            </p:panel>
-                        </p:tab>
-                        <!--                        </c:if>-->
-                        <p:tab id="equipes" title="Equipes">
-                            <p:panel header="Choisir les equipes">
-                                <!--                                <h:panelGrid columns="2" >  -->
-                                <!--                                    <h:outputLabel value="Equipes" for="teams" />-->
-                                <p:pickList id="teams"
-                                            value="#{famSeasonCompetitionController.teams}"
-                                            var="t"
-                                            itemLabel="#{t.libTeam}"
-                                            itemValue="#{t}"
-                                            converter="teamConverter"
-                                        />
-                                <!--                                <p:selectManyMenu  id="teams2"
-                                                   value="#{famSeasonCompetitionController.selected.famTeamList}"  >
-                                    <f:selectItems value="#{cacheBean.listTeam}"  
-                                                   var="t" 
-                                                   itemLabel="#{t.libTeam}"  
-                                                   itemValue="#{t}" /> 
-                                    <p:ajax event="blur" update="msg_teams"/>
-                                </p:selectManyMenu>-->
-                                <!--                                    <p:message id="msg_teams" for="teams"/> -->
-                                <!--                                </h:panelGrid>  -->
-                            </p:panel>
-                        </p:tab>
-
-                        <p:tab id="wherewhen" title="Options">
-                            <p:panel header="Options?">
-
-                                <h:selectBooleanCheckbox label="Definir les journées"
-                                                         value="#{famSeasonCompetitionController.genFixture}"/>
-                                <h:outputText value="Définir les journées"/>
-                            </p:panel>
-                        </p:tab>
-
-                        <p:tab id="confirm" title="Confirmation">
-                            <p:panel header="Confirmation">
-                                <p:dataList value="#{famSeasonCompetitionController.teams.target}"
-                                            var="team"
-                                            itemType="circle">
-                                    #{team.libTeam}
-                                </p:dataList>
-                                <p:commandButton action="#{famSeasonCompetitionController.generateChampionship}"
-                                                 value="Generer"
-                                        />
-                            </p:panel>
-                        </p:tab>
-
-                    </p:wizard>
                 </p:panel>
-            </h:form>
-        </center>
+                <!--</p:tab>-->
+                <p:panel header="Yeah!" rendered="#{!famSeasonCompetitionController.warningExisting}">
+                    <!--<p:tab id="equipes" title="Equipes">-->
+                    <!--<p:panel header="Choisir les equipes">-->
+                    <p:pickList id="teams"
+                                value="#{famSeasonCompetitionController.teams}"
+                                var="t"
+                                itemLabel="#{t.libTeam}"
+                                itemValue="#{t}"
+                                converter="teamConverter"
+                            />
+                    <!--</p:panel>-->
+                    <!--</p:tab>-->
+
+                    <!--<p:tab id="wherewhen" title="Options">-->
+                    <!--<p:panel header="Options?">-->
+
+                    <h:selectBooleanCheckbox label="Definir les journées"
+                                             value="#{famSeasonCompetitionController.genFixture}"/>
+                    <h:outputText value="Définir les journées"/>
+                    <!--</p:panel>-->
+                    <!--</p:tab>-->
+
+                    <!--<p:tab id="confirm" title="Confirmation">-->
+                    <!--<p:panel header="Confirmation">-->
+                    <p:dataList value="#{famSeasonCompetitionController.teams.target}"
+                                var="team"
+                                itemType="circle">
+                        #{team.libTeam}
+                    </p:dataList>
+                    <p:commandButton action="#{famSeasonCompetitionController.generateChampionship}"
+                                     value="Generer"
+                            />
+                    <!--</p:panel>-->
+                    <!--</p:tab>-->
+                    <!--</p:wizard>-->
+                </p:panel>
+            </p:panel>
+        </h:form>
     </ui:define>
 </ui:composition>

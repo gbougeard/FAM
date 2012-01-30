@@ -1,6 +1,5 @@
 package org.fam.jsf.controller;
 
-import org.fam.common.log.LogUtil;
 import org.fam.ejb.model.FamSeasonCompetition;
 import org.fam.ejb.model.FamTeam;
 import org.fam.ejb.session.FamFixtureFacade;
@@ -9,6 +8,8 @@ import org.fam.jsf.bean.util.JsfUtil;
 import org.fam.jsf.cache.CacheBean;
 import org.primefaces.event.FlowEvent;
 import org.primefaces.model.DualListModel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -19,11 +20,12 @@ import javax.inject.Inject;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
 @ManagedBean(name = "famSeasonCompetitionController")
 @ViewScoped
 public class FamSeasonCompetitionController extends AbstractController<FamSeasonCompetition> implements Serializable {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(FamSeasonCompetitionController.class);
 
     @EJB
     private FamSeasonCompetitionFacade ejbFacade;
@@ -41,12 +43,12 @@ public class FamSeasonCompetitionController extends AbstractController<FamSeason
 
     @PostConstruct
     private void postConstruct() {
-        LogUtil.log(this.getClass() + " - postConstruct", Level.INFO, null);
+        LOGGER.debug(this.getClass() + " - postConstruct");
     }
 
     @PreDestroy
     private void preDestroy() {
-        LogUtil.log(this.getClass() + " - preDestroy", Level.INFO, null);
+        LOGGER.debug(this.getClass() + " - preDestroy");
     }
 
     @Override
@@ -84,8 +86,8 @@ public class FamSeasonCompetitionController extends AbstractController<FamSeason
     }
 
     public void setTeams(DualListModel<FamTeam> teams) {
-        LogUtil.log("setTeams src" + teams.getSource().size(), Level.OFF, null);
-        LogUtil.log("setTeams trg" + teams.getTarget().size(), Level.OFF, null);
+        LOGGER.debug("setTeams src" + teams.getSource().size());
+        LOGGER.debug("setTeams trg" + teams.getTarget().size());
         if (teams != null) {
             this.teams = teams;
         }
@@ -143,7 +145,7 @@ public class FamSeasonCompetitionController extends AbstractController<FamSeason
     public void initForWizard() {
         super.loadAction();
         if (cacheBean == null) {
-            LogUtil.log("cacheBean NULL", Level.WARNING, null);
+            LOGGER.warn("cacheBean NULL");
         }
         List<FamTeam> source = new ArrayList<FamTeam>();
         source.addAll(cacheBean.getListTeam());
