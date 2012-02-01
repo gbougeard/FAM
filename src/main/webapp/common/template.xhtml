@@ -9,8 +9,12 @@
 
 <f:view contentType="text/html">
     <h:head>
-        <meta http-equiv="Content-Type" content="text/html;"/>
-        <title><ui:insert name="title">Titre par défaut</ui:insert></title>
+        <f:facet name="first">
+            <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+            <title><ui:insert name="title">Titre par défaut</ui:insert></title>
+        </f:facet>
+
+
         <!-- <style type="text/css" media="screen">@import "${request.contextPath}/css/default.css";</style>-->
         <!--            <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>-->
 
@@ -76,6 +80,11 @@
             }
 
         </style>
+
+        <!--<link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/default.css" />-->
+        <!--<link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/syntaxhighlighter/syntaxhighlighter.css" />-->
+
+        <ui:insert name="head"></ui:insert>
     </h:head>
     <h:body>
         <!--            <h:messages styleClass="message_erreur" id="message_erreur"/>-->
