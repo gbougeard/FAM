@@ -21,7 +21,7 @@
         <phase-listener>com.ocpsoft.pretty.faces.event.MultiPageMessagesSupport</phase-listener>
     </lifecycle>
 
-    <navigation-rule>
+   <!-- <navigation-rule>
         <from-view-id>/callback.xhtml</from-view-id>
         <navigation-case>
             <from-action>#{oauthAuthenticator.connect}</from-action>
@@ -29,5 +29,6 @@
             <to-view-id>/index.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
-    </navigation-rule>
+    </navigation-rule>-->
+
 </faces-config>

@@ -61,10 +61,10 @@ public class Openid implements Serializable {
     private final static String GOOGLE_ENDPOINT = "https://www.google.com/accounts/o8/id";
     private final static String YAHOO_ENDPOINT = "http://me.yahoo.com";
     //
-    private final static String AUTH_SIGNUP_SUCCEED = "/auth/afterSignup.xhtml";
-    private final static String AUTH_SIGNUP_FAILED = "/auth/loginError.xhtml";
-    private final static String AUTH_SUCCEED = "/openid.xhtml";
-    private final static String AUTH_FAILED = "/auth/loginError.xhtml";
+    private final static String AUTH_SIGNUP_SUCCEED = "/callback.xhtml";
+    //    private final static String AUTH_SIGNUP_FAILED = "/auth/loginError.xhtml";
+    private final static String AUTH_SUCCEED = "/callback.xhtml";
+    private final static String AUTH_FAILED = "/err/error.xhtml";
     //
     @EJB
     private FamUserFacade ejbFamUserFacade;

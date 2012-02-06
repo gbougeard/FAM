@@ -5,10 +5,6 @@ import org.fam.ejb.model.FamFixture;
 import org.fam.ejb.model.FamSeasonCompetition;
 import org.fam.ejb.session.FamFixtureFacade;
 import org.fam.jsf.bean.util.JsfUtil;
-import org.primefaces.model.timeline.DefaultTimeLine;
-import org.primefaces.model.timeline.DefaultTimelineEvent;
-import org.primefaces.model.timeline.Timeline;
-
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.ejb.EJB;
@@ -28,7 +24,7 @@ public class FamFixtureController extends AbstractController<FamFixture> impleme
     private FamFixtureFacade ejbFacade;
     private Long idSeasonCompetition;
     //
-    private List<Timeline> lstTimeLine;
+//    private List<Timeline> lstTimeLine;
 
     /**
      * In a real application, this number should be resolved by a projection query
@@ -40,7 +36,7 @@ public class FamFixtureController extends AbstractController<FamFixture> impleme
     private void postConstruct() {
         LogUtil.log(this.getClass() + " - postConstruct", Level.INFO, null);
 //        findAll();
-        lstTimeLine = new ArrayList<Timeline>();
+//        lstTimeLine = new ArrayList<Timeline>();
     }
 
     @PreDestroy
@@ -93,16 +89,16 @@ public class FamFixtureController extends AbstractController<FamFixture> impleme
             try {
                 items = getFacade().findByCompetitionId(idSeasonCompetition);
 
-                lstTimeLine = new ArrayList<Timeline>();
-                DefaultTimeLine timeLine = new DefaultTimeLine("fixture", "Calendrier des journées");
-                timeLine.setFocusDate(new Date());
-                timeLine.setInitialZoom(20);
-                for (FamFixture item : items) {
-                    timeLine.addEvent(new DefaultTimelineEvent(item.getLibFixture(), item.getLibFixture(), item.getDtFixture(), null,
-                            "/images/silk/sport_soccer.png"));
-                }
-
-                lstTimeLine.add(timeLine);
+//                lstTimeLine = new ArrayList<Timeline>();
+//                DefaultTimeLine timeLine = new DefaultTimeLine("fixture", "Calendrier des journées");
+//                timeLine.setFocusDate(new Date());
+//                timeLine.setInitialZoom(20);
+//                for (FamFixture item : items) {
+//                    timeLine.addEvent(new DefaultTimelineEvent(item.getLibFixture(), item.getLibFixture(), item.getDtFixture(), null,
+//                            "/images/silk/sport_soccer.png"));
+//                }
+//
+//                lstTimeLine.add(timeLine);
 
             } catch (Exception e) {
                 LogUtil.log("loadBySeasonCompetition", Level.SEVERE, e);
@@ -116,15 +112,15 @@ public class FamFixtureController extends AbstractController<FamFixture> impleme
         try {
             items = getFacade().findByCompetition(famSeasonCompetition);
 
-            lstTimeLine = new ArrayList<Timeline>();
-            DefaultTimeLine timeLine = new DefaultTimeLine("fixture", famSeasonCompetition.getDisplayName());
-            timeLine.setFocusDate(new Date());
-            timeLine.setInitialZoom(20);
-            for (FamFixture item : items) {
-                timeLine.addEvent(new DefaultTimelineEvent("Project start", item.getLibFixture(), item.getDtFixture(), null,
-                        "/images/silk/sport_soccer.png"));
-            }
-            lstTimeLine.add(timeLine);
+//            lstTimeLine = new ArrayList<Timeline>();
+//            DefaultTimeLine timeLine = new DefaultTimeLine("fixture", famSeasonCompetition.getDisplayName());
+//            timeLine.setFocusDate(new Date());
+//            timeLine.setInitialZoom(20);
+//            for (FamFixture item : items) {
+//                timeLine.addEvent(new DefaultTimelineEvent("Project start", item.getLibFixture(), item.getDtFixture(), null,
+//                        "/images/silk/sport_soccer.png"));
+//            }
+//            lstTimeLine.add(timeLine);
         } catch (Exception e) {
             LogUtil.log("loadBySeasonCompetition", Level.SEVERE, e);
             JsfUtil.addErrorMessage(e, "loadBySeasonCompetition Failed");
@@ -151,11 +147,11 @@ public class FamFixtureController extends AbstractController<FamFixture> impleme
         this.idSeasonCompetition = idSeasonCompetition;
     }
 
-    public List<Timeline> getModel() {
-        return lstTimeLine;
-    }
-
-    public void setLstTimeLine(List<Timeline> lstTimeLine) {
-        this.lstTimeLine = lstTimeLine;
-    }
+//    public List<Timeline> getModel() {
+//        return lstTimeLine;
+//    }
+//
+//    public void setLstTimeLine(List<Timeline> lstTimeLine) {
+//        this.lstTimeLine = lstTimeLine;
+//    }
 }

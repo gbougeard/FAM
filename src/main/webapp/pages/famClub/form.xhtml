@@ -54,6 +54,13 @@
                         size="40"
                         dropdown="true"
                 >
+            <p:column>
+                <p:graphicImage value="/images/flags/#{c.codCountry}.png"/>
+            </p:column>
+
+            <p:column>
+                #{c.libCountry}
+            </p:column>
             <p:ajax event="itemSelect" listener="#{cachePlayer.onChangeValue}" update="famState"/>
         </p:autoComplete>
         <p:message id="msg_famCountry" for="famCountry"/>

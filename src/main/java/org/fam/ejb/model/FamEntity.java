@@ -5,6 +5,7 @@ package org.fam.ejb.model;
  * the editor.
  */
 
+import lombok.Data;
 import org.fam.ejb.listener.AbstractEntityListener;
 
 import javax.persistence.*;
@@ -20,6 +21,7 @@ import java.util.Date;
 @EntityListeners({
     AbstractEntityListener.class
 })
+@Data
 public class FamEntity implements Serializable {
 
     /**
@@ -39,38 +41,6 @@ public class FamEntity implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dtModif;
 
-    /**
-     * 
-     * @return
-     */
-    public Date getDtCreat() {
-        return dtCreat;
-    }
-
-    /**
-     * 
-     * @param dt
-     */
-    public void setDtCreat(Date dt) {
-        this.dtCreat = dt;
-    }
-
-    /**
-     * 
-     * @return
-     */
-    public Date getDtModif() {
-        return dtModif;
-    }
-
-    /**
-     * 
-     * @param dt
-     */
-    public void setDtModif(Date dt) {
-        this.dtModif = dt;
-    }
-    
     public Long getId(){
         return null;
     }

@@ -11,7 +11,7 @@
         template="/common/template.xhtml">
 
     <ui:define name="title">
-        <h:outputText value="#{bundle.ListFamEventTitle}"></h:outputText>
+        <h:outputText value="#{bundle.ListFamEventTitle}"/>
     </ui:define>
     <ui:define name="body">
         <h:form>
@@ -37,7 +37,6 @@
                             <p:toolbarGroup align="left">
                                 <p:commandButton value="Agenda"
                                                  action="#{famEventController.prepareAgenda}"/>
-                                <p:divider/>
                                 <p:commandButton type="push"
                                                  image="ui-icon-document"
                                                  value="#{bundle.ListFamEventViewLink}"

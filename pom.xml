@@ -17,7 +17,7 @@
         <charts4j.version>1.3</charts4j.version>
         <shiro.version>1.2.0</shiro.version>
         <seam-social.version>3.2.0-SNAPSHOT</seam-social.version>
-        <primefaces.version>3.0.1</primefaces.version>
+        <primefaces.version>3.1-SNAPSHOT</primefaces.version>
         <seam.version>3.0.0-SNAPSHOT</seam.version>
 
         <maven.compiler.source>1.6</maven.compiler.source>
@@ -248,7 +248,7 @@
             <scope>test</scope>
         </dependency>-->
 
-        <dependency>
+        <!--<dependency>
             <groupId>org.jboss.seam.social</groupId>
             <artifactId>seam-social-api</artifactId>
             <version>${seam-social.version}</version>
@@ -261,26 +261,26 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- If using Twitter, add the following dependency -->
+        &lt;!&ndash; If using Twitter, add the following dependency &ndash;&gt;
         <dependency>
             <groupId>org.jboss.seam.social</groupId>
             <artifactId>seam-social-twitter</artifactId>
             <version>${seam-social.version}</version>
         </dependency>
 
-        <!-- If using Facebook, add the following dependency -->
+        &lt;!&ndash; If using Facebook, add the following dependency &ndash;&gt;
         <dependency>
             <groupId>org.jboss.seam.social</groupId>
             <artifactId>seam-social-facebook</artifactId>
             <version>${seam-social.version}</version>
         </dependency>
 
-        <!-- If using LinkedIn, add the following dependency -->
+        &lt;!&ndash; If using LinkedIn, add the following dependency &ndash;&gt;
         <dependency>
             <groupId>org.jboss.seam.social</groupId>
             <artifactId>seam-social-linkedin</artifactId>
             <version>${seam-social.version}</version>
-        </dependency>
+        </dependency>-->
 
         <!-- <dependency>
             <groupId>org.jboss.seam.social</groupId>

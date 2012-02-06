@@ -3,8 +3,9 @@ package org.fam.jsf.bean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.bean.ManagedBean;
+import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
 
@@ -15,7 +16,7 @@ import java.util.List;
  * Time: 00:00
  * To change this template use File | Settings | File Templates.
  */
-@ManagedBean
+@Named
 @SessionScoped
 public class UserSettings implements Serializable {
 
@@ -27,6 +28,13 @@ public class UserSettings implements Serializable {
     private Theme currentTheme;
 
     public UserSettings() {
+//        currentTheme = AvailableThemes.getInstance().getThemeForName("home");
+//        availableThemes = AvailableThemes.getInstance().getThemes();
+    }
+    
+    @PostConstruct
+    public void init(){
+        LOGGER.debug("init");
         currentTheme = AvailableThemes.getInstance().getThemeForName("home");
         availableThemes = AvailableThemes.getInstance().getThemes();
     }

@@ -78,36 +78,6 @@ public class Login implements Serializable {
         sb.append("login ").append(famCredentials.getUsername()).append(" / ").append(famCredentials.getPassword());
         LogUtil.log(sb.toString(), Level.INFO, null);
 
-//        UsernamePasswordToken token = new UsernamePasswordToken(famCredentials.getUsername(), famCredentials.getPassword());
-
-//”Remember Me” built-in, just do this:
-//        token.setRememberMe(true);
-
-        //With most of Shiro, you'll always want to make sure you're working with the currently executing user, referred to as the subject
-//        Subject currentUser = SecurityUtils.getSubject();
-
-//Authenticate the subject by passing
-//the user name and password token
-//into the login method
-        /*try {
-            currentUser.login(token);
-        } catch (UnknownAccountException uae) {
-            JsfUtil.addErrorMessage(uae, "UnknownAccountException");
-
-        } catch (IncorrectCredentialsException ice) {
-            JsfUtil.addErrorMessage(ice, "IncorrectCredentialsException");
-
-        } catch (LockedAccountException lae) {
-            JsfUtil.addErrorMessage(lae, "LockedAccountException");
-
-        } catch (ExcessiveAttemptsException eae) {
-            JsfUtil.addErrorMessage(eae, "ExcessiveAttemptsException");
-
-        } catch (AuthenticationException ae) {
-            //unexpected error?
-            JsfUtil.addErrorMessage(ae, "AuthenticationException");
-        }*/
-//No problems, show authenticated view…
 
         FamUser user = userManager.login(famCredentials.getUsername(), famCredentials.getPassword());
         if (user != null) {

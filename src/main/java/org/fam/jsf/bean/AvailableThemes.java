@@ -68,7 +68,7 @@ public class AvailableThemes {
         for (final String themeName : themeNames) {
             final Theme theme = new Theme();
             theme.setName(themeName);
-            theme.setImage("/images/themes/" + themeName + ".png");
+            theme.setImage(themeName + ".png");
 
             themes.add(theme);
             themesAsMap.put(theme.getName(), theme);

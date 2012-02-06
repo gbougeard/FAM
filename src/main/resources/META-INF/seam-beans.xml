@@ -20,6 +20,8 @@
        xmlns:security="urn:java:org.jboss.seam.security"
        xmlns:o="urn:java:org.jboss.seam.social:org.jboss.seam.social.oauth:org.jboss.seam.social.twitter.jackson:org.jboss.seam.social.linkedin.jackson:org.jboss.seam.social.facebook.jackson">
 
+       <!--xmlns:o="urn:java:org.jboss.seam.social:org.jboss.seam.social.oauth:org.jboss.seam.social.twitter.jackson:org.jboss.seam.social.linkedin.jackson:org.jboss.seam.social.facebook.jackson">-->
+
     <security:IdentityImpl>
         <s:modifies/>
         <security:authenticatorName>oauthAuthenticator</security:authenticatorName>

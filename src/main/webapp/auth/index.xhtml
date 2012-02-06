@@ -15,9 +15,13 @@
         <div id="utilisateur">
             <c:if test="${request.remoteUser!=null}">
                 <h:form>
-                    <h:commandLink action="#{authentificationBean.deconnexion}"><img
-                            src="images/utilisateur.png" alt="utilisateur" border="0"
-                            align="absmiddle"/></h:commandLink> #{b.utilisateur} : ${request.remoteUser}
+                    <h:commandLink action="#{authentificationBean.deconnexion}">
+                        <h:graphicImage name="utilisateur.png"
+                             alt="utilisateur" border="0"
+                             library="images"
+                            align="absmiddle"/>
+                    </h:commandLink>
+                    #{b.utilisateur} : ${request.remoteUser}
                 </h:form>
             </c:if>
         </div>
