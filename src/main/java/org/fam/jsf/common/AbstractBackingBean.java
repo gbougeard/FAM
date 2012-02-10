@@ -53,8 +53,7 @@ public class AbstractBackingBean implements Serializable {
     }
 
     protected Object getVariable(String name) {
-        Object o = getVariableResolver().resolveVariable(getFacesContext(), name);
-        return o;
+        return getVariableResolver().resolveVariable(getFacesContext(), name);
     }
 
     protected HttpSession getSession() {
@@ -62,8 +61,7 @@ public class AbstractBackingBean implements Serializable {
     }
 
     protected HttpServletRequest getRequest() {
-        HttpServletRequest request = (HttpServletRequest) getFacesContext().getExternalContext().getRequest();
-        return request;
+        return (HttpServletRequest) getFacesContext().getExternalContext().getRequest();
     }
 
     protected String getParameter(String name) {

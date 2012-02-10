@@ -21,6 +21,8 @@ import org.openid4java.message.ParameterList;
 import org.openid4java.message.ax.AxMessage;
 import org.openid4java.message.ax.FetchRequest;
 import org.openid4java.message.ax.FetchResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Produces;
@@ -28,7 +30,10 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
@@ -43,6 +48,8 @@ import java.util.logging.Level;
 public class Login implements Serializable {
 
     private static final long serialVersionUID = 7965455427888195913L;
+    //
+    private static final Logger LOGGER = LoggerFactory.getLogger(Login.class);
     //
     @Inject
     private FamCredentials famCredentials;
@@ -142,11 +149,10 @@ public class Login implements Serializable {
     }
 
     public void loginOpenId() throws IOException {
-//        System.out.println("login");
         try {
             manager = new ConsumerManager();
         } catch (ConsumerException e) {
-            LogUtil.log("Error creating ConsumerManager.", Level.SEVERE, e);
+            LOGGER.error("Cannot Login with openid", e);
         }
         validatedId = null;
 
@@ -158,13 +164,14 @@ public class Login implements Serializable {
         }
 
         String returnToUrl = returnToUrl(returnUrl);
-        String url = authRequest(returnToUrl);
+//        String url = authRequest(returnToUrl);
+//        authRequest(returnToUrl);
 
-        if (url != null) {
-            FacesContext.getCurrentInstance().getExternalContext().redirect(url);
-        } else {
-            FacesContext.getCurrentInstance().getExternalContext().redirect(AUTH_FAILED);
-        }
+//        if (url != null) {
+//            FacesContext.getCurrentInstance().getExternalContext().redirect(url);
+//        } else {
+//            FacesContext.getCurrentInstance().getExternalContext().redirect(AUTH_FAILED);
+//        }
     }
 
     /**
@@ -185,9 +192,8 @@ public class Login implements Serializable {
             LogUtil.log("returnToUrl", Level.SEVERE, ex);
 //            Logger.getLogger(Openid.class.getName()).log(Level.SEVERE, null, ex);
         }
-        String returnToUrl = "http://" + request.getServerName() + ":" + request.getServerPort()
+        return "http://" + request.getServerName() + ":" + request.getServerPort()
                 + context.getApplication().getViewHandler().getActionURL(context, urlExtension);
-        return returnToUrl;
     }
 
     /**
@@ -201,8 +207,7 @@ public class Login implements Serializable {
      * @return the URL where the message should be sent
      * @throws IOException
      */
-    private String authRequest(String returnToUrl) throws IOException {
-//        System.out.println("authRequest");
+    /*private String authRequest(String returnToUrl) throws IOException {
         LogUtil.log("authRequest " + userSuppliedId, Level.INFO, null);
         LogUtil.log("cred.username " + famCredentials.getUsername(), Level.INFO, null);
         try {
@@ -232,13 +237,12 @@ public class Login implements Serializable {
             // TODO
         }
         return null;
-    }
-
+    }*/
     public void verify() {
 //        System.out.println("verify");
         ExternalContext context = javax.faces.context.FacesContext.getCurrentInstance().getExternalContext();
         HttpServletRequest request = (HttpServletRequest) context.getRequest();
-        validatedId = verifyResponse(request);
+//        validatedId = verifyResponse(request);
     }
 
     /**
@@ -250,8 +254,7 @@ public class Login implements Serializable {
      * @param httpReq httpRequest
      * @return users identifier.
      */
-    private String verifyResponse(HttpServletRequest httpReq) {
-//        System.out.println("verifyResponse");
+    /*private String verifyResponse(HttpServletRequest httpReq) {
         try {
             ParameterList response = new ParameterList(httpReq.getParameterMap());
 
@@ -267,7 +270,6 @@ public class Login implements Serializable {
 
             Identifier verified = verification.getVerifiedId();
             if (verified != null) {
-//                System.out.println("verified");
                 AuthSuccess authSuccess =
                         (AuthSuccess) verification.getAuthResponse();
 
@@ -315,7 +317,7 @@ public class Login implements Serializable {
             LogUtil.log("OpenIDException", Level.SEVERE, e);
         }
         return null;
-    }
+    }*/
 
     /**
      * hidden member for onLoad/Init event.
@@ -377,5 +379,128 @@ public class Login implements Serializable {
     public String update() {
         userManager.edit(currentUser);
         return prepareMyAccount();
+    }
+
+
+    // --- placing the authentication request ---
+    public String authRequest(String userSuppliedString,
+                              HttpServletRequest httpReq,
+                              HttpServletResponse httpResp)
+            throws IOException {
+        try {
+            // configure the return_to URL where your application will receive
+            // the authentication responses from the OpenID provider
+            String returnToUrl = AUTH_SUCCEED; //"http://example.com/openid";
+
+            // --- Forward proxy setup (only if needed) ---
+            // ProxyProperties proxyProps = new ProxyProperties();
+            // proxyProps.setProxyName("proxy.example.com");
+            // proxyProps.setProxyPort(8080);
+            // HttpClientFactory.setProxyProperties(proxyProps);
+
+            // perform discovery on the user-supplied identifier
+            List discoveries = manager.discover(userSuppliedString);
+
+            // attempt to associate with the OpenID provider
+            // and retrieve one service endpoint for authentication
+            DiscoveryInformation discovered = manager.associate(discoveries);
+
+            // store the discovery information in the user's session
+            httpReq.getSession().setAttribute("openid-disc", discovered);
+
+            // obtain a AuthRequest message to be sent to the OpenID provider
+            AuthRequest authReq = manager.authenticate(discovered, returnToUrl);
+
+            // Attribute Exchange example: fetching the 'email' attribute
+            FetchRequest fetch = FetchRequest.createFetchRequest();
+            fetch.addAttribute("email",
+                    // attribute alias
+                    "http://schema.openid.net/contact/email",   // type URI
+                    true);                                      // required
+
+            // attach the extension to the authentication request
+            authReq.addExtension(fetch);
+
+
+            if (!discovered.isVersion2()) {
+                // Option 1: GET HTTP-redirect to the OpenID Provider endpoint
+                // The only method supported in OpenID 1.x
+                // redirect-URL usually limited ~2048 bytes
+                httpResp.sendRedirect(authReq.getDestinationUrl(true));
+                return null;
+            } else {
+                // Option 2: HTML FORM Redirection (Allows payloads >2048 bytes)
+
+                RequestDispatcher dispatcher = httpReq.getServletContext().getRequestDispatcher("formredirection.jsp");
+                httpReq.setAttribute("parameterMap", authReq.getParameterMap());
+                httpReq.setAttribute("destinationUrl", authReq.getDestinationUrl(false));
+                try {
+                    dispatcher.forward(httpReq, httpResp);
+                } catch (ServletException e) {
+                    LOGGER.error("Error forwarding", e);
+                }
+            }
+        } catch (OpenIDException e) {
+            // present error to the user
+        }
+
+        return null;
+    }
+
+    // --- processing the authentication response ---
+    public Identifier verifyResponse(HttpServletRequest httpReq) {
+        try {
+            // extract the parameters from the authentication response
+            // (which comes in as a HTTP request from the OpenID provider)
+            ParameterList response =
+                    new ParameterList(httpReq.getParameterMap());
+
+            // retrieve the previously stored discovery information
+            DiscoveryInformation discovered = (DiscoveryInformation)
+                    httpReq.getSession().getAttribute("openid-disc");
+
+            // extract the receiving URL from the HTTP request
+            StringBuffer receivingURL = httpReq.getRequestURL();
+            String queryString = httpReq.getQueryString();
+            if (queryString != null && queryString.length() > 0) {
+                receivingURL.append("?").append(httpReq.getQueryString());
+            }
+
+            // verify the response; ConsumerManager needs to be the same
+            // (static) instance used to place the authentication request
+            VerificationResult verification = manager.verify(receivingURL.toString(),
+                    response, discovered);
+
+            // examine the verification result and extract the verified identifier
+            Identifier verified = verification.getVerifiedId();
+            if (verified != null) {
+                AuthSuccess authSuccess = (AuthSuccess) verification.getAuthResponse();
+
+                if (authSuccess.hasExtension(AxMessage.OPENID_NS_AX)) {
+                    FetchResponse fetchResp = (FetchResponse) authSuccess.getExtension(AxMessage.OPENID_NS_AX);
+
+                    List emails = fetchResp.getAttributeValues("email");
+//                    String email = (String) emails.get(0);
+                    openIdEmail = (String) emails.get(0);
+                    List firsts = fetchResp.getAttributeValues("firstname");
+                    openIdFirstName = (String) firsts.get(0);
+                    List lasts = fetchResp.getAttributeValues("lastname");
+                    openIdLastName = (String) lasts.get(0);
+
+                    currentUser = new FamUser();
+                    currentUser.setEmail(openIdEmail);
+                    currentUser.setFirstName(openIdFirstName);
+                    currentUser.setLastName(openIdLastName);
+                    currentUser.setOpenid(Boolean.TRUE);
+
+                }
+
+                return verified;  // success
+            }
+        } catch (OpenIDException e) {
+            // present error to the user
+        }
+
+        return null;
     }
 }
