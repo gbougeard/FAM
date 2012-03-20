@@ -1,0 +1,73 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+    <ui:define name="title">Agenda</ui:define>
+    <ui:define name="body">
+        <center>
+            <h:form>
+                <p:growl id="messages" showDetail="true"/>
+                <p:toolbar>
+                    <p:toolbarGroup align="left">
+                        <p:commandButton type="button" value="New" image="ui-icon-document"/>
+                        <p:commandButton type="button" value="Open" image="ui-icon-folder-open"/>
+                        <p:divider/>
+                        <p:commandButton type="button" title="Save" image="ui-icon-disk"/>
+                        <p:commandButton type="button" title="Delete" image="ui-icon-trash"/>
+                        <p:commandButton type="button" title="Print" image="ui-icon-print"/>
+                    </p:toolbarGroup>
+                </p:toolbar>
+                <p:schedule value="#{agendaController.eventModel}"
+                            editable="true" widgetVar="myagenda"
+                            eventSelectListener="#{agendaController.onEventSelect}"
+                            dateSelectListener="#{agendaController.onDateSelect}"
+                            eventMoveListener="#{agendaController.onEventMove}"
+                            eventResizeListener="#{agendaController.onEventResize}"
+                            onEventMoveUpdate="messages" onEventResizeUpdate="messages"
+                            onDateSelectUpdate="eventDetails" onDateSelectComplete="eventDialog.show()"
+                            onEventSelectUpdate="eventDetails" onEventSelectComplete="eventDialog.show()"
+                            firstHour="4"
+                            maxTime="23"
+                            minTime="11"
+                            startWeekday="1"
+                            view="agendaWeek"
+                            style="width:800px;"
+                        >
+
+                </p:schedule>
+
+                <p:dialog widgetVar="eventDialog" header="Event Details" showEffect="clip" hideEffect="clip">
+                    <h:panelGrid id="eventDetails" columns="2">
+                        <h:outputLabel for="title" value="Title:"/>
+                        <p:inputText id="title" value="#{agendaController.event.title}"/>
+
+                        <h:outputLabel for="from" value="From:"/>
+                        <p:inputMask id="from" mask="99/99/9999"
+                                     value="#{agendaController.event.startDate}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </p:inputMask>
+
+                        <h:outputLabel for="to" value="To:"/>
+                        <p:inputMask id="to" mask="99/99/9999"
+                                     value="#{agendaController.event.endDate}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </p:inputMask>
+
+                        <h:outputLabel for="allDay" value="All Day:"/>
+                        <h:selectBooleanCheckbox id="allDay"
+                                                 value="#{agendaController.event.allDay}"/>
+
+                        <p:commandButton type="reset" value="Reset"/>
+                        <p:commandButton value="Save"
+                                         oncomplete="myagenda.update();eventDialog.hide();"
+                                         actionListener="#{agendaController.addEvent}"/>
+                    </h:panelGrid>
+                </p:dialog>
+            </h:form>
+        </center>
+    </ui:define>
+</ui:composition>

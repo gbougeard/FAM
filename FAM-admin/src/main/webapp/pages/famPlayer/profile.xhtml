@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        >
+    <f:metadata>
+        <!--        <f:event type="preRenderView" listener="#{chartBean.buildChart(bean)}" />	-->
+    </f:metadata>
+    <!--    <h:form>-->
+    <!--    <h:panelGrid columns="2">-->
+    <h:panelGrid columns="6">
+        <h:outputLabel value="Taille" for="height"/>
+        <h:panelGrid columns="1" style="margin-bottom:10px">
+            <p:inputText id="height"
+                         value="#{bean.height}">
+                <p:ajax process="@this" update="msg_height"/>
+            </p:inputText>
+            <!--                    <p:slider for="height" minValue="100" maxValue="220"
+          onSlideEndUpdate="msg_height" /> -->
+        </h:panelGrid>
+        <p:message id="msg_height" for="height"/>
+
+        <h:outputLabel value="Poids" for="weight"/>
+        <h:panelGrid columns="1" style="margin-bottom:10px">
+            <p:inputText id="weight"
+                         value="#{bean.weight}">
+                <p:ajax process="@this" update="msg_weight"/>
+            </p:inputText>
+            <!--                    <p:slider for="weight" minValue="20" maxValue="150"
+          onSlideEndUpdate="msg_weight" /> -->
+        </h:panelGrid>
+        <p:message id="msg_weight" for="weight"/>
+
+        <!--                <p:separator/><p:separator/><p:separator/>-->
+
+        <h:outputLabel value="ATT" for="att"/>
+        <h:panelGrid columns="1" style="margin-bottom:10px">
+            <p:inputText id="att"
+                         value="#{bean.att}">
+                <p:ajax process="@this" update="msg_att"/>
+            </p:inputText>
+            <!--                    <p:slider for="att" minValue="0" maxValue="100"
+            onSlideEndUpdate="msg_att growl"
+            slideEndListener="#{famPlayerController.onSlideEnd}"
+            />-->
+        </h:panelGrid>
+        <p:message id="msg_att" for="att"/>
+
+        <h:outputLabel value="DEF" for="def"/>
+        <h:panelGrid columns="1" style="margin-bottom:10px">
+            <p:inputText id="def"
+                         value="#{bean.def}">
+                <p:ajax process="@this" update="msg_def"/>
+            </p:inputText>
+            <!--                    <p:slider for="def" minValue="0" maxValue="100"
+          onSlideEndUpdate="msg_def"
+          slideEndListener="#{famPlayerController.onSlideEnd}"
+           /> -->
+        </h:panelGrid>
+        <p:message id="msg_def" for="def"/>
+
+        <h:outputLabel value="TEC" for="tec"/>
+        <h:panelGrid columns="1" style="margin-bottom:10px">
+            <p:inputText id="tec"
+                         value="#{bean.tec}">
+                <p:ajax process="@this" update="msg_tec"/>
+            </p:inputText>
+            <!--                    <p:slider for="tec" minValue="0" maxValue="100"
+           onSlideEndUpdate="msg_tec"
+           /> -->
+        </h:panelGrid>
+        <p:message id="msg_tec" for="tec"/>
+
+        <h:outputLabel value="VIT" for="vit"/>
+        <h:panelGrid columns="1" style="margin-bottom:10px">
+            <p:inputText id="vit"
+                         value="#{bean.vit}">
+                <p:ajax process="@this" update="msg_vit"/>
+            </p:inputText>
+            <!--                    <p:slider for="vit" minValue="0" maxValue="100"
+                      onSlideEndUpdate="msg_vit">
+            </p:slider>-->
+        </h:panelGrid>
+        <p:message id="msg_vit" for="vit"/>
+
+        <h:outputLabel value="PUI" for="pui"/>
+        <h:panelGrid columns="1" style="margin-bottom:10px">
+            <p:inputText id="pui"
+                         value="#{bean.pui}">
+                <p:ajax process="@this" update="msg_pui"/>
+            </p:inputText>
+            <!--                    <p:slider for="pui" minValue="0" maxValue="100"/> -->
+        </h:panelGrid>
+        <p:message id="msg_pui" for="pui"/>
+
+        <h:outputLabel value="PHY" for="phy"/>
+        <h:panelGrid columns="1" style="margin-bottom:10px">
+            <p:inputText id="phy"
+                         value="#{bean.phy}">
+                <p:ajax process="@this" update="msg_phy"/>
+            </p:inputText>
+            <!--                    <p:slider for="phy" minValue="0" maxValue="100"/> -->
+        </h:panelGrid>
+        <p:message id="msg_phy" for="phy"/>
+
+    </h:panelGrid>
+    <p:commandButton value="Voir le Graph"
+                     onclick="dlg.show();"
+
+            />
+
+    <p:dialog widgetVar="dlg" header="Profil" minWidth="450">
+
+        <h:graphicImage id="chart" height="300" style="border-width:4px;border-color:#6F6E6E;border-style:double"
+                        url="#{bean.profileChartUrl}"/>
+        <!--            <h:outputText id="url" value="#{bean.profileChartUrl}"/>-->
+    </p:dialog>
+    <!--    </h:panelGrid>-->
+    <!--    </h:form>-->
+</ui:composition>
+

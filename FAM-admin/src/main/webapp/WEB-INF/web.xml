@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+
+    <context-param>
+        <param-name>primefaces.THEME</param-name>
+        <param-value>#{userSettings.currentTheme.name}</param-value>
+    </context-param>
+    <context-param>
+        <param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Development</param-value>
+    </context-param>
+    <context-param>
+        <param-name>javax.faces.FACELETS_DEVELOPMENT</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
+        <param-name>com.sun.faces.allowTextChildren</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <!--    <context-param>
+        <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
+        <param-value>.xhtml</param-value>
+    </context-param>-->
+    <context-param>
+        <param-name>javax.faces.DATETIMECONVERTER_DEFAULT_TIMEZONE_IS_SYSTEM_TIMEZONE</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
+        <param-name>com.ocpsoft.pretty.BASE_PACKAGES</param-name>
+        <param-value>none</param-value>
+    </context-param>
+    <context-param>
+        <param-name>org.fam.jsf.PLAYERS_PHOTO_PATH</param-name>
+        <param-value>/images/players/</param-value>
+    </context-param>
+    <context-param>
+        <param-name>org.fam.jsf.DEFAULT_PHOTO</param-name>
+        <param-value>default</param-value>
+    </context-param>
+    <context-param>
+        <param-name>org.fam.jsf.DEFAULT_IMAGE_EXTENSION</param-name>
+        <param-value>.png</param-value>
+    </context-param>
+
+
+    <filter>
+        <filter-name>webappMetricsFilter</filter-name>
+        <filter-class>com.yammer.metrics.web.DefaultWebappMetricsFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>webappMetricsFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- <filter>
+        <filter-name>ShiroFilter</filter-name>
+        <filter-class>org.apache.shiro.web.servlet.IniShiroFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>ShiroFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>-->
+    <!-- <filter>
+        <filter-name>ShiroFilter</filter-name>
+        <filter-class>org.apache.shiro.web.servlet.IniShiroFilter</filter-class>
+        &lt;!&ndash;&lt;!&ndash; no init-param means load the INI config from classpath:shiro.ini &ndash;&gt;&ndash;&gt;
+    </filter>-->
+    <!-- Make sure any request you want accessible to Shiro is filtered. /* catches all -->
+    <!-- requests.  Usually this filter mapping is defined first (before all others) to -->
+    <!-- ensure that Shiro works in subsequent filters in the filter chain:             -->
+    <!-- <filter-mapping>
+        <filter-name>ShiroFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>-->
+
+    <filter>
+        <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
+        <init-param>
+            <param-name>thresholdSize</param-name>
+            <param-value>2097152</param-value>
+        </init-param>
+    </filter>
+
+
+    <filter-mapping>
+        <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <servlet-name>Faces Servlet</servlet-name>
+    </filter-mapping>
+
+    <servlet>
+        <display-name>JSF Servlet</display-name>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <!--        <url-pattern>/faces/*</url-pattern>-->
+        <url-pattern>*.jsf</url-pattern>
+        <url-pattern>*.xhtml</url-pattern>
+    </servlet-mapping>
+    <!--    <servlet>
+        <servlet-name>Comet Servlet</servlet-name>
+        <servlet-class>org.primefaces.comet.PrimeFacesCometServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Comet Servlet</servlet-name>
+        <url-pattern>/primefaces_comet/*</url-pattern>
+    </servlet-mapping>-->
+    <session-config>
+        <session-timeout>
+            60
+        </session-timeout>
+    </session-config>
+    <!-- definir les acces securises -->
+    <!--    <security-constraint>
+        <display-name>Authentification</display-name>
+        <web-resource-collection>
+            <web-resource-name>page securisee</web-resource-name>
+             <url-pattern>/faces/*</url-pattern>
+            <url-pattern>*.jsf</url-pattern>
+            <url-pattern>*.xhtml</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>Administrateur</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>fam-realms</realm-name>
+        <form-login-config>
+            <form-login-page>/authentification.jsf</form-login-page>
+            <form-error-page>/erreur.jsf</form-error-page>
+        </form-login-config>
+    </login-config>-->
+    <!--    <security-constraint>
+        <display-name>Admin Pages</display-name>
+        <web-resource-collection>
+            <web-resource-name>Protected Admin Area</web-resource-name>
+            <description/>
+            <url-pattern>/admin/*</url-pattern>
+            <url-pattern>/site/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+            <http-method>HEAD</http-method>
+            <http-method>PUT</http-method>
+            <http-method>OPTIONS</http-method>
+            <http-method>TRACE</http-method>
+            <http-method>DELETE</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>ADMIN_SITE</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>User Pages</display-name>
+        <web-resource-collection>
+            <web-resource-name>Protected Users Area</web-resource-name>
+            <description/>
+            <url-pattern>/users/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+            <http-method>HEAD</http-method>
+            <http-method>PUT</http-method>
+            <http-method>OPTIONS</http-method>
+            <http-method>TRACE</http-method>
+            <http-method>DELETE</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>USER</role-name>
+            <role-name>ADMIN_SITE</role-name>
+        </auth-constraint>
+    </security-constraint>
+     Security roles used by this web application 
+    <security-role>
+        <role-name>ADMIN_SITE</role-name>
+    </security-role>
+    <security-role>
+        <role-name>USER</role-name>
+    </security-role>
+    
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>file</realm-name>
+        <form-login-config>
+            <form-login-page>/auth/loginForm.xhtml</form-login-page>
+            <form-error-page>/auth/loginError.xhtml</form-error-page>
+        </form-login-config>
+    </login-config>-->
+    <welcome-file-list>
+        <welcome-file>/index.xhtml</welcome-file>
+        <!--        <welcome-file>/admin/index.xhtml</welcome-file>
+        <welcome-file>/site/index.xhtml</welcome-file>-->
+    </welcome-file-list>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/err/403.xhtml</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/err/404.xhtml</location>
+    </error-page>
+    <error-page>
+        <exception-type>javax.faces.application.ViewExpiredException</exception-type>
+        <location>/err/expired.xhtml</location>
+    </error-page>
+
+    <display-name>FAM-admin</display-name>
+    <module-name>FAM-admin</module-name>
+</web-app>

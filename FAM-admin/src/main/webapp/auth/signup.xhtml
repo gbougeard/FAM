@@ -1,0 +1,59 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+
+    <ui:define name="title">Signup</ui:define>
+
+    <ui:define name="body">
+
+        <p:panel header="Signup">
+            <h:form>
+                <h:panelGrid columns="3">
+                    <h:outputText value="Email : "/>
+                    <p:inputText id="email"
+                                 value="#{credentials.username}">
+                        <p:ajax event="blur" update="msgEmail"/>
+                    </p:inputText>
+                    <p:message id="msgEmail" for="email"/>
+                    <!--                            -->
+                    <h:outputText value="Password : "/>
+                    <p:password id="password1"
+                                value="#{credentials.password}"
+                                feedback="true" minLength="6">
+                        <p:ajax event="blur" update="msgPwd1"/>
+                    </p:password>
+                    <p:message id="msgPwd1" for="password1"/>
+                    <!--        -->
+                    <h:outputText value="Confirm password : "/>
+                    <p:password id="password2"
+                                value="#{credentials.passwordConfirmed}"
+                                feedback="false" minLength="6"
+                                validator="duplicateFieldValidator"
+                            >
+                        <!--                        <f:validator validatorId="duplicateFieldValidator" />-->
+                        <f:attribute name="field1Id"
+                                     value="#{component.parent.parent.clientId}:password1"/>
+                        <p:ajax process="@form" update="msgPwd2"/>
+                    </p:password>
+                    <p:message id="msgPwd2" for="password2"/>
+                    <!--                            <p:captcha label="Captcha"/>  -->
+
+                </h:panelGrid>
+                <p:commandButton value="Sign up"
+                                 action="#{login.doSignup}"/>
+
+                <p:commandButton action="#{login.signupOpenidGoogle}"
+                                 value="Signup with Google"
+                                 id="openidGoogle"
+                                 immediate="true"/>
+            </h:form>
+        </p:panel>
+
+    </ui:define>
+
+</ui:composition>

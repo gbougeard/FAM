@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        >
+
+    <h:panelGrid columns="3">
+        <!--                    <h:outputLabel value="#{bundle.EditFamGoalLabel_idGoal}" for="idGoal" />
+     <p:inputText id="idGoal"
+                  value="#{bean.idGoal}"
+                  title="#{bundle.EditFamGoalTitle_idGoal}"
+                  >
+         <p:ajax event="blur" update="msg_idGoal"/>
+     </p:inputText>
+     <p:message id="msg_idGoal" for="idGoal"/> -->
+        <h:outputLabel value="#{bundle.EditFamGoalLabel_famMatchPlayerStriker}" for="famMatchPlayerStriker"/>
+        <h:selectOneMenu id="famMatchPlayerStriker"
+                         value="#{bean.famMatchPlayerStriker}"
+                         title="#{bundle.EditFamGoalTitle_famMatchPlayerStriker}"
+                >
+            <f:selectItems value="#{famMatchPlayerController.itemsAvailableSelectOne}"/>
+            <p:ajax event="blur" update="msg_famMatchPlayerStriker"/>
+        </h:selectOneMenu>
+        <p:message id="msg_famMatchPlayerStriker" for="famMatchPlayerStriker"/>
+
+        <h:outputLabel value="#{bundle.EditFamGoalLabel_famMatchPlayerAssist}" for="famMatchPlayerAssist"/>
+        <h:selectOneMenu id="famMatchPlayerAssist"
+                         value="#{bean.famMatchPlayerAssist}"
+                         title="#{bundle.EditFamGoalTitle_famMatchPlayerAssist}"
+                >
+            <f:selectItems value="#{famMatchPlayerController.itemsAvailableSelectOne}"/>
+            <p:ajax event="blur" update="msg_famMatchPlayerAssist"/>
+        </h:selectOneMenu>
+        <p:message id="msg_famMatchPlayerAssist" for="famMatchPlayerAssist"/>
+
+        <h:outputLabel value="#{bundle.EditFamGoalLabel_goalTime}" for="goalTime"/>
+        <p:inputText id="goalTime"
+                     value="#{bean.goalTime}"
+                     title="#{bundle.EditFamGoalTitle_goalTime}"
+                >
+            <p:ajax event="blur" update="msg_goalTime"/>
+        </p:inputText>
+        <p:message id="msg_goalTime" for="goalTime"/>
+
+        <h:outputLabel value="#{bundle.EditFamGoalLabel_csc}" for="csc"/>
+        <p:selectBooleanCheckbox id="csc"
+                                 value="#{bean.csc}"
+                                 title="#{bundle.EditFamGoalTitle_csc}"
+                >
+            <p:ajax event="blur" update="msg_csc"/>
+        </p:selectBooleanCheckbox>
+        <p:message id="msg_csc" for="csc"/>
+
+        <h:outputLabel value="#{bundle.EditFamGoalLabel_penalty}" for="penalty"/>
+        <p:selectBooleanCheckbox id="penalty"
+                                 value="#{bean.penalty}"
+                                 title="#{bundle.EditFamGoalTitle_penalty}"
+                >
+            <p:ajax event="blur" update="msg_penalty"/>
+        </p:selectBooleanCheckbox>
+        <p:message id="msg_penalty" for="penalty"/>
+
+        <!--                    <h:outputLabel value="#{bundle.EditFamGoalLabel_dtCreat}" for="dtCreat" />
+     <p:inputText id="dtCreat"
+                  value="#{bean.dtCreat}"
+                  title="#{bundle.EditFamGoalTitle_dtCreat}"
+                  >
+         <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+         <p:ajax event="blur" update="msg_dtCreat"/>
+     </p:inputText>
+     <p:message id="msg_dtCreat" for="dtCreat"/>
+
+     <h:outputLabel value="#{bundle.EditFamGoalLabel_dtModif}" for="dtModif" />
+     <p:inputText id="dtModif"
+                  value="#{bean.dtModif}"
+                  title="#{bundle.EditFamGoalTitle_dtModif}"
+                  >
+         <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+         <p:ajax event="blur" update="msg_dtModif"/>
+     </p:inputText>
+     <p:message id="msg_dtModif" for="dtModif"/> -->
+
+    </h:panelGrid>
+</ui:composition>

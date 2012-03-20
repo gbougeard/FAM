@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{bundle.EditFamStaffFunctionTitle}"/>
+    </ui:define>
+    <ui:define name="body">
+        <h:form>
+            <p:panel header="#{bundle.EditFamStaffFunctionTitle}">
+                <h:panelGrid columns="3">
+                    <h:outputLabel value="#{bundle.EditFamStaffFunctionLabel_idStaffFunction}" for="idStaffFunction"/>
+                    <p:inputText id="idStaffFunction"
+                                 value="#{famStaffFunctionController.selected.idStaffFunction}"
+                                 title="#{bundle.EditFamStaffFunctionTitle_idStaffFunction}"
+                                 required="true"
+                                 requiredMessage="#{bundle.EditFamStaffFunctionRequiredMessage_idStaffFunction}"
+                            >
+                        <p:ajax event="blur" update="msg_idStaffFunction"/>
+                    </p:inputText>
+                    <p:message id="msg_idStaffFunction" for="idStaffFunction"/>
+
+                    <h:outputLabel value="#{bundle.EditFamStaffFunctionLabel_libStaffFunction}" for="libStaffFunction"/>
+                    <p:inputText id="libStaffFunction"
+                                 value="#{famStaffFunctionController.selected.libStaffFunction}"
+                                 title="#{bundle.EditFamStaffFunctionTitle_libStaffFunction}"
+                                 required="true"
+                                 requiredMessage="#{bundle.EditFamStaffFunctionRequiredMessage_libStaffFunction}"
+                            >
+                        <p:ajax event="blur" update="msg_libStaffFunction"/>
+                    </p:inputText>
+                    <p:message id="msg_libStaffFunction" for="libStaffFunction"/>
+
+                    <h:outputLabel value="#{bundle.EditFamStaffFunctionLabel_codStaffFunction}" for="codStaffFunction"/>
+                    <p:inputText id="codStaffFunction"
+                                 value="#{famStaffFunctionController.selected.codStaffFunction}"
+                                 title="#{bundle.EditFamStaffFunctionTitle_codStaffFunction}"
+                                 required="true"
+                                 requiredMessage="#{bundle.EditFamStaffFunctionRequiredMessage_codStaffFunction}"
+                            >
+                        <p:ajax event="blur" update="msg_codStaffFunction"/>
+                    </p:inputText>
+                    <p:message id="msg_codStaffFunction" for="codStaffFunction"/>
+
+                    <h:outputLabel value="#{bundle.EditFamStaffFunctionLabel_famClub}" for="famClub"/>
+                    <h:selectOneMenu id="famClub"
+                                     value="#{famStaffFunctionController.selected.famClub}"
+                                     title="#{bundle.EditFamStaffFunctionTitle_famClub}"
+                            >
+                        <f:selectItems value="#{famClubController.itemsAvailableSelectOne}"/>
+                        <p:ajax event="blur" update="msg_famClub"/>
+                    </h:selectOneMenu>
+                    <p:message id="msg_famClub" for="famClub"/>
+
+                    <h:outputLabel value="#{bundle.EditFamStaffFunctionLabel_dtCreat}" for="dtCreat"/>
+                    <p:inputText id="dtCreat"
+                                 value="#{famStaffFunctionController.selected.dtCreat}"
+                                 title="#{bundle.EditFamStaffFunctionTitle_dtCreat}"
+                                 required="true"
+                                 requiredMessage="#{bundle.EditFamStaffFunctionRequiredMessage_dtCreat}"
+                            >
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
+                        <p:ajax event="blur" update="msg_dtCreat"/>
+                    </p:inputText>
+
+                    <p:message id="msg_dtCreat" for="dtCreat"/>
+
+                    <h:outputLabel value="#{bundle.EditFamStaffFunctionLabel_dtModif}" for="dtModif"/>
+                    <p:inputText id="dtModif"
+                                 value="#{famStaffFunctionController.selected.dtModif}"
+                                 title="#{bundle.EditFamStaffFunctionTitle_dtModif}"
+                            >
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
+                        <p:ajax event="blur" update="msg_dtModif"/>
+                    </p:inputText>
+
+                    <p:message id="msg_dtModif" for="dtModif"/>
+
+                </h:panelGrid>
+                <p:commandButton value="#{bundle.EditFamStaffFunctionSaveLink}"
+                                 action="#{famStaffFunctionController.update}"
+                                 immediate="true"/>
+                <p:commandButton value="#{bundle.CancelLink}"
+                                 action="#{famStaffFunctionController.prepareList}"
+                                 immediate="true"/>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

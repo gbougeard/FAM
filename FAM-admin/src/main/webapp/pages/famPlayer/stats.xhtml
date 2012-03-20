@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        >
+    <f:metadata>
+    </f:metadata>
+    <!--    BODY-->
+    <h:panelGrid columns="2">
+        <!--        Date derniere MAJ-->
+        <h:outputText value="#{bundle.Stat_dtModifStat}"/>
+        <h:outputText value="#{bean.dtModifStat}"
+                      title="#{bundle.Stat_dtModifStat}">
+            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" timeZone="#{cacheBean.timeZone}"/>
+        </h:outputText>
+        <!--        nbMatch-->
+        <h:outputText value="#{bundle.Stat_nbMatch}"/>
+        <h:outputText value="#{bean.nbMatch}"
+                      title="#{bundle.Stat_nbMatch}"/>
+        <!--        nbWorkout-->
+        <h:outputText value="#{bundle.Stat_nbWorkout}"/>
+        <h:outputText value="#{bean.nbWorkout}"
+                      title="#{bundle.Stat_nbWorkout}"/>
+        <!--        nbGoal-->
+        <h:outputText value="#{bundle.Stat_nbGoal}"/>
+        <h:outputText value="#{bean.nbGoal}"
+                      title="#{bundle.Stat_nbGoal}"/>
+        <!--        nbAssist-->
+        <h:outputText value="#{bundle.Stat_nbAssist}"/>
+        <h:outputText value="#{bean.nbAssist}"
+                      title="#{bundle.Stat_nbAssist}"/>
+        <!--        avgGoalPerMatch-->
+        <h:outputText value="#{bundle.Stat_avgGoalPerMatch}"/>
+        <h:outputText value="#{bean.avgGoalPerMatch}"
+                      title="#{bundle.Stat_avgGoalPerMatch}"/>
+        <!--        avgAssistPerMatch-->
+        <h:outputText value="#{bundle.Stat_avgAssistPerMatch}"/>
+        <h:outputText value="#{bean.avgAssistPerMatch}"
+                      title="#{bundle.Stat_avgAssistPerMatch}"/>
+        <!--        nbCaps-->
+        <h:outputText value="#{bundle.Stat_nbCaps}"/>
+        <h:outputText value="#{bean.nbMatch - bean.nbSubstitute}"
+                      title="#{bundle.Stat_nbCaps}"/>
+        <!--        nbSubstitute-->
+        <h:outputText value="#{bundle.Stat_nbSubstitute}"/>
+        <h:outputText value="#{bean.nbSubstitute}"
+                      title="#{bundle.Stat_nbSubstitute}"/>
+        <!--        timePlayed-->
+        <h:outputText value="#{bundle.Stat_timePlayed}"/>
+        <h:outputText value="#{bean.timePlayed}"
+                      title="#{bundle.Stat_timePlayed}"/>
+        <!--        avgNote-->
+        <h:outputText value="#{bundle.Stat_avgNote}"/>
+        <h:outputText value="#{bean.avgNote}"
+                      title="#{bundle.Stat_avgNote}"/>
+    </h:panelGrid>
+</ui:composition>
+

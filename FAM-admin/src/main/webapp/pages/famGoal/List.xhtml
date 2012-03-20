@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{bundle.ListFamGoalTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <h:form>
+            <p:panel header="#{bundle.FamGoal}">
+
+                <p:dataTable
+                        value="#{famGoalController.lazyModel}"
+                        lazy="true"
+                        var="item"
+                        selection="#{famGoalController.selected}"
+                        selectionMode="single"
+                        paginator="true" rows="10"
+                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                        rowsPerPageTemplate="5,10,15"
+                        sortBy="#{item.goalTime}"
+                        emptyMessage="#{bundle.NoDataFound}"
+                        paginatorAlwaysVisible="false"
+                        >
+                    <p:ajax event="rowSelect" update="tb"/>
+                    <p:ajax event="rowUnselect" update="tb"/>
+                    <f:facet name="header">
+                        <p:toolbar id="tb">
+                            <p:toolbarGroup align="left">
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamGoalViewLink}"
+                                                 action="#{famGoalController.prepareView}"
+                                                 disabled="#{empty famGoalController.selected.idGoal}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamGoalCreateLink}"
+                                                 action="#{famGoalController.prepareCreate}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamGoalEditLink}"
+                                                 action="#{famGoalController.prepareEdit}"
+                                                 disabled="#{empty famGoalController.selected.idGoal}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.DeleteLink}"
+                                                 action="#{famGoalController.prepareDelete}"
+                                                 disabled="#{empty famGoalController.selected.idGoal}"/>
+                            </p:toolbarGroup>
+                        </p:toolbar>
+                    </f:facet>
+                    <!--                    <p:column sortBy="#{item.idGoal}"
+                              filterBy="#{item.idGoal}"
+                              headerText="#{bundle.ListFamGoalTitle_idGoal}" >
+                        <h:outputText value="#{item.idGoal}"/>
+                    </p:column>-->
+                    <p:column sortBy="#{item.goalTime}"
+                              filterBy="#{item.goalTime}"
+                              headerText="#{bundle.ListFamGoalTitle_goalTime}">
+                        <h:outputText value="#{item.goalTime}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.famMatchPlayerStriker.displayName}"
+                              filterBy="#{item.famMatchPlayerStriker.displayName}"
+                              headerText="#{bundle.ListFamGoalTitle_famMatchPlayerStriker}">
+                        <h:outputText value="#{item.famMatchPlayerStriker.displayName}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.famMatchPlayerAssist.displayName}"
+                              filterBy="#{item.famMatchPlayerAssist.displayName}"
+                              headerText="#{bundle.ListFamGoalTitle_famMatchPlayerAssist}">
+                        <h:outputText value="#{item.famMatchPlayerAssist.displayName}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.csc}"
+                              filterBy="#{item.csc}"
+                              headerText="#{bundle.ListFamGoalTitle_csc}">
+                        <h:selectBooleanCheckbox value="#{item.csc}"
+                                                 readonly="true"/>
+                    </p:column>
+                    <p:column sortBy="#{item.penalty}"
+                              filterBy="#{item.penalty}"
+                              headerText="#{bundle.ListFamGoalTitle_penalty}">
+                        <h:selectBooleanCheckbox value="#{item.penalty}"
+                                                 readonly="true"/>
+                    </p:column>
+
+                    <!--                    <p:column sortBy="#{item.dtCreat}"
+                              filterBy="#{item.dtCreat}"
+                              headerText="#{bundle.ListFamGoalTitle_dtCreat}" >
+                        <h:outputText value="#{item.dtCreat}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column sortBy="#{item.dtModif}"
+                              filterBy="#{item.dtModif}"
+                              headerText="#{bundle.ListFamGoalTitle_dtModif}" >
+                        <h:outputText value="#{item.dtModif}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:column>-->
+                    <f:facet name="footer">
+
+                    </f:facet>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

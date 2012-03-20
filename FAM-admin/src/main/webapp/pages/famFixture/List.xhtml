@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{bundle.ListFamFixtureTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <h:form>
+            <p:panel header="#{bundle.FamFixture}">
+
+                <p:dataTable
+                        value="#{famFixtureController.lazyModel}"
+                        lazy="true"
+                        var="item"
+                        selection="#{famFixtureController.selected}"
+                        selectionMode="single"
+                        paginator="true" rows="10"
+                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                        rowsPerPageTemplate="5,10,15"
+                        sortBy="#{item.libFixture}"
+                        emptyMessage="#{bundle.NoDataFound}"
+                        paginatorAlwaysVisible="false"
+                        >
+                    <p:ajax event="rowSelect" update="tb"/>
+                    <p:ajax event="rowUnselect" update="tb"/>
+                    <f:facet name="header">
+                        <p:toolbar id="tb">
+                            <p:toolbarGroup align="left">
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamFixtureViewLink}"
+                                                 action="#{famFixtureController.prepareView}"
+                                                 disabled="#{empty famFixtureController.selected.idFixture}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamFixtureCreateLink}"
+                                                 action="#{famFixtureController.prepareCreate}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamFixtureEditLink}"
+                                                 action="#{famFixtureController.prepareEdit}"
+                                                 disabled="#{empty famFixtureController.selected.idFixture}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.DeleteLink}"
+                                                 action="#{famFixtureController.prepareDelete}"
+                                                 disabled="#{empty famFixtureController.selected.idFixture}"/>
+                            </p:toolbarGroup>
+                        </p:toolbar>
+                    </f:facet>
+                    <!--                    <p:column sortBy="#{item.idFixture}"
+                              filterBy="#{item.idFixture}"
+                              headerText="#{bundle.ListFamFixtureTitle_idFixture}" >
+                        <h:outputText value="#{item.idFixture}"/>
+                    </p:column>-->
+                    <p:column sortBy="#{item.famSeasonCompetition.displayName}"
+                              filterBy="#{item.famSeasonCompetition.displayName}"
+                              headerText="#{bundle.ListFamFixtureTitle_famSeasonCompetition}">
+                        <h:outputText value="#{item.famSeasonCompetition.displayName}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.libFixture}"
+                              filterBy="#{item.libFixture}"
+                              headerText="#{bundle.ListFamFixtureTitle_libFixture}">
+                        <h:outputText value="#{item.libFixture}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.dtFixture}"
+                              filterBy="#{item.dtFixture}"
+                              headerText="#{bundle.ListFamFixtureTitle_dtFixture}">
+                        <h:outputText value="#{item.dtFixture}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="#{cacheBean.timeZone}"/>
+                        </h:outputText>
+                    </p:column>
+
+                    <!--                    <p:column sortBy="#{item.dtCreat}"
+                              filterBy="#{item.dtCreat}"
+                              headerText="#{bundle.ListFamFixtureTitle_dtCreat}" >
+                        <h:outputText value="#{item.dtCreat}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column sortBy="#{item.dtModif}"
+                              filterBy="#{item.dtModif}"
+                              headerText="#{bundle.ListFamFixtureTitle_dtModif}" >
+                        <h:outputText value="#{item.dtModif}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:column>-->
+                    <f:facet name="footer">
+
+                    </f:facet>
+                </p:dataTable>
+
+
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

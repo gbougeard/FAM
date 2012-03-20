@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{bundle.ListFamCardTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <h:form>
+            <p:panel header="#{bundle.FamCard}">
+
+                <p:dataTable
+                        value="#{famCardController.lazyModel}"
+                        lazy="true"
+                        var="item"
+                        selection="#{famCardController.selected}"
+                        selectionMode="single"
+                        paginator="true" rows="10"
+                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                        rowsPerPageTemplate="5,10,15"
+                        sortBy="#{item.cardTime}"
+                        emptyMessage="#{bundle.NoDataFound}"
+                        paginatorAlwaysVisible="false"
+                        >
+                    <p:ajax event="rowSelect" update="tb"/>
+                    <p:ajax event="rowUnselect" update="tb"/>
+                    <f:facet name="header">
+                        <p:toolbar>
+                            <p:toolbarGroup align="left">
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamCardViewLink}"
+                                                 action="#{famCardController.prepareView}"
+                                                 disabled="#{empty famCardController.selected.idCard}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamCardCreateLink}"
+                                                 action="#{famCardController.prepareCreate}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamCardEditLink}"
+                                                 action="#{famCardController.prepareEdit}"
+                                                 disabled="#{empty famCardController.selected.idCard}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.DeleteLink}"
+                                                 action="#{famCardController.prepareDelete}"
+                                                 disabled="#{empty famCardController.selected.idCard}"/>
+                            </p:toolbarGroup>
+                        </p:toolbar>
+                    </f:facet>
+                    <!--                    <p:column sortBy="#{item.idCard}"
+                              filterBy="#{item.idCard}"
+                              headerText="#{bundle.ListFamCardTitle_idCard}" >
+                        <h:outputText value="#{item.idCard}"/>
+                    </p:column>-->
+                    <p:column sortBy="#{item.famMatchPlayer.famPlayer.displayName}"
+                              filterBy="#{item.famMatchPlayer.famPlayer.displayName}"
+                              headerText="#{bundle.ListFamCardTitle_famMatchPlayer}">
+                        <h:outputText value="#{item.famMatchPlayer.famPlayer.displayName}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.famTypCard.libTypCard}"
+                              filterBy="#{item.famTypCard.libTypCard}"
+                              headerText="#{bundle.ListFamCardTitle_famTypCard}">
+                        <h:outputText value="#{item.famTypCard.libTypCard}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.cardTime}"
+                              filterBy="#{item.cardTime}"
+                              headerText="#{bundle.ListFamCardTitle_cardTime}">
+                        <h:outputText value="#{item.cardTime}"/>
+                    </p:column>
+
+                    <!--                    <p:column sortBy="#{item.dtCreat}"
+                              filterBy="#{item.dtCreat}"
+                              headerText="#{bundle.ListFamCardTitle_dtCreat}" >
+                        <h:outputText value="#{item.dtCreat}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column sortBy="#{item.dtModif}"
+                              filterBy="#{item.dtModif}"
+                              headerText="#{bundle.ListFamCardTitle_dtModif}" >
+                        <h:outputText value="#{item.dtModif}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:column>-->
+                    <f:facet name="footer">
+
+                    </f:facet>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

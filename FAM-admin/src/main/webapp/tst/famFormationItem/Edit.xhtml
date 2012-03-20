@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{bundle.EditFamFormationItemTitle}"/>
+    </ui:define>
+    <ui:define name="body">
+        <h:form>
+            <p:panel header="#{bundle.EditFamFormationItemTitle}">
+                <h:panelGrid columns="3">
+                    <h:outputLabel value="#{bundle.EditFamFormationItemLabel_idFormationItem}" for="idFormationItem"/>
+                    <p:inputText id="idFormationItem"
+                                 value="#{famFormationItemController.selected.idFormationItem}"
+                                 title="#{bundle.EditFamFormationItemTitle_idFormationItem}"
+                                 required="true"
+                                 requiredMessage="#{bundle.EditFamFormationItemRequiredMessage_idFormationItem}"
+                            >
+                        <p:ajax event="blur" update="msg_idFormationItem"/>
+                    </p:inputText>
+                    <p:message id="msg_idFormationItem" for="idFormationItem"/>
+
+                    <h:outputLabel value="#{bundle.EditFamFormationItemLabel_famFormation}" for="famFormation"/>
+                    <h:selectOneMenu id="famFormation"
+                                     value="#{famFormationItemController.selected.famFormation}"
+                                     title="#{bundle.EditFamFormationItemTitle_famFormation}"
+                            >
+                        <f:selectItems value="#{famFormationController.itemsAvailableSelectOne}"/>
+                        <p:ajax event="blur" update="msg_famFormation"/>
+                    </h:selectOneMenu>
+                    <p:message id="msg_famFormation" for="famFormation"/>
+
+                    <h:outputLabel value="#{bundle.EditFamFormationItemLabel_numItem}" for="numItem"/>
+                    <p:inputText id="numItem"
+                                 value="#{famFormationItemController.selected.numItem}"
+                                 title="#{bundle.EditFamFormationItemTitle_numItem}"
+                                 required="true"
+                                 requiredMessage="#{bundle.EditFamFormationItemRequiredMessage_numItem}"
+                            >
+                        <p:ajax event="blur" update="msg_numItem"/>
+                    </p:inputText>
+                    <p:message id="msg_numItem" for="numItem"/>
+
+                    <h:outputLabel value="#{bundle.EditFamFormationItemLabel_coord}" for="coord"/>
+                    <p:inputText id="coord"
+                                 value="#{famFormationItemController.selected.coord}"
+                                 title="#{bundle.EditFamFormationItemTitle_coord}"
+                                 required="true"
+                                 requiredMessage="#{bundle.EditFamFormationItemRequiredMessage_coord}"
+                            >
+                        <p:ajax event="blur" update="msg_coord"/>
+                    </p:inputText>
+                    <p:message id="msg_coord" for="coord"/>
+
+                    <h:outputLabel value="#{bundle.EditFamFormationItemLabel_dtCreat}" for="dtCreat"/>
+                    <p:inputText id="dtCreat"
+                                 value="#{famFormationItemController.selected.dtCreat}"
+                                 title="#{bundle.EditFamFormationItemTitle_dtCreat}"
+                                 required="true"
+                                 requiredMessage="#{bundle.EditFamFormationItemRequiredMessage_dtCreat}"
+                            >
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
+                        <p:ajax event="blur" update="msg_dtCreat"/>
+                    </p:inputText>
+
+                    <p:message id="msg_dtCreat" for="dtCreat"/>
+
+                    <h:outputLabel value="#{bundle.EditFamFormationItemLabel_dtModif}" for="dtModif"/>
+                    <p:inputText id="dtModif"
+                                 value="#{famFormationItemController.selected.dtModif}"
+                                 title="#{bundle.EditFamFormationItemTitle_dtModif}"
+                            >
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
+                        <p:ajax event="blur" update="msg_dtModif"/>
+                    </p:inputText>
+
+                    <p:message id="msg_dtModif" for="dtModif"/>
+
+                </h:panelGrid>
+                <p:commandButton value="#{bundle.EditFamFormationItemSaveLink}"
+                                 action="#{famFormationItemController.update}"
+                                 immediate="true"/>
+                <p:commandButton value="#{bundle.CancelLink}"
+                                 action="#{famFormationItemController.prepareList}"
+                                 immediate="true"/>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

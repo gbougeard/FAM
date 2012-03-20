@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+    <ui:define name="title">
+        <h:outputText value="#{bundle.ViewFamFixtureTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <p:panel header="#{bundle.ViewFamFixtureTitle}">
+            <h:form>
+                <h:panelGrid columns="2">
+                    <!--                    <h:outputText value="#{bundle.ViewFamFixtureLabel_idFixture}"/>
+      <h:outputText value="#{famFixtureController.selected.idFixture}"
+                    title="#{bundle.ViewFamFixtureTitle_idFixture}"/>-->
+
+                    <h:outputText value="#{bundle.ViewFamFixtureLabel_famSeasonCompetition}"/>
+                    <h:outputText value="#{famFixtureController.selected.famSeasonCompetition.displayName}"
+                                  title="#{bundle.ViewFamFixtureTitle_famSeasonCompetition}"/>
+
+                    <h:outputText value="#{bundle.ViewFamFixtureLabel_libFixture}"/>
+                    <h:outputText value="#{famFixtureController.selected.libFixture}"
+                                  title="#{bundle.ViewFamFixtureTitle_libFixture}"/>
+
+                    <h:outputText value="#{bundle.ViewFamFixtureLabel_dtFixture}"/>
+                    <h:outputText value="#{famFixtureController.selected.dtFixture}"
+                                  title="#{bundle.ViewFamFixtureTitle_dtFixture}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="#{cacheBean.timeZone}"/>
+                    </h:outputText>
+
+                    <!--                    <h:outputText value="#{bundle.ViewFamFixtureLabel_dtCreat}"/>
+                    <h:outputText value="#{famFixtureController.selected.dtCreat}"
+                                  title="#{bundle.ViewFamFixtureTitle_dtCreat}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewFamFixtureLabel_dtModif}"/>
+                    <h:outputText value="#{famFixtureController.selected.dtModif}"
+                                  title="#{bundle.ViewFamFixtureTitle_dtModif}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                    </h:outputText>-->
+                </h:panelGrid>
+                <br/>
+                <p:commandButton action="#{famFixtureController.prepareEdit}" value="#{bundle.ViewFamFixtureEditLink}"/>
+                <p:commandButton action="#{famFixtureController.prepareCreate}"
+                                 value="#{bundle.ViewFamFixtureCreateLink}"/>
+                <p:commandButton action="#{famFixtureController.prepareList}"
+                                 value="#{bundle.ViewFamFixtureShowAllLink}"/>
+            </h:form>
+        </p:panel>
+    </ui:define>
+</ui:composition>
+

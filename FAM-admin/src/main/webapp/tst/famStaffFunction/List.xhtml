@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{bundle.ListFamStaffFunctionTitle}"/>
+    </ui:define>
+    <ui:define name="body">
+        <h:form>
+            <h:panelGroup id="messagePanel" layout="block">
+            </h:panelGroup>
+            <p:panel header="Clubs">
+
+                <p:dataTable
+                        value="#{famStaffFunctionController.items}"
+                        var="item"
+                        selectionMode="single"
+                        selection="#{famStaffFunctionController.selected}"
+                        paginator="true" rows="10"
+                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                        rowsPerPageTemplate="5,10,15">
+                    <f:facet name="header">
+                        <p:toolbar>
+                            <p:toolbarGroup align="left">
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamStaffFunctionViewLink}"
+                                                 action="#{famStaffFunctionController.prepareView}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamStaffFunctionCreateLink}"
+                                                 action="#{famStaffFunctionController.prepareCreate}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamStaffFunctionEditLink}"
+                                                 action="#{famStaffFunctionController.prepareEdit}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.DeleteLink}"
+                                                 action="#{famStaffFunctionController.prepareDelete}"/>
+                            </p:toolbarGroup>
+                        </p:toolbar>
+                    </f:facet>
+                    <p:column sortBy="#{item.idStaffFunction}"
+                              filterBy="#{item.idStaffFunction}"
+                              headerText="#{bundle.ListFamStaffFunctionTitle_idStaffFunction}">
+                        <h:outputText value="#{item.idStaffFunction}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.libStaffFunction}"
+                              filterBy="#{item.libStaffFunction}"
+                              headerText="#{bundle.ListFamStaffFunctionTitle_libStaffFunction}">
+                        <h:outputText value="#{item.libStaffFunction}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.codStaffFunction}"
+                              filterBy="#{item.codStaffFunction}"
+                              headerText="#{bundle.ListFamStaffFunctionTitle_codStaffFunction}">
+                        <h:outputText value="#{item.codStaffFunction}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.famClub}"
+                              filterBy="#{item.famClub}"
+                              headerText="#{bundle.ListFamStaffFunctionTitle_famClub}">
+                        <h:outputText value="#{item.famClub}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.dtCreat}"
+                              filterBy="#{item.dtCreat}"
+                              headerText="#{bundle.ListFamStaffFunctionTitle_dtCreat}">
+                        <h:outputText value="#{item.dtCreat}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column sortBy="#{item.dtModif}"
+                              filterBy="#{item.dtModif}"
+                              headerText="#{bundle.ListFamStaffFunctionTitle_dtModif}">
+                        <h:outputText value="#{item.dtModif}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
+                        </h:outputText>
+                    </p:column>
+                    <f:facet name="footer">
+
+                    </f:facet>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+        xmlns:p="http://primefaces.org/ui"
+        >
+    <script type="text/javascript">
+        function handleDrop(event, ui) {
+            var droppedCar = ui.draggable;
+
+            droppedCar.fadeOut('fast');
+        }
+    </script>
+    <ui:include src="/pages/famEvent/view.xhtml">
+        <ui:param name="bean" value="#{bean.famEvent}"/>
+    </ui:include>
+    <!--    <p:panel header="Réponses" id="answers">-->
+    <p:pickList id="playersAnswer"
+                value="#{famWorkoutController.pickList}"
+                var="a"
+                itemValue="#{a}"
+                style="width:300px;"
+            >
+        <f:facet name="sourceCaption">Joueurs (#{fn:length(famWorkoutController.playerPickList.source)})</f:facet>
+        <f:facet name="targetCaption">Présents (#{fn:length(famWorkoutController.playerPickList.target)})</f:facet>
+
+        <p:column style="width:25%">
+            <p:graphicImage
+                    value="#{initParam['org.fam.jsf.PLAYERS_PHOTO_PATH']}#{initParam['org.fam.jsf.DEFAULT_PHOTO']}#{initParam['org.fam.jsf.DEFAULT_IMAGE_EXTENSION']}"
+                    width="30"/>
+        </p:column>
+        <p:column style="width:50%;">
+            #{a.famPlayer.displayName}
+        </p:column>
+        <p:column style="width:25%;">
+            #{empty a.famAnswer ? "" : a.famAnswer.famTypAnswer.libTypAnswer}
+        </p:column>
+    </p:pickList>
+
+    <!--    <h:panelGrid columns="6">-->
+
+    <!--        <p:fieldset legend="Réponses: Oui " style="height:200px;">  
+    
+                <p:dataGrid id="answersYes" 
+                            var="a"  
+                            value="#{famWorkoutController.answerList}" columns="3">  
+    
+                    <p:column>  
+                        <p:panel id="pnlYes" header="#{a.famPlayer.displayName}"  styleClass="#{a.famTypAnswer.grpTypAnswer}">  
+                            <h:outputText value="#{a.famTypAnswer.libTypAnswer}" />
+                        </p:panel>  
+                        <p:draggable for="pnlYes" 
+                                     revert="true"  
+                                     handle=".ui-panel-titlebar" 
+                                     stack=".ui-panel"
+                                     />  
+                    </p:column>  
+    
+                </p:dataGrid>  
+    
+            </p:fieldset>  -->
+
+    <!--            <p:fieldset legend="Réponses: Non" style="height:200px;">  
+    
+                    <p:dataGrid id="answersNo" 
+                                var="a"  
+                                value="#{famWorkoutController.answerNoList}" 
+                                columns="3">  
+    
+                        <p:column>  
+                            <p:panel id="pnlNo" header="#{a.famPlayer.displayName}" style="text-align:center">  
+                                <h:outputText value="#{a.famTypAnswer.libTypAnswer}"/>
+                            </p:panel>  
+                            <p:draggable for="pnlNo" revert="true"  
+                                         handle=".ui-panel-titlebar" stack=".ui-panel"/>  
+                        </p:column>  
+    
+                    </p:dataGrid>  
+    
+                </p:fieldset> 
+    
+                <p:fieldset legend="Réponses: Maybe" style="height:200px;">  
+    
+                    <p:dataGrid id="answersMaybe" 
+                                var="a"  
+                                value="#{famWorkoutController.answerMaybeList}" columns="3">  
+    
+                        <p:column>  
+                            <p:panel id="pnlMaybe" header="#{a.famPlayer.displayName}" style="text-align:center">  
+                                <h:outputText value="#{a.famTypAnswer.libTypAnswer}"/>
+                            </p:panel>  
+                            <p:draggable for="pnlMaybe" revert="true"  
+                                         handle=".ui-panel-titlebar" stack=".ui-panel"/>  
+                        </p:column>  
+    
+                    </p:dataGrid>  
+    
+                </p:fieldset> 
+    
+                <p:fieldset legend="Sans Réponses" style="height:200px;">  
+    
+                    <p:dataGrid id="no_answers" 
+                                var="n"  
+                                value="#{famWorkoutController.noAnswerList}" columns="3">  
+    
+                        <p:column>  
+                            <p:panel id="pnl_no" header="#{n.displayName}" style="text-align:center">  
+    
+                            </p:panel>  
+                            <p:draggable for="pnl_no" revert="true"  
+                                         handle=".ui-panel-titlebar" stack=".ui-panel"/>  
+                        </p:column>  
+    
+                    </p:dataGrid>  
+    
+                </p:fieldset> 
+</h:panelGrid> -->
+    <!--    <p:fieldset id="players" legend="Présents" style="height:100px;">
+            <p:outputPanel id="dropArea"> 
+                <p:dataList value="#{bean.famPlayerList}"
+                            var="p"
+                            rendered="#{not empty bean.famPlayerList}"
+                            >
+                    <h:outputText value="#{p.displayName}"/>
+                </p:dataList>
+            </p:outputPanel> 
+        </p:fieldset>
+        <p:droppable for="players" tolerance="touch" 
+                     activeStyleClass="ui-state-highlight" 
+                     datasource="answersYes" 
+                     onDrop="handleDrop">  
+            <p:ajax listener="#{famWorkoutController.onAnswerDrop}" update="dropArea answersYes" />  
+        </p:droppable> -->
+    <!--    <p:droppable for="players" tolerance="touch" 
+                     activeStyleClass="ui-state-highlight" 
+                     datasource="answersNo" 
+                     onDrop="handleDrop">  
+            <p:ajax listener="#{famWorkoutController.onAnswerNoDrop}" update="dropArea answersNo" />  
+        </p:droppable> 
+        <p:droppable for="players" tolerance="touch" 
+                     activeStyleClass="ui-state-highlight" 
+                     datasource="answersMaybe" 
+                     onDrop="handleDrop">  
+            <p:ajax listener="#{famWorkoutController.onAnswerMaybeDrop}" update="dropArea answersMaybe" />  
+        </p:droppable> 
+        <p:droppable for="players" tolerance="touch" 
+                     activeStyleClass="ui-state-highlight" 
+                     datasource="no_answers" 
+                     onDrop="handleDrop">  
+            <p:ajax listener="#{famWorkoutController.onPlayerDrop}" update="dropArea no_answers" />  
+        </p:droppable> -->
+    <br/>
+
+</ui:composition>

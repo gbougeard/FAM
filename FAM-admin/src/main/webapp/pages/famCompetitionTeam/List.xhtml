@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{bundle.ListFamCompetitionTeamTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <h:form>
+            <p:panel header="#{bundle.FamCompetitionTeam}">
+
+                <p:dataTable
+                        value="#{famCompetitionTeamController.lazyModel}"
+                        lazy="true"
+                        var="item"
+                        selection="#{famCompetitionTeamController.selected}"
+                        selectionMode="single"
+                        paginator="true" rows="10"
+                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                        rowsPerPageTemplate="5,10,15"
+                        sortBy="#{item.famSeasonCompetition.displayName}"
+                        emptyMessage="#{bundle.NoDataFound}"
+                        paginatorAlwaysVisible="false"
+                        >
+                    <p:ajax event="rowSelect" update="tb"/>
+                    <p:ajax event="rowUnselect" update="tb"/>
+                    <f:facet name="header">
+                        <p:toolbar id="tb">
+                            <p:toolbarGroup align="left">
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamCompetitionTeamViewLink}"
+                                                 action="#{famCompetitionTeamController.prepareView}"
+                                                 disabled="#{empty famCompetitionTeamController.selected.famTeam.libTeam}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamCompetitionTeamCreateLink}"
+                                                 action="#{famCompetitionTeamController.prepareCreate}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamCompetitionTeamEditLink}"
+                                                 action="#{famCompetitionTeamController.prepareEdit}"
+                                                 disabled="#{empty famCompetitionTeamController.selected.famTeam.libTeam}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.DeleteLink}"
+                                                 action="#{famCompetitionTeamController.prepareDelete}"
+                                                 disabled="#{empty famCompetitionTeamController.selected.famTeam.libTeam}"/>
+                            </p:toolbarGroup>
+                        </p:toolbar>
+                    </f:facet>
+                    <!--                    <p:column sortBy="#{item.idCompetitionTeam}"
+                              filterBy="#{item.idCompetitionTeam}"
+                              headerText="#{bundle.ListFamCompetitionTeamTitle_idCompetitionTeam}" >
+                        <h:outputText value="#{item.idCompetitionTeam}"/>
+                    </p:column>-->
+                    <p:column sortBy="#{item.famSeasonCompetition.displayName}"
+                              filterBy="#{item.famSeasonCompetition.displayName}"
+                              headerText="#{bundle.ListFamCompetitionTeamTitle_famSeasonCompetition}">
+                        <h:outputText value="#{item.famSeasonCompetition.displayName}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.famTeam.libTeam}"
+                              filterBy="#{item.famTeam.libTeam}"
+                              headerText="#{bundle.ListFamCompetitionTeamTitle_famTeam}">
+                        <h:outputText value="#{item.famTeam.libTeam}"/>
+                    </p:column>
+                    <f:facet name="footer">
+
+                    </f:facet>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

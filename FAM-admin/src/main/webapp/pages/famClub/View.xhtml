@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+
+    <!--    <f:metadata>
+        <f:viewParam name="id" value="#{famClubController.id}"/>
+        <f:event type="preRenderView" listener="#{famClubController.loadAction}" />	
+    </f:metadata>-->
+
+    <ui:define name="title">
+        <h:outputText value="#{bundle.ViewFamClubTitle}"/>
+    </ui:define>
+
+    <ui:define name="body">
+        <p:panel header="#{bundle.ViewFamClubTitle} - #{famClubController.selected.libClub}">
+            <h:form>
+
+                <ui:include src="view.xhtml">
+                    <ui:param name="bean" value="#{famClubController.selected}"/>
+                </ui:include>
+                <br/>
+                <p:commandButton action="#{famClubController.prepareEdit}"
+                                 value="#{bundle.ViewFamClubEditLink}"/>
+                <p:commandButton action="#{famClubController.prepareCreate}"
+                                 value="#{bundle.ViewFamClubCreateLink}"/>
+                <p:commandButton action="#{famClubController.prepareList}"
+                                 value="#{bundle.ViewFamClubShowAllLink}"/>
+            </h:form>
+        </p:panel>
+    </ui:define>
+</ui:composition>
+

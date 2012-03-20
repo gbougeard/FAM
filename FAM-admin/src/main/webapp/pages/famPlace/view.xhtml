@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        >
+
+
+    <h:panelGrid columns="2">
+
+        <h:outputText value="#{bundle.ViewFamPlaceLabel_libPlace}"/>
+        <h:outputText value="#{bean.libPlace}"
+                      title="#{bundle.ViewFamPlaceTitle_libPlace}"/>
+
+        <h:outputText value="#{bundle.ViewFamPlaceLabel_address}"/>
+        <h:outputText value="#{bean.address}"
+                      title="#{bundle.ViewFamPlaceTitle_address}"/>
+
+        <h:outputText value="#{bundle.ViewFamPlaceLabel_zipcode}"/>
+        <h:outputText value="#{bean.zipcode}"
+                      title="#{bundle.ViewFamPlaceTitle_zipcode}"/>
+
+        <h:outputText value="#{bundle.ViewFamPlaceLabel_city}"/>
+        <h:outputText value="#{bean.city}"
+                      title="#{bundle.ViewFamPlaceTitle_city}"/>
+
+        <h:outputText value="#{bundle.ViewFamPlaceLabel_latitude}"/>
+        <h:outputText value="#{bean.latitude}"
+                      title="#{bundle.ViewFamPlaceTitle_latitude}"/>
+
+        <h:outputText value="#{bundle.ViewFamPlaceLabel_longitude}"/>
+        <h:outputText value="#{bean.longitude}"
+                      title="#{bundle.ViewFamPlaceTitle_longitude}"/>
+
+        <h:outputText value="#{bundle.ViewFamPlaceLabel_famTypPlace}"/>
+        <h:outputText value="#{bean.famTypPlace.libTypPlace}"
+                      title="#{bundle.ViewFamPlaceTitle_famTypPlace}"/>
+    </h:panelGrid>
+
+    <p:fieldset legend="Debug" rendered="#{cacheBean.debug}">
+        <h:panelGrid columns="2">
+
+            <h:outputText value="#{bundle.ViewFamPlaceLabel_idPlace}"/>
+            <h:outputText value="#{bean.idPlace}"
+                          title="#{bundle.ViewFamPlaceTitle_idPlace}"/>
+
+            <h:outputText value="#{bundle.ViewFamPlaceLabel_fullAddress}"/>
+            <h:outputText value="#{bean.fullAddress}"
+                          title="#{bundle.ViewFamPlaceTitle_fullAddress}"/>
+
+            <h:outputText value="#{bundle.ViewFamPlaceLabel_dtCreat}"/>
+            <h:outputText value="#{bean.dtCreat}"
+                          title="#{bundle.ViewFamPlaceTitle_dtCreat}">
+                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
+            </h:outputText>
+            <h:outputText value="#{bundle.ViewFamPlaceLabel_dtModif}"/>
+            <h:outputText value="#{bean.dtModif}"
+                          title="#{bundle.ViewFamPlaceTitle_dtModif}">
+                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
+            </h:outputText>
+
+        </h:panelGrid>
+    </p:fieldset>
+
+</ui:composition>

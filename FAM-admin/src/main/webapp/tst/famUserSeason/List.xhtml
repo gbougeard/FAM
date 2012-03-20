@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{bundle.ListFamUserSeasonTitle}"/>
+    </ui:define>
+    <ui:define name="body">
+        <h:form>
+            <h:panelGroup id="messagePanel" layout="block">
+            </h:panelGroup>
+            <p:panel header="Clubs">
+
+                <p:dataTable
+                        value="#{famUserSeasonController.items}"
+                        var="item"
+                        selectionMode="single"
+                        selection="#{famUserSeasonController.selected}"
+                        paginator="true" rows="10"
+                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                        rowsPerPageTemplate="5,10,15">
+                    <f:facet name="header">
+                        <p:toolbar>
+                            <p:toolbarGroup align="left">
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamUserSeasonViewLink}"
+                                                 action="#{famUserSeasonController.prepareView}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamUserSeasonCreateLink}"
+                                                 action="#{famUserSeasonController.prepareCreate}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamUserSeasonEditLink}"
+                                                 action="#{famUserSeasonController.prepareEdit}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.DeleteLink}"
+                                                 action="#{famUserSeasonController.prepareDelete}"/>
+                            </p:toolbarGroup>
+                        </p:toolbar>
+                    </f:facet>
+                    <p:column sortBy="#{item.famUser}"
+                              filterBy="#{item.famUser}"
+                              headerText="#{bundle.ListFamUserSeasonTitle_famUser}">
+                        <h:outputText value="#{item.famUser}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.famSeason}"
+                              filterBy="#{item.famSeason}"
+                              headerText="#{bundle.ListFamUserSeasonTitle_famSeason}">
+                        <h:outputText value="#{item.famSeason}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.isAdmin}"
+                              filterBy="#{item.isAdmin}"
+                              headerText="#{bundle.ListFamUserSeasonTitle_isAdmin}">
+                        <h:outputText value="#{item.isAdmin}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.isCoach}"
+                              filterBy="#{item.isCoach}"
+                              headerText="#{bundle.ListFamUserSeasonTitle_isCoach}">
+                        <h:outputText value="#{item.isCoach}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.isPlayer}"
+                              filterBy="#{item.isPlayer}"
+                              headerText="#{bundle.ListFamUserSeasonTitle_isPlayer}">
+                        <h:outputText value="#{item.isPlayer}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.isReporter}"
+                              filterBy="#{item.isReporter}"
+                              headerText="#{bundle.ListFamUserSeasonTitle_isReporter}">
+                        <h:outputText value="#{item.isReporter}"/>
+                    </p:column>
+                    <f:facet name="footer">
+
+                    </f:facet>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

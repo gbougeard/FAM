@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+    <ui:define name="title">
+        <h:outputText value="#{bundle.ViewFamStaffFunctionTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <p:panel header="#{bundle.ViewFamStaffFunctionTitle}">
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewFamStaffFunctionLabel_idStaffFunction}"/>
+                    <h:outputText value="#{famStaffFunctionController.selected.idStaffFunction}"
+                                  title="#{bundle.ViewFamStaffFunctionTitle_idStaffFunction}"/>
+                    <h:outputText value="#{bundle.ViewFamStaffFunctionLabel_libStaffFunction}"/>
+                    <h:outputText value="#{famStaffFunctionController.selected.libStaffFunction}"
+                                  title="#{bundle.ViewFamStaffFunctionTitle_libStaffFunction}"/>
+                    <h:outputText value="#{bundle.ViewFamStaffFunctionLabel_codStaffFunction}"/>
+                    <h:outputText value="#{famStaffFunctionController.selected.codStaffFunction}"
+                                  title="#{bundle.ViewFamStaffFunctionTitle_codStaffFunction}"/>
+                    <h:outputText value="#{bundle.ViewFamStaffFunctionLabel_famClub}"/>
+                    <h:outputText value="#{famStaffFunctionController.selected.famClub}"
+                                  title="#{bundle.ViewFamStaffFunctionTitle_famClub}"/>
+                    <h:outputText value="#{bundle.ViewFamStaffFunctionLabel_dtCreat}"/>
+                    <h:outputText value="#{famStaffFunctionController.selected.dtCreat}"
+                                  title="#{bundle.ViewFamStaffFunctionTitle_dtCreat}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewFamStaffFunctionLabel_dtModif}"/>
+                    <h:outputText value="#{famStaffFunctionController.selected.dtModif}"
+                                  title="#{bundle.ViewFamStaffFunctionTitle_dtModif}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
+                    </h:outputText>
+                </h:panelGrid>
+                <br/>
+                <p:commandButton action="Edit" value="#{bundle.ViewFamStaffFunctionEditLink}"/>
+                <p:commandButton action="#{famStaffFunctionController.prepareCreate}"
+                                 value="#{bundle.ViewFamStaffFunctionCreateLink}"/>
+                <p:commandButton action="#{famStaffFunctionController.prepareList}"
+                                 value="#{bundle.ViewFamStaffFunctionShowAllLink}"/>
+            </h:form>
+        </p:panel>
+    </ui:define>
+</ui:composition>
+
+        </html>

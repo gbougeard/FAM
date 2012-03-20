@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        >
+
+    <h:panelGrid columns="3">
+        <h:outputLabel value="#{bundle.EditFamMatchPlayerLabel_famMatchTeam}" for="famMatchTeam"/>
+        <p:inputText id="famMatchTeam"
+                     value="#{bean.famMatchTeam}"
+                     title="#{bundle.EditFamMatchPlayerTitle_famMatchTeam}"
+                >
+            <p:ajax event="blur" update="msg_famMatchTeam"/>
+        </p:inputText>
+        <p:message id="msg_famMatchTeam" for="famMatchTeam"/>
+
+        <h:outputLabel value="#{bundle.EditFamMatchPlayerLabel_famPlayer}" for="famPlayer"/>
+        <h:selectOneMenu id="famPlayer"
+                         value="#{bean.famPlayer}"
+                         title="#{bundle.EditFamMatchPlayerTitle_famPlayer}"
+                >
+            <f:selectItems value="#{famPlayerController.itemsAvailableSelectOne}"/>
+            <p:ajax event="blur" update="msg_famPlayer"/>
+        </h:selectOneMenu>
+        <p:message id="msg_famPlayer" for="famPlayer"/>
+
+        <h:outputLabel value="#{bundle.EditFamMatchPlayerLabel_note}" for="note"/>
+        <p:spinner id="note"
+                   value="#{bean.note}"
+                   min="0" max="10" stepFactor="0.5"
+                >
+            <p:ajax event="blur" update="msg_note"/>
+        </p:spinner>
+        <p:message id="msg_note" for="note"/>
+
+        <h:outputLabel value="#{bundle.EditFamMatchPlayerLabel_comments}" for="comments"/>
+        <p:editor id="comments"
+                  value="#{bean.comments}"
+                  width="600"
+                >
+            <p:ajax event="blur" update="msg_comments"/>
+        </p:editor>
+        <p:message id="msg_comments" for="comments"/>
+
+    </h:panelGrid
+</ui:composition>

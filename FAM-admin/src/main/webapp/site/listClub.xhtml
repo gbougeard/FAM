@@ -1,0 +1,123 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+
+    <ui:define name="title">Clubs</ui:define>
+    <ui:define name="body">
+        <!--        Form Detail-->
+        <p:panel header="Edition - Club">
+            <h:form id="formEdit">
+                <p:ajaxStatus style="width:16px;height:16px;">
+                    <f:facet name="start">
+                        <h:graphicImage value="../../design/ajaxloading.gif"/>
+                    </f:facet>
+                    <f:facet name="complete">
+                        <h:outputText value=""/>
+                    </f:facet>
+                </p:ajaxStatus>
+
+                <h:panelGrid columns="3" id="edit">
+                    <h:outputLabel value="Id :" for="lbl_idClub"></h:outputLabel>
+                    <p:inputText id="lbl_idClub"
+                                 value="#{clubController.selected.idClub}"
+                                 readonly="true">
+                        <p:ajax event="blur" update="msgId"/>
+                    </p:inputText>
+                    <p:message id="msgId" for="lbl_idClub"/>
+
+                    <h:outputLabel value="Libellé :" for="lbl_libClub"></h:outputLabel>
+                    <p:inputText id="lbl_libClub"
+                                 value="#{clubController.selected.libClub}">
+                        <p:ajax event="blur change" update="msgLib"/>
+                    </p:inputText>
+                    <p:message id="msgLib" for="lbl_libClub"/>
+
+                    <h:outputLabel value="Code :" for="lbl_code"></h:outputLabel>
+                    <p:inputText id="lbl_code"
+                                 value="#{clubController.selected.codeFff}">
+                        <p:ajax event="blur" update="msgCode"/>
+                    </p:inputText>
+                    <p:message id="msgCode" for="lbl_code"/>
+
+                    <h:outputLabel value="Date creat. :" for="lbl_dtCreat"></h:outputLabel>
+                    <p:inputText id="lbl_dtCreat"
+                                 value="#{clubController.selected.dtCreat}"
+                                 readonly="true">
+                        <f:convertDateTime type="both" dateStyle="medium"/>
+                        <p:ajax event="blur" update="msgDtCreat"/>
+                    </p:inputText>
+                    <p:message id="msgDtCreat" for="lbl_dtCreat"/>
+
+                    <h:outputLabel value="Date modif. :" for="lbl_dtModif"></h:outputLabel>
+                    <p:inputText id="lbl_dtModif"
+                                 value="#{clubController.selected.dtModif}"
+                                 readonly="true">
+                        <f:convertDateTime type="both" dateStyle="medium"/>
+                        <p:ajax event="blur" update="msgDtModif"/>
+                    </p:inputText>
+                    <p:message id="msgDtModif" for="lbl_dtModif"/>
+
+                    <p:commandButton value="Nouveau"
+                                     action="#{clubController.nouveau}"
+                                     update="formEdit:edit"/>
+                    <p:commandButton value="Enregistrer"
+                                     action="#{clubController.save}"
+                                     update="formList:grid formEdit:edit"/>
+
+                </h:panelGrid>
+            </h:form>
+        </p:panel>
+
+        <!--        Liste Master-->
+        <center>
+            <h:form id="formList">
+                <p:panel header="Clubs">
+
+                    <p:dataTable
+                            var="club"
+                            value="#{clubController.list}"
+                            selection="#{clubController.selected}"
+                            selectionMode="single"
+                            update="formEdit:edit"
+                            id="grid"
+                            scrollable="true"
+                            height="100">
+
+                        <f:facet name="header">
+                        </f:facet>
+
+                        <p:column sortBy="#{club.idClub}"
+                                  filterBy="#{club.idClub}"
+                                  headerText="Id"
+                                  style="width:200px">
+                            <h:outputText value="#{club.idClub}"/>
+                        </p:column>
+
+                        <p:column sortBy="#{club.libClub}"
+                                  filterBy="#{club.libClub}"
+                                  headerText="Libellé"
+                                  style="width:200px">
+                            <h:outputText value="#{club.libClub}"/>
+                        </p:column>
+
+                        <p:column sortBy="#{club.codeFff}"
+                                  filterBy="#{club.codeFff}"
+                                  headerText="Code "
+                                  style="width:200px">
+                            <h:outputText value="#{club.codeFff}"/>
+                        </p:column>
+
+                        <f:facet name="footer">
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+        </center>
+
+    </ui:define>
+</ui:composition>

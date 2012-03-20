@@ -1,0 +1,777 @@
+<pretty-config xmlns="http://ocpsoft.com/prettyfaces/3.3.0"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://ocpsoft.com/prettyfaces/3.3.0
+                                   		http://ocpsoft.com/xml/ns/prettyfaces/ocpsoft-pretty-faces-3.3.0.xsd">
+
+    <!-- Begin Example RewriteRules
+
+       // These are custom rewrite-rules, and are probably not necessary for your application.
+
+       <rewrite match="^/old-url/(\w+)/$" substitute="/new_url/$1/" redirect="301" />
+
+    -->
+
+    <!-- Begin UrlMappings -->
+    <!--      // These are examples of URL mappings, and should be customized for your application.-->
+
+    <url-mapping id="index">
+        <pattern value="/"/>
+        <view-id value="/index.xhtml"/>
+    </url-mapping>
+
+    <url-mapping id="login">
+        <pattern value="/login/"/>
+        <view-id value="/login.xhtml"/>
+    </url-mapping>
+
+    <url-mapping id="signup">
+        <pattern value="/signup/#{ id : authentificationBean.activeTab}"/>
+        <view-id value="/signup.xhtml"/>
+    </url-mapping>
+
+    <url-mapping id="myAccount">
+        <pattern value="/auth/myAccount/"/>
+        <view-id value="/myAccount.xhtml"/>
+        <action>#{login.reloadUser}</action>
+    </url-mapping>
+
+    <!--      CLUB-->
+    <url-mapping id="listClub">
+        <pattern value="/auth/club/"/>
+        <view-id value="/pages/famClub/List.xhtml"/>
+        <action onPostback="false">#{famClubController.initLazyModel}</action>
+    </url-mapping>
+
+    <url-mapping id="viewClub" parentId="listClub">
+        <pattern value="v/#{ id : famClubController.id }"/>
+        <view-id value="/pages/famClub/View.xhtml"/>
+        <action onPostback="false">#{famClubController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="editClub" parentId="listClub">
+        <pattern value="e/#{ id : famClubController.id }"/>
+        <view-id value="/pages/famClub/Edit.xhtml"/>
+        <action onPostback="false">#{famClubController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="createClub" parentId="listClub">
+        <pattern value="c"/>
+        <view-id value="/pages/famClub/Create.xhtml"/>
+    </url-mapping>
+
+    <!--    TEAM-->
+    <url-mapping id="listTeam">
+        <pattern value="/auth/team/"/>
+        <view-id value="/pages/famTeam/List.xhtml"/>
+        <action onPostback="false">#{famTeamController.initLazyModel}</action>
+    </url-mapping>
+
+    <url-mapping id="viewTeam" parentId="listTeam">
+        <pattern value="v/#{ id : famTeamController.id }"/>
+        <view-id value="/pages/famTeam/View.xhtml"/>
+        <action onPostback="false">#{famTeamController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="editTeam" parentId="listTeam">
+        <pattern value="e/#{ id : famTeamController.id }"/>
+        <view-id value="/pages/famTeam/Edit.xhtml"/>
+        <action onPostback="false">#{famTeamController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="createTeam" parentId="listTeam">
+        <pattern value="c"/>
+        <view-id value="/pages/famTeam/Create.xhtml"/>
+    </url-mapping>
+
+    <!--    PLAYER-->
+    <url-mapping id="listPlayer">
+        <pattern value="/auth/player/"/>
+        <view-id value="/pages/famPlayer/List.xhtml"/>
+        <action onPostback="false">#{famPlayerController.initLazyModel}</action>
+    </url-mapping>
+
+    <url-mapping id="viewPlayer" parentId="listPlayer">
+        <pattern value="v/#{ id : famPlayerController.id }"/>
+        <view-id value="/pages/famPlayer/View.xhtml"/>
+        <action onPostback="false">#{famPlayerController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="editPlayer" parentId="listPlayer">
+        <pattern value="e/#{ id : famPlayerController.id }"/>
+        <view-id value="/pages/famPlayer/Edit.xhtml"/>
+        <action onPostback="false">#{famPlayerController.loadActionForEdit}</action>
+    </url-mapping>
+
+    <url-mapping id="createPlayer" parentId="listPlayer">
+        <pattern value="c"/>
+        <view-id value="/pages/famPlayer/Create.xhtml"/>
+        <action onPostback="false">#{famPlayerController.prepareForCreate}</action>
+    </url-mapping>
+
+    <!--   USER-->
+    <url-mapping id="listUser">
+        <pattern value="/auth/user/"/>
+        <view-id value="/pages/famUser/List.xhtml"/>
+        <action onPostback="false">#{famUserController.initLazyModel}</action>
+    </url-mapping>
+
+    <url-mapping id="viewUser" parentId="listUser">
+        <pattern value="v/#{ id : famUserController.id }"/>
+        <view-id value="/pages/famUser/View.xhtml"/>
+        <action onPostback="false">#{famUserController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="editUser" parentId="listUser">
+        <pattern value="e/#{ id : famUserController.id }"/>
+        <view-id value="/pages/famUser/Edit.xhtml"/>
+        <action onPostback="false">#{famUserController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="createUser" parentId="listUser">
+        <pattern value="c"/>
+        <view-id value="/pages/famUser/Create.xhtml"/>
+    </url-mapping>
+
+    <!--    EVENT-->
+    <url-mapping id="listEvent">
+        <pattern value="/auth/event/"/>
+        <view-id value="/pages/famEvent/List.xhtml"/>
+        <action onPostback="false">#{famEventController.initLazyModel}</action>
+    </url-mapping>
+
+    <url-mapping id="viewEvent" parentId="listEvent">
+        <pattern value="v/#{ id : famEventController.id }"/>
+        <view-id value="/pages/famEvent/View.xhtml"/>
+        <action onPostback="false">#{famEventController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="editEvent" parentId="listEvent">
+        <pattern value="e/#{ id : famEventController.id }"/>
+        <view-id value="/pages/famEvent/Edit.xhtml"/>
+        <action onPostback="false">#{famEventController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="createEvent" parentId="listEvent">
+        <pattern value="c"/>
+        <view-id value="/pages/famEvent/Create.xhtml"/>
+    </url-mapping>
+
+    <url-mapping id="agenda" parentId="listEvent">
+        <pattern value="agenda"/>
+        <view-id value="/pages/famEvent/Agenda.xhtml"/>
+        <action onPostback="false">#{famEventController.initLazyEventModel}</action>
+    </url-mapping>
+
+    <url-mapping id="appointment" parentId="listEvent">
+        <pattern value="appt/#{ id : famEventController.id }"/>
+        <view-id value="/pages/famEvent/Appointment.xhtml"/>
+        <action onPostback="false">#{famEventController.loadAction}</action>
+    </url-mapping>
+
+    <!--    SEASON-->
+    <url-mapping id="listSeason">
+        <pattern value="/season/"/>
+        <view-id value="/pages/famSeason/List.xhtml"/>
+        <action onPostback="false">#{famSeasonController.initLazyModel}</action>
+    </url-mapping>
+
+    <url-mapping id="viewSeason" parentId="listSeason">
+        <pattern value="v/#{ id : famSeasonController.id }"/>
+        <view-id value="/pages/famSeason/View.xhtml"/>
+        <action onPostback="false">#{famSeasonController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="editSeason" parentId="listSeason">
+        <pattern value="e/#{ id : famSeasonController.id }"/>
+        <view-id value="/pages/famSeason/Edit.xhtml"/>
+        <action onPostback="false">#{famSeasonController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="createSeason" parentId="listSeason">
+        <pattern value="c"/>
+        <view-id value="/pages/famSeason/Create.xhtml"/>
+    </url-mapping>
+
+    <!--    ABSENCE-->
+    <url-mapping id="listAbsence">
+        <pattern value="/absence/"/>
+        <view-id value="/pages/famAbsence/List.xhtml"/>
+        <action onPostback="false">#{famAbsenceController.initLazyModel}</action>
+    </url-mapping>
+
+    <url-mapping id="viewAbsence" parentId="listAbsence">
+        <pattern value="v/#{ id : famAbsenceController.id }"/>
+        <view-id value="/pages/famAbsence/View.xhtml"/>
+        <action onPostback="false">#{famAbsenceController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="editAbsence" parentId="listAbsence">
+        <pattern value="e/#{ id : famAbsenceController.id }"/>
+        <view-id value="/pages/famAbsence/Edit.xhtml"/>
+        <action onPostback="false">#{famAbsenceController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="createAbsence" parentId="listAbsence">
+        <pattern value="c"/>
+        <view-id value="/pages/famAbsence/Create.xhtml"/>
+    </url-mapping>
+
+    <!--    ANSWER-->
+    <url-mapping id="listAnswer">
+        <pattern value="/answer/"/>
+        <view-id value="/pages/famAnswer/List.xhtml"/>
+        <action onPostback="false">#{famAnswerController.initLazyModel}</action>
+    </url-mapping>
+
+    <url-mapping id="viewAnswer" parentId="listAnswer">
+        <pattern value="v/#{ id : famAnswerController.id }"/>
+        <view-id value="/pages/famAnswer/View.xhtml"/>
+        <action onPostback="false">#{famAnswerController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="editAnswer" parentId="listAnswer">
+        <pattern value="e/#{ id : famAnswerController.id }"/>
+        <view-id value="/pages/famAnswer/Edit.xhtml"/>
+        <action onPostback="false">#{famAnswerController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="createAnswer" parentId="listAnswer">
+        <pattern value="c"/>
+        <view-id value="/pages/famAnswer/Create.xhtml"/>
+    </url-mapping>
+
+    <!--    COMMENT-->
+    <url-mapping id="listComment">
+        <pattern value="/comment/"/>
+        <view-id value="/pages/famComment/List.xhtml"/>
+        <action onPostback="false">#{famCommentController.initLazyModel}</action>
+    </url-mapping>
+
+    <url-mapping id="viewComment" parentId="listComment">
+        <pattern value="v/#{ id : famCommentController.id }"/>
+        <view-id value="/pages/famComment/View.xhtml"/>
+        <action onPostback="false">#{famCommentController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="editComment" parentId="listComment">
+        <pattern value="e/#{ id : famCommentController.id }"/>
+        <view-id value="/pages/famComment/Edit.xhtml"/>
+        <action onPostback="false">#{famCommentController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="createComment" parentId="listComment">
+        <pattern value="c"/>
+        <view-id value="/pages/famComment/Create.xhtml"/>
+    </url-mapping>
+
+    <!--    EVENTSTATUS-->
+    <url-mapping id="listEventStatus">
+        <pattern value="/eventStatus/"/>
+        <view-id value="/pages/famEventStatus/List.xhtml"/>
+        <action onPostback="false">#{famEventStatusController.initLazyModel}</action>
+    </url-mapping>
+
+    <url-mapping id="viewEventStatus" parentId="listEventStatus">
+        <pattern value="v/#{ id : famEventStatusController.id }"/>
+        <view-id value="/pages/famEventStatus/View.xhtml"/>
+        <action onPostback="false">#{famEventStatusController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="editEventStatus" parentId="listEventStatus">
+        <pattern value="e/#{ id : famEventStatusController.id }"/>
+        <view-id value="/pages/famEventStatus/Edit.xhtml"/>
+        <action onPostback="false">#{famEventStatusController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="createEventStatus" parentId="listEventStatus">
+        <pattern value="c"/>
+        <view-id value="/pages/famEventStatus/Create.xhtml"/>
+    </url-mapping>
+
+    <!--    FIXTURE-->
+    <url-mapping id="listFixture">
+        <pattern value="/fixture/"/>
+        <view-id value="/pages/famFixture/List.xhtml"/>
+        <action onPostback="false">#{famFixtureController.initLazyModel}</action>
+    </url-mapping>
+
+    <url-mapping id="viewFixture" parentId="listFixture">
+        <pattern value="v/#{ id : famFixtureController.id }"/>
+        <view-id value="/pages/famFixture/View.xhtml"/>
+        <action onPostback="false">#{famFixtureController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="editFixture" parentId="listFixture">
+        <pattern value="e/#{ id : famFixtureController.id }"/>
+        <view-id value="/pages/famFixture/Edit.xhtml"/>
+        <action onPostback="false">#{famFixtureController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="createFixture" parentId="listFixture">
+        <pattern value="c"/>
+        <view-id value="/pages/famFixture/Create.xhtml"/>
+    </url-mapping>
+
+    <!--    FORMATION-->
+    <url-mapping id="listFormation">
+        <pattern value="/formation/"/>
+        <view-id value="/pages/famFormation/List.xhtml"/>
+        <action onPostback="false">#{famFormationController.initLazyModel}</action>
+    </url-mapping>
+
+    <url-mapping id="viewFormation" parentId="listFormation">
+        <pattern value="v/#{ id : famFormationController.id }"/>
+        <view-id value="/pages/famFormation/View.xhtml"/>
+        <action onPostback="false">#{famFormationController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="editFormation" parentId="listFormation">
+        <pattern value="e/#{ id : famFormationController.id }"/>
+        <view-id value="/pages/famFormation/Edit.xhtml"/>
+        <action onPostback="false">#{famFormationController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="createFormation" parentId="listFormation">
+        <pattern value="c"/>
+        <view-id value="/pages/famFormation/Create.xhtml"/>
+        <action onPostback="false">#{famFormationController.loadForCreate}</action>
+    </url-mapping>
+
+    <!--    GOAL-->
+    <url-mapping id="listGoal">
+        <pattern value="/goal/"/>
+        <view-id value="/pages/famGoal/List.xhtml"/>
+        <action onPostback="false">#{famGoalController.initLazyModel}</action>
+    </url-mapping>
+
+    <url-mapping id="viewGoal" parentId="listGoal">
+        <pattern value="v/#{ id : famGoalController.id }"/>
+        <view-id value="/pages/famGoal/View.xhtml"/>
+        <action onPostback="false">#{famGoalController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="editGoal" parentId="listGoal">
+        <pattern value="e/#{ id : famGoalController.id }"/>
+        <view-id value="/pages/famGoal/Edit.xhtml"/>
+        <action onPostback="false">#{famGoalController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="createGoal" parentId="listGoal">
+        <pattern value="c"/>
+        <view-id value="/pages/famGoal/Create.xhtml"/>
+    </url-mapping>
+
+    <!--   MATCH-->
+    <url-mapping id="listMatch">
+        <pattern value="/match/"/>
+        <view-id value="/pages/famMatch/List.xhtml"/>
+        <action onPostback="false">#{famMatchController.initLazyModel}</action>
+    </url-mapping>
+
+    <url-mapping id="viewMatch" parentId="listMatch">
+        <pattern value="v/#{ id : famMatchController.id }"/>
+        <view-id value="/pages/famMatch/View.xhtml"/>
+        <action onPostback="false">#{famMatchController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="editMatch" parentId="listMatch">
+        <pattern value="e/#{ id : famMatchController.id }"/>
+        <view-id value="/pages/famMatch/Edit.xhtml"/>
+        <action onPostback="false">#{famMatchController.loadForEdit}</action>
+    </url-mapping>
+
+    <url-mapping id="createMatch" parentId="listMatch">
+        <pattern value="c"/>
+        <view-id value="/pages/famMatch/Create.xhtml"/>
+    </url-mapping>
+
+    <url-mapping id="composeMatch" parentId="listMatch">
+        <pattern value="compose/#{ id : famMatchController.id }/team/#{ idTeam : famMatchController.idTeam}"/>
+        <view-id value="/pages/famMatch/compose.xhtml"/>
+        <action onPostback="false">#{famMatchController.loadForCompose}</action>
+    </url-mapping>
+
+    <url-mapping id="debriefMatch" parentId="listMatch">
+        <pattern value="debrief/#{ id : famMatchController.id }/team/#{ idTeam : famMatchController.idTeam}"/>
+        <view-id value="/pages/famMatch/debrief.xhtml"/>
+        <action onPostback="false">#{famMatchController.loadForDebrief}</action>
+    </url-mapping>
+
+    <!--    MATCHPLAYER-->
+    <url-mapping id="listMatchPlayer">
+        <pattern value="/matchMatchPlayer/"/>
+        <view-id value="/pages/famMatchPlayer/List.xhtml"/>
+        <action onPostback="false">#{famMatchPlayerController.initLazyModel}</action>
+    </url-mapping>
+
+    <url-mapping id="viewMatchPlayer" parentId="listMatchPlayer">
+        <pattern value="v/#{ id : famMatchPlayerController.id }"/>
+        <view-id value="/pages/famMatchPlayer/View.xhtml"/>
+        <action onPostback="false">#{famMatchPlayerController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="editMatchPlayer" parentId="listMatchPlayer">
+        <pattern value="e/#{ id : famMatchPlayerController.id }"/>
+        <view-id value="/pages/famMatchPlayer/Edit.xhtml"/>
+        <action onPostback="false">#{famMatchPlayerController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="createMatchPlayer" parentId="listMatchPlayer">
+        <pattern value="c"/>
+        <view-id value="/pages/famMatchPlayer/Create.xhtml"/>
+    </url-mapping>
+
+    <!--   ORGANIZATION-->
+    <url-mapping id="listOrganization">
+        <pattern value="/organization/"/>
+        <view-id value="/pages/famOrganization/List.xhtml"/>
+        <action onPostback="false">#{famOrganizationController.initLazyModel}</action>
+    </url-mapping>
+
+    <url-mapping id="viewOrganization" parentId="listOrganization">
+        <pattern value="v/#{ id : famOrganizationController.id }"/>
+        <view-id value="/pages/famOrganization/View.xhtml"/>
+        <action onPostback="false">#{famOrganizationController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="editOrganization" parentId="listOrganization">
+        <pattern value="e/#{ id : famOrganizationController.id }"/>
+        <view-id value="/pages/famOrganization/Edit.xhtml"/>
+        <action onPostback="false">#{famOrganizationController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="createOrganization" parentId="listOrganization">
+        <pattern value="c"/>
+        <view-id value="/pages/famOrganization/Create.xhtml"/>
+    </url-mapping>
+
+    <!--    PLACE-->
+    <url-mapping id="listPlace">
+        <pattern value="/place/"/>
+        <view-id value="/pages/famPlace/List.xhtml"/>
+        <action onPostback="false">#{famPlaceController.initLazyModel}</action>
+    </url-mapping>
+
+    <url-mapping id="viewPlace" parentId="listPlace">
+        <pattern value="v/#{ id : famPlaceController.id }"/>
+        <view-id value="/pages/famPlace/View.xhtml"/>
+        <action onPostback="false">#{famPlaceController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="editPlace" parentId="listPlace">
+        <pattern value="e/#{ id : famPlaceController.id }"/>
+        <view-id value="/pages/famPlace/Edit.xhtml"/>
+        <action onPostback="false">#{famPlaceController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="createPlace" parentId="listPlace">
+        <pattern value="c"/>
+        <view-id value="/pages/famPlace/Create.xhtml"/>
+    </url-mapping>
+
+    <!--    POSITION-->
+    <url-mapping id="listPosition">
+        <pattern value="/position/"/>
+        <view-id value="/pages/famPosition/List.xhtml"/>
+        <action onPostback="false">#{famPositionController.initLazyModel}</action>
+    </url-mapping>
+
+    <url-mapping id="viewPosition" parentId="listPosition">
+        <pattern value="v/#{ id : famPositionController.id }"/>
+        <view-id value="/pages/famPosition/View.xhtml"/>
+        <action onPostback="false">#{famPositionController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="editPosition" parentId="listPosition">
+        <pattern value="e/#{ id : famPositionController.id }"/>
+        <view-id value="/pages/famPosition/Edit.xhtml"/>
+        <action onPostback="false">#{famPositionController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="createPosition" parentId="listPosition">
+        <pattern value="c"/>
+        <view-id value="/pages/famPosition/Create.xhtml"/>
+    </url-mapping>
+
+    <!--    SCALE-->
+    <url-mapping id="listScale">
+        <pattern value="/scale/"/>
+        <view-id value="/pages/famScale/List.xhtml"/>
+        <action onPostback="false">#{famScaleController.initLazyModel}</action>
+    </url-mapping>
+
+    <url-mapping id="viewScale" parentId="listScale">
+        <pattern value="v/#{ id : famScaleController.id }"/>
+        <view-id value="/pages/famScale/View.xhtml"/>
+        <action onPostback="false">#{famScaleController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="editScale" parentId="listScale">
+        <pattern value="e/#{ id : famScaleController.id }"/>
+        <view-id value="/pages/famScale/Edit.xhtml"/>
+        <action onPostback="false">#{famScaleController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="createScale" parentId="listScale">
+        <pattern value="c"/>
+        <view-id value="/pages/famScale/Create.xhtml"/>
+    </url-mapping>
+
+    <!--    SEASONCOMPETITION-->
+    <url-mapping id="listSeasonCompetition">
+        <pattern value="/seasonCompetition/"/>
+        <view-id value="/pages/famSeasonCompetition/List.xhtml"/>
+        <action onPostback="false">#{famSeasonCompetitionController.initLazyModel}</action>
+    </url-mapping>
+
+    <url-mapping id="viewSeasonCompetition" parentId="listSeasonCompetition">
+        <pattern value="v/#{ id : famSeasonCompetitionController.id }"/>
+        <view-id value="/pages/famSeasonCompetition/View.xhtml"/>
+        <action onPostback="false">#{famSeasonCompetitionController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="editSeasonCompetition" parentId="listSeasonCompetition">
+        <pattern value="e/#{ id : famSeasonCompetitionController.id }"/>
+        <view-id value="/pages/famSeasonCompetition/Edit.xhtml"/>
+        <action onPostback="false">#{famSeasonCompetitionController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="createSeasonCompetition" parentId="listSeasonCompetition">
+        <pattern value="c"/>
+        <view-id value="/pages/famSeasonCompetition/Create.xhtml"/>
+    </url-mapping>
+
+    <url-mapping id="wizardSeasonCompetition" parentId="listSeasonCompetition">
+        <pattern value="wizard/#{ id : famSeasonCompetitionController.id }"/>
+        <view-id value="/pages/famSeasonCompetition/Wizard.xhtml"/>
+        <action onPostback="false">#{famSeasonCompetitionController.initForWizard}</action>
+    </url-mapping>
+
+    <url-mapping id="fixtureSeasonCompetition" parentId="listSeasonCompetition">
+        <pattern value="fixture/#{ id : famSeasonCompetitionController.id }"/>
+        <view-id value="/pages/famFixture/Grid.xhtml"/>
+        <action onPostback="false">#{famFixtureController.loadBySeasonCompetition}</action>
+    </url-mapping>
+
+    <!--    TYP_ANSWER-->
+    <url-mapping id="listTypAnswer">
+        <pattern value="/typAnswer/"/>
+        <view-id value="/pages/famTypAnswer/List.xhtml"/>
+        <action onPostback="false">#{famTypAnswerController.initLazyModel}</action>
+    </url-mapping>
+
+    <url-mapping id="viewTypAnswer" parentId="listTypAnswer">
+        <pattern value="v/#{ id : famTypAnswerController.id }"/>
+        <view-id value="/pages/famTypAnswer/View.xhtml"/>
+        <action onPostback="false">#{famTypAnswerController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="editTypAnswer" parentId="listTypAnswer">
+        <pattern value="e/#{ id : famTypAnswerController.id }"/>
+        <view-id value="/pages/famTypAnswer/Edit.xhtml"/>
+        <action onPostback="false">#{famTypAnswerController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="createTypAnswer" parentId="listTypAnswer">
+        <pattern value="c"/>
+        <view-id value="/pages/famTypAnswer/Create.xhtml"/>
+    </url-mapping>
+
+    <!--     TYP_ABSENCE -->
+    <url-mapping id="listTypAbsence">
+        <pattern value="/typAbsence/"/>
+        <view-id value="/pages/famTypAbsence/List.xhtml"/>
+        <action onPostback="false">#{famTypAbsenceController.initLazyModel}</action>
+    </url-mapping>
+
+    <url-mapping id="viewTypAbsence" parentId="listTypAbsence">
+        <pattern value="v/#{ id : famTypAbsenceController.id }"/>
+        <view-id value="/pages/famTypAbsence/View.xhtml"/>
+        <action onPostback="false">#{famTypAbsenceController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="editTypAbsence" parentId="listTypAbsence">
+        <pattern value="e/#{ id : famTypAbsenceController.id }"/>
+        <view-id value="/pages/famTypAbsence/Edit.xhtml"/>
+        <action onPostback="false">#{famTypAbsenceController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="createTypAbsence" parentId="listTypAbsence">
+        <pattern value="c"/>
+        <view-id value="/pages/famTypAbsence/Create.xhtml"/>
+    </url-mapping>
+
+    <!--    TYP_CARD-->
+    <url-mapping id="listTypCard">
+        <pattern value="/typCard/"/>
+        <view-id value="/pages/famTypCard/List.xhtml"/>
+        <action onPostback="false">#{famTypCardController.initLazyModel}</action>
+    </url-mapping>
+
+    <url-mapping id="viewTypCard" parentId="listTypCard">
+        <pattern value="v/#{ id : famTypCardController.id }"/>
+        <view-id value="/pages/famTypCard/View.xhtml"/>
+        <action onPostback="false">#{famTypCardController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="editTypCard" parentId="listTypCard">
+        <pattern value="e/#{ id : famTypCardController.id }"/>
+        <view-id value="/pages/famTypCard/Edit.xhtml"/>
+        <action onPostback="false">#{famTypCardController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="createTypCard" parentId="listTypCard">
+        <pattern value="c"/>
+        <view-id value="/pages/famTypCard/Create.xhtml"/>
+    </url-mapping>
+
+    <!--    TYPCARDFINESCALE-->
+    <url-mapping id="listTypCardFinescale">
+        <pattern value="/typCardFinescale/"/>
+        <view-id value="/pages/famTypCardFinescale/List.xhtml"/>
+        <action onPostback="false">#{famTypCardFinescaleController.initLazyModel}</action>
+    </url-mapping>
+
+    <url-mapping id="viewTypCardFinescale" parentId="listTypCardFinescale">
+        <pattern value="v/#{ id : famTypCardFinescaleController.id }"/>
+        <view-id value="/pages/famTypCardFinescale/View.xhtml"/>
+        <action onPostback="false">#{famTypCardFinescaleController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="editTypCardFinescale" parentId="listTypCardFinescale">
+        <pattern value="e/#{ id : famTypCardFinescaleController.id }"/>
+        <view-id value="/pages/famTypCardFinescale/Edit.xhtml"/>
+        <action onPostback="false">#{famTypCardFinescaleController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="createTypCardFinescale" parentId="listTypCardFinescale">
+        <pattern value="c"/>
+        <view-id value="/pages/famTypCardFinescale/Create.xhtml"/>
+    </url-mapping>
+
+    <!--    TYPCOMPETITION-->
+    <url-mapping id="listTypCompetition">
+        <pattern value="/typCompetition/"/>
+        <view-id value="/pages/famTypCompetition/List.xhtml"/>
+        <action onPostback="false">#{famTypCompetitionController.initLazyModel}</action>
+    </url-mapping>
+
+    <url-mapping id="viewTypCompetition" parentId="listTypCompetition">
+        <pattern value="v/#{ id : famTypCompetitionController.id }"/>
+        <view-id value="/pages/famTypCompetition/View.xhtml"/>
+        <action onPostback="false">#{famTypCompetitionController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="editTypCompetition" parentId="listTypCompetition">
+        <pattern value="e/#{ id : famTypCompetitionController.id }"/>
+        <view-id value="/pages/famTypCompetition/Edit.xhtml"/>
+        <action onPostback="false">#{famTypCompetitionController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="createTypCompetition" parentId="listTypCompetition">
+        <pattern value="c"/>
+        <view-id value="/pages/famTypCompetition/Create.xhtml"/>
+    </url-mapping>
+
+    <!--    TYPEVENT-->
+    <url-mapping id="listTypEvent">
+        <pattern value="/typEvent/"/>
+        <view-id value="/pages/famTypEvent/List.xhtml"/>
+        <action onPostback="false">#{famTypEventController.initLazyModel}</action>
+    </url-mapping>
+
+    <url-mapping id="viewTypEvent" parentId="listTypEvent">
+        <pattern value="v/#{ id : famTypEventController.id }"/>
+        <view-id value="/pages/famTypEvent/View.xhtml"/>
+        <action onPostback="false">#{famTypEventController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="editTypEvent" parentId="listTypEvent">
+        <pattern value="e/#{ id : famTypEventController.id }"/>
+        <view-id value="/pages/famTypEvent/Edit.xhtml"/>
+        <action onPostback="false">#{famTypEventController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="createTypEvent" parentId="listTypEvent">
+        <pattern value="c"/>
+        <view-id value="/pages/famTypEvent/Create.xhtml"/>
+    </url-mapping>
+
+    <!--    TYPMATCH-->
+    <url-mapping id="listTypMatch">
+        <pattern value="/typMatch/"/>
+        <view-id value="/pages/famTypMatch/List.xhtml"/>
+        <action onPostback="false">#{famTypMatchController.initLazyModel}</action>
+    </url-mapping>
+
+    <url-mapping id="viewTypMatch" parentId="listTypMatch">
+        <pattern value="v/#{ id : famTypMatchController.id }"/>
+        <view-id value="/pages/famTypMatch/View.xhtml"/>
+        <action onPostback="false">#{famTypMatchController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="editTypMatch" parentId="listTypMatch">
+        <pattern value="e/#{ id : famTypMatchController.id }"/>
+        <view-id value="/pages/famTypMatch/Edit.xhtml"/>
+        <action onPostback="false">#{famTypMatchController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="createTypMatch" parentId="listTypMatch">
+        <pattern value="c"/>
+        <view-id value="/pages/famTypMatch/Create.xhtml"/>
+    </url-mapping>
+
+    <!--    TYPPLACE-->
+    <url-mapping id="listTypPlace">
+        <pattern value="/typPlace/"/>
+        <view-id value="/pages/famTypPlace/List.xhtml"/>
+        <action onPostback="false">#{famTypPlaceController.initLazyModel}</action>
+    </url-mapping>
+
+    <url-mapping id="viewTypPlace" parentId="listTypPlace">
+        <pattern value="v/#{ id : famTypPlaceController.id }"/>
+        <view-id value="/pages/famTypPlace/View.xhtml"/>
+        <action onPostback="false">#{famTypPlaceController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="editTypPlace" parentId="listTypPlace">
+        <pattern value="e/#{ id : famTypPlaceController.id }"/>
+        <view-id value="/pages/famTypPlace/Edit.xhtml"/>
+        <action onPostback="false">#{famTypPlaceController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="createTypPlace" parentId="listTypPlace">
+        <pattern value="c"/>
+        <view-id value="/pages/famTypPlace/Create.xhtml"/>
+    </url-mapping>
+
+    <!--    WORKOUT-->
+    <url-mapping id="listWorkout">
+        <pattern value="/workout/"/>
+        <view-id value="/pages/famWorkout/List.xhtml"/>
+        <action onPostback="false">#{famWorkoutController.initLazyModel}</action>
+    </url-mapping>
+
+    <url-mapping id="viewWorkout" parentId="listWorkout">
+        <pattern value="v/#{ id : famWorkoutController.id }"/>
+        <view-id value="/pages/famWorkout/View.xhtml"/>
+        <action onPostback="false">#{famWorkoutController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="editWorkout" parentId="listWorkout">
+        <pattern value="e/#{ id : famWorkoutController.id }"/>
+        <view-id value="/pages/famWorkout/Edit.xhtml"/>
+        <action onPostback="false">#{famWorkoutController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="debriefWorkout" parentId="listWorkout">
+        <pattern value="debrief/#{ id : famWorkoutController.id }"/>
+        <view-id value="/pages/famWorkout/Debrief.xhtml"/>
+        <action onPostback="false">#{famWorkoutController.loadForDebrief}</action>
+    </url-mapping>
+
+    <url-mapping id="createWorkout" parentId="listWorkout">
+        <pattern value="c"/>
+        <view-id value="/pages/famWorkout/Create.xhtml"/>
+    </url-mapping>
+</pretty-config>

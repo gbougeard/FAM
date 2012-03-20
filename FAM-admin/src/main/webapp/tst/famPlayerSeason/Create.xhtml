@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/template.xhtml">
+    <ui:define name="title">
+        <h:outputText value="#{bundle.CreateFamPlayerSeasonTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <h:panelGroup id="messagePanel" layout="block">
+            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+        </h:panelGroup>
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputLabel value="#{bundle.CreateFamPlayerSeasonLabel_famPlayer}" for="famPlayer"/>
+                <h:selectOneMenu id="famPlayer" value="#{famPlayerSeasonController.selected.famPlayer}"
+                                 title="#{bundle.CreateFamPlayerSeasonTitle_famPlayer}">
+                    <f:selectItems value="#{famPlayerController.itemsAvailableSelectOne}"/>
+                </h:selectOneMenu>
+                <h:outputLabel value="#{bundle.CreateFamPlayerSeasonLabel_famPlayerProfile}" for="famPlayerProfile"/>
+                <h:inputText id="famPlayerProfile" value="#{famPlayerSeasonController.selected.famPlayerProfile}"
+                             title="#{bundle.CreateFamPlayerSeasonTitle_famPlayerProfile}"/>
+                <h:outputLabel value="#{bundle.CreateFamPlayerSeasonLabel_famSeason}" for="famSeason"/>
+                <h:selectOneMenu id="famSeason" value="#{famPlayerSeasonController.selected.famSeason}"
+                                 title="#{bundle.CreateFamPlayerSeasonTitle_famSeason}">
+                    <f:selectItems value="#{famSeasonController.itemsAvailableSelectOne}"/>
+                </h:selectOneMenu>
+            </h:panelGrid>
+            <br/>
+            <h:commandLink action="#{famPlayerSeasonController.create}"
+                           value="#{bundle.CreateFamPlayerSeasonSaveLink}"/>
+            <br/>
+            <br/>
+            <h:commandLink action="#{famPlayerSeasonController.prepareList}"
+                           value="#{bundle.CreateFamPlayerSeasonShowAllLink}" immediate="true"/>
+            <br/>
+            <br/>
+            <h:commandLink value="#{bundle.CreateFamPlayerSeasonIndexLink}" action="/index" immediate="true"/>
+        </h:form>
+    </ui:define>
+</ui:composition>
+
+</html>

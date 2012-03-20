@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        >
+
+    <h:panelGrid columns="3">
+        <!--                    <h:outputLabel value="#{bundle.EditFamOrganizationLabel_idOrganization}" for="idOrganization" />
+     <p:inputText id="idOrganization"
+                  value="#{bean.idOrganization}"
+                  title="#{bundle.EditFamOrganizationTitle_idOrganization}"
+                  >
+         <p:ajax event="blur" update="msg_idOrganization"/>
+     </p:inputText>
+     <p:message id="msg_idOrganization" for="idOrganization"/> -->
+
+        <h:outputLabel value="#{bundle.EditFamOrganizationLabel_libOrganization}" for="libOrganization"/>
+        <p:inputText id="libOrganization"
+                     value="#{bean.libOrganization}"
+                     title="#{bundle.EditFamOrganizationTitle_libOrganization}"
+                >
+            <p:ajax event="blur" update="msg_libOrganization"/>
+        </p:inputText>
+        <p:message id="msg_libOrganization" for="libOrganization"/>
+
+        <h:outputLabel value="#{bundle.EditFamOrganizationLabel_codeOrganization}" for="codeOrganization"/>
+        <p:inputText id="codeOrganization"
+                     value="#{bean.codeOrganization}"
+                     title="#{bundle.EditFamOrganizationTitle_codeOrganization}"
+                >
+            <p:ajax event="blur" update="msg_codeOrganization"/>
+        </p:inputText>
+        <p:message id="msg_codeOrganization" for="codeOrganization"/>
+
+        <h:outputLabel value="#{bundle.EditFamOrganizationLabel_parent}" for="parent"/>
+        <h:selectOneMenu id="parent"
+                         value="#{bean.parent.libOrganization}"
+                         title="#{bundle.EditFamOrganizationTitle_parent}"
+                         converter="organizationConverter"
+                >
+            <f:selectItem itemLabel="Parent"
+                          noSelectionOption="true"/>
+            <f:selectItems value="#{cacheBean.listOrganization}"
+                           var="n"
+                           itemValue="#{n}"
+                           itemLabel="#{n.libOrganization}"/>
+            <p:ajax event="blur" update="msg_parent"/>
+        </h:selectOneMenu>
+        <p:message id="msg_parent" for="parent"/>
+
+        <!--                    <h:outputLabel value="#{bundle.EditFamOrganizationLabel_dtCreat}" for="dtCreat" />
+     <p:inputText id="dtCreat"
+                  value="#{bean.dtCreat}"
+                  title="#{bundle.EditFamOrganizationTitle_dtCreat}"
+                  >
+         <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+         <p:ajax event="blur" update="msg_dtCreat"/>
+     </p:inputText>
+     <p:message id="msg_dtCreat" for="dtCreat"/>
+
+     <h:outputLabel value="#{bundle.EditFamOrganizationLabel_dtModif}" for="dtModif" />
+     <p:inputText id="dtModif"
+                  value="#{bean.dtModif}"
+                  title="#{bundle.EditFamOrganizationTitle_dtModif}"
+                  >
+         <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+         <p:ajax event="blur" update="msg_dtModif"/>
+     </p:inputText>
+     <p:message id="msg_dtModif" for="dtModif"/> -->
+
+    </h:panelGrid>
+</ui:composition>

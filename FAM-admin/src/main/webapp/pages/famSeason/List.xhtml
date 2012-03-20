@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{bundle.ListFamSeasonTitle}"/>
+    </ui:define>
+
+    <ui:define name="body">
+        <h:form>
+            <p:panel header="#{bundle.FamSeason}">
+
+                <p:dataTable
+                        value="#{famSeasonController.lazyModel}"
+                        lazy="true"
+                        var="item"
+                        selection="#{famSeasonController.selected}"
+                        selectionMode="single"
+                        paginator="true" rows="10"
+                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                        rowsPerPageTemplate="5,10,15"
+                        sortBy="#{item.libSeason}"
+                        emptyMessage="#{bundle.NoDataFound}"
+                        paginatorAlwaysVisible="false"
+                        >
+                    <p:ajax event="rowSelect" update="tb"/>
+                    <p:ajax event="rowUnselect" update="tb"/>
+                    <f:facet name="header">
+                        <p:toolbar id="tb">
+                            <p:toolbarGroup align="left">
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamSeasonViewLink}"
+                                                 action="#{famSeasonController.prepareView}"
+                                                 disabled="#{empty famSeasonController.selected.idSeason}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamSeasonCreateLink}"
+                                                 action="#{famSeasonController.prepareCreate}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.ListFamSeasonEditLink}"
+                                                 action="#{famSeasonController.prepareEdit}"
+                                                 disabled="#{empty famSeasonController.selected.idSeason}"/>
+                                <p:commandButton type="push"
+                                                 image="ui-icon-document"
+                                                 value="#{bundle.DeleteLink}"
+                                                 action="#{famSeasonController.prepareDelete}"
+                                                 disabled="#{empty famSeasonController.selected.idSeason}"/>
+                            </p:toolbarGroup>
+                        </p:toolbar>
+                    </f:facet>
+                    <!--                    <p:column sortBy="#{item.idSeason}"
+                              filterBy="#{item.idSeason}"
+                              headerText="#{bundle.ListFamSeasonTitle_idSeason}" >
+                        <h:outputText value="#{item.idSeason}"/>
+                    </p:column>-->
+                    <p:column sortBy="#{item.libSeason}"
+                              filterBy="#{item.libSeason}"
+                              headerText="#{bundle.ListFamSeasonTitle_libSeason}">
+                        <h:outputText value="#{item.libSeason}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.currentSeason}"
+                              filterBy="#{item.currentSeason}"
+                              headerText="#{bundle.ListFamSeasonTitle_currentSeason}">
+                        <p:selectBooleanCheckbox value="#{item.currentSeason}"
+                                />
+                    </p:column>
+                    <!--                    <p:column sortBy="#{item.dtCreat}"
+                              filterBy="#{item.dtCreat}"
+                              headerText="#{bundle.ListFamSeasonTitle_dtCreat}" >
+                        <h:outputText value="#{item.dtCreat}">
+                            <f:convertDateTime type="both" dateStyle="medium" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column sortBy="#{item.dtModif}"
+                              filterBy="#{item.dtModif}"
+                              headerText="#{bundle.ListFamSeasonTitle_dtModif}" >
+                        <h:outputText value="#{item.dtModif}">
+                            <f:convertDateTime type="both" dateStyle="medium" />
+                        </h:outputText>
+                    </p:column>-->
+                    <f:facet name="footer">
+
+                    </f:facet>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

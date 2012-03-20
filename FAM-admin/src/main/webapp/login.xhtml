@@ -1,0 +1,89 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+        template="/common/template.xhtml">
+
+    <ui:define name="titre">Test</ui:define>
+    <ui:define name="body">
+        <h:form id="loginForm">
+            <!--<p>Hi, <shiro:guest>Guest</shiro:guest>
+                <shiro:user><shiro:principal/></shiro:user>!
+            </p>
+            <p> <h:outputText rendered="#{ not empty request.getAttribute('shiroLoginFailure')}"
+                value=" Login attempt was unsuccessful:#{ request.getAttribute('shiroLoginFailure')}"/>
+            </p>-->
+
+            <h:panelGrid columns="2">
+                <h:outputLabel for="username">Username:</h:outputLabel>
+                <h:inputText id="username" value="#{login.username}"/>
+                <h:outputLabel for="password">Password:</h:outputLabel>
+                <h:inputSecret id="password" value="#{login.password}"
+                            />
+            </h:panelGrid>
+            <p:commandButton id="login" value="Login"
+                             action="#{login.login}"
+                             update="@form"/>
+        </h:form>
+        <!--<c:set var="datePattern"><fmt:message key="date.format"/></c:set>
+        <c:set var="ctx" value="${pageContext.request.contextPath}"/>
+
+        &lt;!&ndash;<form action="${ctx}/j_security_check" id="loginForm" method="post">&ndash;&gt;
+        <form action="" id="loginForm" method="post">
+            <p>
+                <c:if test="${param.error == 'true'}">
+                    <div class="error">Login Failed.</div>
+                </c:if>
+
+                <label for="username" id="username-label">Username</label><br/>
+                <input id="username" type="text" name="username"/><br/>
+
+                <label for="password">Password</label><br/>
+                <input id="password" type="password" name="password"/><br/>
+
+                <input type="checkbox" name="rememberMe" id="rememberMe"/>
+                <label for="rememberMe" style="vertical-align: top">Remember Me</label><br/>
+
+                <input type="submit" id="login" class="button" value="Login"/>
+                <input type="reset" id="reset" class="button" value="Clear"/>
+            </p>
+        </form>
+
+        <script type="text/javascript">
+            <c:if test = "${param.ajax}" >
+                var loginFailed = function (data, status) {
+                    $(".error").remove();
+                    $('#username-label').before('<div class="error">Login failed, please try again.</div>');
+                };
+
+            $("#login").live('click', function (e) {
+                e.preventDefault();
+                $.ajax({url:getHost() + "${ctx}/api/login.json",
+                    type:"POST",
+                    beforeSend:function (xhr) {
+                        xhr.withCredentials = true;
+                    },
+                    data:$("#loginForm").serialize(),
+                    success:function (data, status) {
+                        if (data.loggedIn) {
+                            // success
+                            dialog.dialog('close');
+                            location.href = getHost() + '${ctx}/users';
+                        } else {
+                            loginFailed(data);
+                        }
+                    },
+                    error:loginFailed
+                });
+            });
+            </c:if>
+            $('#username').focus();
+        </script>-->
+
+    </ui:define>
+
+</ui:composition>

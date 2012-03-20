@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+    <ui:define name="title">
+        <h:outputText value="#{bundle.ViewFamAnswerTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <p:panel header="#{bundle.ViewFamAnswerTitle}">
+            <h:form>
+                <h:panelGrid columns="2">
+                    <!--                    <h:outputText value="#{bundle.ViewFamAnswerLabel_idAnswer}"/>
+      <h:outputText value="#{famAnswerController.selected.idAnswer}"
+                    title="#{bundle.ViewFamAnswerTitle_idAnswer}"/>-->
+
+                    <h:outputText value="#{bundle.ViewFamAnswerLabel_famEvent}"/>
+                    <h:outputText value="#{famAnswerController.selected.famEvent.libEvent}"
+                                  title="#{bundle.ViewFamAnswerTitle_famEvent}"/>
+
+                    <h:outputText value="#{bundle.ViewFamAnswerLabel_famTypAnswer}"/>
+                    <h:outputText value="#{famAnswerController.selected.famTypAnswer.libTypAnswer}"
+                                  title="#{bundle.ViewFamAnswerTitle_famTypAnswer}"/>
+
+                    <h:outputText value="#{bundle.ViewFamAnswerLabel_famPlayer}"/>
+                    <h:outputText value="#{famAnswerController.selected.famPlayer.displayName}"
+                                  title="#{bundle.ViewFamAnswerTitle_famPlayer}"/>
+
+                    <h:outputText value="#{bundle.ViewFamAnswerLabel_comments}"/>
+                    <h:outputText value="#{famAnswerController.selected.comments}"
+                                  title="#{bundle.ViewFamAnswerTitle_comments}"/>
+
+
+                    <!--                    <h:outputText value="#{bundle.ViewFamAnswerLabel_dtCreat}"/>
+                    <h:outputText value="#{famAnswerController.selected.dtCreat}" 
+                                  title="#{bundle.ViewFamAnswerTitle_dtCreat}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewFamAnswerLabel_dtModif}"/>
+                    <h:outputText value="#{famAnswerController.selected.dtModif}" 
+                                  title="#{bundle.ViewFamAnswerTitle_dtModif}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                    </h:outputText>-->
+                </h:panelGrid>
+                <br/>
+                <p:commandButton action="#{famAnswerController.prepareEdit}" value="#{bundle.ViewFamAnswerEditLink}"/>
+                <p:commandButton action="#{famAnswerController.prepareCreate}"
+                                 value="#{bundle.ViewFamAnswerCreateLink}"/>
+                <p:commandButton action="#{famAnswerController.prepareList}"
+                                 value="#{bundle.ViewFamAnswerShowAllLink}"/>
+            </h:form>
+        </p:panel>
+    </ui:define>
+</ui:composition>
+

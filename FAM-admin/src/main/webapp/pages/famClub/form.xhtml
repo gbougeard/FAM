@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        >
+
+    <h:panelGrid columns="3">
+
+        <h:outputLabel value="#{bundle.CreateFamClubLabel_libClub}" for="libClub"/>
+        <p:inputText id="libClub" value="#{bean.libClub}"
+                     title="#{bundle.CreateFamClubTitle_libClub}"
+                >
+            <p:ajax event="blur" update="msg_libClub"/>
+        </p:inputText>
+        <p:message id="msg_libClub" for="libClub"/>
+
+        <h:outputLabel value="#{bundle.CreateFamClubLabel_codeFff}" for="codeFff"/>
+        <p:inputText id="codeFff"
+                     value="#{bean.codeFff}"
+                     title="#{bundle.CreateFamClubTitle_codeFff}"
+                >
+            <p:ajax event="blur" update="msg_codeFff"/>
+        </p:inputText>
+        <p:message id="msg_codeFff" for="codeFff"/>
+
+        <h:outputLabel value="Pays" for="famCountry"/>
+        <!--        <p:selectOneMenu id="famCountry" 
+                                 value="#{bean.famCountry}" 
+                                 converter="countryConverter"
+                                 valueChangeListener="#{cachePlayer.filterState}"
+                                 style="width:350px;"
+                                 >
+                    <f:selectItem itemLabel="Country"  itemValue=""/>
+                                noSelectionOption="true"/>
+                    <f:selectItems  value="#{cacheBean.listCountry}"
+                                    var="c"
+                                    itemValue="#{c}"
+                                    itemLabel="#{c.libCountry}"/>
+                    <p:ajax process="@this" update="msg_famCountry famState"/>
+                </p:selectOneMenu>-->
+        <p:autoComplete id="famCountry"
+                        value="#{bean.famCountry}"
+                        completeMethod="#{cachePlayer.completeCountry}"
+                        var="c"
+                        itemLabel="#{c.libCountry}"
+                        itemValue="#{c}"
+                        converter="countryConverter"
+                        size="40"
+                        dropdown="true"
+                >
+            <p:column>
+                <p:graphicImage value="/images/flags/#{c.codCountry}.png"/>
+            </p:column>
+
+            <p:column>
+                #{c.libCountry}
+            </p:column>
+            <p:ajax event="itemSelect" listener="#{cachePlayer.onChangeValue}" update="famState"/>
+        </p:autoComplete>
+        <p:message id="msg_famCountry" for="famCountry"/>
+
+        <h:outputLabel value="Région" for="famState"/>
+        <!--        <p:selectOneMenu id="famState" 
+                                 value="#{bean.famState}" 
+                                 converter="stateConverter"
+                                 valueChangeListener="#{cachePlayer.filterProvince}"
+                                 style="width:200px;"
+                                 >
+                    <f:selectItem itemLabel="State" itemValue=""/>
+                                                          noSelectionOption="true"/>
+                    <f:selectItems  value="#{cachePlayer.lstState}"
+                                    var="s"
+                                    itemValue="#{s}"
+                                    itemLabel="#{s.libState}"/>
+                    <p:ajax process="@this" update="msg_famState famProvince"/>
+                </p:selectOneMenu>-->
+        <p:autoComplete id="famState"
+                        value="#{bean.famState}"
+                        completeMethod="#{cachePlayer.completeState}"
+                        var="c"
+                        itemLabel="#{c.libState}"
+                        itemValue="#{c}"
+                        converter="stateConverter"
+                        size="40"
+                        dropdown="true"
+                >
+            <p:ajax event="itemSelect" listener="#{cachePlayer.onChangeValue}" update="famProvince"/>
+        </p:autoComplete>
+        <p:message id="msg_famState" for="famState"/>
+
+        <h:outputLabel value="Département" for="famProvince"/>
+        <!--        <p:selectOneMenu id="famProvince" 
+                                 value="#{bean.famProvince}" 
+                                 converter="provinceConverter"
+                                 valueChangeListener="#{cachePlayer.filterCity}"
+                                 style="width:200px;"
+                                 >
+                    <f:selectItem itemLabel="Province" itemValue=""/>
+                                                          noSelectionOption="true"/>
+                    <f:selectItems  value="#{cachePlayer.lstProvince}"
+                                    var="p"
+                                    itemValue="#{p}"
+                                    itemLabel="#{p.codProvince} - #{p.libProvince}"/>
+                    <p:ajax process="@this" update="msg_famProvince famCity"/>
+                </p:selectOneMenu>-->
+        <p:autoComplete id="famProvince"
+                        value="#{bean.famProvince}"
+                        completeMethod="#{cachePlayer.completeProvince}"
+                        var="p"
+                        itemLabel="#{p.codProvince} - #{p.libProvince}"
+                        itemValue="#{p}"
+                        converter="provinceConverter"
+                        size="40"
+                        dropdown="true"
+                >
+            <p:ajax event="itemSelect" listener="#{cachePlayer.onChangeValue}" update="famCity"/>
+        </p:autoComplete>
+        <p:message id="msg_famProvince" for="famProvince"/>
+
+        <h:outputLabel value="Ville" for="famCity"/>
+        <!--        <p:selectOneMenu id="famCity" 
+                                 value="#{bean.famCity}" 
+                                 converter="cityConverter"
+                                 style="width:200px;"
+                                 >
+                    <f:selectItem itemLabel="City" itemValue=""/>
+                                                          noSelectionOption="true"/>
+                    <f:selectItems  value="#{cachePlayer.lstCity}"
+                                    var="v"
+                                    itemValue="#{v}"
+                                    itemLabel="#{v.libCity}"/>
+                    <p:ajax process="@this" update="msg_famCity" />
+                </p:selectOneMenu>-->
+        <p:autoComplete id="famCity"
+                        value="#{bean.famCity}"
+                        completeMethod="#{cachePlayer.completeCity}"
+                        var="c"
+                        itemLabel="#{c.libCity}"
+                        itemValue="#{c}"
+                        converter="cityConverter"
+                        size="40"
+                        dropdown="true"
+                >
+        </p:autoComplete>
+        <p:message id="msg_famCity" for="famCity"/>
+
+        <h:outputLabel value="#{bundle.EditFamClubLabel_comments}" for="comments"/>
+        <p:editor id="comments"
+                  value="#{bean.comments}"
+                  widgetVar="editor" width="600" height="150"/>
+    </h:panelGrid>
+
+    <p:fieldset legend="Debug" rendered="#{initParam['javax.faces.PROJECT_STAGE'] eq 'Development'}">
+
+        <h:panelGrid columns="2">
+            <h:outputText value="#{bundle.ViewFamClubLabel_idClub}"/>
+            <h:outputText value="#{bean.idClub}"
+                          title="#{bundle.ViewFamClubTitle_idClub}"/>
+
+            <h:outputText value="#{bundle.ViewFamPlaceLabel_dtCreat}"/>
+            <h:outputText value="#{bean.dtCreat}"
+                          title="#{bundle.ViewFamPlaceTitle_dtCreat}">
+                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
+            </h:outputText>
+
+            <h:outputText value="#{bundle.ViewFamPlaceLabel_dtModif}"/>
+            <h:outputText value="#{bean.dtModif}"
+                          title="#{bundle.ViewFamPlaceTitle_dtModif}">
+                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
+            </h:outputText>
+
+        </h:panelGrid>
+    </p:fieldset>
+</ui:composition>

@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+
+        >
+<ui:component>
+    <p:panel id="banner">
+        <!--            <p:themeSwitcher initialText="Change Skin" buttonPreText="Skin: "/>  -->
+        <!-- utilisateur authentifie -->
+        <!--
+        <c:if test="${request.remoteUser!=null}">
+            You are logged as  ${request.remoteUser} + ${request.userPrincipal}
+            <h:form id="logout">
+                <h:commandLink action="#{authentificationBean.deconnexion}">Logout</h:commandLink>
+            </h:form>
+            <c:if test="${authentificationBean.isAdmin}">
+                et vous etes admin!
+            </c:if>
+            <c:if test="${!authentificationBean.isAdmin}">
+                et vous etes grouillot!
+            </c:if>
+        </c:if>-->
+        <!--                <c:if test="${request.remoteUser==null}">
+        <h:form id="login">
+            <h:outputLabel value="Login : " for="lbl_login"></h:outputLabel>
+            <p:inputText id="lbl_login"
+                         value="#{loginBean.email}" required="true">
+            </p:inputText>
+
+            <h:outputLabel value="Password : " for="lbl_pwd"></h:outputLabel>
+            <p:password id="lbl_pwd"
+                        value="#{loginBean.password}"
+                        required="true"
+                        feedback="false">
+            </p:password>
+            <p:commandButton value="Login"
+                             ajax="false"
+                             actionListener="#{authentificationBean.login}"/>
+        </h:form>-->
+
+        <!--<p>Hi, <shiro:guest>Guest</shiro:guest>-->
+        <!--<shiro:user><shiro:principal/></shiro:user>!-->
+        <!--</p>-->
+
+
+        <p:layout style="min-width:400px;min-height:200px;" id="layout">
+
+            <p:layoutUnit position="center">
+                <h:outputText value="Hello, #{login.currentUser.displayName}"
+                              rendered="#{login.loggedIn}"/>
+                <h:form id="navSignup">
+                    <p:commandLink action="#{login.home}">
+                        <h:outputText value="Home"/>
+                    </p:commandLink>
+                    <h:commandLink action="#{login.logout}"
+                                   rendered="#{login.loggedIn}">
+                        <h:outputText value=" Se déconnecter"/>
+                    </h:commandLink>
+                    <h:commandLink action="#{authentificationBean.navSignup}"
+                                   rendered="#{!login.loggedIn}">
+                        <h:outputText value=" S'inscrire"/>
+                    </h:commandLink>
+                    <h:commandLink action="#{authentificationBean.navLogin}"
+                                   rendered="#{!login.loggedIn}">
+                        S'identifier
+                    </h:commandLink>
+                    <p:commandLink action="pretty:myAccount"
+                                   rendered="#{login.loggedIn}">
+                        <h:outputText value=" My Account"/>
+                    </p:commandLink>
+                    <p:commandButton action="#{cacheBean.initCache()}" value="Refresh Cache"/>
+                    <p:commandButton action="#{login.logout}" value="Logout"/>
+                </h:form>
+            </p:layoutUnit>
+            <p:layoutUnit position="west" size="50" resizable="false">
+                <p:ajaxStatus style="width:16px;height:16px;">
+                    <f:facet name="start">
+                        <h:graphicImage value="/images/ajaxloading.gif"/>
+                    </f:facet>
+                    <f:facet name="complete">
+                        <h:outputText value=""/>
+                    </f:facet>
+                    <!--                         <f:facet name="prestart">
+                      <h:outputText value="" />
+                  </f:facet>
+                   <f:facet name="success">
+                      <h:outputText value="Success!" />
+                  </f:facet>  -->
+                    <f:facet name="error">
+                        <h:outputText value="Error!"/>
+                    </f:facet>
+                </p:ajaxStatus>
+            </p:layoutUnit>
+            <p:layoutUnit position="east" resizable="false" size="350">
+
+                <!-- <p:themeSwitcher style="width:200px" effect="fade" var="t">
+                    <f:selectItem itemLabel="Choose Theme" itemValue=""/>
+                    <f:selectItems value="#{availableThemes.themes}"
+                                   var="theme"
+                                   itemLabel="#{theme.name}"
+                                   itemValue="#{theme}"/>
+
+                    <p:column>
+                        <p:graphicImage value="/images/themes/#{t.image}" width="90" height="60"/>
+                    </p:column>
+                    <p:column>
+                        #{t.name}
+                    </p:column>
+                </p:themeSwitcher>-->
+                <h:form prependId="false">
+                    <h:outputLabel>#{fn:length(availableThemes.themes)} themes</h:outputLabel>
+                    <h:outputLabel>#{fn:length(userSettings.availableThemes.themes)} themes from user</h:outputLabel>
+                    <p:themeSwitcher style="width:150px" effect="fade" var="t" value="#{userSettings.currentTheme}">
+                        <f:selectItem itemLabel="Choose Theme" itemValue=""/>
+                        <!--<f:selectItems value="#{userSettings.availableThemes.themes}"-->
+                        <f:selectItems value="#{availableThemes.themes}"
+
+                                       var="theme"
+                                       itemLabel="#{theme.name}"
+                                       itemValue="#{theme}"/>
+                        <p:column>
+                            <!--<p:graphicImage value="/images/themes/#{t.image}" width="90" height="60"/>-->
+                            <h:graphicImage library="images/themes" name="${t.image}" width="90" height="60"/>
+                            <!--rendered="${not empty theme.image}"-->
+                        </p:column>
+                        <p:column>
+                            #{t.name}
+                        </p:column>
+                    </p:themeSwitcher>
+                    <!--<cc:themeSwitcher id="themeSwitcher"/>-->
+                </h:form>
+
+            </p:layoutUnit>
+        </p:layout>
+
+
+        <!--                </c:if>-->
+    </p:panel>
+</ui:component>
+</html>
+

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{bundle.EditFamUserSeasonTitle}"/>
+    </ui:define>
+    <ui:define name="body">
+        <h:form>
+            <p:panel header="#{bundle.EditFamUserSeasonTitle}">
+                <h:panelGrid columns="3">
+                    <h:outputLabel value="#{bundle.EditFamUserSeasonLabel_famUser}" for="famUser"/>
+                    <h:selectOneMenu id="famUser"
+                                     value="#{famUserSeasonController.selected.famUser}"
+                                     title="#{bundle.EditFamUserSeasonTitle_famUser}"
+                            >
+                        <f:selectItems value="#{famUserController.itemsAvailableSelectOne}"/>
+                        <p:ajax event="blur" update="msg_famUser"/>
+                    </h:selectOneMenu>
+                    <p:message id="msg_famUser" for="famUser"/>
+
+                    <h:outputLabel value="#{bundle.EditFamUserSeasonLabel_famSeason}" for="famSeason"/>
+                    <h:selectOneMenu id="famSeason"
+                                     value="#{famUserSeasonController.selected.famSeason}"
+                                     title="#{bundle.EditFamUserSeasonTitle_famSeason}"
+                            >
+                        <f:selectItems value="#{famSeasonController.itemsAvailableSelectOne}"/>
+                        <p:ajax event="blur" update="msg_famSeason"/>
+                    </h:selectOneMenu>
+                    <p:message id="msg_famSeason" for="famSeason"/>
+
+                    <h:outputLabel value="#{bundle.EditFamUserSeasonLabel_isAdmin}" for="isAdmin"/>
+                    <p:inputText id="isAdmin"
+                                 value="#{famUserSeasonController.selected.isAdmin}"
+                                 title="#{bundle.EditFamUserSeasonTitle_isAdmin}"
+                            >
+                        <p:ajax event="blur" update="msg_isAdmin"/>
+                    </p:inputText>
+                    <p:message id="msg_isAdmin" for="isAdmin"/>
+
+                    <h:outputLabel value="#{bundle.EditFamUserSeasonLabel_isCoach}" for="isCoach"/>
+                    <p:inputText id="isCoach"
+                                 value="#{famUserSeasonController.selected.isCoach}"
+                                 title="#{bundle.EditFamUserSeasonTitle_isCoach}"
+                            >
+                        <p:ajax event="blur" update="msg_isCoach"/>
+                    </p:inputText>
+                    <p:message id="msg_isCoach" for="isCoach"/>
+
+                    <h:outputLabel value="#{bundle.EditFamUserSeasonLabel_isPlayer}" for="isPlayer"/>
+                    <p:inputText id="isPlayer"
+                                 value="#{famUserSeasonController.selected.isPlayer}"
+                                 title="#{bundle.EditFamUserSeasonTitle_isPlayer}"
+                            >
+                        <p:ajax event="blur" update="msg_isPlayer"/>
+                    </p:inputText>
+                    <p:message id="msg_isPlayer" for="isPlayer"/>
+
+                    <h:outputLabel value="#{bundle.EditFamUserSeasonLabel_isReporter}" for="isReporter"/>
+                    <p:inputText id="isReporter"
+                                 value="#{famUserSeasonController.selected.isReporter}"
+                                 title="#{bundle.EditFamUserSeasonTitle_isReporter}"
+                            >
+                        <p:ajax event="blur" update="msg_isReporter"/>
+                    </p:inputText>
+                    <p:message id="msg_isReporter" for="isReporter"/>
+
+                </h:panelGrid>
+                <p:commandButton value="#{bundle.EditFamUserSeasonSaveLink}"
+                                 action="#{famUserSeasonController.update}"
+                                 immediate="true"/>
+                <p:commandButton value="#{bundle.CancelLink}"
+                                 action="#{famUserSeasonController.prepareList}"
+                                 immediate="true"/>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

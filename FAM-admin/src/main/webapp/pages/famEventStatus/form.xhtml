@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        >
+
+    <h:panelGrid columns="3">
+        <!--                    <h:outputLabel value="#{bundle.EditFamEventStatusLabel_idEventStatus}" for="idEventStatus" />
+     <p:inputText id="idEventStatus"
+                  value="#{bean.idEventStatus}"
+                  title="#{bundle.EditFamEventStatusTitle_idEventStatus}"
+                  >
+         <p:ajax event="blur" update="msg_idEventStatus"/>
+     </p:inputText>
+     <p:message id="msg_idEventStatus" for="idEventStatus"/> -->
+
+        <h:outputLabel value="#{bundle.EditFamEventStatusLabel_libEventStatus}" for="libEventStatus"/>
+        <p:inputText id="libEventStatus"
+                     value="#{bean.libEventStatus}"
+                     title="#{bundle.EditFamEventStatusTitle_libEventStatus}"
+                >
+            <p:ajax event="blur" update="msg_libEventStatus"/>
+        </p:inputText>
+        <p:message id="msg_libEventStatus" for="libEventStatus"/>
+
+        <h:outputLabel value="#{bundle.EditFamEventStatusLabel_codEventStatus}" for="codEventStatus"/>
+        <p:inputText id="codEventStatus"
+                     value="#{bean.codEventStatus}"
+                     title="#{bundle.EditFamEventStatusTitle_codEventStatus}"
+                >
+            <p:ajax event="blur" update="msg_codEventStatus"/>
+        </p:inputText>
+        <p:message id="msg_codEventStatus" for="codEventStatus"/>
+
+        <!--                    <h:outputLabel value="#{bundle.EditFamEventStatusLabel_dtCreat}" for="dtCreat" />
+     <p:inputText id="dtCreat"
+                  value="#{bean.dtCreat}"
+                  title="#{bundle.EditFamEventStatusTitle_dtCreat}"
+                  >
+         <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+         <p:ajax event="blur" update="msg_dtCreat"/>
+     </p:inputText>
+     <p:message id="msg_dtCreat" for="dtCreat"/>
+
+     <h:outputLabel value="#{bundle.EditFamEventStatusLabel_dtModif}" for="dtModif" />
+     <p:inputText id="dtModif"
+                  value="#{bean.dtModif}"
+                  title="#{bundle.EditFamEventStatusTitle_dtModif}"
+                  >
+         <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+         <p:ajax event="blur" update="msg_dtModif"/>
+     </p:inputText>
+     <p:message id="msg_dtModif" for="dtModif"/> -->
+
+    </h:panelGrid>
+</ui:composition>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        >
+
+    <h:panelGrid columns="3">
+        <!--                    <h:outputLabel value="#{bundle.EditFamTypMatchLabel_idTypMatch}" for="idTypMatch" />
+     <p:inputText id="idTypMatch"
+                  value="#{bean.idTypMatch}"
+                  title="#{bundle.EditFamTypMatchTitle_idTypMatch}"
+                  >
+         <p:ajax event="blur" update="msg_idTypMatch"/>
+     </p:inputText>
+     <p:message id="msg_idTypMatch" for="idTypMatch"/> -->
+
+        <h:outputLabel value="#{bundle.EditFamTypMatchLabel_libTypMatch}" for="libTypMatch"/>
+        <p:inputText id="libTypMatch"
+                     value="#{bean.libTypMatch}"
+                     title="#{bundle.EditFamTypMatchTitle_libTypMatch}"
+                >
+            <p:ajax event="blur" update="msg_libTypMatch"/>
+        </p:inputText>
+        <p:message id="msg_libTypMatch" for="libTypMatch"/>
+
+        <h:outputLabel value="#{bundle.EditFamTypMatchLabel_codTypMatch}" for="codTypMatch"/>
+        <p:inputText id="codTypMatch"
+                     value="#{bean.codTypMatch}"
+                     title="#{bundle.EditFamTypMatchTitle_codTypMatch}"
+                >
+            <p:ajax event="blur" update="msg_codTypMatch"/>
+        </p:inputText>
+        <p:message id="msg_codTypMatch" for="codTypMatch"/>
+
+        <h:outputLabel value="#{bundle.EditFamTypMatchLabel_nbPlayer}" for="nbPlayer"/>
+        <p:inputText id="nbPlayer"
+                     value="#{bean.nbPlayer}"
+                     title="#{bundle.EditFamTypMatchTitle_nbPlayer}"
+                >
+            <p:ajax event="blur" update="msg_nbPlayer"/>
+        </p:inputText>
+        <p:message id="msg_nbPlayer" for="nbPlayer"/>
+
+        <h:outputLabel value="#{bundle.EditFamTypMatchLabel_nbSubstitute}" for="nbSubstitute"/>
+        <p:inputText id="nbSubstitute"
+                     value="#{bean.nbSubstitute}"
+                     title="#{bundle.EditFamTypMatchTitle_nbSubstitute}"
+                >
+            <p:ajax event="blur" update="msg_nbSubstitute"/>
+        </p:inputText>
+        <p:message id="msg_nbSubstitute" for="nbSubstitute"/>
+
+        <h:outputLabel value="#{bundle.EditFamTypMatchLabel_infiniteSubs}" for="infiniteSubs"/>
+        <p:selectBooleanCheckbox id="infiniteSubs"
+                                 value="#{bean.infiniteSubs}">
+            <p:ajax event="blur" update="msg_infiniteSubs"/>
+        </p:selectBooleanCheckbox>
+        <p:message id="msg_infiniteSubs" for="infiniteSubs"/>
+
+        <h:outputLabel value="#{bundle.EditFamTypMatchLabel_periodDuration}" for="periodDuration"/>
+        <p:inputText id="periodDuration"
+                     value="#{bean.periodDuration}"
+                     title="#{bundle.EditFamTypMatchTitle_periodDuration}"
+                >
+            <p:ajax event="blur" update="msg_periodDuration"/>
+        </p:inputText>
+        <p:message id="msg_periodDuration" for="periodDuration"/>
+
+        <h:outputLabel value="#{bundle.EditFamTypMatchLabel_extraTime}" for="extraTime"/>
+        <p:selectBooleanCheckbox id="extraTime"
+                                 value="#{bean.extraTime}"
+                                 binding="#{showExtraTime}"
+                >
+            <p:ajax event="change" process="@this" update="@form"/>
+        </p:selectBooleanCheckbox>
+        <p:message id="msg_extraTime" for="extraTime"/>
+
+        <!--                    <h:panelGroup rendered="#{not empty showExtraTime.value and showExtraTime.value}">-->
+        <h:outputLabel value="#{bundle.EditFamTypMatchLabel_extraTimeDuration}"
+                       for="extraTimeDuration"
+                       rendered="#{not empty showExtraTime.value and showExtraTime.value}"/>
+        <p:inputText id="extraTimeDuration"
+                     value="#{bean.extraTimeDuration}"
+                     title="#{bundle.EditFamTypMatchTitle_extraTimeDuration}"
+                     rendered="#{not empty showExtraTime.value and showExtraTime.value}"
+                >
+            <p:ajax event="blur" update="msg_extraTimeDuration"/>
+        </p:inputText>
+        <p:message id="msg_extraTimeDuration"
+                   for="extraTimeDuration"
+                   rendered="#{not empty showExtraTime.value and showExtraTime.value}"/>
+        <!--                        -->
+        <h:outputLabel value="#{bundle.EditFamTypMatchLabel_penalties}"
+                       for="penalties"/>
+        <p:selectBooleanCheckbox id="penalties"
+                                 value="#{bean.penalties}"
+                                 binding="#{showPenalties}">
+            <p:ajax event="change" process="@this" update="@form"/>
+        </p:selectBooleanCheckbox>
+        <p:message id="msg_penalties" for="penalties"/>
+
+        <h:outputLabel value="#{bundle.EditFamTypMatchLabel_nbPenalties}"
+                       for="nbPenalties"
+                       rendered="#{not empty showPenalties.value and showPenalties.value}"/>
+        <p:inputText id="nbPenalties"
+                     value="#{bean.nbPenalties}"
+                     title="#{bundle.EditFamTypMatchTitle_nbPenalties}"
+                     rendered="#{not empty showPenalties.value and showPenalties.value}">
+            <p:ajax event="blur" update="msg_nbPenalties"/>
+        </p:inputText>
+        <p:message id="msg_nbPenalties" for="nbPenalties"
+                   rendered="#{not empty showPenalties.value and showPenalties.value}"/>
+
+        <!--                    <h:outputLabel value="#{bundle.EditFamTypMatchLabel_dtCreat}" for="dtCreat" />
+     <p:inputText id="dtCreat"
+                  value="#{bean.dtCreat}"
+                  title="#{bundle.EditFamTypMatchTitle_dtCreat}"
+                  >
+         <f:convertDateTime type="both" dateStyle="medium" />
+         <p:ajax event="blur" update="msg_dtCreat"/>
+     </p:inputText>
+     <p:message id="msg_dtCreat" for="dtCreat"/>
+
+     <h:outputLabel value="#{bundle.EditFamTypMatchLabel_dtModif}" for="dtModif" />
+     <p:inputText id="dtModif"
+                  value="#{bean.dtModif}"
+                  title="#{bundle.EditFamTypMatchTitle_dtModif}"
+                  >
+         <f:convertDateTime type="both" dateStyle="medium" />
+         <p:ajax event="blur" update="msg_dtModif"/>
+     </p:inputText>
+     <p:message id="msg_dtModif" for="dtModif"/> -->
+
+    </h:panelGrid>
+</ui:composition>

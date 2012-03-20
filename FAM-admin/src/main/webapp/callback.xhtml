@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+
+                template="common/template.xhtml">
+    <!--xmlns:s="http://jboss.org/seam/faces"-->
+    <ui:define name="content">
+        <!--<f:metadata>
+            <f:viewParam name="#{oauthAuthenticator.verifierParamName}" value="#{oauthAuthenticator.verifier}"
+                         required="true"
+                         requiredMessage="We didn't get the authorization from the service provider. Please go back and Try Again !"/>
+            &lt;!&ndash;<s:viewAction action="#{oauthAuthenticator.connect}"/>&ndash;&gt;
+        </f:metadata>-->
+        <h:messages/>
+
+        <!-- <h1>Seam Social Security Example</h1>
+
+       <p>Getting Authorization from the OAuth Service Provider</p>
+       You're ready to use Seam Social
+       <h:link outcome="home">client</h:link>-->
+
+        <h:form>
+
+            <h:inputHidden value="#{login.onLoad}"/>
+            <h:panelGrid columns="2">
+                <h:outputLabel for="userSuppliedId" value="User Supplied Id: "/>
+                <h:outputText id="userSuppliedId" value="#{login.userSuppliedId}"/>
+
+                <h:outputLabel for="email" value="Email "/>
+                <h:outputText id="email" value="#{login.openIdEmail}"/>
+
+                <h:outputLabel for="firstname" value="Firstname: "/>
+                <h:outputText id="firstname" value="#{login.openIdFirstName}"/>
+
+                <h:outputLabel for="lastname" value="Lastname: "/>
+                <h:outputText id="lastname" value="#{login.openIdLastName}"/>
+
+            </h:panelGrid>
+        </h:form>
+
+    </ui:define>
+</ui:composition>

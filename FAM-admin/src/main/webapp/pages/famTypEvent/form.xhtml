@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        >
+
+    <h:panelGrid columns="3">
+        <!--                    <h:outputLabel value="#{bundle.EditFamTypEventLabel_idTypEvent}" for="idTypEvent" />
+     <p:inputText id="idTypEvent"
+                  value="#{bean.idTypEvent}"
+                  title="#{bundle.EditFamTypEventTitle_idTypEvent}"
+                  >
+         <p:ajax event="blur" update="msg_idTypEvent"/>
+     </p:inputText>
+     <p:message id="msg_idTypEvent" for="idTypEvent"/> -->
+
+        <h:outputLabel value="#{bundle.EditFamTypEventLabel_libTypEvent}" for="libTypEvent"/>
+        <p:inputText id="libTypEvent"
+                     value="#{bean.libTypEvent}"
+                     title="#{bundle.EditFamTypEventTitle_libTypEvent}">
+            <p:ajax event="blur" update="msg_libTypEvent"/>
+        </p:inputText>
+        <p:message id="msg_libTypEvent" for="libTypEvent"/>
+
+        <h:outputLabel value="#{bundle.EditFamTypEventLabel_codTypEvent}" for="codTypEvent"/>
+        <p:inputText id="codTypEvent"
+                     value="#{bean.codTypEvent}"
+                     title="#{bundle.EditFamTypEventTitle_codTypEvent}"
+                >
+            <p:ajax event="blur" update="msg_codTypEvent"/>
+        </p:inputText>
+        <p:message id="msg_codTypEvent" for="codTypEvent"/>
+
+        <!--                    <h:outputLabel value="#{bundle.EditFamTypEventLabel_dtCreat}" for="dtCreat" />
+     <p:inputText id="dtCreat"
+                  value="#{bean.dtCreat}"
+                  title="#{bundle.EditFamTypEventTitle_dtCreat}"
+                  >
+         <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+         <p:ajax event="blur" update="msg_dtCreat"/>
+     </p:inputText>
+     <p:message id="msg_dtCreat" for="dtCreat"/>
+
+     <h:outputLabel value="#{bundle.EditFamTypEventLabel_dtModif}" for="dtModif" />
+     <p:inputText id="dtModif"
+                  value="#{bean.dtModif}"
+                  title="#{bundle.EditFamTypEventTitle_dtModif}"
+                  >
+         <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+         <p:ajax event="blur" update="msg_dtModif"/>
+     </p:inputText>
+     <p:message id="msg_dtModif" for="dtModif"/> -->
+
+    </h:panelGrid>
+</ui:composition>

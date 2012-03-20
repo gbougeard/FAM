@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        >
+    <f:metadata>
+    </f:metadata>
+    <!--    BODY-->
+    <p:accordionPanel id="#{id}"
+                      value="#{list}"
+                      var="player"
+                      multiple="true"
+            >
+        <p:tab title="#{player.displayName}">
+            <h:panelGrid columns="3" cellpadding="10" columnClasses="verticalTop,verticalTop,verticalTop">
+                <p:graphicImage id="photo"
+                                value="#{initParam['org.fam.jsf.PLAYERS_PHOTO_PATH']}#{initParam['org.fam.jsf.DEFAULT_PHOTO']}#{initParam['org.fam.jsf.DEFAULT_IMAGE_EXTENSION']}"
+                                cache="false"
+                                width="120"
+                                style="border-width:4px;border-color:#6F6E6E;border-style:double"
+                        />
+
+                <h:panelGrid columns="2">
+                    <h:outputText value="Name: "/>
+                    <h:outputText value="#{player.firstName}" style="font-weight: bold"/>
+
+                    <h:outputText value="Number: "/>
+                    <h:outputText value="#{player.lastName}" style="font-weight: bold"/>
+
+                    <h:outputText value="Position: "/>
+                    <h:outputText value="#{player.principalPosition.libPosition}" style="font-weight: bold"/>
+                </h:panelGrid>
+                <p:carousel rows="1"
+                            circular="true"
+                            itemStyle="height:100px;width:250px"
+                            effect="easeInStrong">
+                    <p:tab title="Stats">
+                        <h:panelGrid columns="4">
+                            <h:outputText value="Nb de buts: "/>
+                            <h:outputText value="#{player.currentStat.nbGoal}" style="font-weight: bold"/>
+
+                            <h:outputText value="Moy. buts/match: "/>
+                            <h:outputText value="#{player.currentStat.avgGoalPerMatch}" style="font-weight: bold"/>
+
+                            <h:outputText value="Nb de passes: "/>
+                            <h:outputText value="#{player.currentStat.nbAssist}" style="font-weight: bold"/>
+
+                            <h:outputText value="Moy. passes/match: "/>
+                            <h:outputText value="#{player.currentStat.avgAssistPerMatch}" style="font-weight: bold"/>
+
+                            <h:outputText value="Nb de matches: "/>
+                            <h:outputText value="#{player.currentStat.nbMatch}" style="font-weight: bold"/>
+
+                            <h:outputText value="Nb d'entrainements: "/>
+                            <h:outputText value="#{player.currentStat.nbWorkout}" style="font-weight: bold"/>
+
+                            <h:outputText value="Temps de jeu: "/>
+                            <h:outputText value="#{player.currentStat.timePlayed}" style="font-weight: bold"/>
+
+                            <h:outputText value="Note moyenne: "/>
+                            <h:outputText value="#{player.currentStat.avgNote}" style="font-weight: bold"/>
+
+                        </h:panelGrid>
+                    </p:tab>
+                    <p:tab title="Profil">
+                        <h:graphicImage id="chart" height="90"
+                                        style="border: 4px double #6F6E6E;"
+                                        url="#{player.currentProfile.profileChartUrl}"/>
+                    </p:tab>
+                    <p:tab title="Postes" titletip="Postes">
+                        <p:dataList value="#{player.famPlayerPositionList}" var="position" type="definition">
+
+                            <f:facet name="description">
+                                <!--                                <h:outputText value="#{position.numOrder}"/>-->
+                                <h:outputText value="#{position.famPosition.libPosition}"/>
+                            </f:facet>
+                        </p:dataList>
+                    </p:tab>
+                </p:carousel>
+            </h:panelGrid>
+            <p:draggable for="photo"
+                         revert="true"
+                         handle=".ui-panel-titlebar"
+                         stack=".ui-panel"
+                    />
+
+        </p:tab>
+    </p:accordionPanel>
+</ui:composition>
+
