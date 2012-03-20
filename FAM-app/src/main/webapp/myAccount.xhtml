@@ -1,0 +1,139 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="Mon compte"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <c:if test="${not empty login.currentUser.currentClub}">
+            <style type="text/css"
+                   media="screen">@import "${request.contextPath}/${login.currentUser.currentClub.idClub}/css/default.css";</style>
+        </c:if>
+        <h:form>
+            <p:panel header="Mon compte">
+                <!--<p>Hi, <shiro:guest>Guest</shiro:guest>-->
+                <!--<shiro:user><shiro:principal/></shiro:user>!-->
+                <!--</p>-->
+                <p:tabView>
+                    <p:tab title="User">
+                        <h:panelGrid columns="3">
+                            <!--                    <h:outputLabel value="#{bundle.EditFamUserLabel_idUser}" for="idUser" />
+                         <p:inputText id="idUser"
+                                      value="#{login.currentUser.idUser}"
+                                      title="#{bundle.EditFamUserTitle_idUser}"
+                                      >
+                             <p:ajax event="blur" update="msg_idUser"/>
+                         </p:inputText>
+                         <p:message id="msg_idUser" for="idUser"/> -->
+
+                            <h:outputLabel value="#{bundle.EditFamUserLabel_firstName}" for="usrFirstName"/>
+                            <p:inplace>
+                                <p:inputText id="usrFirstName"
+                                             value="#{login.currentUser.firstName}"
+                                             title="#{bundle.EditFamUserTitle_firstName}"
+                                        >
+                                    <p:ajax event="blur" update="msg_usrFirstName"/>
+                                </p:inputText>
+                            </p:inplace>
+                            <p:message id="msg_usrFirstName" for="usrFirstName"/>
+
+                            <h:outputLabel value="#{bundle.EditFamUserLabel_lastName}" for="usrLastName"/>
+                            <p:inplace>
+                                <p:inputText id="usrLastName"
+                                             value="#{login.currentUser.lastName}"
+                                             title="#{bundle.EditFamUserTitle_lastName}"
+                                        >
+                                    <p:ajax event="blur" update="msg_usrLastName"/>
+                                </p:inputText>
+                            </p:inplace>
+                            <p:message id="msg_usrLastName" for="usrLastName"/>
+
+
+                            <!--                    <h:outputLabel value="#{bundle.EditFamUserLabel_password}" for="password" />
+                         <p:password id="password"
+                                     value="#{login.currentUser.password}"
+                                     feedback="false"
+                                     minLength="6"
+                                     >
+                             <p:ajax event="blur" update="msg_password"/>
+                         </p:password>
+                         <p:message id="msg_password" for="password"/> -->
+
+                            <h:outputLabel value="#{bundle.EditFamUserLabel_email}" for="usrEmail"/>
+                            <p:inplace>
+                                <p:inputText id="usrEmail"
+                                             value="#{login.currentUser.email}"
+                                             title="#{bundle.EditFamUserTitle_email}"
+                                        >
+                                    <p:ajax event="blur" update="msg_usrEmail"/>
+                                </p:inputText>
+                            </p:inplace>
+                            <p:message id="msg_usrEmail" for="usrEmail"/>
+
+                            <!--                    <h:outputLabel value="#{bundle.EditFamUserLabel_famClub}" for="famClub" />
+                         <p:inplace >
+                             <h:selectOneMenu id="famClub"
+                                              value="#{login.currentUser.famClub}"
+                                              title="#{bundle.EditFamUserTitle_famClub}"
+                                              >
+                                 <f:selectItem itemLabel="Club"
+                                               noSelectionOption="true"/>
+                                 <f:selectItems  value="#{cacheBean.listClub}"
+                                                 var="n"
+                                                 itemValue="#{n}"
+                                                 itemLabel="#{n.libClub}"/>
+                                 <p:ajax event="blur" update="msg_famClub"/>
+                             </h:selectOneMenu>
+                         </p:inplace>
+                         <p:message id="msg_famClub" for="famClub"/> -->
+
+                        </h:panelGrid>
+                        <p:commandButton value="#{bundle.EditFamUserSaveLink}"
+                                         action="#{login.update}"
+                                         immediate="true"/>
+                        <p:commandButton value="#{bundle.Cancel}"
+                                         action="#{login.prepareMyAccount}"
+                                         immediate="true"/>
+                    </p:tab>
+                    <!--                    myPlayer-->
+                    <p:tab title="MyPlayer">
+                        <c:if test="${not empty cachePlayer}">
+                            <ui:include src="${pageContext.request.servletPath}/pages/famPlayer/view.xhtml">
+                                <ui:param name="bean" value="#{cachePlayer.currentPlayer}"/>
+                            </ui:include>
+                        </c:if>
+                        <c:if test="${empty cachePlayer}">
+                            <h1>Pa de joueur encore sélectionné</h1>
+                        </c:if>
+                        <p:commandButton value="#{bundle.EditMyAccountCalcStatLink}"
+                                         action="#{famPlayerSeasonFacade.calcStatForPlayerAndCurrentSeason(cachePlayer.currentPlayer)}"
+                                         immediate="true"
+                                         update="@form"/>
+                    </p:tab>
+                    <p:tab title="MyClub"
+                           rendered="#{not empty login.currentUser.currentClub}">
+                        <ui:include src="${pageContext.request.servletPath}/pages/famClub/view.xhtml">
+                            <ui:param name="bean" value="#{login.currentUser.currentClub}"/>
+                        </ui:include>
+
+                        <!--                        <c:if test="#{not empty login.currentUser.famPlayer}">
+                            <ui:include src="/pages/famPlayer/view.xhtml">
+                                <ui:param name="bean" value="#{login.currentUser.famPlayer}" />
+                            </ui:include>
+                        </c:if>
+                        <c:if test="#{empty login.currentUser.famPlayer}">
+                            <h1>Pa de joueur encore sélectionné</h1>
+                        </c:if>-->
+                    </p:tab>
+                </p:tabView>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

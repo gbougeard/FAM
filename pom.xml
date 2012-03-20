@@ -2,147 +2,103 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>org.fam</groupId>
-    <artifactId>FAM</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <artifactId>FAM-parent</artifactId>
+    <version>1.0</version>
+    <packaging>pom</packaging>
+    <name>00 - Parent of FAM</name>
 
-    <name>FAM Web App</name>
+    <modules>
+        <module>FAM-app</module>
+        <module>FAM-admin</module>
+    </modules>
 
     <properties>
-        <theme.version>1.0.3</theme.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <charts4j.version>1.3</charts4j.version>
-        <primefaces.version>3.1</primefaces.version>
-        <openid4java.version>0.9.5</openid4java.version>
+        <version.junit>4.10</version.junit>
+        <version.hibernate.validator>4.2.0.Final</version.hibernate.validator>
+        <version.glassfish>3.1.2</version.glassfish>
+        <version.arquillian>1.0.0.CR7</version.arquillian>
+        <version.arquillian.glassfish.embedded>1.0.0.CR2</version.arquillian.glassfish.embedded>
+        <version.mockito>1.9.0</version.mockito>
+        <version.maven.embedded.glassfish.plugin>3.1.2</version.maven.embedded.glassfish.plugin>
+
+        <version.maven.war.plugin>2.1.1</version.maven.war.plugin>
+        <version.maven.compiler.plugin>2.3.2</version.maven.compiler.plugin>
+        <version.maven.failsafe.plugin>2.12</version.maven.failsafe.plugin>
+
+        <version.jelastic.plugin>1.6-SNAPSHOT</version.jelastic.plugin>
 
         <maven.compiler.source>1.6</maven.compiler.source>
         <maven.compiler.target>1.6</maven.compiler.target>
-        <maven.war.plugin.version>2.1.1</maven.war.plugin.version>
-        <maven.compiler.plugin.version>2.3.2</maven.compiler.plugin.version>
 
-        <eclipselink.version>2.3.0</eclipselink.version>
-        <persistence.version>2.0.3</persistence.version>
-        <junit.version>4.8.2</junit.version>
+        <version.primefaces>3.2</version.primefaces>
+        <version.primefaces.themes>1.0.4</version.primefaces.themes>
+        <version.primefaces.extensions>0.4.0</version.primefaces.extensions>
+
+        <version.charts4j>1.3</version.charts4j>
+        <version.openid4java>0.9.5</version.openid4java>
+        <version.prettyfaces>3.3.3</version.prettyfaces>
+        <version.geocoder>0.9</version.geocoder>
+        <version.datafactory>0.8</version.datafactory>
+        <version.lombok>0.10.8</version.lombok>
+        <version.metrics>2.1.1</version.metrics>
+        <version.slf4j>1.6.4</version.slf4j>
+
+        <version.eclipselink>2.3.2</version.eclipselink>
+        <version.persistence>2.0.3</version.persistence>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <netbeans.hint.deploy.server>gfv3ee6</netbeans.hint.deploy.server>
+        <netbeans.hint.j2eeVersion>1.6</netbeans.hint.j2eeVersion>
+
+        <jelastic.username></jelastic.username>
+        <jelastic.password></jelastic.password>
+
     </properties>
 
-    <repositories>
-        <repository>
-            <id>prime-repo</id>
-            <name>PrimeFaces Maven Repository</name>
-            <url>http://repository.primefaces.org</url>
-            <layout>default</layout>
-        </repository>
-        <repository>
-            <name>Repository hosting the jee6 artifacts</name>
-            <id>java.net</id>
-            <url>http://download.java.net/maven/2</url>
-        </repository>
-        <repository>
-            <name>EclipseLink</name>
-            <id>EclipseLink</id>
-            <url>http://www.eclipse.org/downloads/download.php?r=1&amp;nf=1&amp;file=/rt/eclipselink/maven.repo/</url>
-        </repository>
-        <repository>
-            <id>maven2-repository.dev.java.net.glassfish</id>
-            <name>Java.net Repository for Maven</name>
-            <url>http://download.java.net/maven/glassfish/</url>
-        </repository>
-        <repository>
-            <id>jboss</id>
-            <name>JBoss Repository</name>
-            <url>http://repository.jboss.org/nexus/content/groups/public-jboss/</url>
-        </repository>
-        <repository>
-            <url>http://download.eclipse.org/rt/eclipselink/maven.repo/</url>
-            <id>eclipselink</id>
-            <layout>default</layout>
-            <name>Repository for library Library[eclipselink]</name>
-        </repository>
-        <repository>
-            <id>geocoder-java</id>
-            <url>https://geocoder-java.googlecode.com/svn/mavenrepo</url>
-        </repository>
-        <repository>
-            <id>openid4java snapshots repository</id>
-            <name>openid4java snapshots repository</name>
-            <url>https://oss.sonatype.org/content/repositories/openid4java-snapshots</url>
-            <snapshots/>
-        </repository>
-        <repository>
-            <id>guice</id>
-            <url>http://guice-maven.googlecode.com/svn/trunk</url>
-        </repository>
-    </repositories>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <name>Glassfish</name>
-            <id>Glassfish</id>
-            <url>http://download.java.net/maven/glassfish/</url>
-        </pluginRepository>
-
-        <pluginRepository>
-            <name>JRebel</name>
-            <id>JRebel</id>
-            <url>http://repos.zeroturnaround.com/maven2/org/zeroturnaround/javarebel-maven-plugin/</url>
-        </pluginRepository>
-
-        <pluginRepository>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <id>central</id>
-            <name>plugins-release</name>
-            <url>http://maven.jelastic.com/plugins-release</url>
-        </pluginRepository>
-        <pluginRepository>
-            <snapshots/>
-            <id>snapshots</id>
-            <name>plugins-snapshot</name>
-            <url>http://maven.jelastic.com/plugins-snapshot</url>
-        </pluginRepository>
-    </pluginRepositories>
 
     <dependencies>
         <!-- This imports the Java EE 6 runtime libraries provided by GlassFish
 			Embedded -->
         <dependency>
-            <groupId>org.glassfish.extras</groupId>
+            <groupId>org.glassfish.main.extras</groupId>
             <artifactId>glassfish-embedded-all</artifactId>
-            <version>3.1.1</version>
+            <version>${version.glassfish}</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>0.10.6</version>
+            <version>${version.lombok}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.fluttercode.datafactory</groupId>
             <artifactId>datafactory</artifactId>
-            <version>0.8</version>
+            <version>${version.datafactory}</version>
             <type>jar</type>
         </dependency>
+
         <dependency>
             <groupId>com.google.code.geocoder-java</groupId>
             <artifactId>geocoder-java</artifactId>
-            <version>0.9</version>
+            <version>${version.geocoder}</version>
         </dependency>
         <dependency>
             <groupId>com.googlecode.charts4j</groupId>
             <artifactId>charts4j</artifactId>
-            <version>${charts4j.version}</version>
+            <version>${version.charts4j}</version>
         </dependency>
 
         <dependency>
             <groupId>org.openid4java</groupId>
             <artifactId>openid4java</artifactId>
-            <version>${openid4java.version}</version>
+            <version>${version.openid4java}</version>
             <type>pom</type>
         </dependency>
 
@@ -150,14 +106,10 @@
         <dependency>
             <groupId>com.ocpsoft</groupId>
             <artifactId>prettyfaces-jsf2</artifactId>
-            <version>3.3.2</version>
+            <version>${version.prettyfaces}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.primefaces</groupId>
-            <artifactId>primefaces</artifactId>
-            <version>${primefaces.version}</version>
-        </dependency>
+
 
         <!-- Logging and Language dependencies -->
         <dependency>
@@ -192,164 +144,200 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.6.4</version>
+            <version>${version.slf4j}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-jcl</artifactId>
-            <version>1.6.4</version>
+            <version>${version.slf4j}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.yammer.metrics</groupId>
+            <artifactId>metrics-core</artifactId>
+            <version>${version.metrics}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.yammer.metrics</groupId>
+            <artifactId>metrics-annotation</artifactId>
+            <version>${version.metrics}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.yammer.metrics</groupId>
+            <artifactId>metrics-servlet</artifactId>
+            <version>${version.metrics}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.yammer.metrics</groupId>
+            <artifactId>metrics-web</artifactId>
+            <version>${version.metrics}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.yammer.metrics</groupId>
+            <artifactId>metrics-httpclient</artifactId>
+            <version>${version.metrics}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>${version.primefaces}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.primefaces.extensions</groupId>
+            <artifactId>primefaces-extensions</artifactId>
+            <version>${version.primefaces.extensions}</version>
+        </dependency>
         <!--Primeface themes-->
         <dependency>
             <groupId>org.primefaces.themes</groupId>
             <artifactId>black-tie</artifactId>
-            <version>${theme.version}</version>
+            <version>${version.primefaces.themes}</version>
         </dependency>
         <dependency>
             <groupId>org.primefaces.themes</groupId>
             <artifactId>blitzer</artifactId>
-            <version>${theme.version}</version>
+            <version>${version.primefaces.themes}</version>
         </dependency>
         <dependency>
             <groupId>org.primefaces.themes</groupId>
             <artifactId>bluesky</artifactId>
-            <version>${theme.version}</version>
+            <version>${version.primefaces.themes}</version>
         </dependency>
         <dependency>
             <groupId>org.primefaces.themes</groupId>
             <artifactId>casablanca</artifactId>
-            <version>${theme.version}</version>
+            <version>${version.primefaces.themes}</version>
         </dependency>
         <dependency>
             <groupId>org.primefaces.themes</groupId>
             <artifactId>cupertino</artifactId>
-            <version>${theme.version}</version>
+            <version>${version.primefaces.themes}</version>
         </dependency>
         <dependency>
             <groupId>org.primefaces.themes</groupId>
             <artifactId>dark-hive</artifactId>
-            <version>${theme.version}</version>
+            <version>${version.primefaces.themes}</version>
         </dependency>
         <dependency>
             <groupId>org.primefaces.themes</groupId>
             <artifactId>dot-luv</artifactId>
-            <version>${theme.version}</version>
+            <version>${version.primefaces.themes}</version>
         </dependency>
         <dependency>
             <groupId>org.primefaces.themes</groupId>
             <artifactId>eggplant</artifactId>
-            <version>${theme.version}</version>
+            <version>${version.primefaces.themes}</version>
         </dependency>
         <dependency>
             <groupId>org.primefaces.themes</groupId>
             <artifactId>excite-bike</artifactId>
-            <version>${theme.version}</version>
+            <version>${version.primefaces.themes}</version>
         </dependency>
         <dependency>
             <groupId>org.primefaces.themes</groupId>
             <artifactId>flick</artifactId>
-            <version>${theme.version}</version>
+            <version>${version.primefaces.themes}</version>
         </dependency>
         <dependency>
             <groupId>org.primefaces.themes</groupId>
             <artifactId>glass-x</artifactId>
-            <version>${theme.version}</version>
+            <version>${version.primefaces.themes}</version>
         </dependency>
         <dependency>
             <groupId>org.primefaces.themes</groupId>
             <artifactId>home</artifactId>
-            <version>${theme.version}</version>
+            <version>${version.primefaces.themes}</version>
         </dependency>
         <dependency>
             <groupId>org.primefaces.themes</groupId>
             <artifactId>hot-sneaks</artifactId>
-            <version>${theme.version}</version>
+            <version>${version.primefaces.themes}</version>
         </dependency>
         <dependency>
             <groupId>org.primefaces.themes</groupId>
             <artifactId>humanity</artifactId>
-            <version>${theme.version}</version>
+            <version>${version.primefaces.themes}</version>
         </dependency>
         <dependency>
             <groupId>org.primefaces.themes</groupId>
             <artifactId>le-frog</artifactId>
-            <version>${theme.version}</version>
+            <version>${version.primefaces.themes}</version>
         </dependency>
         <dependency>
             <groupId>org.primefaces.themes</groupId>
             <artifactId>midnight</artifactId>
-            <version>${theme.version}</version>
+            <version>${version.primefaces.themes}</version>
         </dependency>
         <dependency>
             <groupId>org.primefaces.themes</groupId>
             <artifactId>mint-choc</artifactId>
-            <version>${theme.version}</version>
+            <version>${version.primefaces.themes}</version>
         </dependency>
         <dependency>
             <groupId>org.primefaces.themes</groupId>
             <artifactId>overcast</artifactId>
-            <version>${theme.version}</version>
+            <version>${version.primefaces.themes}</version>
         </dependency>
         <dependency>
             <groupId>org.primefaces.themes</groupId>
             <artifactId>pepper-grinder</artifactId>
-            <version>${theme.version}</version>
+            <version>${version.primefaces.themes}</version>
         </dependency>
         <dependency>
             <groupId>org.primefaces.themes</groupId>
             <artifactId>redmond</artifactId>
-            <version>${theme.version}</version>
+            <version>${version.primefaces.themes}</version>
         </dependency>
         <dependency>
             <groupId>org.primefaces.themes</groupId>
             <artifactId>rocket</artifactId>
-            <version>${theme.version}</version>
+            <version>${version.primefaces.themes}</version>
         </dependency>
         <dependency>
             <groupId>org.primefaces.themes</groupId>
             <artifactId>smoothness</artifactId>
-            <version>${theme.version}</version>
+            <version>${version.primefaces.themes}</version>
         </dependency>
         <dependency>
             <groupId>org.primefaces.themes</groupId>
             <artifactId>south-street</artifactId>
-            <version>${theme.version}</version>
+            <version>${version.primefaces.themes}</version>
         </dependency>
         <dependency>
             <groupId>org.primefaces.themes</groupId>
             <artifactId>start</artifactId>
-            <version>${theme.version}</version>
+            <version>${version.primefaces.themes}</version>
         </dependency>
         <dependency>
             <groupId>org.primefaces.themes</groupId>
             <artifactId>sunny</artifactId>
-            <version>${theme.version}</version>
+            <version>${version.primefaces.themes}</version>
         </dependency>
         <dependency>
             <groupId>org.primefaces.themes</groupId>
             <artifactId>swanky-purse</artifactId>
-            <version>${theme.version}</version>
+            <version>${version.primefaces.themes}</version>
         </dependency>
         <dependency>
             <groupId>org.primefaces.themes</groupId>
             <artifactId>trontastic</artifactId>
-            <version>${theme.version}</version>
+            <version>${version.primefaces.themes}</version>
         </dependency>
         <dependency>
             <groupId>org.primefaces.themes</groupId>
             <artifactId>ui-darkness</artifactId>
-            <version>${theme.version}</version>
+            <version>${version.primefaces.themes}</version>
         </dependency>
         <dependency>
             <groupId>org.primefaces.themes</groupId>
             <artifactId>ui-lightness</artifactId>
-            <version>${theme.version}</version>
+            <version>${version.primefaces.themes}</version>
         </dependency>
         <dependency>
             <groupId>org.primefaces.themes</groupId>
             <artifactId>vader</artifactId>
-            <version>${theme.version}</version>
+            <version>${version.primefaces.themes}</version>
         </dependency>
 
 
@@ -361,21 +349,21 @@
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>javax.persistence</artifactId>
-            <version>${persistence.version}</version>
+            <version>${version.persistence}</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>eclipselink</artifactId>
-            <version>${eclipselink.version}</version>
+            <version>${version.eclipselink}</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>4.1.0.Final</version>
+            <version>${version.hibernate.validator}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -387,9 +375,21 @@
         </dependency>
 
         <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>${version.mockito}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
+            <version>${version.junit}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.arquillian.junit</groupId>
+            <artifactId>arquillian-junit-container</artifactId>
+            <version>${version.arquillian}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -399,39 +399,37 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
+                <version>${version.maven.compiler.plugin}</version>
+                <inherited>true</inherited>
                 <configuration>
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
-                    <!--                    <compilerArguments>
-                        <endorseddirs>${endorsed.dir}</endorseddirs>
-                    </compilerArguments>-->
+                    <source>1.6</source>
+                    <target>1.6</target>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>2.1.1</version>
+                <version>${version.maven.war.plugin}</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>com.jelastic</groupId>
-                <artifactId>jelastic-maven-plugin</artifactId>
-                <version>1.6-SNAPSHOT</version>
-                <configuration>
-                    <email>${jelastic.username}</email>
-                    <password>${jelastic.password}</password>
-                    <context>dev</context>
-                    <environment>gougeard</environment>
-                    <api_hoster>api.jelastic.com</api_hoster>
-                </configuration>
-            </plugin>
+            <!--<plugin>-->
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-failsafe-plugin</artifactId>-->
+            <!--<version>${version.maven.failsafe.plugin}</version>-->
+            <!--<configuration>-->
+            <!--</configuration>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<goals>-->
+            <!--<goal>integration-test</goal>-->
+            <!--<goal>verify</goal>-->
+            <!--</goals>-->
+            <!--</execution>-->
+            <!--</executions>-->
+            <!--</plugin>-->
         </plugins>
-
-        <finalName>FAM</finalName>
-
     </build>
 
     <reporting>
