@@ -11,7 +11,7 @@
     <ui:define name="titre">Test</ui:define>
     <ui:define name="body">
         <center>
-            <h:outputLabel>#{fn:length(cacheBean.listClub)} clubs</h:outputLabel>
+            <h:outputText value="#{fn:length(cacheBean.listClub)} clubs"/>
 
 
             <h:form id="loginForm">
@@ -154,11 +154,11 @@
                         onclick="pbAjax.start();startButton.disable();"
                         immediate="true"
                         />
-                <p:commandButton
-                                  value="Create Player"
-                                  actionListener="#{bootstrap.createPlayer}"
-                                  immediate="true"
-                        />
+                <!--<p:commandButton-->
+                                  <!--value="Create Player"-->
+                                  <!--actionListener="#{bootstrap.createPlayer}"-->
+                                  <!--immediate="true"-->
+                        <!--/>-->
                 <p:growl id="growl" />
 
 

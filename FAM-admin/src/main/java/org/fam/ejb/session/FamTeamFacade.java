@@ -8,7 +8,6 @@ package org.fam.ejb.session;
 import org.fam.common.interceptor.AuditInterceptor;
 import org.fam.common.interceptor.LoggingInterceptor;
 import org.fam.ejb.model.FamTeam;
-import org.fam.ejb.model.FamUser;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -45,7 +44,4 @@ public class FamTeamFacade extends AbstractFacade<FamTeam> {
         }
     }
 
-    public void setCurrentUser(FamUser currentUser) {
-        this.currentUser = currentUser;
-    }
 }

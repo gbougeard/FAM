@@ -36,9 +36,9 @@ public class AbstractFacade<T> {
     @PersistenceContext//(unitName = "FAM-test-ejbPU")
     private EntityManager em;
     //
-    @Inject
-    @LoggedIn
-    protected FamUser currentUser;
+//    @Inject
+//    @LoggedIn
+//    protected FamUser currentUser;
 
 
     /**

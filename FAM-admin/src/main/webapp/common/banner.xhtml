@@ -113,26 +113,23 @@
                     </p:column>
                 </p:themeSwitcher>-->
                 <h:form prependId="false">
-                    <h:outputLabel>#{fn:length(availableThemes.themes)} themes</h:outputLabel>
-                    <h:outputLabel>#{fn:length(userSettings.availableThemes.themes)} themes from user</h:outputLabel>
-                    <p:themeSwitcher style="width:150px" effect="fade" var="t" value="#{userSettings.currentTheme}">
-                        <f:selectItem itemLabel="Choose Theme" itemValue=""/>
-                        <!--<f:selectItems value="#{userSettings.availableThemes.themes}"-->
-                        <f:selectItems value="#{availableThemes.themes}"
 
-                                       var="theme"
-                                       itemLabel="#{theme.name}"
-                                       itemValue="#{theme}"/>
-                        <p:column>
-                            <!--<p:graphicImage value="/images/themes/#{t.image}" width="90" height="60"/>-->
-                            <h:graphicImage library="images/themes" name="${t.image}" width="90" height="60"/>
-                            <!--rendered="${not empty theme.image}"-->
-                        </p:column>
-                        <p:column>
-                            #{t.name}
-                        </p:column>
+
+                    <p:themeSwitcher style="width:150px" effect="fade" var="t" value="#{userSettings.currentTheme}" id="defaultSwitcher" >
+                        <p:ajax listener="#{userSettings.onChange}" />
+                        <f:selectItem itemLabel="Choose Theme" itemValue=""/>
+                        <!--itemLabel="#{theme.name}"-->
+                        <f:selectItems value="#{availableThemes.themes}"/>
+                                       <!--var="theme"-->
+                                       <!--itemLabel="#{theme.name}"-->
+                                       <!--itemValue="#{theme}"/>-->
+                        <!--<p:column>-->
+                            <!--<h:graphicImage library="images/themes" name="${theme.image}" width="90" height="60"/>-->
+                        <!--</p:column>-->
+                        <!--<p:column>-->
+                            <!--#{theme.name}-->
+                        <!--</p:column>-->
                     </p:themeSwitcher>
-                    <!--<cc:themeSwitcher id="themeSwitcher"/>-->
                 </h:form>
 
             </p:layoutUnit>

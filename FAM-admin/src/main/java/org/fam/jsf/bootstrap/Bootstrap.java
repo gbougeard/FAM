@@ -12,10 +12,12 @@ import org.fluttercode.datafactory.impl.DataFactory;
 import org.joda.time.DateTime;
 import org.primefaces.event.DragDropEvent;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.*;
+import javax.ejb.AsyncResult;
+import javax.ejb.Asynchronous;
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -48,92 +50,92 @@ public class Bootstrap implements Serializable {
     private FamClubFacade ejbClub;
     private final List<FamClub> listClub = new ArrayList<FamClub>();
     // TEAMS
-    @EJB
+    @Inject
     private FamTeamFacade ejbTeam;
     private final List<FamTeam> listTeam = new ArrayList<FamTeam>();
     // ORGANIZATIONS
-    @EJB
+    @Inject
     private FamOrganizationFacade ejbOrganization;
     private final List<FamOrganization> listOrganization = new ArrayList<FamOrganization>();
     // SEASONS
-    @EJB
+    @Inject
     private FamSeasonFacade ejbSeason;
     private final List<FamSeason> listSeason = new ArrayList<FamSeason>();
     // TYP_EVENT
-    @EJB
+    @Inject
     private FamTypEventFacade ejbTypEvent;
     private final List<FamTypEvent> listTypEvent = new ArrayList<FamTypEvent>();
     // TYP_CARD
-    @EJB
+    @Inject
     private FamTypCardFacade ejbTypCard;
     private final List<FamTypCard> listFamTypCard = new ArrayList<FamTypCard>();
     // SCALE
-    @EJB
+    @Inject
     private FamScaleFacade ejbScale;
     private final List<FamScale> listScale = new ArrayList<FamScale>();
     // EVENT STATUS
-    @EJB
+    @Inject
     private FamEventStatusFacade ejbEventStatus;
     private final List<FamEventStatus> listEventStatus = new ArrayList<FamEventStatus>();
     // TYP_PLACE
-    @EJB
+    @Inject
     private FamTypPlaceFacade ejbTypPlace;
     private final List<FamTypPlace> listTypPlace = new ArrayList<FamTypPlace>();
     // TYP_COMPETITION
-    @EJB
+    @Inject
     private FamTypCompetitionFacade ejbTypCompetition;
     private final List<FamTypCompetition> listTypCompetition = new ArrayList<FamTypCompetition>();
     // TYP_ABSENCE
-    @EJB
+    @Inject
     private FamTypAbsenceFacade ejbTypAbsence;
     private final List<FamTypAbsence> listTypAbsence = new ArrayList<FamTypAbsence>();
     // TYP_ANSWER
-    @EJB
+    @Inject
     private FamTypAnswerFacade ejbTypAnswer;
     private final List<FamTypAnswer> listTypAnswer = new ArrayList<FamTypAnswer>();
     // POSITION
-    @EJB
+    @Inject
     private FamPositionFacade ejbPosition;
     private final List<FamPosition> listPosition = new ArrayList<FamPosition>();
     // TYP_MATCH
-    @EJB
+    @Inject
     private FamTypMatchFacade ejbTypMatch;
     private final List<FamTypMatch> listTypMatch = new ArrayList<FamTypMatch>();
     // EVENT
-    @EJB
+    @Inject
     private FamEventFacade ejbEvent;
     private final List<FamEvent> listEvent = new ArrayList<FamEvent>();
     // SEASON COMPETITION
-    @EJB
+    @Inject
     private FamSeasonCompetitionFacade ejbSeasonCompetition;
     private final List<FamSeasonCompetition> listSeasonCompetition = new ArrayList<FamSeasonCompetition>();
     // USER
-    @EJB
+    @Inject
     private FamUserFacade ejbUser;
     private final List<FamUser> listUser = new ArrayList<FamUser>();
     // PLAYER
-    @EJB
+    @Inject
     private FamPlayerFacade ejbPlayer;
     private final List<FamPlayer> listPlayer = new ArrayList<FamPlayer>();
     // STAFF FUNCTION
-    @EJB
+    @Inject
     private FamStaffFunctionFacade ejbStaffFunction;
     private final List<FamStaffFunction> listStaffFunction = new ArrayList<FamStaffFunction>();
     // EVENT
-    @EJB
+    @Inject
     private FamWorkoutFacade ejbWorkout;
     private final List<FamWorkout> listWorkout = new ArrayList<FamWorkout>();
     // COUNTRY
-    @EJB
+    @Inject
     private FamCountryFacade ejbCountry;
     // STATE
-    @EJB
+    @Inject
     private FamStateFacade ejbState;
     // PROVINCE
-    @EJB
+    @Inject
     private FamProvinceFacade ejbProvince;
     //CITY
-    @EJB
+    @Inject
     private FamCityFacade ejbCity;
     //
     private FamUser toto;
@@ -144,7 +146,7 @@ public class Bootstrap implements Serializable {
     // 
     @PostConstruct
     void postConstruct() {
-        LOGGER.info("IN: InitData:PostConstruct");
+        LOGGER.debug("PostConstruct");
 //        checkInitDone();
     }
 
@@ -260,6 +262,7 @@ public class Bootstrap implements Serializable {
     }
 
     public void checkInitDone() {
+        LOGGER.debug("checkInitDone");
         try {
             this.initDone = (ejbPosition.findAll().size() > 0);
         } catch (Exception e) {

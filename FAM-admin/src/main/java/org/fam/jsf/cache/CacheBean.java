@@ -7,21 +7,17 @@ package org.fam.jsf.cache;
 import com.yammer.metrics.Metrics;
 import com.yammer.metrics.core.Counter;
 import lombok.Getter;
-import org.fam.common.interceptor.AuditInterceptor;
-import org.fam.common.interceptor.LoggingInterceptor;
 import org.fam.ejb.model.*;
 import org.fam.ejb.session.*;
 import org.fam.jsf.bootstrap.Bootstrap;
 import org.slf4j.Logger;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.DependsOn;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.interceptor.Interceptors;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -30,13 +26,13 @@ import java.util.TimeZone;
 /**
  * @author mask_hot
  */
+@Named
 // Does not work
 @Startup
-@DependsOn("Bootstrap")
-@Named
+//@DependsOn("Bootstrap")
 @Singleton
 @Getter
-@Interceptors({AuditInterceptor.class, LoggingInterceptor.class})
+//@Interceptors({AuditInterceptor.class, LoggingInterceptor.class})
 public class CacheBean {
 
     //    private static final Logger LOGGER = LoggerFactory.getLogger(CacheBean.class);
@@ -144,9 +140,7 @@ public class CacheBean {
 
     @PostConstruct
     void postConstruct() {
-        if (LOGGER.isInfoEnabled()) {
-            LOGGER.info("IN: CacheBean:PostConstruct");
-        }
+        LOGGER.debug("PostConstruct");
         count.inc();
 
 //        if (!bootstrap.getInitDone()) {
@@ -168,6 +162,7 @@ public class CacheBean {
         try {
 //            int i = ejbPosition.findAll().size();
 //            LOGGER.debug(i + " positions");
+            LOGGER.trace("Init done?");
             if (bootstrap.getInitDone()) {
 //            if (!ejbPosition.findAll().isEmpty()) {
                 initCache();

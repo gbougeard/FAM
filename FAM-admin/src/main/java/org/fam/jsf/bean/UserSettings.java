@@ -26,15 +26,10 @@ public class UserSettings implements Serializable {
 
     private static final String DEFAULT_THEME = "home";
 
-    @Inject
-    private AvailableThemes availableThemes;
-
-//    private List<Theme> availableThemes;
-    private Theme currentTheme;
+//    private Theme currentTheme;
+    private String currentTheme;
 
     public UserSettings() {
-//        availableThemes = AvailableThemes.getInstance();
-//        currentTheme = availableThemes.getThemeForName(DEFAULT_THEME);
     }
 
     @PostConstruct
@@ -42,30 +37,32 @@ public class UserSettings implements Serializable {
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("init");
         }
-        currentTheme = availableThemes.getThemeForName(DEFAULT_THEME);
+//        currentTheme = availableThemes.getThemeForName(DEFAULT_THEME);
+        currentTheme = DEFAULT_THEME;
     }
 
 
-    public Theme getCurrentTheme() {
+//    public Theme getCurrentTheme() {
+//        return currentTheme;
+//    }
+//
+//    public void setCurrentTheme(Theme currentTheme) {
+//        LOGGER.warn(String.format("OLD theme : %s", currentTheme.getName()));
+//        this.currentTheme = currentTheme;
+//        LOGGER.warn(String.format("NEW theme : %s", this.currentTheme.getName()));
+//    }
+    public String getCurrentTheme() {
         return currentTheme;
     }
 
-    public void setCurrentTheme(Theme currentTheme) {
-        if (LOGGER.isInfoEnabled()) {
-            LOGGER.info(String.format("OLD theme : %s", currentTheme.getName()));
-        }
+    public void setCurrentTheme(String currentTheme) {
+        LOGGER.warn(String.format("OLD theme : %s", currentTheme));
         this.currentTheme = currentTheme;
-        if (LOGGER.isInfoEnabled()) {
-            LOGGER.info(String.format("NEW theme : %s", this.currentTheme.getName()));
-        }
+        LOGGER.warn(String.format("NEW theme : %s", this.currentTheme));
     }
 
-    public void setAvailableThemes(AvailableThemes availableThemes) {
-        this.availableThemes = availableThemes;
-    }
-
-    public AvailableThemes getAvailableThemes() {
-        return availableThemes;
+    public void onChange(){
+        LOGGER.warn("onChange()");
     }
 
     public void setLOGGER(Logger LOGGER) {

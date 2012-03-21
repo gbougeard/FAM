@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
+import javax.ejb.Startup;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -21,7 +22,7 @@ import java.util.List;
  */
 @Named
 @Singleton
-//@Startup
+@Startup
 //@Lock(LockType.READ)
 public class AvailableThemes implements Serializable {
     private static final long serialVersionUID = -7546671249075892398L;
@@ -99,7 +100,7 @@ public class AvailableThemes implements Serializable {
         LOGGER.debug(themes.size()+" themes loaded");
     }
 
-    public final List<Theme> getThemes() {
+    public List<Theme> getThemes() {
         return themes;
     }
 

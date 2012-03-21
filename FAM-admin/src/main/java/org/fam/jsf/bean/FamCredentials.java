@@ -6,7 +6,6 @@ package org.fam.jsf.bean;
 
 import org.fam.common.log.LogUtil;
 
-import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -67,8 +66,5 @@ public class FamCredentials implements Serializable {
 //        LogUtil.log("setPassword " + passwordConfirmed, Level.OFF, null);
 //        this.passwordConfirmed = passwordConfirmed;
 //    }
-    @PostConstruct
-    void init() {
-        LogUtil.log("construct FamCredentials", Level.INFO, null);
-    }
+
 }

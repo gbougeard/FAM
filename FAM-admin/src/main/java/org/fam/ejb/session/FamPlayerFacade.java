@@ -12,7 +12,6 @@ import org.fam.ejb.model.FamPlayerSeason;
 import org.fam.ejb.model.FamUser;
 import org.fam.ejb.util.ChartUtil;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -47,8 +46,8 @@ public class FamPlayerFacade extends AbstractFacade<FamPlayer> {
 //    @LoggedIn
 //    private FamUser currentUser;
 
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(FamPlayerFacade.class);
+    @Inject
+    private Logger LOGGER;
 
     /**
      *
@@ -178,7 +177,7 @@ public class FamPlayerFacade extends AbstractFacade<FamPlayer> {
         this.ejbSeason = ejbSeason;
     }
 
-    public void setCurrentUser(FamUser currentUser) {
-        this.currentUser = currentUser;
+    public void setLOGGER(Logger LOGGER) {
+        this.LOGGER = LOGGER;
     }
 }
