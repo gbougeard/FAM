@@ -5,7 +5,6 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 
         >
 <ui:component>
@@ -115,20 +114,21 @@
                 <h:form prependId="false">
 
 
-                    <p:themeSwitcher style="width:150px" effect="fade" var="t" value="#{userSettings.currentTheme}" id="defaultSwitcher" >
-                        <p:ajax listener="#{userSettings.onChange}" />
+                    <p:themeSwitcher style="width:150px" effect="fade" var="t" value="#{userSettings.currentTheme}"
+                                     id="defaultSwitcher">
+                        <p:ajax listener="#{userSettings.onChange}"/>
                         <f:selectItem itemLabel="Choose Theme" itemValue=""/>
                         <!--itemLabel="#{theme.name}"-->
-                        <f:selectItems value="#{availableThemes.themes}"/>
-                                       <!--var="theme"-->
-                                       <!--itemLabel="#{theme.name}"-->
-                                       <!--itemValue="#{theme}"/>-->
-                        <!--<p:column>-->
-                            <!--<h:graphicImage library="images/themes" name="${theme.image}" width="90" height="60"/>-->
-                        <!--</p:column>-->
-                        <!--<p:column>-->
-                            <!--#{theme.name}-->
-                        <!--</p:column>-->
+                        <f:selectItems value="#{availableThemes.themes}"
+                                       var="theme"
+                                       itemLabel="#{theme.name}"
+                                       itemValue="#{theme}"/>
+                        <p:column>
+                            <h:graphicImage library="images/themes" name="${theme.image}" width="90" height="60"/>
+                        </p:column>
+                        <p:column>
+                            #{theme.name}
+                        </p:column>
                     </p:themeSwitcher>
                 </h:form>
 
