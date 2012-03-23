@@ -1,5 +1,7 @@
 package org.fam.jsf.controller;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.fam.common.cdi.LoggedIn;
 import org.fam.common.cdi.Player;
 import org.fam.ejb.model.*;
@@ -15,25 +17,28 @@ import org.primefaces.event.ScheduleEntryResizeEvent;
 import org.primefaces.event.ScheduleEntrySelectEvent;
 import org.primefaces.model.*;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
 
 @ManagedBean(name = "famEventController")
 @ViewScoped
+@Getter
+@Setter
 public class FamEventController extends AbstractController<FamEvent> implements Serializable {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(FamEventController.class);
+    private static final long serialVersionUID = -6296773571175172927L;
+    @Inject
+    private Logger LOGGER;
 
     @EJB
     private FamEventFacade ejbFacade;
@@ -61,18 +66,25 @@ public class FamEventController extends AbstractController<FamEvent> implements 
     @Player
     private FamPlayer currentPlayer;
     private FamAnswer currentUserAnswer;
+    //
+    private Date now;
 
     public FamEventController() {
     }
 
     @PostConstruct
     private void postConstruct() {
-        LOGGER.info(this.getClass() + " - postConstruct");
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug(" - postConstruct");
+        }
+        now = new Date();
     }
 
     @PreDestroy
     private void preDestroy() {
-        LOGGER.info(this.getClass() + " - preDestroy");
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug(" - preDestroy");
+        }
     }
 
     @Override
@@ -131,7 +143,9 @@ public class FamEventController extends AbstractController<FamEvent> implements 
 
             @Override
             public void loadEvents(Date dtStart, Date dtEnd) {
-                LOGGER.info("loadEvent " + dtStart + " " + dtEnd);
+                if (LOGGER.isInfoEnabled()) {
+                    LOGGER.info("loadEvent " + dtStart + " " + dtEnd);
+                }
 
                 items = ejbFacade.find(dtStart, dtEnd);
                 for (FamEvent evt : items) {
@@ -142,12 +156,16 @@ public class FamEventController extends AbstractController<FamEvent> implements 
                     e.setAllDay(evt.getAllDay());
                     e.setData(evt);
                     if (evt.getFamTypEvent().getCodTypEvent().equals("M")) {
-                        LOGGER.info("MatchEvent", Level.OFF, null);
+                        if (LOGGER.isDebugEnabled()) {
+                            LOGGER.debug("MatchEvent");
+                        }
                         e.setStyleClass("redEvent");
                     } else {
                         e.setStyleClass("greenEvent");
                     }
-                    LOGGER.info("dayofWeek " + dtS.getDayOfWeek());
+                    if (LOGGER.isInfoEnabled()) {
+                        LOGGER.info("dayofWeek " + dtS.getDayOfWeek());
+                    }
 
                     addEvent(e);
                 }
@@ -163,7 +181,9 @@ public class FamEventController extends AbstractController<FamEvent> implements 
 
     public DualListModel<FamTeam> getTeams() {
         if (cacheBean == null) {
-            LOGGER.info("cacheBean NULL", Level.WARNING, null);
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("cacheBean NULL");
+            }
         }
         List<FamTeam> source = new ArrayList<FamTeam>();
         source.addAll(cachePlayer.getListTeam());
@@ -180,27 +200,18 @@ public class FamEventController extends AbstractController<FamEvent> implements 
         return teams;
     }
 
-    public void setTeams(DualListModel<FamTeam> teams) {
-        this.teams = teams;
-    }
 
-    public CacheBean getCacheBean() {
-        return cacheBean;
-    }
+    public void addEvent(ActionEvent actionEvent) {
 
-    public void setCacheBean(CacheBean cacheBean) {
-        this.cacheBean = cacheBean;
-    }
-
-    //    public void addEvent(ActionEvent actionEvent) {
 //        if (event.getId() == null) {
 //            eventModel.addEvent(event);
 //        } else {
 //            eventModel.updateEvent(event);
 //        }
-//
-//        event = new DefaultScheduleEvent();
-//    }
+
+        event = new DefaultScheduleEvent();
+    }
+
     public Long getEventId() {
         return ((FamEvent) event.getData()).getIdEvent();
     }
@@ -224,9 +235,11 @@ public class FamEventController extends AbstractController<FamEvent> implements 
 //        addMessage(message);
 
         current = (FamEvent) event.getData();
-        LOGGER.info("move " + event, Level.OFF, null);
-        LOGGER.info("dayDelta " + dayDelta, Level.OFF, null);
-        LOGGER.info("minuteDelta " + minuteDelta, Level.OFF, null);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("move " + event);
+            LOGGER.debug("dayDelta " + dayDelta);
+            LOGGER.debug("minuteDelta " + minuteDelta);
+        }
 
         DateTime dt = new DateTime(current.getDtEvent());
         dt = dt.plusDays(dayDelta);
@@ -248,20 +261,15 @@ public class FamEventController extends AbstractController<FamEvent> implements 
 //        addMessage(message);
 
         current = (FamEvent) event.getData();
-        LOGGER.info("resize " + event, Level.OFF, null);
-        LOGGER.info("dayDelta " + dayDelta, Level.OFF, null);
-        LOGGER.info("minuteDelta " + minuteDelta, Level.OFF, null);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("resize " + event);
+            LOGGER.debug("dayDelta " + dayDelta);
+            LOGGER.debug("minuteDelta " + minuteDelta);
+        }
         current.setDuration(current.getDuration() + minuteDelta);
         update();
     }
 
-    public ScheduleEvent getEvent() {
-        return event;
-    }
-
-    public ScheduleModel getLazyEventModel() {
-        return lazyEventModel;
-    }
 
     @Override
     public String loadAction() {
@@ -275,6 +283,7 @@ public class FamEventController extends AbstractController<FamEvent> implements 
             return null;
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, "loadAction failed");
+            LOGGER.error("loadAction failed", e);
             return "pretty:";
         }
 
@@ -290,90 +299,9 @@ public class FamEventController extends AbstractController<FamEvent> implements 
             JsfUtil.addSuccessMessage("Bien enregistrée", "Réponse");
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, "Answer failed");
+            LOGGER.error("saveAnswer failed", e);
         }
         return null;
     }
 
-    public List<FamAnswer> getYesForEvent() {
-        return lstYes;
-    }
-
-    public Integer getNbYesForEvent() {
-        return lstYes.size();
-    }
-
-    public List<FamAnswer> getNoForEvent() {
-        return lstNo;
-    }
-
-    public Integer getNbNoForEvent() {
-        return lstNo.size();
-    }
-
-    public List<FamAnswer> getMaybeForEvent() {
-        return lstMaybe;
-    }
-
-    public Integer getNbMaybeForEvent() {
-        return lstMaybe.size();
-    }
-
-    public FamUser getCurrentUser() {
-        return currentUser;
-    }
-
-    public void setCurrentUser(FamUser currentUser) {
-        this.currentUser = currentUser;
-    }
-
-    public FamAnswer getCurrentUserAnswer() {
-        return currentUserAnswer;
-    }
-
-    public void setCurrentUserAnswer(FamAnswer currentUserAnswer) {
-        this.currentUserAnswer = currentUserAnswer;
-    }
-    // CONVERTER
-//    @FacesConverter(forClass = FamEvent.class)
-//    public static class FamEventControllerConverter implements Converter {
-//
-//        @Override
-//        public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
-//            if (value == null || value.length() == 0) {
-//                return null;
-//            }
-//            FamEventController controller = (FamEventController) facesContext.getApplication().getELResolver().
-//                    getValue(facesContext.getELContext(), null, "famEventController");
-//            return controller.ejbFacade.find(getKey(value));
-//        }
-//
-//        Long getKey(String value) {
-//            Long key;
-//            key = Long.valueOf(value);
-//            return key;
-//        }
-//
-//        String getStringKey(Long value) {
-//            StringBuilder sb = new StringBuilder();
-//            sb.append(value);
-//            return sb.toString();
-//        }
-//
-//        @Override
-//        public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
-//            if (object == null) {
-//                return null;
-//            }
-//            if (object instanceof FamEvent) {
-//                FamEvent o = (FamEvent) object;
-//                return getStringKey(o.getIdEvent());
-//            } else {
-//                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + FamEventController.class.getName());
-//            }
-//        }
-//    }
-
-    public void setCachePlayer(CachePlayer cachePlayer) {
-        this.cachePlayer = cachePlayer;
-    }
 }
