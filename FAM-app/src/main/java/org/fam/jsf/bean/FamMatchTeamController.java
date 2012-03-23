@@ -36,12 +36,12 @@ public class FamMatchTeamController implements Serializable {
 
     @PostConstruct
     private void postConstruct() {
-        LogUtil.log(this.getClass() + " - postConstruct", Level.INFO, null);
+
     }
 
     @PreDestroy
     private void preDestroy() {
-        LogUtil.log(this.getClass() + " - preDestroy", Level.INFO, null);
+
     }
 
     public FamMatchTeam getSelected() {

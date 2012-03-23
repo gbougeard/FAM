@@ -31,7 +31,7 @@ public class FamCredentials implements Serializable {
 //    private String passwordConfirmed;
 
 //    public void validPassword(FacesContext context, UIComponent component, Object value) {
-//        LogUtil.log("validPassword " + this.password + " " + (String) value, Level.INFO, null);
+//
 //        if (this.password != null && !this.password.isEmpty()) {
 //            if (password.equals((String) value) == false) {
 //                // password mismatch
@@ -46,7 +46,7 @@ public class FamCredentials implements Serializable {
     }
 
     public void setPassword(String password) {
-        LogUtil.log("setPassword " + password, Level.OFF, null);
+
         this.password = password;
     }
 
@@ -64,11 +64,11 @@ public class FamCredentials implements Serializable {
 //    }
 //
 //    public void setPasswordConfirmed(String passwordConfirmed) {
-//        LogUtil.log("setPassword " + passwordConfirmed, Level.OFF, null);
+//
 //        this.passwordConfirmed = passwordConfirmed;
 //    }
     @PostConstruct
     void init() {
-        LogUtil.log("construct FamCredentials", Level.INFO, null);
+
     }
 }

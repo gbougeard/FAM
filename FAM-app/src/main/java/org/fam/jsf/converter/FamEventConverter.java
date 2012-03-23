@@ -26,7 +26,7 @@ public class FamEventConverter implements Converter {
         if (value == null || value.length() == 0) {
             return null;
         }
-        LogUtil.log(this.getClass() + "::getAsObject " + value, Level.OFF, null);
+
         FamEventController controller = (FamEventController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null, "famEventController");
         return controller.getFacade().find(getKey(value));
     }

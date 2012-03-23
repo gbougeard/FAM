@@ -37,13 +37,13 @@ public class FamPlaceController extends AbstractController<FamPlace> implements 
 
     @PostConstruct
     private void postConstruct() {
-        LogUtil.log(this.getClass() + " - postConstruct", Level.INFO, null);
+
 //        findAll();
     }
 
     @PreDestroy
     private void preDestroy() {
-        LogUtil.log(this.getClass() + " - preDestroy", Level.INFO, null);
+
     }
 
     @Override
@@ -91,7 +91,7 @@ public class FamPlaceController extends AbstractController<FamPlace> implements 
 //            
 //            @Override
 //            public void onFailure() {
-//                LogUtil.log(fullAdress, Level.SEVERE, null);
+//
 //            }
 //            
 //            @Override
@@ -130,23 +130,23 @@ public class FamPlaceController extends AbstractController<FamPlace> implements 
         GeocoderRequest geocoderRequest = new GeocoderRequestBuilder().setAddress(details).getGeocoderRequest();
 //       setLanguage("en")
         GeocodeResponse geocoderResponse = geocoder.geocode(geocoderRequest);
-        LogUtil.log(geocoderResponse.toString(), Level.OFF, null);
+
         List<GeocoderResult> results = geocoderResponse.getResults();
         for (GeocoderResult result : results) {
-            LogUtil.log(result.getFormattedAddress(), Level.OFF, null);
-            LogUtil.log(result.getGeometry().getLocation().getLat().toPlainString(), Level.OFF, null);
-            LogUtil.log(result.getGeometry().getLocation().getLng().toString(), Level.OFF, null);
+
+
+
             current.setLatitude(result.getGeometry().getLocation().getLat());
             current.setLongitude(result.getGeometry().getLocation().getLng());
         }
 
         LatLng coord = new LatLng(current.getLatitude().doubleValue(), current.getLongitude().doubleValue());
         if (coord == null) {
-            LogUtil.log("coord NULL", Level.WARNING, null);
+
             coord = new LatLng(42.0, 1.43);
         }
         if (simpleModel == null) {
-            LogUtil.log("simpleModel NULL", Level.WARNING, null);
+
             simpleModel = new DefaultMapModel();
         }
         simpleModel.addOverlay(new Marker(coord, "Test"));

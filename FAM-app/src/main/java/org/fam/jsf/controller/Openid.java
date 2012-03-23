@@ -110,7 +110,7 @@ public class Openid implements Serializable {
             manager = new ConsumerManager();
         } catch (ConsumerException e) {
 //            System.out.println("Error creating ConsumerManager.");
-            LogUtil.log("Error creating ConsumerManager.", Level.SEVERE, e);
+
         }
         validatedId = null;
 
@@ -146,7 +146,7 @@ public class Openid implements Serializable {
         try {
             request.setCharacterEncoding("UTF-8");
         } catch (UnsupportedEncodingException ex) {
-            LogUtil.log("returnToUrl", Level.SEVERE, ex);
+
 //            Logger.getLogger(Openid.class.getName()).log(Level.SEVERE, null, ex);
         }
         String returnToUrl = "http://" + request.getServerName() + ":" + request.getServerPort()
@@ -261,10 +261,10 @@ public class Openid implements Serializable {
                         if (lst.isEmpty()) {
                             // user not found!
                             // throw Error!
-                            LogUtil.log("Signin with openid - user not found", Level.SEVERE, null);
+
                         } else {
                             user = lst.get(0);
-                            LogUtil.log("Signin with openid - user " + user, Level.INFO, null);
+
                             profileController.setFamUser(user);
                             login.setCurrentUser(user);
                             profileController.afterSignin();
@@ -275,7 +275,7 @@ public class Openid implements Serializable {
             }
         } catch (OpenIDException e) {
             // TODO
-            LogUtil.log("OpenIDException", Level.SEVERE, e);
+
         }
         return null;
     }

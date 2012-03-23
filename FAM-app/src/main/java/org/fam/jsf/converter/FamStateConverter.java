@@ -26,7 +26,7 @@ public class FamStateConverter implements Converter {
         if (value == null || value.length() == 0) {
             return null;
         }
-        LogUtil.log(this.getClass() + "::getAsObject " + value, Level.OFF, null);
+
         FamStateController controller = (FamStateController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null, "famStateController");
         return controller.getFacade().find(getKey(value));
     }

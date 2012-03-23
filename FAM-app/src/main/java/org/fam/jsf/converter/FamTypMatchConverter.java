@@ -22,7 +22,7 @@ public class FamTypMatchConverter implements Converter {
 
     @Override
     public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
-        LogUtil.log(this.getClass() + "::getAsObject " + value, Level.INFO, null);
+
         if (value == null || value.length() == 0) {
             return null;
         }

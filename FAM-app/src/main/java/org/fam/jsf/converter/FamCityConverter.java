@@ -26,7 +26,7 @@ public class FamCityConverter implements Converter {
         if (value == null || value.length() == 0) {
             return null;
         }
-        LogUtil.log(this.getClass() + "::getAsObject " + value, Level.OFF, null);
+
         FamCityController controller = (FamCityController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null, "famCityController");
         return controller.getFacade().find(getKey(value));
     }

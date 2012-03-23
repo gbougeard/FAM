@@ -26,7 +26,7 @@ public class FamTypCardFinescaleConverter implements Converter {
         if (value == null || value.length() == 0) {
             return null;
         }
-        LogUtil.log(this.getClass() + "::getAsObject " + value, Level.OFF, null);
+
         FamTypCardFinescaleController controller = (FamTypCardFinescaleController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null, "famTypCardFinescaleController");
         return controller.getFacade().find(getKey(value));
     }

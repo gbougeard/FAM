@@ -26,7 +26,7 @@ public class FamClubConverter implements Converter {
         if (value == null || value.length() == 0) {
             return null;
         }
-        LogUtil.log(this.getClass() + "::getAsObject " + value, Level.OFF, null);
+
         FamClubController controller = (FamClubController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null, "famClubController");
         return controller.getFacade().find(getKey(value));
     }

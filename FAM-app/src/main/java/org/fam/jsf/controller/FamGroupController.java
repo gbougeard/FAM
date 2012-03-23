@@ -28,13 +28,13 @@ public class FamGroupController extends AbstractController<FamGroup> implements 
 
     @PostConstruct
     private void postConstruct() {
-        LogUtil.log(this.getClass() + " - postConstruct", Level.INFO, null);
+
         findAll();
     }
 
     @PreDestroy
     private void preDestroy() {
-        LogUtil.log(this.getClass() + " - preDestroy", Level.INFO, null);
+
     }
 
     @Override

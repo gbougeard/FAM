@@ -26,7 +26,7 @@ public class FamMatchConverter implements Converter {
         if (value == null || value.length() == 0) {
             return null;
         }
-        LogUtil.log(this.getClass() + "::getAsObject " + value, Level.OFF, null);
+
         FamMatchController controller = (FamMatchController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null, "famMatchController");
         return controller.getFacade().find(getKey(value));
     }

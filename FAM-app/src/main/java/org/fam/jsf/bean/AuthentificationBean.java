@@ -78,18 +78,18 @@ public class AuthentificationBean implements Serializable {
     }
 
     public String navSignup() {
-        LogUtil.log("navSignup", Level.INFO, null);
+
         return "pretty:signup";
     }
 
     public String navLogin() {
-        LogUtil.log("navLogin", Level.INFO, null);
+
         return "/auth/login?faces-redirect=true";
     }
 
     public String doSignup() {
-        LogUtil.log("do signup", Level.INFO, null);
-        LogUtil.log(signupBean.toString(), Level.OFF, null);
+
+
         return "/auth/signup?faces-redirect=true";
     }
 

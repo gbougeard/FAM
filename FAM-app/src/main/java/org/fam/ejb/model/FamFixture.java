@@ -203,7 +203,7 @@ public class FamFixture extends FamEntity implements Serializable {
     //    @PreUpdate
 //    void preUpdate() {
 //        if (this.getDtFixture() != null) {
-////            LogUtil.log("FixturePreUpdate setDate", Level.WARNING, null);
+////
 //            // Pour tous les matches de la journée
 //            for (FamMatch match : this.getFamMatchList()) {
 //                match.getFamEvent().setDtEvent(this.getDtFixture());
@@ -224,10 +224,10 @@ public class FamFixture extends FamEntity implements Serializable {
                     builder.append(ii++ == 0 ? "\n" : "\n,").append(f.getName()).append(" : ").append(f.get(this));
                 } catch (IllegalArgumentException e) {
                     // TODO Auto-generated catch block
-                    LogUtil.log("Erreur!", Level.SEVERE, e);
+
                 } catch (IllegalAccessException e) {
                     // TODO Auto-generated catch block
-                    LogUtil.log("Erreur!", Level.SEVERE, e);
+
                 }
             }
             builder.append("\n]");

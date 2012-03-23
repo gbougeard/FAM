@@ -44,13 +44,13 @@ public class FamFormationController extends AbstractController<FamFormation> imp
 
     @PostConstruct
     private void postConstruct() {
-        LogUtil.log(this.getClass() + " - postConstruct", Level.INFO, null);
+
 //        genTarget();
     }
 
     @PreDestroy
     private void preDestroy() {
-        LogUtil.log(this.getClass() + " - preDestroy", Level.INFO, null);
+
     }
 
     @Override
@@ -91,7 +91,7 @@ public class FamFormationController extends AbstractController<FamFormation> imp
     }
 
     public void genTarget() {
-        LogUtil.log(this.getClass() + " - genTarget", Level.INFO, null);
+
         lstTarget.clear();
 //        if (current.getFamTypMatch() != null) {
         for (int i = 1;
@@ -137,7 +137,7 @@ public class FamFormationController extends AbstractController<FamFormation> imp
 //        return super.update();
 //    }
     public void onDrop(DragDropEvent event) {
-        LogUtil.log(this.getClass() + " - onDrop ", Level.INFO, null);
+
 //        Player player = (Player) event.getData();  
 //  
 //        selectedPlayers.add(player);  
@@ -196,7 +196,7 @@ public class FamFormationController extends AbstractController<FamFormation> imp
     }
 
     public void genImage(SelectEvent event) {
-        LogUtil.log(this.getClass() + " - genImage", Level.INFO, null);
+
         lstGraphicText.clear();
         lstNumber.clear();
         FamTypMatch typMatch = (FamTypMatch) event.getObject();
@@ -222,7 +222,7 @@ public class FamFormationController extends AbstractController<FamFormation> imp
     }
 
     public void genImage() {
-        LogUtil.log(this.getClass() + " - genImage", Level.INFO, null);
+
         lstGraphicText.clear();
         lstNumber.clear();
 //        FamTypMatch typMatch = (FamTypMatch) event.getObject();

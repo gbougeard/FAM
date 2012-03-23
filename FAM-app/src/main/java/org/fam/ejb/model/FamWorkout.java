@@ -169,9 +169,9 @@ public class FamWorkout extends FamEntity implements Serializable {
                 try {
                     builder.append(ii++ == 0 ? "\n" : "\n,").append(f.getName()).append(" : ").append(f.get(this));
                 } catch (IllegalArgumentException e) {
-                    LogUtil.log("Erreur!", Level.SEVERE, e);
+
                 } catch (IllegalAccessException e) {
-                    LogUtil.log("Erreur!", Level.SEVERE, e);
+
                 }
             }
         }

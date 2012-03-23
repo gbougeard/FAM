@@ -219,10 +219,10 @@ public class FamTypCardFinescale extends FamEntity implements Serializable {
                 builder.append(ii++ == 0 ? "\n" : "\n,").append(f.getName()).append(" : ").append(f.get(this));
             } catch (IllegalArgumentException e) {
                 // TODO Auto-generated catch block
-                LogUtil.log("Erreur!", Level.SEVERE, e);
+
             } catch (IllegalAccessException e) {
                 // TODO Auto-generated catch block
-                LogUtil.log("Erreur!", Level.SEVERE, e);
+
             }
         }
         builder.append("\n]");

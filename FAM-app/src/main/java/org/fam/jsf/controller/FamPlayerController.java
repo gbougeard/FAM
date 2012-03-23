@@ -59,12 +59,12 @@ public class FamPlayerController extends AbstractController<FamPlayer> implement
 
     @PostConstruct
     private void postConstruct() {
-        LogUtil.log(this.getClass() + " - postConstruct", Level.INFO, null);
+
     }
 
     @PreDestroy
     private void preDestroy() {
-        LogUtil.log(this.getClass() + " - preDestroy", Level.INFO, null);
+
     }
 
     @Override
@@ -114,7 +114,7 @@ public class FamPlayerController extends AbstractController<FamPlayer> implement
 
     @Override
     public String prepareEdit() {
-        LogUtil.log(this.getClass() + " - prepareEdit", Level.INFO, null);
+
 //        preparePositionForEdit();
         id = current.getIdPlayer();
         return getPrettyId(PRETTY_ID_EDIT);
@@ -144,7 +144,7 @@ public class FamPlayerController extends AbstractController<FamPlayer> implement
     }
 
     public String loadActionForEdit() {
-        LogUtil.log(this.getClass() + " - loadActionForEdit", Level.INFO, null);
+
         super.loadAction();
         return preparePositionForEdit();
     }
@@ -162,7 +162,7 @@ public class FamPlayerController extends AbstractController<FamPlayer> implement
 
     private void getTargetPositions() {
         List<FamPosition> set = new ArrayList<FamPosition>(positions.getTarget());
-        LogUtil.log("create target size " + positions.getTarget().size(), Level.OFF, null);
+
 //        List<FamPlayerPosition> list = new ArrayList<FamPlayerPosition>();
         Integer i = 1;
         if (current.getFamPlayerPositionList() == null) {
@@ -184,12 +184,12 @@ public class FamPlayerController extends AbstractController<FamPlayer> implement
 
     @Override
     public String create() {
-        LogUtil.log("create", Level.OFF, null);
+
         try {
 
             getTargetPositions();
 
-            LogUtil.log("avant create joueur " + currentProfile, Level.OFF, null);
+
 
             // on sauvegarde le joueur
             getFacade().create(current);
@@ -200,7 +200,7 @@ public class FamPlayerController extends AbstractController<FamPlayer> implement
             sb.append(servletContext.getRealPath("")).append(File.separator).append("images").append(File.separator).append("players").append(File.separator).append(current.getIdPlayer()).append(".png");
             String newFileName = sb.toString();
 
-            LogUtil.log("file Rename " + newFileName, Level.OFF, null);
+
 
 //            File file = new File(DEFAULT_PHOTO);
 //            Boolean bRes = file.renameTo(new File(newFileName));
@@ -235,7 +235,7 @@ public class FamPlayerController extends AbstractController<FamPlayer> implement
     }
 
     public void setPositions(DualListModel<FamPosition> positions) {
-        LogUtil.log("setPositions " + positions, Level.OFF, null);
+
         if (positions != null) {
             this.positions = positions;
         }
@@ -313,9 +313,9 @@ public class FamPlayerController extends AbstractController<FamPlayer> implement
             File file = new File(croppedImage.getOriginalFilename());
             file.delete();
         } catch (FileNotFoundException e) {
-            LogUtil.log("Cropping", Level.SEVERE, e);
+
         } catch (IOException e) {
-            LogUtil.log("Cropping", Level.SEVERE, e);
+
         }
 
         return null;
@@ -341,21 +341,21 @@ public class FamPlayerController extends AbstractController<FamPlayer> implement
             // Copie depuis le in vers le out
             in.transferTo(0, in.size(), out);
         } catch (Exception e) {
-//             LogUtil.log("Erreur!", Level.SEVERE, e); // n'importe quelle exception
-            LogUtil.log("copyFile", Level.SEVERE, e);
+//
+
         } finally { // finalement on ferme
             if (in != null) {
                 try {
                     in.close();
                 } catch (IOException e) {
-                    LogUtil.log("copyFile Close IN", Level.SEVERE, e);
+
                 }
             }
             if (out != null) {
                 try {
                     out.close();
                 } catch (IOException e) {
-                    LogUtil.log("copyFile Close OUT", Level.SEVERE, e);
+
                 }
             }
         }

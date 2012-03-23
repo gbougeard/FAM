@@ -12,7 +12,7 @@ import java.util.logging.Level;
 /**
  * @author gbougear
  */
-public class LogUtil {
+public class
 
     //    private static final java.util.logging.Logger logger;
     private static final Logger LOGGER = LoggerFactory.getLogger("FAM");

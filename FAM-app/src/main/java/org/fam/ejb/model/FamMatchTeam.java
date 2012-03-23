@@ -185,7 +185,7 @@ public class FamMatchTeam implements Serializable {
 
     //    @PrePersist
 //    private void addEvent() {
-////        LogUtil.log("addEvent", Level.WARNING, null);
+////
 //
 //        // Event
 //        FamEvent event = null;

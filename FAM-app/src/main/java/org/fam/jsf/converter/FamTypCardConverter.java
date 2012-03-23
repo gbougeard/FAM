@@ -25,7 +25,7 @@ public class FamTypCardConverter implements Converter {
         if (value == null || value.length() == 0) {
             return null;
         }
-        LogUtil.log(this.getClass() + "::getAsObject " + value, Level.OFF, null);
+
         FamTypCardController controller = (FamTypCardController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null, "famTypCardController");
         return controller.getFacade().find(getKey(value));
     }

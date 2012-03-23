@@ -83,7 +83,7 @@ public class Login implements Serializable {
     public String login() {
         StringBuilder sb = new StringBuilder();
         sb.append("login ").append(famCredentials.getUsername()).append(" / ").append(famCredentials.getPassword());
-        LogUtil.log(sb.toString(), Level.INFO, null);
+
 
 
         FamUser user = userManager.login(famCredentials.getUsername(), famCredentials.getPassword());
@@ -189,7 +189,7 @@ public class Login implements Serializable {
         try {
             request.setCharacterEncoding("UTF-8");
         } catch (UnsupportedEncodingException ex) {
-            LogUtil.log("returnToUrl", Level.SEVERE, ex);
+
 //            Logger.getLogger(Openid.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "http://" + request.getServerName() + ":" + request.getServerPort()
@@ -208,8 +208,8 @@ public class Login implements Serializable {
      * @throws IOException
      */
     /*private String authRequest(String returnToUrl) throws IOException {
-        LogUtil.log("authRequest " + userSuppliedId, Level.INFO, null);
-        LogUtil.log("cred.username " + famCredentials.getUsername(), Level.INFO, null);
+
+
         try {
             List discoveries = manager.discover(userSuppliedId);
             discovered = manager.associate(discoveries);
@@ -302,10 +302,10 @@ public class Login implements Serializable {
                         if (lst.isEmpty()) {
                             // user not found!
                             // throw Error!
-                            LogUtil.log("Signin with openid - user not found", Level.SEVERE, null);
+
                         } else {
                             currentUser = lst.get(0);
-                            LogUtil.log("Signin with openid - user " + currentUser, Level.INFO, null);
+
 //                            profileController.afterSignin();
                         }
                     }
@@ -314,7 +314,7 @@ public class Login implements Serializable {
             }
         } catch (OpenIDException e) {
             // TODO
-            LogUtil.log("OpenIDException", Level.SEVERE, e);
+
         }
         return null;
     }*/

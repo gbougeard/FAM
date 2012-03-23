@@ -26,7 +26,7 @@ public class FamGoalConverter implements Converter {
         if (value == null || value.length() == 0) {
             return null;
         }
-        LogUtil.log(this.getClass() + "::getAsObject " + value, Level.OFF, null);
+
         FamGoalController controller = (FamGoalController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null, "famGoalController");
         return controller.getFacade().find(getKey(value));
     }

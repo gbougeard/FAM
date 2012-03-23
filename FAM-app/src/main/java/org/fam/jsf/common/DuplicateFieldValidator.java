@@ -25,7 +25,7 @@ public class DuplicateFieldValidator implements Validator {
     public void validate(FacesContext context, UIComponent component, Object value)
             throws ValidatorException {
 
-        LogUtil.log("validate " + component.getFamily(), Level.INFO, null);
+
 
         // Obtain the client ID of the first field from f:attribute.
 //        System.out.println(component.getFamily());

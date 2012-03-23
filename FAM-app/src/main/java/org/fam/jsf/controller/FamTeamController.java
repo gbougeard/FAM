@@ -53,13 +53,13 @@ public class FamTeamController extends AbstractController<FamTeam> implements Se
 
     @PostConstruct
     private void postConstruct() {
-        LogUtil.log(this.getClass() + " - postConstruct", Level.INFO, null);
+
 //        findAll();
     }
 
     @PreDestroy
     private void preDestroy() {
-        LogUtil.log(this.getClass() + " - preDestroy", Level.INFO, null);
+
     }
 
     @Override
@@ -78,9 +78,9 @@ public class FamTeamController extends AbstractController<FamTeam> implements Se
 
     @Override
     public String prepareEdit() {
-        LogUtil.log(this.getClass() + "::prepareEdit " + id, Level.OFF, null);
+
         id = current.getIdTeam();
-        LogUtil.log(this.getClass() + "::prepareEdit " + id, Level.OFF, null);
+
         return getPrettyId(PRETTY_ID_EDIT);
     }
 
@@ -117,7 +117,7 @@ public class FamTeamController extends AbstractController<FamTeam> implements Se
             @URLAction(mappingId = PRETTY_ID_VIEW, onPostback = false)
     })
     public String loadAction() {
-        LogUtil.log(this.getClass() + "::loadAction " + id, Level.OFF, null);
+
         return super.loadAction();
     }
 

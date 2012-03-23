@@ -31,13 +31,13 @@ public class FamClubController extends AbstractController<FamClub>
 
     @PostConstruct
     private void postConstruct() {
-        LogUtil.log(this.getClass() + " - postConstruct", Level.INFO, null);
+
 //        findAll();
     }
 
     @PreDestroy
     private void preDestroy() {
-        LogUtil.log(this.getClass() + " - preDestroy", Level.INFO, null);
+
 //        super.infoDestroy();
     }
 
@@ -100,7 +100,7 @@ public class FamClubController extends AbstractController<FamClub>
 //            if (value == null || value.length() == 0) {
 //                return null;
 //            }
-//            LogUtil.log(this.getClass() + "::getAsObject " + value, Level.OFF, null);
+//
 //            FamClubController controller = (FamClubController) facesContext.getApplication().getELResolver().
 //                    getValue(facesContext.getELContext(), null, "famClubController");
 //            return controller.getFacade().find(getKey(value));

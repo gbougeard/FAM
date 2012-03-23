@@ -76,13 +76,13 @@ public class AgendaController implements Serializable {
 
     @PostConstruct
     private void postConstruct() {
-        LogUtil.log("event - postConstruct", Level.INFO, null);
+
 
     }
 
     @PreDestroy
     private void preDestroy() {
-        LogUtil.log("event - preDestroy", Level.INFO, null);
+
     }
 
     public void addEvent(ActionEvent actionEvent) {
