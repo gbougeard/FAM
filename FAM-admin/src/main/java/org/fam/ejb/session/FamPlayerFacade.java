@@ -15,7 +15,6 @@ import org.slf4j.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.interceptor.Interceptors;
@@ -32,7 +31,6 @@ import java.util.List;
 //        url = "jdbc:derby:memory:sampleDB;create=true;user=app;password=app"
 //)
 @Stateless
-@LocalBean
 @Interceptors({AuditInterceptor.class, LoggingInterceptor.class})
 public class FamPlayerFacade extends AbstractFacade<FamPlayer> {
 
@@ -58,12 +56,10 @@ public class FamPlayerFacade extends AbstractFacade<FamPlayer> {
 
     @PostConstruct
     void postConstruct() {
-        LOGGER.info("PostConstruct");
     }
 
     @PreDestroy
     void preDestroy() {
-        LOGGER.info("PreDestroy");
     }
 
     /**

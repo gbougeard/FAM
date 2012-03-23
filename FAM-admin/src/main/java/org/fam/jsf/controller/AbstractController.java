@@ -114,6 +114,10 @@ public abstract class AbstractController<T> extends AbstractBackingBean {
         return current;
     }
 
+    public void setSelected(T t) {
+        current = t;
+    }
+
     public void onRowSelect(SelectEvent event) {
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("onRowSelect");

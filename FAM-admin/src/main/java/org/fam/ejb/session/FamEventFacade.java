@@ -4,32 +4,42 @@
  */
 package org.fam.ejb.session;
 
+import lombok.Getter;
+import lombok.Setter;
+import org.fam.common.cdi.Loggable;
 import org.fam.common.cdi.Player;
 import org.fam.common.constant.FamConstantes;
 import org.fam.ejb.model.FamEvent;
 import org.fam.ejb.model.FamEventStatus;
 import org.fam.ejb.model.FamPlayer;
+import org.slf4j.Logger;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaQuery;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author gbougear
  */
+@Loggable
 @Stateless
+@Getter
+@Setter
 public class FamEventFacade extends AbstractFacade<FamEvent> {
 
-//    @PersistenceContext//(unitName = "FAM-test-ejbPU")
+    //    @PersistenceContext//(unitName = "FAM-test-ejbPU")
 //    private EntityManager em;
-
-    @EJB
+    @Inject
+    private Logger LOGGER;
+    //
+    @Inject
     private FamEventStatusFacade ejbEventStatus;
-    @EJB
+    @Inject
     private FamSeasonFacade ejbSeason;
     //
     @Inject
@@ -168,4 +178,50 @@ public class FamEventFacade extends AbstractFacade<FamEvent> {
 //    public void setCurrentPlayer(FamPlayer currentPlayer) {
 //        this.currentPlayer = currentPlayer;
 //    }
+
+
+    @Override
+    public FamEvent find(Object id) {
+        return super.find(id);    //To change body of overridden methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public List<FamEvent> findAll() {
+        return super.findAll();
+    }
+
+    @Override
+    public void remove(FamEvent entity) {
+        super.remove(entity);    //To change body of overridden methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void edit(FamEvent entity) {
+        super.edit(entity);    //To change body of overridden methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void create(FamEvent entity) {
+        super.create(entity);    //To change body of overridden methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public List<FamEvent> findByAttributes(Map<String, Object> attributes) {
+        return super.findByAttributes(attributes);    //To change body of overridden methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public List<FamEvent> findAllLazy(int first, int pageSize, String sortField, boolean sortOrder, Map<String, String> filters) {
+        return super.findAllLazy(first, pageSize, sortField, sortOrder, filters);    //To change body of overridden methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public int countLazy(Map<String, String> filters) {
+        return super.countLazy(filters);    //To change body of overridden methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public List<FamEvent> findByCriteria(CriteriaQuery cq) {
+        return super.findByCriteria(cq);    //To change body of overridden methods use File | Settings | File Templates.
+    }
 }

@@ -1,18 +1,23 @@
 package org.fam.jsf.controller;
 
+import lombok.Getter;
+import lombok.Setter;
+import org.fam.common.cdi.Loggable;
 import org.fam.common.interceptor.AuditInterceptor;
 import org.fam.common.interceptor.LoggingInterceptor;
 import org.fam.ejb.model.*;
 import org.fam.ejb.session.FamPlayerFacade;
 import org.fam.jsf.bean.util.JsfUtil;
 import org.fam.jsf.cache.CacheBean;
+import org.primefaces.event.SelectEvent;
 import org.primefaces.event.SlideEndEvent;
+import org.primefaces.event.UnselectEvent;
 import org.primefaces.model.CroppedImage;
 import org.primefaces.model.DualListModel;
+import org.slf4j.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -30,14 +35,20 @@ import java.util.ResourceBundle;
 @ManagedBean
 @ViewScoped
 @Interceptors({AuditInterceptor.class, LoggingInterceptor.class})
-public class FamPlayerController extends AbstractController<FamPlayer> implements Serializable {
+@Loggable
+@Getter
+@Setter
+public class FamPlayerController extends AbstractController<FamPlayer> {
+
+    @Inject
+    private Logger LOGGER;
 
     public static final String PRETTY_ID_LIST = "listPlayer";
     public static final String PRETTY_ID_CREATE = "createPlayer";
     public static final String PRETTY_ID_EDIT = "editPlayer";
     public static final String PRETTY_ID_VIEW = "viewPlayer";
     //
-    @EJB
+    @Inject
     private FamPlayerFacade ejbFacade;
     //
     private DualListModel<FamPosition> positions;
@@ -242,29 +253,6 @@ public class FamPlayerController extends AbstractController<FamPlayer> implement
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
-    public FamPlayerSeason getCurrentProfile() {
-        return currentProfile;
-    }
-
-    public void setCurrentProfile(FamPlayerSeason currentProfile) {
-        this.currentProfile = currentProfile;
-    }
-
-    public CacheBean getCacheBean() {
-        return cacheBean;
-    }
-
-    public void setCacheBean(CacheBean cacheBean) {
-        this.cacheBean = cacheBean;
-    }
-
-    public String getTmpImgUrl() {
-        return tmpImgUrl;
-    }
-
-    public void setTmpImgUrl(String tmpImgUrl) {
-        this.tmpImgUrl = tmpImgUrl;
-    }
 
     public Boolean getShowPhoto() {
         return (tmpImgUrl != null && !tmpImgUrl.isEmpty());
@@ -281,13 +269,6 @@ public class FamPlayerController extends AbstractController<FamPlayer> implement
         return sb.toString();
     }
 
-    public CroppedImage getCroppedImage() {
-        return croppedImage;
-    }
-
-    public void setCroppedImage(CroppedImage croppedImage) {
-        this.croppedImage = croppedImage;
-    }
 
     public String crop() {
         if (croppedImage == null) {
@@ -307,23 +288,16 @@ public class FamPlayerController extends AbstractController<FamPlayer> implement
             imageOutput.close();
 
             File file = new File(croppedImage.getOriginalFilename());
-            file.delete();
+            return file.delete() ? null : "error";
         } catch (FileNotFoundException e) {
-
+            LOGGER.error("crop", e);
         } catch (IOException e) {
-
+            LOGGER.error("crop", e);
         }
 
         return null;
     }
 
-    public String getNewImageName() {
-        return newImageName;
-    }
-
-    public void setNewImageName(String newImageName) {
-        this.newImageName = newImageName;
-    }
 
     private void copyFile(String src, String dest) {
         FileChannel in = null; // canal d'entrée
@@ -337,23 +311,43 @@ public class FamPlayerController extends AbstractController<FamPlayer> implement
             // Copie depuis le in vers le out
             in.transferTo(0, in.size(), out);
         } catch (Exception e) {
-//
+            LOGGER.error("copyFile", e);
 
         } finally { // finalement on ferme
             if (in != null) {
                 try {
                     in.close();
                 } catch (IOException e) {
-
+                    LOGGER.error("copyFile", e);
                 }
             }
             if (out != null) {
                 try {
                     out.close();
                 } catch (IOException e) {
-
+                    LOGGER.error("copyFile", e);
                 }
             }
         }
+    }
+
+    @Override
+    public void onRowSelect(SelectEvent event) {
+        super.onRowSelect(event);
+    }
+
+    @Override
+    public void onRowUnselect(UnselectEvent event) {
+        super.onRowUnselect(event);
+    }
+
+    @Override
+    public String loadAction() {
+        return super.loadAction();
+    }
+
+    @Override
+    protected void findAll() {
+        super.findAll();
     }
 }
