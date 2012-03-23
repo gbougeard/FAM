@@ -4,7 +4,6 @@
  */
 package org.fam.jsf.controller;
 
-import org.fam.common.log.LogUtil;
 import org.primefaces.event.FileUploadEvent;
 
 import javax.annotation.PostConstruct;
@@ -19,7 +18,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.logging.Level;
 
 /**
  * @author mask_hot
@@ -43,16 +41,16 @@ public class FileUploadController {
 
     @PostConstruct
     private void postConstruct() {
-        LogUtil.log(this.getClass() + " - postConstruct", Level.INFO, null);
+
     }
 
     @PreDestroy
     private void preDestroy() {
-        LogUtil.log(this.getClass() + " - preDestroy", Level.INFO, null);
+
     }
 
     public void handleFileUpload(FileUploadEvent event) {
-        LogUtil.log("handleFileUpload - " + event.getFile().getFileName(), Level.INFO, null);
+
 
         ExternalContext extContext = FacesContext.getCurrentInstance().getExternalContext();
         File result = new File(extContext.getRealPath(TMP_PATH
@@ -88,7 +86,7 @@ public class FileUploadController {
             famPlayerController.setTmpImgUrl(TMP_PATH + event.getFile().getFileName());
 
         } catch (IOException e) {
-            LogUtil.log("Erreur!", Level.SEVERE, e);
+
 
             FacesMessage error = new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     "The files were not uploaded!", "");

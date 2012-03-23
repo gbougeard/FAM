@@ -5,15 +5,12 @@ package org.fam.ejb.model;
  * and open the template in the editor.
  */
 
-import org.fam.common.log.LogUtil;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.lang.reflect.Field;
 import java.util.List;
-import java.util.logging.Level;
 
 /**
  * @author gbougear
@@ -242,25 +239,4 @@ public class FamScale extends FamEntity implements Serializable {
         return true;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-
-        Class cls = this.getClass();
-        int ii = 0;
-        builder.append(this.getClass()).append(" [");
-        for (Field f : cls.getDeclaredFields()) {
-            try {
-                builder.append(ii++ == 0 ? "\n" : "\n,").append(f.getName()).append(" : ").append(f.get(this));
-            } catch (IllegalArgumentException e) {
-                // TODO Auto-generated catch block
-                LogUtil.log("Erreur!", Level.SEVERE, e);
-            } catch (IllegalAccessException e) {
-                // TODO Auto-generated catch block
-                LogUtil.log("Erreur!", Level.SEVERE, e);
-            }
-        }
-        builder.append("\n]");
-        return builder.toString();
-    }
 }

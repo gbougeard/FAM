@@ -4,6 +4,8 @@
  */
 package org.fam.jsf.controller;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.fam.ejb.model.FamEntity;
 import org.fam.ejb.session.AbstractFacade;
 import org.fam.jsf.bean.util.JsfUtil;
@@ -13,30 +15,32 @@ import org.primefaces.event.UnselectEvent;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.faces.event.ActionEvent;
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
 
 /**
  * @author mask_hot
  */
+@Getter
+@Setter
 public abstract class AbstractController<T> extends AbstractBackingBean {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractController.class);
+    @Inject
+    private Logger LOGGER;
 
     public final static String PRETTY_PREFIX = "pretty:";
     protected T current;
-    protected List<T> items = new ArrayList<T>();
+    protected List items = new ArrayList<T>();
     //    private Boolean select;
     protected int selectedItemIndex;
     //
     private LazyDataModel<T> lazyModel;
-    private List<T> lazyItems = new ArrayList<T>();
+    private List lazyItems = new ArrayList<T>();
     //
 //    @URLQueryParameter("id")
     Long id;
@@ -52,13 +56,22 @@ public abstract class AbstractController<T> extends AbstractBackingBean {
     }
 
     public void initLazyModel() {
-        LOGGER.debug("initLazyModel");
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("initLazyModel");
+        }
 
         lazyModel = new LazyDataModel<T>() {
 
             @Override
-            public List<T> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, String> filters) {
-                LOGGER.debug("Loading the lazy data between " + first + " " + pageSize);
+            public List load(int first,
+                             int pageSize,
+                             String sortField,
+                             SortOrder sortOrder,
+                             Map<String, String> filters) {
+
+                if (LOGGER.isDebugEnabled()) {
+                    LOGGER.debug("Loading the lazy data between " + first + " " + pageSize);
+                }
 
                 try {
                     lazyItems = getFacade().findAllLazy(first, pageSize,
@@ -69,12 +82,14 @@ public abstract class AbstractController<T> extends AbstractBackingBean {
                      */
                     int count = getFacade().countLazy(filters);
 
-                    LOGGER.debug("nb items " + lazyItems.size() + " count " + count);
+                    if (LOGGER.isDebugEnabled()) {
+                        LOGGER.debug("nb items " + lazyItems.size() + " count " + count);
+                    }
 
                     lazyModel.setRowCount(count);
 
                 } catch (Exception e) {
-                    LOGGER.debug("LazyLoad", Level.SEVERE, e);
+                    LOGGER.error("LazyLoad", e);
                     JsfUtil.addErrorMessage("LazyLoad", e.getMessage());
                 }
 
@@ -99,44 +114,10 @@ public abstract class AbstractController<T> extends AbstractBackingBean {
         return current;
     }
 
-    public void setSelected(T current) {
-        LOGGER.debug(this.getClass() + " - Abstract - setSelected");
-        this.current = current;
-    }
-
-    public List<T> getItems() {
-        return items;
-    }
-
-    public void setItems(List<T> items) {
-        this.items = items;
-    }
-
-    //    public Boolean getSelect() {
-//        return select;
-//    }
-//
-//    public void setSelect(Boolean select) {
-//        this.select = select;
-//    }
-    public List<T> getLazyItems() {
-        return lazyItems;
-    }
-
-    public void setLazyItems(List<T> lazyItems) {
-        this.lazyItems = lazyItems;
-    }
-
-    public LazyDataModel<T> getLazyModel() {
-        return lazyModel;
-    }
-
-    public void setLazyModel(LazyDataModel<T> lazyModel) {
-        this.lazyModel = lazyModel;
-    }
-
     public void onRowSelect(SelectEvent event) {
-        LOGGER.debug("onRowSelect");
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("onRowSelect");
+        }
 //        select = Boolean.TRUE;
 
         T o = (T) event.getObject();
@@ -144,7 +125,9 @@ public abstract class AbstractController<T> extends AbstractBackingBean {
     }
 
     public void onRowUnselect(UnselectEvent event) {
-        LOGGER.debug("onRowUnselect");
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("onRowUnselect");
+        }
 //        select = Boolean.FALSE;
         current = null;
     }
@@ -162,7 +145,9 @@ public abstract class AbstractController<T> extends AbstractBackingBean {
     }
 
     public String prepareList() {
-        LOGGER.debug("prepareList");
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("prepareList");
+        }
         initLazyModel();
 //        setSelect(Boolean.FALSE);
         return "List?faces-redirect=true";
@@ -172,7 +157,7 @@ public abstract class AbstractController<T> extends AbstractBackingBean {
         try {
             items = getFacade().findAll();
         } catch (Exception e) {
-            LOGGER.debug("FindAll", Level.SEVERE, e);
+            LOGGER.error("FindAll", e);
             JsfUtil.addErrorMessage("FindAll", e.getMessage());
         }
     }
@@ -182,7 +167,7 @@ public abstract class AbstractController<T> extends AbstractBackingBean {
             getFacade().remove(current);
             return prepareList();
         } catch (Exception e) {
-            LOGGER.debug("Destroy", Level.SEVERE, e);
+            LOGGER.error("Destroy", e);
             JsfUtil.addErrorMessage("Destroy", e.getMessage());
             return null;
         }
@@ -190,7 +175,9 @@ public abstract class AbstractController<T> extends AbstractBackingBean {
     }
 
     public String create() {
-        LOGGER.debug(this.getClass() + ":create " + current.getClass());
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug(this.getClass() + ":create " + current.getClass());
+        }
         try {
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("FamTeamCreated"));
@@ -202,7 +189,9 @@ public abstract class AbstractController<T> extends AbstractBackingBean {
     }
 
     public String update() {
-        LOGGER.debug(this.getClass() + ":update " + current);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug(this.getClass() + ":update " + current);
+        }
         try {
             getFacade().edit(current);
             JsfUtil.addSuccessMessage("Update Done");//ResourceBundle.getBundle("/Bundle").getString("FamTeamUpdated"));
@@ -215,7 +204,9 @@ public abstract class AbstractController<T> extends AbstractBackingBean {
     }
 
     public String updateAndNoRedirect() {
-        LOGGER.debug(this.getClass() + ":update " + current);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug(this.getClass() + ":update " + current);
+        }
         try {
             getFacade().edit(current);
             JsfUtil.addSuccessMessage("Update Done");//ResourceBundle.getBundle("/Bundle").getString("FamTeamUpdated"));
@@ -228,7 +219,9 @@ public abstract class AbstractController<T> extends AbstractBackingBean {
 
     //    @URLAction(phaseId = PhaseId.RENDER_RESPONSE, onPostback = false)
     public String loadAction() {
-        LOGGER.debug(this.getClass() + " - loadAction " + id);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug(this.getClass() + " - loadAction " + id);
+        }
         if (id != null) {
 
             try {
@@ -236,7 +229,7 @@ public abstract class AbstractController<T> extends AbstractBackingBean {
                 return null;
 
             } catch (Exception e) {
-                LOGGER.debug("Load Action", Level.SEVERE, e);
+                LOGGER.error("Load Action", e);
                 JsfUtil.addErrorMessage(e, "Load Action id=" + id);
                 return "pretty:";
             }
@@ -273,15 +266,10 @@ public abstract class AbstractController<T> extends AbstractBackingBean {
         JsfUtil.addSuccessMessage("test Action", actionEvent.getComponent().getClientId());
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     protected void infoDestroy() {
         JsfUtil.addInfoMessage("Votre session a expiré. Veuillez vous re-logguer.", "Attention!");
     }
+
+
 }

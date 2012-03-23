@@ -15,7 +15,7 @@
 - Base de données: 'vilaloka'
 -->
 <vilaloka>
-  <!-- Table state -->
+    <!-- Table state -->
     <state>
         <id_region>1</id_region>
         <name_state>Aquitaine</name_state>
@@ -121,7 +121,7 @@
         <state_slug>nord-pas-de-calais</state_slug>
         <id_country>1</id_country>
     </state>
-     <state>
+    <state>
         <id_region>16</id_region>
         <name_state>Basse-Normandie</name_state>
         <name_state_uppercase>BASSE-NORMANDIE</name_state_uppercase>
@@ -130,8 +130,8 @@
     </state>
     <state>
         <id_region>17</id_region>
-        <name_state>Haute Normandie </name_state>
-        <name_state_uppercase>HAUTE NORMANDIE </name_state_uppercase>
+        <name_state>Haute Normandie</name_state>
+        <name_state_uppercase>HAUTE NORMANDIE</name_state_uppercase>
         <state_slug>haute-normandie-</state_slug>
         <id_country>1</id_country>
     </state>
@@ -177,5 +177,5 @@
         <state_slug>alsace</state_slug>
         <id_country>1</id_country>
     </state>
-   
+
 </vilaloka>

@@ -7,6 +7,8 @@ package org.fam.jsf.cache;
 import com.yammer.metrics.Metrics;
 import com.yammer.metrics.core.Counter;
 import lombok.Getter;
+import lombok.Setter;
+import org.fam.common.cdi.Loggable;
 import org.fam.ejb.model.*;
 import org.fam.ejb.session.*;
 import org.fam.jsf.bootstrap.Bootstrap;
@@ -27,19 +29,15 @@ import java.util.TimeZone;
  * @author mask_hot
  */
 @Named
-// Does not work
 @Startup
-//@DependsOn("Bootstrap")
 @Singleton
+@Loggable
 @Getter
-//@Interceptors({AuditInterceptor.class, LoggingInterceptor.class})
+@Setter
 public class CacheBean {
 
-    //    private static final Logger LOGGER = LoggerFactory.getLogger(CacheBean.class);
     @Inject
     private Logger LOGGER;
-
-    private static final long serialVersionUID = 3127080842613764314L;
 
     private FamSeason currentSeason;
     private FamTypEvent typEventMatch;
@@ -90,8 +88,6 @@ public class CacheBean {
     @Inject
     private FamSeasonCompetitionFacade ejbSeasonCompetition;
     private final List<FamSeasonCompetition> listSeasonCompetition = new ArrayList<FamSeasonCompetition>();
-
-
     // POSITION
     @Inject
     private FamPositionFacade ejbPosition;
@@ -140,7 +136,9 @@ public class CacheBean {
 
     @PostConstruct
     void postConstruct() {
-        LOGGER.debug("PostConstruct");
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("PostConstruct");
+        }
         count.inc();
 
 //        if (!bootstrap.getInitDone()) {
@@ -160,14 +158,12 @@ public class CacheBean {
 //        }
 
         try {
-//            int i = ejbPosition.findAll().size();
-//            LOGGER.debug(i + " positions");
-            LOGGER.trace("Init done?");
             if (bootstrap.getInitDone()) {
-//            if (!ejbPosition.findAll().isEmpty()) {
                 initCache();
             } else {
-                LOGGER.warn("Bootstrap NOT DONE!!");
+                if (LOGGER.isWarnEnabled()) {
+                    LOGGER.warn("Bootstrap NOT DONE!!");
+                }
             }
         } catch (Exception e) {
             String msg = "Cannot check InitDone via Table Position";
@@ -450,91 +446,4 @@ public class CacheBean {
         return currentSeason;
     }
 
-    public void setBootstrap(Bootstrap bootstrap) {
-        this.bootstrap = bootstrap;
-    }
-
-    public void setLOGGER(Logger LOGGER) {
-        this.LOGGER = LOGGER;
-    }
-
-    public void setEjbClub(FamClubFacade ejbClub) {
-        this.ejbClub = ejbClub;
-    }
-
-    public void setEjbOrganization(FamOrganizationFacade ejbOrganization) {
-        this.ejbOrganization = ejbOrganization;
-    }
-
-    public void setEjbSeason(FamSeasonFacade ejbSeason) {
-        this.ejbSeason = ejbSeason;
-    }
-
-    public void setEjbPlace(FamPlaceFacade ejbPlace) {
-        this.ejbPlace = ejbPlace;
-    }
-
-    public void setEjbTypPlace(FamTypPlaceFacade ejbTypPlace) {
-        this.ejbTypPlace = ejbTypPlace;
-    }
-
-    public void setEjbTypEvent(FamTypEventFacade ejbTypEvent) {
-        this.ejbTypEvent = ejbTypEvent;
-    }
-
-    public void setEjbEventStatus(FamEventStatusFacade ejbEventStatus) {
-        this.ejbEventStatus = ejbEventStatus;
-    }
-
-    public void setEventStatusScheduled(FamEventStatus eventStatusScheduled) {
-        this.eventStatusScheduled = eventStatusScheduled;
-    }
-
-    public void setEjbTypCompetition(FamTypCompetitionFacade ejbTypCompetition) {
-        this.ejbTypCompetition = ejbTypCompetition;
-    }
-
-    public void setEjbScale(FamScaleFacade ejbScale) {
-        this.ejbScale = ejbScale;
-    }
-
-    public void setEjbSeasonCompetition(FamSeasonCompetitionFacade ejbSeasonCompetition) {
-        this.ejbSeasonCompetition = ejbSeasonCompetition;
-    }
-
-    public void setEjbPosition(FamPositionFacade ejbPosition) {
-        this.ejbPosition = ejbPosition;
-    }
-
-    public void setEjbTypMatch(FamTypMatchFacade ejbTypMatch) {
-        this.ejbTypMatch = ejbTypMatch;
-    }
-
-    public void setEjbTypAnswer(FamTypAnswerFacade ejbTypAnswer) {
-        this.ejbTypAnswer = ejbTypAnswer;
-    }
-
-    public void setEjbCountry(FamCountryFacade ejbCountry) {
-        this.ejbCountry = ejbCountry;
-    }
-
-    public void setEjbState(FamStateFacade ejbState) {
-        this.ejbState = ejbState;
-    }
-
-    public void setEjbProvince(FamProvinceFacade ejbProvince) {
-        this.ejbProvince = ejbProvince;
-    }
-
-    public void setEjbCity(FamCityFacade ejbCity) {
-        this.ejbCity = ejbCity;
-    }
-
-    public void setEjbTypCard(FamTypCardFacade ejbTypCard) {
-        this.ejbTypCard = ejbTypCard;
-    }
-
-    public void setEjbFormation(FamFormationFacade ejbFormation) {
-        this.ejbFormation = ejbFormation;
-    }
 }

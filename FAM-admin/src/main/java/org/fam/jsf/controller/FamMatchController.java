@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.fam.common.cdi.LoggedIn;
 import org.fam.common.cdi.Player;
-import org.fam.common.log.LogUtil;
 import org.fam.ejb.model.*;
 import org.fam.ejb.session.*;
 import org.fam.jsf.bean.CanvasFormationItem;
@@ -26,7 +25,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
 
 @ManagedBean(name = "famMatchController")
 @ViewScoped
@@ -119,12 +117,12 @@ public class FamMatchController extends AbstractController<FamMatch> implements 
 
     @PostConstruct
     private void postConstruct() {
-        LogUtil.log(this.getClass() + " - postConstruct", Level.INFO, null);
+
     }
 
     @PreDestroy
     private void preDestroy() {
-        LogUtil.log(this.getClass() + " - preDestroy", Level.INFO, null);
+
     }
 
     @Override
@@ -225,7 +223,7 @@ public class FamMatchController extends AbstractController<FamMatch> implements 
     }
 
     public void loadForCompose() {
-        LogUtil.log(this.getClass() + " - loadForCompose - match " + id + " team " + idTeam, Level.INFO, null);
+
         super.loadAction();
         findTeam();
 
@@ -261,7 +259,7 @@ public class FamMatchController extends AbstractController<FamMatch> implements 
     }
 
     public void loadForDebrief() {
-        LogUtil.log(this.getClass() + " - loadForDebrief - match " + id + " team " + idTeam, Level.INFO, null);
+
         super.loadAction();
         findTeam();
 
@@ -279,7 +277,7 @@ public class FamMatchController extends AbstractController<FamMatch> implements 
     private void findTeam() {
         if (idTeam == null) {
             FamClub club = currentPlayer.getClubForSeason(current.getFamSeasonCompetition().getFamSeason());
-            LogUtil.log("Club de currentUser " + club.getLibClub(), Level.OFF, null);
+
             for (FamMatchTeam matchTeam : current.getFamMatchTeamList()) {
                 // On se positionne sur l'equipe de notre club
                 //TODO gerer un match entre 2 equipes de notre club
@@ -289,8 +287,8 @@ public class FamMatchController extends AbstractController<FamMatch> implements 
                 }
 
             }
-            LogUtil.log("Match " + current.getFamEvent().getLibEvent(), Level.OFF, null);
-            LogUtil.log("Team trouvee " + famTeam.getLibTeam(), Level.OFF, null);
+
+
             idTeam = famTeam.getIdTeam();
         } else {
             famTeam = ejbTeam.find(idTeam);
@@ -314,7 +312,7 @@ public class FamMatchController extends AbstractController<FamMatch> implements 
     }
 
     public void genTarget() {
-        LogUtil.log(this.getClass() + " - genTarget", Level.INFO, null);
+
         lstTarget.clear();
 
         for (int i = 1;
@@ -379,7 +377,7 @@ public class FamMatchController extends AbstractController<FamMatch> implements 
     }
 
     public void onValueChange(ValueChangeEvent event) {
-        LogUtil.log("onValueChange", Level.INFO, null);
+
         int i = 1;
         for (FamPlayer p : dlmPlayer.getTarget()) {
             for (CanvasFormationItem cfi : lstTarget) {
@@ -394,7 +392,7 @@ public class FamMatchController extends AbstractController<FamMatch> implements 
     }
 
     public void onPreselectDrop(DragDropEvent ddEvent) {
-        LogUtil.log("onPreselectDrop", Level.INFO, null);
+
         FamPlayer player = ((FamPlayer) ddEvent.getData());
 
         preselectedLst.add(player);
@@ -406,7 +404,7 @@ public class FamMatchController extends AbstractController<FamMatch> implements 
     }
 
     public void onDrop(DragDropEvent ddEvent) {
-        LogUtil.log("onDrop", Level.INFO, null);
+
         FamPlayer player = ((FamPlayer) ddEvent.getData());
 
         Integer num = (Integer) ddEvent.getComponent().getAttributes().get("num");
@@ -439,7 +437,7 @@ public class FamMatchController extends AbstractController<FamMatch> implements 
     }
 
     public void onSubDrop(DragDropEvent ddEvent) {
-        LogUtil.log("onSubDrop", Level.INFO, null);
+
         FamPlayer player = ((FamPlayer) ddEvent.getData());
 
         String strNum = (String) ddEvent.getComponent().getAttributes().get("num");
@@ -472,12 +470,12 @@ public class FamMatchController extends AbstractController<FamMatch> implements 
     }
 
     public void deselect(FamPlayer player) {
-        LogUtil.log("deselect " + player.getDisplayName(), Level.INFO, null);
+
 
     }
 
     public void onPreselectYesDrop(DragDropEvent ddEvent) {
-        LogUtil.log("onPreselectYesDrop", Level.INFO, null);
+
         FamAnswer answer = ((FamAnswer) ddEvent.getData());
 
         preselectedLst.add(answer.getFamPlayer());
@@ -485,7 +483,7 @@ public class FamMatchController extends AbstractController<FamMatch> implements 
     }
 
     public String addSelectedYes() {
-        LogUtil.log("addSelectedYes", Level.INFO, null);
+
 
         for (FamAnswer answer : selectedYes) {
             preselectedLst.add(answer.getFamPlayer());
@@ -496,7 +494,7 @@ public class FamMatchController extends AbstractController<FamMatch> implements 
     }
 
     public String addSelectedNo() {
-        LogUtil.log("addSelectedNo", Level.INFO, null);
+
 
         for (FamAnswer answer : selectedNo) {
             preselectedLst.add(answer.getFamPlayer());
@@ -507,7 +505,7 @@ public class FamMatchController extends AbstractController<FamMatch> implements 
     }
 
     public String addSelectedMaybe() {
-        LogUtil.log("addSelectedMaybe", Level.INFO, null);
+
 
         for (FamAnswer answer : selectedMaybe) {
             preselectedLst.add(answer.getFamPlayer());
@@ -518,7 +516,7 @@ public class FamMatchController extends AbstractController<FamMatch> implements 
     }
 
     public String addSelectedPlayers() {
-        LogUtil.log("addSelectedPlayers", Level.INFO, null);
+
 
         for (FamPlayer player : selectedPlayers) {
             preselectedLst.add(player);

@@ -1,6 +1,5 @@
 package org.fam.jsf.controller;
 
-import org.fam.common.log.LogUtil;
 import org.fam.ejb.model.FamCity;
 import org.fam.ejb.session.FamCityFacade;
 
@@ -10,7 +9,6 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
-import java.util.logging.Level;
 
 @ManagedBean(name = "famCityController")
 @ViewScoped
@@ -25,13 +23,11 @@ public class FamCityController extends AbstractController<FamCity>
 
     @PostConstruct
     private void postConstruct() {
-        LogUtil.log(this.getClass() + " - postConstruct", Level.INFO, null);
 //        findAll();
     }
 
     @PreDestroy
     private void preDestroy() {
-        LogUtil.log(this.getClass() + " - preDestroy", Level.INFO, null);
     }
 
     @Override

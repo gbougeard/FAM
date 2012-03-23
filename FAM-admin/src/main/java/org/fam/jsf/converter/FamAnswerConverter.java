@@ -4,7 +4,6 @@
  */
 package org.fam.jsf.converter;
 
-import org.fam.common.log.LogUtil;
 import org.fam.ejb.model.FamAnswer;
 import org.fam.jsf.controller.FamAnswerController;
 
@@ -12,7 +11,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import java.util.logging.Level;
 
 /**
  * @author mask_hot
@@ -26,7 +24,7 @@ public class FamAnswerConverter implements Converter {
         if (value == null || value.length() == 0) {
             return null;
         }
-        LogUtil.log(this.getClass() + "::getAsObject " + value, Level.OFF, null);
+
         FamAnswerController controller = (FamAnswerController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null, "famAnswerController");
         return controller.getFacade().find(getKey(value));
     }

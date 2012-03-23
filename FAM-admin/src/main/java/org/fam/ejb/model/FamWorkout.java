@@ -5,17 +5,14 @@ package org.fam.ejb.model;
  * and open the template in the editor.
  */
 
-import org.fam.common.log.LogUtil;
 import org.fam.ejb.listener.FamWorkoutEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
 /**
  * @author gbougear
@@ -157,25 +154,4 @@ public class FamWorkout extends FamEntity implements Serializable {
         return !((this.idWorkout == null && other.idWorkout != null) || (this.idWorkout != null && !this.idWorkout.equals(other.idWorkout)));
     }
 
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-
-        Class cls = this.getClass();
-        int ii = 0;
-        builder.append(this.getClass()).append(" [");
-        for (Field f : cls.getDeclaredFields()) {
-            if (!f.getName().equals(PROP_PLAYERS)) {
-                try {
-                    builder.append(ii++ == 0 ? "\n" : "\n,").append(f.getName()).append(" : ").append(f.get(this));
-                } catch (IllegalArgumentException e) {
-                    LogUtil.log("Erreur!", Level.SEVERE, e);
-                } catch (IllegalAccessException e) {
-                    LogUtil.log("Erreur!", Level.SEVERE, e);
-                }
-            }
-        }
-        builder.append("\n]");
-        return builder.toString();
-    }
 }

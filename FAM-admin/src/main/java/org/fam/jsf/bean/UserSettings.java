@@ -1,5 +1,6 @@
 package org.fam.jsf.bean;
 
+import lombok.Data;
 import org.slf4j.Logger;
 
 import javax.annotation.PostConstruct;
@@ -17,6 +18,7 @@ import java.io.Serializable;
  */
 @Named
 @SessionScoped
+@Data
 public class UserSettings implements Serializable {
 
     private static final long serialVersionUID = 20111020L;
@@ -25,8 +27,6 @@ public class UserSettings implements Serializable {
     private Logger LOGGER;
 
     private static final String DEFAULT_THEME = "home";
-
-//    private Theme currentTheme;
     private String currentTheme;
 
     public UserSettings() {
@@ -34,38 +34,7 @@ public class UserSettings implements Serializable {
 
     @PostConstruct
     public void init() {
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("init");
-        }
-//        currentTheme = availableThemes.getThemeForName(DEFAULT_THEME);
         currentTheme = DEFAULT_THEME;
     }
 
-
-//    public Theme getCurrentTheme() {
-//        return currentTheme;
-//    }
-//
-//    public void setCurrentTheme(Theme currentTheme) {
-//        LOGGER.warn(String.format("OLD theme : %s", currentTheme.getName()));
-//        this.currentTheme = currentTheme;
-//        LOGGER.warn(String.format("NEW theme : %s", this.currentTheme.getName()));
-//    }
-    public String getCurrentTheme() {
-        return currentTheme;
-    }
-
-    public void setCurrentTheme(String currentTheme) {
-        LOGGER.warn(String.format("OLD theme : %s", currentTheme));
-        this.currentTheme = currentTheme;
-        LOGGER.warn(String.format("NEW theme : %s", this.currentTheme));
-    }
-
-    public void onChange(){
-        LOGGER.warn("onChange()");
-    }
-
-    public void setLOGGER(Logger LOGGER) {
-        this.LOGGER = LOGGER;
-    }
 }

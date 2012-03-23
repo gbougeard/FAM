@@ -4,7 +4,9 @@
  */
 package org.fam.jsf.controller;
 
-import org.fam.common.log.LogUtil;
+import lombok.Getter;
+import lombok.Setter;
+import org.fam.common.cdi.Loggable;
 import org.fam.ejb.model.FamEvent;
 import org.fam.ejb.session.FamEventFacade;
 import org.joda.time.DateTime;
@@ -16,27 +18,31 @@ import org.primefaces.model.DefaultScheduleEvent;
 import org.primefaces.model.DefaultScheduleModel;
 import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
+import org.slf4j.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
-import java.io.Serializable;
+import javax.inject.Inject;
 import java.util.List;
-import java.util.logging.Level;
 
 /**
  * @author gbougear
  */
 @ManagedBean(name = "agendaController")
 @ViewScoped
-public class AgendaController implements Serializable {
+@Loggable
+@Getter
+@Setter
+public class AgendaController {
 
-    @EJB
+    @Inject
+    private Logger LOGGER;
+    @Inject
     private FamEventFacade ejb;
     private FamEvent event1;
     private FamEvent selectedEvent;
@@ -76,13 +82,11 @@ public class AgendaController implements Serializable {
 
     @PostConstruct
     private void postConstruct() {
-        LogUtil.log("event - postConstruct", Level.INFO, null);
 
     }
 
     @PreDestroy
     private void preDestroy() {
-        LogUtil.log("event - preDestroy", Level.INFO, null);
     }
 
     public void addEvent(ActionEvent actionEvent) {
@@ -130,67 +134,4 @@ public class AgendaController implements Serializable {
         return "/users/agenda?faces-redirect=true";
     }
 
-    public FamEvent getEvent1() {
-        return event1;
-    }
-
-    public void setEvent1(FamEvent Event) {
-        this.event1 = Event;
-    }
-
-    public List<FamEvent> getEventList() {
-        return eventList;
-    }
-
-    public void setEventList(List<FamEvent> EventList) {
-        this.eventList = EventList;
-    }
-
-    public FamEventFacade getEjb() {
-        return ejb;
-    }
-
-    public void setEjb(FamEventFacade ejb) {
-        this.ejb = ejb;
-    }
-
-    public FamEvent getSelectedEvent() {
-        return selectedEvent;
-    }
-
-    public void setSelectedEvent(FamEvent selectedEvent) {
-        this.selectedEvent = selectedEvent;
-    }
-
-    public ScheduleEvent getEvent() {
-        return event;
-    }
-
-    public void setEvent(ScheduleEvent event) {
-        this.event = event;
-    }
-
-    public ScheduleModel getEventModel() {
-        return eventModel;
-    }
-
-    public void setEventModel(ScheduleModel eventModel) {
-        this.eventModel = eventModel;
-    }
-
-    public ScheduleModel getLazyEventModel() {
-        return lazyEventModel;
-    }
-
-    public void setLazyEventModel(ScheduleModel lazyEventModel) {
-        this.lazyEventModel = lazyEventModel;
-    }
-
-    public String getTheme() {
-        return theme;
-    }
-
-    public void setTheme(String theme) {
-        this.theme = theme;
-    }
 }

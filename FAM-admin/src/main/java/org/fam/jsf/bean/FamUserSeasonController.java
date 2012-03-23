@@ -1,6 +1,5 @@
 package org.fam.jsf.bean;
 
-import org.fam.common.log.LogUtil;
 import org.fam.ejb.model.FamUserSeason;
 import org.fam.ejb.session.FamUserSeasonFacade;
 import org.fam.jsf.bean.util.JsfUtil;
@@ -19,7 +18,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
 
 @Named
 @SessionScoped
@@ -36,12 +34,10 @@ public class FamUserSeasonController implements Serializable {
 
     @PostConstruct
     private void postConstruct() {
-        LogUtil.log(this.getClass() + " - postConstruct", Level.INFO, null);
     }
 
     @PreDestroy
     private void preDestroy() {
-        LogUtil.log(this.getClass() + " - preDestroy", Level.INFO, null);
     }
 
     public FamUserSeason getSelected() {

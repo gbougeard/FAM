@@ -4,7 +4,6 @@
  */
 package org.fam.jsf.converter;
 
-import org.fam.common.log.LogUtil;
 import org.fam.ejb.model.FamTypAbsence;
 import org.fam.jsf.controller.FamTypAbsenceController;
 
@@ -12,7 +11,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import java.util.logging.Level;
 
 /**
  * @author mask_hot
@@ -26,7 +24,7 @@ public class FamTypAbsenceConverter implements Converter {
         if (value == null || value.length() == 0) {
             return null;
         }
-        LogUtil.log(this.getClass() + "::getAsObject " + value, Level.OFF, null);
+
         FamTypAbsenceController controller = (FamTypAbsenceController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null, "famTypAbsenceController");
         return controller.getFacade().find(getKey(value));
     }

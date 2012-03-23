@@ -1,6 +1,5 @@
 package org.fam.jsf.controller;
 
-import org.fam.common.log.LogUtil;
 import org.fam.ejb.model.FamTypEvent;
 import org.fam.ejb.session.FamTypEventFacade;
 
@@ -10,7 +9,6 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
-import java.util.logging.Level;
 
 @ManagedBean(name = "famTypEventController")
 @ViewScoped
@@ -24,12 +22,12 @@ public class FamTypEventController extends AbstractController<FamTypEvent> imple
 
     @PostConstruct
     private void postConstruct() {
-        LogUtil.log(this.getClass() + " - postConstruct", Level.INFO, null);
+
     }
 
     @PreDestroy
     private void preDestroy() {
-        LogUtil.log(this.getClass() + " - preDestroy", Level.INFO, null);
+
     }
 
     @Override

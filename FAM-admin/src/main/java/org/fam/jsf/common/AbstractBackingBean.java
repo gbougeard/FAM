@@ -12,7 +12,6 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.el.VariableResolver;
 import javax.faces.event.PhaseId;
-import javax.interceptor.Interceptors;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.Serializable;
@@ -20,7 +19,7 @@ import java.io.Serializable;
 /**
  * @author mask_hot
  */
-@Interceptors({BasePhaseListener.class})
+//@Interceptors({BasePhaseListener.class})
 public class AbstractBackingBean implements Serializable {
 
     private PhaseBean phaseBean;

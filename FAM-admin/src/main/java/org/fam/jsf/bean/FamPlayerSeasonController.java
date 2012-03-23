@@ -1,13 +1,15 @@
 package org.fam.jsf.bean;
 
-import org.fam.common.log.LogUtil;
+import lombok.Getter;
+import lombok.Setter;
+import org.fam.common.cdi.Loggable;
 import org.fam.ejb.model.FamPlayerSeason;
 import org.fam.ejb.session.FamPlayerSeasonFacade;
 import org.fam.jsf.bean.util.JsfUtil;
+import org.slf4j.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.component.UIComponent;
@@ -15,20 +17,28 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.faces.model.SelectItem;
+import javax.inject.Inject;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
 
 @ManagedBean(name = "famPlayerSeasonController")
 @SessionScoped
+@Loggable
+@Getter
+@Setter
 public class FamPlayerSeasonController implements Serializable {
+
+    private static final long serialVersionUID = -4318357218595271665L;
+    @Inject
+    private Logger LOGGER;
+    @Inject
+    private FamPlayerSeasonFacade ejbFacade;
 
     private FamPlayerSeason current = new FamPlayerSeason();
     private List<FamPlayerSeason> items = new ArrayList<FamPlayerSeason>();
-    @EJB
-    private FamPlayerSeasonFacade ejbFacade;
+
     private int selectedItemIndex;
 
     public FamPlayerSeasonController() {
@@ -36,12 +46,10 @@ public class FamPlayerSeasonController implements Serializable {
 
     @PostConstruct
     private void postConstruct() {
-        LogUtil.log(this.getClass() + " - postConstruct", Level.INFO, null);
     }
 
     @PreDestroy
     private void preDestroy() {
-        LogUtil.log(this.getClass() + " - preDestroy", Level.INFO, null);
     }
 
     public FamPlayerSeason getSelected() {
@@ -110,6 +118,7 @@ public class FamPlayerSeasonController implements Serializable {
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("FamPlayerSeasonUpdated"));
             return "View?faces-redirect=true";
         } catch (Exception e) {
+            LOGGER.error("update", e);
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
         }

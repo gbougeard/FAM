@@ -4,8 +4,6 @@
  */
 package org.fam.jsf.common;
 
-import org.fam.common.log.LogUtil;
-
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
@@ -13,7 +11,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
-import java.util.logging.Level;
 
 /**
  * @author mask_hot
@@ -24,8 +21,6 @@ public class DuplicateFieldValidator implements Validator {
     @Override
     public void validate(FacesContext context, UIComponent component, Object value)
             throws ValidatorException {
-
-        LogUtil.log("validate " + component.getFamily(), Level.INFO, null);
 
         // Obtain the client ID of the first field from f:attribute.
 //        System.out.println(component.getFamily());

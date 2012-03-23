@@ -7,13 +7,10 @@ package org.fam.ejb.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.fam.common.log.LogUtil;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.lang.reflect.Field;
-import java.util.logging.Level;
 
 /**
  * @author mask_hot
@@ -131,62 +128,6 @@ public class FamPlayerSeason implements Serializable {
         famPlayerStat = new FamPlayerStat();
     }
 
-
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-
-        Class cls = this.getClass();
-        int ii = 0;
-        builder.append(this.getClass()).append(" [");
-        for (Field f : cls.getDeclaredFields()) {
-            String str = "null";
-            if (f.getName().equals(PROP_CLUB)) {
-
-                if (this.getFamClub() != null) {
-                    str = this.getFamClub().getLibClub();
-                }
-                builder.append(ii++ == 0 ? "\n" : "\n,").append(f.getName()).append(" : ").append(str);
-
-            } else {
-                if (f.getName().equals(PROP_TEAM)) {
-
-                    if (this.getFamTeam() != null) {
-                        str = this.getFamTeam().getLibTeam();
-                    }
-                    builder.append(ii++ == 0 ? "\n" : "\n,").append(f.getName()).append(" : ").append(str);
-                } else {
-                    if (f.getName().equals(PROP_SEASON)) {
-
-                        if (this.getFamSeason() != null) {
-                            str = this.getFamSeason().getLibSeason();
-                        }
-                        builder.append(ii++ == 0 ? "\n" : "\n,").append(f.getName()).append(" : ").append(str);
-                    } else {
-                        if (f.getName().equals(PROP_PLAYER)) {
-
-                            if (this.getFamPlayer() != null) {
-                                str = this.getFamPlayer().getDisplayName();
-                            }
-                            builder.append(ii++ == 0 ? "\n" : "\n,").append(f.getName()).append(" : ").append(str);
-                        } else {
-                            try {
-                                builder.append(ii++ == 0 ? "\n" : "\n,").append(f.getName()).append(" : ").append(f.get(this));
-                            } catch (IllegalArgumentException e) {
-                                // TODO Auto-generated catch block
-                                LogUtil.log("Erreur!", Level.SEVERE, e);
-                            } catch (IllegalAccessException e) {
-                                // TODO Auto-generated catch block
-                                LogUtil.log("Erreur!", Level.SEVERE, e);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        builder.append("\n]");
-        return builder.toString();
-    }
 
     @Override
     public boolean equals(Object o) {

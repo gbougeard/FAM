@@ -1,6 +1,5 @@
 package org.fam.jsf.controller;
 
-import org.fam.common.log.LogUtil;
 import org.fam.ejb.model.FamCompetitionTeam;
 import org.fam.ejb.session.FamCompetitionTeamFacade;
 
@@ -14,7 +13,6 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.inject.Named;
 import java.io.Serializable;
-import java.util.logging.Level;
 
 @Named
 @SessionScoped
@@ -28,12 +26,10 @@ public class FamCompetitionTeamController extends AbstractController<FamCompetit
 
     @PostConstruct
     private void postConstruct() {
-        LogUtil.log(this.getClass() + " - postConstruct", Level.INFO, null);
     }
 
     @PreDestroy
     private void preDestroy() {
-        LogUtil.log(this.getClass() + " - preDestroy", Level.INFO, null);
     }
 
     @Override

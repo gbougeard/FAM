@@ -15,7 +15,7 @@
 - Base de données: 'vilaloka'
 -->
 <vilaloka>
-  <!-- Table province -->
+    <!-- Table province -->
     <province>
         <id_departement>1</id_departement>
         <id_region>22</id_region>
@@ -40,7 +40,7 @@
         <name_province_uppercase>ALLIER</name_province_uppercase>
         <province_slug>allier</province_slug>
     </province>
-     <province>
+    <province>
         <id_departement>4</id_departement>
         <id_region>21</id_region>
         <code>04</code>
@@ -84,8 +84,8 @@
         <id_departement>9</id_departement>
         <id_region>14</id_region>
         <code>09</code>
-        <name_province> Ariége</name_province>
-        <name_province_uppercase> ARIÉGE</name_province_uppercase>
+        <name_province>Ariége</name_province>
+        <name_province_uppercase>ARIÉGE</name_province_uppercase>
         <province_slug>-ariege</province_slug>
     </province>
     <province>
@@ -172,8 +172,8 @@
         <id_departement>21</id_departement>
         <id_region>12</id_region>
         <code>23</code>
-        <name_province>Creuse </name_province>
-        <name_province_uppercase>CREUSE </name_province_uppercase>
+        <name_province>Creuse</name_province>
+        <name_province_uppercase>CREUSE</name_province_uppercase>
         <province_slug>creuse-</province_slug>
     </province>
     <province>

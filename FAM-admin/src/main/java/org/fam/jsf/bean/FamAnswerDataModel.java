@@ -4,20 +4,24 @@
  */
 package org.fam.jsf.bean;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.fam.ejb.model.FamAnswer;
 import org.fam.ejb.session.FamAnswerFacade;
 import org.primefaces.model.SelectableDataModel;
 
-import javax.ejb.EJB;
 import javax.faces.model.ListDataModel;
+import javax.inject.Inject;
 import java.util.List;
 
 /**
  * @author mask_hot
  */
+@Getter
+@Setter
 public class FamAnswerDataModel extends ListDataModel<FamAnswer> implements SelectableDataModel<FamAnswer> {
 
-    @EJB
+    @Inject
     FamAnswerFacade ejb;
 
     public FamAnswerDataModel() {

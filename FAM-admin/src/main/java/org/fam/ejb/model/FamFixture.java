@@ -5,16 +5,13 @@ package org.fam.ejb.model;
  * and open the template in the editor.
  */
 
-import org.fam.common.log.LogUtil;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.lang.reflect.Field;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
 
 /**
  * @author gbougear
@@ -203,35 +200,11 @@ public class FamFixture extends FamEntity implements Serializable {
     //    @PreUpdate
 //    void preUpdate() {
 //        if (this.getDtFixture() != null) {
-////            LogUtil.log("FixturePreUpdate setDate", Level.WARNING, null);
+////
 //            // Pour tous les matches de la journée
 //            for (FamMatch match : this.getFamMatchList()) {
 //                match.getFamEvent().setDtEvent(this.getDtFixture());
 //            }
 //        }
 //    }
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-
-        Class cls = this.getClass();
-        int ii = 0;
-        builder.append(this.getClass()).append(" [");
-        for (Field f : cls.getDeclaredFields()) {
-            if ((f.getName().equals(PROP_MATCHS) == false)
-                    && (f.getName().equals(PROP_SEASON_COMPETITION))) {
-                try {
-                    builder.append(ii++ == 0 ? "\n" : "\n,").append(f.getName()).append(" : ").append(f.get(this));
-                } catch (IllegalArgumentException e) {
-                    // TODO Auto-generated catch block
-                    LogUtil.log("Erreur!", Level.SEVERE, e);
-                } catch (IllegalAccessException e) {
-                    // TODO Auto-generated catch block
-                    LogUtil.log("Erreur!", Level.SEVERE, e);
-                }
-            }
-            builder.append("\n]");
-        }
-        return builder.toString();
-    }
 }

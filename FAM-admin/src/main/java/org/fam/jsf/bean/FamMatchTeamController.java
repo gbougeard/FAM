@@ -1,34 +1,43 @@
 package org.fam.jsf.bean;
 
-import org.fam.common.log.LogUtil;
+import lombok.Getter;
+import lombok.Setter;
+import org.fam.common.cdi.Loggable;
 import org.fam.ejb.model.FamMatchTeam;
 import org.fam.ejb.session.FamMatchTeamFacade;
 import org.fam.jsf.bean.util.JsfUtil;
+import org.slf4j.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.faces.model.SelectItem;
+import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
 
 @Named
 @SessionScoped
+@Loggable
+@Getter
+@Setter
 public class FamMatchTeamController implements Serializable {
+
+    private static final long serialVersionUID = 2955219154097614663L;
+    @Inject
+    private Logger LOGGER;
+    @Inject
+    private FamMatchTeamFacade ejbFacade;
 
     private FamMatchTeam current = new FamMatchTeam();
     private List<FamMatchTeam> items = new ArrayList<FamMatchTeam>();
-    @EJB
-    private FamMatchTeamFacade ejbFacade;
+
     private int selectedItemIndex;
 
     public FamMatchTeamController() {
@@ -36,12 +45,10 @@ public class FamMatchTeamController implements Serializable {
 
     @PostConstruct
     private void postConstruct() {
-        LogUtil.log(this.getClass() + " - postConstruct", Level.INFO, null);
     }
 
     @PreDestroy
     private void preDestroy() {
-        LogUtil.log(this.getClass() + " - preDestroy", Level.INFO, null);
     }
 
     public FamMatchTeam getSelected() {
@@ -85,6 +92,7 @@ public class FamMatchTeamController implements Serializable {
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("FamMatchTeamCreated"));
             return prepareView();
         } catch (Exception e) {
+            LOGGER.error("create", e);
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
         }
@@ -111,6 +119,7 @@ public class FamMatchTeamController implements Serializable {
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("FamMatchTeamUpdated"));
             return "View?faces-redirect=true";
         } catch (Exception e) {
+            LOGGER.error("update", e);
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
         }
@@ -142,30 +151,16 @@ public class FamMatchTeamController implements Serializable {
             getFacade().remove(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("FamMatchTeamDeleted"));
         } catch (Exception e) {
+            LOGGER.error("delete", e);
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }
     }
 
 
-    public List<FamMatchTeam> getItems() {
-        /*if (items == null) {
-        items = getPagination().createPageDataModel();
-        }*/
-        return items;
-    }
-
     private void recreateModel() {
         items = null;
     }
 
-
-    public SelectItem[] getItemsAvailableSelectMany() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
-    }
-
-    public SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
-    }
 
     @FacesConverter(forClass = FamMatchTeam.class)
     public static class FamMatchTeamControllerConverter implements Converter {

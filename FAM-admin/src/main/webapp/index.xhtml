@@ -2,8 +2,6 @@
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:c="http://java.sun.com/jsp/jstl/core"
         xmlns:fn="http://java.sun.com/jsp/jstl/functions"
         xmlns:p="http://primefaces.org/ui"
         template="/common/template.xhtml">
@@ -44,15 +42,15 @@
                 <h:panelGrid columns="2" rendered="#{!login.loggedIn}">
                     <!--<h:outputLabel value="#{bundle.EditFamTeamLabel_famClub}" for="famClub"/>-->
                     <!--<h:selectOneMenu id="famClub"-->
-                                     <!--value="#{cachePlayer.currentClub}"-->
-                                     <!--title="#{bundle.EditFamTeamTitle_famClub}"-->
-                            <!-->-->
-                        <!--<f:selectItem itemLabel="Club"-->
-                                      <!--noSelectionOption="true"/>-->
-                        <!--<f:selectItems value="#{cacheBean.listClub}"-->
-                                       <!--var="n"-->
-                                       <!--itemValue="#{n}"-->
-                                       <!--itemLabel="#{n.libClub}"/>-->
+                    <!--value="#{cachePlayer.currentClub}"-->
+                    <!--title="#{bundle.EditFamTeamTitle_famClub}"-->
+                    <!-->-->
+                    <!--<f:selectItem itemLabel="Club"-->
+                    <!--noSelectionOption="true"/>-->
+                    <!--<f:selectItems value="#{cacheBean.listClub}"-->
+                    <!--var="n"-->
+                    <!--itemValue="#{n}"-->
+                    <!--itemLabel="#{n.libClub}"/>-->
                     <!--</h:selectOneMenu>-->
 
                     <h:outputLabel for="username">Username:</h:outputLabel>
@@ -147,26 +145,27 @@
                         <h:graphicImage value="/images/myspace.jpeg"/>
                     </h:commandLink>
                 </h:panelGrid>-->
-                <p:commandButton  widgetVar="startButton"
-                        value="Create Data"
-                        rendered="#{!bootstrap.initDone}"
-                        actionListener="#{bootstrap.createData}"
-                        onclick="pbAjax.start();startButton.disable();"
-                        immediate="true"
+                <p:commandButton widgetVar="startButton"
+                                 value="Create Data"
+                                 rendered="#{!bootstrap.initDone}"
+                                 actionListener="#{bootstrap.createData}"
+                                 onclick="pbAjax.start();startButton.disable();"
+                                 immediate="true"
                         />
                 <!--<p:commandButton-->
-                                  <!--value="Create Player"-->
-                                  <!--actionListener="#{bootstrap.createPlayer}"-->
-                                  <!--immediate="true"-->
-                        <!--/>-->
-                <p:growl id="growl" />
+                <!--value="Create Player"-->
+                <!--actionListener="#{bootstrap.createPlayer}"-->
+                <!--immediate="true"-->
+                <!--/>-->
+                <p:growl id="growl"/>
 
 
                 <!--<p:commandButton value="Start" type="button" onclick="pbAjax.start();startButton2.disable();" widgetVar="startButton2"/>-->
                 <!--<p:commandButton value="Cancel" actionListener="#{progressBean.cancel}" oncomplete="pbAjax.cancel();startButton2.enable();" />-->
 
-                <p:progressBar widgetVar="pbAjax" ajax="true" value="#{bootstrap.progress}" oncomplete="startButton.enable()">
-                    <p:ajax event="complete" listener="#{bootstrap.onComplete}" update="growl" />
+                <p:progressBar widgetVar="pbAjax" ajax="true" value="#{bootstrap.progress}"
+                               oncomplete="startButton.enable()">
+                    <p:ajax event="complete" listener="#{bootstrap.onComplete}" update="growl"/>
                 </p:progressBar>
 
 
@@ -174,24 +173,24 @@
 
             <!--<h:outputText id="tst" value="Init not done : #{initData.progress}%" rendered="#{!initData.initDone}"/>-->
             <!--<h:form prependId="false">-->
-                <!--&lt;!&ndash;                <p:growl id="growl" autoUpdate="true" showDetail="true" />&ndash;&gt;-->
-                <!--<p:commandButton-->
-                        <!--value="Create Data"-->
-                        <!--rendered="#{!initData.initDone}"-->
-                        <!--actionListener="#{initData.createData}"-->
+            <!--&lt;!&ndash;                <p:growl id="growl" autoUpdate="true" showDetail="true" />&ndash;&gt;-->
+            <!--<p:commandButton-->
+            <!--value="Create Data"-->
+            <!--rendered="#{!initData.initDone}"-->
+            <!--actionListener="#{initData.createData}"-->
 
-                        <!--immediate="true"-->
-                        <!--update=" messages"-->
-                        <!--/>-->
-                <!--onclick="pbAjax.start();poll.start();"-->
-                <!--<p:poll interval="1" update="tst" widgetVar="poll" autoStart="false"/>-->
+            <!--immediate="true"-->
+            <!--update=" messages"-->
+            <!--/>-->
+            <!--onclick="pbAjax.start();poll.start();"-->
+            <!--<p:poll interval="1" update="tst" widgetVar="poll" autoStart="false"/>-->
 
-                <!--<p:progressBar widgetVar="pbAjax" ajax="true" value="#{initData.progress}"-->
-                <!--rendered="#{!initData.initDone}">-->
-                <!--<p:ajax event="complete" listener="#{initData.onComplete}" update="growl messages tst"/>-->
-                <!--</p:progressBar>-->
-                <!--                <p:outputPanel id="display"/>
-              <p:push channel="chat" onpublish="handlePublish"/>-->
+            <!--<p:progressBar widgetVar="pbAjax" ajax="true" value="#{initData.progress}"-->
+            <!--rendered="#{!initData.initDone}">-->
+            <!--<p:ajax event="complete" listener="#{initData.onComplete}" update="growl messages tst"/>-->
+            <!--</p:progressBar>-->
+            <!--                <p:outputPanel id="display"/>
+          <p:push channel="chat" onpublish="handlePublish"/>-->
             <!--</h:form>-->
 
         </center>

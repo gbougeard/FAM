@@ -18,7 +18,7 @@ public class FamPlayerEntityListener {
     @PrePersist
     @PreUpdate
     void setProfileChart(final Object entity) {
-//        LogUtil.log("FamPlayerEntityListener::buildChart", Level.INFO, null);
+//
 //        String url = ChartUtil.radarProfile(( (FamPlayer) entity ).getCurrentProfile());
 //        ( (FamPlayer) entity ).setProfileChartUrl(url);
 //        ( (FamPlayer) entity ).getCurrentProfile().setProfileChartUrl(url);

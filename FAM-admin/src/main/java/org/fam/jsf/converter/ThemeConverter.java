@@ -37,7 +37,7 @@ public class ThemeConverter implements Converter {
     @Override
     public Object getAsObject(final FacesContext context, final UIComponent component, final String value) {
 //        return AvailableThemes.getInstance().getThemeForName(value);
-        LOGGER.debug("themes not null? "+ (themes != null));
+        LOGGER.debug("themes not null? " + (themes != null));
         return themes.getThemeForName(value);
     }
 

@@ -2,6 +2,7 @@ package org.fam.jsf.controller;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.fam.common.cdi.Loggable;
 import org.fam.common.cdi.LoggedIn;
 import org.fam.common.cdi.Player;
 import org.fam.ejb.model.*;
@@ -34,6 +35,7 @@ import java.util.List;
 @ViewScoped
 @Getter
 @Setter
+@Loggable
 public class FamEventController extends AbstractController<FamEvent> implements Serializable {
 
     private static final long serialVersionUID = -6296773571175172927L;
@@ -148,7 +150,8 @@ public class FamEventController extends AbstractController<FamEvent> implements 
                 }
 
                 items = ejbFacade.find(dtStart, dtEnd);
-                for (FamEvent evt : items) {
+                for (Object o : items) {
+                    FamEvent evt = (FamEvent) o;
                     String title = evt.getLibEvent();
                     DateTime dtS = new DateTime(evt.getDtEvent());
                     DateTime dtE = dtS.plusMinutes(evt.getDuration());

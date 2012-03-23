@@ -22,7 +22,7 @@ public class FamSeasonConverter extends AbstractConverter<FamSeasonController> {
 //        if (value == null || value.length() == 0) {
 //            return null;
 //        }
-//        LogUtil.log(this.getClass() + "::getAsObject " + value, Level.OFF, null);
+//
 //        FamSeasonController controller = (FamSeasonController) facesContext.getApplication().getELResolver().
 //                getValue(facesContext.getELContext(), null, "famSeasonController");
 //        return controller.getEjbFacade().find(getKey(value));

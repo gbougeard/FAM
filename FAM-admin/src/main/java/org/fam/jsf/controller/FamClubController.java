@@ -1,6 +1,5 @@
 package org.fam.jsf.controller;
 
-import org.fam.common.log.LogUtil;
 import org.fam.ejb.model.FamClub;
 import org.fam.ejb.session.FamClubFacade;
 
@@ -10,7 +9,6 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
-import java.util.logging.Level;
 
 @ManagedBean(name = "famClubController")
 @ViewScoped
@@ -31,13 +29,11 @@ public class FamClubController extends AbstractController<FamClub>
 
     @PostConstruct
     private void postConstruct() {
-        LogUtil.log(this.getClass() + " - postConstruct", Level.INFO, null);
 //        findAll();
     }
 
     @PreDestroy
     private void preDestroy() {
-        LogUtil.log(this.getClass() + " - preDestroy", Level.INFO, null);
 //        super.infoDestroy();
     }
 
@@ -100,7 +96,7 @@ public class FamClubController extends AbstractController<FamClub>
 //            if (value == null || value.length() == 0) {
 //                return null;
 //            }
-//            LogUtil.log(this.getClass() + "::getAsObject " + value, Level.OFF, null);
+//
 //            FamClubController controller = (FamClubController) facesContext.getApplication().getELResolver().
 //                    getValue(facesContext.getELContext(), null, "famClubController");
 //            return controller.getFacade().find(getKey(value));

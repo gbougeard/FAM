@@ -6,20 +6,20 @@ package org.fam.ejb.session;
 
 import org.fam.common.interceptor.AuditInterceptor;
 import org.fam.common.interceptor.LoggingInterceptor;
-import org.fam.common.log.LogUtil;
 import org.fam.ejb.model.FamUser;
+import org.slf4j.Logger;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.interceptor.Interceptors;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
 
 /**
@@ -29,6 +29,9 @@ import java.util.logging.Level;
 @LocalBean
 @Interceptors({LoggingInterceptor.class, AuditInterceptor.class})
 public class FamUserFacade extends AbstractFacade<FamUser> implements Serializable {
+
+    @Inject
+    private Logger LOGGER;
 
     //    @PersistenceContext//(unitName = "FAM-test-ejbPU")
 //    private EntityManager em;
@@ -116,7 +119,6 @@ public class FamUserFacade extends AbstractFacade<FamUser> implements Serializab
     public FamUser login(String username, String password) {
         StringBuilder sb = new StringBuilder();
         sb.append("login ").append(username).append(" / ").append(password);
-        LogUtil.log(sb.toString(), Level.INFO, null);
 
         Query query = getEntityManager().createNamedQuery("FamUser.login");
         query.setParameter(FamUser.PROP_EMAIL, username);
@@ -127,35 +129,35 @@ public class FamUserFacade extends AbstractFacade<FamUser> implements Serializab
             results = query.getResultList();
         } catch (NoResultException e) {
             //- if there is no result}
-            LogUtil.log("NoResultException", Level.SEVERE, e);
+            LOGGER.error("NoResultException", e);
             return null;
         } catch (NonUniqueResultException e) {
             //- if more than one result
-            LogUtil.log("NonUniqueResultException", Level.SEVERE, e);
+            LOGGER.error("NonUniqueResultException", e);
             return null;
         } catch (IllegalStateException e) {
             //- if called for a Java Persistence query language UPDATE or DELETE statement
-            LogUtil.log("IllegalStateException", Level.SEVERE, e);
+            LOGGER.error("IllegalStateException", e);
             return null;
         } catch (QueryTimeoutException e) {
             // - if the query execution exceeds the query timeout value set and only the statement is rolled back
-            LogUtil.log("QueryTimeoutException", Level.SEVERE, e);
+            LOGGER.error("QueryTimeoutException", e);
             return null;
         } catch (TransactionRequiredException e) {
             // - if a lock mode has been set and there is no transaction
-            LogUtil.log("TransactionRequiredException", Level.SEVERE, e);
+            LOGGER.error("TransactionRequiredException", e);
             return null;
         } catch (PessimisticLockException e) {
             //- if pessimistic locking fails and the transaction is rolled back
-            LogUtil.log("PessimisticLockException", Level.SEVERE, e);
+            LOGGER.error("PessimisticLockException", e);
             return null;
         } catch (LockTimeoutException e) {
             // - if pessimistic locking fails and only the statement is rolled back
-            LogUtil.log("LockTimeoutException", Level.SEVERE, e);
+            LOGGER.error("LockTimeoutException", e);
             return null;
         } catch (PersistenceException e) {
             // - if the query execution exceeds the query timeout value set and the transaction is rolled back
-            LogUtil.log("PersistenceException", Level.SEVERE, e);
+            LOGGER.error("PersistenceException", e);
             return null;
         }
 
@@ -163,10 +165,10 @@ public class FamUserFacade extends AbstractFacade<FamUser> implements Serializab
             return null;
         } else {
             if (results.size() > 1) {
-                LogUtil.log("Cannot have more than one user with the same username", Level.SEVERE, null);
+                LOGGER.warn("Cannot have more than one user with the same username");
                 throw new IllegalStateException("Cannot have more than one user with the same username!");
             } else {
-                LogUtil.log("LOGIN SUCCESS!", Level.INFO, null);
+                LOGGER.info("LOGIN SUCCESS!");
                 return results.get(0);
             }
         }

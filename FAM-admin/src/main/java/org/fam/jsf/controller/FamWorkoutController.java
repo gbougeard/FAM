@@ -2,7 +2,6 @@ package org.fam.jsf.controller;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.fam.common.log.LogUtil;
 import org.fam.ejb.model.FamAnswer;
 import org.fam.ejb.model.FamPlayer;
 import org.fam.ejb.model.FamWorkout;
@@ -21,7 +20,6 @@ import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
 @ManagedBean(name = "famWorkoutController")
 @ViewScoped
@@ -52,12 +50,12 @@ public class FamWorkoutController extends AbstractController<FamWorkout>
 
     @PostConstruct
     private void postConstruct() {
-        LogUtil.log(this.getClass() + " - postConstruct", Level.INFO, null);
+
     }
 
     @PreDestroy
     private void preDestroy() {
-        LogUtil.log(this.getClass() + " - preDestroy", Level.INFO, null);
+
 //        super.infoDestroy();
     }
 

@@ -4,7 +4,6 @@
  */
 package org.fam.jsf.converter;
 
-import org.fam.common.log.LogUtil;
 import org.fam.ejb.model.FamTypMatch;
 import org.fam.jsf.controller.FamTypMatchController;
 
@@ -12,7 +11,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import java.util.logging.Level;
 
 /**
  * @author mask_hot
@@ -22,7 +20,7 @@ public class FamTypMatchConverter implements Converter {
 
     @Override
     public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
-        LogUtil.log(this.getClass() + "::getAsObject " + value, Level.INFO, null);
+
         if (value == null || value.length() == 0) {
             return null;
         }

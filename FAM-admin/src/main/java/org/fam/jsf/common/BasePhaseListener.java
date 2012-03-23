@@ -16,6 +16,7 @@ import javax.faces.event.PhaseListener;
  */
 public class BasePhaseListener implements PhaseListener {
 
+    //    @Inject
     private static final Logger LOGGER = LoggerFactory.getLogger(BasePhaseListener.class);
 
     @Override
@@ -24,7 +25,9 @@ public class BasePhaseListener implements PhaseListener {
 //        VariableResolver vr = ctx.getApplication().getVariableResolver();
 //        PhaseBean phaseBean = (PhaseBeanvr.resolveVariable(ctx, "phaseBean");
 //        phaseBean.setCurrentPhaseId(event.getPhaseId());
-        LOGGER.trace("BEFORE PHASE " + pe.getPhaseId());
+        if (LOGGER.isTraceEnabled()) {
+            LOGGER.trace("BEFORE PHASE " + pe.getPhaseId());
+        }
     }
 
     @Override
@@ -34,6 +37,9 @@ public class BasePhaseListener implements PhaseListener {
 
     @Override
     public void afterPhase(PhaseEvent pe) {
-        LOGGER.trace("AFTER PHASE " + pe.getPhaseId());
+        if (LOGGER.isTraceEnabled()) {
+            LOGGER.trace("AFTER PHASE " + pe.getPhaseId());
+        }
     }
+
 }

@@ -7,7 +7,6 @@ package org.fam.ejb.session;
 import org.fam.common.constant.FamConstantes;
 import org.fam.common.interceptor.AuditInterceptor;
 import org.fam.common.interceptor.LoggingInterceptor;
-import org.fam.common.log.LogUtil;
 import org.fam.ejb.model.*;
 import org.fam.jsf.cache.CachePlayer;
 
@@ -18,7 +17,6 @@ import javax.interceptor.Interceptors;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
 /**
  * @author gbougear
@@ -161,12 +159,10 @@ public class FamAnswerFacade extends AbstractFacade<FamAnswer> {
 
 
         List<FamAnswer> answerList = findAnswerByEvent(event);
-        LogUtil.log(answerList.size() + " answers found for event " + event.getLibEvent(), Level.INFO, null);
 
         List<FamPlayer> players = new ArrayList<FamPlayer>();
         for (FamTeam team : event.getFamTeamList()) {
             List<FamPlayerSeason> playerSeasonList = ejbPlayerSeason.findByTeamAndSeason(team, event.getFamSeason());
-            LogUtil.log(playerSeasonList.size() + " players found for team " + team.getLibTeam(), Level.INFO, null);
 
             for (FamPlayerSeason ps : playerSeasonList) {
                 players.add(ps.getFamPlayer());
@@ -184,7 +180,6 @@ public class FamAnswerFacade extends AbstractFacade<FamAnswer> {
     public List<FamPlayer> findByEventAndNoAnswerAndTeam(FamEvent event, FamTeam team) {
 
         List<FamAnswer> answerList = findAnswerByEvent(event);
-        LogUtil.log(answerList.size() + " answers found for event " + event.getLibEvent(), Level.INFO, null);
 
         List<FamPlayer> players = new ArrayList<FamPlayer>();
 
@@ -193,7 +188,6 @@ public class FamAnswerFacade extends AbstractFacade<FamAnswer> {
         }
 
         List<FamPlayerSeason> playerSeasonList = ejbPlayerSeason.findByTeamAndSeason(team, event.getFamSeason());
-        LogUtil.log(playerSeasonList.size() + " players found for team " + team.getLibTeam(), Level.INFO, null);
 
         for (FamPlayerSeason ps : playerSeasonList) {
             players.add(ps.getFamPlayer());

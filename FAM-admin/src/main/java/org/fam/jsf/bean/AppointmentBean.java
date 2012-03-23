@@ -4,6 +4,9 @@
  */
 package org.fam.jsf.bean;
 
+import lombok.Getter;
+import lombok.Setter;
+import org.fam.common.cdi.Loggable;
 import org.fam.common.cdi.LoggedIn;
 import org.fam.common.cdi.Player;
 import org.fam.ejb.model.FamAnswer;
@@ -14,7 +17,6 @@ import org.fam.ejb.session.FamAnswerFacade;
 import org.fam.ejb.session.FamEventFacade;
 import org.fam.jsf.bean.util.JsfUtil;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -30,9 +32,13 @@ import java.util.List;
  */
 @ManagedBean
 @ViewScoped
+@Loggable
+@Getter
+@Setter
 public class AppointmentBean {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(AppointmentBean.class);
+    @Inject
+    private Logger LOGGER;
 
     @EJB
     private FamEventFacade ejbEvent;
@@ -60,12 +66,16 @@ public class AppointmentBean {
 
     @PostConstruct
     private void postConstruct() {
-        LOGGER.info(this.getClass() + " - postConstruct");
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info("postConstruct");
+        }
     }
 
     @PreDestroy
     private void preDestroy() {
-        LOGGER.info(this.getClass() + " - preDestroy");
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info("preDestroy");
+        }
     }
 
     public void loadAction() {
@@ -119,71 +129,5 @@ public class AppointmentBean {
         }
         return null;
     }
-
-    /* GETTER / SETTER */
-    public FamUser getCurrentUser() {
-        return currentUser;
-    }
-
-    public void setCurrentUser(FamUser currentUser) {
-        this.currentUser = currentUser;
-    }
-
-    public FamAnswer getCurrentUserAnswer() {
-        return currentUserAnswer;
-    }
-
-    public void setCurrentUserAnswer(FamAnswer currentUserAnswer) {
-        this.currentUserAnswer = currentUserAnswer;
-    }
-
-    public List<FamAnswer> getYesForEvent() {
-        return lstYes;
-    }
-
-    public Integer getNbYesForEvent() {
-        return lstYes.size();
-    }
-
-    public List<FamAnswer> getNoForEvent() {
-        return lstNo;
-    }
-
-    public Integer getNbNoForEvent() {
-        return lstNo.size();
-    }
-
-    public List<FamAnswer> getMaybeForEvent() {
-        return lstMaybe;
-    }
-
-    public Integer getNbMaybeForEvent() {
-        return lstMaybe.size();
-    }
-
-    public List<FamPlayer> getNoAnswerForEvent() {
-        return lstNsp;
-    }
-
-    public Integer getNbNoAnswerForEvent() {
-        return lstNsp.size();
-    }
-
-    public FamEvent getCurrentEvent() {
-        return currentEvent;
-    }
-
-    public void setCurrentEvent(FamEvent currentEvent) {
-        this.currentEvent = currentEvent;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
 
 }

@@ -8,8 +8,8 @@ import org.fam.ejb.model.FamPlayer;
 import org.fam.ejb.session.FamPlayerFacade;
 import org.primefaces.model.SelectableDataModel;
 
-import javax.ejb.EJB;
 import javax.faces.model.ListDataModel;
+import javax.inject.Inject;
 import java.util.List;
 
 /**
@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class FamPlayerDataModel extends ListDataModel<FamPlayer> implements SelectableDataModel<FamPlayer> {
 
-    @EJB
+    @Inject
     FamPlayerFacade ejb;
 
     public FamPlayerDataModel() {

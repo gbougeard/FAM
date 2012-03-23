@@ -6,9 +6,10 @@ package org.fam.jsf.bean;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.fam.common.log.LogUtil;
+import org.fam.common.cdi.Loggable;
 import org.fam.ejb.model.FamRole;
 import org.primefaces.event.TabChangeEvent;
+import org.slf4j.Logger;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
@@ -18,16 +19,19 @@ import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.Serializable;
-import java.util.logging.Level;
 
 /**
  * @author gbougear
  */
 @Named
 @SessionScoped
+@Loggable
 @Getter
 @Setter
 public class AuthentificationBean implements Serializable {
+
+    @Inject
+    private Logger LOGGER;
 
     //    @Resource
 //    private SessionContext sessionContext;
@@ -78,18 +82,14 @@ public class AuthentificationBean implements Serializable {
     }
 
     public String navSignup() {
-        LogUtil.log("navSignup", Level.INFO, null);
         return "pretty:signup";
     }
 
     public String navLogin() {
-        LogUtil.log("navLogin", Level.INFO, null);
         return "/auth/login?faces-redirect=true";
     }
 
     public String doSignup() {
-        LogUtil.log("do signup", Level.INFO, null);
-        LogUtil.log(signupBean.toString(), Level.OFF, null);
         return "/auth/signup?faces-redirect=true";
     }
 

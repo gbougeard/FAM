@@ -4,8 +4,9 @@
  */
 package org.fam.jsf.bean;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.fam.common.cdi.LoggedIn;
-import org.fam.common.log.LogUtil;
 import org.fam.ejb.model.FamUser;
 import org.fam.ejb.session.FamUserFacade;
 import org.fam.jsf.bean.util.JsfUtil;
@@ -22,7 +23,6 @@ import org.openid4java.message.ax.AxMessage;
 import org.openid4java.message.ax.FetchRequest;
 import org.openid4java.message.ax.FetchResponse;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Produces;
@@ -38,18 +38,20 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
-import java.util.logging.Level;
 
 /**
  * @author mask_hot
  */
 @SessionScoped
 @Named
+@Getter
+@Setter
 public class Login implements Serializable {
 
     private static final long serialVersionUID = 7965455427888195913L;
     //
-    private static final Logger LOGGER = LoggerFactory.getLogger(Login.class);
+    @Inject
+    private Logger LOGGER;
     //
     @Inject
     private FamCredentials famCredentials;
@@ -83,8 +85,6 @@ public class Login implements Serializable {
     public String login() {
         StringBuilder sb = new StringBuilder();
         sb.append("login ").append(famCredentials.getUsername()).append(" / ").append(famCredentials.getPassword());
-        LogUtil.log(sb.toString(), Level.INFO, null);
-
 
         FamUser user = userManager.login(famCredentials.getUsername(), famCredentials.getPassword());
         if (user != null) {
@@ -113,10 +113,6 @@ public class Login implements Serializable {
     @Named(value = "currentUser")
     public FamUser getCurrentUser() {
         return currentUser;
-    }
-
-    public void setCurrentUser(FamUser currentUser) {
-        this.currentUser = currentUser;
     }
 
     // ============= OPENID ===============================
@@ -189,7 +185,6 @@ public class Login implements Serializable {
         try {
             request.setCharacterEncoding("UTF-8");
         } catch (UnsupportedEncodingException ex) {
-            LogUtil.log("returnToUrl", Level.SEVERE, ex);
 //            Logger.getLogger(Openid.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "http://" + request.getServerName() + ":" + request.getServerPort()
@@ -208,8 +203,8 @@ public class Login implements Serializable {
      * @throws IOException
      */
     /*private String authRequest(String returnToUrl) throws IOException {
-        LogUtil.log("authRequest " + userSuppliedId, Level.INFO, null);
-        LogUtil.log("cred.username " + famCredentials.getUsername(), Level.INFO, null);
+
+
         try {
             List discoveries = manager.discover(userSuppliedId);
             discovered = manager.associate(discoveries);
@@ -302,10 +297,10 @@ public class Login implements Serializable {
                         if (lst.isEmpty()) {
                             // user not found!
                             // throw Error!
-                            LogUtil.log("Signin with openid - user not found", Level.SEVERE, null);
+
                         } else {
                             currentUser = lst.get(0);
-                            LogUtil.log("Signin with openid - user " + currentUser, Level.INFO, null);
+
 //                            profileController.afterSignin();
                         }
                     }
@@ -314,7 +309,7 @@ public class Login implements Serializable {
             }
         } catch (OpenIDException e) {
             // TODO
-            LogUtil.log("OpenIDException", Level.SEVERE, e);
+
         }
         return null;
     }*/
@@ -334,21 +329,6 @@ public class Login implements Serializable {
         return "/index.xhtml?faces-redirect=true";
     }
 
-    public String getOpenIdEmail() {
-        return openIdEmail;
-    }
-
-    public String getOpenIdFirstName() {
-        return openIdFirstName;
-    }
-
-    public String getOpenIdLastName() {
-        return openIdLastName;
-    }
-
-    public String getUserSuppliedId() {
-        return userSuppliedId;
-    }
 
     public String doSignUp() {
         if (currentUser == null) {

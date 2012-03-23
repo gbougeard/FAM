@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.fam.jsf.event;
+package org.fam.common.event;
 
 /**
  * @author arungupta

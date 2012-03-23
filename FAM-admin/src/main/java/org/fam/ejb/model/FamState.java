@@ -5,16 +5,13 @@ package org.fam.ejb.model;
  * and open the template in the editor.
  */
 
-import org.fam.common.log.LogUtil;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
-import java.lang.reflect.Field;
 import java.util.List;
-import java.util.logging.Level;
 
 /**
  * @author gbougear
@@ -187,27 +184,4 @@ public class FamState extends FamEntity implements Serializable {
         return true;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-
-        Class cls = this.getClass();
-        int ii = 0;
-        builder.append(this.getClass()).append(" [");
-        for (Field f : cls.getDeclaredFields()) {
-//            if (( f.getName().equals(PROP_PROVINCES) == false )
-//                    && 
-            if ((f.getName().equals(PROP_CLUBS) == false)) {
-                try {
-                    builder.append(ii++ == 0 ? "\n" : "\n,").append(f.getName()).append(" : ").append(f.get(this));
-                } catch (IllegalArgumentException e) {
-                    LogUtil.log("Erreur!", Level.SEVERE, e);
-                } catch (IllegalAccessException e) {
-                    LogUtil.log("Erreur!", Level.SEVERE, e);
-                }
-            }
-        }
-        builder.append("\n]");
-        return builder.toString();
-    }
 }

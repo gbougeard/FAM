@@ -97,7 +97,7 @@ public class AvailableThemes implements Serializable {
             themesAsMap.put(theme.getName(), theme);
         }
 
-        LOGGER.debug(themes.size()+" themes loaded");
+        LOGGER.debug(themes.size() + " themes loaded");
     }
 
     public List<Theme> getThemes() {

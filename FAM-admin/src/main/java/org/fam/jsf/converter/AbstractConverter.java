@@ -4,13 +4,11 @@
  */
 package org.fam.jsf.converter;
 
-import org.fam.common.log.LogUtil;
 import org.fam.jsf.controller.AbstractController;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
-import java.util.logging.Level;
 
 /**
  * @author mask_hot
@@ -41,7 +39,7 @@ public abstract class AbstractConverter<T> implements Converter {
         if (value == null || value.length() == 0) {
             return null;
         }
-        LogUtil.log(this.getClass() + "::getAsObject " + value, Level.OFF, null);
+
 
         controller = (AbstractController) facesContext.getApplication().getELResolver().
                 getValue(facesContext.getELContext(), null, controllerClass.getName());

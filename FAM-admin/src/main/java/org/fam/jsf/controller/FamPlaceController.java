@@ -5,7 +5,6 @@ import com.google.code.geocoder.GeocoderRequestBuilder;
 import com.google.code.geocoder.model.GeocodeResponse;
 import com.google.code.geocoder.model.GeocoderRequest;
 import com.google.code.geocoder.model.GeocoderResult;
-import org.fam.common.log.LogUtil;
 import org.fam.ejb.model.FamPlace;
 import org.fam.ejb.session.FamPlaceFacade;
 import org.primefaces.model.map.DefaultMapModel;
@@ -21,7 +20,6 @@ import javax.faces.bean.ViewScoped;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
-import java.util.logging.Level;
 
 @ManagedBean(name = "famPlaceController")
 @ViewScoped
@@ -37,13 +35,13 @@ public class FamPlaceController extends AbstractController<FamPlace> implements 
 
     @PostConstruct
     private void postConstruct() {
-        LogUtil.log(this.getClass() + " - postConstruct", Level.INFO, null);
+
 //        findAll();
     }
 
     @PreDestroy
     private void preDestroy() {
-        LogUtil.log(this.getClass() + " - preDestroy", Level.INFO, null);
+
     }
 
     @Override
@@ -91,7 +89,7 @@ public class FamPlaceController extends AbstractController<FamPlace> implements 
 //            
 //            @Override
 //            public void onFailure() {
-//                LogUtil.log(fullAdress, Level.SEVERE, null);
+//
 //            }
 //            
 //            @Override
@@ -130,23 +128,22 @@ public class FamPlaceController extends AbstractController<FamPlace> implements 
         GeocoderRequest geocoderRequest = new GeocoderRequestBuilder().setAddress(details).getGeocoderRequest();
 //       setLanguage("en")
         GeocodeResponse geocoderResponse = geocoder.geocode(geocoderRequest);
-        LogUtil.log(geocoderResponse.toString(), Level.OFF, null);
+
         List<GeocoderResult> results = geocoderResponse.getResults();
         for (GeocoderResult result : results) {
-            LogUtil.log(result.getFormattedAddress(), Level.OFF, null);
-            LogUtil.log(result.getGeometry().getLocation().getLat().toPlainString(), Level.OFF, null);
-            LogUtil.log(result.getGeometry().getLocation().getLng().toString(), Level.OFF, null);
+
+
             current.setLatitude(result.getGeometry().getLocation().getLat());
             current.setLongitude(result.getGeometry().getLocation().getLng());
         }
 
         LatLng coord = new LatLng(current.getLatitude().doubleValue(), current.getLongitude().doubleValue());
         if (coord == null) {
-            LogUtil.log("coord NULL", Level.WARNING, null);
+
             coord = new LatLng(42.0, 1.43);
         }
         if (simpleModel == null) {
-            LogUtil.log("simpleModel NULL", Level.WARNING, null);
+
             simpleModel = new DefaultMapModel();
         }
         simpleModel.addOverlay(new Marker(coord, "Test"));

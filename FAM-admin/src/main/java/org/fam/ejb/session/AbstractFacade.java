@@ -4,13 +4,10 @@
  */
 package org.fam.ejb.session;
 
-import org.fam.common.cdi.LoggedIn;
 import org.fam.common.interceptor.AuditInterceptor;
 import org.fam.common.interceptor.LoggingInterceptor;
 import org.fam.ejb.exception.FamException;
-import org.fam.ejb.model.FamUser;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.event.Event;
@@ -65,7 +62,7 @@ public class AbstractFacade<T> {
     }
 
     @PostConstruct
-    private void init(){
+    private void init() {
         LOGGER.debug("Init");
     }
 

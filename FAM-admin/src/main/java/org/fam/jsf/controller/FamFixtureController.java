@@ -1,6 +1,5 @@
 package org.fam.jsf.controller;
 
-import org.fam.common.log.LogUtil;
 import org.fam.ejb.model.FamFixture;
 import org.fam.ejb.model.FamSeasonCompetition;
 import org.fam.ejb.session.FamFixtureFacade;
@@ -12,7 +11,6 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
-import java.util.logging.Level;
 
 @ManagedBean(name = "famFixtureController")
 @ViewScoped
@@ -32,14 +30,14 @@ public class FamFixtureController extends AbstractController<FamFixture> impleme
 
     @PostConstruct
     private void postConstruct() {
-        LogUtil.log(this.getClass() + " - postConstruct", Level.INFO, null);
+
 //        findAll();
 //        lstTimeLine = new ArrayList<Timeline>();
     }
 
     @PreDestroy
     private void preDestroy() {
-        LogUtil.log(this.getClass() + " - preDestroy", Level.INFO, null);
+
     }
 
     @Override
@@ -81,7 +79,7 @@ public class FamFixtureController extends AbstractController<FamFixture> impleme
     }
 
     public void loadBySeasonCompetition() {
-        LogUtil.log("loadBySeasonCompetition " + idSeasonCompetition, Level.INFO, null);
+
         if (idSeasonCompetition != null) {
 
             try {
@@ -99,14 +97,14 @@ public class FamFixtureController extends AbstractController<FamFixture> impleme
 //                lstTimeLine.add(timeLine);
 
             } catch (Exception e) {
-                LogUtil.log("loadBySeasonCompetition", Level.SEVERE, e);
+
                 JsfUtil.addErrorMessage(e, "loadBySeasonCompetition");
             }
         }
     }
 
     public String loadBySeasonCompetition(FamSeasonCompetition famSeasonCompetition) {
-        LogUtil.log("loadBySeasonCompetition " + famSeasonCompetition.getDisplayName(), Level.INFO, null);
+
         try {
             items = getFacade().findByCompetition(famSeasonCompetition);
 
@@ -120,7 +118,7 @@ public class FamFixtureController extends AbstractController<FamFixture> impleme
 //            }
 //            lstTimeLine.add(timeLine);
         } catch (Exception e) {
-            LogUtil.log("loadBySeasonCompetition", Level.SEVERE, e);
+
             JsfUtil.addErrorMessage(e, "loadBySeasonCompetition Failed");
         }
         String url = "/ok/famFixture/Grid?faces-redirect=true&id=" + famSeasonCompetition.getIdSeasonCompetition();
@@ -131,7 +129,7 @@ public class FamFixtureController extends AbstractController<FamFixture> impleme
         try {
             getFacade().propagateDate(current);
         } catch (Exception e) {
-            LogUtil.log("propagateDate", Level.SEVERE, e);
+
             JsfUtil.addErrorMessage(e, "propagateDate");
         }
         return super.prepareView();

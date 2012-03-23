@@ -43,8 +43,8 @@ public class FamPositionFacade extends AbstractFacade<FamPosition> {
     }
 
     @PostConstruct
-    private void init(){
-       LOGGER.debug("Init");
+    private void init() {
+        LOGGER.debug("Init");
     }
 
     /**
