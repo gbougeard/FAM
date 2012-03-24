@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition
+<html
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:f="http://java.sun.com/jsf/core"
         xmlns:p="http://primefaces.org/ui"
         >
+<ui:composition>
     <f:metadata>
         <!--        <f:event type="preRenderView" listener="#{chartBean.buildChart(bean)}" />	-->
     </f:metadata>
+    <!--@elvariable id="bean" type="org.fam.ejb.model.FamPlayer"-->
     <h:panelGrid columns="2">
-        <p:graphicImage id="photo"
-                        value=" #{initParam['org.fam.jsf.PLAYERS_PHOTO_PATH']}#{initParam['org.fam.jsf.DEFAULT_PHOTO']}#{initParam['org.fam.jsf.DEFAULT_IMAGE_EXTENSION']}"
+        <h:graphicImage id="photo"
+                        library="images/players"
+                        name="#{initParam['org.fam.jsf.DEFAULT_PHOTO']}#{initParam['org.fam.jsf.DEFAULT_IMAGE_EXTENSION']}"
                         cache="false"
                         width="120"
                         style="border-width:4px;border-color:#6F6E6E;border-style:double"
@@ -30,6 +33,7 @@
          <p:message id="msg_idPlayer" for="idPlayer"/> -->
 
             <h:outputLabel value="#{bundle.EditFamUserLabel_firstName}" for="firstName"/>
+
             <h:outputText id="firstName"
                           value="#{bean.firstName}"
                           title="#{bundle.EditFamUserTitle_firstName}"
@@ -195,5 +199,5 @@
 
         </p:tab>
     </p:tabView>
-
 </ui:composition>
+</html>

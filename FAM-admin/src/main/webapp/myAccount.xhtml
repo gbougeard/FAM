@@ -108,7 +108,7 @@
                             </ui:include>
                         </c:if>
                         <c:if test="${empty cachePlayer}">
-                            <h1>Pa de joueur encore sélectionné</h1>
+                            <h1>Pas de joueur encore sélectionné</h1>
                         </c:if>
                         <p:commandButton value="#{bundle.EditMyAccountCalcStatLink}"
                                          action="#{famPlayerSeasonFacade.calcStatForPlayerAndCurrentSeason(cachePlayer.currentPlayer)}"
