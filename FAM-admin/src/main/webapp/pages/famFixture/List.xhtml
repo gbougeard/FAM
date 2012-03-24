@@ -18,7 +18,7 @@
 
                 <p:dataTable
                         value="#{famFixtureController.lazyModel}"
-                        lazy="true"
+
                         var="item"
                         selection="#{famFixtureController.selected}"
                         selectionMode="single"
@@ -35,21 +35,21 @@
                         <p:toolbar id="tb">
                             <p:toolbarGroup align="left">
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamFixtureViewLink}"
                                                  action="#{famFixtureController.prepareView}"
                                                  disabled="#{empty famFixtureController.selected.idFixture}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamFixtureCreateLink}"
                                                  action="#{famFixtureController.prepareCreate}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamFixtureEditLink}"
                                                  action="#{famFixtureController.prepareEdit}"
                                                  disabled="#{empty famFixtureController.selected.idFixture}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.DeleteLink}"
                                                  action="#{famFixtureController.prepareDelete}"
                                                  disabled="#{empty famFixtureController.selected.idFixture}"/>

@@ -18,7 +18,7 @@
 
                 <p:dataTable
                         value="#{famScaleController.lazyModel}"
-                        lazy="true"
+
                         var="item"
                         selection="#{famScaleController.selected}"
                         selectionMode="single"
@@ -35,21 +35,21 @@
                         <p:toolbar id="tb">
                             <p:toolbarGroup align="left">
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamScaleViewLink}"
                                                  action="#{famScaleController.prepareView}"
                                                  disabled="#{empty famScaleController.selected.idScale}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamScaleCreateLink}"
                                                  action="#{famScaleController.prepareCreate}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamScaleEditLink}"
                                                  action="#{famScaleController.prepareEdit}"
                                                  disabled="#{empty famScaleController.selected.idScale}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.DeleteLink}"
                                                  action="#{famScaleController.prepareDelete}"
                                                  disabled="#{empty famScaleController.selected.idScale}"/>

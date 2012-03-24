@@ -19,7 +19,7 @@
 
                 <p:dataTable
                         value="#{famProfileController.lazyModel}"
-                        lazy="true"
+
                         var="item"
                         selectionMode="single"
                         paginator="true" rows="10"
@@ -32,21 +32,21 @@
                         <p:toolbar>
                             <p:toolbarGroup align="left">
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamProfileViewLink}"
                                                  action="#{famProfileController.prepareView}"
                                                  disabled="#{!famProfileController.select}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamProfileCreateLink}"
                                                  action="#{famProfileController.prepareCreate}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamProfileEditLink}"
                                                  action="#{famProfileController.prepareEdit}"
                                                  disabled="#{!famProfileController.select}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.DeleteLink}"
                                                  action="#{famProfileController.prepareDelete}"
                                                  disabled="#{!famProfileController.select}"/>

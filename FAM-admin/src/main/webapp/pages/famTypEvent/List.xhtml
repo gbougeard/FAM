@@ -18,7 +18,7 @@
 
                 <p:dataTable
                         value="#{famTypEventController.lazyModel}"
-                        lazy="true"
+
                         var="item"
                         selection="#{famTypEventController.selected}"
                         selectionMode="single"
@@ -35,21 +35,21 @@
                         <p:toolbar id="tb">
                             <p:toolbarGroup align="left">
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamTypEventViewLink}"
                                                  action="#{famTypEventController.prepareView}"
                                                  disabled="#{empty famTypEventController.selected.idTypEvent}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamTypEventCreateLink}"
                                                  action="#{famTypEventController.prepareCreate}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamTypEventEditLink}"
                                                  action="#{famTypEventController.prepareEdit}"
                                                  disabled="#{empty famTypEventController.selected.idTypEvent}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.DeleteLink}"
                                                  action="#{famTypEventController.prepareDelete}"
                                                  disabled="#{empty famTypEventController.selected.idTypEvent}"/>

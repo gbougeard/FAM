@@ -19,7 +19,7 @@
 
                 <p:dataTable
                         value="#{famClubController.lazyModel}"
-                        lazy="true"
+
                         var="item"
                         selection="#{famClubController.selected}"
                         selectionMode="single"
@@ -41,7 +41,7 @@
                         <p:toolbar id="tb">
                             <p:toolbarGroup align="left">
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamClubViewLink}"
                                                  action="#{famClubController.prepareView}"
                                                  disabled="#{empty famClubController.selected.idClub}"/>

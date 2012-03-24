@@ -18,7 +18,7 @@
 
                 <p:dataTable
                         value="#{famGroupController.lazyModel}"
-                        lazy="true"
+
                         var="item"
                         selectionMode="single"
                         paginator="true" rows="10"
@@ -31,21 +31,21 @@
                         <p:toolbar>
                             <p:toolbarGroup align="left">
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamGroupViewLink}"
                                                  action="#{famGroupController.prepareView}"
                                                  disabled="#{!famGroupController.select}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamGroupCreateLink}"
                                                  action="#{famGroupController.prepareCreate}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamGroupEditLink}"
                                                  action="#{famGroupController.prepareEdit}"
                                                  disabled="#{!famGroupController.select}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.DeleteLink}"
                                                  action="#{famGroupController.prepareDelete}"
                                                  disabled="#{!famGroupController.select}"/>

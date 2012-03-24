@@ -19,7 +19,7 @@
 
                 <p:dataTable
                         value="#{famOrganizationController.lazyModel}"
-                        lazy="true"
+
                         var="item"
                         selection="#{famOrganizationController.selected}"
                         selectionMode="single"
@@ -36,21 +36,21 @@
                         <p:toolbar id="tb">
                             <p:toolbarGroup align="left">
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamOrganizationViewLink}"
                                                  action="#{famOrganizationController.prepareView}"
                                                  disabled="#{empty famOrganizationController.selected.idOrganization}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamOrganizationCreateLink}"
                                                  action="#{famOrganizationController.prepareCreate}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamOrganizationEditLink}"
                                                  action="#{famOrganizationController.prepareEdit}"
                                                  disabled="#{empty famOrganizationController.selected.idOrganization}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.DeleteLink}"
                                                  action="#{famOrganizationController.prepareDelete}"
                                                  disabled="#{empty famOrganizationController.selected.idOrganization}"/>

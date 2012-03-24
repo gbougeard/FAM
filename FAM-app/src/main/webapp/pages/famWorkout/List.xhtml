@@ -19,7 +19,7 @@
 
                 <p:dataTable
                         value="#{famWorkoutController.lazyModel}"
-                        lazy="true"
+
                         var="item"
                         selection="#{famWorkoutController.selected}"
                         selectionMode="single"
@@ -35,26 +35,26 @@
                         <p:toolbar id="tb">
                             <p:toolbarGroup align="left">
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.View}"
                                                  action="#{famWorkoutController.prepareView}"
                                                  disabled="#{empty famWorkoutController.selected.idWorkout}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.CreateLink}"
                                                  action="#{famWorkoutController.prepareCreate}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.Edit}"
                                                  action="#{famWorkoutController.prepareEdit}"
                                                  disabled="#{empty famWorkoutController.selected.idWorkout}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.DeleteLink}"
                                                  action="#{famWorkoutController.destroyAndView}"
                                                  disabled="#{empty famWorkoutController.selected.idWorkout}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamWorkoutDebriefLink}"
                                                  action="#{famWorkoutController.prepareDebrief}"
                                                  disabled="#{empty famWorkoutController.selected.idWorkout}"/>

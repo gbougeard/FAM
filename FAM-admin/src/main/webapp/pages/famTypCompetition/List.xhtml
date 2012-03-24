@@ -18,7 +18,7 @@
 
                 <p:dataTable
                         value="#{famTypCompetitionController.lazyModel}"
-                        lazy="true"
+
                         var="item"
                         selection="#{famTypCompetitionController.selected}"
                         selectionMode="single"
@@ -35,21 +35,21 @@
                         <p:toolbar id="tb">
                             <p:toolbarGroup align="left">
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamTypCompetitionViewLink}"
                                                  action="#{famTypCompetitionController.prepareView}"
                                                  disabled="#{empty famTypCompetitionController.selected.idTypCompetition}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamTypCompetitionCreateLink}"
                                                  action="#{famTypCompetitionController.prepareCreate}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamTypCompetitionEditLink}"
                                                  action="#{famTypCompetitionController.prepareEdit}"
                                                  disabled="#{empty famTypCompetitionController.selected.idTypCompetition}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.DeleteLink}"
                                                  action="#{famTypCompetitionController.prepareDelete}"
                                                  disabled="#{empty famTypCompetitionController.selected.idTypCompetition}"/>

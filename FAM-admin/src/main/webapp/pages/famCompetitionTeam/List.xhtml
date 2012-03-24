@@ -18,7 +18,7 @@
 
                 <p:dataTable
                         value="#{famCompetitionTeamController.lazyModel}"
-                        lazy="true"
+
                         var="item"
                         selection="#{famCompetitionTeamController.selected}"
                         selectionMode="single"
@@ -35,21 +35,21 @@
                         <p:toolbar id="tb">
                             <p:toolbarGroup align="left">
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamCompetitionTeamViewLink}"
                                                  action="#{famCompetitionTeamController.prepareView}"
                                                  disabled="#{empty famCompetitionTeamController.selected.famTeam.libTeam}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamCompetitionTeamCreateLink}"
                                                  action="#{famCompetitionTeamController.prepareCreate}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamCompetitionTeamEditLink}"
                                                  action="#{famCompetitionTeamController.prepareEdit}"
                                                  disabled="#{empty famCompetitionTeamController.selected.famTeam.libTeam}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.DeleteLink}"
                                                  action="#{famCompetitionTeamController.prepareDelete}"
                                                  disabled="#{empty famCompetitionTeamController.selected.famTeam.libTeam}"/>

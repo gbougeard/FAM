@@ -19,7 +19,7 @@
 
                 <p:dataTable
                         value="#{famTypPlaceController.lazyModel}"
-                        lazy="true"
+
                         var="item"
                         selection="#{famTypPlaceController.selected}"
                         selectionMode="single"
@@ -36,21 +36,21 @@
                         <p:toolbar id="tb">
                             <p:toolbarGroup align="left">
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamTypPlaceViewLink}"
                                                  action="#{famTypPlaceController.prepareView}"
                                                  disabled="#{empty famTypPlaceController.selected.idTypPlace}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamTypPlaceCreateLink}"
                                                  action="#{famTypPlaceController.prepareCreate}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamTypPlaceEditLink}"
                                                  action="#{famTypPlaceController.prepareEdit}"
                                                  disabled="#{empty famTypPlaceController.selected.idTypPlace}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.DeleteLink}"
                                                  action="#{famTypPlaceController.prepareDelete}"
                                                  disabled="#{empty famTypPlaceController.selected.idTypPlace}"/>

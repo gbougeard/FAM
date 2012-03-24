@@ -19,7 +19,7 @@
 
                 <p:dataTable
                         value="#{famTypCardFinescaleController.lazyModel}"
-                        lazy="true"
+
                         var="item"
                         selection="#{famTypCardFinescaleController.selected}"
                         selectionMode="single"
@@ -36,21 +36,21 @@
                         <p:toolbar id="tb">
                             <p:toolbarGroup align="left">
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamTypCardFinescaleViewLink}"
                                                  action="#{famTypCardFinescaleController.prepareView}"
                                                  disabled="#{empty famTypCardFinescaleController.selected.idTypCardFinescale}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamTypCardFinescaleCreateLink}"
                                                  action="#{famTypCardFinescaleController.prepareCreate}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamTypCardFinescaleEditLink}"
                                                  action="#{famTypCardFinescaleController.prepareEdit}"
                                                  disabled="#{empty famTypCardFinescaleController.selected.idTypCardFinescale}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.DeleteLink}"
                                                  action="#{famTypCardFinescaleController.prepareDelete}"
                                                  disabled="#{empty famTypCardFinescaleController.selected.idTypCardFinescale}"/>

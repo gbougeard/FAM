@@ -18,7 +18,7 @@
 
                 <p:dataTable
                         value="#{famCardController.lazyModel}"
-                        lazy="true"
+
                         var="item"
                         selection="#{famCardController.selected}"
                         selectionMode="single"
@@ -35,21 +35,21 @@
                         <p:toolbar>
                             <p:toolbarGroup align="left">
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamCardViewLink}"
                                                  action="#{famCardController.prepareView}"
                                                  disabled="#{empty famCardController.selected.idCard}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamCardCreateLink}"
                                                  action="#{famCardController.prepareCreate}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamCardEditLink}"
                                                  action="#{famCardController.prepareEdit}"
                                                  disabled="#{empty famCardController.selected.idCard}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.DeleteLink}"
                                                  action="#{famCardController.prepareDelete}"
                                                  disabled="#{empty famCardController.selected.idCard}"/>

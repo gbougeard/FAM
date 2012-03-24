@@ -18,7 +18,7 @@
 
                 <p:dataTable
                         value="#{famTypAnswerController.lazyModel}"
-                        lazy="true"
+
                         var="item"
                         selection="#{famTypAnswerController.selected}"
                         selectionMode="single"
@@ -35,21 +35,21 @@
                         <p:toolbar id="tb">
                             <p:toolbarGroup align="left">
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamTypAnswerViewLink}"
                                                  action="#{famTypAnswerController.prepareView}"
                                                  disabled="#{empty famTypAnswerController.selected.idTypAnswer}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamTypAnswerCreateLink}"
                                                  action="#{famTypAnswerController.prepareCreate}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamTypAnswerEditLink}"
                                                  action="#{famTypAnswerController.prepareEdit}"
                                                  disabled="#{empty famTypAnswerController.selected.idTypAnswer}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.DeleteLink}"
                                                  action="#{famTypAnswerController.prepareDelete}"
                                                  disabled="#{empty famTypAnswerController.selected.idTypAnswer}"/>

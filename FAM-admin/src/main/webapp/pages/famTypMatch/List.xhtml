@@ -18,7 +18,7 @@
 
                 <p:dataTable
                         value="#{famTypMatchController.lazyModel}"
-                        lazy="true"
+
                         var="item"
                         selection="#{famTypMatchController.selected}"
                         selectionMode="single"
@@ -35,21 +35,21 @@
                         <p:toolbar id="tb">
                             <p:toolbarGroup align="left">
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamTypMatchViewLink}"
                                                  action="#{famTypMatchController.prepareView}"
                                                  disabled="#{empty famTypMatchController.selected.idTypMatch}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamTypMatchCreateLink}"
                                                  action="#{famTypMatchController.prepareCreate}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamTypMatchEditLink}"
                                                  action="#{famTypMatchController.prepareEdit}"
                                                  disabled="#{empty famTypMatchController.selected.idTypMatch}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.DeleteLink}"
                                                  action="#{famTypMatchController.prepareDelete}"
                                                  disabled="#{empty famTypMatchController.selected.idTypMatch}"/>

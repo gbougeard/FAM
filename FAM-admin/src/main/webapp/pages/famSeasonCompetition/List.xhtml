@@ -19,7 +19,7 @@
 
                 <p:dataTable
                         value="#{famSeasonCompetitionController.lazyModel}"
-                        lazy="true"
+
                         var="item"
                         selection="#{famSeasonCompetitionController.selected}"
                         selectionMode="single"
@@ -36,36 +36,36 @@
                         <p:toolbar id="tb">
                             <p:toolbarGroup align="left">
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamSeasonCompetitionViewLink}"
                                                  action="#{famSeasonCompetitionController.prepareView}"
                                                  disabled="#{empty famSeasonCompetitionController.selected.displayName}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamSeasonCompetitionCreateLink}"
                                                  action="#{famSeasonCompetitionController.prepareCreate}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamSeasonCompetitionEditLink}"
                                                  action="#{famSeasonCompetitionController.prepareEdit}"
                                                  disabled="#{empty famSeasonCompetitionController.selected.displayName}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.DeleteLink}"
                                                  action="#{famSeasonCompetitionController.destroy}"
                                                  disabled="#{empty famSeasonCompetitionController.selected.displayName}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="Generer Championnat"
                                                  action="#{famSeasonCompetitionController.prepareWizard}"
                                                  disabled="#{!famSeasonCompetitionController.isChampionship}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="Journées"
                                                  action="#{famFixtureController.loadBySeasonCompetition(famSeasonCompetitionController.selected)}"
                                                  disabled="#{!famSeasonCompetitionController.isChampionship}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="Résultats"
                                                  action="#{famSeasonCompetitionController.prepareWizard}"
                                                  disabled="#{!famSeasonCompetitionController.isChampionship}"/>

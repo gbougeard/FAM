@@ -19,7 +19,7 @@
 
                 <p:dataTable
                         value="#{famTypAbsenceController.lazyModel}"
-                        lazy="true"
+
                         var="item"
                         selection="#{famTypAbsenceController.selected}"
                         selectionMode="single"
@@ -36,21 +36,21 @@
                         <p:toolbar id="tb">
                             <p:toolbarGroup align="left">
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamTypAbsenceViewLink}"
                                                  action="#{famTypAbsenceController.prepareView}"
                                                  disabled="#{empty famTypAbsenceController.selected.idTypAbsence}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamTypAbsenceCreateLink}"
                                                  action="#{famTypAbsenceController.prepareCreate}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamTypAbsenceEditLink}"
                                                  action="#{famTypAbsenceController.prepareEdit}"
                                                  disabled="#{empty famTypAbsenceController.selected.idTypAbsence}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.DeleteLink}"
                                                  action="#{famTypAbsenceController.prepareDelete}"
                                                  disabled="#{empty famTypAbsenceController.selected.idTypAbsence}"/>

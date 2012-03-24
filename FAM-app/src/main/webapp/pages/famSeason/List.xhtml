@@ -20,7 +20,7 @@
 
                 <p:dataTable
                         value="#{famSeasonController.lazyModel}"
-                        lazy="true"
+
                         var="item"
                         selection="#{famSeasonController.selected}"
                         selectionMode="single"
@@ -37,21 +37,21 @@
                         <p:toolbar id="tb">
                             <p:toolbarGroup align="left">
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamSeasonViewLink}"
                                                  action="#{famSeasonController.prepareView}"
                                                  disabled="#{empty famSeasonController.selected.idSeason}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamSeasonCreateLink}"
                                                  action="#{famSeasonController.prepareCreate}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamSeasonEditLink}"
                                                  action="#{famSeasonController.prepareEdit}"
                                                  disabled="#{empty famSeasonController.selected.idSeason}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.DeleteLink}"
                                                  action="#{famSeasonController.prepareDelete}"
                                                  disabled="#{empty famSeasonController.selected.idSeason}"/>

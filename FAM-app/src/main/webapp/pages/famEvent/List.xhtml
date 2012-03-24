@@ -19,7 +19,7 @@
 
                 <p:dataTable
                         value="#{famEventController.lazyModel}"
-                        lazy="true"
+
                         var="item"
                         selection="#{famEventController.selected}"
                         selectionMode="single"
@@ -38,21 +38,21 @@
                                 <p:commandButton value="Agenda"
                                                  action="#{famEventController.prepareAgenda}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamEventViewLink}"
                                                  action="#{famEventController.prepareView}"
                                                  disabled="#{empty famEventController.selected.idEvent}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamEventCreateLink}"
                                                  action="#{famEventController.prepareCreate}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamEventEditLink}"
                                                  action="#{famEventController.prepareEdit}"
                                                  disabled="#{empty famEventController.selected.idEvent}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.DeleteLink}"
                                                  action="#{famEventController.prepareDelete}"
                                                  disabled="#{empty famEventController.selected.idEvent}"/>

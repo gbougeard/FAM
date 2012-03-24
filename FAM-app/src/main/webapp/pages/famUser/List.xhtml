@@ -19,7 +19,7 @@
 
                 <p:dataTable
                         value="#{famUserController.lazyModel}"
-                        lazy="true"
+
                         var="item"
                         selection="#{famUserController.selected}"
                         selectionMode="single"
@@ -36,21 +36,21 @@
                         <p:toolbar id="tb">
                             <p:toolbarGroup align="left">
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamUserViewLink}"
                                                  action="#{famUserController.prepareView}"
                                                  disabled="#{empty famUserController.selected.email}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamUserCreateLink}"
                                                  action="#{famUserController.prepareCreate}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamUserEditLink}"
                                                  action="#{famUserController.prepareEdit}"
                                                  disabled="#{empty famUserController.selected.email}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.DeleteLink}"
                                                  action="#{famUserController.prepareDelete}"
                                                  disabled="#{empty famUserController.selected.email}"/>

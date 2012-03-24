@@ -18,7 +18,7 @@
 
                 <p:dataTable
                         value="#{famMatchPlayerController.lazyModel}"
-                        lazy="true"
+
                         var="item"
                         selection="#{famMatchPlayerController.selected}"
                         selectionMode="single"
@@ -35,21 +35,21 @@
                         <p:toolbar id="tb">
                             <p:toolbarGroup align="left">
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamMatchPlayerViewLink}"
                                                  action="#{famMatchPlayerController.prepareView}"
                                                  disabled="#{empty famMatchController.selected.famMatchTeam}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamMatchPlayerCreateLink}"
                                                  action="#{famMatchPlayerController.prepareCreate}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamMatchPlayerEditLink}"
                                                  action="#{famMatchPlayerController.prepareEdit}"
                                                  disabled="#{empty famMatchController.selected.famMatchTeam}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.PlayerDeleteLink}"
                                                  action="#{famMatchPlayerController.prepareDelete}"
                                                  disabled="#{empty famMatchController.selected.famMatchTeam}"/>

@@ -18,7 +18,7 @@
 
                 <p:dataTable
                         value="#{famPlaceController.lazyModel}"
-                        lazy="true"
+
                         var="item"
                         selection="#{famPlaceController.selected}"
                         selectionMode="single"
@@ -35,21 +35,21 @@
                         <p:toolbar id="tb">
                             <p:toolbarGroup align="left">
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamPlaceViewLink}"
                                                  action="#{famPlaceController.prepareView}"
                                                  disabled="#{empty famPlaceController.selected.idPlace}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamPlaceCreateLink}"
                                                  action="#{famPlaceController.prepareCreate}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamPlaceEditLink}"
                                                  action="#{famPlaceController.prepareEdit}"
                                                  disabled="#{empty famPlaceController.selected.idPlace}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.DeleteLink}"
                                                  action="#{famPlaceController.prepareDelete}"
                                                  disabled="#{empty famPlaceController.selected.idPlace}"/>

@@ -18,7 +18,7 @@
 
                 <p:dataTable
                         value="#{famFormationController.lazyModel}"
-                        lazy="true"
+
                         var="item"
                         selection="#{famFormationController.selected}"
                         selectionMode="single"
@@ -35,22 +35,22 @@
                         <p:toolbar id="tb">
                             <p:toolbarGroup align="left">
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamFormationViewLink}"
                                                  action="#{famFormationController.prepareView}"
                                                  disabled="#{empty famFormationController.selected.idFormation}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamFormationCreateLink}"
                                                  action="#{famFormationController.prepareCreate}"
                                                  immediate="true"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamFormationEditLink}"
                                                  action="#{famFormationController.prepareEdit}"
                                                  disabled="#{empty famFormationController.selected.idFormation}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.DeleteLink}"
                                                  action="#{famFormationController.prepareDelete}"
                                                  disabled="#{empty famFormationController.selected.idFormation}"/>

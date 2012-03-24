@@ -12,6 +12,7 @@
     <h:panelGrid columns="3">
 
         <h:outputLabel value="#{bundle.CreateFamClubLabel_libClub}" for="libClub"/>
+        <!--@elvariable id="bean" type="org.fam.ejb.model.FamClub"-->
         <p:inputText id="libClub" value="#{bean.libClub}"
                      title="#{bundle.CreateFamClubTitle_libClub}"
                 >
@@ -54,7 +55,7 @@
                         dropdown="true"
                 >
             <p:column>
-                <p:graphicImage value="/images/flags/#{c.codCountry}.png"/>
+                <h:graphicImage name="#{c.codCountry}.png" library="images/flags" />
             </p:column>
 
             <p:column>

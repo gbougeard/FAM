@@ -18,7 +18,7 @@
 
                 <p:dataTable
                         value="#{famCommentController.lazyModel}"
-                        lazy="true"
+
                         var="item"
                         selection="#{famCommentController.selected}"
                         selectionMode="single"
@@ -35,21 +35,21 @@
                         <p:toolbar id="tb">
                             <p:toolbarGroup align="left">
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamCommentViewLink}"
                                                  action="#{famCommentController.prepareView}"
                                                  disabled="#{empty famCommentController.selected.idComment}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamCommentCreateLink}"
                                                  action="#{famCommentController.prepareCreate}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamCommentEditLink}"
                                                  action="#{famCommentController.prepareEdit}"
                                                  disabled="#{empty famCommentController.selected.idComment}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.DeleteLink}"
                                                  action="#{famCommentController.prepareDelete}"
                                                  disabled="#{empty famCommentController.selected.idComment}"/>

@@ -18,7 +18,7 @@
 
                 <p:dataTable
                         value="#{famAnswerController.lazyModel}"
-                        lazy="true"
+
                         var="item"
                         selection="#{famAnswerController.selected}"
                         selectionMode="single"
@@ -35,21 +35,21 @@
                         <p:toolbar id="tb">
                             <p:toolbarGroup align="left">
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamAnswerViewLink}"
                                                  action="#{famAnswerController.prepareView}"
                                                  disabled="#{empty famAnswerController.selected.idAnswer}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamAnswerCreateLink}"
                                                  action="#{famAnswerController.prepareCreate}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamAnswerEditLink}"
                                                  action="#{famAnswerController.prepareEdit}"
                                                  disabled="#{empty famAnswerController.selected.idAnswer}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.DeleteLink}"
                                                  action="#{famAnswerController.prepareDestroy}"
                                                  disabled="#{empty famAnswerController.selected.idAnswer}"/>

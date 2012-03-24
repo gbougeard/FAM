@@ -18,7 +18,7 @@
 
                 <p:dataTable
                         value="#{famTeamController.lazyModel}"
-                        lazy="true"
+
                         var="item"
                         selectionMode="single"
                         selection="#{famTeamController.selected}"
@@ -38,22 +38,22 @@
                         <p:toolbar id="tb">
                             <p:toolbarGroup align="left">
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamTeamViewLink}"
                                                  action="#{famTeamController.prepareView}"
                                                  disabled="#{empty famTeamController.selected.idTeam}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamTeamCreateLink}"
                                                  action="#{famTeamController.prepareCreate}"
                                                  immediate="true"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamTeamEditLink}"
                                                  action="#{famTeamController.prepareEdit}"
                                                  disabled="#{empty famTeamController.selected.idTeam}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.DeleteLink}"
                                                  action="#{famTeamController.destroy}"
                                                  disabled="#{empty famTeamController.selected.idTeam}"/>

@@ -19,7 +19,7 @@
 
                 <p:dataTable
                         value="#{famGoalController.lazyModel}"
-                        lazy="true"
+
                         var="item"
                         selection="#{famGoalController.selected}"
                         selectionMode="single"
@@ -36,21 +36,21 @@
                         <p:toolbar id="tb">
                             <p:toolbarGroup align="left">
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamGoalViewLink}"
                                                  action="#{famGoalController.prepareView}"
                                                  disabled="#{empty famGoalController.selected.idGoal}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamGoalCreateLink}"
                                                  action="#{famGoalController.prepareCreate}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamGoalEditLink}"
                                                  action="#{famGoalController.prepareEdit}"
                                                  disabled="#{empty famGoalController.selected.idGoal}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.DeleteLink}"
                                                  action="#{famGoalController.prepareDelete}"
                                                  disabled="#{empty famGoalController.selected.idGoal}"/>

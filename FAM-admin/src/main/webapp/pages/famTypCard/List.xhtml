@@ -18,7 +18,7 @@
 
                 <p:dataTable
                         value="#{famTypCardController.lazyModel}"
-                        lazy="true"
+
                         var="item"
                         selection="#{famTypCardController.selected}"
                         selectionMode="single"
@@ -35,21 +35,21 @@
                         <p:toolbar id="tb">
                             <p:toolbarGroup align="left">
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamTypCardViewLink}"
                                                  action="#{famTypCardController.prepareView}"
                                                  disabled="#{empty famTypCardController.selected.idTypCard}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamTypCardCreateLink}"
                                                  action="#{famTypCardController.prepareCreate}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamTypCardEditLink}"
                                                  action="#{famTypCardController.prepareEdit}"
                                                  disabled="#{empty famTypCardController.selected.idTypCard}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.DeleteLink}"
                                                  action="#{famTypCardController.prepareDelete}"
                                                  disabled="#{empty famTypCardController.selected.idTypCard}"/>

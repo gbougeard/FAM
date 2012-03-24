@@ -18,7 +18,7 @@
 
                 <p:dataTable
                         value="#{famPositionController.lazyModel}"
-                        lazy="true"
+
                         var="item"
                         selection="#{famPositionController.selected}"
                         selectionMode="single"
@@ -35,21 +35,21 @@
                         <p:toolbar id="tb">
                             <p:toolbarGroup align="left">
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamPositionViewLink}"
                                                  action="#{famPositionController.prepareView}"
                                                  disabled="#{empty famPositionController.selected.idPosition}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamPositionCreateLink}"
                                                  action="#{famPositionController.prepareCreate}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.ListFamPositionEditLink}"
                                                  action="#{famPositionController.prepareEdit}"
                                                  disabled="#{empty famPositionController.selected.idPosition}"/>
                                 <p:commandButton type="push"
-                                                 image="ui-icon-document"
+                                                 icon="ui-icon-document"
                                                  value="#{bundle.DeleteLink}"
                                                  action="#{famPositionController.prepareDelete}"
                                                  disabled="#{empty famPositionController.selected.idPosition}"/>
