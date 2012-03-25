@@ -5,22 +5,23 @@
 
 package org.fam.ejb.session;
 
+import org.fam.common.cdi.Loggable;
 import org.fam.common.interceptor.AuditInterceptor;
 import org.fam.common.interceptor.LoggingInterceptor;
 import org.fam.ejb.model.FamFormation;
 import org.fam.ejb.model.FamFormationItem;
 
-import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
 import javax.persistence.*;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author gbougear
  */
 @Stateless
-@LocalBean
+@Loggable
 @Interceptors({AuditInterceptor.class, LoggingInterceptor.class})
 public class FamFormationItemFacade extends AbstractFacade<FamFormationItem> {
 //    @PersistenceContext//(unitName = "FAM-test-ejbPU")
@@ -80,4 +81,28 @@ public class FamFormationItemFacade extends AbstractFacade<FamFormationItem> {
         return result;
     }
 
+    @Override
+    public void create(FamFormationItem entity) {
+        super.create(entity);    //To change body of overridden methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void edit(FamFormationItem entity) {
+        super.edit(entity);    //To change body of overridden methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void remove(FamFormationItem entity) {
+        super.remove(entity);    //To change body of overridden methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public FamFormationItem find(Object id) {
+        return super.find(id);    //To change body of overridden methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public List<FamFormationItem> findAllLazy(int first, int pageSize, String sortField, boolean sortOrder, Map<String, String> filters) {
+        return super.findAllLazy(first, pageSize, sortField, sortOrder, filters);    //To change body of overridden methods use File | Settings | File Templates.
+    }
 }

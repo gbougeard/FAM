@@ -165,7 +165,7 @@ public class FamFormation extends FamEntity implements Serializable {
         if (!codFormation.equals(that.codFormation)) {
             return false;
         }
-        if (!idFormation.equals(that.idFormation)) {
+        if (idFormation != null ? !idFormation.equals(that.idFormation) : that.idFormation != null) {
             return false;
         }
 
@@ -175,7 +175,7 @@ public class FamFormation extends FamEntity implements Serializable {
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + idFormation.hashCode();
+        result = 31 * result + (idFormation != null ? idFormation.hashCode() : 0);
         result = 31 * result + codFormation.hashCode();
         return result;
     }
@@ -189,6 +189,12 @@ public class FamFormation extends FamEntity implements Serializable {
         sb.append(", codFormation='").append(codFormation).append('\'');
         sb.append(", byDefault=").append(byDefault);
         sb.append(", famTypMatch=").append(famTypMatch.getLibTypMatch());
+        if (famFormationItemList != null) {
+            sb.append(", famFormationItemList=");
+            for (FamFormationItem famFormationItem : famFormationItemList) {
+                sb.append(famFormationItem).append('\'');
+            }
+        }
 //        sb.append(", famFormationItemList=").append(famFormationItemList);
         sb.append('}');
         return sb.toString();
