@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition
+<html
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
         xmlns:fn="http://java.sun.com/jsp/jstl/functions"
         xmlns:p="http://primefaces.org/ui"
         >
+<ui:composition>
     <script type="text/javascript">
         function handleDrop(event, ui) {
             var droppedCar = ui.draggable;
@@ -29,8 +31,8 @@
         <f:facet name="targetCaption">Présents (#{fn:length(famWorkoutController.playerPickList.target)})</f:facet>
 
         <p:column style="width:25%">
-            <p:graphicImage
-                    value="#{initParam['org.fam.jsf.PLAYERS_PHOTO_PATH']}#{initParam['org.fam.jsf.DEFAULT_PHOTO']}#{initParam['org.fam.jsf.DEFAULT_IMAGE_EXTENSION']}"
+            <h:graphicImage library="images/players"
+                    name="#{initParam['org.fam.jsf.DEFAULT_PHOTO']}#{initParam['org.fam.jsf.DEFAULT_IMAGE_EXTENSION']}"
                     width="30"/>
         </p:column>
         <p:column style="width:50%;">
@@ -154,5 +156,5 @@
             <p:ajax listener="#{famWorkoutController.onPlayerDrop}" update="dropArea no_answers" />  
         </p:droppable> -->
     <br/>
-
 </ui:composition>
+</html>

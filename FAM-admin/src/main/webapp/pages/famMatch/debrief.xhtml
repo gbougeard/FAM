@@ -238,8 +238,8 @@
             >
         <p:tab title="#{matchPlayer.num} - #{matchPlayer.famPlayer.displayName}">
             <h:panelGrid columns="2" cellpadding="10" columnClasses="verticalTop,verticalTop">
-                <p:graphicImage
-                        value="#{initParam['org.fam.jsf.PLAYERS_PHOTO_PATH']}#{initParam['org.fam.jsf.DEFAULT_PHOTO']}#{initParam['org.fam.jsf.DEFAULT_IMAGE_EXTENSION']}"
+                <h:graphicImage library="images/players"
+                        name="#{initParam['org.fam.jsf.DEFAULT_PHOTO']}#{initParam['org.fam.jsf.DEFAULT_IMAGE_EXTENSION']}"
                         width="60"/>
 
                 <h:panelGrid columns="3">

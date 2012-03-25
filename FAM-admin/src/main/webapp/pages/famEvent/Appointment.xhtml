@@ -32,13 +32,13 @@ title="#{bundle.ViewFamEventTitle_idEvent}"/>-->
 
 <!--                    <h:outputText value="#{bundle.ViewFamEventLabel_famEventStatus}"/>-->
 <!--                    <h:panelGrid columns="2" cellpadding="10">
-    <p:graphicImage value="/images/dock/soccer_1_128.png" />
+    <h:graphicImage library="images/dock" name="soccer_1_128.png" />
 
 </h:panelGrid>-->
 
 <p:fieldset legend="Date et lieu">
     <h:panelGrid columns="4" cellpadding="10">
-        <p:graphicImage value="#{resource['images/icons:02_calendar.png']}"/>
+        <h:graphicImage name="02_calendar.png" library="images/icons"/>
 
         <h:panelGrid columns="1" width="300px">
             <!--                                <h:outputText value="#{bundle.ViewFamEventLabel_dtEvent}"/>-->
@@ -60,7 +60,8 @@ title="#{bundle.ViewFamEventTitle_idEvent}"/>-->
             </p:dataList>
         </h:panelGrid>
 
-        <p:graphicImage value="#{resource['images/icons:04_maps.png']}"/>
+        <!--<p:graphicImage value="#{resource['images/icons:04_maps.png']}"/>-->
+        <h:graphicImage name="04_maps.png" library="images/icons"/>
 
         <h:panelGrid columns="1" width="300px">
             <h:outputText value="#{appointmentBean.currentEvent.famPlace.libPlace}"
@@ -86,7 +87,8 @@ title="#{bundle.ViewFamEventTitle_idEvent}"/>-->
             toggleable="true"
             rendered="#{not empty appointmentBean.currentEvent.comments}">
     <h:panelGrid columns="2" cellpadding="10">
-        <p:graphicImage value="#{resource['images/icons:07_note.png']}"/>
+        <!--<p:graphicImage value="#{resource['images/icons:07_note.png']}"/>-->
+        <h:graphicImage name="07_note.png" library="images/icons"/>
         <h:outputText value="#{appointmentBean.currentEvent.comments}"
                       title="#{bundle.ViewFamEventTitle_comments}"
                       escape="false"/>
@@ -110,8 +112,8 @@ title="#{bundle.ViewFamEventTitle_idEvent}"/>-->
 
 <p:fieldset legend="Ma réponse">
     <h:panelGrid columns="2" cellpadding="10">
-        <p:graphicImage value="#{resource['images/icons:01_messages.png']}"/>
-
+        <!--<p:graphicImage value="#{resource['images/icons:']}"/>-->
+        <h:graphicImage name="01_messages.png" library="images/icons"/>
         <h:panelGrid columns="2">
             <!--                                <h:outputLabel value="#{bundle.EditFamEventLabel_famTypAnswer}" for="famTypAnswer" />-->
             <p:selectOneMenu id="famTypAnswer"
@@ -155,8 +157,8 @@ title="#{bundle.ViewFamEventTitle_idEvent}"/>-->
 
 <p:fieldset legend="Autres réponses" toggleable="true">
     <h:panelGrid columns="2" cellpadding="10">
-        <p:graphicImage value="#{resource['images/icons:01_messages.png']}"/>
-
+        <!--<p:graphicImage value="#{resource['images/icons:']}"/>-->
+        <h:graphicImage name="01_messages.png" library="images/icons"/>
         <h:panelGrid columns="4" columnClasses="cols_4,cols_4,cols_4,cols_4">
             <p:dataTable value="#{appointmentBean.lstYes}"
                          var="y"
