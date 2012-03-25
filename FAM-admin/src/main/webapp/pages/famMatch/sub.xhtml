@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition
+<html
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:f="http://java.sun.com/jsf/core"
         xmlns:p="http://primefaces.org/ui"
         >
-
+<ui:composition>
 <h:panelGrid columns="4" columnClasses="verticalTop,verticalTop,verticalTop,verticalTop">
     <!--                            <p:fieldset id="test" legend="Préselection">-->
 
@@ -93,13 +93,14 @@
                              converter="formationConverter">
                 <f:selectItem itemLabel="Formation" itemValue=""/>
                 <!--                                        noSelectionOption="true"/>-->
-                <f:selectItems value="#{cachedLstFormation}"
+                <f:selectItems value="#{cacheBean.listFormation}"
                                var="f"
                                itemLabel="#{f.libFormation}"
                                itemValue="#{f}"/>
                 <!--                    <p:ajax event="blur" update="@form"/>-->
                 <!--                                        listener="#{famMatchController.changeFormation}"/>-->
-                <p:ajax event="valueChange" listener="#{famMatchController.genTarget}" update="dgField lst"/>
+                <p:ajax event="valueChange" listener="#{famMatchController.genTarget}" update="dgField"/>
+                <!--lst"/>-->
             </p:selectOneMenu>
             <p:message id="msg_formation" for="formation"/>
         </h:panelGrid>
@@ -198,9 +199,9 @@
             <h:outputText value="#{mp.num}"/>
         </p:column>
         <p:column style="width:25%">
-            <p:graphicImage
-                    value="#{initParam['org.fam.jsf.PLAYERS_PHOTO_PATH']}#{initParam['org.fam.jsf.DEFAULT_PHOTO']}#{initParam['org.fam.jsf.DEFAULT_IMAGE_EXTENSION']}"
-                    width="30"/>
+            <h:graphicImage library="images/players"
+                            name="#{initParam['org.fam.jsf.DEFAULT_PHOTO']}#{initParam['org.fam.jsf.DEFAULT_IMAGE_EXTENSION']}"
+                            width="30"/>
         </p:column>
         <p:column style="width:50%;">
             <h:outputText value="#{mp.famPlayer.displayName}"/>
@@ -212,6 +213,6 @@
                action="#{famMatchController.saveLineup}"
                immediate="true"
                update="@form"/>
-
 </ui:composition>
+</html>
 

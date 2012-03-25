@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition
+<html
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:f="http://java.sun.com/jsf/core"
         xmlns:p="http://primefaces.org/ui"
         >
+<ui:composition>
+    <!--@elvariable id="bean" type="org.fam.ejb.model.FamFixture"-->
     <h:panelGrid columns="3">
         <!--                    <h:outputLabel value="#{bundle.EditFamFixtureLabel_idFixture}" for="idFixture" />
      <p:inputText id="idFixture"
@@ -19,6 +21,7 @@
      <p:message id="msg_idFixture" for="idFixture"/> -->
 
         <h:outputLabel value="#{bundle.EditFamFixtureLabel_famSeasonCompetition}" for="famSeasonCompetition"/>
+
         <p:selectOneMenu id="famSeasonCompetition"
                          value="#{bean.famSeasonCompetition}"
                          converter="competConverter"
@@ -50,7 +53,7 @@
                     locale="fr"
                     maxHour="23"
                     minHour="9"
-                    mindate="#{cacheBean.now}"><!--
+                    mindate="#{common.now}"><!--
                     locale="fr"
                     lang="fr">-->
             <p:ajax event="blur" update="msg_dtFixture"/>
@@ -79,3 +82,4 @@
 
     </h:panelGrid>
 </ui:composition>
+</html>

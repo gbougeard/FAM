@@ -14,6 +14,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author gbougear
@@ -124,9 +125,9 @@ public class FamClub extends FamEntity implements Serializable {
     @Column(name = COL_COMMENTS)
     private String comments;
     //
-//    public static final String PROP_TEAMS = "famTeamList";
-//    @OneToMany(mappedBy = FamTeam.PROP_CLUB, fetch = FetchType.EAGER)
-//    private List<FamTeam> famTeamList;
+    public static final String PROP_TEAMS = "famTeamList";
+    @OneToMany(mappedBy = FamTeam.PROP_CLUB, fetch = FetchType.EAGER)
+    private List<FamTeam> famTeamList;
 
     public FamClub() {
     }

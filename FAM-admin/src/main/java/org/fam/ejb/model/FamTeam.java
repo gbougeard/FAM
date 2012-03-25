@@ -8,6 +8,7 @@ package org.fam.ejb.model;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.List;
@@ -106,15 +107,15 @@ public class FamTeam extends FamEntity implements Serializable {
     /**
      *
      */
-//    public static final String COL_ID_CLUB = "id_club";
-//    /**
-//     *
-//     */
-//    public static final String PROP_CLUB = "famClub";
-//    @NotNull
-//    @ManyToOne
-//    @JoinColumn(name = COL_ID_CLUB, referencedColumnName = FamClub.COL_ID, insertable=false, updatable=false)
-//    private FamClub famClub;
+    public static final String COL_ID_CLUB = "id_club";
+    /**
+     *
+     */
+    public static final String PROP_CLUB = "famClub";
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = COL_ID_CLUB, referencedColumnName = FamClub.COL_ID, insertable = false, updatable = false)
+    private FamClub famClub;
     //
     @ManyToMany
     @JoinTable(name = FamCompetitionTeam.TABLE_NAME,

@@ -116,7 +116,6 @@
 
                     <p:themeSwitcher style="width:150px" effect="fade" var="t" value="#{userSettings.currentTheme}"
                                      id="defaultSwitcher">
-                        <p:ajax listener="#{userSettings.onChange}"/>
                         <f:selectItem itemLabel="Choose Theme" itemValue=""/>
                         <!--itemLabel="#{theme.name}"-->
                         <f:selectItems value="#{availableThemes.themes}"

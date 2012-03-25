@@ -8,7 +8,7 @@
         xmlns:f="http://java.sun.com/jsf/core"
         xmlns:p="http://primefaces.org/ui"
         >
-
+    <!--@elvariable id="bean" type="org.fam.ejb.model.FamEvent"-->
     <h:panelGrid columns="3">
         <!--                    <h:outputLabel value="#{bundle.EditFamEventLabel_idEvent}" for="idEvent" />-->
         <!--                    <p:inputText id="idEvent" 
@@ -35,7 +35,7 @@
           <p:ajax event="blur" update="msg_famSeason"/>
       </h:selectOneMenu>
       <p:message id="msg_famSeason" for="famSeason"/>-->
-        <!--mindate="#{cacheBean.now}"-->
+        <!--mindate="#{common.now}"-->
         <h:outputLabel value="#{bundle.EditFamEventLabel_dtEvent}" for="dtEvent"/>
         <p:calendar id="dtEvent"
                     value="#{bean.dtEvent}"
@@ -160,6 +160,7 @@
       itemValue="#{t}"
       converter="teamConverter"
       />  -->
+
         <p:selectManyMenu id="teams"
                           value="#{bean.famTeamList}"
                           converter="teamConverter">

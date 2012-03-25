@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition
+<html
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:f="http://java.sun.com/jsf/core"
         xmlns:p="http://primefaces.org/ui"
         >
+<ui:composition>
+<!--@elvariable id="bean" type="org.fam.ejb.model.FamPlayer"-->
 <h:panelGrid columns="2">
-    <p:graphicImage id="photo"
-                    value="#{initParam['org.fam.jsf.PLAYERS_PHOTO_PATH']}#{empty bean.idPlayer ? initParam['org.fam.jsf.DEFAULT_PHOTO'] : bean.idPlayer}#{initParam['org.fam.jsf.DEFAULT_IMAGE_EXTENSION']}"
+
+    <h:graphicImage id="photo"
+                    library="images/players"
+                    name="#{empty bean.idPlayer ? initParam['org.fam.jsf.DEFAULT_PHOTO'] : bean.idPlayer}#{initParam['org.fam.jsf.DEFAULT_IMAGE_EXTENSION']}"
                     cache="false"
                     width="120"
                     style="border-width:4px;border-color:#6F6E6E;border-style:double"
@@ -49,7 +53,7 @@
                     value="#{bean.dtBirth}"
                     title="#{bundle.EditFamUserTitle_dtBirth}"
                     navigator="true"
-                    maxdate="#{cacheBean.now}"
+                    maxdate="#{common.now}"
                     mindate="01/01/1930"
                     locale="fr"
                     pattern="dd/MM/yyyy"
@@ -61,7 +65,7 @@
         <h:panelGrid columns="3" rendered="#{not empty bean.idPlayer}">
             <h:outputLabel value="Club actuel" for="famClub"/>
             <p:selectOneMenu id="famClub"
-                             value="#{bean.currentPlayerSeason.famClub}"
+                             value="#{bean.currentClub}"
                              style="width:200px;"
                              converter="clubConverter"
                     >
@@ -79,14 +83,14 @@
             <h:outputLabel value="Equipe actuelle" for="famTeam"
                     />
             <p:selectOneMenu id="famTeam"
-                             value="#{bean.currentPlayerSeason.famTeam}"
+                             value="#{bean.currentTeam}"
                              converter="teamConverter"
                              style="width:200px;"
                     >
                 <f:selectItem itemLabel="Team"
                               itemValue=""/>
                 <!--                              noSelectionOption="true"/>-->
-                <f:selectItems value="#{cachePlayer.listTeam}"
+                <f:selectItems value="#{bean.currentClub.famTeamList}"
                                var="t"
                                itemValue="#{t}"
                                itemLabel="#{t.libTeam}"/>
@@ -172,7 +176,7 @@
                                 value="#{bean.dtArrival}"
                                 title="#{bundle.EditFamUserTitle_dtArrival}"
                                 navigator="true"
-                                maxdate="#{cacheBean.now}"
+                                maxdate="#{common.now}"
                                 locale="fr"
                                 pattern="dd/MM/yyyy"
                             >
@@ -295,5 +299,5 @@
 
     </p:tab>
 </p:tabView>
-
 </ui:composition>
+</html>

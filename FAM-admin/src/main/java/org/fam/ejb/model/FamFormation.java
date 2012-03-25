@@ -162,14 +162,21 @@ public class FamFormation extends FamEntity implements Serializable {
 
         FamFormation that = (FamFormation) o;
 
-        return idFormation.equals(that.idFormation);
+        if (!codFormation.equals(that.codFormation)) {
+            return false;
+        }
+        if (!idFormation.equals(that.idFormation)) {
+            return false;
+        }
 
+        return true;
     }
 
     @Override
     public int hashCode() {
         int result = super.hashCode();
         result = 31 * result + idFormation.hashCode();
+        result = 31 * result + codFormation.hashCode();
         return result;
     }
 
