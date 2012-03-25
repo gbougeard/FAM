@@ -1,5 +1,6 @@
 package org.fam.jsf.controller;
 
+import org.fam.common.cdi.Loggable;
 import org.fam.ejb.model.FamFormation;
 import org.fam.ejb.model.FamFormationItem;
 import org.fam.ejb.model.FamTypMatch;
@@ -9,29 +10,30 @@ import org.primefaces.event.DragDropEvent;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
+import org.slf4j.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.imageio.ImageIO;
+import javax.inject.Inject;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @ManagedBean(name = "famFormationController")
 @ViewScoped
-public class FamFormationController extends AbstractController<FamFormation> implements Serializable {
+@Loggable
+public class FamFormationController extends AbstractController<FamFormation> {
 
-    @EJB
+    @Inject
+    private Logger LOGGER;
+    @Inject
     private FamFormationFacade ejbFacade;
     //
     private List<StreamedContent> lstGraphicText = new ArrayList<StreamedContent>();
@@ -87,6 +89,32 @@ public class FamFormationController extends AbstractController<FamFormation> imp
     public String prepareCreate() {
         loadForCreate();
         return "pretty:createFormation";
+    }
+
+    @Override
+    public String create() {
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("create ");
+        }
+        return super.create();
+    }
+
+    @Override
+    public String update() {
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("update ");
+        }
+        return super.update();
+    }
+
+    @Override
+    public String destroy() {
+        return super.destroy();
+    }
+
+    @Override
+    protected void findAll() {
+        super.findAll();
     }
 
     public void genTarget() {
@@ -236,8 +264,8 @@ public class FamFormationController extends AbstractController<FamFormation> imp
             ByteArrayOutputStream os = new ByteArrayOutputStream();
             try {
                 ImageIO.write(bufferedImg, "png", os);
-            } catch (IOException ex) {
-                Logger.getLogger(FamFormationController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException e) {
+                LOGGER.error("genImage", e);
             }
             lstGraphicText.add(new DefaultStreamedContent(new ByteArrayInputStream(os.toByteArray()), "image/png"));
 
@@ -282,5 +310,13 @@ public class FamFormationController extends AbstractController<FamFormation> imp
 
     public void setLstTarget(List<CanvasFormationItem> lstTarget) {
         this.lstTarget = lstTarget;
+    }
+
+    public void setLOGGER(Logger LOGGER) {
+        this.LOGGER = LOGGER;
+    }
+
+    public void setEjbFacade(FamFormationFacade ejbFacade) {
+        this.ejbFacade = ejbFacade;
     }
 }

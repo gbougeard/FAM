@@ -29,12 +29,12 @@ Pour effacer la bordure des layout
     color: black !important;
 }
 
-.soccer_field {
+.soccer_field{
     height: 512px;
     width: 384px;
-    background-image: url(../images/Soccer.Field_Transparant.png);
-    overflow: hidden;
+    background-image: url(#{resource[ 'images/Soccer.Field_Transparant.png' ]}) !important;
     background-repeat: no-repeat;
+    /*overflow: hidden;*/
 }
 
 .Planifie {

@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition
+<html
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:f="http://java.sun.com/jsf/core"
         xmlns:p="http://primefaces.org/ui"
         >
+<ui:composition>
     <script type="text/javascript">
         function handleDrop(event, ui) {
             var droppedCar = ui.draggable;
@@ -15,8 +16,10 @@
             droppedCar.fadeOut('fast');
         }
     </script>
+    <!--@elvariable id="bean" type="org.fam.ejb.model.FamFormation"-->
     <h:panelGrid columns="3">
         <h:outputLabel value="#{bundle.EditFamFormationLabel_libFormation}" for="libFormation"/>
+
         <p:inputText id="libFormation"
                      value="#{bean.libFormation}"
                      title="#{bundle.EditFamFormationTitle_libFormation}"
@@ -97,9 +100,16 @@
             </p:dataGrid> 
         </p:panel>-->
         <p:panel header="Field" styleClass="soccer_field">
-            <p:dataGrid id="trgField" value="#{famFormationController.lstTarget}"
+            <p:dataGrid id="trgField"
+                        value="#{famFormationController.lstTarget}"
                         var="t" columns="5"
-                        style="padding-top: 25px;margin-left: 20px;">
+                        style="padding-top: 25px;margin-left: 20px; .ui-datagrid-content{
+    height: 512px;
+    width: 384px;
+    background-image: url(#{resource[ 'images/Soccer.Field_Transparant.png' ]}) !important;
+    background-repeat: no-repeat;}"
+
+                        >
                 <p:column>
                     <p:panel id="trg"
                              style="width:50px;height:63px;opacity:0.5;"
@@ -139,5 +149,5 @@
 
     <!--    </p:fieldset>-->
 
-
 </ui:composition>
+</html>

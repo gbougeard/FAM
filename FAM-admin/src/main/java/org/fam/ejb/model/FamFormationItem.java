@@ -117,14 +117,21 @@ public class FamFormationItem extends FamEntity implements Serializable {
 
         FamFormationItem that = (FamFormationItem) o;
 
-        return idFormationItem.equals(that.idFormationItem);
+        if (idFormationItem != null ? !idFormationItem.equals(that.idFormationItem) : that.idFormationItem != null) {
+            return false;
+        }
+        if (!numItem.equals(that.numItem)) {
+            return false;
+        }
 
+        return true;
     }
 
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + idFormationItem.hashCode();
+        result = 31 * result + (idFormationItem != null ? idFormationItem.hashCode() : 0);
+        result = 31 * result + numItem.hashCode();
         return result;
     }
 
@@ -135,7 +142,9 @@ public class FamFormationItem extends FamEntity implements Serializable {
         sb.append("{idFormationItem=").append(idFormationItem);
         sb.append(", numItem=").append(numItem);
         sb.append(", coord=").append(coord);
-        sb.append(", famFormation=").append(famFormation.getLibFormation());
+        if (famFormation != null) {
+            sb.append(", famFormation=").append(famFormation.getLibFormation());
+        }
         sb.append('}');
         return sb.toString();
     }
