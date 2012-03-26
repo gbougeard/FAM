@@ -9,8 +9,8 @@ import org.fam.common.interceptor.AuditInterceptor;
 import org.fam.common.interceptor.LoggingInterceptor;
 import org.fam.ejb.model.*;
 import org.fam.jsf.cache.CachePlayer;
+import org.slf4j.Logger;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.interceptor.Interceptors;
@@ -27,10 +27,12 @@ public class FamAnswerFacade extends AbstractFacade<FamAnswer> {
 
     //    @PersistenceContext ////(unitName = "FAM-test-ejbPU")
 //    private EntityManager em;
-    @EJB
-    FamTypAnswerFacade ejbTypAnswer;
-    @EJB
-    FamPlayerSeasonFacade ejbPlayerSeason;
+    @Inject
+    private Logger LOGGER;
+    @Inject
+    private FamTypAnswerFacade ejbTypAnswer;
+    @Inject
+    private FamPlayerSeasonFacade ejbPlayerSeason;
     //
     @Inject
     private CachePlayer cachePlayer;
@@ -64,20 +66,28 @@ public class FamAnswerFacade extends AbstractFacade<FamAnswer> {
             result = query.getResultList();
         } catch (NoResultException e) {
             //- if there is no result}
+            LOGGER.error("findAnswerByEvent", e);
         } catch (NonUniqueResultException e) {
             //- if more than one result
+            LOGGER.error("findAnswerByEvent", e);
         } catch (IllegalStateException e) {
             //- if called for a Java Persistence query language UPDATE or DELETE statement
+            LOGGER.error("findAnswerByEvent", e);
         } catch (QueryTimeoutException e) {
             // - if the query execution exceeds the query timeout value set and only the statement is rolled back
+            LOGGER.error("findAnswerByEvent", e);
         } catch (TransactionRequiredException e) {
             // - if a lock mode has been set and there is no transaction
+            LOGGER.error("findAnswerByEvent", e);
         } catch (PessimisticLockException e) {
             //- if pessimistic locking fails and the transaction is rolled back
+            LOGGER.error("findAnswerByEvent", e);
         } catch (LockTimeoutException e) {
             // - if pessimistic locking fails and only the statement is rolled back
+            LOGGER.error("findAnswerByEvent", e);
         } catch (PersistenceException e) {
             // - if the query execution exceeds the query timeout value set and the transaction is rolled back
+            LOGGER.error("findAnswerByEvent", e);
         }
 
         return result;
@@ -98,20 +108,28 @@ public class FamAnswerFacade extends AbstractFacade<FamAnswer> {
             result = query.getResultList();
         } catch (NoResultException e) {
             //- if there is no result}
+            LOGGER.error("findAnswerByEventAndTypAnswer", e);
         } catch (NonUniqueResultException e) {
             //- if more than one result
+            LOGGER.error("findAnswerByEventAndTypAnswer", e);
         } catch (IllegalStateException e) {
             //- if called for a Java Persistence query language UPDATE or DELETE statement
+            LOGGER.error("findAnswerByEventAndTypAnswer", e);
         } catch (QueryTimeoutException e) {
             // - if the query execution exceeds the query timeout value set and only the statement is rolled back
+            LOGGER.error("findAnswerByEventAndTypAnswer", e);
         } catch (TransactionRequiredException e) {
             // - if a lock mode has been set and there is no transaction
+            LOGGER.error("findAnswerByEventAndTypAnswer", e);
         } catch (PessimisticLockException e) {
             //- if pessimistic locking fails and the transaction is rolled back
+            LOGGER.error("findAnswerByEventAndTypAnswer", e);
         } catch (LockTimeoutException e) {
             // - if pessimistic locking fails and only the statement is rolled back
+            LOGGER.error("findAnswerByEventAndTypAnswer", e);
         } catch (PersistenceException e) {
             // - if the query execution exceeds the query timeout value set and the transaction is rolled back
+            LOGGER.error("findAnswerByEventAndTypAnswer", e);
         }
 
         return result;
@@ -132,20 +150,28 @@ public class FamAnswerFacade extends AbstractFacade<FamAnswer> {
             result = query.getResultList();
         } catch (NoResultException e) {
             //- if there is no result}
+            LOGGER.error("findAnswerByEventAndInTypAnswer", e);
         } catch (NonUniqueResultException e) {
             //- if more than one result
+            LOGGER.error("findAnswerByEventAndInTypAnswer", e);
         } catch (IllegalStateException e) {
             //- if called for a Java Persistence query language UPDATE or DELETE statement
+            LOGGER.error("findAnswerByEventAndInTypAnswer", e);
         } catch (QueryTimeoutException e) {
             // - if the query execution exceeds the query timeout value set and only the statement is rolled back
+            LOGGER.error("findAnswerByEventAndInTypAnswer", e);
         } catch (TransactionRequiredException e) {
             // - if a lock mode has been set and there is no transaction
+            LOGGER.error("findAnswerByEventAndInTypAnswer", e);
         } catch (PessimisticLockException e) {
             //- if pessimistic locking fails and the transaction is rolled back
+            LOGGER.error("findAnswerByEventAndInTypAnswer", e);
         } catch (LockTimeoutException e) {
             // - if pessimistic locking fails and only the statement is rolled back
+            LOGGER.error("findAnswerByEventAndInTypAnswer", e);
         } catch (PersistenceException e) {
             // - if the query execution exceeds the query timeout value set and the transaction is rolled back
+            LOGGER.error("findAnswerByEventAndInTypAnswer", e);
         }
 
         return result;
@@ -209,6 +235,9 @@ public class FamAnswerFacade extends AbstractFacade<FamAnswer> {
     }
 
     private List<FamAnswer> getAnswerForTeam(List<FamAnswer> lstAnswer, FamTeam team) {
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info("getAnswerForTeam in " + lstAnswer.size());
+        }
         List<FamAnswer> list = new ArrayList<FamAnswer>();
 
         if (lstAnswer == null || lstAnswer.isEmpty()) {
@@ -226,6 +255,9 @@ public class FamAnswerFacade extends AbstractFacade<FamAnswer> {
                     }
                 }
             }
+        }
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info(list.size() + "answers found for " + team);
         }
         return list;
     }
@@ -273,20 +305,28 @@ public class FamAnswerFacade extends AbstractFacade<FamAnswer> {
             result = query.getResultList();
         } catch (NoResultException e) {
             //- if there is no result}
+            LOGGER.error("findAnswerByEventAndPlayer", e);
         } catch (NonUniqueResultException e) {
             //- if more than one result
+            LOGGER.error("findAnswerByEventAndPlayer", e);
         } catch (IllegalStateException e) {
             //- if called for a Java Persistence query language UPDATE or DELETE statement
+            LOGGER.error("findAnswerByEventAndPlayer", e);
         } catch (QueryTimeoutException e) {
             // - if the query execution exceeds the query timeout value set and only the statement is rolled back
+            LOGGER.error("findAnswerByEventAndPlayer", e);
         } catch (TransactionRequiredException e) {
             // - if a lock mode has been set and there is no transaction
+            LOGGER.error("findAnswerByEventAndPlayer", e);
         } catch (PessimisticLockException e) {
             //- if pessimistic locking fails and the transaction is rolled back
+            LOGGER.error("findAnswerByEventAndPlayer", e);
         } catch (LockTimeoutException e) {
             // - if pessimistic locking fails and only the statement is rolled back
+            LOGGER.error("findAnswerByEventAndPlayer", e);
         } catch (PersistenceException e) {
             // - if the query execution exceeds the query timeout value set and the transaction is rolled back
+            LOGGER.error("findAnswerByEventAndPlayer", e);
         }
 
         if (result.isEmpty()) {
@@ -307,5 +347,9 @@ public class FamAnswerFacade extends AbstractFacade<FamAnswer> {
 
     public void setCachePlayer(CachePlayer cachePlayer) {
         this.cachePlayer = cachePlayer;
+    }
+
+    public void setLOGGER(Logger LOGGER) {
+        this.LOGGER = LOGGER;
     }
 }
