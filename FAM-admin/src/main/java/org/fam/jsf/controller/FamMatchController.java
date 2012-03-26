@@ -2,6 +2,7 @@ package org.fam.jsf.controller;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.fam.common.cdi.Loggable;
 import org.fam.common.cdi.LoggedIn;
 import org.fam.common.cdi.Player;
 import org.fam.ejb.model.*;
@@ -13,43 +14,65 @@ import org.fam.jsf.cache.CacheBean;
 import org.fam.jsf.cache.CachePlayer;
 import org.primefaces.event.DragDropEvent;
 import org.primefaces.model.DualListModel;
+import org.slf4j.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ValueChangeEvent;
 import javax.inject.Inject;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 @ManagedBean(name = "famMatchController")
 @ViewScoped
+@Loggable
 @Getter
 @Setter
-public class FamMatchController extends AbstractController<FamMatch> implements Serializable {
+public class FamMatchController extends AbstractController<FamMatch> {
 
-    @EJB
+    @Inject
+    Logger LOGGER;
+    @Inject
     private FamMatchFacade ejbFacade;
+    @Inject
+    private FamAnswerFacade ejbAnswer;
+    @Inject
+    private FamTeamFacade ejbTeam;
+    @Inject
+    private FamGoalFacade ejbGoal;
+    @Inject
+    private FamCardFacade ejbCard;
+    @Inject
+    private FamSubstitutionFacade ejbSub;
+    @Inject
+    private FamEventFacade ejbEvent;
+    @Inject
+    private FamMatchTeamFacade ejbMatchTeam;
+    @Inject
+    private FamMatchPlayerFacade ejbMatchPlayer;
+    @Inject
+    private FamFixtureFacade ejbFixture;
+    //
     @Inject
     private CacheBean cacheBean;
     @Inject
     private CachePlayer cachePlayer;
     //
+    @Inject
+    @LoggedIn
+    private FamUser currentUser;
+    @Inject
+    @Player
+    private FamPlayer currentPlayer;
+    //
     private FamMatchTeam matchTeamHome = new FamMatchTeam();
     private FamMatchTeam matchTeamAway = new FamMatchTeam();
     private FamEvent famEvent = new FamEvent();
-    @EJB
-    private FamFixtureFacade ejbFixture;
+
     private List<FamFixture> fixtureList = new ArrayList<FamFixture>();
-    //
-    @EJB
-    private FamAnswerFacade ejbAnswer;
-    @EJB
-    private FamTeamFacade ejbTeam;
     //
     private Long idTeam;
     private FamTeam famTeam;
@@ -63,15 +86,6 @@ public class FamMatchController extends AbstractController<FamMatch> implements 
     private List<FamAnswer> selectedMaybe;
     private FamPlayer[] selectedPlayers;
     //
-//    @Inject
-    // private Login login;
-    @Inject
-    @LoggedIn
-    private FamUser currentUser;
-    @Inject
-    @Player
-    private FamPlayer currentPlayer;
-    //
     private FamPlayer selectedPlayer;
     private List<FamPlayer> players;
     private List<FamPlayer> preselectedLst;
@@ -82,15 +96,6 @@ public class FamMatchController extends AbstractController<FamMatch> implements 
     private FamCard famCard;
     private List<FamSubstitution> lstSubstitution;
     private FamSubstitution famSubstitution;
-    //
-    @EJB
-    private FamGoalFacade ejbGoal;
-    @EJB
-    private FamCardFacade ejbCard;
-    @EJB
-    private FamSubstitutionFacade ejbSub;
-    @EJB
-    private FamEventFacade ejbEvent;
     //
     private FamMatchTeam famMatchTeam;
     //
@@ -103,14 +108,7 @@ public class FamMatchController extends AbstractController<FamMatch> implements 
     private int nbSub;
     private int nbPlayers;
     //
-    @EJB
-    private FamMatchTeamFacade ejbMatchTeam;
-    //
     private FamPlayerDataModel playerDM;
-    //
-    @EJB
-    private FamMatchPlayerFacade ejbMatchPlayer;
-
 
     public FamMatchController() {
     }
@@ -137,10 +135,6 @@ public class FamMatchController extends AbstractController<FamMatch> implements 
     @Override
     public FamMatchFacade getFacade() {
         return ejbFacade;
-    }
-
-    public List<FamFixture> getFixtureList() {
-        return fixtureList;
     }
 
     @Override
@@ -202,6 +196,9 @@ public class FamMatchController extends AbstractController<FamMatch> implements 
     @Override
     public String prepareView() {
         id = current.getIdMatch();
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info("matchId " + id);
+        }
         return "pretty:viewMatch";
     }
 
@@ -228,9 +225,21 @@ public class FamMatchController extends AbstractController<FamMatch> implements 
         findTeam();
 
         lstYes = ejbAnswer.findAnswerYesByEventAndTeam(current.getFamEvent(), famTeam);
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info("yes " + lstYes.size());
+        }
         lstNo = ejbAnswer.findAnswerNoByEventAndTeam(current.getFamEvent(), famTeam);
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info("no " + lstNo.size());
+        }
         lstMaybe = ejbAnswer.findAnswerMaybeByEventAndTeam(current.getFamEvent(), famTeam);
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info("maybe " + lstMaybe.size());
+        }
         lstPlayer = ejbAnswer.findByEventAndNoAnswerAndTeam(current.getFamEvent(), famTeam);
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info("nsp " + lstPlayer.size());
+        }
 
         playerDM = new FamPlayerDataModel(lstPlayer);
 
@@ -271,13 +280,17 @@ public class FamMatchController extends AbstractController<FamMatch> implements 
         lstCard = ejbCard.findByMatchAndTeam(current, famTeam);
         lstSubstitution = ejbSub.findByMatchAndTeam(current, famTeam);
 
-
     }
 
     private void findTeam() {
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info("findTeam " + idTeam);
+        }
         if (idTeam == null) {
             FamClub club = currentPlayer.getClubForSeason(current.getFamSeasonCompetition().getFamSeason());
-
+            if (LOGGER.isInfoEnabled()) {
+                LOGGER.info("club " + club);
+            }
             for (FamMatchTeam matchTeam : current.getFamMatchTeamList()) {
                 // On se positionne sur l'equipe de notre club
                 //TODO gerer un match entre 2 equipes de notre club
@@ -290,6 +303,9 @@ public class FamMatchController extends AbstractController<FamMatch> implements 
 
 
             idTeam = famTeam.getIdTeam();
+            if (LOGGER.isInfoEnabled()) {
+                LOGGER.info("team trouvee " + idTeam);
+            }
         } else {
             famTeam = ejbTeam.find(idTeam);
         }
@@ -304,7 +320,9 @@ public class FamMatchController extends AbstractController<FamMatch> implements 
                 famMatchTeam = mt;
             }
         }
-
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info("matchTeam trouvee " + famMatchTeam);
+        }
 
         nbTit = current.getFamSeasonCompetition().getFamTypCompetition().getFamTypMatch().getNbPlayer();
         nbSub = current.getFamSeasonCompetition().getFamTypCompetition().getFamTypMatch().getNbSubstitute();
@@ -312,7 +330,9 @@ public class FamMatchController extends AbstractController<FamMatch> implements 
     }
 
     public void genTarget() {
-
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("genTarget");
+        }
         lstTarget.clear();
 
         for (int i = 1;
@@ -483,8 +503,7 @@ public class FamMatchController extends AbstractController<FamMatch> implements 
     }
 
     public String addSelectedYes() {
-
-
+        LOGGER.info("addSelectedYes");
         for (FamAnswer answer : selectedYes) {
             preselectedLst.add(answer.getFamPlayer());
             lstYes.remove(answer);
@@ -494,8 +513,7 @@ public class FamMatchController extends AbstractController<FamMatch> implements 
     }
 
     public String addSelectedNo() {
-
-
+        LOGGER.info("addSelectedNo");
         for (FamAnswer answer : selectedNo) {
             preselectedLst.add(answer.getFamPlayer());
             lstNo.remove(answer);
@@ -505,8 +523,7 @@ public class FamMatchController extends AbstractController<FamMatch> implements 
     }
 
     public String addSelectedMaybe() {
-
-
+        LOGGER.info("addSelectedMaybe");
         for (FamAnswer answer : selectedMaybe) {
             preselectedLst.add(answer.getFamPlayer());
             lstMaybe.remove(answer);
@@ -516,8 +533,7 @@ public class FamMatchController extends AbstractController<FamMatch> implements 
     }
 
     public String addSelectedPlayers() {
-
-
+        LOGGER.info("addSelectedPlayers");
         for (FamPlayer player : selectedPlayers) {
             preselectedLst.add(player);
             lstPlayer.remove(player);
@@ -556,6 +572,7 @@ public class FamMatchController extends AbstractController<FamMatch> implements 
 //            ejbMatchTeam.edit(famMatchTeam);
             JsfUtil.addSuccessMessage("Enregistré");
         } catch (Exception e) {
+            LOGGER.error("saveLineup", e);
             JsfUtil.addErrorMessage(e.getMessage(), "saveLineup");
         }
         return "pretty:";
