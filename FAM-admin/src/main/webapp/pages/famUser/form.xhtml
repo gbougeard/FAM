@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition
+<html
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:f="http://java.sun.com/jsf/core"
         xmlns:p="http://primefaces.org/ui"
         >
-
+<ui:composition>
+    <!--@elvariable id="bean" type="org.fam.ejb.model.FamUser"-->
     <h:panelGrid columns="3">
         <!--                    <h:outputLabel value="#{bundle.EditFamUserLabel_idUser}" for="idUser" />
      <p:inputText id="idUser"
@@ -20,11 +21,12 @@
      <p:message id="msg_idUser" for="idUser"/> -->
 
         <h:outputLabel value="#{bundle.EditFamUserLabel_firstName}" for="firstName"/>
+
         <p:inputText id="firstName"
                      value="#{bean.firstName}"
                      title="#{bundle.EditFamUserTitle_firstName}"
                 >
-            <p:ajax event="blur" update="msg_firstName"/>
+            <p:ajax event="blur" update="msg_firstName" partialSubmit="true"/>
         </p:inputText>
         <p:message id="msg_firstName" for="firstName"/>
 
@@ -33,7 +35,7 @@
                      value="#{bean.lastName}"
                      title="#{bundle.EditFamUserTitle_lastName}"
                 >
-            <p:ajax event="blur" update="msg_lastName"/>
+            <p:ajax event="blur" update="msg_lastName" partialSubmit="true"/>
         </p:inputText>
         <p:message id="msg_lastName" for="lastName"/>
 
@@ -43,7 +45,7 @@
                     feedback="false"
                     minLength="6"
                 >
-            <p:ajax event="blur" update="msg_password"/>
+            <p:ajax event="blur" update="msg_password" partialSubmit="true"/>
         </p:password>
         <p:message id="msg_password" for="password"/>
 
@@ -52,7 +54,7 @@
                      value="#{bean.email}"
                      title="#{bundle.EditFamUserTitle_email}"
                 >
-            <p:ajax event="blur" update="msg_email"/>
+            <p:ajax event="blur" update="msg_email" partialSubmit="true"/>
         </p:inputText>
         <p:message id="msg_email" for="email"/>
 
@@ -68,7 +70,7 @@
                            var="n"
                            itemValue="#{n}"
                            itemLabel="#{n.displayName}"/>
-            <p:ajax event="blur" update="msg_famPlayer"/>
+            <p:ajax event="blur" update="msg_famPlayer" partialSubmit="true"/>
         </p:selectOneMenu>
         <p:message id="msg_famPlayer" for="famPlayer"/>
 
@@ -94,4 +96,5 @@
      <p:message id="msg_dtModif" for="dtModif"/> -->
 
     </h:panelGrid>
-</ui:composition>
+ </ui:composition>
+</html>

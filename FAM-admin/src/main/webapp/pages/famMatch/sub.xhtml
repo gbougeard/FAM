@@ -106,10 +106,13 @@
         </h:panelGrid>
 
         <!--                                <div>-->
-        <p:panel header="Lineup" id="soccer_field" styleClass="soccer_field">
-            <p:dataGrid id="dgField" value="#{famMatchController.lstTarget}"
+        <p:panel header="Lineup" id="soccer_field" >
+            <p:dataGrid id="dgField"
+                        value="#{famMatchController.lstTarget}"
                         var="t" columns="5"
-                        style="padding-top: 50px;margin-left: 40px;">
+                        styleClass="soccer_field"
+                    >
+                        <!--style="padding-top: 50px;margin-left: 40px;"-->
                 <p:column>
                     <p:panel id="trg"
                              style="width:50px;height:63px;opacity:0.5;"
@@ -127,8 +130,9 @@
                                 >
                             <f:attribute name="num" value="#{t.famFormationItem.numItem}"/>
                             <p:ajax listener="#{famMatchController.onDrop}"
-                                    update=":tabs:dtMP trg"
+                                    update="trg @(:myForm:tabs:dtMP)"
                                     />
+                            <!--:tabs:dtMP-->
                         </p:droppable>
                     </p:panel>
 
@@ -161,7 +165,7 @@
                         >
                     <f:attribute name="num" value="#{t.strIdx}"/>
                     <p:ajax listener="#{famMatchController.onSubDrop}"
-                            update=":myForm:tabs:dtMP sub"
+                            update="@(:myForm:tabs:dtMP) sub"
                             />
                 </p:droppable>
             </p:column>

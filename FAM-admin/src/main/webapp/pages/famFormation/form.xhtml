@@ -99,17 +99,13 @@
                 </p:column>  
             </p:dataGrid> 
         </p:panel>-->
-        <p:panel header="Field" styleClass="soccer_field">
+        <p:panel header="Field">
             <p:dataGrid id="trgField"
                         value="#{famFormationController.lstTarget}"
                         var="t" columns="5"
-                        style="padding-top: 25px;margin-left: 20px; .ui-datagrid-content{
-    height: 512px;
-    width: 384px;
-    background-image: url(#{resource[ 'images/Soccer.Field_Transparant.png' ]}) !important;
-    background-repeat: no-repeat;}"
-
-                        >
+                        styleClass="soccer_field"
+                    >
+                        <!--style="padding-top: 25px;margin-left: 20px"-->
                 <p:column>
                     <p:panel id="trg"
                              style="width:50px;height:63px;opacity:0.5;"

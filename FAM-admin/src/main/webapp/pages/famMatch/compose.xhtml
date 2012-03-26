@@ -1,216 +1,226 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition
+<html
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:f="http://java.sun.com/jsf/core"
         xmlns:p="http://primefaces.org/ui"
-        xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-        template="/common/template.xhtml">
+        xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+<ui:composition
+        template="${pageContext.request.servletPath}/common/template.xhtml">
 
+<ui:debug/>
 
 <ui:define name="title">
     <h:outputText value="#{bundle.EditFamMatchTitle}"/>
 </ui:define>
+
 <ui:define name="body">
-    <script type="text/javascript">
-        function handleDrop(event, ui) {
-            var droppedCar = ui.draggable;
+<script type="text/javascript">
+    function handleDrop(event, ui) {
+        var droppedCar = ui.draggable;
 
-            droppedCar.fadeOut('fast');
-        }
-    </script>
+        droppedCar.fadeOut('fast');
+    }
+</script>
 
-    <h:form id="myForm">
+<h:form id="myForm">
 
-        <p:panel
-                header="Compose #{famMatchController.famTeam.libTeam} for  #{famMatchController.selected.famEvent.libEvent}"
-                style="height:500px;">
-            <p:tabView id="tabs">
-                <p:tab title="Présélection">
+<p:panel
+        header="Compose #{famMatchController.famTeam.libTeam} for  #{famMatchController.selected.famEvent.libEvent}"
+        style="height:500px;">
+<p:tabView id="tabs">
+<p:tab title="Présélection">
 
-                    <p:fieldset legend="Réponses" toggleable="true">
-                        <h:panelGrid columns="2" cellpadding="10">
-                            <h:graphicImage name="01_messages.png" library="images/icons"/>
+    <p:fieldset legend="Réponses" toggleable="true">
+        <h:panelGrid columns="2" cellpadding="10">
+            <h:graphicImage name="01_messages.png" library="images/icons"/>
 
-                            <h:panelGrid columns="4">
+            <h:panelGrid columns="4">
 
-                                <p:dataTable id="dtYes"
-                                             value="#{famMatchController.lstYes}"
-                                             var="y"
-                                             paginator="true"
-                                             rows="5"
-                                             pageLinks="1"
-                                             paginatorPosition="bottom"
-                                             paginatorAlwaysVisible="false"
-                                             selection="#{famMatchController.selectedYes}"
-                                             rowKey="#{y.idAnswer}"
-                                             style="height:200px;width:180px;"
-                                        >
-                                    <p:ajax event="rowSelect" update="@this"/>
-                                    <p:ajax event="rowUnselect" update="@this"/>
+                <p:dataTable id="dtYes"
+                             value="#{famMatchController.lstYes}"
+                             var="y"
+                             paginator="true"
+                             rows="5"
+                             pageLinks="1"
+                             paginatorPosition="bottom"
+                             paginatorAlwaysVisible="false"
+                             selection="#{famMatchController.selectedYes}"
+                             rowKey="#{y.idAnswer}"
+                             style="height:200px;width:180px;"
+                        >
+                    <p:ajax event="rowSelect" update="@this" partialSubmit="true"/>
+                    <p:ajax event="rowUnselect" update="@this" partialSubmit="true"/>
 
-                                    <p:column selectionMode="multiple"/>
+                    <p:column selectionMode="multiple"/>
 
-                                    <p:column headerText="Présents (#{fn:length(famMatchController.lstYes)})">
-                                        <h:outputText value="#{y.famPlayer.displayName}"/>
-                                    </p:column>
-                                    <p:column>
-                                        <h:outputText id="com"
-                                                      value="com"
-                                                      title="#{y.comments}"
-                                                      rendered="#{not empty y.comments}"/>
-                                    </p:column>
-                                    <f:facet name="footer">
-                                        <p:commandButton value="Add" icon="ui-icon ui-icon-search"
-                                                         action="#{famMatchController.addSelectedYes}"
-                                                         immediate="true"
-                                                         disabled="#{empty famMatchController.selectedYes}"
-                                                         update="@form"/>
-                                    </f:facet>
-                                </p:dataTable>
+                    <p:column headerText="Présents (#{fn:length(famMatchController.lstYes)})">
+                        <h:outputText value="#{y.famPlayer.displayName}"/>
+                    </p:column>
+                    <p:column>
+                        <h:outputText id="com"
+                                      value="com"
+                                      title="#{y.comments}"
+                                      rendered="#{not empty y.comments}"/>
+                    </p:column>
+                    <f:facet name="footer">
+                        <p:commandButton value="Add"
+                                         icon="ui-icon ui-icon-search"
+                                         action="#{famMatchController.addSelectedYes}"
+                                         immediate="true"
+                                         disabled="#{empty famMatchController.selectedYes}"
+                                         update="@form"/>
+                    </f:facet>
+                </p:dataTable>
 
-                                <p:dataTable value="#{famMatchController.lstMaybe}"
-                                             var="m"
-                                             paginator="true"
-                                             rows="5"
-                                             pageLinks="3"
-                                             paginatorPosition="bottom"
-                                             paginatorAlwaysVisible="false"
-                                             selection="#{famMatchController.selectedMaybe}"
-                                             rowKey="#{m.idAnswer}"
-                                             style="height:200px;width:180px;"
-                                        >
-                                    <p:ajax event="rowSelect" update="@this"/>
-                                    <p:ajax event="rowUnselect" update="@this"/>
-                                    <p:column selectionMode="multiple"/>
-                                    <p:column headerText="Ne savent pas (#{fn:length(famMatchController.lstMaybe)})">
-                                        <h:outputText value="#{m.famPlayer.displayName}"/>
-                                    </p:column>
-                                    <p:column>
-                                        <h:outputText id="com"
-                                                      value="com"
-                                                      title="#{m.comments}"
-                                                      rendered="#{not empty m.comments}"/>
-                                    </p:column>
-                                    <f:facet name="footer">
-                                        <p:commandButton value="Add" icon="ui-icon ui-icon-search"
-                                                         action="#{famMatchController.addSelectedMaybe}"
-                                                         immediate="true"
-                                                         disabled="#{empty famMatchController.selectedMaybe}"
-                                                         update="@form"/>
-                                    </f:facet>
-                                </p:dataTable>
+                <p:dataTable value="#{famMatchController.lstMaybe}"
+                             var="m"
+                             paginator="true"
+                             rows="5"
+                             pageLinks="3"
+                             paginatorPosition="bottom"
+                             paginatorAlwaysVisible="false"
+                             selection="#{famMatchController.selectedMaybe}"
+                             rowKey="#{m.idAnswer}"
+                             style="height:200px;width:180px;"
+                        >
+                    <p:ajax event="rowSelect" update="@this" partialSubmit="true"/>
+                    <p:ajax event="rowUnselect" update="@this" partialSubmit="true"/>
+                    <p:column selectionMode="multiple"/>
+                    <p:column headerText="Ne savent pas (#{fn:length(famMatchController.lstMaybe)})">
+                        <h:outputText value="#{m.famPlayer.displayName}"/>
+                    </p:column>
+                    <p:column>
+                        <h:outputText id="com"
+                                      value="com"
+                                      title="#{m.comments}"
+                                      rendered="#{not empty m.comments}"/>
+                    </p:column>
+                    <f:facet name="footer">
+                        <p:commandButton value="Add"
+                                         icon="ui-icon ui-icon-search"
+                                         action="#{famMatchController.addSelectedMaybe}"
+                                         immediate="true"
+                                         disabled="#{empty famMatchController.selectedMaybe}"
+                                         update="@form"/>
+                    </f:facet>
+                </p:dataTable>
 
-                                <p:dataTable value="#{famMatchController.lstNo}"
-                                             var="n"
-                                             paginator="true"
-                                             rows="5"
-                                             pageLinks="3"
-                                             paginatorPosition="bottom"
-                                             paginatorAlwaysVisible="false"
-                                             selection="#{famMatchController.selectedNo}"
-                                             rowKey="#{n.idAnswer}"
-                                             style="height:200px;width:180px;"
-                                        >
-                                    <p:ajax event="rowSelect" update="@this"/>
-                                    <p:ajax event="rowUnselect" update="@this"/>
-                                    <p:column selectionMode="multiple"/>
-                                    <p:column headerText="Absents (#{fn:length(famMatchController.lstNo)})">
-                                        <h:outputText value="#{n.famPlayer.displayName}"/>
-                                    </p:column>
-                                    <p:column>
-                                        <h:outputText id="com"
-                                                      value="com"
-                                                      title="#{n.comments}"
-                                                      rendered="#{not empty n.comments}"/>
-                                    </p:column>
-                                    <f:facet name="footer">
-                                        <p:commandButton value="Add" icon="ui-icon ui-icon-search"
-                                                         action="#{famMatchController.addSelectedNo}"
-                                                         immediate="true"
-                                                         disabled="#{empty famMatchController.selectedNo}"
-                                                         update="@form"/>
-                                    </f:facet>
-                                </p:dataTable>
+                <p:dataTable value="#{famMatchController.lstNo}"
+                             var="n"
+                             paginator="true"
+                             rows="5"
+                             pageLinks="3"
+                             paginatorPosition="bottom"
+                             paginatorAlwaysVisible="false"
+                             selection="#{famMatchController.selectedNo}"
+                             rowKey="#{n.idAnswer}"
+                             style="height:200px;width:180px;"
+                        >
+                    <p:ajax event="rowSelect" update="@this" partialSubmit="true"/>
+                    <p:ajax event="rowUnselect" update="@this" partialSubmit="true"/>
+                    <p:column selectionMode="multiple"/>
+                    <p:column headerText="Absents (#{fn:length(famMatchController.lstNo)})">
+                        <h:outputText value="#{n.famPlayer.displayName}"/>
+                    </p:column>
+                    <p:column>
+                        <h:outputText id="com"
+                                      value="com"
+                                      title="#{n.comments}"
+                                      rendered="#{not empty n.comments}"/>
+                    </p:column>
+                    <f:facet name="footer">
+                        <p:commandButton value="Add"
+                                         icon="ui-icon ui-icon-search"
+                                         action="#{famMatchController.addSelectedNo}"
+                                         immediate="true"
+                                         disabled="#{empty famMatchController.selectedNo}"
+                                         update="@form"/>
+                    </f:facet>
+                </p:dataTable>
 
-                                <p:dataTable value="#{famMatchController.playerDM}"
-                                             var="nsp"
-                                             paginator="true"
-                                             rows="5"
-                                             paginatorPosition="bottom"
-                                             paginatorAlwaysVisible="false"
-                                             pageLinks="1"
-                                             selection="#{famMatchController.selectedPlayers}"
-                                             style="height:200px;width:180px;"
-                                        >
-                                    <p:ajax event="rowSelect" update="btnAdd"/>
-                                    <p:ajax event="rowUnselect" update="btnAdd"/>
-                                    <p:column selectionMode="multiple"/>
-                                    <p:column headerText="Sans réponse (#{fn:length(famMatchController.lstPlayer)})">
-                                        <h:outputText id="player" value="#{nsp.displayName}"/>
-                                        <!--                                            <p:draggable for="player"
-                                      revert="true"
-                                      handle=".ui-panel-titlebar"
-                                      stack=".ui-panel"
-                                      />  -->
-                                    </p:column>
-                                    <f:facet name="footer">
-                                        <p:commandButton id="btnAdd"
-                                                         type="push"
-                                                         value="Add"
-                                                         action="#{famMatchController.addSelectedPlayers}"
-                                                         immediate="true"
-                                                         disabled="#{empty famMatchController.selectedPlayers}"
-                                                         update="@form"
-                                                />
-                                    </f:facet>
-                                </p:dataTable>
+                <p:dataTable value="#{famMatchController.playerDM}"
+                             var="nsp"
+                             paginator="true"
+                             rows="5"
+                             paginatorPosition="bottom"
+                             paginatorAlwaysVisible="false"
+                             pageLinks="1"
+                             selection="#{famMatchController.selectedPlayers}"
+                             style="height:200px;width:180px;"
+                        >
+                    <p:ajax event="rowSelect" update="@this" partialSubmit="true"/>
+                    <p:ajax event="rowUnselect" update="@this" partialSubmit="true"/>
+                    <p:column selectionMode="multiple"/>
+                    <p:column headerText="Sans réponse (#{fn:length(famMatchController.lstPlayer)})">
+                        <h:outputText id="player" value="#{nsp.displayName}"/>
+                        <!--                                            <p:draggable for="player"
+                      revert="true"
+                      handle=".ui-panel-titlebar"
+                      stack=".ui-panel"
+                      />  -->
+                    </p:column>
+                    <f:facet name="footer">
+                        <p:commandButton value="Add"
+                                         icon="ui-icon ui-icon-search"
+                                         immediate="true"
+                                         disabled="#{empty famMatchController.selectedPlayers}"
+                                         update="@form"
+                                         actionListener="#{famMatchController.addSelectedPlayers}"
+                                />
+                        <!--action="#{famMatchController.addSelectedPlayers}"-->
+                    </f:facet>
+                </p:dataTable>
 
-                            </h:panelGrid>
-                        </h:panelGrid>
-                    </p:fieldset>
+            </h:panelGrid>
+        </h:panelGrid>
+    </p:fieldset>
 
-                    <p:fieldset id="preselection"
-                                legend="Préselection"
-                                style="margin-top:20px"
-                                rendered="#{!empty famMatchController.preselectedLst}">
-                        <!--                            <p:outputPanel id="dropArea" style="height:100px;">  -->
+    <p:fieldset id="preselection"
+                legend="Préselection"
+                style="margin-top:20px">
+        <!--rendered="#{!empty famMatchController.preselectedLst}">-->
+        <!--                            <p:outputPanel id="dropArea" style="height:100px;">  -->
 
-                        <!--                                <h:outputText value="!!!Drop here!!!"
-                     rendered="#{empty famMatchController.preselectedLst}"
-                     style="font-size:24px;" />  -->
-                        <ui:include src="selectedPlayers.xhtml">
-                            <ui:param name="list" value="#{famMatchController.preselectedLst}"/>
-                            <ui:param name="id" value="preselectedPlayers"/>
-                        </ui:include>
-                        <!--                            </p:outputPanel>-->
-                    </p:fieldset>
-                    <!--                        <p:droppable for="preselection" tolerance="touch"
-                                datasource="ds"
-                                activeStyleClass="ui-state-highlight"
-                                onDrop="handleDrop"
-                                >
-                       <p:ajax listener="#{famMatchController.onPreselectDrop}" update="@form" />
-                   </p:droppable> -->
+        <!--                                <h:outputText value="!!!Drop here!!!"
+     rendered="#{empty famMatchController.preselectedLst}"
+     style="font-size:24px;" />  -->
+        <ui:include src="selectedPlayers.xhtml">
+            <ui:param name="list" value="#{famMatchController.preselectedLst}"/>
+            <ui:param name="id" value="preselectedPlayers"/>
+        </ui:include>
+        <!--                            </p:outputPanel>-->
+    </p:fieldset>
+    <!--                        <p:droppable for="preselection" tolerance="touch"
+                datasource="ds"
+                activeStyleClass="ui-state-highlight"
+                onDrop="handleDrop"
+                >
+       <p:ajax listener="#{famMatchController.onPreselectDrop}" update="@form" />
+   </p:droppable> -->
 
-                </p:tab>
-                <p:tab title="Sélection" id="tab2">
-                    <!--                    <h:form>-->
+</p:tab>
 
-                    <ui:include src="sub.xhtml"/><!--
+
+<p:tab title="Sélection" id="tab2">
+    <!--                    <h:form>-->
+
+    <ui:include src="sub.xhtml"/><!--
                             <ui:param name="list" value="#{famMatchController.preselectedLst}" />
                             <ui:param name="preselection" value="#{true}" />
                             <ui:param name="actionDelete" value="#{famMatchController.deselect}" />
                             <ui:param name="id" value="lstPreselected" />
                         </ui:include>-->
-                    <!--                    </h:form>    -->
-                </p:tab>
-            </p:tabView>
+    <!--                    </h:form>    -->
+</p:tab>
+</p:tabView>
 
-        </p:panel>
-    </h:form>
+</p:panel>
+</h:form>
 </ui:define>
+
 </ui:composition>
+</html>
