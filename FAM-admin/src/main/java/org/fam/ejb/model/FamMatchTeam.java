@@ -177,7 +177,9 @@ public class FamMatchTeam implements Serializable {
         sb.append(", goalScored=").append(goalScored);
         sb.append(", goalShipped=").append(goalShipped);
 //        sb.append(", famMatchPlayerList=").append(famMatchPlayerList);
-        sb.append(", famFormation=").append(famFormation.getLibFormation());
+        if (famFormation != null) {
+            sb.append(", famFormation=").append(famFormation.getLibFormation());
+        }
         sb.append(", draft=").append(draft);
         sb.append('}');
         return sb.toString();

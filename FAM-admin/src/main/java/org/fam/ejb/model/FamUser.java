@@ -41,7 +41,7 @@ import java.util.List;
 })
 public class FamUser extends FamEntity implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -1395568979877326735L;
     /**
      *
      */
@@ -61,6 +61,7 @@ public class FamUser extends FamEntity implements Serializable {
      *
      */
     public static final String COL_ID = "id_user";
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
