@@ -15,9 +15,11 @@ import java.util.logging.Logger;
  * Time: 19:10
  * To change this template use File | Settings | File Templates.
  */
+//This interceptor implements Serializable because it's used on a Stateful Session Bean who has
+//        *         passivation and activation lifecycle.
 @Loggable
 @Interceptor
-public class LoggingInterceptor implements Serializable {
+public class LogInterceptor implements Serializable {
 
     // ======================================
     // =             Attributes             =

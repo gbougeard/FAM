@@ -5,4 +5,7 @@
     <!--<interceptors>
         <class>org.fam.common.interceptor.SecurityInterceptor</class>
     </interceptors>-->
+    <!--<interceptors>-->
+        <!--<class>org.fam.common.cdi.LogInterceptor</class>-->
+    <!--</interceptors>-->
 </beans>
