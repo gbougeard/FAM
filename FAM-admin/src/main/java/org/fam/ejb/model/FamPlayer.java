@@ -314,6 +314,12 @@ public class FamPlayer extends FamEntity implements Serializable {
         }
     }
 
+    public void setCurrentClub(FamClub club) {
+        if (getCurrentPlayerSeason() != null) {
+            getCurrentPlayerSeason().setFamClub(club);
+        }
+    }
+
     public FamClub getClubForSeason(FamSeason season) {
         if (famPlayerSeasons != null) {
             for (FamPlayerSeason item : famPlayerSeasons) {
@@ -330,6 +336,12 @@ public class FamPlayer extends FamEntity implements Serializable {
             return null;
         } else {
             return getCurrentPlayerSeason().getFamTeam();
+        }
+    }
+
+    public void setCurrentTeam(FamTeam team) {
+        if (getCurrentPlayerSeason() != null) {
+            getCurrentPlayerSeason().setFamTeam(team);
         }
     }
 
