@@ -5,30 +5,38 @@ import com.google.code.geocoder.GeocoderRequestBuilder;
 import com.google.code.geocoder.model.GeocodeResponse;
 import com.google.code.geocoder.model.GeocoderRequest;
 import com.google.code.geocoder.model.GeocoderResult;
+import lombok.Getter;
+import lombok.Setter;
 import org.fam.ejb.model.FamPlace;
 import org.fam.ejb.session.FamPlaceFacade;
+import org.primefaces.event.map.OverlaySelectEvent;
 import org.primefaces.model.map.DefaultMapModel;
 import org.primefaces.model.map.LatLng;
 import org.primefaces.model.map.MapModel;
 import org.primefaces.model.map.Marker;
+import org.slf4j.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.List;
 
 @ManagedBean(name = "famPlaceController")
 @ViewScoped
-public class FamPlaceController extends AbstractController<FamPlace> implements Serializable {
+@Getter
+@Setter
+public class FamPlaceController extends AbstractController<FamPlace> {
+
+    @Inject
+    private Logger LOGGER;
+    @Inject
+    private FamPlaceFacade ejbFacade;
 
     private MapModel simpleModel = new DefaultMapModel();
-    //
-    @EJB
-    private FamPlaceFacade ejbFacade;
+    private Marker marker;
 
     public FamPlaceController() {
     }
@@ -107,10 +115,18 @@ public class FamPlaceController extends AbstractController<FamPlace> implements 
             simpleModel = null;
         } else {
             LatLng coord = new LatLng(current.getLatitude().doubleValue(), current.getLongitude().doubleValue());
-            simpleModel.addOverlay(new Marker(coord, current.getLibPlace()));
+            marker = new Marker(coord, current.getLibPlace());
+//            marker.setDraggable(true);
+            simpleModel.addOverlay(marker);
         }
 
         return simpleModel;
+    }
+
+    public void onMarkerSelect(OverlaySelectEvent event) {
+        LOGGER.info("BEFORE " + marker.getLatlng().toString());
+        this.marker = (Marker) event.getOverlay();
+        LOGGER.info("AFTER " + marker.getLatlng().toString());
     }
 
     public String getLatLong() throws IOException {
@@ -122,7 +138,7 @@ public class FamPlaceController extends AbstractController<FamPlace> implements 
 //        } else {
 //            details = current.getFullAddress();
 //        }
-        System.out.println("adresse:" + details);
+        LOGGER.debug("adresse:" + details);
 
         Geocoder geocoder = new Geocoder();
         GeocoderRequest geocoderRequest = new GeocoderRequestBuilder().setAddress(details).getGeocoderRequest();
@@ -131,8 +147,6 @@ public class FamPlaceController extends AbstractController<FamPlace> implements 
 
         List<GeocoderResult> results = geocoderResponse.getResults();
         for (GeocoderResult result : results) {
-
-
             current.setLatitude(result.getGeometry().getLocation().getLat());
             current.setLongitude(result.getGeometry().getLocation().getLng());
         }
@@ -154,42 +168,4 @@ public class FamPlaceController extends AbstractController<FamPlace> implements 
         return null;//"map";
     }
 
-//    @FacesConverter(forClass = FamPlace.class)
-//    public static class FamPlaceControllerConverter implements Converter {
-//
-//        @Override
-//        public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
-//            if (value == null || value.length() == 0) {
-//                return null;
-//            }
-//            FamPlaceController controller = (FamPlaceController) facesContext.getApplication().getELResolver().
-//                    getValue(facesContext.getELContext(), null, "famPlaceController");
-//            return controller.ejbFacade.find(getKey(value));
-//        }
-//
-//        Long getKey(String value) {
-//            Long key;
-//            key = Long.valueOf(value);
-//            return key;
-//        }
-//
-//        String getStringKey(Long value) {
-//            StringBuilder sb = new StringBuilder();
-//            sb.append(value);
-//            return sb.toString();
-//        }
-//
-//        @Override
-//        public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
-//            if (object == null) {
-//                return null;
-//            }
-//            if (object instanceof FamPlace) {
-//                FamPlace o = (FamPlace) object;
-//                return getStringKey(o.getIdPlace());
-//            } else {
-//                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + FamPlaceController.class.getName());
-//            }
-//        }
-//    }
 }

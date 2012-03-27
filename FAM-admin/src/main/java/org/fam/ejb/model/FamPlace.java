@@ -180,14 +180,17 @@ public class FamPlace extends FamEntity implements Serializable {
 
         FamPlace famPlace = (FamPlace) o;
 
-        return idPlace.equals(famPlace.idPlace);
+        if (idPlace != null ? !idPlace.equals(famPlace.idPlace) : famPlace.idPlace != null) {
+            return false;
+        }
 
+        return true;
     }
 
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + idPlace.hashCode();
+        result = 31 * result + (idPlace != null ? idPlace.hashCode() : 0);
         return result;
     }
 
