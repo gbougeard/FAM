@@ -3,8 +3,6 @@ package org.fam.jsf.controller;
 import lombok.Getter;
 import lombok.Setter;
 import org.fam.common.cdi.Loggable;
-import org.fam.common.interceptor.AuditInterceptor;
-import org.fam.common.interceptor.LoggingInterceptor;
 import org.fam.ejb.model.*;
 import org.fam.ejb.session.FamPlayerFacade;
 import org.fam.jsf.bean.util.JsfUtil;
@@ -24,7 +22,6 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.imageio.stream.FileImageOutputStream;
 import javax.inject.Inject;
-import javax.interceptor.Interceptors;
 import javax.servlet.ServletContext;
 import java.io.*;
 import java.nio.channels.FileChannel;
@@ -34,7 +31,6 @@ import java.util.ResourceBundle;
 
 @ManagedBean
 @ViewScoped
-@Interceptors({AuditInterceptor.class, LoggingInterceptor.class})
 @Loggable
 @Getter
 @Setter
@@ -42,18 +38,17 @@ public class FamPlayerController extends AbstractController<FamPlayer> {
 
     @Inject
     private Logger LOGGER;
+    @Inject
+    private FamPlayerFacade ejbFacade;
+    @Inject
+    private CacheBean cacheBean;
 
     public static final String PRETTY_ID_LIST = "listPlayer";
     public static final String PRETTY_ID_CREATE = "createPlayer";
     public static final String PRETTY_ID_EDIT = "editPlayer";
     public static final String PRETTY_ID_VIEW = "viewPlayer";
     //
-    @Inject
-    private FamPlayerFacade ejbFacade;
-    //
     private DualListModel<FamPosition> positions;
-    @Inject
-    private CacheBean cacheBean;
     //
     private FamPlayerSeason currentProfile;
     //
@@ -124,24 +119,30 @@ public class FamPlayerController extends AbstractController<FamPlayer> {
     @Override
     public String prepareEdit() {
 
-//        preparePositionForEdit();
+        preparePositionForEdit();
         id = current.getIdPlayer();
         return getPrettyId(PRETTY_ID_EDIT);
     }
 
     public String preparePositionForEdit() {
         List<FamPosition> source = new ArrayList<FamPosition>();
-        source.addAll(cacheBean.getListPosition());
 
-        if (current.getFamPlayerPositionList() != null) {
-            source.removeAll(current.getFamPlayerPositionList());
-        }
+        source.addAll(cacheBean.getListPosition());
+        LOGGER.debug("All positions count " + source.size());
 
         List<FamPosition> target = new ArrayList<FamPosition>();
         if (current.getFamPlayerPositionList() != null) {
+            LOGGER.debug("Player positions count " + current.getFamPlayerPositionList().size());
+            LOGGER.debug("Expected " + (source.size() - current.getFamPlayerPositionList().size()));
             for (FamPlayerPosition item : current.getFamPlayerPositionList()) {
+                if (source.contains(item.getFamPosition())) {
+                    source.remove(item.getFamPosition());
+                }
                 target.add(item.getFamPosition());
             }
+
+            LOGGER.debug("Source count " + source.size());
+
 //            target.addAll(current.getFamPlayerPositionList());
         }
 
@@ -198,7 +199,6 @@ public class FamPlayerController extends AbstractController<FamPlayer> {
 
             getTargetPositions();
 
-
             // on sauvegarde le joueur
             getFacade().create(current);
 
@@ -207,7 +207,6 @@ public class FamPlayerController extends AbstractController<FamPlayer> {
             ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
             sb.append(servletContext.getRealPath("")).append(File.separator).append("images").append(File.separator).append("players").append(File.separator).append(current.getIdPlayer()).append(".png");
             String newFileName = sb.toString();
-
 
 //            File file = new File(DEFAULT_PHOTO);
 //            Boolean bRes = file.renameTo(new File(newFileName));
@@ -232,6 +231,7 @@ public class FamPlayerController extends AbstractController<FamPlayer> {
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("FamPlayerUpdated"));
             return prepareView();
         } catch (Exception e) {
+            LOGGER.error("update failed", e);
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
         }
@@ -252,7 +252,6 @@ public class FamPlayerController extends AbstractController<FamPlayer> {
         FacesMessage msg = new FacesMessage("Slide Ended", "Value: " + event.getValue());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
-
 
     public Boolean getShowPhoto() {
         return (tmpImgUrl != null && !tmpImgUrl.isEmpty());
