@@ -8,7 +8,6 @@ import com.yammer.metrics.Metrics;
 import com.yammer.metrics.core.Counter;
 import lombok.Getter;
 import lombok.Setter;
-import org.fam.common.cdi.Loggable;
 import org.fam.ejb.model.*;
 import org.fam.ejb.session.*;
 import org.fam.jsf.bootstrap.Bootstrap;
@@ -31,7 +30,6 @@ import java.util.TimeZone;
 @Named
 @Startup
 @Singleton
-@Loggable
 @Getter
 @Setter
 public class CacheBean {

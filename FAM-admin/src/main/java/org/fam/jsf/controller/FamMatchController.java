@@ -9,6 +9,7 @@ import org.fam.ejb.model.*;
 import org.fam.ejb.session.*;
 import org.fam.jsf.bean.CanvasFormationItem;
 import org.fam.jsf.bean.FamPlayerDataModel;
+import org.fam.jsf.bean.TeamComposition;
 import org.fam.jsf.bean.util.JsfUtil;
 import org.fam.jsf.cache.CacheBean;
 import org.fam.jsf.cache.CachePlayer;
@@ -77,18 +78,19 @@ public class FamMatchController extends AbstractController<FamMatch> {
     private Long idTeam;
     private FamTeam famTeam;
     //
-    private List<FamAnswer> lstYes;
-    private List<FamAnswer> lstNo;
-    private List<FamAnswer> lstMaybe;
-    private List<FamPlayer> lstPlayer;
-    private FamAnswer[] selectedYes;
-    private List<FamAnswer> selectedNo;
-    private List<FamAnswer> selectedMaybe;
-    private FamPlayer[] selectedPlayers;
-    //
-    private FamPlayer selectedPlayer;
-    private List<FamPlayer> players;
-    private List<FamPlayer> preselectedLst;
+    private List<TeamComposition> lstTeamComposition;
+    //    private List<FamAnswer> lstYes;
+//    private List<FamAnswer> lstNo;
+//    private List<FamAnswer> lstMaybe;
+//    private List<FamPlayer> lstPlayer;
+//    private FamAnswer[] selectedYes;
+//    private List<FamAnswer> selectedNo;
+//    private List<FamAnswer> selectedMaybe;
+//    private FamPlayer[] selectedPlayers;
+//    //
+//    private FamPlayer selectedPlayer;
+//    private List<FamPlayer> players;
+//    private List<FamPlayer> preselectedLst;
     //
     private List<FamGoal> lstGoal;
     private FamGoal famGoal;
@@ -101,14 +103,14 @@ public class FamMatchController extends AbstractController<FamMatch> {
     //
     private List<CanvasFormationItem> lstTarget = new ArrayList<CanvasFormationItem>();
     private List<CanvasFormationItem> lstSubs = new ArrayList<CanvasFormationItem>();
-    //
-    private DualListModel<FamPlayer> dlmPlayer;
-    //
+    //    //
+//    private DualListModel<FamPlayer> dlmPlayer;
+//    //
     private int nbTit;
     private int nbSub;
     private int nbPlayers;
-    //
-    private FamPlayerDataModel playerDM;
+//    //
+//    private FamPlayerDataModel playerDM;
 
     public FamMatchController() {
     }
@@ -222,49 +224,75 @@ public class FamMatchController extends AbstractController<FamMatch> {
     public void loadForCompose() {
 
         super.loadAction();
-        findTeam();
+        //findTeam();
 
-        lstYes = ejbAnswer.findAnswerYesByEventAndTeam(current.getFamEvent(), famTeam);
+        lstTeamComposition = new ArrayList<TeamComposition>();
+
+        for (FamMatchTeam fmt : current.getFamMatchTeamList()) {
+            lstTeamComposition.add(loadTeamComposition(fmt.getFamTeam()));
+        }
+        nbTit = current.getFamSeasonCompetition().getFamTypCompetition().getFamTypMatch().getNbPlayer();
+        nbSub = current.getFamSeasonCompetition().getFamTypCompetition().getFamTypMatch().getNbSubstitute();
+        nbPlayers = nbTit + nbSub;
+        for (TeamComposition teamComposition : lstTeamComposition) {
+            teamComposition.setNbPlayers(nbPlayers);
+            teamComposition.setNbTit(nbTit);
+            teamComposition.setNbSub(nbSub);
+            teamComposition.genTarget();
+        }
+
+    }
+
+    private TeamComposition loadTeamComposition(FamTeam team) {
+        TeamComposition tc = new TeamComposition();
+        tc.setFamTeam(team);
+
+        for (FamMatchTeam matchTeam : current.getFamMatchTeamList()) {
+            if (matchTeam.getFamTeam().equals(team)) {
+                tc.setFamMatchTeam(matchTeam);
+            }
+        }
+
+        tc.setLstYes(ejbAnswer.findAnswerYesByEventAndTeam(current.getFamEvent(), team));
         if (LOGGER.isInfoEnabled()) {
-            LOGGER.info("yes " + lstYes.size());
+            LOGGER.info("yes " + tc.getLstYes().size());
         }
-        lstNo = ejbAnswer.findAnswerNoByEventAndTeam(current.getFamEvent(), famTeam);
+        tc.setLstNo(ejbAnswer.findAnswerNoByEventAndTeam(current.getFamEvent(), team));
         if (LOGGER.isInfoEnabled()) {
-            LOGGER.info("no " + lstNo.size());
+            LOGGER.info("no " + tc.getLstNo().size());
         }
-        lstMaybe = ejbAnswer.findAnswerMaybeByEventAndTeam(current.getFamEvent(), famTeam);
+        tc.setLstMaybe(ejbAnswer.findAnswerMaybeByEventAndTeam(current.getFamEvent(), team));
         if (LOGGER.isInfoEnabled()) {
-            LOGGER.info("maybe " + lstMaybe.size());
+            LOGGER.info("maybe " + tc.getLstMaybe().size());
         }
-        lstPlayer = ejbAnswer.findByEventAndNoAnswerAndTeam(current.getFamEvent(), famTeam);
+        tc.setLstPlayer(ejbAnswer.findByEventAndNoAnswerAndTeam(current.getFamEvent(), team));
         if (LOGGER.isInfoEnabled()) {
-            LOGGER.info("nsp " + lstPlayer.size());
+            LOGGER.info("nsp " + tc.getLstPlayer().size());
         }
 
-        playerDM = new FamPlayerDataModel(lstPlayer);
+        tc.setPlayerDM(new FamPlayerDataModel(tc.getLstPlayer()));
 
-        preselectedLst = new ArrayList<FamPlayer>();
-
-        dlmPlayer = new DualListModel<FamPlayer>(preselectedLst, new ArrayList<FamPlayer>());
+        tc.setDlmPlayer(new DualListModel<FamPlayer>(tc.getPreselectedLst(), new ArrayList<FamPlayer>()));
 
 
-        if (famMatchTeam.getFamMatchPlayerList() == null) {
-            famMatchTeam.setFamMatchPlayerList(new ArrayList<FamMatchPlayer>());
+        if (tc.getFamMatchTeam().getFamMatchPlayerList() == null) {
+            tc.getFamMatchTeam().setFamMatchPlayerList(new ArrayList<FamMatchPlayer>());
         }
-        if (famMatchTeam.getFamMatchPlayerList().isEmpty()) {
+        if (tc.getFamMatchTeam().getFamMatchPlayerList().isEmpty()) {
 
             for (int i = 1;
                  i <= nbPlayers;
                  i++) {
                 FamMatchPlayer item = new FamMatchPlayer();
                 item.setNum(i);
-                item.setFamMatchTeam(famMatchTeam);
-                famMatchTeam.getFamMatchPlayerList().add(item);
+                item.setFamMatchTeam(tc.getFamMatchTeam());
+                tc.getFamMatchTeam().getFamMatchPlayerList().add(item);
             }
         }
 
-        genTarget();
+        return tc;
 
+//        genTarget();
     }
 
     public void loadForDebrief() {
@@ -324,99 +352,31 @@ public class FamMatchController extends AbstractController<FamMatch> {
             LOGGER.info("matchTeam trouvee " + famMatchTeam);
         }
 
-        nbTit = current.getFamSeasonCompetition().getFamTypCompetition().getFamTypMatch().getNbPlayer();
-        nbSub = current.getFamSeasonCompetition().getFamTypCompetition().getFamTypMatch().getNbSubstitute();
-        nbPlayers = nbTit + nbSub;
+
     }
 
-    public void genTarget() {
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("genTarget");
-        }
-        lstTarget.clear();
-
-        for (int i = 1;
-             i <= 30;
-             i++) {
-            CanvasFormationItem item = new CanvasFormationItem();
-            item.setStrIdx(String.format("%d", i));
-
-            if (famMatchTeam != null && famMatchTeam.getFamFormation() != null) {
-                for (FamFormationItem fi : famMatchTeam.getFamFormation().getFamFormationItemList()) {
-                    if (fi.getCoord().equals(Integer.valueOf(i))) {
-                        item.setFamFormationItem(fi);
-                        break;
-                    }
-                }
-            }
-            lstTarget.add(item);
-        }
-        // Remplaçants
-        for (int i = 1;
-             i <= nbSub;
-             i++) {
-            CanvasFormationItem item = new CanvasFormationItem();
-            item.setStrIdx(String.format("%d", i + nbTit));
-
-            if (famMatchTeam != null && famMatchTeam.getFamFormation() != null) {
-                for (FamFormationItem fi : famMatchTeam.getFamFormation().getFamFormationItemList()) {
-                    if (fi.getCoord().equals(Integer.valueOf(i + nbTit))) {
-                        item.setFamFormationItem(fi);
-                        break;
-                    }
-                }
-            }
-            lstSubs.add(item);
-        }
-        // Add Players from LineUp
-        for (FamMatchPlayer fmp : famMatchTeam.getFamMatchPlayerList()) {
-            if (fmp.getFamPlayer() != null) {
-                if (fmp.getNum() <= nbTit) {
-                    // Ajoute aux titulaires
-                    for (CanvasFormationItem cfi : lstTarget) {
-                        if (cfi.getFamFormationItem() != null
-                                && cfi.getFamFormationItem().getNumItem().equals(fmp.getNum())) {
-
-                            cfi.setFamPlayer(fmp.getFamPlayer());
-                            break;
-                        }
-                    }
-                } else {
-                    // Ajoute aux remplacants
-                    for (CanvasFormationItem cfi : lstSubs) {
-                        if (cfi.getStrIdx().equals(String.format("%d", fmp.getNum()))) {
-                            cfi.setFamPlayer(fmp.getFamPlayer());
-                            break;
-                        }
-                    }
-                }
-
-
-            }
-        }
-    }
 
     public void onValueChange(ValueChangeEvent event) {
 
-        int i = 1;
-        for (FamPlayer p : dlmPlayer.getTarget()) {
-            for (CanvasFormationItem cfi : lstTarget) {
-                if (cfi.getStrIdx().equals(String.format("%d", i))) {
-
-                    cfi.setFamPlayer(p);
-                    break;
-                }
-            }
-            i++;
-        }
+//        int i = 1;
+//        for (FamPlayer p : dlmPlayer.getTarget()) {
+//            for (CanvasFormationItem cfi : lstTarget) {
+//                if (cfi.getStrIdx().equals(String.format("%d", i))) {
+//
+//                    cfi.setFamPlayer(p);
+//                    break;
+//                }
+//            }
+//            i++;
+//        }
     }
 
     public void onPreselectDrop(DragDropEvent ddEvent) {
 
-        FamPlayer player = ((FamPlayer) ddEvent.getData());
-
-        preselectedLst.add(player);
-        lstPlayer.remove(player);
+//        FamPlayer player = ((FamPlayer) ddEvent.getData());
+//
+//        preselectedLst.add(player);
+//        lstPlayer.remove(player);
     }
 
     public int coord(int coord) {
@@ -498,50 +458,10 @@ public class FamMatchController extends AbstractController<FamMatch> {
 
         FamAnswer answer = ((FamAnswer) ddEvent.getData());
 
-        preselectedLst.add(answer.getFamPlayer());
-        lstYes.remove(answer);
+//        preselectedLst.add(answer.getFamPlayer());
+//        lstYes.remove(answer);
     }
 
-    public String addSelectedYes() {
-        LOGGER.info("addSelectedYes");
-        for (FamAnswer answer : selectedYes) {
-            preselectedLst.add(answer.getFamPlayer());
-            lstYes.remove(answer);
-        }
-
-        return null;
-    }
-
-    public String addSelectedNo() {
-        LOGGER.info("addSelectedNo");
-        for (FamAnswer answer : selectedNo) {
-            preselectedLst.add(answer.getFamPlayer());
-            lstNo.remove(answer);
-        }
-
-        return null;
-    }
-
-    public String addSelectedMaybe() {
-        LOGGER.info("addSelectedMaybe");
-        for (FamAnswer answer : selectedMaybe) {
-            preselectedLst.add(answer.getFamPlayer());
-            lstMaybe.remove(answer);
-        }
-
-        return null;
-    }
-
-    public String addSelectedPlayers() {
-        LOGGER.info("addSelectedPlayers");
-        for (FamPlayer player : selectedPlayers) {
-            preselectedLst.add(player);
-            lstPlayer.remove(player);
-        }
-        // on raz la selection
-        selectedPlayers = null;
-        return null;
-    }
 
     public String addGoal() {
         lstGoal.add(famGoal);

@@ -9,6 +9,7 @@
         xmlns:p="http://primefaces.org/ui"
         >
 <ui:composition>
+<!--@elvariable id="tc" type="org.fam.jsf.bean.TeamComposition"-->
 <h:panelGrid columns="4" columnClasses="verticalTop,verticalTop,verticalTop,verticalTop">
     <!--                            <p:fieldset id="test" legend="Préselection">-->
 
@@ -36,8 +37,9 @@
       </p:column>
   </p:pickList>  -->
 
+
     <p:dataTable id="dtPlayers"
-                 value="#{famMatchController.preselectedLst}"
+                 value="#{tc.preselectedLst}"
                  var="item"
                  selectionMode="single"
                  emptyMessage="#{bundle.NoDataFound}"
@@ -89,7 +91,7 @@
         <h:panelGrid columns="3">
             <h:outputLabel value="Formation" for="formation"/>
             <p:selectOneMenu id="formation"
-                             value="#{famMatchController.famMatchTeam.famFormation}"
+                             value="#{tc.famMatchTeam.famFormation}"
                              converter="formationConverter">
                 <f:selectItem itemLabel="Formation" itemValue=""/>
                 <!--                                        noSelectionOption="true"/>-->
@@ -99,7 +101,7 @@
                                itemValue="#{f}"/>
                 <!--                    <p:ajax event="blur" update="@form"/>-->
                 <!--                                        listener="#{famMatchController.changeFormation}"/>-->
-                <p:ajax event="valueChange" listener="#{famMatchController.genTarget}" update="dgField"/>
+                <p:ajax event="valueChange" listener="#{tc.genTarget}" update="dgField" partialSubmit="true"/>
                 <!--lst"/>-->
             </p:selectOneMenu>
             <p:message id="msg_formation" for="formation"/>
@@ -108,7 +110,7 @@
         <!--                                <div>-->
         <p:panel header="Lineup" id="soccer_field" >
             <p:dataGrid id="dgField"
-                        value="#{famMatchController.lstTarget}"
+                        value="#{tc.lstTarget}"
                         var="t" columns="5"
                         styleClass="soccer_field"
                     >
@@ -130,7 +132,7 @@
                                 >
                             <f:attribute name="num" value="#{t.famFormationItem.numItem}"/>
                             <p:ajax listener="#{famMatchController.onDrop}"
-                                    update="trg @(:myForm:tabs:dtMP)"
+                                    update="trg @(:myForm:tabs:dtMP)"  partialSubmit="true"
                                     />
                             <!--:tabs:dtMP-->
                         </p:droppable>
@@ -165,14 +167,14 @@
                         >
                     <f:attribute name="num" value="#{t.strIdx}"/>
                     <p:ajax listener="#{famMatchController.onSubDrop}"
-                            update="@(:myForm:tabs:dtMP) sub"
+                            update="@(:myForm:tabs:dtMP) sub" partialSubmit="true"
                             />
                 </p:droppable>
             </p:column>
         </p:dataGrid>
     </h:panelGrid>
     <p:dataTable id="dtMP"
-                 value="#{famMatchController.famMatchTeam.famMatchPlayerList}"
+                 value="#{tc.famMatchTeam.famMatchPlayerList}"
                  var="mp"
                  emptyMessage="#{bundle.NoDataFound}"
                  rowKey="#{mp.num}"
@@ -190,7 +192,7 @@
       </p:column>  -->
     </p:dataTable>
     <p:orderList
-            value="#{famMatchController.famMatchTeam.famMatchPlayerList}"
+            value="#{tc.famMatchTeam.famMatchPlayerList}"
             var="mp"
             iconOnly="true"
             effect="clip"
