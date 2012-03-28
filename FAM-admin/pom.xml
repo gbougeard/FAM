@@ -25,18 +25,18 @@
 
         <plugins>
 
-            <plugin>
-                <groupId>com.jelastic</groupId>
-                <artifactId>jelastic-maven-plugin</artifactId>
-                <version>${version.jelastic.plugin}</version>
-                <configuration>
-                    <email>${jelastic.username}</email>
-                    <password>${jelastic.password}</password>
-                    <context>dev</context>
-                    <environment>gougeard</environment>
-                    <api_hoster>api.jelastic.com</api_hoster>
-                </configuration>
-            </plugin>
+            <!--<plugin>-->
+                <!--<groupId>com.jelastic</groupId>-->
+                <!--<artifactId>jelastic-maven-plugin</artifactId>-->
+                <!--<version>${version.jelastic.plugin}</version>-->
+                <!--<configuration>-->
+                    <!--<email>${jelastic.username}</email>-->
+                    <!--<password>${jelastic.password}</password>-->
+                    <!--<context>dev</context>-->
+                    <!--<environment>gougeard</environment>-->
+                    <!--<api_hoster>api.jelastic.com</api_hoster>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
