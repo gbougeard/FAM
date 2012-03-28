@@ -132,9 +132,9 @@
                                 >
                             <f:attribute name="num" value="#{t.famFormationItem.numItem}"/>
                             <p:ajax listener="#{famMatchController.onDrop}"
-                                    update="trg @(:myForm:tabs:dtMP)"  partialSubmit="true"
+                                    update="trg "  partialSubmit="true"
                                     />
-                            <!--:tabs:dtMP-->
+                            <!--:tabs:dtMP  @(:myForm:tabs:dtMP)-->
                         </p:droppable>
                     </p:panel>
 
@@ -167,8 +167,9 @@
                         >
                     <f:attribute name="num" value="#{t.strIdx}"/>
                     <p:ajax listener="#{famMatchController.onSubDrop}"
-                            update="@(:myForm:tabs:dtMP) sub" partialSubmit="true"
+                            update=" sub" partialSubmit="true"
                             />
+                    <!--@(:myForm:tabs:dtMP)-->
                 </p:droppable>
             </p:column>
         </p:dataGrid>

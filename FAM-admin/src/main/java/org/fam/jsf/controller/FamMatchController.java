@@ -14,6 +14,8 @@ import org.fam.jsf.bean.util.JsfUtil;
 import org.fam.jsf.cache.CacheBean;
 import org.fam.jsf.cache.CachePlayer;
 import org.primefaces.event.DragDropEvent;
+import org.primefaces.event.SelectEvent;
+import org.primefaces.event.UnselectEvent;
 import org.primefaces.model.DualListModel;
 import org.slf4j.Logger;
 
@@ -497,21 +499,34 @@ public class FamMatchController extends AbstractController<FamMatch> {
         }
         return "pretty:";
     }
-//    @Override
-//    public void onRowSelect(SelectEvent event) {
-//        FacesMessage msg = new FacesMessage("Car Selected", ((FamPlayer) event.getObject()).getDisplayName());
-//
-//        FacesContext.getCurrentInstance().addMessage(null, msg);
-//
-//        JsfUtil.addSuccessMessage((selectedPlayers == null ? "0" : selectedPlayers.length) + " selected");
-//    }
-//
-//    @Override
-//    public void onRowUnselect(UnselectEvent event) {
-//        FacesMessage msg = new FacesMessage("Car Unselected", ((FamPlayer) event.getObject()).getDisplayName());
-//
-//        FacesContext.getCurrentInstance().addMessage(null, msg);
-//
-//        JsfUtil.addSuccessMessage((selectedPlayers == null ? "0" : selectedPlayers.length) + " selected");
-//    }
+    @Override
+    public void onRowSelect(SelectEvent event) {
+        String msg="";
+        if (event.getObject() instanceof FamAnswer){
+            msg =  ((FamAnswer) event.getObject()).getFamPlayer().getDisplayName();
+        }else if (event.getObject() instanceof FamPlayer){
+            msg =  ((FamPlayer) event.getObject()).getDisplayName();
+        }
+
+        JsfUtil.addInfoMessage("RowSelect", msg);
+    }
+
+    @Override
+    public void onRowUnselect(UnselectEvent event) {
+        String msg="";
+        if (event.getObject() instanceof FamAnswer){
+            msg =  ((FamAnswer) event.getObject()).getFamPlayer().getDisplayName();
+        }else if (event.getObject() instanceof FamPlayer){
+            msg =  ((FamPlayer) event.getObject()).getDisplayName();
+        }
+
+        JsfUtil.addInfoMessage("UnSelect", msg);
+    }
+
+    public void test() {
+        String msg="OUU";
+         LOGGER.info("HELL YEAH!");
+
+        JsfUtil.addInfoMessage("test", msg);
+    }
 }

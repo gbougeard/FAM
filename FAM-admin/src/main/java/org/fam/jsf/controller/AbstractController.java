@@ -49,7 +49,7 @@ public abstract class AbstractController<T> extends AbstractBackingBean {
 //        init();
     }
 
-    public String getPrettyId(String id) {
+    protected String getPrettyId(String id) {
         StringBuilder sb = new StringBuilder();
         sb.append(PRETTY_PREFIX).append(id);
         return sb.toString();

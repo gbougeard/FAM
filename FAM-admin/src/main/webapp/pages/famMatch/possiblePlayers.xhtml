@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: mask_hot
+  Date: 28/03/12
+  Time: 21:09
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui"
+        >
+<ui:composition>
+        <p:dataTable id="#{id}"
+                     value="#{lst}"
+                     var="item"
+                     paginator="true"
+                     rows="5"
+                     pageLinks="1"
+                     paginatorPosition="bottom"
+                     paginatorAlwaysVisible="false"
+                     selection="#{selected}"
+                     rowKey="#{ANSWER ? item.idAnswer :item.idPlayer }"
+                     style="height:200px;width:180px;"
+                >
+            <p:ajax event="rowSelect" update="@this"  />
+            <p:ajax event="rowUnselect" update="@this" />
+
+            <p:column selectionMode="multiple"/>
+
+            <p:column headerText="#{headerText} (#{fn:length(lst)})">
+                <h:outputText value="#{ANSWER ? item.famPlayer.displayName : item.displayName}"/>
+            </p:column>
+            <p:column rendered="#{ANSWER}">
+                <h:outputText id="com"
+                              value="com"
+                              title="#{item.comments}"
+                              rendered="#{not empty item.comments}"/>
+            </p:column>
+            <f:facet name="footer">
+
+                <p:commandButton value="Add"
+                                 icon="ui-icon ui-icon-search"
+                                 actionListener="#{famMatchController.test}"
+                                 immediate="true"
+                                 disabled="#{empty selected}"
+                                 update="@form "
+                        />
+                        <!--update="@form @(messages) "-->
+
+               <!-- <p:dialog header="Car Detail" widgetVar="carDialog"
+                          width="250" showEffect="explode" hideEffect="explode">
+
+                    <p:dataList id="display"
+                                value="#{selected}"
+                                var="selectedCar" type="definition">
+
+                        #{ANSWER ? selectedCar.famPlayer.displayName : selectedCar.displayName}
+                        <f:facet name="description">
+                            prout
+                        </f:facet>
+                    </p:dataList>
+
+                </p:dialog>-->
+
+            </f:facet>
+            <!---->
+        </p:dataTable>
+
+</ui:composition>
+
+
+</html>

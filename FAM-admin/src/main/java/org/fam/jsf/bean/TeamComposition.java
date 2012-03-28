@@ -3,6 +3,7 @@ package org.fam.jsf.bean;
 import lombok.Getter;
 import lombok.Setter;
 import org.fam.ejb.model.*;
+import org.fam.jsf.bean.util.JsfUtil;
 import org.primefaces.model.DualListModel;
 
 import javax.enterprise.inject.Model;
@@ -79,6 +80,7 @@ public class TeamComposition {
 
     public String addSelectedPlayers() {
 //        LOGGER.info("addSelectedPlayers");
+        JsfUtil.addInfoMessage("addSelectedPlayers", selectedPlayers.length + " selected");
         for (FamPlayer player : selectedPlayers) {
             preselectedLst.add(player);
             lstPlayer.remove(player);
@@ -87,6 +89,16 @@ public class TeamComposition {
         selectedPlayers = null;
         return null;
     }
+
+   /* public void addSelectedPlayers() {
+        JsfUtil.addInfoMessage("addSelectedPlayers", selectedPlayers.length + " selected");
+        for (FamPlayer player : selectedPlayers) {
+            preselectedLst.add(player);
+            lstPlayer.remove(player);
+        }
+        // on raz la selection
+        selectedPlayers = null;
+    }*/
 
     public void genTarget() {
 //        if (LOGGER.isDebugEnabled()) {
