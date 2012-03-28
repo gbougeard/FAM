@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition
+<html
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:f="http://java.sun.com/jsf/core"
         xmlns:p="http://primefaces.org/ui"
         >
+<ui:composition>
     <f:metadata>
         <!--        <f:event type="preRenderView" listener="#{chartBean.buildChart(bean)}" />	-->
     </f:metadata>
     <!--    <h:form>-->
     <!--    <h:panelGrid columns="2">-->
+    <!--@elvariable id="bean" type="org.fam.ejb.model.FamPlayerProfile"-->
     <h:panelGrid columns="6">
         <h:outputLabel value="Taille" for="height"/>
         <h:panelGrid columns="1" style="margin-bottom:10px">
             <p:inputText id="height"
                          value="#{bean.height}">
-                <p:ajax process="@this" update="msg_height"/>
+                <p:ajax process="@this" update="msg_height" partialSubmit="true"/>
             </p:inputText>
             <!--                    <p:slider for="height" minValue="100" maxValue="220"
           onSlideEndUpdate="msg_height" /> -->
@@ -29,7 +31,7 @@
         <h:panelGrid columns="1" style="margin-bottom:10px">
             <p:inputText id="weight"
                          value="#{bean.weight}">
-                <p:ajax process="@this" update="msg_weight"/>
+                <p:ajax process="@this" update="msg_weight" partialSubmit="true"/>
             </p:inputText>
             <!--                    <p:slider for="weight" minValue="20" maxValue="150"
           onSlideEndUpdate="msg_weight" /> -->
@@ -42,7 +44,7 @@
         <h:panelGrid columns="1" style="margin-bottom:10px">
             <p:inputText id="att"
                          value="#{bean.att}">
-                <p:ajax process="@this" update="msg_att"/>
+                <p:ajax process="@this" update="msg_att" partialSubmit="true"/>
             </p:inputText>
             <!--                    <p:slider for="att" minValue="0" maxValue="100"
             onSlideEndUpdate="msg_att growl"
@@ -55,7 +57,7 @@
         <h:panelGrid columns="1" style="margin-bottom:10px">
             <p:inputText id="def"
                          value="#{bean.def}">
-                <p:ajax process="@this" update="msg_def"/>
+                <p:ajax process="@this" update="msg_def" partialSubmit="true"/>
             </p:inputText>
             <!--                    <p:slider for="def" minValue="0" maxValue="100"
           onSlideEndUpdate="msg_def"
@@ -68,7 +70,7 @@
         <h:panelGrid columns="1" style="margin-bottom:10px">
             <p:inputText id="tec"
                          value="#{bean.tec}">
-                <p:ajax process="@this" update="msg_tec"/>
+                <p:ajax process="@this" update="msg_tec" partialSubmit="true"/>
             </p:inputText>
             <!--                    <p:slider for="tec" minValue="0" maxValue="100"
            onSlideEndUpdate="msg_tec"
@@ -80,7 +82,7 @@
         <h:panelGrid columns="1" style="margin-bottom:10px">
             <p:inputText id="vit"
                          value="#{bean.vit}">
-                <p:ajax process="@this" update="msg_vit"/>
+                <p:ajax process="@this" update="msg_vit" partialSubmit="true"/>
             </p:inputText>
             <!--                    <p:slider for="vit" minValue="0" maxValue="100"
                       onSlideEndUpdate="msg_vit">
@@ -92,7 +94,7 @@
         <h:panelGrid columns="1" style="margin-bottom:10px">
             <p:inputText id="pui"
                          value="#{bean.pui}">
-                <p:ajax process="@this" update="msg_pui"/>
+                <p:ajax process="@this" update="msg_pui" partialSubmit="true"/>
             </p:inputText>
             <!--                    <p:slider for="pui" minValue="0" maxValue="100"/> -->
         </h:panelGrid>
@@ -102,7 +104,7 @@
         <h:panelGrid columns="1" style="margin-bottom:10px">
             <p:inputText id="phy"
                          value="#{bean.phy}">
-                <p:ajax process="@this" update="msg_phy"/>
+                <p:ajax process="@this" update="msg_phy" partialSubmit="true"/>
             </p:inputText>
             <!--                    <p:slider for="phy" minValue="0" maxValue="100"/> -->
         </h:panelGrid>
@@ -122,5 +124,7 @@
     </p:dialog>
     <!--    </h:panelGrid>-->
     <!--    </h:form>-->
+
 </ui:composition>
+</html>
 

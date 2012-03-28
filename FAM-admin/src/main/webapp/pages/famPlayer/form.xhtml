@@ -35,7 +35,7 @@
                      value="#{bean.firstName}"
                      title="#{bundle.EditFamUserTitle_firstName}"
                 >
-            <p:ajax event="blur" update="msg_firstName"/>
+            <p:ajax event="blur" update="msg_firstName" partialSubmit="true"/>
         </p:inputText>
         <p:message id="msg_firstName" for="firstName"/>
 
@@ -44,7 +44,7 @@
                      value="#{bean.lastName}"
                      title="#{bundle.EditFamUserTitle_lastName}"
                 >
-            <p:ajax event="blur" update="msg_lastName"/>
+            <p:ajax event="blur" update="msg_lastName" partialSubmit="true"/>
         </p:inputText>
         <p:message id="msg_lastName" for="lastName"/>
 
@@ -58,7 +58,7 @@
                     locale="fr"
                     pattern="dd/MM/yyyy"
                 >
-            <p:ajax event="blur" update="msg_dtBirth"/>
+            <p:ajax event="blur" update="msg_dtBirth" partialSubmit="true"/>
         </p:calendar>
         <p:message id="msg_dtBirth" for="dtBirth"/>
 
@@ -75,7 +75,7 @@
                                var="n"
                                itemValue="#{n}"
                                itemLabel="#{n.libClub}"/>
-                <p:ajax process="@this" update="msg_famClub famTeam"/>
+                <p:ajax process="@this" update="msg_famClub famTeam" partialSubmit="true"/>
             </p:selectOneMenu>
             <p:message id="msg_famClub" for="famClub"/>
 
@@ -94,7 +94,7 @@
                                var="t"
                                itemValue="#{t}"
                                itemLabel="#{t.libTeam}"/>
-                <p:ajax event="blur" update="msg_famTeam"/>
+                <p:ajax event="blur" update="msg_famTeam" partialSubmit="true"/>
             </p:selectOneMenu>
             <p:message id="msg_famTeam" for="famTeam"
                     />
@@ -112,7 +112,7 @@
                                  value="#{bean.email}"
                                  title="#{bundle.EditFamUserTitle_email}"
                             >
-                        <p:ajax event="blur" update="msg_email"/>
+                        <p:ajax event="blur" update="msg_email" partialSubmit="true"/>
                     </p:inputText>
                     <p:message id="msg_email" for="email"/>
 
@@ -121,7 +121,7 @@
                                  value="#{bean.tel}"
                                  title="#{bundle.EditFamUserTitle_tel}"
                             >
-                        <p:ajax event="blur" update="msg_tel"/>
+                        <p:ajax event="blur" update="msg_tel" partialSubmit="true"/>
                     </p:inputText>
                     <p:message id="msg_tel" for="tel"/>
                 </h:panelGrid>
@@ -135,7 +135,7 @@
                                  value="#{bean.address}"
                                  title="#{bundle.EditFamUserTitle_address}"
                             >
-                        <p:ajax event="blur" update="msg_address"/>
+                        <p:ajax event="blur" update="msg_address" partialSubmit="true"/>
                     </p:inputText>
                     <p:message id="msg_address" for="address"/>
 
@@ -144,7 +144,7 @@
                                  value="#{bean.zipcode}"
                                  title="#{bundle.EditFamUserTitle_zipcode}"
                             >
-                        <p:ajax event="blur" update="msg_zipcode"/>
+                        <p:ajax event="blur" update="msg_zipcode" partialSubmit="true"/>
                     </p:inputText>
                     <p:message id="msg_zipcode" for="zipcode"/>
 
@@ -153,7 +153,7 @@
                                  value="#{bean.city}"
                                  title="#{bundle.EditFamUserTitle_city}"
                             >
-                        <p:ajax event="blur" update="msg_city"/>
+                        <p:ajax event="blur" update="msg_city" partialSubmit="true"/>
                     </p:inputText>
                     <p:message id="msg_city" for="city"/>
 
@@ -167,7 +167,7 @@
                                  value="#{bean.numLicense}"
                                  title="#{bundle.EditFamPlayerTitle_numLicense}"
                             >
-                        <p:ajax event="blur" update="msg_numLicense"/>
+                        <p:ajax event="blur" update="msg_numLicense" partialSubmit="true"/>
                     </p:inputText>
                     <p:message id="msg_numLicense" for="numLicense"/>
 
@@ -181,7 +181,7 @@
                                 pattern="dd/MM/yyyy"
                             >
                         <!--                        <f:convertDateTime pattern="dd/MM/yyyy" />-->
-                        <p:ajax event="blur" update="msg_dtArrival"/>
+                        <p:ajax event="blur" update="msg_dtArrival" partialSubmit="true"/>
                     </p:calendar>
                     <p:message id="msg_dtArrival" for="dtArrival"/>
                 </h:panelGrid>
@@ -208,7 +208,7 @@
                                  value="#{bean.iceContact}"
                                  title="#{bundle.EditFamUserTitle_iceContact}"
                             >
-                        <p:ajax event="blur" update="msg_iceContact"/>
+                        <p:ajax event="blur" update="msg_iceContact" partialSubmit="true"/>
                     </p:inputText>
                     <p:message id="msg_iceContact" for="iceContact"/>
 
@@ -217,7 +217,7 @@
                                  value="#{bean.iceTel}"
                                  title="#{bundle.EditFamUserTitle_iceTel}"
                             >
-                        <p:ajax event="blur" update="msg_iceTel"/>
+                        <p:ajax event="blur" update="msg_iceTel" partialSubmit="true"/>
                     </p:inputText>
                     <p:message id="msg_iceTel" for="iceTel"/>
 
@@ -262,8 +262,9 @@
 
                 <p:commandButton value="Crop"
                                  action="#{famPlayerController.crop}"
-                                 update="photo"
+
                                  rendered="#{not empty bean.idPlayer}"/>
+                <!--update="@(photo)"-->
             </p:tab>
         </p:tabView>
     </p:tab>
@@ -287,8 +288,9 @@
         <p:tabView var="s" value="#{bean.famPlayerSeasons}" style="height:250px;">
             <p:tab title="#{s.famSeason.libSeason}">
                 <h:panelGrid columns="2">
-                    <h:graphicImage id="chart" height="200"
-                                    style="border-width:4px;border-color:#6F6E6E;border-style:double"
+                    <h:graphicImage id="chart"
+                                    height="200"
+                                    style="border: 4px double #6F6E6E;"
                                     url="#{s.famPlayerProfile.profileChartUrl}"/>
                     <ui:include src="stats.xhtml">
                         <ui:param name="bean" value="#{s.famPlayerStat}"/>
