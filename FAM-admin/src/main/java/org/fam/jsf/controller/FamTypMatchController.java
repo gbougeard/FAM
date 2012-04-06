@@ -5,16 +5,16 @@ import org.fam.ejb.session.FamTypMatchFacade;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
 import java.io.Serializable;
 
 @ManagedBean(name = "famTypMatchController")
 @ViewScoped
 public class FamTypMatchController extends AbstractController<FamTypMatch> implements Serializable {
 
-    @EJB
+    @Inject
     private FamTypMatchFacade ejbFacade;
 
     public FamTypMatchController() {

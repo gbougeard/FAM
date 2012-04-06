@@ -3,10 +3,10 @@ package org.fam.jsf.bean;
 import lombok.Getter;
 import lombok.Setter;
 import org.fam.ejb.model.*;
-import org.fam.jsf.bean.util.JsfUtil;
 import org.primefaces.model.DualListModel;
 
 import javax.enterprise.inject.Model;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,20 +20,18 @@ import java.util.List;
 @Model
 @Getter
 @Setter
-public class TeamComposition {
+public class TeamComposition implements Serializable {
+
+    private static final long serialVersionUID = 5265035756215442054L;
 
     private FamMatchTeam famMatchTeam;
     private FamTeam famTeam;
 
-    private List<FamAnswer> lstYes;
-    private List<FamAnswer> lstNo;
-    private List<FamAnswer> lstMaybe;
-    private List<FamPlayer> lstPlayer;
-    private FamAnswer[] selectedYes;
-    private List<FamAnswer> selectedNo;
-    private List<FamAnswer> selectedMaybe;
-    private FamPlayer[] selectedPlayers;
-    //
+    private AnswerGiven answerYes = new AnswerGiven();
+    private AnswerGiven answerNo = new AnswerGiven();
+    private AnswerGiven answerMaybe = new AnswerGiven();
+    private AnswerUngiven answerUngiven = new AnswerUngiven();
+
     private FamPlayer selectedPlayer;
     private List<FamPlayer> players = new ArrayList<FamPlayer>();
     private List<FamPlayer> preselectedLst = new ArrayList<FamPlayer>();
@@ -50,60 +48,27 @@ public class TeamComposition {
     //
     private FamPlayerDataModel playerDM;
 
-    public String addSelectedYes() {
-        for (FamAnswer answer : selectedYes) {
+    public List<FamPlayer> getPreselectedLst() {
+        preselectedLst.clear();
+        // Add selected Players from Yes
+        for (FamAnswer answer : answerYes.getLstSelected()) {
             preselectedLst.add(answer.getFamPlayer());
-            lstYes.remove(answer);
         }
-
-        return null;
-    }
-
-    public String addSelectedNo() {
-        for (FamAnswer answer : selectedNo) {
+        // Add selected Players from Maybe
+        for (FamAnswer answer : answerMaybe.getLstSelected()) {
             preselectedLst.add(answer.getFamPlayer());
-            lstNo.remove(answer);
         }
-
-        return null;
-    }
-
-    public String addSelectedMaybe() {
-//        LOGGER.info("addSelectedMaybe");
-        for (FamAnswer answer : selectedMaybe) {
+        // Add selected Players from No
+        for (FamAnswer answer : answerNo.getLstSelected()) {
             preselectedLst.add(answer.getFamPlayer());
-            lstMaybe.remove(answer);
         }
+        // Add selected players from No response
+        preselectedLst.addAll(answerUngiven.getLstSelected());
 
-        return null;
+        return preselectedLst;
     }
-
-    public String addSelectedPlayers() {
-//        LOGGER.info("addSelectedPlayers");
-        JsfUtil.addInfoMessage("addSelectedPlayers", selectedPlayers.length + " selected");
-        for (FamPlayer player : selectedPlayers) {
-            preselectedLst.add(player);
-            lstPlayer.remove(player);
-        }
-        // on raz la selection
-        selectedPlayers = null;
-        return null;
-    }
-
-   /* public void addSelectedPlayers() {
-        JsfUtil.addInfoMessage("addSelectedPlayers", selectedPlayers.length + " selected");
-        for (FamPlayer player : selectedPlayers) {
-            preselectedLst.add(player);
-            lstPlayer.remove(player);
-        }
-        // on raz la selection
-        selectedPlayers = null;
-    }*/
 
     public void genTarget() {
-//        if (LOGGER.isDebugEnabled()) {
-//            LOGGER.debug("genTarget");
-//        }
         lstTarget.clear();
 
         for (int i = 1;
@@ -140,7 +105,6 @@ public class TeamComposition {
             lstSubs.add(item);
         }
 
-
         // Add Players from LineUp
         if (famMatchTeam != null) {
             for (FamMatchPlayer fmp : famMatchTeam.getFamMatchPlayerList()) {
@@ -165,13 +129,11 @@ public class TeamComposition {
                         }
                     }
 
-
                 }
             }
         }
 
     }
-
 
 }
 

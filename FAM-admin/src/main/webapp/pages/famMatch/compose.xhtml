@@ -3,7 +3,6 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html
         xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:fn="http://java.sun.com/jsp/jstl/functions"
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:p="http://primefaces.org/ui"
@@ -20,13 +19,12 @@
     <ui:define name="body">
 
         <!--<script type="text/javascript">-->
-            <!--function handleDrop(event, ui) {-->
-                <!--var droppedCar = ui.draggable;-->
+        <!--function handleDrop(event, ui) {-->
+        <!--var droppedCar = ui.draggable;-->
 
-                <!--droppedCar.fadeOut('fast');-->
-            <!--}-->
+        <!--droppedCar.fadeOut('fast');-->
+        <!--}-->
         <!--</script>-->
-        <p:log />
         <h:form id="myForm">
 
             <p:panel
@@ -46,42 +44,46 @@
                                             <ui:include src="possiblePlayers.xhtml">
                                                 <ui:param name="id" value="dtYes"/>
                                                 <ui:param name="headerText" value="Présents"/>
-                                                <ui:param name="ANSWER" value="#{true}"/>
+                                                <ui:param name="TYP" value="#{true}"/>
 
-                                                <ui:param name="lst" value="#{tc.lstYes}"/>
+                                                <!--<ui:param name="lst" value="#{tc.lstYes}"/>-->
                                                 <ui:param name="selected" value="#{tc.selectedYes}"/>
                                                 <ui:param name="addSelected" value="#{tc.addSelectedYes}"/>
+                                                <ui:param name="answer" value="#{tc.answerYes}"/>
                                             </ui:include>
 
                                             <ui:include src="possiblePlayers.xhtml">
                                                 <ui:param name="id" value="dtMaybe"/>
                                                 <ui:param name="headerText" value="Peut-être"/>
-                                                <ui:param name="ANSWER" value="#{true}"/>
+                                                <ui:param name="TYP" value="#{true}"/>
 
-                                                <ui:param name="lst" value="#{tc.lstMaybe}"/>
+                                                <!--<ui:param name="lst" value="#{tc.lstMaybe}"/>-->
                                                 <ui:param name="selected" value="#{tc.selectedMaybe}"/>
                                                 <ui:param name="addSelected" value="#{tc.addSelectedMaybe}"/>
+                                                <ui:param name="answer" value="#{tc.answerMaybe}"/>
                                             </ui:include>
 
                                             <ui:include src="possiblePlayers.xhtml">
                                                 <ui:param name="id" value="dtNo"/>
                                                 <ui:param name="headerText" value="Absents"/>
-                                                <ui:param name="ANSWER" value="#{true}"/>
+                                                <ui:param name="TYP" value="#{true}"/>
 
-                                                <ui:param name="lst" value="#{tc.lstNo}"/>
+                                                <!--<ui:param name="lst" value="#{tc.lstNo}"/>-->
                                                 <ui:param name="selected" value="#{tc.selectedNo}"/>
                                                 <ui:param name="addSelected" value="#{tc.addSelectedNo}"/>
+                                                <ui:param name="answer" value="#{tc.answerNo}"/>
                                             </ui:include>
 
 
                                             <ui:include src="possiblePlayers.xhtml">
                                                 <ui:param name="id" value="dtNSP"/>
                                                 <ui:param name="headerText" value="Sans réponse"/>
-                                                <ui:param name="ANSWER" value="#{false}"/>
+                                                <ui:param name="TYP" value="#{false}"/>
 
-                                                <ui:param name="lst" value="#{tc.lstPlayer}"/>
-                                                <ui:param name="selected" value="#{tc.selectedPlayers}"/>
-                                                <ui:param name="addSelected" value="#{tc.addSelectedPlayers}"/>
+                                                <!--<ui:param name="lst" value="#{tc.lstPlayer}"/>-->
+                                                <!--<ui:param name="selected" value="#{tc.selectedPlayers}"/>-->
+                                                <ui:param name="answer" value="#{tc.answerUngiven}"/>
+                                                <!--<ui:param name="addSelected" value="#{tc.addSelectedPlayers}"/>-->
                                             </ui:include>
 
 
@@ -102,7 +104,6 @@
                                         <ui:param name="list" value="#{tc.preselectedLst}"/>
                                         <ui:param name="id" value="preselectedPlayers"/>
                                     </ui:include>
-                                    <!--                            </p:outputPanel>-->
                                 </p:fieldset>
                                 <!--                        <p:droppable for="preselection" tolerance="touch"
                                            datasource="ds"

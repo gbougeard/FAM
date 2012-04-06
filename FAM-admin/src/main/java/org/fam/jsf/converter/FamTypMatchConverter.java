@@ -15,12 +15,11 @@ import javax.faces.convert.FacesConverter;
 /**
  * @author mask_hot
  */
-@FacesConverter(forClass = FamTypMatch.class)
+@FacesConverter(forClass = FamTypMatch.class, value = "typMatchConverter")
 public class FamTypMatchConverter implements Converter {
 
     @Override
     public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
-
         if (value == null || value.length() == 0) {
             return null;
         }
@@ -53,4 +52,5 @@ public class FamTypMatchConverter implements Converter {
             throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + FamTypMatchController.class.getName());
         }
     }
+
 }
