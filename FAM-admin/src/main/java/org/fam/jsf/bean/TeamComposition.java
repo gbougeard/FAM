@@ -3,10 +3,10 @@ package org.fam.jsf.bean;
 import lombok.Getter;
 import lombok.Setter;
 import org.fam.ejb.model.*;
-import org.fam.jsf.bean.util.JsfUtil;
 import org.primefaces.model.DualListModel;
 
 import javax.enterprise.inject.Model;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,19 +20,29 @@ import java.util.List;
 @Model
 @Getter
 @Setter
-public class TeamComposition {
+public class TeamComposition implements Serializable {
+
+    private static final long serialVersionUID = 5265035756215442054L;
+
+//    @Inject
+//    private Logger LOGGER;
 
     private FamMatchTeam famMatchTeam;
     private FamTeam famTeam;
 
-    private List<FamAnswer> lstYes;
-    private List<FamAnswer> lstNo;
-    private List<FamAnswer> lstMaybe;
-    private List<FamPlayer> lstPlayer;
-    private FamAnswer[] selectedYes;
-    private List<FamAnswer> selectedNo;
-    private List<FamAnswer> selectedMaybe;
-    private FamPlayer[] selectedPlayers;
+    private AnswerGiven answerYes = new AnswerGiven();
+    private AnswerGiven answerNo = new AnswerGiven();
+    private AnswerGiven answerMaybe = new AnswerGiven();
+    private AnswerUngiven answerUngiven = new AnswerUngiven();
+
+    //    private List<FamAnswer> lstYes;
+//    private List<FamAnswer> lstNo;
+//    private List<FamAnswer> lstMaybe;
+//    private List<FamPlayer> lstPlayer;
+//    private FamAnswer[] selectedYes;
+//    private List<FamAnswer> selectedNo;
+//    private List<FamAnswer> selectedMaybe;
+//    private FamPlayer[] selectedPlayers;
     //
     private FamPlayer selectedPlayer;
     private List<FamPlayer> players = new ArrayList<FamPlayer>();
@@ -50,7 +60,24 @@ public class TeamComposition {
     //
     private FamPlayerDataModel playerDM;
 
-    public String addSelectedYes() {
+    public List<FamPlayer> getPreselectedLst() {
+        preselectedLst.clear();
+        for (FamAnswer answer : answerYes.getLstSelected()) {
+            preselectedLst.add(answer.getFamPlayer());
+        }
+        for (FamAnswer answer : answerMaybe.getLstSelected()) {
+            preselectedLst.add(answer.getFamPlayer());
+        }
+        for (FamAnswer answer : answerNo.getLstSelected()) {
+            preselectedLst.add(answer.getFamPlayer());
+        }
+        preselectedLst.addAll(answerUngiven.getLstSelected());
+//        JsfUtil.addInfoMessage("ungiven " + answerUngiven.getLstSelected().size(),"TC" );
+//        LOGGER.info("presel "+preselectedLst.size());
+        //JsfUtil.addInfoMessage("presel " + preselectedLst.size(),"TC" );
+        return preselectedLst;
+    }
+    /*public String addSelectedYes() {
         for (FamAnswer answer : selectedYes) {
             preselectedLst.add(answer.getFamPlayer());
             lstYes.remove(answer);
@@ -88,9 +115,9 @@ public class TeamComposition {
         // on raz la selection
         selectedPlayers = null;
         return null;
-    }
+    }*/
 
-   /* public void addSelectedPlayers() {
+    /* public void addSelectedPlayers() {
         JsfUtil.addInfoMessage("addSelectedPlayers", selectedPlayers.length + " selected");
         for (FamPlayer player : selectedPlayers) {
             preselectedLst.add(player);

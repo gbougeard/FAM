@@ -18,61 +18,108 @@
         xmlns:p="http://primefaces.org/ui"
         >
 <ui:composition>
-        <p:dataTable id="#{id}"
-                     value="#{lst}"
-                     var="item"
-                     paginator="true"
-                     rows="5"
-                     pageLinks="1"
-                     paginatorPosition="bottom"
-                     paginatorAlwaysVisible="false"
-                     selection="#{selected}"
-                     rowKey="#{ANSWER ? item.idAnswer :item.idPlayer }"
-                     style="height:200px;width:180px;"
-                >
-            <p:ajax event="rowSelect" update="@this"  />
-            <p:ajax event="rowUnselect" update="@this" />
+    <!--@elvariable id="answer" type="org.fam.jsf.bean.Answer"-->
+    <!--@elvariable id="TYP" type="java.lang.Boolean"-->
+    <!--@elvariable id="id" type="java.lang.String"-->
+    <!--@elvariable id="headerText" type="java.lang.String"-->
+    <p:dataList id="#{id}"
+                value="#{answer.lstAnswer}"
+                var="item"
+                paginator="true"
+                rows="5"
+                pageLinks="1"
+                paginatorPosition="bottom"
+                paginatorAlwaysVisible="false"
+                rowKey="#{TYP ? item.idAnswer :item.idPlayer }"
+                style="height:250px;width:200px;"
+                effectSpeed="fast"
+                paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink}"
+                type="none">
 
-            <p:column selectionMode="multiple"/>
+        <f:facet name="header">
+            #{headerText} (#{fn:length(answer.lstAnswer)})
+        </f:facet>
 
-            <p:column headerText="#{headerText} (#{fn:length(lst)})">
-                <h:outputText value="#{ANSWER ? item.famPlayer.displayName : item.displayName}"/>
-            </p:column>
-            <p:column rendered="#{ANSWER}">
-                <h:outputText id="com"
-                              value="com"
-                              title="#{item.comments}"
-                              rendered="#{not empty item.comments}"/>
-            </p:column>
-            <f:facet name="footer">
+        <p:column>
+            <p:commandButton icon="ui-icon-search"
+                             update="@form @(messages) @(preselectedPlayers)"
+                             action="#{answer.addSelected}"
+                             immediate="true"
+                             title="View Detail">
+                <f:setPropertyActionListener value="#{item}" target="#{answer.selected}"/>
+            </p:commandButton>
+        </p:column>
 
-                <p:commandButton value="Add"
-                                 icon="ui-icon ui-icon-search"
-                                 actionListener="#{famMatchController.test}"
-                                 immediate="true"
-                                 disabled="#{empty selected}"
-                                 update="@form "
-                        />
-                        <!--update="@form @(messages) "-->
+        <p:column>
+            <h:outputText value="#{TYP ? item.famPlayer.displayName : item.displayName}"/>
+            <br/>
+        </p:column>
 
-               <!-- <p:dialog header="Car Detail" widgetVar="carDialog"
-                          width="250" showEffect="explode" hideEffect="explode">
+        <p:column rendered="#{TYP}">
+            <h:outputText id="com"
+                          value="com"
+                          title="#{item.comments}"
+                          rendered="#{not empty item.comments}"/>
+        </p:column>
+    </p:dataList>
+    <!--</h:form>-->
 
-                    <p:dataList id="display"
-                                value="#{selected}"
-                                var="selectedCar" type="definition">
+    <!--<p:dataTable id="#{id}"
+                 value="#{lst}"
+                 var="item"
+                 paginator="true"
+                 rows="5"
+                 pageLinks="1"
+                 paginatorPosition="bottom"
+                 paginatorAlwaysVisible="false"
+                 selection="#{selected}"
+                 rowKey="#{TYP ? item.idAnswer :item.idPlayer }"
+                 style="height:200px;width:180px;"
+            >
+        <p:ajax event="rowSelect" update="@this"/>
+        <p:ajax event="rowUnselect" update="@this"/>
 
-                        #{ANSWER ? selectedCar.famPlayer.displayName : selectedCar.displayName}
-                        <f:facet name="description">
-                            prout
-                        </f:facet>
-                    </p:dataList>
+        <p:column selectionMode="multiple"/>
 
-                </p:dialog>-->
+        <p:column headerText="#{headerText} (#{fn:length(lst)})">
+            <h:outputText value="#{TYP ? item.famPlayer.displayName : item.displayName}"/>
+        </p:column>
+        <p:column rendered="#{TYP}">
+            <h:outputText id="com"
+                          value="com"
+                          title="#{item.comments}"
+                          rendered="#{not empty item.comments}"/>
+        </p:column>
+        <f:facet name="footer">
 
-            </f:facet>
-            <!---->
-        </p:dataTable>
+            <p:commandButton id="btn-add"
+                             value="Add"
+                             icon="ui-icon ui-icon-search"
+                             actionListener="#{famMatchController.test}"
+                             immediate="true"
+
+                             update="@form "
+                    />
+            &lt;!&ndash;disabled="#{empty selected}" update="@form @(messages) "&ndash;&gt;
+
+            &lt;!&ndash; <p:dialog header="Car Detail" widgetVar="carDialog"
+                      width="250" showEffect="explode" hideEffect="explode">
+
+                <p:dataList id="display"
+                            value="#{selected}"
+                            var="selectedCar" type="definition">
+
+                    #{TYP ? selectedCar.famPlayer.displayName : selectedCar.displayName}
+                    <f:facet name="description">
+                        prout
+                    </f:facet>
+                </p:dataList>
+
+            </p:dialog>&ndash;&gt;
+
+        </f:facet>
+        &lt;!&ndash;&ndash;&gt;
+    </p:dataTable>-->
 
 </ui:composition>
 

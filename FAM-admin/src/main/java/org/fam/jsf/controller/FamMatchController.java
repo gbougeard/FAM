@@ -255,24 +255,24 @@ public class FamMatchController extends AbstractController<FamMatch> {
             }
         }
 
-        tc.setLstYes(ejbAnswer.findAnswerYesByEventAndTeam(current.getFamEvent(), team));
+        tc.getAnswerYes().setLstAnswer(ejbAnswer.findAnswerYesByEventAndTeam(current.getFamEvent(), team));
         if (LOGGER.isInfoEnabled()) {
-            LOGGER.info("yes " + tc.getLstYes().size());
+            LOGGER.info("yes " + tc.getAnswerYes().getLstAnswer().size());
         }
-        tc.setLstNo(ejbAnswer.findAnswerNoByEventAndTeam(current.getFamEvent(), team));
+        tc.getAnswerNo().setLstAnswer(ejbAnswer.findAnswerNoByEventAndTeam(current.getFamEvent(), team));
         if (LOGGER.isInfoEnabled()) {
-            LOGGER.info("no " + tc.getLstNo().size());
+            LOGGER.info("no " + tc.getAnswerNo().getLstAnswer().size());
         }
-        tc.setLstMaybe(ejbAnswer.findAnswerMaybeByEventAndTeam(current.getFamEvent(), team));
+        tc.getAnswerMaybe().setLstAnswer(ejbAnswer.findAnswerMaybeByEventAndTeam(current.getFamEvent(), team));
         if (LOGGER.isInfoEnabled()) {
-            LOGGER.info("maybe " + tc.getLstMaybe().size());
+            LOGGER.info("maybe " + tc.getAnswerMaybe().getLstAnswer().size());
         }
-        tc.setLstPlayer(ejbAnswer.findByEventAndNoAnswerAndTeam(current.getFamEvent(), team));
+        tc.getAnswerUngiven().setLstAnswer(ejbAnswer.findByEventAndNoAnswerAndTeam(current.getFamEvent(), team));
         if (LOGGER.isInfoEnabled()) {
-            LOGGER.info("nsp " + tc.getLstPlayer().size());
+            LOGGER.info("nsp " + tc.getAnswerUngiven().getLstAnswer().size());
         }
 
-        tc.setPlayerDM(new FamPlayerDataModel(tc.getLstPlayer()));
+        tc.setPlayerDM(new FamPlayerDataModel((List<FamPlayer>) tc.getAnswerUngiven().getLstAnswer()));
 
         tc.setDlmPlayer(new DualListModel<FamPlayer>(tc.getPreselectedLst(), new ArrayList<FamPlayer>()));
 
@@ -499,13 +499,14 @@ public class FamMatchController extends AbstractController<FamMatch> {
         }
         return "pretty:";
     }
+
     @Override
     public void onRowSelect(SelectEvent event) {
-        String msg="";
-        if (event.getObject() instanceof FamAnswer){
-            msg =  ((FamAnswer) event.getObject()).getFamPlayer().getDisplayName();
-        }else if (event.getObject() instanceof FamPlayer){
-            msg =  ((FamPlayer) event.getObject()).getDisplayName();
+        String msg = "";
+        if (event.getObject() instanceof FamAnswer) {
+            msg = ((FamAnswer) event.getObject()).getFamPlayer().getDisplayName();
+        } else if (event.getObject() instanceof FamPlayer) {
+            msg = ((FamPlayer) event.getObject()).getDisplayName();
         }
 
         JsfUtil.addInfoMessage("RowSelect", msg);
@@ -513,19 +514,19 @@ public class FamMatchController extends AbstractController<FamMatch> {
 
     @Override
     public void onRowUnselect(UnselectEvent event) {
-        String msg="";
-        if (event.getObject() instanceof FamAnswer){
-            msg =  ((FamAnswer) event.getObject()).getFamPlayer().getDisplayName();
-        }else if (event.getObject() instanceof FamPlayer){
-            msg =  ((FamPlayer) event.getObject()).getDisplayName();
+        String msg = "";
+        if (event.getObject() instanceof FamAnswer) {
+            msg = ((FamAnswer) event.getObject()).getFamPlayer().getDisplayName();
+        } else if (event.getObject() instanceof FamPlayer) {
+            msg = ((FamPlayer) event.getObject()).getDisplayName();
         }
 
         JsfUtil.addInfoMessage("UnSelect", msg);
     }
 
     public void test() {
-        String msg="OUU";
-         LOGGER.info("HELL YEAH!");
+        String msg = "OUU";
+        LOGGER.info("HELL YEAH!");
 
         JsfUtil.addInfoMessage("test", msg);
     }
