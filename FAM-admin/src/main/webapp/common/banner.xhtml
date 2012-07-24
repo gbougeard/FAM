@@ -7,130 +7,73 @@
       xmlns:p="http://primefaces.org/ui"
 
         >
-<ui:component>
-    <p:panel id="banner">
-        <!--            <p:themeSwitcher initialText="Change Skin" buttonPreText="Skin: "/>  -->
-        <!-- utilisateur authentifie -->
-        <!--
-        <c:if test="${request.remoteUser!=null}">
-            You are logged as  ${request.remoteUser} + ${request.userPrincipal}
-            <h:form id="logout">
-                <h:commandLink action="#{authentificationBean.deconnexion}">Logout</h:commandLink>
+<ui:composition>
+    <!--<p:panel>-->
+    <p:layout style="min-width:400px;min-height:200px;">
+
+        <p:layoutUnit position="west">
+            <h:outputText value="Hello, #{login.currentUser.displayName}"
+                          rendered="#{login.loggedIn}"/>
+            <h:form id="navSignup">
+                <h:commandLink action="#{authentificationBean.navSignup}"
+                               rendered="#{!login.loggedIn}">
+                    <h:outputText value=" S'inscrire"/>
+                </h:commandLink>
+                <h:commandLink action="#{authentificationBean.navLogin}"
+                               rendered="#{!login.loggedIn}">
+                    S'identifier
+                </h:commandLink>
+                **#{p:remoteUser()}**
+                <p:commandButton action="#{cacheBean.initCache()}" value="Refresh Cache"/>
+
             </h:form>
-            <c:if test="${authentificationBean.isAdmin}">
-                et vous etes admin!
-            </c:if>
-            <c:if test="${!authentificationBean.isAdmin}">
-                et vous etes grouillot!
-            </c:if>
-        </c:if>-->
-        <!--                <c:if test="${request.remoteUser==null}">
-        <h:form id="login">
-            <h:outputLabel value="Login : " for="lbl_login"></h:outputLabel>
-            <p:inputText id="lbl_login"
-                         value="#{loginBean.email}" required="true">
-            </p:inputText>
+        </p:layoutUnit>
 
-            <h:outputLabel value="Password : " for="lbl_pwd"></h:outputLabel>
-            <p:password id="lbl_pwd"
-                        value="#{loginBean.password}"
-                        required="true"
-                        feedback="false">
-            </p:password>
-            <p:commandButton value="Login"
-                             ajax="false"
-                             actionListener="#{authentificationBean.login}"/>
-        </h:form>-->
+        <p:layoutUnit position="center">
+            <p:ajaxStatus style="width:16px;height:16px;">
+                <f:facet name="start">
+                    <h:graphicImage name="ajaxloading.gif" library="images"/>
+                </f:facet>
+                <f:facet name="complete">
+                    <h:outputText value=""/>
+                </f:facet>
+                <!--                         <f:facet name="prestart">
+                  <h:outputText value="" />
+              </f:facet>
+               <f:facet name="success">
+                  <h:outputText value="Success!" />
+              </f:facet>  -->
+                <f:facet name="error">
+                    <h:outputText value="Error!"/>
+                </f:facet>
+            </p:ajaxStatus>
 
-        <!--<p>Hi, <shiro:guest>Guest</shiro:guest>-->
-        <!--<shiro:user><shiro:principal/></shiro:user>!-->
-        <!--</p>-->
+        </p:layoutUnit>
 
+        <p:layoutUnit position="east" resizable="false" size="200">
 
-        <p:layout style="min-width:400px;min-height:200px;" id="layout">
+            <h:form prependId="false">
 
-            <p:layoutUnit position="west">
-                <h:outputText value="Hello, #{login.currentUser.displayName}"
-                              rendered="#{login.loggedIn}"/>
-                <h:form id="navSignup">
-                    <h:commandLink action="#{authentificationBean.navSignup}"
-                                   rendered="#{!login.loggedIn}">
-                        <h:outputText value=" S'inscrire"/>
-                    </h:commandLink>
-                    <h:commandLink action="#{authentificationBean.navLogin}"
-                                   rendered="#{!login.loggedIn}">
-                        S'identifier
-                    </h:commandLink>
-                    **#{p:remoteUser()}**
-                    <p:commandButton action="#{cacheBean.initCache()}" value="Refresh Cache"/>
-
-                </h:form>
-            </p:layoutUnit>
-            <p:layoutUnit position="center">
-                <p:ajaxStatus style="width:16px;height:16px;">
-                    <f:facet name="start">
-                        <h:graphicImage name="ajaxloading.gif" library="images"/>
-                    </f:facet>
-                    <f:facet name="complete">
-                        <h:outputText value=""/>
-                    </f:facet>
-                    <!--                         <f:facet name="prestart">
-                      <h:outputText value="" />
-                  </f:facet>
-                   <f:facet name="success">
-                      <h:outputText value="Success!" />
-                  </f:facet>  -->
-                    <f:facet name="error">
-                        <h:outputText value="Error!"/>
-                    </f:facet>
-                </p:ajaxStatus>
-                <h:form id="frmMsg">
-                    <p:messages id="messages" showDetail="true" autoUpdate="true"/>
-                    <p:growl id="growl" showDetail="true" autoUpdate="true"/>
-                </h:form>
-            </p:layoutUnit>
-            <p:layoutUnit position="east" resizable="false" size="200">
-
-                <!-- <p:themeSwitcher style="width:200px" effect="fade" var="t">
+                <p:themeSwitcher style="width:150px" effect="fade" var="t" value="#{userSettings.currentTheme}"
+                                 id="defaultSwitcher">
                     <f:selectItem itemLabel="Choose Theme" itemValue=""/>
+                    <!--itemLabel="#{theme.name}"-->
                     <f:selectItems value="#{availableThemes.themes}"
                                    var="theme"
                                    itemLabel="#{theme.name}"
                                    itemValue="#{theme}"/>
-
                     <p:column>
-                        <p:graphicImage value="/images/themes/#{t.image}" width="90" height="60"/>
+                        <h:graphicImage library="images/themes" name="${t.image}" width="90" height="60"/>
                     </p:column>
                     <p:column>
                         #{t.name}
                     </p:column>
-                </p:themeSwitcher>-->
-                <h:form prependId="false">
+                </p:themeSwitcher>
+            </h:form>
 
-
-                    <p:themeSwitcher style="width:150px" effect="fade" var="t" value="#{userSettings.currentTheme}"
-                                     id="defaultSwitcher">
-                        <f:selectItem itemLabel="Choose Theme" itemValue=""/>
-                        <!--itemLabel="#{theme.name}"-->
-                        <f:selectItems value="#{availableThemes.themes}"
-                                       var="theme"
-                                       itemLabel="#{theme.name}"
-                                       itemValue="#{theme}"/>
-                        <p:column>
-                            <h:graphicImage library="images/themes" name="${t.image}" width="90" height="60"/>
-                        </p:column>
-                        <p:column>
-                            #{t.name}
-                        </p:column>
-                    </p:themeSwitcher>
-                </h:form>
-
-            </p:layoutUnit>
-        </p:layout>
-
-
-        <!--                </c:if>-->
-    </p:panel>
-</ui:component>
+        </p:layoutUnit>
+    </p:layout>
+    <!--</p:panel>-->
+</ui:composition>
 </html>
 

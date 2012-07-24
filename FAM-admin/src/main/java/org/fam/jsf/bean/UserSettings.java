@@ -16,7 +16,7 @@ import java.io.Serializable;
  * Time: 00:00
  * To change this template use File | Settings | File Templates.
  */
-@Named
+@Named(value = "userSettings")
 @SessionScoped
 @Data
 public class UserSettings implements Serializable {

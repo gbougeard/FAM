@@ -4,8 +4,8 @@
  */
 package org.fam.jsf.converter;
 
-import org.fam.ejb.model.FamScale;
-import org.fam.jsf.controller.FamScaleController;
+import org.fam.ejb.model.FamCategory;
+import org.fam.jsf.controller.FamCategoryController;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -15,16 +15,16 @@ import javax.faces.convert.FacesConverter;
 /**
  * @author mask_hot
  */
-@FacesConverter(forClass = FamScale.class, value = "scaleConverter")
-public class FamScaleConverter implements Converter {
+@FacesConverter(forClass = FamCategory.class, value = "categoryConverter")
+public class FamCategoryConverter implements Converter {
+
 
     @Override
     public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
         if (value == null || value.length() == 0) {
             return null;
         }
-        FamScaleController controller = (FamScaleController) facesContext.getApplication().getELResolver().
-                getValue(facesContext.getELContext(), null, "famScaleController");
+        FamCategoryController controller = (FamCategoryController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null, "famCategoryController");
         return controller.getFacade().find(getKey(value));
     }
 
@@ -45,11 +45,11 @@ public class FamScaleConverter implements Converter {
         if (object == null || object.equals("")) {
             return null;
         }
-        if (object instanceof FamScale) {
-            FamScale o = (FamScale) object;
-            return getStringKey(o.getIdScale());
+        if (object instanceof FamCategory) {
+            FamCategory o = (FamCategory) object;
+            return o.getIdCategory() == null ? "" : o.getIdCategory().toString();
         } else {
-            throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + FamScaleController.class.getName());
+            throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: model.FamCategory");
         }
     }
 }

@@ -80,12 +80,17 @@
                               style="width:20%">
                         <h:outputText value="#{item.codTeam}"/>
                     </p:column>
-                    <!--<p:column sortBy="#{item.famClub.libClub}"-->
-                    <!--filterBy="#{item.famClub.libClub}"-->
-                    <!--headerText="#{bundle.ListFamTeamTitle_famClub}"-->
-                    <!--style="width:40%">-->
-                    <!--<h:outputText value="#{item.famClub.libClub}"/>-->
-                    <!--</p:column>-->
+                    <p:column sortBy="#{item.famCategory.libCategory}"
+                              filterBy="#{item.famCategory.libCategory}"
+                              headerText="#{bundle.ListFamSeasonCompetitionTitle_famCategory}">
+                        <h:outputText value="#{item.famCategory.libCategory}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.famClub.libClub}"
+                              filterBy="#{item.famClub.libClub}"
+                              headerText="#{bundle.ListFamTeamTitle_famClub}"
+                              style="width:40%">
+                        <h:outputText value="#{item.famClub.libClub}"/>
+                    </p:column>
                     <p:column sortBy="#{item.famPlace.libPlace}"
                               filterBy="#{item.famPlace.libPlace}"
                               headerText="#{bundle.ListFamTeamTitle_famPlace}"

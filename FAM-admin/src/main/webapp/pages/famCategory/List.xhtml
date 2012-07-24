@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui"
+        >
+<ui:composition
+        template="${pageContext.request.servletPath}/common/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{bundle.ListFamCategoryTitle}"/>
+    </ui:define>
+    <ui:define name="body">
+        <h:form>
+            <p:panel header="#{bundle.FamCategory}">
+
+                <!--@elvariable id="item" type="org.fam.ejb.model.FamCategory"-->
+                <p:dataTable
+                        value="#{famCategoryController.lazyModel}"
+                        lazy="true"
+                        var="item"
+                        selection="#{famCategoryController.selected}"
+                        selectionMode="single"
+                        paginator="true" rows="10"
+                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                        rowsPerPageTemplate="5,10,15"
+                        sortBy="#{item.libCategory}"
+                        emptyMessage="#{bundle.NoDataFound}"
+                        paginatorAlwaysVisible="false"
+                        >
+                    <p:ajax event="rowSelect" update="tb"/>
+                    <p:ajax event="rowUnselect" update="tb"/>
+                    <f:facet name="header">
+                        <p:toolbar id="tb">
+                            <p:toolbarGroup align="left">
+                                <p:commandButton type="push"
+                                                 icon="ui-icon-document"
+                                                 value="#{bundle.ViewLink}"
+                                                 action="#{famCategoryController.prepareView}"
+                                                 disabled="#{empty famCategoryController.selected.idCategory}"/>
+                                <p:commandButton type="push"
+                                                 icon="ui-icon-document"
+                                                 value="#{bundle.CreateLink}"
+                                                 action="#{famCategoryController.prepareCreate}"/>
+                                <p:commandButton type="push"
+                                                 icon="ui-icon-document"
+                                                 value="#{bundle.EditLink}"
+                                                 action="#{famCategoryController.prepareEdit}"
+                                                 disabled="#{empty famCategoryController.selected.idCategory}"/>
+                                <p:commandButton type="push"
+                                                 icon="ui-icon-document"
+                                                 value="#{bundle.DeleteLink}"
+                                                 action="#{famCategoryController.prepareDelete}"
+                                                 disabled="#{empty famCategoryController.selected.idCategory}"/>
+                                <p:commandButton type="push"
+                                                 icon="ui-icon-document"
+                                                 value="Generer"
+                                                 action="#{famCategoryController.facade.genData}"/>
+                            </p:toolbarGroup>
+                        </p:toolbar>
+                    </f:facet>
+                    <!--                    <p:column sortBy="#{item.idCategory}"
+                              filterBy="#{item.idCategory}"
+                              headerText="#{bundle.ListFamCategoryTitle_idCategory}" >
+                        <h:outputText value="#{item.idCategory}"/>
+                    </p:column>-->
+                    <p:column sortBy="#{item.libCategory}"
+                              filterBy="#{item.libCategory}"
+                              headerText="#{bundle.ListFamCategoryTitle_libCategory}">
+                        <h:outputText value="#{item.libCategory}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.codCategory}"
+                              filterBy="#{item.codCategory}"
+                              headerText="#{bundle.ListFamCategoryTitle_codCategory}">
+                        <h:outputText value="#{item.codCategory}"/>
+                    </p:column>
+                    <!--                    <p:column sortBy="#{item.dtCreat}"
+                              filterBy="#{item.dtCreat}"
+                              headerText="#{bundle.ListFamCategoryTitle_dtCreat}" >
+                        <h:outputText value="#{item.dtCreat}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column sortBy="#{item.dtModif}"
+                              filterBy="#{item.dtModif}"
+                              headerText="#{bundle.ListFamCategoryTitle_dtModif}" >
+                        <h:outputText value="#{item.dtModif}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:column>-->
+                    <f:facet name="footer">
+
+                    </f:facet>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>
+

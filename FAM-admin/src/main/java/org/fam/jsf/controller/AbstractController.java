@@ -193,9 +193,7 @@ public abstract class AbstractController<T> extends AbstractBackingBean {
     }
 
     public String update() {
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug(this.getClass() + ":update " + current);
-        }
+        LOGGER.debug(this.getClass() + ":update " + current);
         try {
             getFacade().edit(current);
             JsfUtil.addSuccessMessage("Update Done");//ResourceBundle.getBundle("/Bundle").getString("FamTeamUpdated"));

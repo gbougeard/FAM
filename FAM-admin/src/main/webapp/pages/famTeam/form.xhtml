@@ -12,6 +12,7 @@
     <h:panelGrid columns="3">
 
         <h:outputLabel value="#{bundle.EditFamTeamLabel_libTeam}" for="libTeam"/>
+        <!--@elvariable id="bean" type="org.fam.ejb.model.FamTeam"-->
         <p:inputText id="libTeam"
                      value="#{bean.libTeam}"
                      title="#{bundle.EditFamTeamTitle_libTeam}">
@@ -28,32 +29,52 @@
         <p:message id="msg_codTeam" for="codTeam"/>
 
         <h:outputLabel value="#{bundle.EditFamTeamLabel_famClub}" for="famClub"/>
-        <h:selectOneMenu id="famClub"
+        <p:selectOneMenu id="famClub"
                          value="#{bean.famClub}"
                          title="#{bundle.EditFamTeamTitle_famClub}"
+                         style="width:160px;"
+                         converter="clubConverter"
                 >
-            <f:selectItem itemLabel="Club"
-                          noSelectionOption="true"/>
+            <f:selectItem itemLabel="Club" itemValue=""/>
             <f:selectItems value="#{cacheBean.listClub}"
                            var="n"
                            itemValue="#{n}"
                            itemLabel="#{n.libClub}"/>
             <p:ajax event="blur" update="msg_famClub"/>
-        </h:selectOneMenu>
+        </p:selectOneMenu>
         <p:message id="msg_famClub" for="famClub"/>
 
+        <h:outputLabel value="#{bundle.EditFamTeamLabel_famCategory}" for="famCategory"/>
+        <p:selectOneMenu id="famCategory"
+                         value="#{bean.famCategory}"
+                         title="#{bundle.EditFamTeamTitle_famCategory}"
+                         style="width:160px;"
+                         converter="categoryConverter"
+                >
+            <f:selectItem itemLabel="Category" itemValue=""/>
+            <f:selectItems value="#{cacheBean.listCategory}"
+                           var="c"
+                           itemValue="#{c}"
+                           itemLabel="#{c.libCategory}"/>
+            <p:ajax event="blur" update="msg_famCategory"/>
+        </p:selectOneMenu>
+        <p:message id="msg_famCategory" for="famCategory"/>
+
         <h:outputLabel value="#{bundle.EditFamTeamLabel_famPlace}" for="famPlace"/>
-        <h:selectOneMenu id="famPlace"
+        <p:selectOneMenu id="famPlace"
                          value="#{bean.famPlace}"
-                         title="#{bundle.EditFamTeamTitle_famPlace}">
-            <f:selectItem itemLabel="Place"
-                          noSelectionOption="true"/>
+                         title="#{bundle.EditFamEventTitle_famPlace}"
+                         style="width:160px;"
+
+                >
+            <f:selectItem itemLabel="Place" itemValue=""/>
+            <!--                          noSelectionOption="true"/>-->
             <f:selectItems value="#{cacheBean.listPlace}"
                            var="p"
                            itemValue="#{p}"
                            itemLabel="#{p.libPlace}"/>
             <p:ajax event="blur" update="msg_famPlace"/>
-        </h:selectOneMenu>
+        </p:selectOneMenu>
         <p:message id="msg_famPlace" for="famPlace"/>
 
     </h:panelGrid>
@@ -62,6 +83,7 @@
         <h:panelGrid columns="2">
 
             <h:outputText value="#{bundle.ViewFamTeamLabel_idTeam}"/>
+            <!--@elvariable id="bean" type="org.fam.ejb.model.FamTeam"-->
             <h:outputText value="#{bean.idTeam}"
                           title="#{bundle.ViewFamTeamTitle_idTeam}"/>
 

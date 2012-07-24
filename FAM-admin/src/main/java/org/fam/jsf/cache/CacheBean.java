@@ -6,6 +6,7 @@ package org.fam.jsf.cache;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.fam.ejb.model.FamCategory;
 import org.fam.ejb.model.FamCity;
 import org.fam.ejb.model.FamClub;
 import org.fam.ejb.model.FamCountry;
@@ -25,6 +26,7 @@ import org.fam.ejb.model.FamTypCompetition;
 import org.fam.ejb.model.FamTypEvent;
 import org.fam.ejb.model.FamTypMatch;
 import org.fam.ejb.model.FamTypPlace;
+import org.fam.ejb.session.FamCategoryFacade;
 import org.fam.ejb.session.FamCityFacade;
 import org.fam.ejb.session.FamClubFacade;
 import org.fam.ejb.session.FamCountryFacade;
@@ -156,6 +158,10 @@ public class CacheBean {
     @Inject
     private FamFormationFacade ejbFormation;
     private final List<FamFormation> listFormation = new ArrayList<FamFormation>();
+    // CATEGORY
+    @Inject
+    private FamCategoryFacade ejbCategory;
+    private final List<FamCategory> listCategory = new ArrayList<FamCategory>();
     //
     @Inject
     private Bootstrap bootstrap;
@@ -308,6 +314,8 @@ public class CacheBean {
         loadAllCities();
         //FORMATION
         loadAllFormations();
+        //CATEGORY
+        loadAllCategories();
 
     }
 
@@ -465,6 +473,14 @@ public class CacheBean {
 
         for (FamFormation o : ejbFormation.findAll()) {
             listFormation.add(o);
+        }
+    }
+
+    private void loadAllCategories() {
+        listCategory.clear();
+
+        for (FamCategory o : ejbCategory.findAll()) {
+            listCategory.add(o);
         }
     }
 

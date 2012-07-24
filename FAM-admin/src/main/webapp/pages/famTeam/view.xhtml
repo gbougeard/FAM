@@ -8,7 +8,7 @@
         xmlns:f="http://java.sun.com/jsf/core"
         xmlns:p="http://primefaces.org/ui"
         >
-
+    <!--@elvariable id="bean" type="org.fam.ejb.model.FamTeam"-->
     <p:tabView>
         <p:tab title="Resumé">
             <h:panelGrid columns="2">
@@ -21,9 +21,13 @@
                 <h:outputText value="#{bean.famPlace.libPlace}"
                               title="#{bundle.ViewFamTeamTitle_famPlace}"/>
 
-                <!--<h:outputText value="#{bundle.ViewFamTeamLabel_famClub}"/>-->
-                <!--<h:outputText value="#{bean.famClub.libClub}"-->
-                <!--title="#{bundle.ViewFamTeamTitle_famClub}"/>-->
+                <h:outputText value="#{bundle.ViewFamTeamLabel_famClub}"/>
+                <h:outputText value="#{bean.famClub.libClub}"
+                              title="#{bundle.ViewFamTeamTitle_famClub}"/>
+
+                <h:outputText value="#{bundle.ViewFamTeamLabel_famCategory}"/>
+                <h:outputText value="#{bean.famCategory.libCategory}"
+                              title="#{bundle.ViewFamTeamTitle_famClub}"/>
 
                 <h:outputText value="#{bundle.ViewFamTeamLabel_codTeam}"/>
                 <h:outputText value="#{bean.codTeam}"

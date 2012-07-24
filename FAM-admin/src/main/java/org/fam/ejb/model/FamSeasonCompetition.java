@@ -5,7 +5,25 @@ package org.fam.ejb.model;
  * and open the template in the editor.
  */
 
-import javax.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.PostLoad;
+import javax.persistence.PostPersist;
+import javax.persistence.PostUpdate;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
@@ -13,6 +31,8 @@ import java.util.List;
 /**
  * @author mask_hot
  */
+@Getter
+@Setter
 @Entity
 @Table(name = FamSeasonCompetition.TABLE_NAME)
 @NamedQueries({
@@ -27,14 +47,8 @@ public class FamSeasonCompetition extends FamEntity implements Serializable {
      */
     public static final String TABLE_NAME = "fam_season_competition";
     //
-    /**
-     *
-     */
-    public static final String PROP_ID = "idSeasonCompetition";
-    /**
-     *
-     */
     public static final String COL_ID = "id_season_competition";
+    public static final String PROP_ID = "idSeasonCompetition";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = COL_ID)
@@ -50,10 +64,7 @@ public class FamSeasonCompetition extends FamEntity implements Serializable {
      *
      */
     public static final String COL_ID_COMPETITION = FamTypCompetition.COL_ID;
-    /**
-     *
-     */
-    public static final String PROP_COMPETITION = "famCompetition";
+    public static final String PROP_COMPETITION = "famTypCompetition";
     @ManyToOne
     @JoinColumn(name = COL_ID_COMPETITION, referencedColumnName = FamTypCompetition.COL_ID)
     @NotNull
@@ -63,14 +74,18 @@ public class FamSeasonCompetition extends FamEntity implements Serializable {
      *
      */
     public static final String COL_ID_SEASON = FamSeason.COL_ID;
-    /**
-     *
-     */
     public static final String PROP_SEASON = "famSeason";
     @ManyToOne
     @JoinColumn(name = COL_ID_SEASON, referencedColumnName = FamSeason.COL_ID)
     @NotNull
     private FamSeason famSeason;
+
+    public static final String COL_ID_CATEGORY = "id_category";
+    public static final String PROP_CATEGORY = "famCategory";
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = COL_ID_CATEGORY, referencedColumnName = FamCategory.COL_ID)
+    private FamCategory famCategory;
     //
     @Transient
     private String displayName;
@@ -109,111 +124,7 @@ public class FamSeasonCompetition extends FamEntity implements Serializable {
     public FamSeasonCompetition() {
     }
 
-    /**
-     * @param idSeasonCompetition
-     */
-    public FamSeasonCompetition(Long idSeasonCompetition) {
-        this.idSeasonCompetition = idSeasonCompetition;
-    }
 
-    /**
-     * @return
-     */
-    public Long getIdSeasonCompetition() {
-        return idSeasonCompetition;
-    }
-
-    /**
-     * @param idSeasonCompetition
-     */
-    public void setIdSeasonCompetition(Long idSeasonCompetition) {
-        this.idSeasonCompetition = idSeasonCompetition;
-    }
-
-    /**
-     * @return
-     */
-    public FamTypCompetition getFamTypCompetition() {
-        return famTypCompetition;
-    }
-
-    /**
-     * @param famCompetition
-     */
-    public void setFamTypCompetition(FamTypCompetition famCompetition) {
-        this.famTypCompetition = famCompetition;
-    }
-
-    /**
-     * @return
-     */
-    public String getDisplayName() {
-        return displayName;
-    }
-
-    /**
-     * @param displayName
-     */
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
-    }
-
-    /**
-     * @return
-     */
-    public FamSeason getFamSeason() {
-        return famSeason;
-    }
-
-    /**
-     * @param famSeason
-     */
-    public void setFamSeason(FamSeason famSeason) {
-        this.famSeason = famSeason;
-    }
-
-    /**
-     * @return
-     */
-    public List<FamTeam> getFamTeamList() {
-        return famTeamList;
-    }
-
-    /**
-     * @param famTeamList
-     */
-    public void setFamTeamList(List<FamTeam> famTeamList) {
-        this.famTeamList = famTeamList;
-    }
-
-    /**
-     * @return
-     */
-    public FamScale getFamScale() {
-        return famScale;
-    }
-
-    /**
-     * @param famScale
-     */
-    public void setFamScale(FamScale famScale) {
-        this.famScale = famScale;
-    }
-
-    /**
-     *
-     * @return
-     */
-//    public List<FamTypCardFinescale> getFamTypCardFinescaleList() {
-//        return famTypCardFinescaleList;
-//    }
-
-    /**
-     * @param famTypCardFinescaleList
-     */
-//    public void setFamTypCardFinescaleList(List<FamTypCardFinescale> famTypCardFinescaleList) {
-//        this.famTypCardFinescaleList = famTypCardFinescaleList;
-//    }
     @Override
     public int hashCode() {
         int hash = 0;
@@ -234,6 +145,18 @@ public class FamSeasonCompetition extends FamEntity implements Serializable {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "FamSeasonCompetition{" +
+                "idSeasonCompetition=" + idSeasonCompetition +
+                ", famTypCompetition=" + famTypCompetition +
+                ", famSeason=" + famSeason +
+                ", famCategory=" + famCategory +
+                ", displayName='" + displayName + '\'' +
+                ", famTeamList=" + famTeamList +
+                ", famScale=" + famScale +
+                '}';
+    }
 
     @PostLoad
     @PostPersist

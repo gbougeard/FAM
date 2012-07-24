@@ -774,4 +774,34 @@
         <pattern value="c"/>
         <view-id value="/pages/famWorkout/Create.xhtml"/>
     </url-mapping>
+
+    <!--    CATEGORY-->
+    <url-mapping id="listCategory">
+        <pattern value="/category/"/>
+        <view-id value="/pages/famCategory/List.xhtml"/>
+        <action onPostback="false">#{famCategoryController.initLazyModel}</action>
+    </url-mapping>
+
+    <url-mapping id="viewCategory" parentId="listCategory">
+        <pattern value="v/#{ id : famCategoryController.id }"/>
+        <view-id value="/pages/famCategory/View.xhtml"/>
+        <action onPostback="false">#{famCategoryController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="editCategory" parentId="listCategory">
+        <pattern value="e/#{ id : famCategoryController.id }"/>
+        <view-id value="/pages/famCategory/Edit.xhtml"/>
+        <action onPostback="false">#{famCategoryController.loadAction}</action>
+    </url-mapping>
+
+    <url-mapping id="debriefCategory" parentId="listCategory">
+        <pattern value="debrief/#{ id : famCategoryController.id }"/>
+        <view-id value="/pages/famCategory/Debrief.xhtml"/>
+        <action onPostback="false">#{famCategoryController.loadForDebrief}</action>
+    </url-mapping>
+
+    <url-mapping id="createCategory" parentId="listCategory">
+        <pattern value="c"/>
+        <view-id value="/pages/famCategory/Create.xhtml"/>
+    </url-mapping>
 </pretty-config>

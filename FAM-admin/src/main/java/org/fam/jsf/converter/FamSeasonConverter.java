@@ -9,42 +9,36 @@ import org.fam.jsf.controller.FamSeasonController;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
 /**
  * @author gregory.bougeard
  */
-@FacesConverter(forClass = FamSeason.class)
-public class FamSeasonConverter extends AbstractConverter<FamSeasonController> {
+@FacesConverter(forClass = FamSeason.class, value = "seasonConverter")
+public class FamSeasonConverter implements Converter {
 
-//    @Override
-//    public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
-//        if (value == null || value.length() == 0) {
-//            return null;
-//        }
-//
-//        FamSeasonController controller = (FamSeasonController) facesContext.getApplication().getELResolver().
-//                getValue(facesContext.getELContext(), null, "famSeasonController");
-//        return controller.getEjbFacade().find(getKey(value));
-////        Long key = getKey(value);
-////        Object o = org.fam.ejb.find(key);
-////        return o;
-//    }
-//
-//    Long getKey(String value) {
-//        Long key;
-//        key = Long.valueOf(value);
-//        return key;
-//    }
-//
-//    String getStringKey(Long value) {
-//        StringBuilder sb = new StringBuilder();
-//        sb.append(value);
-//        return sb.toString();
-//    }
+    @Override
+    public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
+        if (value == null || value.length() == 0) {
+            return null;
+        }
 
-    public FamSeasonConverter() {
-        super(FamSeasonController.class);
+        FamSeasonController controller = (FamSeasonController) facesContext.getApplication().getELResolver().
+                getValue(facesContext.getELContext(), null, "famSeasonController");
+        return controller.getEjbFacade().find(getKey(value));
+    }
+
+    Long getKey(String value) {
+        Long key;
+        key = Long.valueOf(value);
+        return key;
+    }
+
+    String getStringKey(Long value) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(value);
+        return sb.toString();
     }
 
 

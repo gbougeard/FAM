@@ -15,7 +15,7 @@ import javax.faces.convert.FacesConverter;
 /**
  * @author mask_hot
  */
-@FacesConverter(forClass = FamTypCompetition.class)
+@FacesConverter(forClass = FamTypCompetition.class, value = "typCompetitionConverter")
 public class FamTypCompetitionConverter implements Converter {
 
     @Override

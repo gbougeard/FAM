@@ -20,48 +20,67 @@
      <p:message id="msg_idSeasonCompetition" for="idSeasonCompetition"/> -->
 
         <h:outputLabel value="#{bundle.EditFamSeasonCompetitionLabel_famCompetition}" for="famCompetition"/>
-        <h:selectOneMenu id="famCompetition"
+        <!--@elvariable id="bean" type="org.fam.ejb.model.FamSeasonCompetition"-->
+        <p:selectOneMenu id="famCompetition"
                          value="#{bean.famTypCompetition}"
                          title="#{bundle.EditFamSeasonCompetitionTitle_famCompetition}"
+                         converter="typCompetitionConverter"
                 >
             <f:selectItem itemLabel="TypCompetition"
-                          noSelectionOption="true"/>
+                          itemValue=""/>
             <f:selectItems value="#{cacheBean.listTypCompetition}"
                            var="n"
                            itemValue="#{n}"
                            itemLabel="#{n.libTypCompetition}"/>
             <p:ajax event="blur" update="msg_famCompetition"/>
-        </h:selectOneMenu>
+        </p:selectOneMenu>
         <p:message id="msg_famCompetition" for="famCompetition"/>
 
+        <h:outputLabel value="#{bundle.EditFamTeamLabel_famCategory}" for="famCategory"/>
+        <p:selectOneMenu id="famCategory"
+                         value="#{bean.famCategory}"
+                         title="#{bundle.EditFamTeamTitle_famCategory}"
+                         converter="categoryConverter"
+                >
+            <f:selectItem itemLabel="Category"
+                          itemValue=""/>
+            <f:selectItems value="#{cacheBean.listCategory}"
+                           var="c"
+                           itemValue="#{c}"
+                           itemLabel="#{c.libCategory}"/>
+            <p:ajax event="blur" update="msg_famCategory"/>
+        </p:selectOneMenu>
+        <p:message id="msg_famCategory" for="famCategory"/>
+
         <h:outputLabel value="#{bundle.EditFamSeasonCompetitionLabel_famSeason}" for="famSeason"/>
-        <h:selectOneMenu id="famSeason"
+        <p:selectOneMenu id="famSeason"
                          value="#{bean.famSeason}"
                          title="#{bundle.EditFamSeasonCompetitionTitle_famSeason}"
+                         converter="seasonConverter"
                 >
             <f:selectItem itemLabel="Saison"
-                          noSelectionOption="true"/>
+                          itemValue=""/>
             <f:selectItems value="#{cacheBean.listSeason}"
-                           var="n"
-                           itemValue="#{n}"
-                           itemLabel="#{n.libSeason}"/>
+                           var="s"
+                           itemValue="#{s}"
+                           itemLabel="#{s.libSeason}"/>
             <p:ajax event="blur" update="msg_famSeason"/>
-        </h:selectOneMenu>
+        </p:selectOneMenu>
         <p:message id="msg_famSeason" for="famSeason"/>
 
         <h:outputLabel value="#{bundle.EditFamSeasonCompetitionLabel_famScale}" for="famScale"/>
-        <h:selectOneMenu id="famScale"
+        <p:selectOneMenu id="famScale"
                          value="#{bean.famScale}"
                          title="#{bundle.EditFamSeasonCompetitionTitle_famScale}"
                 >
             <f:selectItem itemLabel="Bareme"
-                          noSelectionOption="true"/>
+                          itemValue=""/>
             <f:selectItems value="#{cacheBean.listScale}"
-                           var="n"
-                           itemValue="#{n}"
-                           itemLabel="#{n.libScale}"/>
+                           var="sc"
+                           itemValue="#{sc}"
+                           itemLabel="#{sc.libScale}"/>
             <p:ajax event="blur" update="msg_famScale"/>
-        </h:selectOneMenu>
+        </p:selectOneMenu>
         <p:message id="msg_famScale" for="famScale"/>
 
     </h:panelGrid>

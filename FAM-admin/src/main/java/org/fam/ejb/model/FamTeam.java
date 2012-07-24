@@ -5,9 +5,25 @@ package org.fam.ejb.model;
  * and open the template in the editor.
  */
 
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
@@ -16,6 +32,8 @@ import java.util.List;
 /**
  * @author mask_hot
  */
+@Getter
+@Setter
 @Entity
 @Table(name = FamTeam.TABLE_NAME,
         uniqueConstraints = {
@@ -51,9 +69,6 @@ public class FamTeam extends FamEntity implements Serializable {
      *
      */
     public static final String PROP_ID = "idTeam";
-    /**
-     *
-     */
     public static final String COL_ID = "id_team";
 
     @Id
@@ -70,9 +85,6 @@ public class FamTeam extends FamEntity implements Serializable {
      *
      */
     public static final String COL_LIB = "lib_team";
-    /**
-     *
-     */
     public static final String PROP_LIB = "libTeam";
     @Basic(optional = false)
     @NotEmpty(message = "Libellé obligatoire")
@@ -83,9 +95,6 @@ public class FamTeam extends FamEntity implements Serializable {
      *
      */
     public static final String COL_COD = "cod_team";
-    /**
-     *
-     */
     public static final String PROP_COD = "codTeam";
     @Basic(optional = false)
     @NotEmpty(message = "Code obligatoire")
@@ -96,9 +105,6 @@ public class FamTeam extends FamEntity implements Serializable {
      *
      */
     public static final String COL_ID_PLACE = "id_place";
-    /**
-     *
-     */
     public static final String PROP_PLACE = "famPlace";
     @ManyToOne
     @JoinColumn(name = COL_ID_PLACE, referencedColumnName = FamPlace.COL_ID)
@@ -108,14 +114,18 @@ public class FamTeam extends FamEntity implements Serializable {
      *
      */
     public static final String COL_ID_CLUB = "id_club";
-    /**
-     *
-     */
     public static final String PROP_CLUB = "famClub";
     @NotNull
     @ManyToOne
-    @JoinColumn(name = COL_ID_CLUB, referencedColumnName = FamClub.COL_ID, insertable = false, updatable = false)
+    @JoinColumn(name = COL_ID_CLUB, referencedColumnName = FamClub.COL_ID)
     private FamClub famClub;
+
+    public static final String COL_ID_CATEGORY = "id_category";
+    public static final String PROP_CATEGORY = "famCategory";
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = COL_ID_CATEGORY, referencedColumnName = FamCategory.COL_ID)
+    private FamCategory famCategory;
     //
     @ManyToMany
     @JoinTable(name = FamCompetitionTeam.TABLE_NAME,
@@ -145,152 +155,57 @@ public class FamTeam extends FamEntity implements Serializable {
     public FamTeam() {
     }
 
-    /**
-     * @param idTeam
-     */
-    public FamTeam(Long idTeam) {
-        this.idTeam = idTeam;
-    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
 
-    /**
-     * @return
-     */
-    public Long getIdTeam() {
-        return idTeam;
-    }
+        FamTeam famTeam = (FamTeam) o;
 
-    /**
-     * @param idTeam
-     */
-    public void setIdTeam(Long idTeam) {
-        this.idTeam = idTeam;
-    }
+        if (!codTeam.equals(famTeam.codTeam)) {
+            return false;
+        }
+        if (idTeam != null ? !idTeam.equals(famTeam.idTeam) : famTeam.idTeam != null) {
+            return false;
+        }
+        if (!libTeam.equals(famTeam.libTeam)) {
+            return false;
+        }
 
-    /**
-     * @return
-     */
-    public String getLibTeam() {
-        return libTeam;
-    }
-
-    /**
-     * @param libTeam
-     */
-    public void setLibTeam(String libTeam) {
-        this.libTeam = libTeam;
-    }
-
-    /**
-     * @return
-     */
-    public FamPlace getFamPlace() {
-        return famPlace;
-    }
-
-    /**
-     * @param famPlace
-     */
-    public void setFamPlace(FamPlace famPlace) {
-        this.famPlace = famPlace;
-    }
-
-    /**
-     * @return
-     */
-//    public FamClub getFamClub() {
-//        return famClub;
-//    }
-//
-//    /**
-//     * @param famClub
-//     */
-//    public void setFamClub(FamClub famClub) {
-//        this.famClub = famClub;
-//    }
-
-    /**
-     * @return
-     */
-    public List<FamMatchTeam> getFamMatchTeamList() {
-        return famMatchTeamList;
-    }
-
-    /**
-     * @param famMatchTeamList
-     */
-    public void setFamMatchTeamList(List<FamMatchTeam> famMatchTeamList) {
-        this.famMatchTeamList = famMatchTeamList;
+        return true;
     }
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (idTeam != null ? idTeam.hashCode() : 0);
-        return hash;
+        int result = super.hashCode();
+        result = 31 * result + (idTeam != null ? idTeam.hashCode() : 0);
+        result = 31 * result + libTeam.hashCode();
+        result = 31 * result + codTeam.hashCode();
+        return result;
     }
-
-    /**
-     * @return
-     */
-    public String getCodTeam() {
-        return codTeam;
-    }
-
-    /**
-     * @param codTeam
-     */
-    public void setCodTeam(String codTeam) {
-        this.codTeam = codTeam;
-    }
-
-    /**
-     * @return
-     */
-    public List<FamSeasonCompetition> getFamCompetitionList() {
-        return famCompetitionList;
-    }
-
-    /**
-     * @param famCompetitionList
-     */
-    public void setFamCompetitionList(List<FamSeasonCompetition> famCompetitionList) {
-        this.famCompetitionList = famCompetitionList;
-    }
-
-    /**
-     * @return
-     */
-    public List<FamEvent> getFamEventList() {
-        return famEventList;
-    }
-
-    /**
-     * @param famEventList
-     */
-    public void setFamEventList(List<FamEvent> famEventList) {
-        this.famEventList = famEventList;
-    }
-
-    public List<FamPlayerSeason> getFamPlayerSeasonList() {
-        return famPlayerSeasonList;
-    }
-
-    public void setFamPlayerSeasonList(List<FamPlayerSeason> famPlayerSeasonList) {
-        this.famPlayerSeasonList = famPlayerSeasonList;
-    }
-
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof FamTeam)) {
-            return false;
-        }
-        FamTeam other = (FamTeam) object;
-        if ((this.idTeam == null && other.idTeam != null) || (this.idTeam != null && !this.idTeam.equals(other.idTeam))) {
-            return false;
-        }
-        return true;
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        sb.append("FamTeam");
+        sb.append("{idTeam=").append(idTeam);
+        sb.append(", libTeam='").append(libTeam).append('\'');
+        sb.append(", codTeam='").append(codTeam).append('\'');
+        sb.append(", famPlace=").append(famPlace);
+        sb.append(", famClub=").append(famClub);
+        sb.append(", famCategory=").append(famCategory);
+//        sb.append(", famCompetitionList=").append(famCompetitionList);
+//        sb.append(", famEventList=").append(famEventList);
+//        sb.append(", famMatchTeamList=").append(famMatchTeamList);
+//        sb.append(", famPlayerSeasonList=").append(famPlayerSeasonList);
+        sb.append('}');
+        return sb.toString();
     }
-
 }

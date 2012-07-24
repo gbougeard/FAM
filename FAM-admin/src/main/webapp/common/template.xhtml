@@ -130,6 +130,10 @@
             <p:layoutUnit id="center"
                           position="center"
                     >
+                <h:form id="frmMsg">
+                    <p:messages id="messages" showDetail="true" autoUpdate="true"/>
+                    <p:growl id="growl" showDetail="true" autoUpdate="true"/>
+                </h:form>
                 <ui:include src="navigation.xhtml"/>
                 <ui:insert name="body">Contenu par défaut</ui:insert>
             </p:layoutUnit>

@@ -10,6 +10,7 @@
 
     <h:panelGrid columns="2">
 
+        <!--@elvariable id="bean" type="org.fam.ejb.model.FamSeasonCompetition"-->
 
         <h:outputText value="#{bundle.ViewFamSeasonCompetitionLabel_displayName}"/>
         <h:outputText value="#{bean.displayName}"
@@ -18,6 +19,10 @@
         <h:outputText value="#{bundle.ViewFamSeasonCompetitionLabel_famCompetition}"/>
         <h:outputText value="#{bean.famTypCompetition.libTypCompetition}"
                       title="#{bundle.ViewFamSeasonCompetitionTitle_famCompetition}"/>
+
+        <h:outputText value="#{bundle.ViewFamSeasonCompetitionLabel_famCategory}"/>
+        <h:outputText value="#{bean.famCategory.libCategory}"
+                      title="#{bundle.ViewFamSeasonCompetitionTitle_famCategory}"/>
 
         <h:outputText value="#{bundle.ViewFamSeasonCompetitionLabel_famSeason}"/>
         <h:outputText value="#{bean.famSeason.libSeason}"

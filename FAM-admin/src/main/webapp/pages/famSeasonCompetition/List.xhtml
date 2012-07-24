@@ -19,6 +19,7 @@
         <h:form>
             <p:panel header="#{bundle.FamSeasonCompetition}">
 
+                <!--@elvariable id="item" type="org.fam.ejb.model.FamSeasonCompetition"-->
                 <p:dataTable
                         value="#{famSeasonCompetitionController.lazyModel}"
                         lazy="true"
@@ -88,6 +89,11 @@
                               filterBy="#{item.famTypCompetition.libTypCompetition}"
                               headerText="#{bundle.ListFamSeasonCompetitionTitle_famCompetition}">
                         <h:outputText value="#{item.famTypCompetition.libTypCompetition}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.famCategory.libCategory}"
+                              filterBy="#{item.famCategory.libCategory}"
+                              headerText="#{bundle.ListFamSeasonCompetitionTitle_famCategory}">
+                        <h:outputText value="#{item.famCategory.libCategory}"/>
                     </p:column>
                     <p:column sortBy="#{item.famSeason.libSeason}"
                               filterBy="#{item.famSeason.libSeason}"

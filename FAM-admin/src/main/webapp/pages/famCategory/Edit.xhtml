@@ -5,32 +5,23 @@
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:f="http://java.sun.com/jsf/core"
         xmlns:p="http://primefaces.org/ui"
         template="/common/template.xhtml">
 
-    <f:metadata>
-        <f:viewParam name="id" value="#{famTeamController.id}"/>
-        <f:event type="preRenderView" listener="#{famTeamController.loadAction}"/>
-    </f:metadata>
-
     <ui:define name="title">
-        <h:outputText value="#{bundle.EditFamTeamTitle}"/>
+        <h:outputText value="#{bundle.EditFamCategoryTitle}"/>
     </ui:define>
-
     <ui:define name="body">
         <h:form>
-            <p:panel header="#{bundle.EditFamTeamTitle} - #{famTeamController.selected.libTeam}">
-
+            <p:panel header="#{bundle.EditFamCategoryTitle}">
                 <ui:include src="form.xhtml">
-                    <ui:param name="bean" value="#{famTeamController.selected}"/>
+                    <ui:param name="bean" value="#{famCategoryController.selected}"/>
                 </ui:include>
-                <br/>
-                <p:commandButton value="#{bundle.EditFamTeamSaveLink}"
-                                 action="#{famTeamController.update}"
+                <p:commandButton value="#{bundle.SaveLink}"
+                                 action="#{famCategoryController.update}"
                         />
                 <p:commandButton value="#{bundle.CancelLink}"
-                                 action="#{famTeamController.prepareList}"
+                                 action="#{famCategoryController.prepareList}"
                                  immediate="true"/>
             </p:panel>
         </h:form>

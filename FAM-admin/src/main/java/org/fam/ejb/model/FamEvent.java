@@ -11,7 +11,27 @@ import org.fam.ejb.listener.FamEventEntityListener;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.joda.time.DateTime;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.PostLoad;
+import javax.persistence.PostPersist;
+import javax.persistence.PostUpdate;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
@@ -97,9 +117,6 @@ public class FamEvent extends FamEntity implements Serializable {
      *
      */
     public static final String PROP_DT_EVENT = "dtEvent";
-    /**
-     *
-     */
     public static final String COL_DT_EVENT = "dt_event";
     @Basic(optional = false)
     @Column(name = COL_DT_EVENT)
@@ -120,9 +137,6 @@ public class FamEvent extends FamEntity implements Serializable {
      *
      */
     public static final String COL_ID_TYP = "id_typ_event";
-    /**
-     *
-     */
     public static final String PROP_TYP = "famTypEvent";
     @JoinColumn(name = COL_ID_TYP, referencedColumnName = FamTypEvent.COL_ID)
     @ManyToOne
@@ -133,9 +147,6 @@ public class FamEvent extends FamEntity implements Serializable {
      *
      */
     public static final String COL_ID_PLACE = "id_place";
-    /**
-     *
-     */
     public static final String PROP_PLACE = "famPlace";
     @JoinColumn(name = COL_ID_PLACE, referencedColumnName = FamPlace.COL_ID)
     @ManyToOne
@@ -153,9 +164,6 @@ public class FamEvent extends FamEntity implements Serializable {
      *
      */
     public static final String COL_ID_STATUS = "id_eventStatus";
-    /**
-     *
-     */
     public static final String PROP_STATUS = "famEventStatus";
     @JoinColumn(name = COL_ID_STATUS, referencedColumnName = FamEventStatus.COL_ID)
     @ManyToOne

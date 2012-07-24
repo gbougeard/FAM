@@ -5,6 +5,7 @@
 package org.fam.jsf.bootstrap;
 
 import org.fam.common.constant.FamConstantes;
+import org.fam.ejb.model.FamCategory;
 import org.fam.ejb.model.FamClub;
 import org.fam.ejb.model.FamEvent;
 import org.fam.ejb.model.FamEventStatus;
@@ -26,6 +27,7 @@ import org.fam.ejb.model.FamTypMatch;
 import org.fam.ejb.model.FamTypPlace;
 import org.fam.ejb.model.FamUser;
 import org.fam.ejb.model.FamWorkout;
+import org.fam.ejb.session.FamCategoryFacade;
 import org.fam.ejb.session.FamCityFacade;
 import org.fam.ejb.session.FamClubFacade;
 import org.fam.ejb.session.FamCountryFacade;
@@ -168,6 +170,10 @@ public class Bootstrap implements Serializable {
     @Inject
     private FamWorkoutFacade ejbWorkout;
     private final List<FamWorkout> listWorkout = new ArrayList<FamWorkout>();
+    // CATEGORY
+    @Inject
+    private FamCategoryFacade ejbCategory;
+    private final List<FamCategory> listCategory = new ArrayList<FamCategory>();
     // COUNTRY
     @Inject
     private FamCountryFacade ejbCountry;
@@ -232,6 +238,10 @@ public class Bootstrap implements Serializable {
         // TYP_CARD
         ejbTypCard.initData();
         logMsg("TypCard");
+        progress++;
+        // CATEGORY
+        ejbCategory.genData();
+        logMsg("Category");
         progress++;
         // SCALE
         ejbScale.initData();
