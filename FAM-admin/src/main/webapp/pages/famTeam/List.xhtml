@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition
+<html
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:f="http://java.sun.com/jsf/core"
         xmlns:p="http://primefaces.org/ui"
-        template="/common/template.xhtml">
+        >
+<ui:composition
+        template="${pageContext.request.servletPath}/common/template.xhtml">
 
     <ui:define name="title">
         <h:outputText value="#{bundle.ListFamTeamTitle}"/>
@@ -16,9 +18,10 @@
         <h:form>
             <p:panel header="#{bundle.FamTeam}">
 
+                <!--@elvariable id="item" type="org.fam.ejb.model.FamTeam"-->
                 <p:dataTable
                         value="#{famTeamController.lazyModel}"
-
+                        lazy="true"
                         var="item"
                         selectionMode="single"
                         selection="#{famTeamController.selected}"
@@ -30,11 +33,11 @@
                         emptyMessage="#{bundle.NoDataFound}"
                         paginatorAlwaysVisible="false"
                         >
-                    <p:ajax event="rowSelect" update="tb sel1 sel2"/>
-                    <p:ajax event="rowUnselect" update="tb sel1 sel2"/>
+                    <p:ajax event="rowSelect" update="tb"/>
+                    <p:ajax event="rowUnselect" update="tb"/>
                     <f:facet name="header">
-                        <h:outputText id="sel1" value="#{empty famTeamController.selected.idTeam}"/>
-                        <h:outputText id="sel2" value="#{famTeamController.id}"/>
+                        <!--<h:outputText id="sel1" value="#{empty famTeamController.selected.idTeam}"/>-->
+                        <!--<h:outputText id="sel2" value="#{famTeamController.id}"/>-->
                         <p:toolbar id="tb">
                             <p:toolbarGroup align="left">
                                 <p:commandButton type="push"
@@ -111,4 +114,6 @@
         </h:form>
     </ui:define>
 </ui:composition>
+</html>
+
 

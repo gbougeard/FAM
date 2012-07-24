@@ -2,7 +2,12 @@ package org.fam.jsf.bean;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.fam.ejb.model.*;
+import org.fam.ejb.model.FamAnswer;
+import org.fam.ejb.model.FamFormationItem;
+import org.fam.ejb.model.FamMatchPlayer;
+import org.fam.ejb.model.FamMatchTeam;
+import org.fam.ejb.model.FamPlayer;
+import org.fam.ejb.model.FamTeam;
 import org.primefaces.model.DualListModel;
 
 import javax.enterprise.inject.Model;
@@ -47,6 +52,7 @@ public class TeamComposition implements Serializable {
 
     //
     private FamPlayerDataModel playerDM;
+
 
     public List<FamPlayer> getPreselectedLst() {
         preselectedLst.clear();

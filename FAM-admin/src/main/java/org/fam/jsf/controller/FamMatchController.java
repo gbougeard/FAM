@@ -5,8 +5,29 @@ import lombok.Setter;
 import org.fam.common.cdi.Loggable;
 import org.fam.common.cdi.LoggedIn;
 import org.fam.common.cdi.Player;
-import org.fam.ejb.model.*;
-import org.fam.ejb.session.*;
+import org.fam.ejb.model.FamAnswer;
+import org.fam.ejb.model.FamCard;
+import org.fam.ejb.model.FamClub;
+import org.fam.ejb.model.FamEvent;
+import org.fam.ejb.model.FamFixture;
+import org.fam.ejb.model.FamGoal;
+import org.fam.ejb.model.FamMatch;
+import org.fam.ejb.model.FamMatchPlayer;
+import org.fam.ejb.model.FamMatchTeam;
+import org.fam.ejb.model.FamPlayer;
+import org.fam.ejb.model.FamSubstitution;
+import org.fam.ejb.model.FamTeam;
+import org.fam.ejb.model.FamUser;
+import org.fam.ejb.session.FamAnswerFacade;
+import org.fam.ejb.session.FamCardFacade;
+import org.fam.ejb.session.FamEventFacade;
+import org.fam.ejb.session.FamFixtureFacade;
+import org.fam.ejb.session.FamGoalFacade;
+import org.fam.ejb.session.FamMatchFacade;
+import org.fam.ejb.session.FamMatchPlayerFacade;
+import org.fam.ejb.session.FamMatchTeamFacade;
+import org.fam.ejb.session.FamSubstitutionFacade;
+import org.fam.ejb.session.FamTeamFacade;
 import org.fam.jsf.bean.CanvasFormationItem;
 import org.fam.jsf.bean.FamPlayerDataModel;
 import org.fam.jsf.bean.TeamComposition;
@@ -23,6 +44,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.component.UIComponent;
 import javax.faces.event.ValueChangeEvent;
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -111,6 +133,9 @@ public class FamMatchController extends AbstractController<FamMatch> {
     private int nbTit;
     private int nbSub;
     private int nbPlayers;
+
+    private UIComponent userListComponent = null;
+
 //    //
 //    private FamPlayerDataModel playerDM;
 
@@ -419,7 +444,7 @@ public class FamMatchController extends AbstractController<FamMatch> {
     }
 
     public void onSubDrop(DragDropEvent ddEvent) {
-
+        LOGGER.info("onSubDrop");
         FamPlayer player = ((FamPlayer) ddEvent.getData());
 
         String strNum = (String) ddEvent.getComponent().getAttributes().get("num");

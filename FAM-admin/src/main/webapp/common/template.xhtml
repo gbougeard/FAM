@@ -68,15 +68,15 @@
         </script>
         <!--            <f:loadBundle basename="org.brickred.socialauthseam.bundle.MessageResources" var="msg"/>-->
         <!--<style type="text/css">-->
-            <!--.ui-widget {-->
-                <!--font-size: 75%;-->
-            <!--}-->
+        <!--.ui-widget {-->
+        <!--font-size: 75%;-->
+        <!--}-->
 
-            <!--.themeMenu {-->
-                <!--overflow: auto;-->
-                <!--height: 300px;-->
-                <!--width: 200px;-->
-            <!--}-->
+        <!--.themeMenu {-->
+        <!--overflow: auto;-->
+        <!--height: 300px;-->
+        <!--width: 200px;-->
+        <!--}-->
 
         <!--</style>-->
 
@@ -108,11 +108,11 @@
                 <!--                    <ui:include src="menu.xhtml"/>-->
             </p:layoutUnit>
 
-            <p:layoutUnit id="south"
+            <!--<p:layoutUnit id="south"
                           position="south"
                           size="60">
                 <ui:include src="footer.xhtml"/>
-            </p:layoutUnit>
+            </p:layoutUnit>-->
 
             <p:layoutUnit id="west"
                           position="west"
@@ -121,7 +121,7 @@
                 <ui:include src="navigation.xhtml"/>
             </p:layoutUnit>
 
-            <p:layoutUnit position="east" size="200">
+            <p:layoutUnit position="east" size="20">
 
 
             </p:layoutUnit>
@@ -129,10 +129,7 @@
             <p:layoutUnit id="center"
                           position="center"
                     >
-                <h:form>
-                    <p:messages id="messages" showDetail="true" autoUpdate="true"/>
-                    <p:growl id="growl" showDetail="true" autoUpdate="true"/>
-                </h:form>
+
                 <ui:insert name="body">Contenu par défaut</ui:insert>
             </p:layoutUnit>
 

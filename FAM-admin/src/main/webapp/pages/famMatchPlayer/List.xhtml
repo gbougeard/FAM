@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition
+<html
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:f="http://java.sun.com/jsf/core"
         xmlns:p="http://primefaces.org/ui"
-        template="/common/template.xhtml">
+        >
+<ui:composition
+        template="${pageContext.request.servletPath}/common/template.xhtml">
 
     <ui:define name="title">
-        <h:outputText value="#{bundle.ListFamMatchPlayerTitle}"></h:outputText>
+        <h:outputText value="#{bundle.ListFamMatchPlayerTitle}"/>
     </ui:define>
     <ui:define name="body">
         <h:form>
             <p:panel header="#{bundle.FamMatchPlayer}">
 
+                <!--@elvariable id="item" type="org.fam.ejb.model.FamMatchPlayer-->
                 <p:dataTable
                         value="#{famMatchPlayerController.lazyModel}"
-
+                        lazy="true"
                         var="item"
                         selection="#{famMatchPlayerController.selected}"
                         selectionMode="single"
@@ -38,7 +41,7 @@
                                                  icon="ui-icon-document"
                                                  value="#{bundle.ListFamMatchPlayerViewLink}"
                                                  action="#{famMatchPlayerController.prepareView}"
-                                                 disabled="#{empty famMatchController.selected.famMatchTeam}"/>
+                                                 disabled="#{empty famMatchController.selected.id}"/>
                                 <p:commandButton type="push"
                                                  icon="ui-icon-document"
                                                  value="#{bundle.ListFamMatchPlayerCreateLink}"
@@ -47,12 +50,12 @@
                                                  icon="ui-icon-document"
                                                  value="#{bundle.ListFamMatchPlayerEditLink}"
                                                  action="#{famMatchPlayerController.prepareEdit}"
-                                                 disabled="#{empty famMatchController.selected.famMatchTeam}"/>
+                                                 disabled="#{empty famMatchController.selected.id}"/>
                                 <p:commandButton type="push"
                                                  icon="ui-icon-document"
                                                  value="#{bundle.PlayerDeleteLink}"
                                                  action="#{famMatchPlayerController.prepareDelete}"
-                                                 disabled="#{empty famMatchController.selected.famMatchTeam}"/>
+                                                 disabled="#{empty famMatchController.selected.id}"/>
                             </p:toolbarGroup>
                         </p:toolbar>
                     </f:facet>
@@ -85,4 +88,4 @@
         </h:form>
     </ui:define>
 </ui:composition>
-
+</html>

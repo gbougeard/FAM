@@ -25,13 +25,14 @@
         <!--droppedCar.fadeOut('fast');-->
         <!--}-->
         <!--</script>-->
-        <h:form id="myForm">
+        <h:form id="myForm" prependId="false">
 
             <p:panel
                     header="#{famMatchController.selected.famEvent.libEvent}"
                     style="height:500px;">
                 <p:tabView id="tabsTeam" value="#{famMatchController.lstTeamComposition}" var="tc">
-                    <p:tab title="#{tc.famTeam.libTeam}">
+                    <p:tab title="#{tc.famTeam.libTeam} #{tc.famMatchTeam.home ? 'Home' : 'Away'}"
+                           rendered="#{tc.famMatchTeam.home}">
                         <p:tabView id="tabs">
                             <p:tab title="Présélection">
 
@@ -119,7 +120,10 @@
                             <p:tab title="Sélection" id="tab2">
                                 <!--                    <h:form>-->
 
-                                <ui:include src="sub.xhtml"/><!--
+                                <ui:include src="sub.xhtml">
+                                    <ui:param name="idTeam" value="T_#{tc.famTeam.idTeam}"/>
+                                </ui:include>
+                                <!--
                             <ui:param name="list" value="#{famMatchController.preselectedLst}" />
                             <ui:param name="preselection" value="#{true}" />
                             <ui:param name="actionDelete" value="#{famMatchController.deselect}" />

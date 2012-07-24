@@ -4,196 +4,212 @@
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:fn="http://java.sun.com/jsp/jstl/functions"
         xmlns:p="http://primefaces.org/ui"
+        xmlns:pe="http://primefaces.org/ui/extensions"
+
         template="/common/template.xhtml">
 
-    <ui:define name="titre">Test</ui:define>
-    <ui:define name="body">
-        <center>
-            <h:outputText value="#{fn:length(cacheBean.listClub)} clubs"/>
+<ui:define name="titre">Test</ui:define>
+<ui:define name="body">
+<center>
+    <h:outputText value="#{fn:length(cacheBean.listClub)} clubs"/>
 
 
-            <h:form id="loginForm">
+    <h:form id="loginForm">
 
 
-                <!--<h1>Seam Social Security Integration Example</h1>
+        <!--<h1>Seam Social Security Integration Example</h1>
 
-                <h:panelGroup rendered="#{not identity.loggedIn}">
-                    <p>Please select the service Below to connect Seam Social to your
-                        account on the given service</p>
+        <h:panelGroup rendered="#{not identity.loggedIn}">
+            <p>Please select the service Below to connect Seam Social to your
+                account on the given service</p>
 
-                    <ul>
-                        <h:selectOneRadio value="#{oauthAuthenticator.serviceName}">
-                            <f:selectItems value="#{oauthAuthenticator.listOfServices}" var="p" itemValue="#{p}"
-                                           itemLabel="#{p}"/>
-                        </h:selectOneRadio>
+            <ul>
+                <h:selectOneRadio value="#{oauthAuthenticator.serviceName}">
+                    <f:selectItems value="#{oauthAuthenticator.listOfServices}" var="p" itemValue="#{p}"
+                                   itemLabel="#{p}"/>
+                </h:selectOneRadio>
 
-                        <h:commandButton action="#{identity.login}" value="login"/>
-                    </ul>
+                <h:commandButton action="#{identity.login}" value="login"/>
+            </ul>
 
-                </h:panelGroup>-->
+        </h:panelGroup>-->
 
-                <!--<h:panelGroup rendered="#{identity.loggedIn}">
-                    <img src="#{identity.user.userProfile.profileImageUrl}" alt="profil"/>
-                    <h:outputText value="Hello, #{identity.user.userProfile.fullName}!"/>
-                    <h:commandButton action="#{identity.logout}" value="Logout"/>
-                </h:panelGroup>-->
+        <!--<h:panelGroup rendered="#{identity.loggedIn}">
+            <img src="#{identity.user.userProfile.profileImageUrl}" alt="profil"/>
+            <h:outputText value="Hello, #{identity.user.userProfile.fullName}!"/>
+            <h:commandButton action="#{identity.logout}" value="Logout"/>
+        </h:panelGroup>-->
 
-                toto@gmail.com/toto
-                <h:panelGrid columns="2" rendered="#{!login.loggedIn}">
-                    <!--<h:outputLabel value="#{bundle.EditFamTeamLabel_famClub}" for="famClub"/>-->
-                    <!--<h:selectOneMenu id="famClub"-->
-                    <!--value="#{cachePlayer.currentClub}"-->
-                    <!--title="#{bundle.EditFamTeamTitle_famClub}"-->
-                    <!-->-->
-                    <!--<f:selectItem itemLabel="Club"-->
-                    <!--noSelectionOption="true"/>-->
-                    <!--<f:selectItems value="#{cacheBean.listClub}"-->
-                    <!--var="n"-->
-                    <!--itemValue="#{n}"-->
-                    <!--itemLabel="#{n.libClub}"/>-->
-                    <!--</h:selectOneMenu>-->
+        toto@gmail.com/toto
+        <h:panelGrid columns="2" rendered="#{!login.loggedIn}">
+            <!--<h:outputLabel value="#{bundle.EditFamTeamLabel_famClub}" for="famClub"/>-->
+            <!--<h:selectOneMenu id="famClub"-->
+            <!--value="#{cachePlayer.currentClub}"-->
+            <!--title="#{bundle.EditFamTeamTitle_famClub}"-->
+            <!-->-->
+            <!--<f:selectItem itemLabel="Club"-->
+            <!--noSelectionOption="true"/>-->
+            <!--<f:selectItems value="#{cacheBean.listClub}"-->
+            <!--var="n"-->
+            <!--itemValue="#{n}"-->
+            <!--itemLabel="#{n.libClub}"/>-->
+            <!--</h:selectOneMenu>-->
 
-                    <h:outputLabel for="username">Username:</h:outputLabel>
-                    <p:inputText id="username" value="#{famCredentials.username}"/>
-                    <h:outputLabel for="password">Password:</h:outputLabel>
-                    <p:password id="password" value="#{famCredentials.password}"
-                                feedback="false"/>
-                </h:panelGrid>
-                <p:commandButton id="login" value="Login"
-                                 action="#{login.login}"
-                                 rendered="#{!login.loggedIn}"
-                                 update="@form"/>
-                <p:commandButton id="logout" value="Logout"
-                                 action="#{login.logout}"
-                                 rendered="#{login.loggedIn}"
-                                 update="@form "/>
-                <p:commandButton id="openid"
-                                 value="Login with OpenId"
-                                 rendered="#{!login.loggedIn}"
-                                 action="#{login.loginOpenId}"
-                                 update="@form "
-                                 disabled="true"/>
-                <p:commandButton id="openidGoogle"
-                                 value="Login with Google"
-                                 rendered="#{!login.loggedIn}"
-                                 action="#{login.signinOpenidGoogle}"
-                                 update="@form "
-                                 immediate="true"/>
-                <p:commandButton id="openidYahoo"
-                                 value="Login with Yahoo"
-                                 rendered="#{!login.loggedIn}"
-                                 action="#{login.signinOpenidYahoo}"
-                                 update="@form "
-                                 disabled="true"/>
+            <h:outputLabel for="username">Username:</h:outputLabel>
+            <p:inputText id="username" value="#{famCredentials.username}"/>
+            <h:outputLabel for="password">Password:</h:outputLabel>
+            <p:password id="password" value="#{famCredentials.password}"
+                        feedback="false"/>
+        </h:panelGrid>
+        <p:commandButton id="login" value="Login"
+                         action="#{login.login}"
+                         rendered="#{!login.loggedIn}"
+                         update="@form"/>
+        <p:commandButton id="logout" value="Logout"
+                         action="#{login.logout}"
+                         rendered="#{login.loggedIn}"
+                         update="@form "/>
+        <p:commandButton id="openid"
+                         value="Login with OpenId"
+                         rendered="#{!login.loggedIn}"
+                         action="#{login.loginOpenId}"
+                         update="@form "
+                         disabled="true"/>
+        <p:commandButton id="openidGoogle"
+                         value="Login with Google"
+                         rendered="#{!login.loggedIn}"
+                         action="#{login.signinOpenidGoogle}"
+                         update="@form "
+                         immediate="true"/>
+        <p:commandButton id="openidYahoo"
+                         value="Login with Yahoo"
+                         rendered="#{!login.loggedIn}"
+                         action="#{login.signinOpenidYahoo}"
+                         update="@form "
+                         disabled="true"/>
 
-                <p:separator/>
+        <p:separator/>
 
-                <!--                <h:outputLabel for="openid">Open ID</h:outputLabel>
-                <p:inputText id="openid_identifier"
-                             value="#{credentials.openid}"
-                             style="background: url(http://openid.net/login-bg.gif) no-repeat; padding-left: 18px; background-position: 0 50%;" />
+        <!--                <h:outputLabel for="openid">Open ID</h:outputLabel>
+        <p:inputText id="openid_identifier"
+                     value="#{credentials.openid}"
+                     style="background: url(http://openid.net/login-bg.gif) no-repeat; padding-left: 18px; background-position: 0 50%;" />
 
-                <p:separator/>-->
-                <!--                    <h:panelGrid columns="2">
-                    <h:commandLink id="facebook"
-                                   name="facebook"
-                                   action="#{socialauth.login}"
-                                   actionListener="#{socialauthenticator.updateId}">
-                        <h:graphicImage value="/images/facebook_icon.png"/>
-                    </h:commandLink>
-                    <h:commandLink id="twitter"
-                                   name="twitter"
-                                   action="#{socialauth.login}"
-                                   actionListener="#{socialauthenticator.updateId}">
-                        <h:graphicImage value="/images/twitter_icon.png"/>
-                    </h:commandLink>
-                    <h:commandLink id="google"
-                                   name="google"
-                                   action="#{socialauth.login}"
-                                   actionListener="#{socialauthenticator.updateId}">
-                        <h:graphicImage value="/images/gmail-icon.jpg"/>
-                    </h:commandLink>
-                    <h:commandLink id="yahoo"
-                                   name="yahoo"
-                                   action="#{socialauth.login}"
-                                   actionListener="#{socialauthenticator.updateId}">
-                        <h:graphicImage value="/images/yahoomail_icon.jpg"/>
-                    </h:commandLink>
+        <p:separator/>-->
+        <!--                    <h:panelGrid columns="2">
+            <h:commandLink id="facebook"
+                           name="facebook"
+                           action="#{socialauth.login}"
+                           actionListener="#{socialauthenticator.updateId}">
+                <h:graphicImage value="/images/facebook_icon.png"/>
+            </h:commandLink>
+            <h:commandLink id="twitter"
+                           name="twitter"
+                           action="#{socialauth.login}"
+                           actionListener="#{socialauthenticator.updateId}">
+                <h:graphicImage value="/images/twitter_icon.png"/>
+            </h:commandLink>
+            <h:commandLink id="google"
+                           name="google"
+                           action="#{socialauth.login}"
+                           actionListener="#{socialauthenticator.updateId}">
+                <h:graphicImage value="/images/gmail-icon.jpg"/>
+            </h:commandLink>
+            <h:commandLink id="yahoo"
+                           name="yahoo"
+                           action="#{socialauth.login}"
+                           actionListener="#{socialauthenticator.updateId}">
+                <h:graphicImage value="/images/yahoomail_icon.jpg"/>
+            </h:commandLink>
 
-                    <h:commandLink id="hotmail"
-                                   name="hotmail"
-                                   action="#{socialauth.login}"
-                                   actionListener="#{socialauthenticator.updateId}">
-                        <h:graphicImage value="/images/hotmail.jpeg"/>
-                    </h:commandLink>
-                    <h:commandLink id="linkedin"
-                                   name="linkedin"
-                                   action="#{socialauth.login}"
-                                   actionListener="#{socialauthenticator.updateId}">
-                        <h:graphicImage value="/images/linkedin.gif"/>
-                    </h:commandLink>
-                    <h:commandLink id="foursquare"
-                                   name="foursquare"
-                                   action="#{socialauth.login}"
-                                   actionListener="#{socialauthenticator.updateId}">
-                        <h:graphicImage value="/images/foursquare.jpeg"/>
-                    </h:commandLink>
-                    <h:commandLink id="myspace"
-                                   name="myspace"
-                                   action="#{socialauth.login}"
-                                   actionListener="#{socialauthenticator.updateId}">
-                        <h:graphicImage value="/images/myspace.jpeg"/>
-                    </h:commandLink>
-                </h:panelGrid>-->
-                <p:commandButton widgetVar="startButton"
-                                 value="Create Data"
-                                 rendered="#{!bootstrap.initDone}"
-                                 actionListener="#{bootstrap.createData}"
-                                 onclick="pbAjax.start();startButton.disable();"
-                                 immediate="true"
-                        />
-                <!--<p:commandButton-->
-                <!--value="Create Player"-->
-                <!--actionListener="#{bootstrap.createPlayer}"-->
-                <!--immediate="true"-->
-                <!--/>-->
-                <p:growl id="growl"/>
+            <h:commandLink id="hotmail"
+                           name="hotmail"
+                           action="#{socialauth.login}"
+                           actionListener="#{socialauthenticator.updateId}">
+                <h:graphicImage value="/images/hotmail.jpeg"/>
+            </h:commandLink>
+            <h:commandLink id="linkedin"
+                           name="linkedin"
+                           action="#{socialauth.login}"
+                           actionListener="#{socialauthenticator.updateId}">
+                <h:graphicImage value="/images/linkedin.gif"/>
+            </h:commandLink>
+            <h:commandLink id="foursquare"
+                           name="foursquare"
+                           action="#{socialauth.login}"
+                           actionListener="#{socialauthenticator.updateId}">
+                <h:graphicImage value="/images/foursquare.jpeg"/>
+            </h:commandLink>
+            <h:commandLink id="myspace"
+                           name="myspace"
+                           action="#{socialauth.login}"
+                           actionListener="#{socialauthenticator.updateId}">
+                <h:graphicImage value="/images/myspace.jpeg"/>
+            </h:commandLink>
+        </h:panelGrid>-->
+        <p:commandButton widgetVar="startButton"
+                         value="Create Data"
+                         rendered="#{!bootstrap.initDone}"
+                         actionListener="#{bootstrap.createData}"
+                         onclick="pbAjax.start();startButton.disable();"
+                         immediate="true"
+                />
+        <p:commandButton value="Create 10k more players"
+                         actionListener="#{bootstrap.createManyPlayers}"
+                         onclick="pbAjax.start();startButton.disable();"
+                         onstart="blockUIWidget2.block()"
+                         oncomplete="blockUIWidget2.unblock()"
+                         immediate="true"
+                />
+        <pe:blockUI target="loginForm" content="blockUIContent" widgetVar="blockUIWidget2"/>
+
+        <h:panelGrid id="blockUIContent" columns="2" style="display: none;">
+            <h:graphicImage library="images" name="ajax-loader1.gif"
+                            style="margin-right: 12px; vertical-align: middle;"/>
+            <h:outputText value="Working" style="white-space: nowrap;"/>
+        </h:panelGrid>
+        <!--<p:commandButton-->
+        <!--value="Create Player"-->
+        <!--actionListener="#{bootstrap.createPlayer}"-->
+        <!--immediate="true"-->
+        <!--/>-->
+        <p:growl id="growl"/>
 
 
-                <!--<p:commandButton value="Start" type="button" onclick="pbAjax.start();startButton2.disable();" widgetVar="startButton2"/>-->
-                <!--<p:commandButton value="Cancel" actionListener="#{progressBean.cancel}" oncomplete="pbAjax.cancel();startButton2.enable();" />-->
+        <!--<p:commandButton value="Start" type="button" onclick="pbAjax.start();startButton2.disable();" widgetVar="startButton2"/>-->
+        <!--<p:commandButton value="Cancel" actionListener="#{progressBean.cancel}" oncomplete="pbAjax.cancel();startButton2.enable();" />-->
 
-                <p:progressBar widgetVar="pbAjax" ajax="true" value="#{bootstrap.progress}"
-                               oncomplete="startButton.enable()">
-                    <p:ajax event="complete" listener="#{bootstrap.onComplete}" update="growl"/>
-                </p:progressBar>
+        <p:progressBar widgetVar="pbAjax" ajax="true" value="#{bootstrap.progress}"
+                       oncomplete="startButton.enable()">
+            <p:ajax event="complete" listener="#{bootstrap.onComplete}" update="growl"/>
+        </p:progressBar>
 
 
-            </h:form>
+    </h:form>
 
-            <!--<h:outputText id="tst" value="Init not done : #{initData.progress}%" rendered="#{!initData.initDone}"/>-->
-            <!--<h:form prependId="false">-->
-            <!--&lt;!&ndash;                <p:growl id="growl" autoUpdate="true" showDetail="true" />&ndash;&gt;-->
-            <!--<p:commandButton-->
-            <!--value="Create Data"-->
-            <!--rendered="#{!initData.initDone}"-->
-            <!--actionListener="#{initData.createData}"-->
+    <!--<h:outputText id="tst" value="Init not done : #{initData.progress}%" rendered="#{!initData.initDone}"/>-->
+    <!--<h:form prependId="false">-->
+    <!--&lt;!&ndash;                <p:growl id="growl" autoUpdate="true" showDetail="true" />&ndash;&gt;-->
+    <!--<p:commandButton-->
+    <!--value="Create Data"-->
+    <!--rendered="#{!initData.initDone}"-->
+    <!--actionListener="#{initData.createData}"-->
 
-            <!--immediate="true"-->
-            <!--update=" messages"-->
-            <!--/>-->
-            <!--onclick="pbAjax.start();poll.start();"-->
-            <!--<p:poll interval="1" update="tst" widgetVar="poll" autoStart="false"/>-->
+    <!--immediate="true"-->
+    <!--update=" messages"-->
+    <!--/>-->
+    <!--onclick="pbAjax.start();poll.start();"-->
+    <!--<p:poll interval="1" update="tst" widgetVar="poll" autoStart="false"/>-->
 
-            <!--<p:progressBar widgetVar="pbAjax" ajax="true" value="#{initData.progress}"-->
-            <!--rendered="#{!initData.initDone}">-->
-            <!--<p:ajax event="complete" listener="#{initData.onComplete}" update="growl messages tst"/>-->
-            <!--</p:progressBar>-->
-            <!--                <p:outputPanel id="display"/>
-          <p:push channel="chat" onpublish="handlePublish"/>-->
-            <!--</h:form>-->
+    <!--<p:progressBar widgetVar="pbAjax" ajax="true" value="#{initData.progress}"-->
+    <!--rendered="#{!initData.initDone}">-->
+    <!--<p:ajax event="complete" listener="#{initData.onComplete}" update="growl messages tst"/>-->
+    <!--</p:progressBar>-->
+    <!--                <p:outputPanel id="display"/>
+  <p:push channel="chat" onpublish="handlePublish"/>-->
+    <!--</h:form>-->
 
-        </center>
-    </ui:define>
+</center>
+</ui:define>
 </ui:composition>
 

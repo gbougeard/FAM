@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition
+<html
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:f="http://java.sun.com/jsf/core"
         xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-        xmlns:p="http://primefaces.org/ui"
-        template="/common/template.xhtml">
+        xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/common/template.xhtml">
 
 <f:metadata>
     <f:viewParam name="id" value="#{appointmentBean.id}"/>
@@ -83,7 +83,7 @@ title="#{bundle.ViewFamEventTitle_idEvent}"/>-->
     </h:panelGrid>
 </p:fieldset>
 
-<p:fieldset legend="Le mot du coach"
+<p:fieldset legend="#{bundle.ViewFamEventTitle_coachBriefing}"
             toggleable="true"
             rendered="#{not empty appointmentBean.currentEvent.comments}">
     <h:panelGrid columns="2" cellpadding="10">
@@ -110,143 +110,156 @@ title="#{bundle.ViewFamEventTitle_idEvent}"/>-->
                    itemLabel="#{s.displayName}"/>
 </h:selectOneMenu>-->
 
-<p:fieldset legend="Ma réponse">
-    <h:panelGrid columns="2" cellpadding="10">
-        <!--<p:graphicImage value="#{resource['images/icons:']}"/>-->
-        <h:graphicImage name="01_messages.png" library="images/icons"/>
-        <h:panelGrid columns="2">
-            <!--                                <h:outputLabel value="#{bundle.EditFamEventLabel_famTypAnswer}" for="famTypAnswer" />-->
-            <p:selectOneMenu id="famTypAnswer"
-                             value="#{appointmentBean.currentUserAnswer.famTypAnswer}"
-                             title="#{bundle.EditFamEventTitle_famTypAnswer}"
-                             converter="typAnswerConverter"
-                    >
-                <f:selectItem itemLabel="TypAnswer" itemValue=""/>
-                <!--                                                  noSelectionOption="true"/>-->
-                <f:selectItems value="#{cacheBean.listTypAnswer}"
-                               var="s"
-                               itemValue="#{s}"
-                               itemLabel="#{s.libTypAnswer}"/>
-                <p:ajax event="blur" update="msg_famTypAnswer"/>
-            </p:selectOneMenu>
-            <p:message id="msg_famTypAnswer" for="famTypAnswer"/>
+<p:fieldset legend="#{bundle.ViewFamEventTitle_myAnswer}">
+    <h:form id="frmMy">
+        <h:panelGrid columns="2" cellpadding="10">
+            <!--<p:graphicImage value="#{resource['images/icons:']}"/>-->
+            <h:graphicImage name="01_messages.png" library="images/icons"/>
+            <h:panelGrid columns="2">
+                <!--                                <h:outputLabel value="#{bundle.EditFamEventLabel_famTypAnswer}" for="famTypAnswer" />-->
+                <p:selectOneMenu id="famTypAnswer"
+                                 value="#{appointmentBean.currentUserAnswer.famTypAnswer}"
+                                 title="#{bundle.EditFamEventTitle_famTypAnswer}"
+                                 converter="typAnswerConverter"
+                        >
+                    <f:selectItem itemLabel="TypAnswer" itemValue=""/>
+                    <!--                                                  noSelectionOption="true"/>-->
+                    <f:selectItems value="#{cacheBean.listTypAnswer}"
+                                   var="s"
+                                   itemValue="#{s}"
+                                   itemLabel="#{s.libTypAnswer}"/>
+                    <p:ajax event="blur" update="msg_famTypAnswer"/>
+                </p:selectOneMenu>
+                <p:message id="msg_famTypAnswer" for="famTypAnswer"/>
 
-            <!--                                <h:outputLabel value="#{bundle.EditFamEventLabel_comments}" for="comments" />-->
-            <p:editor id="comments"
-                      value="#{appointmentBean.currentUserAnswer.comments}"
-                      widgetVar="editor" width="600" height="150"/>
-            <p:message id="msg_comments" for="comments"/>
+                <!--                                <h:outputLabel value="#{bundle.EditFamEventLabel_comments}" for="comments" />-->
+                <p:editor id="comments"
+                          value="#{appointmentBean.currentUserAnswer.comments}"
+                          widgetVar="editor" width="600" height="150"/>
+                <p:message id="msg_comments" for="comments"/>
+            </h:panelGrid>
+
+            <h:panelGrid columns="2">
+                <p:commandButton value="#{bundle.EditFamClubSaveLink}"
+                                 action="#{appointmentBean.saveAnswer}"
+                                 update="@form @(frmMsg) @(dtbYes) "
+                        />
+                <p:commandButton value="#{bundle.CancelLink}"
+                                 action="#{appointmentBean.cancelAnswer}"
+                                 update="@form @(frmMsg) @(frmOthers)"
+                                 immediate="true"
+                        />
+            </h:panelGrid>
+
+
         </h:panelGrid>
-
-        <div/>
-        <h:panelGrid columns="2">
-            <p:commandButton value="#{bundle.EditFamClubSaveLink}"
-                             action="#{appointmentBean.saveAnswer}"
-                             update="@form"
-                    />
-            <p:commandButton value="#{bundle.CancelLink}"
-                             action="#{appointmentBean.cancelAnswer}"
-                             update="@form"
-                             immediate="true"
-                    />
-        </h:panelGrid>
-
-
-    </h:panelGrid>
+    </h:form>
 </p:fieldset>
 
-<p:fieldset legend="Autres réponses" toggleable="true">
-    <h:panelGrid columns="2" cellpadding="10">
-        <!--<p:graphicImage value="#{resource['images/icons:']}"/>-->
-        <h:graphicImage name="01_messages.png" library="images/icons"/>
-        <h:panelGrid columns="4" columnClasses="cols_4,cols_4,cols_4,cols_4">
-            <p:dataTable value="#{appointmentBean.lstYes}"
-                         var="y"
-                         paginator="true"
-                         rows="5"
-                         pageLinks="3"
-                         paginatorPosition="bottom"
-                         paginatorAlwaysVisible="false"
-                         rowKey="#{y.idAnswer}"
-                         style="height:200px;width:180px;"
-                    >
-                <p:column headerText="Présents (#{fn:length(appointmentBean.lstYes)})">
-                    <h:outputText id="py" value="#{y.famPlayer.displayName}"/>
-                </p:column>
-                <p:column>
-                    <p:graphicImage styleClass="icon-balloon"/>
-                    <h:outputText id="com"
-                                  styleClass="icon-balloon-box"
-                                  value="com"
-                                  title="#{y.comments}"
-                                  rendered="#{not empty y.comments}"/>
-                    <p:overlayPanel id="imgPanel" for="com"
-                                    showEffect="blind" hideEffect="explode"
-                                    showEvent="mouseover" hideEvent="mousedown">
-                        <h:outputText value="#{y.comments}"
+<p:fieldset legend="#{bundle.ViewFamEventTitle_otherAnswers}" toggleable="true">
+    <h:form id="frmOthers">
+        <h:panelGrid columns="2" cellpadding="10">
+            <!--<p:graphicImage value="#{resource['images/icons:']}"/>-->
+            <h:graphicImage name="01_messages.png" library="images/icons"/>
+            <h:panelGrid columns="4" columnClasses="cols_4,cols_4,cols_4,cols_4">
+                <!--@elvariable id="y" type="org.fam.ejb.model.FamAnswer"-->
+                <p:dataTable id="dtbYes"
+                             value="#{appointmentBean.lstYes}"
+                             var="y"
+                             paginator="true"
+                             rows="5"
+                             pageLinks="3"
+                             paginatorPosition="bottom"
+                             paginatorAlwaysVisible="false"
+                             rowKey="#{y.idAnswer}"
+                             style="height:200px;width:180px;"
+                        >
+                    <p:column headerText="Présents (#{fn:length(appointmentBean.lstYes)})">
+                        <h:outputText value="#{y.famPlayer.displayName}"/>
+                    </p:column>
+                    <p:column>
+                        <p:graphicImage styleClass="icon-balloon"/>
+                        <h:outputText id="com"
+                                      styleClass="icon-balloon-box"
+                                      value="com"
+                                      title="#{y.comments}"
                                       rendered="#{not empty y.comments}"/>
-                    </p:overlayPanel>
-                </p:column>
-            </p:dataTable>
+                        <p:overlayPanel id="imgPanel" for="com"
+                                        showEffect="blind" hideEffect="explode"
+                                        showEvent="mouseover" hideEvent="mousedown">
+                            <h:outputText value="#{y.comments}"
+                                          rendered="#{not empty y.comments}"/>
+                        </p:overlayPanel>
+                    </p:column>
+                </p:dataTable>
 
-            <p:dataTable value="#{appointmentBean.lstMaybe}"
-                         var="m"
-                         paginator="true"
-                         rows="5"
-                         pageLinks="3"
-                         paginatorPosition="bottom"
-                         paginatorAlwaysVisible="false"
-                         rowKey="#{m.idAnswer}"
-                         style="height:200px;width:180px;"
-                    >
-                <p:column headerText="Ne savent pas (#{fn:length(appointmentBean.lstMaybe)})">
-                    <h:outputText value="#{m.famPlayer.displayName}"/>
-                </p:column>
-                <p:column>
-                    <h:outputText id="com"
-                                  value="com"
-                                  title="#{m.comments}"
-                                  rendered="#{not empty m.comments}"/>
-                </p:column>
-            </p:dataTable>
+                <!--@elvariable id="m" type="org.fam.ejb.model.FamAnswer"-->
+                <p:dataTable id="dtbMaybe"
+                             value="#{appointmentBean.lstMaybe}"
+                             var="m"
+                             paginator="true"
+                             rows="5"
+                             pageLinks="3"
+                             paginatorPosition="bottom"
+                             paginatorAlwaysVisible="false"
+                             rowKey="#{m.idAnswer}"
+                             style="height:200px;width:180px;"
+                        >
+                    <p:column headerText="Ne savent pas (#{fn:length(appointmentBean.lstMaybe)})">
+                        <h:outputText value="#{m.famPlayer.displayName}"/>
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="com"
+                                      title="#{m.comments}"
+                                      rendered="#{not empty m.comments}"/>
+                    </p:column>
+                </p:dataTable>
 
-            <p:dataTable value="#{appointmentBean.lstNo}"
-                         var="n"
-                         paginator="true"
-                         rows="5"
-                         pageLinks="3"
-                         paginatorPosition="bottom"
-                         paginatorAlwaysVisible="false"
-                         rowKey="#{n.idAnswer}"
-                         style="height:200px;width:180px;">
-                <p:column headerText="Absents (#{fn:length(appointmentBean.lstNo)})">
-                    <h:outputText id="py" value="#{n.famPlayer.displayName}"/>
-                </p:column>
-                <p:column>
-                    <h:outputText id="com"
-                                  styleClass="icon-balloon"
-                                  title="#{n.comments}"
-                                  rendered="#{not empty n.comments}"/>
-                </p:column>
-            </p:dataTable>
+                <!--@elvariable id="n" type="org.fam.ejb.model.FamAnswer"-->
+                <p:dataTable id="dtbNo"
+                             value="#{appointmentBean.lstNo}"
+                             var="n"
+                             paginator="true"
+                             rows="5"
+                             pageLinks="3"
+                             paginatorPosition="bottom"
+                             paginatorAlwaysVisible="false"
+                             rowKey="#{n.idAnswer}"
+                             style="height:200px;width:180px;">
+                    <p:column headerText="Absents (#{fn:length(appointmentBean.lstNo)})">
+                        <h:outputText value="#{n.famPlayer.displayName}"/>
+                    </p:column>
+                    <p:column>
+                        <h:outputText styleClass="icon-balloon"
+                                      title="#{n.comments}"
+                                      rendered="#{not empty n.comments}"/>
+                    </p:column>
+                </p:dataTable>
 
-            <p:dataTable value="#{appointmentBean.lstNsp}"
-                         var="nsp"
-                         paginator="true"
-                         rows="5"
-                         pageLinks="1"
-                         paginatorPosition="bottom"
-                         paginatorAlwaysVisible="false"
-                         rowKey="#{nsp.idPlayer}"
-                         style="height:200px;width:180px;">
-                <p:column headerText="Ne se prononcent pas (#{fn:length(appointmentBean.lstNsp)})">
-                    <h:outputText id="py" value="#{nsp.displayName}"/>
-                </p:column>
-                <!--                                        <h:outputText value="#{nsp.displayName}"/>-->
-            </p:dataTable>
+                <!--@elvariable id="nsp" type="org.fam.ejb.model.FamPlayer"-->
+                <p:dataTable id="dtbNsp"
+                             value="#{appointmentBean.lstNsp}"
+                             lazy="true"
+                             var="nsp"
 
+                             scrollRows="20"
+                             scrollable="true" liveScroll="true" scrollHeight="150"
+                             rowKey="#{nsp.idPlayer}"
+                             style="height:200px;width:180px;">
+                    <!--rows="5"-->
+                    <!--paginator="true"-->
+                    <!--pageLinks="1"-->
+                    <!--paginatorPosition="bottom"-->
+                    <!--paginatorAlwaysVisible="false"-->
+                    <p:column headerText="Ne se prononcent pas (#{fn:length(appointmentBean.lstNsp)})">
+                        <h:outputText value="#{nsp.displayName}"/>
+                    </p:column>
+                    <!--                                        <h:outputText value="#{nsp.displayName}"/>-->
+                </p:dataTable>
+
+            </h:panelGrid>
         </h:panelGrid>
-    </h:panelGrid>
+    </h:form>
 </p:fieldset>
 
 <!--                    <h:outputText value="#{bundle.ViewFamEventLabel_dtCreat}"/>
@@ -264,4 +277,5 @@ title="#{bundle.ViewFamEventTitle_idEvent}"/>-->
 </p:panel>
 </ui:define>
 </ui:composition>
+</html>
 

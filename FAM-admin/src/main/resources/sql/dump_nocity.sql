@@ -434,7 +434,8 @@ CREATE TABLE `fam_formation` (
 
 LOCK TABLES `fam_formation` WRITE;
 /*!40000 ALTER TABLE `fam_formation` DISABLE KEYS */;
-insert into fam_formation (1, TRUE, '442', now(), '4-4-2', 21 );
+insert into fam_formation (id_formation, byDefault, cod_formation,dt_creat, id_typ_match)
+values (1, TRUE, '442', now(), '4-4-2', 21 );
 /*!40000 ALTER TABLE `fam_formation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -477,7 +478,7 @@ values
 (1,8,8,now()),
 (1,9,9,now()),
 (1,10,10,now()),
-(1,11,11,now()),
+(1,11,11,now());
 /*!40000 ALTER TABLE `fam_formation_item` ENABLE KEYS */;
 UNLOCK TABLES;
 

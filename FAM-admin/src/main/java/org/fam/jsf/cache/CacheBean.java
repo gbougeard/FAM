@@ -4,12 +4,46 @@
  */
 package org.fam.jsf.cache;
 
-import com.yammer.metrics.Metrics;
-import com.yammer.metrics.core.Counter;
 import lombok.Getter;
 import lombok.Setter;
-import org.fam.ejb.model.*;
-import org.fam.ejb.session.*;
+import org.fam.ejb.model.FamCity;
+import org.fam.ejb.model.FamClub;
+import org.fam.ejb.model.FamCountry;
+import org.fam.ejb.model.FamEventStatus;
+import org.fam.ejb.model.FamFormation;
+import org.fam.ejb.model.FamOrganization;
+import org.fam.ejb.model.FamPlace;
+import org.fam.ejb.model.FamPosition;
+import org.fam.ejb.model.FamProvince;
+import org.fam.ejb.model.FamScale;
+import org.fam.ejb.model.FamSeason;
+import org.fam.ejb.model.FamSeasonCompetition;
+import org.fam.ejb.model.FamState;
+import org.fam.ejb.model.FamTypAnswer;
+import org.fam.ejb.model.FamTypCard;
+import org.fam.ejb.model.FamTypCompetition;
+import org.fam.ejb.model.FamTypEvent;
+import org.fam.ejb.model.FamTypMatch;
+import org.fam.ejb.model.FamTypPlace;
+import org.fam.ejb.session.FamCityFacade;
+import org.fam.ejb.session.FamClubFacade;
+import org.fam.ejb.session.FamCountryFacade;
+import org.fam.ejb.session.FamEventStatusFacade;
+import org.fam.ejb.session.FamFormationFacade;
+import org.fam.ejb.session.FamOrganizationFacade;
+import org.fam.ejb.session.FamPlaceFacade;
+import org.fam.ejb.session.FamPositionFacade;
+import org.fam.ejb.session.FamProvinceFacade;
+import org.fam.ejb.session.FamScaleFacade;
+import org.fam.ejb.session.FamSeasonCompetitionFacade;
+import org.fam.ejb.session.FamSeasonFacade;
+import org.fam.ejb.session.FamStateFacade;
+import org.fam.ejb.session.FamTypAnswerFacade;
+import org.fam.ejb.session.FamTypCardFacade;
+import org.fam.ejb.session.FamTypCompetitionFacade;
+import org.fam.ejb.session.FamTypEventFacade;
+import org.fam.ejb.session.FamTypMatchFacade;
+import org.fam.ejb.session.FamTypPlaceFacade;
 import org.fam.jsf.bootstrap.Bootstrap;
 import org.slf4j.Logger;
 
@@ -126,8 +160,6 @@ public class CacheBean {
     @Inject
     private Bootstrap bootstrap;
 
-    private final Counter count = Metrics.newCounter(CacheBean.class, "count");
-
 
     public CacheBean() {
     }
@@ -137,7 +169,6 @@ public class CacheBean {
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("PostConstruct");
         }
-        count.inc();
 
 //        if (!bootstrap.getInitDone()) {
 //            Future<Integer> res = bootstrap.asyncCreateData();

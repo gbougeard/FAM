@@ -5,8 +5,51 @@
 package org.fam.jsf.bootstrap;
 
 import org.fam.common.constant.FamConstantes;
-import org.fam.ejb.model.*;
-import org.fam.ejb.session.*;
+import org.fam.ejb.model.FamClub;
+import org.fam.ejb.model.FamEvent;
+import org.fam.ejb.model.FamEventStatus;
+import org.fam.ejb.model.FamOrganization;
+import org.fam.ejb.model.FamPlayer;
+import org.fam.ejb.model.FamPlayerPosition;
+import org.fam.ejb.model.FamPosition;
+import org.fam.ejb.model.FamScale;
+import org.fam.ejb.model.FamSeason;
+import org.fam.ejb.model.FamSeasonCompetition;
+import org.fam.ejb.model.FamStaffFunction;
+import org.fam.ejb.model.FamTeam;
+import org.fam.ejb.model.FamTypAbsence;
+import org.fam.ejb.model.FamTypAnswer;
+import org.fam.ejb.model.FamTypCard;
+import org.fam.ejb.model.FamTypCompetition;
+import org.fam.ejb.model.FamTypEvent;
+import org.fam.ejb.model.FamTypMatch;
+import org.fam.ejb.model.FamTypPlace;
+import org.fam.ejb.model.FamUser;
+import org.fam.ejb.model.FamWorkout;
+import org.fam.ejb.session.FamCityFacade;
+import org.fam.ejb.session.FamClubFacade;
+import org.fam.ejb.session.FamCountryFacade;
+import org.fam.ejb.session.FamEventFacade;
+import org.fam.ejb.session.FamEventStatusFacade;
+import org.fam.ejb.session.FamOrganizationFacade;
+import org.fam.ejb.session.FamPlayerFacade;
+import org.fam.ejb.session.FamPositionFacade;
+import org.fam.ejb.session.FamProvinceFacade;
+import org.fam.ejb.session.FamScaleFacade;
+import org.fam.ejb.session.FamSeasonCompetitionFacade;
+import org.fam.ejb.session.FamSeasonFacade;
+import org.fam.ejb.session.FamStaffFunctionFacade;
+import org.fam.ejb.session.FamStateFacade;
+import org.fam.ejb.session.FamTeamFacade;
+import org.fam.ejb.session.FamTypAbsenceFacade;
+import org.fam.ejb.session.FamTypAnswerFacade;
+import org.fam.ejb.session.FamTypCardFacade;
+import org.fam.ejb.session.FamTypCompetitionFacade;
+import org.fam.ejb.session.FamTypEventFacade;
+import org.fam.ejb.session.FamTypMatchFacade;
+import org.fam.ejb.session.FamTypPlaceFacade;
+import org.fam.ejb.session.FamUserFacade;
+import org.fam.ejb.session.FamWorkoutFacade;
 import org.fam.jsf.bean.util.JsfUtil;
 import org.fluttercode.datafactory.impl.DataFactory;
 import org.joda.time.DateTime;
@@ -48,7 +91,7 @@ public class Bootstrap implements Serializable {
     // CLUBS
     @Inject
     private FamClubFacade ejbClub;
-    private final List<FamClub> listClub = new ArrayList<FamClub>();
+    private List<FamClub> listClub = new ArrayList<FamClub>();
     // TEAMS
     @Inject
     private FamTeamFacade ejbTeam;
@@ -96,7 +139,7 @@ public class Bootstrap implements Serializable {
     // POSITION
     @Inject
     private FamPositionFacade ejbPosition;
-    private final List<FamPosition> listPosition = new ArrayList<FamPosition>();
+    private List<FamPosition> listPosition = new ArrayList<FamPosition>();
     // TYP_MATCH
     @Inject
     private FamTypMatchFacade ejbTypMatch;
@@ -716,7 +759,32 @@ public class Bootstrap implements Serializable {
         }
     }
 
-    private void createProfilePlayer(FamPlayer item) {
+    public void createManyUsers() {
+        try {
+            FamUser item;
+            DataFactory df = new DataFactory();
+            for (int i = 0;
+                 i < 200000;
+                 i++) {
+                item = new FamUser();
+                item.setEmail(df.getEmailAddress().replaceAll(" ", "_"));
+                item.setFirstName(df.getFirstName());
+                item.setLastName(df.getLastName());
+                item.setOpenid(Boolean.FALSE);
+                item.setPassword("pwd");
+
+                ejbUser.create(item);
+                // listUser.add(item);
+            }
+
+        } catch (Exception e) {
+            String msg = "create user failed";
+            logErrorMsg(msg, e);
+
+        }
+    }
+
+    private void createProfilePlayer(FamPlayer item) throws Exception {
         try {
             DataFactory df = new DataFactory();
             item.getCurrentProfile().setAtt(df.getNumberBetween(25, 80));
@@ -750,7 +818,7 @@ public class Bootstrap implements Serializable {
         } catch (Exception e) {
             String msg = "create ProfilePlayer failed";
             logErrorMsg(msg, e);
-
+            throw e;
         }
     }
 
@@ -821,7 +889,7 @@ public class Bootstrap implements Serializable {
             item.setDtBirth(df.getBirthDate());
             dt = new DateTime();
             item.setDtArrival(df.getDateBetween(dt.minusYears(15).toDate(), new Date()));
-            item.setNumLicense(new Long(df.getNumberUpTo(99999)));
+            item.setNumLicense((long) df.getNumberUpTo(99999));
             item.setAddress(df.getAddress());
             item.setZipcode(df.getNumberText(5));
             item.setCity(df.getCity());
@@ -840,6 +908,46 @@ public class Bootstrap implements Serializable {
 
             }
 //                ejbPlayer.edit(item);
+        }
+
+
+    }
+
+    public void createManyPlayers() {
+        listClub = ejbClub.findAll();
+        listPosition = ejbPosition.findAll();
+        DataFactory df = new DataFactory();
+
+        FamPlayer item;
+        DateTime dt;
+        try {
+            for (int i = 0; i < 10000; i++) {
+                LOGGER.debug("CREATE PLAYER #" + i);
+                item = new FamPlayer();
+                item.setFirstName(df.getFirstName());
+                item.setLastName(df.getLastName());
+                item.setDtBirth(df.getBirthDate());
+                dt = new DateTime();
+                item.setDtArrival(df.getDateBetween(dt.minusYears(15).toDate(), new Date()));
+                item.setNumLicense((long) df.getNumberUpTo(999999));
+                item.setAddress(df.getAddress());
+                item.setZipcode(df.getNumberText(5));
+                item.setCity(df.getCity());
+                item.setTel(df.getNumberText(10));
+                item.setIceContact(df.getName());
+                item.setIceTel(df.getNumberText(10));
+                setEmailPlayer(item);
+
+
+                ejbPlayer.create(item);
+                listPlayer.add(item);
+                createProfilePlayer(item);
+
+//                ejbPlayer.edit(item);
+            }
+        } catch (Exception e) {
+            String msg = "create player failed";
+            logErrorMsg(msg, e);
         }
 
 

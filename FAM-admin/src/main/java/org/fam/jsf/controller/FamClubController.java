@@ -5,9 +5,9 @@ import org.fam.ejb.session.FamClubFacade;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
 import java.io.Serializable;
 
 @ManagedBean(name = "famClubController")
@@ -21,7 +21,7 @@ import java.io.Serializable;
 public class FamClubController extends AbstractController<FamClub>
         implements Serializable {
 
-    @EJB
+    @Inject
     private FamClubFacade ejbFacade;
 
     public FamClubController() {

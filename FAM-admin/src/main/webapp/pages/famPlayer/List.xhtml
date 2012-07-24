@@ -20,7 +20,7 @@
                 <p:dataTable
                         value="#{famPlayerController.lazyModel}"
                         editable="false"
-
+                        lazy="true"
                         var="item"
                         selection="#{famPlayerController.selected}"
                         selectionMode="single"
@@ -31,8 +31,6 @@
                         sortBy="#{item.numLicense}"
                         emptyMessage="#{bundle.NoDataFound}"
                         paginatorAlwaysVisible="false"
-
-
                         >
                     <p:ajax event="rowSelect" update="tb"/>
                     <p:ajax event="rowUnselect" update="tb"/>
@@ -73,8 +71,8 @@
                         <h:outputText value="#{item.famUser.login}"/>
                     </p:column>-->
 
-                    <p:column sortBy="#{item.displayName}"
-                              filterBy="#{item.displayName}"
+                    <p:column sortBy="#{item.lastName}"
+                              filterBy="#{item.lastName}"
                               headerText="#{bundle.ListFamPlayerTitle_displayName}">
                         <h:outputText value="#{item.displayName}"/>
                     </p:column>

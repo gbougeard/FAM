@@ -20,21 +20,24 @@
                 <p:commandButton value="#{bundle.EditFamFixtureSaveLink}"
                                  action="#{famFixtureController.updateAndNoRedirect}"
                                  onsuccess="confirmation.show()"
-                                 update="messages growl"
+                                 update="@(messages) @(growl)"
                         />
                 <p:commandButton value="#{bundle.CancelLink}"
                                  action="#{famFixtureController.prepareList}"
                                  immediate="true"/>
 
-                <p:dialog
-                        header="Propagation dates" widgetVar="confirmation"
-                        closable="false">
+                <p:dialog header="Propagation dates"
+                          widgetVar="confirmation"
+                          closable="false">
                     <h:outputText value="Voulez-vous propager la date de la journée aux matchs?"/>
-                    <p:commandButton value="Oui" actionListener="#{famFixtureController.propagateDate}"
-                                     update="messages" onsuccess="confirmation.hide()"
+                    <p:commandButton value="Oui"
+                                     actionListener="#{famFixtureController.propagateDate}"
+                                     update="@(messages)"
+                                     onsuccess="confirmation.hide()"
                                      action="#{famFixtureController.prepareList}"/>
                     <p:commandButton value="Non" onclick="confirmation.hide()"
-                                     action="#{famFixtureController.prepareList}" type="button"/>
+                                     action="#{famFixtureController.prepareList}"
+                                     type="button"/>
 
                 </p:dialog>
 

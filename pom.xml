@@ -13,30 +13,32 @@
     <modules>
         <module>FAM-app</module>
         <module>FAM-admin</module>
+        <module>FAM-atdd</module>
     </modules>
 
     <properties>
         <version.junit>4.10</version.junit>
         <version.hibernate.validator>4.2.0.Final</version.hibernate.validator>
         <version.glassfish>3.1.2</version.glassfish>
-        <version.arquillian>1.0.0.CR7</version.arquillian>
-        <version.arquillian.glassfish.embedded>1.0.0.CR2</version.arquillian.glassfish.embedded>
+        <version.arquillian>1.0.0.Final</version.arquillian>
+        <version.arquillian.glassfish.embedded>1.0.0.CR3</version.arquillian.glassfish.embedded>
         <version.mockito>1.9.0</version.mockito>
         <version.maven.embedded.glassfish.plugin>3.1.2</version.maven.embedded.glassfish.plugin>
 
         <version.maven.war.plugin>2.1.1</version.maven.war.plugin>
-        <version.maven.compiler.plugin>2.3.2</version.maven.compiler.plugin>
+        <version.maven.compiler.plugin>2.5</version.maven.compiler.plugin>
         <version.maven.failsafe.plugin>2.12</version.maven.failsafe.plugin>
+        <version.maven.surefire.plugin>2.12</version.maven.surefire.plugin>
 
         <version.jelastic.plugin>1.6-SNAPSHOT</version.jelastic.plugin>
 
         <maven.compiler.source>1.6</maven.compiler.source>
         <maven.compiler.target>1.6</maven.compiler.target>
 
-        <!--<version.primefaces>3.3-SNAPSHOT</version.primefaces>-->
-        <version.primefaces>3.2</version.primefaces>
-        <version.primefaces.themes>1.0.4</version.primefaces.themes>
-        <version.primefaces.extensions>0.4.0</version.primefaces.extensions>
+        <version.primefaces>3.3.1</version.primefaces>
+        <!--<version.primefaces>3.4-SNAPSHOT</version.primefaces>-->
+        <version.primefaces.themes>1.0.6</version.primefaces.themes>
+        <version.primefaces.extensions>0.5.1</version.primefaces.extensions>
 
         <version.charts4j>1.3</version.charts4j>
         <version.openid4java>0.9.5</version.openid4java>
@@ -45,8 +47,10 @@
         <version.datafactory>0.8</version.datafactory>
         <version.lombok>0.10.8</version.lombok>
         <version.metrics>2.1.1</version.metrics>
-        <version.slf4j>1.6.4</version.slf4j>
+        <version.slf4j>1.6.6</version.slf4j>
+        <version.logback>1.0.6</version.logback>
         <version.guava>11.0.1</version.guava>
+        <version.gisgraphy>3.0-beta2</version.gisgraphy>
 
         <version.eclipselink>2.3.2</version.eclipselink>
         <version.persistence>2.0.3</version.persistence>
@@ -62,6 +66,17 @@
 
     </properties>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.jboss.arquillian</groupId>
+                <artifactId>arquillian-bom</artifactId>
+                <version>${version.arquillian}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <!-- This imports the Java EE 6 runtime libraries provided by GlassFish
@@ -77,7 +92,6 @@
             <artifactId>guava</artifactId>
             <version>${version.guava}</version>
         </dependency>
-
 
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -154,10 +168,16 @@
             <version>${version.slf4j}</version>
         </dependency>
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-jcl</artifactId>
-            <version>${version.slf4j}</version>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${version.logback}</version>
         </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>${version.logback}</version>
+        </dependency>
+
 
         <dependency>
             <groupId>com.yammer.metrics</groupId>
@@ -404,6 +424,13 @@
             <version>${version.arquillian}</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.jboss.arquillian.container</groupId>
+            <artifactId>arquillian-glassfish-embedded-3.1</artifactId>
+            <version>${version.arquillian.glassfish.embedded}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -458,7 +485,7 @@
         </plugins>
     </build>
 
-    <reporting>
+    <!--<reporting>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -484,7 +511,7 @@
                 <version>2.3.3</version>
             </plugin>
         </plugins>
-    </reporting>
+    </reporting>-->
 
     <profiles>
         <profile>

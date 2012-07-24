@@ -72,35 +72,6 @@
     <!--    <p:fieldset legend="Disposition">-->
     <h:panelGrid columns="1">
 
-        <!--        <p:panel header="Squad" style="width:80px;height:520px;">
-            <p:dataGrid id="dgSquad" value="#{famFormationController.lstNumber}" 
-                        var="i" columns="1">  
-                <p:column>  
-                    <p:outputPanel id="player" 
-                                   style="font-size:12px;display:block;text-align:center;width:20px;height:20px;border:1px solid #666666;">
-                        <h:outputText value="#{i}"/> 
-                    </p:outputPanel>
-                    <p:draggable for="player" revert="true" handle=".ui-panel-titlebar" stack=".ui-panel"/>  
-
-                </p:column>  
-                                <p:column>  
-                                    <p:panel id="pnl" header="#{i}" style="text-align:center">  
-                
-                                    </p:panel>  
-                                    <p:draggable for="pnl" revert="true"  
-                                                 handle=".ui-panel-titlebar" stack=".ui-panel"/>  
-                                </p:column>
-            </p:dataGrid> 
-        </p:panel>-->
-        <!--        <p:panel header="Canvas "
-                 style="width:300px;height:520px;">  
-            <p:dataGrid  value="#{famFormationController.lstTarget}"
-                        var="i" columns="1">  
-                <p:column>  
-                    <h:outputText value="#{i.famFormationItem.numItem} - #{i.famFormationItem.coord}" rendered="#{not empty i.famFormationItem.coord}"/> 
-                </p:column>  
-            </p:dataGrid> 
-        </p:panel>-->
         <p:panel header="Field">
             <p:dataGrid id="trgField"
                         value="#{famFormationController.lstTarget}"
@@ -134,18 +105,7 @@
                 </p:column>
             </p:dataGrid>
         </p:panel>
-        <!--        <p:panel header="FormationItems "
-                 style="width:300px;height:520px;">  
-            <p:dataGrid id="items" value="#{famFormationController.selected.famFormationItemList}"
-                        var="i" columns="1">  
-                <p:column>  
-                    <h:outputText value="#{i.numItem} - #{i.coord}"/> 
-                </p:column>  
-            </p:dataGrid> 
-        </p:panel>-->
     </h:panelGrid>
-
-    <!--    </p:fieldset>-->
 
 </ui:composition>
 </html>

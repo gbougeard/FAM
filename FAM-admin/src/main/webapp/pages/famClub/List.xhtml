@@ -21,7 +21,7 @@
                 <!--@elvariable id="item" type="org.fam.ejb.model.FamClub"-->
                 <p:dataTable
                         value="#{famClubController.lazyModel}"
-
+                        lazy="true"
                         var="item"
                         selection="#{famClubController.selected}"
                         selectionMode="single"
