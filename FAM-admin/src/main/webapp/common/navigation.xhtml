@@ -5,78 +5,80 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui">
 <ui:component>
-    <div id="navigation">
-        <h:form>
-            <p:menu type="sliding"
-                    style="width:150px; height: 450px;"
-                    rendered="#{login.loggedIn}"
-                    >
-
-                <p:menuitem value="Agenda"
-                            action="pretty:agenda"
-
-                            icon="ui-icon icon-date"
-                            immediate="true"
-                        />
+    <h:form id="frmNav">
+        <p:toolbar id="tbPrincipal"
+                   rendered="#{login.loggedIn}"
+                >
+            <p:toolbarGroup align="left">
+                <p:commandButton action="pretty:myAccount"
+                                 rendered="#{login.loggedIn}"
+                                 icon="ui-icon icon-home"
+                                 value=" My Account"/>
+                <p:commandButton value="Agenda"
+                                 action="pretty:agenda"
+                                 icon="ui-icon icon-date"
+                                 immediate="true"/>
                 <!--                <p:submenu label="Generated">-->
-                <p:menuitem value="FamClub"
-                            immediate="true"
-                            icon="ui-icon ui-icon-close"
-                            action="pretty:listClub"/>
-                <!--
-        <p:menuitem value="FamTeam" action="#{famTeamController.prepareList}"  ajax="false" icon="ui-icon ui-icon-close"/>
-        <p:menuitem value="FamSeason" action="#{famSeasonController.prepareList}"  ajax="false" icon="ui-icon ui-icon-close"/>  -->
-                <p:menuitem value="FamUser"
-                            action="pretty:listUser"
-                            icon="ui-icon icon-user_green"
-                            immediate="true"
-                        />
-                <p:menuitem value="FamPlayer"
-                            action="pretty:listPlayer"
-                            immediate="true"
-                        />
-                <p:menuitem value="FamEvent"
-                            action="pretty:listEvent"
-                            immediate="true"
-                        />
-                <p:menuitem value="Competitions"
-                            action="pretty:listSeasonCompetition"
-                            immediate="true"
-                        />
-                <p:menuitem value="Journées"
-                            action="pretty:listFixture"
-                            immediate="true"
-                        />
-                <p:menuitem value="Season"
-                            action="pretty:listSeason"
-                            immediate="true"
-                        />
-                <p:menuitem value="Team"
-                            action="pretty:listTeam"
-                            immediate="true"
-                        />
-                <p:menuitem value="Match"
-                            action="pretty:listMatch"
-                            immediate="true"
-                        />
-                <p:menuitem value="Entrainements"
-                            action="pretty:listWorkout"
-                            immediate="true"
-                        />
-                <p:menuitem value="Place"
-                            action="pretty:listPlace"
-                            icon="ui-icon icon-map"
-                            immediate="true"
-                        />
-                <p:menuitem value="Organisations"
-                            action="pretty:listOrganization"
-                            immediate="true"
-                        />
-                <p:menuitem value="Formation"
-                            action="pretty:listFormation"
-                            immediate="true"
-                        />
-                <p:submenu label="Referentiels">
+                <p:menuButton value="Commun">
+                    <p:menuitem value="FamClub"
+                                immediate="true"
+                                icon="ui-icon ui-icon-close"
+                                action="pretty:listClub"/>
+                    <!--
+            <p:menuitem value="FamTeam" action="#{famTeamController.prepareList}"  ajax="false" icon="ui-icon ui-icon-close"/>
+            <p:menuitem value="FamSeason" action="#{famSeasonController.prepareList}"  ajax="false" icon="ui-icon ui-icon-close"/>  -->
+                    <p:menuitem value="FamUser"
+                                action="pretty:listUser"
+                                icon="ui-icon icon-user_green"
+                                immediate="true"
+                            />
+                    <p:menuitem value="FamPlayer"
+                                action="pretty:listPlayer"
+                                immediate="true"
+                            />
+                    <p:menuitem value="FamEvent"
+                                action="pretty:listEvent"
+                                immediate="true"
+                            />
+                    <p:menuitem value="Competitions"
+                                action="pretty:listSeasonCompetition"
+                                immediate="true"
+                            />
+                    <p:menuitem value="Journées"
+                                action="pretty:listFixture"
+                                immediate="true"
+                            />
+                    <p:menuitem value="Season"
+                                action="pretty:listSeason"
+                                immediate="true"
+                            />
+                    <p:menuitem value="Team"
+                                action="pretty:listTeam"
+                                immediate="true"
+                            />
+                    <p:menuitem value="Match"
+                                action="pretty:listMatch"
+                                immediate="true"
+                            />
+                    <p:menuitem value="Entrainements"
+                                action="pretty:listWorkout"
+                                immediate="true"
+                            />
+                    <p:menuitem value="Place"
+                                action="pretty:listPlace"
+                                icon="ui-icon icon-map"
+                                immediate="true"
+                            />
+                    <p:menuitem value="Organisations"
+                                action="pretty:listOrganization"
+                                immediate="true"
+                            />
+                    <p:menuitem value="Formation"
+                                action="pretty:listFormation"
+                                immediate="true"
+                            />
+                </p:menuButton>
+                <p:menuButton value="Referentiels">
                     <p:menuitem value="Position"
                                 action="pretty:listPosition"
                                 immediate="true"
@@ -127,7 +129,7 @@
                                 url="/pages/famStaffFuction/List.xhtml"
                                 immediate="true"
                             />
-                </p:submenu>
+                </p:menuButton>
                 <!--                </p:submenu>-->
                 <!--                        <c:if test="${authentificationBean.isAdminSite}">
 <p:submenu label="Admin Site">
@@ -153,9 +155,12 @@
                                     icon="ui-icon ui-icon-disk"/>
                     </p:submenu>
                 </c:if>-->
-            </p:menu>
-        </h:form>
-    </div>
+            </p:toolbarGroup>
+            <p:toolbarGroup align="right">
+                <p:commandButton action="#{login.logout}" value="Logout"/>
+            </p:toolbarGroup>
+        </p:toolbar>
+    </h:form>
 </ui:component>
 </html>
 

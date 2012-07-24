@@ -49,17 +49,10 @@
 
         <p:layout style="min-width:400px;min-height:200px;" id="layout">
 
-            <p:layoutUnit position="center">
+            <p:layoutUnit position="west">
                 <h:outputText value="Hello, #{login.currentUser.displayName}"
                               rendered="#{login.loggedIn}"/>
                 <h:form id="navSignup">
-                    <p:commandLink action="#{login.home}">
-                        <h:outputText value="Home"/>
-                    </p:commandLink>
-                    <h:commandLink action="#{login.logout}"
-                                   rendered="#{login.loggedIn}">
-                        <h:outputText value=" Se déconnecter"/>
-                    </h:commandLink>
                     <h:commandLink action="#{authentificationBean.navSignup}"
                                    rendered="#{!login.loggedIn}">
                         <h:outputText value=" S'inscrire"/>
@@ -68,15 +61,12 @@
                                    rendered="#{!login.loggedIn}">
                         S'identifier
                     </h:commandLink>
-                    <p:commandLink action="pretty:myAccount"
-                                   rendered="#{login.loggedIn}">
-                        <h:outputText value=" My Account"/>
-                    </p:commandLink>
+                    **#{p:remoteUser()}**
                     <p:commandButton action="#{cacheBean.initCache()}" value="Refresh Cache"/>
-                    <p:commandButton action="#{login.logout}" value="Logout"/>
+
                 </h:form>
             </p:layoutUnit>
-            <p:layoutUnit position="west" size="50" resizable="false">
+            <p:layoutUnit position="center">
                 <p:ajaxStatus style="width:16px;height:16px;">
                     <f:facet name="start">
                         <h:graphicImage name="ajaxloading.gif" library="images"/>
@@ -94,8 +84,12 @@
                         <h:outputText value="Error!"/>
                     </f:facet>
                 </p:ajaxStatus>
+                <h:form id="frmMsg">
+                    <p:messages id="messages" showDetail="true" autoUpdate="true"/>
+                    <p:growl id="growl" showDetail="true" autoUpdate="true"/>
+                </h:form>
             </p:layoutUnit>
-            <p:layoutUnit position="east" resizable="false" size="350">
+            <p:layoutUnit position="east" resizable="false" size="200">
 
                 <!-- <p:themeSwitcher style="width:200px" effect="fade" var="t">
                     <f:selectItem itemLabel="Choose Theme" itemValue=""/>
@@ -133,10 +127,6 @@
 
             </p:layoutUnit>
         </p:layout>
-        <h:form id="frmMsg">
-            <p:messages id="messages" showDetail="true" autoUpdate="true"/>
-            <p:growl id="growl" showDetail="true" autoUpdate="true"/>
-        </h:form>
 
 
         <!--                </c:if>-->
