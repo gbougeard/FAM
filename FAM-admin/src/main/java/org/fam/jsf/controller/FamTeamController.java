@@ -10,10 +10,6 @@ import javax.annotation.PreDestroy;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
-import javax.faces.convert.Converter;
-import javax.faces.convert.FacesConverter;
 import java.io.Serializable;
 
 @ManagedBean(name = "famTeamController")
@@ -119,42 +115,42 @@ public class FamTeamController extends AbstractController<FamTeam> implements Se
         return super.loadAction();
     }
 
-    @FacesConverter(forClass = FamTeam.class)
-    public static class FamTeamControllerConverter implements Converter {
-
-        @Override
-        public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
-            if (value == null || value.length() == 0) {
-                return null;
-            }
-            FamTeamController controller = (FamTeamController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "famTeamController");
-            return controller.ejbFacade.find(getKey(value));
-        }
-
-        Long getKey(String value) {
-            Long key;
-            key = Long.valueOf(value);
-            return key;
-        }
-
-        String getStringKey(Long value) {
-            StringBuilder sb = new StringBuilder();
-            sb.append(value);
-            return sb.toString();
-        }
-
-        @Override
-        public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
-            if (object == null) {
-                return null;
-            }
-            if (object instanceof FamTeam) {
-                FamTeam o = (FamTeam) object;
-                return getStringKey(o.getIdTeam());
-            } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + FamTeamController.class.getName());
-            }
-        }
-    }
+//    @FacesConverter(forClass = FamTeam.class)
+//    public static class FamTeamControllerConverter implements Converter {
+//
+//        @Override
+//        public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
+//            if (value == null || value.length() == 0) {
+//                return null;
+//            }
+//            FamTeamController controller = (FamTeamController) facesContext.getApplication().getELResolver().
+//                    getValue(facesContext.getELContext(), null, "famTeamController");
+//            return controller.ejbFacade.find(getKey(value));
+//        }
+//
+//        Long getKey(String value) {
+//            Long key;
+//            key = Long.valueOf(value);
+//            return key;
+//        }
+//
+//        String getStringKey(Long value) {
+//            StringBuilder sb = new StringBuilder();
+//            sb.append(value);
+//            return sb.toString();
+//        }
+//
+//        @Override
+//        public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
+//            if (object == null) {
+//                return null;
+//            }
+//            if (object instanceof FamTeam) {
+//                FamTeam o = (FamTeam) object;
+//                return getStringKey(o.getIdTeam());
+//            } else {
+//                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + FamTeamController.class.getName());
+//            }
+//        }
+//    }
 }

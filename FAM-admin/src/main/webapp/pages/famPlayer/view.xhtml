@@ -9,194 +9,216 @@
         xmlns:p="http://primefaces.org/ui"
         >
 <ui:composition>
-    <f:metadata>
-        <!--        <f:event type="preRenderView" listener="#{chartBean.buildChart(bean)}" />	-->
-    </f:metadata>
-    <!--@elvariable id="bean" type="org.fam.ejb.model.FamPlayer"-->
+<f:metadata>
+    <!--        <f:event type="preRenderView" listener="#{chartBean.buildChart(bean)}" />	-->
+</f:metadata>
+<!--@elvariable id="bean" type="org.fam.ejb.model.FamPlayer"-->
+<h:panelGrid columns="3" cellpadding="10" columnClasses="verticalTop,verticalTop,verticalTop">
+    <h:graphicImage id="photo"
+                    library="images/players"
+                    name="#{initParam['org.fam.jsf.DEFAULT_PHOTO']}#{initParam['org.fam.jsf.DEFAULT_IMAGE_EXTENSION']}"
+                    cache="false"
+                    width="120"
+                    style="border: 4px double #6F6E6E;"
+            />
+
     <h:panelGrid columns="2">
-        <h:graphicImage id="photo"
-                        library="images/players"
-                        name="#{initParam['org.fam.jsf.DEFAULT_PHOTO']}#{initParam['org.fam.jsf.DEFAULT_IMAGE_EXTENSION']}"
-                        cache="false"
-                        width="120"
-                        style="border: 4px double #6F6E6E;"
+        <!--                    <h:outputText value="#{bundle.EditFamPlayerLabel_idPlayer}" for="idPlayer" />
+     <h:outputText id="idPlayer"
+                  value="#{bean.idPlayer}"
+                  title="#{bundle.EditFamPlayerTitle_idPlayer}"
+                  >
+         <p:ajax event="blur" update="msg_idPlayer"/>
+     </h:outputText>
+     <p:message id="msg_idPlayer" for="idPlayer"/> -->
+
+        <h:outputText value="#{bundle.EditFamUserLabel_firstName}"/>
+        <h:outputText id="firstName"
+                      value="#{bean.firstName}"
+                      title="#{bundle.EditFamUserTitle_firstName}"
                 />
 
-        <h:panelGrid columns="2">
-            <!--                    <h:outputText value="#{bundle.EditFamPlayerLabel_idPlayer}" for="idPlayer" />
-         <h:outputText id="idPlayer"
-                      value="#{bean.idPlayer}"
-                      title="#{bundle.EditFamPlayerTitle_idPlayer}"
-                      >
-             <p:ajax event="blur" update="msg_idPlayer"/>
-         </h:outputText>
-         <p:message id="msg_idPlayer" for="idPlayer"/> -->
+        <h:outputText value="#{bundle.EditFamUserLabel_lastName}"/>
+        <h:outputText id="lastName"
+                      value="#{bean.lastName}"
+                      title="#{bundle.EditFamUserTitle_lastName}"
+                />
 
-            <h:outputText value="#{bundle.EditFamUserLabel_firstName}"/>
-            <h:outputText id="firstName"
-                          value="#{bean.firstName}"
-                          title="#{bundle.EditFamUserTitle_firstName}"
-                    />
+        <h:outputText value="#{bundle.EditFamUserLabel_dtBirth}"/>
+        <h:outputText id="dtBirth"
+                      value="#{bean.dtBirth}"
+                      title="#{bundle.EditFamUserTitle_dtBirth}"
+                >
+            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="#{cacheBean.timeZone}"/>
+        </h:outputText>
 
-            <h:outputText value="#{bundle.EditFamUserLabel_lastName}"/>
-            <h:outputText id="lastName"
-                          value="#{bean.lastName}"
-                          title="#{bundle.EditFamUserTitle_lastName}"
-                    />
+        <h:outputText value="#{bundle.EditFamUserLabel_age}"/>
+        <h:outputText id="age"
+                      value="#{bean.age} #{bundle.EditFamUserLabel_yearsOld}"
+                      title="#{bundle.EditFamUserTitle_age}"
+                />
 
-            <h:outputText value="#{bundle.EditFamUserLabel_dtBirth}"/>
-            <h:outputText id="dtBirth"
-                          value="#{bean.dtBirth}"
-                          title="#{bundle.EditFamUserTitle_dtBirth}"
-                    >
-                <f:convertDateTime pattern="dd/MM/yyyy" timeZone="#{cacheBean.timeZone}"/>
-            </h:outputText>
+        <h:outputText value="Club actuel"/>
+        <h:outputText id="famClub"
+                      value="#{bean.currentPlayerSeason.famClub.libClub}"
+                      title="#{bundle.EditFamTeamTitle_famClub}"
+                />
 
-            <h:outputText value="#{bundle.EditFamUserLabel_age}"/>
-            <h:outputText id="age"
-                          value="#{bean.age} #{bundle.EditFamUserLabel_yearsOld}"
-                          title="#{bundle.EditFamUserTitle_age}"
-                    />
-
-            <h:outputText value="Club actuel"/>
-            <h:outputText id="famClub"
-                          value="#{bean.currentPlayerSeason.famClub.libClub}"
-                          title="#{bundle.EditFamTeamTitle_famClub}"
-                    />
-
-            <h:outputText value="Equipe par défaut"/>
-            <h:outputText id="famTeam"
-                          value="#{bean.currentPlayerSeason.famTeam.libTeam}"
-                          title="#{bundle.EditFamTeamTitle_famClub}"
-                    />
-        </h:panelGrid>
+        <h:outputText value="Equipe par défaut"/>
+        <h:outputText id="famTeam"
+                      value="#{bean.currentPlayerSeason.famTeam.libTeam}"
+                      title="#{bundle.EditFamTeamTitle_famClub}"
+                />
     </h:panelGrid>
 
-    <p:tabView style="height:300px;">
-        <p:tab title="Etat-Civil">
-            <p:tabView style="height:250px;">
-                <p:tab title="Contact">
-                    <h:panelGrid columns="2">
-                        <h:outputText value="#{bundle.EditFamUserLabel_email}"/>
-                        <h:outputText id="email"
-                                      value="#{bean.email}"
-                                      title="#{bundle.EditFamUserTitle_email}"
-                                />
+    <h:panelGrid columns="2" columnClasses="verticalTop,verticalTop">
+        <h:outputText value="Catégories"/>
+        <p:dataList id="dlCat"
+                    value="#{bean.currentPlayerSeason.famCategoryList}"
+                    var="cat"
+                >
+            <h:outputText value="#{cat.libCategory}"/>
+        </p:dataList>
+    </h:panelGrid>
+</h:panelGrid>
 
-                        <h:outputText value="#{bundle.EditFamUserLabel_tel}"/>
-                        <h:outputText id="tel"
-                                      value="#{bean.tel}"
-                                      title="#{bundle.EditFamUserTitle_tel}"
-                                />
-                    </h:panelGrid>
-                </p:tab>
+<p:tabView style="height:300px;">
+    <p:tab title="Etat-Civil">
+        <p:tabView style="height:250px;">
+            <p:tab title="Contact">
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.EditFamUserLabel_email}"/>
+                    <h:outputText id="email"
+                                  value="#{bean.email}"
+                                  title="#{bundle.EditFamUserTitle_email}"
+                            />
 
-                <p:tab title="Adresse">
-                    <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.EditFamUserLabel_tel}"/>
+                    <h:outputText id="tel"
+                                  value="#{bean.tel}"
+                                  title="#{bundle.EditFamUserTitle_tel}"
+                            />
+                </h:panelGrid>
+            </p:tab>
 
-                        <h:outputText value="#{bundle.EditFamUserLabel_address}"/>
-                        <h:outputText id="address"
-                                      value="#{bean.address}"
-                                      title="#{bundle.EditFamUserTitle_address}"
-                                />
+            <p:tab title="Adresse">
+                <h:panelGrid columns="2">
 
-                        <h:outputText value="#{bundle.EditFamUserLabel_zipcode}"/>
-                        <h:outputText id="zipcode"
-                                      value="#{bean.zipcode}"
-                                      title="#{bundle.EditFamUserTitle_zipcode}"
-                                />
+                    <h:outputText value="#{bundle.EditFamUserLabel_address}"/>
+                    <h:outputText id="address"
+                                  value="#{bean.address}"
+                                  title="#{bundle.EditFamUserTitle_address}"
+                            />
 
-                        <h:outputText value="#{bundle.EditFamUserLabel_city}"/>
-                        <h:outputText id="city"
-                                      value="#{bean.city}"
-                                      title="#{bundle.EditFamUserTitle_city}"
-                                />
+                    <h:outputText value="#{bundle.EditFamUserLabel_zipcode}"/>
+                    <h:outputText id="zipcode"
+                                  value="#{bean.zipcode}"
+                                  title="#{bundle.EditFamUserTitle_zipcode}"
+                            />
 
-                    </h:panelGrid>
-                </p:tab>
+                    <h:outputText value="#{bundle.EditFamUserLabel_city}"/>
+                    <h:outputText id="city"
+                                  value="#{bean.city}"
+                                  title="#{bundle.EditFamUserTitle_city}"
+                            />
 
-                <p:tab title="Infos Club">
-                    <h:panelGrid columns="2">
-                        <h:outputText value="#{bundle.EditFamPlayerLabel_numLicense}"/>
-                        <h:outputText id="numLicense"
-                                      value="#{bean.numLicense}"
-                                      title="#{bundle.EditFamPlayerTitle_numLicense}"
-                                />
+                </h:panelGrid>
+            </p:tab>
 
-                        <h:outputText value="#{bundle.EditFamUserLabel_dtArrival}"/>
-                        <h:outputText id="dtArrival"
-                                      value="#{bean.dtArrival}"
-                                      title="#{bundle.EditFamUserTitle_dtArrival}"
-                                >
-                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="#{cacheBean.timeZone}"/>
-                        </h:outputText>
-                        <h:outputText value="#{bundle.EditFamUserLabel_seniority}"/>
-                        <h:outputText id="seniority"
-                                      value="#{bean.seniority} #{bundle.EditFamUserLabel_years}"
-                                      title="#{bundle.EditFamUserTitle_seniority}"
-                                />
-                    </h:panelGrid>
-                </p:tab>
+            <p:tab title="Infos Club">
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.EditFamPlayerLabel_numLicense}"/>
+                    <h:outputText id="numLicense"
+                                  value="#{bean.numLicense}"
+                                  title="#{bundle.EditFamPlayerTitle_numLicense}"
+                            />
 
-                <p:tab title="Postes">
-                    <h:panelGrid columns="2">
-                        <p:dataList id="positions"
-                                    value="#{bean.famPlayerPositionList}"
-                                    var="p"
-                                >
-                            <h:outputText value="#{p.famPosition.libPosition}"/>
-                        </p:dataList>
-                    </h:panelGrid>
-                </p:tab>
+                    <h:outputText value="#{bundle.EditFamUserLabel_dtArrival}"/>
+                    <h:outputText id="dtArrival"
+                                  value="#{bean.dtArrival}"
+                                  title="#{bundle.EditFamUserTitle_dtArrival}"
+                            >
+                        <f:convertDateTime pattern="dd/MM/yyyy" timeZone="#{cacheBean.timeZone}"/>
+                    </h:outputText>
+                    <h:outputText value="#{bundle.EditFamUserLabel_seniority}"/>
+                    <h:outputText id="seniority"
+                                  value="#{bean.seniority} #{bundle.EditFamUserLabel_years}"
+                                  title="#{bundle.EditFamUserTitle_seniority}"
+                            />
+                </h:panelGrid>
+            </p:tab>
 
-                <p:tab title="En cas d'urgence">
-                    <h:panelGrid columns="2">
-                        <h:outputText value="Personne à contacter"/>
-                        <h:outputText id="iceContact"
-                                      value="#{bean.iceContact}"
-                                      title="#{bundle.EditFamUserTitle_iceContact}"
-                                />
+            <p:tab title="Postes">
+                <h:panelGrid columns="2">
+                    <p:dataList id="positions"
+                                value="#{bean.famPlayerPositionList}"
+                                var="p"
+                            >
+                        <h:outputText value="#{p.famPosition.libPosition}"/>
+                    </p:dataList>
+                </h:panelGrid>
+            </p:tab>
 
-                        <h:outputText value="Téléphone"/>
-                        <h:outputText id="iceTel"
-                                      value="#{bean.iceTel}"
-                                      title="#{bundle.EditFamUserTitle_iceTel}"
-                                />
+            <p:tab title="En cas d'urgence">
+                <h:panelGrid columns="2">
+                    <h:outputText value="Personne à contacter"/>
+                    <h:outputText id="iceContact"
+                                  value="#{bean.iceContact}"
+                                  title="#{bundle.EditFamUserTitle_iceContact}"
+                            />
 
-                        <h:outputText value="Commentaires"/>
-                        <h:outputText id="iceComment"
-                                      value="#{bean.iceComment}"
-                                />
-                    </h:panelGrid>
-                </p:tab>
+                    <h:outputText value="Téléphone"/>
+                    <h:outputText id="iceTel"
+                                  value="#{bean.iceTel}"
+                                  title="#{bundle.EditFamUserTitle_iceTel}"
+                            />
 
-            </p:tabView>
-        </p:tab>
-        <p:tab title="Profil" rendered="#{not empty bean.idPlayer}">
-            <h:graphicImage id="chart" height="200"
-                            style="border: 4px double #6F6E6E;"
-                            url="#{bean.currentProfile.profileChartUrl}"/>
-        </p:tab>
-        <p:tab title="Stats" rendered="#{not empty bean.idPlayer}">
-            <ui:include src="stats.xhtml">
-                <ui:param name="bean" value="#{bean.currentStat}"/>
-            </ui:include>
-        </p:tab>
-        <p:tab title="Saisons" rendered="#{not empty bean.idPlayer}">
-            <p:tabView var="s" value="#{bean.famPlayerSeasons}" style="height:250px;">
-                <p:tab title="#{s.famSeason.libSeason}">
-                    <h:panelGrid columns="2">
-                        <h:graphicImage id="chart" height="200"
-                                        style="border: 4px double #6F6E6E;"
-                                        url="#{s.famPlayerProfile.profileChartUrl}"/>
+                    <h:outputText value="Commentaires"/>
+                    <h:outputText id="iceComment"
+                                  value="#{bean.iceComment}"
+                            />
+                </h:panelGrid>
+            </p:tab>
+
+        </p:tabView>
+    </p:tab>
+    <p:tab title="Profil" rendered="#{not empty bean.idPlayer}">
+        <h:graphicImage id="chart" height="200"
+                        style="border: 4px double #6F6E6E;"
+                        url="#{bean.currentProfile.profileChartUrl}"/>
+    </p:tab>
+    <p:tab title="Stats" rendered="#{not empty bean.idPlayer}">
+        <ui:include src="stats.xhtml">
+            <ui:param name="bean" value="#{bean.currentStat}"/>
+        </ui:include>
+    </p:tab>
+    <p:tab title="Saisons" rendered="#{not empty bean.idPlayer}">
+        <p:tabView var="s" value="#{bean.famPlayerSeasons}" style="height:250px;">
+            <p:tab title="#{s.famSeason.libSeason}">
+                <h:panelGrid columns="3" cellpadding="10" columnClasses="verticalTop,verticalTop,verticalTop">
+                    <h:graphicImage id="chart" height="200"
+                                    style="border: 4px double #6F6E6E;"
+                                    url="#{s.famPlayerProfile.profileChartUrl}"/>
+                    <h:panelGroup>
                         <ui:include src="stats.xhtml">
                             <ui:param name="bean" value="#{s.famPlayerStat}"/>
                         </ui:include>
-                    </h:panelGrid>
-                </p:tab>
-            </p:tabView>
+                    </h:panelGroup>
 
-        </p:tab>
-    </p:tabView>
+                    <h:panelGrid columns="2" columnClasses="verticalTop,verticalTop">
+                        <h:outputText value="Catégories"/>
+                        <p:dataList id="dlCat"
+                                    value="#{s.famCategoryList}"
+                                    var="cat"
+                                >
+                            <h:outputText value="#{cat.libCategory}"/>
+                        </p:dataList>
+                    </h:panelGrid>
+                </h:panelGrid>
+            </p:tab>
+        </p:tabView>
+
+    </p:tab>
+</p:tabView>
 </ui:composition>
 </html>

@@ -36,7 +36,7 @@ import java.io.Serializable;
         })
 @NamedQueries({
         @NamedQuery(name = FamCategory.FIND_ALL,
-                query = "SELECT f FROM FamCategory f"),
+                query = "SELECT f FROM FamCategory f ORDER BY f.codCategory ASC"),
         @NamedQuery(name = FamCategory.FIND_BY_ID_CLUB,
                 query = "SELECT f FROM FamCategory f WHERE f.idCategory = :idCategory"),
         @NamedQuery(name = FamCategory.FIND_BY_LIB_CLUB,

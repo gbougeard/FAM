@@ -156,9 +156,6 @@ public class FamPlayer extends FamEntity implements Serializable {
      *
      */
     public static final String COL_ID_USER = "id_user";
-    /**
-     *
-     */
     public static final String PROP_USER = "famUser";
     @OneToOne//(optional = false)
     @JoinColumn(name = COL_ID_USER, referencedColumnName = FamUser.COL_ID)
@@ -169,9 +166,6 @@ public class FamPlayer extends FamEntity implements Serializable {
      *
      */
     public static final String PROP_DT_BIRTH = "dtBirth";
-    /**
-     *
-     */
     public static final String COL_DT_BIRTH = "dt_birth";
     @Basic(optional = false)
     @Column(name = COL_DT_BIRTH)
@@ -185,9 +179,6 @@ public class FamPlayer extends FamEntity implements Serializable {
      *
      */
     public static final String PROP_DT_ARRIVAL = "dtArrival";
-    /**
-     *
-     */
     public static final String COL_DT_ARRIVAL = "dt_arrival";
     @Basic(optional = false)
     @Column(name = COL_DT_ARRIVAL)

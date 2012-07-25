@@ -8,9 +8,20 @@ package org.fam.ejb.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author mask_hot
@@ -62,11 +73,7 @@ public class FamPlayerSeason implements Serializable {
      *
      */
     public static final String COL_ID_PLAYER = "id_player";
-    /**
-     *
-     */
     public static final String PROP_PLAYER = "famPlayer";
-
     @Id
     @ManyToOne
     @JoinColumn(name = COL_ID_PLAYER, referencedColumnName = FamPlayer.COL_ID)
@@ -77,9 +84,6 @@ public class FamPlayerSeason implements Serializable {
      *
      */
     public static final String COL_ID_SEASON = "id_season";
-    /**
-     *
-     */
     public static final String PROP_SEASON = "famSeason";
     @Id
     @ManyToOne
@@ -91,9 +95,6 @@ public class FamPlayerSeason implements Serializable {
      *
      */
     public static final String COL_ID_CLUB = FamClub.COL_ID;
-    /**
-     *
-     */
     public static final String PROP_CLUB = "famClub";
     //    @Id
     @ManyToOne
@@ -106,9 +107,6 @@ public class FamPlayerSeason implements Serializable {
      *
      */
     public static final String COL_ID_TEAM = FamTeam.COL_ID;
-    /**
-     *
-     */
     public static final String PROP_TEAM = "famTeam";
     @ManyToOne
     @JoinColumn(name = COL_ID_TEAM, referencedColumnName = FamTeam.COL_ID)
@@ -119,6 +117,18 @@ public class FamPlayerSeason implements Serializable {
     private FamPlayerProfile famPlayerProfile;
     @Embedded
     private FamPlayerStat famPlayerStat;
+
+    @ManyToMany
+    @JoinTable(name = "fam_player_season_category",
+            joinColumns = {
+                    @JoinColumn(name = COL_ID_PLAYER, referencedColumnName = COL_ID_PLAYER),
+                    @JoinColumn(name = COL_ID_SEASON, referencedColumnName = COL_ID_SEASON)
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = FamCategory.COL_ID)
+            }
+    )
+    private List<FamCategory> famCategoryList;
 
     /**
      *

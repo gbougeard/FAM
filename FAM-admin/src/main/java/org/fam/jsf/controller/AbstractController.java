@@ -40,7 +40,7 @@ public abstract class AbstractController<T> extends AbstractBackingBean {
     protected int selectedItemIndex;
     //
     private LazyDataModel<T> lazyModel;
-    private List lazyItems = new ArrayList<T>();
+    private List<T> lazyItems = new ArrayList<T>();
     //
 //    @URLQueryParameter("id")
     Long id;
@@ -63,11 +63,11 @@ public abstract class AbstractController<T> extends AbstractBackingBean {
         lazyModel = new LazyDataModel<T>() {
 
             @Override
-            public List load(int first,
-                             int pageSize,
-                             String sortField,
-                             SortOrder sortOrder,
-                             Map<String, String> filters) {
+            public List<T> load(int first,
+                                int pageSize,
+                                String sortField,
+                                SortOrder sortOrder,
+                                Map<String, String> filters) {
 
                 if (LOGGER.isDebugEnabled()) {
                     LOGGER.debug("Loading the lazy data between " + first + " " + pageSize);
