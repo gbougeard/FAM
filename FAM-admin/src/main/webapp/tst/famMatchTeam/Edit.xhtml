@@ -16,7 +16,7 @@
         <h:form>
             <p:panel header="#{bundle.EditFamMatchTeamTitle}">
                 <h:panelGrid columns="3">
-                    <h:outputLabel value="#{bundle.EditFamMatchTeamLabel_famMatch}" for="famMatch"/>
+                    <p:outputLabel value="#{bundle.EditFamMatchTeamLabel_famMatch}" for="famMatch"/>
                     <h:selectOneMenu id="famMatch"
                                      value="#{famMatchTeamController.selected.famMatch}"
                                      title="#{bundle.EditFamMatchTeamTitle_famMatch}"
@@ -26,7 +26,7 @@
                     </h:selectOneMenu>
                     <p:message id="msg_famMatch" for="famMatch"/>
 
-                    <h:outputLabel value="#{bundle.EditFamMatchTeamLabel_famTeam}" for="famTeam"/>
+                    <p:outputLabel value="#{bundle.EditFamMatchTeamLabel_famTeam}" for="famTeam"/>
                     <h:selectOneMenu id="famTeam"
                                      value="#{famMatchTeamController.selected.famTeam}"
                                      title="#{bundle.EditFamMatchTeamTitle_famTeam}"
@@ -36,7 +36,7 @@
                     </h:selectOneMenu>
                     <p:message id="msg_famTeam" for="famTeam"/>
 
-                    <h:outputLabel value="#{bundle.EditFamMatchTeamLabel_defeat}" for="defeat"/>
+                    <p:outputLabel value="#{bundle.EditFamMatchTeamLabel_defeat}" for="defeat"/>
                     <p:inputText id="defeat"
                                  value="#{famMatchTeamController.selected.defeat}"
                                  title="#{bundle.EditFamMatchTeamTitle_defeat}"
@@ -47,7 +47,7 @@
                     </p:inputText>
                     <p:message id="msg_defeat" for="defeat"/>
 
-                    <h:outputLabel value="#{bundle.EditFamMatchTeamLabel_draw}" for="draw"/>
+                    <p:outputLabel value="#{bundle.EditFamMatchTeamLabel_draw}" for="draw"/>
                     <p:inputText id="draw"
                                  value="#{famMatchTeamController.selected.draw}"
                                  title="#{bundle.EditFamMatchTeamTitle_draw}"
@@ -58,7 +58,7 @@
                     </p:inputText>
                     <p:message id="msg_draw" for="draw"/>
 
-                    <h:outputLabel value="#{bundle.EditFamMatchTeamLabel_goalScored}" for="goalScored"/>
+                    <p:outputLabel value="#{bundle.EditFamMatchTeamLabel_goalScored}" for="goalScored"/>
                     <p:inputText id="goalScored"
                                  value="#{famMatchTeamController.selected.goalScored}"
                                  title="#{bundle.EditFamMatchTeamTitle_goalScored}"
@@ -67,7 +67,7 @@
                     </p:inputText>
                     <p:message id="msg_goalScored" for="goalScored"/>
 
-                    <h:outputLabel value="#{bundle.EditFamMatchTeamLabel_goalShipped}" for="goalShipped"/>
+                    <p:outputLabel value="#{bundle.EditFamMatchTeamLabel_goalShipped}" for="goalShipped"/>
                     <p:inputText id="goalShipped"
                                  value="#{famMatchTeamController.selected.goalShipped}"
                                  title="#{bundle.EditFamMatchTeamTitle_goalShipped}"
@@ -76,7 +76,7 @@
                     </p:inputText>
                     <p:message id="msg_goalShipped" for="goalShipped"/>
 
-                    <h:outputLabel value="#{bundle.EditFamMatchTeamLabel_home}" for="home"/>
+                    <p:outputLabel value="#{bundle.EditFamMatchTeamLabel_home}" for="home"/>
                     <p:inputText id="home"
                                  value="#{famMatchTeamController.selected.home}"
                                  title="#{bundle.EditFamMatchTeamTitle_home}"
@@ -85,7 +85,7 @@
                     </p:inputText>
                     <p:message id="msg_home" for="home"/>
 
-                    <h:outputLabel value="#{bundle.EditFamMatchTeamLabel_points}" for="points"/>
+                    <p:outputLabel value="#{bundle.EditFamMatchTeamLabel_points}" for="points"/>
                     <p:inputText id="points"
                                  value="#{famMatchTeamController.selected.points}"
                                  title="#{bundle.EditFamMatchTeamTitle_points}"
@@ -96,7 +96,7 @@
                     </p:inputText>
                     <p:message id="msg_points" for="points"/>
 
-                    <h:outputLabel value="#{bundle.EditFamMatchTeamLabel_victory}" for="victory"/>
+                    <p:outputLabel value="#{bundle.EditFamMatchTeamLabel_victory}" for="victory"/>
                     <p:inputText id="victory"
                                  value="#{famMatchTeamController.selected.victory}"
                                  title="#{bundle.EditFamMatchTeamTitle_victory}"

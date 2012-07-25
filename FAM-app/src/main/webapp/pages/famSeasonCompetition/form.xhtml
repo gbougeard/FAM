@@ -6,12 +6,11 @@
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:c="http://java.sun.com/jsp/jstl/core"
         xmlns:p="http://primefaces.org/ui"
         >
 
     <h:panelGrid columns="3">
-        <!--                    <h:outputLabel value="#{bundle.EditFamSeasonCompetitionLabel_idSeasonCompetition}" for="idSeasonCompetition" />
+        <!--                    <p:outputLabel value="#{bundle.EditFamSeasonCompetitionLabel_idSeasonCompetition}" for="idSeasonCompetition" />
      <p:inputText id="idSeasonCompetition"
                   value="#{bean.idSeasonCompetition}"
                   title="#{bundle.EditFamSeasonCompetitionTitle_idSeasonCompetition}"
@@ -20,7 +19,7 @@
      </p:inputText>
      <p:message id="msg_idSeasonCompetition" for="idSeasonCompetition"/> -->
 
-        <h:outputLabel value="#{bundle.EditFamSeasonCompetitionLabel_famCompetition}" for="famCompetition"/>
+        <p:outputLabel value="#{bundle.EditFamSeasonCompetitionLabel_famCompetition}" for="famCompetition"/>
         <h:selectOneMenu id="famCompetition"
                          value="#{bean.famTypCompetition}"
                          title="#{bundle.EditFamSeasonCompetitionTitle_famCompetition}"
@@ -35,7 +34,7 @@
         </h:selectOneMenu>
         <p:message id="msg_famCompetition" for="famCompetition"/>
 
-        <h:outputLabel value="#{bundle.EditFamSeasonCompetitionLabel_famSeason}" for="famSeason"/>
+        <p:outputLabel value="#{bundle.EditFamSeasonCompetitionLabel_famSeason}" for="famSeason"/>
         <h:selectOneMenu id="famSeason"
                          value="#{bean.famSeason}"
                          title="#{bundle.EditFamSeasonCompetitionTitle_famSeason}"
@@ -50,7 +49,7 @@
         </h:selectOneMenu>
         <p:message id="msg_famSeason" for="famSeason"/>
 
-        <h:outputLabel value="#{bundle.EditFamSeasonCompetitionLabel_famScale}" for="famScale"/>
+        <p:outputLabel value="#{bundle.EditFamSeasonCompetitionLabel_famScale}" for="famScale"/>
         <h:selectOneMenu id="famScale"
                          value="#{bean.famScale}"
                          title="#{bundle.EditFamSeasonCompetitionTitle_famScale}"

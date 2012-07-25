@@ -6,7 +6,6 @@
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:c="http://java.sun.com/jsp/jstl/core"
         xmlns:p="http://primefaces.org/ui"
         template="/common/template.xhtml">
 
@@ -17,7 +16,7 @@
         <h:form>
             <p:panel header="#{bundle.EditFamUserSeasonTitle}">
                 <h:panelGrid columns="3">
-                    <h:outputLabel value="#{bundle.EditFamUserSeasonLabel_famUser}" for="famUser"/>
+                    <p:outputLabel value="#{bundle.EditFamUserSeasonLabel_famUser}" for="famUser"/>
                     <h:selectOneMenu id="famUser"
                                      value="#{famUserSeasonController.selected.famUser}"
                                      title="#{bundle.EditFamUserSeasonTitle_famUser}"
@@ -27,7 +26,7 @@
                     </h:selectOneMenu>
                     <p:message id="msg_famUser" for="famUser"/>
 
-                    <h:outputLabel value="#{bundle.EditFamUserSeasonLabel_famSeason}" for="famSeason"/>
+                    <p:outputLabel value="#{bundle.EditFamUserSeasonLabel_famSeason}" for="famSeason"/>
                     <h:selectOneMenu id="famSeason"
                                      value="#{famUserSeasonController.selected.famSeason}"
                                      title="#{bundle.EditFamUserSeasonTitle_famSeason}"
@@ -37,7 +36,7 @@
                     </h:selectOneMenu>
                     <p:message id="msg_famSeason" for="famSeason"/>
 
-                    <h:outputLabel value="#{bundle.EditFamUserSeasonLabel_isAdmin}" for="isAdmin"/>
+                    <p:outputLabel value="#{bundle.EditFamUserSeasonLabel_isAdmin}" for="isAdmin"/>
                     <p:inputText id="isAdmin"
                                  value="#{famUserSeasonController.selected.isAdmin}"
                                  title="#{bundle.EditFamUserSeasonTitle_isAdmin}"
@@ -46,7 +45,7 @@
                     </p:inputText>
                     <p:message id="msg_isAdmin" for="isAdmin"/>
 
-                    <h:outputLabel value="#{bundle.EditFamUserSeasonLabel_isCoach}" for="isCoach"/>
+                    <p:outputLabel value="#{bundle.EditFamUserSeasonLabel_isCoach}" for="isCoach"/>
                     <p:inputText id="isCoach"
                                  value="#{famUserSeasonController.selected.isCoach}"
                                  title="#{bundle.EditFamUserSeasonTitle_isCoach}"
@@ -55,7 +54,7 @@
                     </p:inputText>
                     <p:message id="msg_isCoach" for="isCoach"/>
 
-                    <h:outputLabel value="#{bundle.EditFamUserSeasonLabel_isPlayer}" for="isPlayer"/>
+                    <p:outputLabel value="#{bundle.EditFamUserSeasonLabel_isPlayer}" for="isPlayer"/>
                     <p:inputText id="isPlayer"
                                  value="#{famUserSeasonController.selected.isPlayer}"
                                  title="#{bundle.EditFamUserSeasonTitle_isPlayer}"
@@ -64,7 +63,7 @@
                     </p:inputText>
                     <p:message id="msg_isPlayer" for="isPlayer"/>
 
-                    <h:outputLabel value="#{bundle.EditFamUserSeasonLabel_isReporter}" for="isReporter"/>
+                    <p:outputLabel value="#{bundle.EditFamUserSeasonLabel_isReporter}" for="isReporter"/>
                     <p:inputText id="isReporter"
                                  value="#{famUserSeasonController.selected.isReporter}"
                                  title="#{bundle.EditFamUserSeasonTitle_isReporter}"

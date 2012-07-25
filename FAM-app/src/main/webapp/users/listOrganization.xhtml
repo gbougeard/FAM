@@ -3,7 +3,6 @@
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:c="http://java.sun.com/jsp/jstl/core"
         xmlns:p="http://primefaces.org/ui"
         template="/common/template.xhtml">
 
@@ -25,7 +24,7 @@
                     </p:ajaxStatus>
 
                     <h:panelGrid columns="3" id="formOrganization">
-                        <h:outputLabel value="Id :" for="lbl_idOrganization"></h:outputLabel>
+                        <p:outputLabel value="Id :" for="lbl_idOrganization"></p:outputLabel>
                         <p:inputText id="lbl_idOrganization"
                                      value="#{organizationController.selected.idOrganization}"
                                      readonly="true">
@@ -33,21 +32,21 @@
                         </p:inputText>
                         <p:message id="msgId" for="lbl_idOrganization"/>
 
-                        <h:outputLabel value="Libellé :" for="lbl_libOrganization"></h:outputLabel>
+                        <p:outputLabel value="Libellé :" for="lbl_libOrganization"></p:outputLabel>
                         <p:inputText id="lbl_libOrganization"
                                      value="#{organizationController.selected.libOrganization}">
                             <p:ajax event="blur" update="msgLib"/>
                         </p:inputText>
                         <p:message id="msgLib" for="lbl_libOrganization"/>
 
-                        <h:outputLabel value="Code :" for="lbl_code"></h:outputLabel>
+                        <p:outputLabel value="Code :" for="lbl_code"></p:outputLabel>
                         <p:inputText id="lbl_code"
                                      value="#{organizationController.selected.codeOrganization}">
                             <p:ajax event="keyup" update="msgCode"/>
                         </p:inputText>
                         <p:message id="msgCode" for="lbl_code"/>
 
-                        <h:outputLabel value="Parent :" for="selectParent"></h:outputLabel>
+                        <p:outputLabel value="Parent :" for="selectParent"></p:outputLabel>
                         <h:selectOneMenu id="selectParent">
                             <f:selectItem itemLabel="Parents" noSelectionOption="null"/>
                             <f:selectItems value="#{cacheBean.listOrganization}"

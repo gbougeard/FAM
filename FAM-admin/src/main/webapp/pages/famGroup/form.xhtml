@@ -9,7 +9,7 @@
         >
 
     <h:panelGrid columns="3">
-        <!--                    <h:outputLabel value="#{bundle.EditFamGroupLabel_idGroup}" for="idGroup" />
+        <!--                    <p:outputLabel value="#{bundle.EditFamGroupLabel_idGroup}" for="idGroup" />
      <p:inputText id="idGroup"
                   value="#{bean.idGroup}"
                   title="#{bundle.EditFamGroupTitle_idGroup}"
@@ -18,7 +18,8 @@
      </p:inputText>
      <p:message id="msg_idGroup" for="idGroup"/> -->
 
-        <h:outputLabel value="#{bundle.EditFamGroupLabel_groupname}" for="groupname"/>
+        <p:outputLabel value="#{bundle.EditFamGroupLabel_groupname}" for="groupname"/>
+        <!--@elvariable id="bean" type="org.fam.ejb.model.FamGroup"-->
         <p:inputText id="groupname"
                      value="#{bean.groupname}"
                      title="#{bundle.EditFamGroupTitle_groupname}"
@@ -27,7 +28,7 @@
         </p:inputText>
         <p:message id="msg_groupname" for="groupname"/>
 
-        <h:outputLabel value="#{bundle.EditFamGroupLabel_login}" for="login"/>
+        <p:outputLabel value="#{bundle.EditFamGroupLabel_login}" for="login"/>
         <p:inputText id="login"
                      value="#{bean.login}"
                      title="#{bundle.EditFamGroupTitle_login}"
@@ -36,7 +37,7 @@
         </p:inputText>
         <p:message id="msg_login" for="login"/>
 
-        <!--                    <h:outputLabel value="#{bundle.EditFamGroupLabel_dtCreat}" for="dtCreat" />
+        <!--                    <p:outputLabel value="#{bundle.EditFamGroupLabel_dtCreat}" for="dtCreat" />
      <p:inputText id="dtCreat"
                   value="#{bean.dtCreat}"
                   title="#{bundle.EditFamGroupTitle_dtCreat}"
@@ -46,7 +47,7 @@
      </p:inputText>
      <p:message id="msg_dtCreat" for="dtCreat"/>
 
-     <h:outputLabel value="#{bundle.EditFamGroupLabel_dtModif}" for="dtModif" />
+     <p:outputLabel value="#{bundle.EditFamGroupLabel_dtModif}" for="dtModif" />
      <p:inputText id="dtModif"
                   value="#{bean.dtModif}"
                   title="#{bundle.EditFamGroupTitle_dtModif}"

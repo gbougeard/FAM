@@ -6,7 +6,7 @@
         template="/common/template.xhtml">
     <ui:define name="title">Agenda</ui:define>
     <ui:define name="body">
-        <center>
+        <div style="text-align: center;">
             <h:form>
                 <p:toolbar>
 
@@ -56,10 +56,10 @@
                           showEffect="clip"
                           hideEffect="clip">
                     <h:panelGrid id="eventDetails" columns="2">
-                        <h:outputLabel for="title" value="Title:"/>
+                        <p:outputLabel for="title" value="Title:"/>
                         <p:inputText id="title" value="#{famEventController.event.title}"/>
 
-                        <h:outputLabel for="from" value="From:"/>
+                        <p:outputLabel for="from" value="From:"/>
                         <p:calendar id="from"
                                     value="#{famEventController.event.startDate}"
                                     pattern="dd/MM/yyyy HH:mm"
@@ -71,7 +71,7 @@
 
                                 />
 
-                        <h:outputLabel for="to" value="To:"/>
+                        <p:outputLabel for="to" value="To:"/>
                         <p:calendar id="to"
                                     value="#{famEventController.event.endDate}"
                                     pattern="dd/MM/yyyy HH:mm"
@@ -82,7 +82,7 @@
                                     lang="fr"
                                 />
 
-                        <h:outputLabel for="allDay" value="All Day:"/>
+                        <p:outputLabel for="allDay" value="All Day:"/>
                         <h:selectBooleanCheckbox id="allDay"
                                                  value="#{famEventController.event.allDay}"/>
 
@@ -97,6 +97,6 @@
                     </h:panelGrid>
                 </p:dialog>
             </h:form>
-        </center>
+        </div>
     </ui:define>
 </ui:composition>

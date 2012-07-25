@@ -10,7 +10,7 @@
         >
 
     <h:panelGrid columns="3">
-        <!--                    <h:outputLabel value="#{bundle.EditFamTypCompetitionLabel_idCompetition}" for="idCompetition" />
+        <!--                    <p:outputLabel value="#{bundle.EditFamTypCompetitionLabel_idCompetition}" for="idCompetition" />
      <p:inputText id="idCompetition"
                   value="#{bean.idCompetition}"
                   title="#{bundle.EditFamTypCompetitionTitle_idCompetition}"
@@ -19,7 +19,8 @@
      </p:inputText>
      <p:message id="msg_idCompetition" for="idCompetition"/> -->
 
-        <h:outputLabel value="#{bundle.EditFamTypCompetitionLabel_libCompetition}" for="libCompetition"/>
+        <p:outputLabel value="#{bundle.EditFamTypCompetitionLabel_libCompetition}" for="libCompetition"/>
+        <!--@elvariable id="bean" type="org.fam.ejb.model.FamTypCompetition"-->
         <p:inputText id="libCompetition"
                      value="#{bean.libCompetition}"
                      title="#{bundle.EditFamTypCompetitionTitle_libCompetition}"
@@ -28,7 +29,7 @@
         </p:inputText>
         <p:message id="msg_libCompetition" for="libCompetition"/>
 
-        <h:outputLabel value="#{bundle.EditFamTypCompetitionLabel_codCompetition}" for="codCompetition"/>
+        <p:outputLabel value="#{bundle.EditFamTypCompetitionLabel_codCompetition}" for="codCompetition"/>
         <p:inputText id="codCompetition"
                      value="#{bean.codCompetition}"
                      title="#{bundle.EditFamTypCompetitionTitle_codCompetition}"
@@ -37,7 +38,7 @@
         </p:inputText>
         <p:message id="msg_codCompetition" for="codCompetition"/>
 
-        <h:outputLabel value="#{bundle.EditFamTypCompetitionLabel_isChampionship}" for="isChampionship"/>
+        <p:outputLabel value="#{bundle.EditFamTypCompetitionLabel_isChampionship}" for="isChampionship"/>
         <p:selectBooleanCheckbox id="isChampionship"
                                  value="#{bean.isChampionship}"
                 >
@@ -45,7 +46,7 @@
         </p:selectBooleanCheckbox>
         <p:message id="msg_isChampionship" for="isChampionship"/>
 
-        <h:outputLabel value="#{bundle.EditFamTypCompetitionLabel_typMatch}" for="typMatch"/>
+        <p:outputLabel value="#{bundle.EditFamTypCompetitionLabel_typMatch}" for="typMatch"/>
         <h:selectOneMenu id="typMatch"
                          value="#{bean.famTypMatch}">
             <f:selectItems value="#{cacheBean.listTypMatch}"
@@ -57,7 +58,7 @@
         <p:message id="msg_typMatch" for="typMatch"/>
 
 
-        <!--                    <h:outputLabel value="#{bundle.EditFamTypCompetitionLabel_dtCreat}" for="dtCreat" />
+        <!--                    <p:outputLabel value="#{bundle.EditFamTypCompetitionLabel_dtCreat}" for="dtCreat" />
      <p:inputText id="dtCreat"
                   value="#{bean.dtCreat}"
                   title="#{bundle.EditFamTypCompetitionTitle_dtCreat}"
@@ -67,7 +68,7 @@
      </p:inputText>
      <p:message id="msg_dtCreat" for="dtCreat"/>
 
-     <h:outputLabel value="#{bundle.EditFamTypCompetitionLabel_dtModif}" for="dtModif" />
+     <p:outputLabel value="#{bundle.EditFamTypCompetitionLabel_dtModif}" for="dtModif" />
      <p:inputText id="dtModif"
                   value="#{bean.dtModif}"
                   title="#{bundle.EditFamTypCompetitionTitle_dtModif}"

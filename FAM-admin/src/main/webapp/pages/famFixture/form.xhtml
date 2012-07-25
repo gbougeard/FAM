@@ -11,7 +11,7 @@
 <ui:composition>
     <!--@elvariable id="bean" type="org.fam.ejb.model.FamFixture"-->
     <h:panelGrid columns="3">
-        <!--                    <h:outputLabel value="#{bundle.EditFamFixtureLabel_idFixture}" for="idFixture" />
+        <!--                    <p:outputLabel value="#{bundle.EditFamFixtureLabel_idFixture}" for="idFixture" />
      <p:inputText id="idFixture"
                   value="#{bean.idFixture}"
                   title="#{bundle.EditFamFixtureTitle_idFixture}"
@@ -20,7 +20,7 @@
      </p:inputText>
      <p:message id="msg_idFixture" for="idFixture"/> -->
 
-        <h:outputLabel value="#{bundle.EditFamFixtureLabel_famSeasonCompetition}" for="famSeasonCompetition"/>
+        <p:outputLabel value="#{bundle.EditFamFixtureLabel_famSeasonCompetition}" for="famSeasonCompetition"/>
 
         <p:selectOneMenu id="famSeasonCompetition"
                          value="#{bean.famSeasonCompetition}"
@@ -37,7 +37,7 @@
         </p:selectOneMenu>
         <p:message id="msg_famSeasonCompetition" for="famSeasonCompetition"/>
 
-        <h:outputLabel value="#{bundle.EditFamFixtureLabel_libFixture}" for="libFixture"/>
+        <p:outputLabel value="#{bundle.EditFamFixtureLabel_libFixture}" for="libFixture"/>
         <p:inputText id="libFixture"
                      value="#{bean.libFixture}"
                      title="#{bundle.EditFamFixtureTitle_libFixture}"
@@ -46,7 +46,7 @@
         </p:inputText>
         <p:message id="msg_libFixture" for="libFixture"/>
 
-        <h:outputLabel value="#{bundle.EditFamFixtureLabel_dtFixture}" for="dtFixture"/>
+        <p:outputLabel value="#{bundle.EditFamFixtureLabel_dtFixture}" for="dtFixture"/>
         <p:calendar id="dtFixture"
                     value="#{bean.dtFixture}"
                     pattern="dd/MM/yyyy HH:mm"
@@ -60,7 +60,7 @@
         </p:calendar>
         <p:message id="msg_dtFixture" for="dtFixture"/>
 
-        <!--                    <h:outputLabel value="#{bundle.EditFamFixtureLabel_dtCreat}" for="dtCreat" />
+        <!--                    <p:outputLabel value="#{bundle.EditFamFixtureLabel_dtCreat}" for="dtCreat" />
      <p:inputText id="dtCreat"
                   value="#{bean.dtCreat}"
                   title="#{bundle.EditFamFixtureTitle_dtCreat}"
@@ -70,7 +70,7 @@
      </p:inputText>
      <p:message id="msg_dtCreat" for="dtCreat"/>
 
-     <h:outputLabel value="#{bundle.EditFamFixtureLabel_dtModif}" for="dtModif" />
+     <p:outputLabel value="#{bundle.EditFamFixtureLabel_dtModif}" for="dtModif" />
      <p:inputText id="dtModif"
                   value="#{bean.dtModif}"
                   title="#{bundle.EditFamFixtureTitle_dtModif}"

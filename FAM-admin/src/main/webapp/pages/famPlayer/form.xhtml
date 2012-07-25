@@ -17,11 +17,11 @@
                     name="#{empty bean.idPlayer ? initParam['org.fam.jsf.DEFAULT_PHOTO'] : bean.idPlayer}#{initParam['org.fam.jsf.DEFAULT_IMAGE_EXTENSION']}"
                     cache="false"
                     width="120"
-                    style="border-width:4px;border-color:#6F6E6E;border-style:double"
+                    style="border: 4px double #6F6E6E;"
             />
 
     <h:panelGrid columns="3">
-        <!--                    <h:outputLabel value="#{bundle.EditFamPlayerLabel_idPlayer}" for="idPlayer" />
+        <!--                    <p:outputLabel value="#{bundle.EditFamPlayerLabel_idPlayer}" for="idPlayer" />
      <p:inputText id="idPlayer"
                   value="#{bean.idPlayer}"
                   title="#{bundle.EditFamPlayerTitle_idPlayer}"
@@ -30,7 +30,7 @@
      </p:inputText>
      <p:message id="msg_idPlayer" for="idPlayer"/> -->
 
-        <h:outputLabel value="#{bundle.EditFamUserLabel_firstName}" for="firstName"/>
+        <p:outputLabel value="#{bundle.EditFamUserLabel_firstName}" for="firstName"/>
         <p:inputText id="firstName"
                      value="#{bean.firstName}"
                      title="#{bundle.EditFamUserTitle_firstName}"
@@ -39,7 +39,7 @@
         </p:inputText>
         <p:message id="msg_firstName" for="firstName"/>
 
-        <h:outputLabel value="#{bundle.EditFamUserLabel_lastName}" for="lastName"/>
+        <p:outputLabel value="#{bundle.EditFamUserLabel_lastName}" for="lastName"/>
         <p:inputText id="lastName"
                      value="#{bean.lastName}"
                      title="#{bundle.EditFamUserTitle_lastName}"
@@ -48,7 +48,7 @@
         </p:inputText>
         <p:message id="msg_lastName" for="lastName"/>
 
-        <h:outputLabel value="#{bundle.EditFamUserLabel_dtBirth}" for="dtBirth"/>
+        <p:outputLabel value="#{bundle.EditFamUserLabel_dtBirth}" for="dtBirth"/>
         <p:calendar id="dtBirth"
                     value="#{bean.dtBirth}"
                     title="#{bundle.EditFamUserTitle_dtBirth}"
@@ -63,7 +63,7 @@
         <p:message id="msg_dtBirth" for="dtBirth"/>
 
         <h:panelGrid columns="3" rendered="#{not empty bean.idPlayer}">
-            <h:outputLabel value="Club actuel" for="famClub"/>
+            <p:outputLabel value="Club actuel" for="famClub"/>
             <p:selectOneMenu id="famClub"
                              value="#{bean.currentClub}"
                              style="width:200px;"
@@ -80,7 +80,7 @@
             <p:message id="msg_famClub" for="famClub"/>
 
 
-            <h:outputLabel value="Equipe actuelle" for="famTeam"
+            <p:outputLabel value="Equipe actuelle" for="famTeam"
                     />
             <p:selectOneMenu id="famTeam"
                              value="#{bean.currentTeam}"
@@ -107,7 +107,7 @@
         <p:tabView style="height:250px;">
             <p:tab title="Contact">
                 <h:panelGrid columns="3">
-                    <h:outputLabel value="#{bundle.EditFamUserLabel_email}" for="email"/>
+                    <p:outputLabel value="#{bundle.EditFamUserLabel_email}" for="email"/>
                     <p:inputText id="email"
                                  value="#{bean.email}"
                                  title="#{bundle.EditFamUserTitle_email}"
@@ -116,7 +116,7 @@
                     </p:inputText>
                     <p:message id="msg_email" for="email"/>
 
-                    <h:outputLabel value="#{bundle.EditFamUserLabel_tel}" for="tel"/>
+                    <p:outputLabel value="#{bundle.EditFamUserLabel_tel}" for="tel"/>
                     <p:inputText id="tel"
                                  value="#{bean.tel}"
                                  title="#{bundle.EditFamUserTitle_tel}"
@@ -130,7 +130,7 @@
             <p:tab title="Adresse">
                 <h:panelGrid columns="3">
 
-                    <h:outputLabel value="#{bundle.EditFamUserLabel_address}" for="address"/>
+                    <p:outputLabel value="#{bundle.EditFamUserLabel_address}" for="address"/>
                     <p:inputText id="address"
                                  value="#{bean.address}"
                                  title="#{bundle.EditFamUserTitle_address}"
@@ -139,7 +139,7 @@
                     </p:inputText>
                     <p:message id="msg_address" for="address"/>
 
-                    <h:outputLabel value="#{bundle.EditFamUserLabel_zipcode}" for="zipcode"/>
+                    <p:outputLabel value="#{bundle.EditFamUserLabel_zipcode}" for="zipcode"/>
                     <p:inputText id="zipcode"
                                  value="#{bean.zipcode}"
                                  title="#{bundle.EditFamUserTitle_zipcode}"
@@ -148,7 +148,7 @@
                     </p:inputText>
                     <p:message id="msg_zipcode" for="zipcode"/>
 
-                    <h:outputLabel value="#{bundle.EditFamUserLabel_city}" for="city"/>
+                    <p:outputLabel value="#{bundle.EditFamUserLabel_city}" for="city"/>
                     <p:inputText id="city"
                                  value="#{bean.city}"
                                  title="#{bundle.EditFamUserTitle_city}"
@@ -162,7 +162,7 @@
 
             <p:tab title="Infos Club">
                 <h:panelGrid columns="3">
-                    <h:outputLabel value="#{bundle.EditFamPlayerLabel_numLicense}" for="numLicense"/>
+                    <p:outputLabel value="#{bundle.EditFamPlayerLabel_numLicense}" for="numLicense"/>
                     <p:inputText id="numLicense"
                                  value="#{bean.numLicense}"
                                  title="#{bundle.EditFamPlayerTitle_numLicense}"
@@ -171,7 +171,7 @@
                     </p:inputText>
                     <p:message id="msg_numLicense" for="numLicense"/>
 
-                    <h:outputLabel value="#{bundle.EditFamUserLabel_dtArrival}" for="dtArrival"/>
+                    <p:outputLabel value="#{bundle.EditFamUserLabel_dtArrival}" for="dtArrival"/>
                     <p:calendar id="dtArrival"
                                 value="#{bean.dtArrival}"
                                 title="#{bundle.EditFamUserTitle_dtArrival}"
@@ -203,7 +203,7 @@
 
             <p:tab title="En cas d'urgence">
                 <h:panelGrid columns="3">
-                    <h:outputLabel value="Personne à contacter" for="iceContact"/>
+                    <p:outputLabel value="Personne à contacter" for="iceContact"/>
                     <p:inputText id="iceContact"
                                  value="#{bean.iceContact}"
                                  title="#{bundle.EditFamUserTitle_iceContact}"
@@ -212,7 +212,7 @@
                     </p:inputText>
                     <p:message id="msg_iceContact" for="iceContact"/>
 
-                    <h:outputLabel value="Téléphone" for="iceTel"/>
+                    <p:outputLabel value="Téléphone" for="iceTel"/>
                     <p:inputText id="iceTel"
                                  value="#{bean.iceTel}"
                                  title="#{bundle.EditFamUserTitle_iceTel}"
@@ -221,7 +221,7 @@
                     </p:inputText>
                     <p:message id="msg_iceTel" for="iceTel"/>
 
-                    <h:outputLabel value="Commentaires" for="iceComment"/>
+                    <p:outputLabel value="Commentaires" for="iceComment"/>
                     <p:editor id="iceComment"
                               value="#{bean.iceComment}"
                               width="600"

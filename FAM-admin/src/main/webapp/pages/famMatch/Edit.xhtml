@@ -17,7 +17,7 @@
         <h:form>
             <p:panel header="#{bundle.EditFamMatchTitle}">
                 <h:panelGrid columns="3">
-                    <!--                    <h:outputLabel value="#{bundle.EditFamMatchLabel_idMatch}" for="idMatch" />
+                    <!--                    <p:outputLabel value="#{bundle.EditFamMatchLabel_idMatch}" for="idMatch" />
                  <p:inputText id="idMatch"
                               value="#{famMatchController.selected.idMatch}"
                               title="#{bundle.EditFamMatchTitle_idMatch}"
@@ -26,7 +26,7 @@
                  </p:inputText>
                  <p:message id="msg_idMatch" for="idMatch"/> -->
 
-                    <h:outputLabel value="#{bundle.EditFamMatchLabel_famEvent}" for="famEvent"/>
+                    <p:outputLabel value="#{bundle.EditFamMatchLabel_famEvent}" for="famEvent"/>
                     <!--                    <h:selectOneMenu id="famEvent" 
                                                          value="#{famMatchController.selected.famEvent.libEvent}" 
                                                          title="#{bundle.EditFamMatchTitle_famEvent}" 
@@ -43,7 +43,7 @@
                                   value="#{famMatchController.selected.famEvent.libEvent}"/>
                     <p:message id="msg_famEvent" for="famEvent"/>
 
-                    <h:outputLabel value="#{bundle.EditFamMatchLabel_famSeasonCompetition}" for="famSeasonCompetition"/>
+                    <p:outputLabel value="#{bundle.EditFamMatchLabel_famSeasonCompetition}" for="famSeasonCompetition"/>
                     <h:outputText id="famSeasonCompetition"
                                   value="#{famMatchController.selected.famSeasonCompetition.displayName}"/>
                     <!--                    <h:selectOneMenu id="famSeasonCompetition" 
@@ -61,7 +61,7 @@
                     <p:message id="msg_famSeasonCompetition" for="famSeasonCompetition"/>
 
                     <c:if test="${famMatchController.selected.famSeasonCompetition.famTypCompetition.isChampionship}">
-                        <h:outputLabel value="#{bundle.EditFamMatchLabel_famFixture}" for="famFixture"/>
+                        <p:outputLabel value="#{bundle.EditFamMatchLabel_famFixture}" for="famFixture"/>
                         <h:selectOneMenu id="famFixture"
                                          value="${famMatchController.selected.famFixture}"
                                          converter="fixtureConverter"
@@ -77,7 +77,7 @@
                         <p:message id="msg_famFixture" for="famFixture"/>
                     </c:if>
 
-                    <!--                    <h:outputLabel value="#{bundle.EditFamMatchLabel_dtCreat}" for="dtCreat" />
+                    <!--                    <p:outputLabel value="#{bundle.EditFamMatchLabel_dtCreat}" for="dtCreat" />
                  <p:inputText id="dtCreat"
                               value="#{famMatchController.selected.dtCreat}"
                               title="#{bundle.EditFamMatchTitle_dtCreat}"
@@ -87,7 +87,7 @@
                  </p:inputText>
                  <p:message id="msg_dtCreat" for="dtCreat"/>
 
-                 <h:outputLabel value="#{bundle.EditFamMatchLabel_dtModif}" for="dtModif" />
+                 <p:outputLabel value="#{bundle.EditFamMatchLabel_dtModif}" for="dtModif" />
                  <p:inputText id="dtModif"
                               value="#{famMatchController.selected.dtModif}"
                               title="#{bundle.EditFamMatchTitle_dtModif}"

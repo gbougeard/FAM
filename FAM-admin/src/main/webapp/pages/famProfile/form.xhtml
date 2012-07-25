@@ -9,7 +9,7 @@
         >
 
     <h:panelGrid columns="3">
-        <!--                    <h:outputLabel value="#{bundle.EditFamProfileLabel_idProfile}" for="idProfile" />
+        <!--                    <p:outputLabel value="#{bundle.EditFamProfileLabel_idProfile}" for="idProfile" />
      <p:inputText id="idProfile"
                   value="#{bean.idProfile}"
                   title="#{bundle.EditFamProfileTitle_idProfile}"
@@ -18,7 +18,8 @@
      </p:inputText>
      <p:message id="msg_idProfile" for="idProfile"/> -->
 
-        <h:outputLabel value="#{bundle.EditFamProfileLabel_libProfile}" for="libProfile"/>
+        <p:outputLabel value="#{bundle.EditFamProfileLabel_libProfile}" for="libProfile"/>
+        <!--@elvariable id="bean" type="org.fam.ejb.model.FamProfile"-->
         <p:inputText id="libProfile"
                      value="#{bean.libProfile}"
                      title="#{bundle.EditFamProfileTitle_libProfile}"
@@ -27,7 +28,7 @@
         </p:inputText>
         <p:message id="msg_libProfile" for="libProfile"/>
 
-        <h:outputLabel value="#{bundle.EditFamProfileLabel_codProfile}" for="codProfile"/>
+        <p:outputLabel value="#{bundle.EditFamProfileLabel_codProfile}" for="codProfile"/>
         <p:inputText id="codProfile"
                      value="#{bean.codProfile}"
                      title="#{bundle.EditFamProfileTitle_codProfile}"
@@ -36,7 +37,7 @@
         </p:inputText>
         <p:message id="msg_codProfile" for="codProfile"/>
 
-        <!--                    <h:outputLabel value="#{bundle.EditFamProfileLabel_dtCreat}" for="dtCreat" />
+        <!--                    <p:outputLabel value="#{bundle.EditFamProfileLabel_dtCreat}" for="dtCreat" />
      <p:inputText id="dtCreat"
                   value="#{bean.dtCreat}"
                   title="#{bundle.EditFamProfileTitle_dtCreat}"
@@ -46,7 +47,7 @@
      </p:inputText>
      <p:message id="msg_dtCreat" for="dtCreat"/>
 
-     <h:outputLabel value="#{bundle.EditFamProfileLabel_dtModif}" for="dtModif" />
+     <p:outputLabel value="#{bundle.EditFamProfileLabel_dtModif}" for="dtModif" />
      <p:inputText id="dtModif"
                   value="#{bean.dtModif}"
                   title="#{bundle.EditFamProfileTitle_dtModif}"

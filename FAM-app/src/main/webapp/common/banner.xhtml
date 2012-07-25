@@ -4,7 +4,6 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:p="http://primefaces.org/ui"
       xmlns:cc="http://java.sun.com/jsf/composite/composite"
 
@@ -28,12 +27,12 @@
         </c:if>-->
         <!--                <c:if test="${request.remoteUser==null}">
         <h:form id="login">
-            <h:outputLabel value="Login : " for="lbl_login"></h:outputLabel>
+            <p:outputLabel value="Login : " for="lbl_login"></p:outputLabel>
             <p:inputText id="lbl_login"
                          value="#{loginBean.email}" required="true">
             </p:inputText>
 
-            <h:outputLabel value="Password : " for="lbl_pwd"></h:outputLabel>
+            <p:outputLabel value="Password : " for="lbl_pwd"></p:outputLabel>
             <p:password id="lbl_pwd"
                         value="#{loginBean.password}"
                         required="true"

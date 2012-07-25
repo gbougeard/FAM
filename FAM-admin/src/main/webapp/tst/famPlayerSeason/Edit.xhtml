@@ -16,7 +16,7 @@
         <h:form>
             <p:panel header="#{bundle.EditFamPlayerSeasonTitle}">
                 <h:panelGrid columns="3">
-                    <h:outputLabel value="#{bundle.EditFamPlayerSeasonLabel_famPlayer}" for="famPlayer"/>
+                    <p:outputLabel value="#{bundle.EditFamPlayerSeasonLabel_famPlayer}" for="famPlayer"/>
                     <h:selectOneMenu id="famPlayer"
                                      value="#{famPlayerSeasonController.selected.famPlayer}"
                                      title="#{bundle.EditFamPlayerSeasonTitle_famPlayer}"
@@ -26,7 +26,7 @@
                     </h:selectOneMenu>
                     <p:message id="msg_famPlayer" for="famPlayer"/>
 
-                    <h:outputLabel value="#{bundle.EditFamPlayerSeasonLabel_famPlayerProfile}" for="famPlayerProfile"/>
+                    <p:outputLabel value="#{bundle.EditFamPlayerSeasonLabel_famPlayerProfile}" for="famPlayerProfile"/>
                     <p:inputText id="famPlayerProfile"
                                  value="#{famPlayerSeasonController.selected.famPlayerProfile}"
                                  title="#{bundle.EditFamPlayerSeasonTitle_famPlayerProfile}"
@@ -35,7 +35,7 @@
                     </p:inputText>
                     <p:message id="msg_famPlayerProfile" for="famPlayerProfile"/>
 
-                    <h:outputLabel value="#{bundle.EditFamPlayerSeasonLabel_famSeason}" for="famSeason"/>
+                    <p:outputLabel value="#{bundle.EditFamPlayerSeasonLabel_famSeason}" for="famSeason"/>
                     <h:selectOneMenu id="famSeason"
                                      value="#{famPlayerSeasonController.selected.famSeason}"
                                      title="#{bundle.EditFamPlayerSeasonTitle_famSeason}"

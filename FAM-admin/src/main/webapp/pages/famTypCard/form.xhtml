@@ -9,7 +9,7 @@
         >
 
     <h:panelGrid columns="3">
-        <!--                    <h:outputLabel value="#{bundle.EditFamTypCardLabel_idTypCard}" for="idTypCard" />
+        <!--                    <p:outputLabel value="#{bundle.EditFamTypCardLabel_idTypCard}" for="idTypCard" />
      <p:inputText id="idTypCard"
                   value="#{bean.idTypCard}"
                   title="#{bundle.EditFamTypCardTitle_idTypCard}"
@@ -18,7 +18,8 @@
      </p:inputText>
      <p:message id="msg_idTypCard" for="idTypCard"/> -->
 
-        <h:outputLabel value="#{bundle.EditFamTypCardLabel_libTypCard}" for="libTypCard"/>
+        <p:outputLabel value="#{bundle.EditFamTypCardLabel_libTypCard}" for="libTypCard"/>
+        <!--@elvariable id="bean" type="org.fam.ejb.model.FamTypCard"-->
         <p:inputText id="libTypCard"
                      value="#{bean.libTypCard}"
                      title="#{bundle.EditFamTypCardTitle_libTypCard}"
@@ -27,7 +28,7 @@
         </p:inputText>
         <p:message id="msg_libTypCard" for="libTypCard"/>
 
-        <h:outputLabel value="#{bundle.EditFamTypCardLabel_codTypCard}" for="codTypCard"/>
+        <p:outputLabel value="#{bundle.EditFamTypCardLabel_codTypCard}" for="codTypCard"/>
         <p:inputText id="codTypCard"
                      value="#{bean.codTypCard}"
                      title="#{bundle.EditFamTypCardTitle_codTypCard}"
@@ -36,7 +37,7 @@
         </p:inputText>
         <p:message id="msg_codTypCard" for="codTypCard"/>
 
-        <!--                    <h:outputLabel value="#{bundle.EditFamTypCardLabel_dtCreat}" for="dtCreat" />
+        <!--                    <p:outputLabel value="#{bundle.EditFamTypCardLabel_dtCreat}" for="dtCreat" />
      <p:inputText id="dtCreat"
                   value="#{bean.dtCreat}"
                   title="#{bundle.EditFamTypCardTitle_dtCreat}"
@@ -46,7 +47,7 @@
      </p:inputText>
      <p:message id="msg_dtCreat" for="dtCreat"/>
 
-     <h:outputLabel value="#{bundle.EditFamTypCardLabel_dtModif}" for="dtModif" />
+     <p:outputLabel value="#{bundle.EditFamTypCardLabel_dtModif}" for="dtModif" />
      <p:inputText id="dtModif"
                   value="#{bean.dtModif}"
                   title="#{bundle.EditFamTypCardTitle_dtModif}"

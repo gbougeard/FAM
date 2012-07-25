@@ -6,13 +6,12 @@
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:c="http://java.sun.com/jsp/jstl/core"
         xmlns:p="http://primefaces.org/ui"
         >
 
     <h:panelGrid columns="3">
 
-        <h:outputLabel value="#{bundle.CreateFamClubLabel_libClub}" for="libClub"/>
+        <p:outputLabel value="#{bundle.CreateFamClubLabel_libClub}" for="libClub"/>
         <p:inputText id="libClub" value="#{bean.libClub}"
                      title="#{bundle.CreateFamClubTitle_libClub}"
                 >
@@ -20,7 +19,7 @@
         </p:inputText>
         <p:message id="msg_libClub" for="libClub"/>
 
-        <h:outputLabel value="#{bundle.CreateFamClubLabel_codeFff}" for="codeFff"/>
+        <p:outputLabel value="#{bundle.CreateFamClubLabel_codeFff}" for="codeFff"/>
         <p:inputText id="codeFff"
                      value="#{bean.codeFff}"
                      title="#{bundle.CreateFamClubTitle_codeFff}"
@@ -29,7 +28,7 @@
         </p:inputText>
         <p:message id="msg_codeFff" for="codeFff"/>
 
-        <h:outputLabel value="Pays" for="famCountry"/>
+        <p:outputLabel value="Pays" for="famCountry"/>
         <!--        <p:selectOneMenu id="famCountry" 
                                  value="#{bean.famCountry}" 
                                  converter="countryConverter"
@@ -65,7 +64,7 @@
         </p:autoComplete>
         <p:message id="msg_famCountry" for="famCountry"/>
 
-        <h:outputLabel value="Région" for="famState"/>
+        <p:outputLabel value="Région" for="famState"/>
         <!--        <p:selectOneMenu id="famState" 
                                  value="#{bean.famState}" 
                                  converter="stateConverter"
@@ -94,7 +93,7 @@
         </p:autoComplete>
         <p:message id="msg_famState" for="famState"/>
 
-        <h:outputLabel value="Département" for="famProvince"/>
+        <p:outputLabel value="Département" for="famProvince"/>
         <!--        <p:selectOneMenu id="famProvince" 
                                  value="#{bean.famProvince}" 
                                  converter="provinceConverter"
@@ -123,7 +122,7 @@
         </p:autoComplete>
         <p:message id="msg_famProvince" for="famProvince"/>
 
-        <h:outputLabel value="Ville" for="famCity"/>
+        <p:outputLabel value="Ville" for="famCity"/>
         <!--        <p:selectOneMenu id="famCity" 
                                  value="#{bean.famCity}" 
                                  converter="cityConverter"
@@ -150,7 +149,7 @@
         </p:autoComplete>
         <p:message id="msg_famCity" for="famCity"/>
 
-        <h:outputLabel value="#{bundle.EditFamClubLabel_comments}" for="comments"/>
+        <p:outputLabel value="#{bundle.EditFamClubLabel_comments}" for="comments"/>
         <p:editor id="comments"
                   value="#{bean.comments}"
                   widgetVar="editor" width="600" height="150"/>

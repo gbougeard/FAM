@@ -10,7 +10,7 @@
         >
 
     <h:panelGrid columns="3">
-        <!--                    <h:outputLabel value="#{bundle.EditFamCommentLabel_idComment}" for="idComment" />
+        <!--                    <p:outputLabel value="#{bundle.EditFamCommentLabel_idComment}" for="idComment" />
     <p:inputText id="idComment"
                   value="#{bean.idComment}"
                   title="#{bundle.EditFamCommentTitle_idComment}"
@@ -19,7 +19,8 @@
      </p:inputText>
      <p:message id="msg_idComment" for="idComment"/> -->
 
-        <h:outputLabel value="#{bundle.EditFamCommentLabel_famUser}" for="famUser"/>
+        <p:outputLabel value="#{bundle.EditFamCommentLabel_famUser}" for="famUser"/>
+        <!--@elvariable id="bean" type="org.fam.ejb.model.FamComment"-->
         <h:selectOneMenu id="famUser"
                          value="#{bean.famUser}"
                          title="#{bundle.EditFamCommentTitle_famUser}"
@@ -29,7 +30,7 @@
         </h:selectOneMenu>
         <p:message id="msg_famUser" for="famUser"/>
 
-        <h:outputLabel value="#{bundle.EditFamCommentLabel_comments}" for="comments"/>
+        <p:outputLabel value="#{bundle.EditFamCommentLabel_comments}" for="comments"/>
         <p:editor id="comments"
                   value="#{bean.comments}"
                   width="600"
@@ -38,7 +39,7 @@
         </p:editor>
         <p:message id="msg_comments" for="comments"/>
 
-        <!--                    <h:outputLabel value="#{bundle.EditFamCommentLabel_dtCreat}" for="dtCreat" />
+        <!--                    <p:outputLabel value="#{bundle.EditFamCommentLabel_dtCreat}" for="dtCreat" />
      <p:inputText id="dtCreat"
                   value="#{bean.dtCreat}"
                   title="#{bundle.EditFamCommentTitle_dtCreat}"
@@ -48,7 +49,7 @@
      </p:inputText>
      <p:message id="msg_dtCreat" for="dtCreat"/>
 
-     <h:outputLabel value="#{bundle.EditFamCommentLabel_dtModif}" for="dtModif" />
+     <p:outputLabel value="#{bundle.EditFamCommentLabel_dtModif}" for="dtModif" />
      <p:inputText id="dtModif"
                   value="#{bean.dtModif}"
                   title="#{bundle.EditFamCommentTitle_dtModif}"

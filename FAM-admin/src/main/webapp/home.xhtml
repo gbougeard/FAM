@@ -7,9 +7,9 @@
     <ui:define name="body">
         <h:form id="loginForm">
             <h:panelGrid columns="2" rendered="#{!login.loggedIn}">
-                <h:outputLabel for="username">Username:</h:outputLabel>
+                <p:outputLabel for="username" value="Username"/>
                 <p:inputText id="username" value="#{credentials.username}"/>
-                <h:outputLabel for="password">Password:</h:outputLabel>
+                <p:outputLabel for="password" value="Password"/>
                 <h:inputSecret id="password" value="#{credentials.password}"/>
             </h:panelGrid>
             <p:commandButton id="login" value="Login"

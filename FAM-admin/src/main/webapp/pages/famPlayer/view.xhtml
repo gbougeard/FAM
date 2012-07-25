@@ -19,11 +19,11 @@
                         name="#{initParam['org.fam.jsf.DEFAULT_PHOTO']}#{initParam['org.fam.jsf.DEFAULT_IMAGE_EXTENSION']}"
                         cache="false"
                         width="120"
-                        style="border-width:4px;border-color:#6F6E6E;border-style:double"
+                        style="border: 4px double #6F6E6E;"
                 />
 
         <h:panelGrid columns="2">
-            <!--                    <h:outputLabel value="#{bundle.EditFamPlayerLabel_idPlayer}" for="idPlayer" />
+            <!--                    <h:outputText value="#{bundle.EditFamPlayerLabel_idPlayer}" for="idPlayer" />
          <h:outputText id="idPlayer"
                       value="#{bean.idPlayer}"
                       title="#{bundle.EditFamPlayerTitle_idPlayer}"
@@ -32,20 +32,19 @@
          </h:outputText>
          <p:message id="msg_idPlayer" for="idPlayer"/> -->
 
-            <h:outputLabel value="#{bundle.EditFamUserLabel_firstName}" for="firstName"/>
-
+            <h:outputText value="#{bundle.EditFamUserLabel_firstName}"/>
             <h:outputText id="firstName"
                           value="#{bean.firstName}"
                           title="#{bundle.EditFamUserTitle_firstName}"
                     />
 
-            <h:outputLabel value="#{bundle.EditFamUserLabel_lastName}" for="lastName"/>
+            <h:outputText value="#{bundle.EditFamUserLabel_lastName}"/>
             <h:outputText id="lastName"
                           value="#{bean.lastName}"
                           title="#{bundle.EditFamUserTitle_lastName}"
                     />
 
-            <h:outputLabel value="#{bundle.EditFamUserLabel_dtBirth}" for="dtBirth"/>
+            <h:outputText value="#{bundle.EditFamUserLabel_dtBirth}"/>
             <h:outputText id="dtBirth"
                           value="#{bean.dtBirth}"
                           title="#{bundle.EditFamUserTitle_dtBirth}"
@@ -53,19 +52,19 @@
                 <f:convertDateTime pattern="dd/MM/yyyy" timeZone="#{cacheBean.timeZone}"/>
             </h:outputText>
 
-            <h:outputLabel value="#{bundle.EditFamUserLabel_age}" for="age"/>
+            <h:outputText value="#{bundle.EditFamUserLabel_age}"/>
             <h:outputText id="age"
                           value="#{bean.age} #{bundle.EditFamUserLabel_yearsOld}"
                           title="#{bundle.EditFamUserTitle_age}"
                     />
 
-            <h:outputLabel value="Club actuel" for="famClub"/>
+            <h:outputText value="Club actuel"/>
             <h:outputText id="famClub"
                           value="#{bean.currentPlayerSeason.famClub.libClub}"
                           title="#{bundle.EditFamTeamTitle_famClub}"
                     />
 
-            <h:outputLabel value="Equipe par défaut" for="famTeam"/>
+            <h:outputText value="Equipe par défaut"/>
             <h:outputText id="famTeam"
                           value="#{bean.currentPlayerSeason.famTeam.libTeam}"
                           title="#{bundle.EditFamTeamTitle_famClub}"
@@ -78,13 +77,13 @@
             <p:tabView style="height:250px;">
                 <p:tab title="Contact">
                     <h:panelGrid columns="2">
-                        <h:outputLabel value="#{bundle.EditFamUserLabel_email}" for="email"/>
+                        <h:outputText value="#{bundle.EditFamUserLabel_email}"/>
                         <h:outputText id="email"
                                       value="#{bean.email}"
                                       title="#{bundle.EditFamUserTitle_email}"
                                 />
 
-                        <h:outputLabel value="#{bundle.EditFamUserLabel_tel}" for="tel"/>
+                        <h:outputText value="#{bundle.EditFamUserLabel_tel}"/>
                         <h:outputText id="tel"
                                       value="#{bean.tel}"
                                       title="#{bundle.EditFamUserTitle_tel}"
@@ -95,19 +94,19 @@
                 <p:tab title="Adresse">
                     <h:panelGrid columns="2">
 
-                        <h:outputLabel value="#{bundle.EditFamUserLabel_address}" for="address"/>
+                        <h:outputText value="#{bundle.EditFamUserLabel_address}"/>
                         <h:outputText id="address"
                                       value="#{bean.address}"
                                       title="#{bundle.EditFamUserTitle_address}"
                                 />
 
-                        <h:outputLabel value="#{bundle.EditFamUserLabel_zipcode}" for="zipcode"/>
+                        <h:outputText value="#{bundle.EditFamUserLabel_zipcode}"/>
                         <h:outputText id="zipcode"
                                       value="#{bean.zipcode}"
                                       title="#{bundle.EditFamUserTitle_zipcode}"
                                 />
 
-                        <h:outputLabel value="#{bundle.EditFamUserLabel_city}" for="city"/>
+                        <h:outputText value="#{bundle.EditFamUserLabel_city}"/>
                         <h:outputText id="city"
                                       value="#{bean.city}"
                                       title="#{bundle.EditFamUserTitle_city}"
@@ -118,20 +117,20 @@
 
                 <p:tab title="Infos Club">
                     <h:panelGrid columns="2">
-                        <h:outputLabel value="#{bundle.EditFamPlayerLabel_numLicense}" for="numLicense"/>
+                        <h:outputText value="#{bundle.EditFamPlayerLabel_numLicense}"/>
                         <h:outputText id="numLicense"
                                       value="#{bean.numLicense}"
                                       title="#{bundle.EditFamPlayerTitle_numLicense}"
                                 />
 
-                        <h:outputLabel value="#{bundle.EditFamUserLabel_dtArrival}" for="dtArrival"/>
+                        <h:outputText value="#{bundle.EditFamUserLabel_dtArrival}"/>
                         <h:outputText id="dtArrival"
                                       value="#{bean.dtArrival}"
                                       title="#{bundle.EditFamUserTitle_dtArrival}"
                                 >
                             <f:convertDateTime pattern="dd/MM/yyyy" timeZone="#{cacheBean.timeZone}"/>
                         </h:outputText>
-                        <h:outputLabel value="#{bundle.EditFamUserLabel_seniority}" for="seniority"/>
+                        <h:outputText value="#{bundle.EditFamUserLabel_seniority}"/>
                         <h:outputText id="seniority"
                                       value="#{bean.seniority} #{bundle.EditFamUserLabel_years}"
                                       title="#{bundle.EditFamUserTitle_seniority}"
@@ -152,19 +151,19 @@
 
                 <p:tab title="En cas d'urgence">
                     <h:panelGrid columns="2">
-                        <h:outputLabel value="Personne à contacter" for="iceContact"/>
+                        <h:outputText value="Personne à contacter"/>
                         <h:outputText id="iceContact"
                                       value="#{bean.iceContact}"
                                       title="#{bundle.EditFamUserTitle_iceContact}"
                                 />
 
-                        <h:outputLabel value="Téléphone" for="iceTel"/>
+                        <h:outputText value="Téléphone"/>
                         <h:outputText id="iceTel"
                                       value="#{bean.iceTel}"
                                       title="#{bundle.EditFamUserTitle_iceTel}"
                                 />
 
-                        <h:outputLabel value="Commentaires" for="iceComment"/>
+                        <h:outputText value="Commentaires"/>
                         <h:outputText id="iceComment"
                                       value="#{bean.iceComment}"
                                 />
@@ -175,7 +174,7 @@
         </p:tab>
         <p:tab title="Profil" rendered="#{not empty bean.idPlayer}">
             <h:graphicImage id="chart" height="200"
-                            style="border-width:4px;border-color:#6F6E6E;border-style:double"
+                            style="border: 4px double #6F6E6E;"
                             url="#{bean.currentProfile.profileChartUrl}"/>
         </p:tab>
         <p:tab title="Stats" rendered="#{not empty bean.idPlayer}">
@@ -188,7 +187,7 @@
                 <p:tab title="#{s.famSeason.libSeason}">
                     <h:panelGrid columns="2">
                         <h:graphicImage id="chart" height="200"
-                                        style="border-width:4px;border-color:#6F6E6E;border-style:double"
+                                        style="border: 4px double #6F6E6E;"
                                         url="#{s.famPlayerProfile.profileChartUrl}"/>
                         <ui:include src="stats.xhtml">
                             <ui:param name="bean" value="#{s.famPlayerStat}"/>

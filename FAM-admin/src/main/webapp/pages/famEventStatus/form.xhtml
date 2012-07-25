@@ -9,7 +9,7 @@
         >
 
     <h:panelGrid columns="3">
-        <!--                    <h:outputLabel value="#{bundle.EditFamEventStatusLabel_idEventStatus}" for="idEventStatus" />
+        <!--                    <p:outputLabel value="#{bundle.EditFamEventStatusLabel_idEventStatus}" for="idEventStatus" />
      <p:inputText id="idEventStatus"
                   value="#{bean.idEventStatus}"
                   title="#{bundle.EditFamEventStatusTitle_idEventStatus}"
@@ -18,7 +18,8 @@
      </p:inputText>
      <p:message id="msg_idEventStatus" for="idEventStatus"/> -->
 
-        <h:outputLabel value="#{bundle.EditFamEventStatusLabel_libEventStatus}" for="libEventStatus"/>
+        <p:outputLabel value="#{bundle.EditFamEventStatusLabel_libEventStatus}" for="libEventStatus"/>
+        <!--@elvariable id="bean" type="org.fam.ejb.model.FamEventStatus"-->
         <p:inputText id="libEventStatus"
                      value="#{bean.libEventStatus}"
                      title="#{bundle.EditFamEventStatusTitle_libEventStatus}"
@@ -27,7 +28,7 @@
         </p:inputText>
         <p:message id="msg_libEventStatus" for="libEventStatus"/>
 
-        <h:outputLabel value="#{bundle.EditFamEventStatusLabel_codEventStatus}" for="codEventStatus"/>
+        <p:outputLabel value="#{bundle.EditFamEventStatusLabel_codEventStatus}" for="codEventStatus"/>
         <p:inputText id="codEventStatus"
                      value="#{bean.codEventStatus}"
                      title="#{bundle.EditFamEventStatusTitle_codEventStatus}"
@@ -36,7 +37,7 @@
         </p:inputText>
         <p:message id="msg_codEventStatus" for="codEventStatus"/>
 
-        <!--                    <h:outputLabel value="#{bundle.EditFamEventStatusLabel_dtCreat}" for="dtCreat" />
+        <!--                    <p:outputLabel value="#{bundle.EditFamEventStatusLabel_dtCreat}" for="dtCreat" />
      <p:inputText id="dtCreat"
                   value="#{bean.dtCreat}"
                   title="#{bundle.EditFamEventStatusTitle_dtCreat}"
@@ -46,7 +47,7 @@
      </p:inputText>
      <p:message id="msg_dtCreat" for="dtCreat"/>
 
-     <h:outputLabel value="#{bundle.EditFamEventStatusLabel_dtModif}" for="dtModif" />
+     <p:outputLabel value="#{bundle.EditFamEventStatusLabel_dtModif}" for="dtModif" />
      <p:inputText id="dtModif"
                   value="#{bean.dtModif}"
                   title="#{bundle.EditFamEventStatusTitle_dtModif}"

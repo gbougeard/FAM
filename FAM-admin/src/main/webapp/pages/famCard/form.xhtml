@@ -9,7 +9,7 @@
         xmlns:p="http://primefaces.org/ui"
         >
     <h:panelGrid columns="3">
-        <!--                    <h:outputLabel value="#{bundle.EditFamCardLabel_idCard}" for="idCard" />
+        <!--                    <p:outputLabel value="#{bundle.EditFamCardLabel_idCard}" for="idCard" />
      <p:inputText id="idCard"
                   value="#{bean.idCard}"
                   title="#{bundle.EditFamCardTitle_idCard}"
@@ -18,7 +18,8 @@
      </p:inputText>
      <p:message id="msg_idCard" for="idCard"/> -->
 
-        <h:outputLabel value="#{bundle.EditFamCardLabel_famMatchPlayer}" for="famMatchPlayer"/>
+        <p:outputLabel value="#{bundle.EditFamCardLabel_famMatchPlayer}" for="famMatchPlayer"/>
+        <!--@elvariable id="bean" type="org.fam.ejb.model.FamCard"-->
         <h:selectOneMenu id="famMatchPlayer"
                          value="#{bean.famMatchPlayer}"
                          title="#{bundle.EditFamCardTitle_famMatchPlayer}"
@@ -28,7 +29,7 @@
         </h:selectOneMenu>
         <p:message id="msg_famMatchPlayer" for="famMatchPlayer"/>
 
-        <h:outputLabel value="#{bundle.EditFamCardLabel_famTypCard}" for="famTypCard"/>
+        <p:outputLabel value="#{bundle.EditFamCardLabel_famTypCard}" for="famTypCard"/>
         <h:selectOneMenu id="famTypCard"
                          value="#{bean.famTypCard}"
                          title="#{bundle.EditFamCardTitle_famTypCard}"
@@ -38,7 +39,7 @@
         </h:selectOneMenu>
         <p:message id="msg_famTypCard" for="famTypCard"/>
 
-        <h:outputLabel value="#{bundle.EditFamCardLabel_cardTime}" for="cardTime"/>
+        <p:outputLabel value="#{bundle.EditFamCardLabel_cardTime}" for="cardTime"/>
         <p:inputText id="cardTime"
                      value="#{bean.cardTime}"
                      title="#{bundle.EditFamCardTitle_cardTime}"
@@ -47,7 +48,7 @@
         </p:inputText>
         <p:message id="msg_cardTime" for="cardTime"/>
 
-        <!--                    <h:outputLabel value="#{bundle.EditFamCardLabel_dtCreat}" for="dtCreat" />
+        <!--                    <p:outputLabel value="#{bundle.EditFamCardLabel_dtCreat}" for="dtCreat" />
      <p:inputText id="dtCreat"
                   value="#{bean.dtCreat}"
                   title="#{bundle.EditFamCardTitle_dtCreat}"
@@ -57,7 +58,7 @@
      </p:inputText>
      <p:message id="msg_dtCreat" for="dtCreat"/>
 
-     <h:outputLabel value="#{bundle.EditFamCardLabel_dtModif}" for="dtModif" />
+     <p:outputLabel value="#{bundle.EditFamCardLabel_dtModif}" for="dtModif" />
      <p:inputText id="dtModif"
                   value="#{bean.dtModif}"
                   title="#{bundle.EditFamCardTitle_dtModif}"

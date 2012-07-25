@@ -2,8 +2,6 @@
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:c="http://java.sun.com/jsp/jstl/core"
         xmlns:p="http://primefaces.org/ui"
         template="/common/template.xhtml">
     <ui:define name="title">Agenda</ui:define>
@@ -58,10 +56,10 @@
                           showEffect="clip"
                           hideEffect="clip">
                     <h:panelGrid id="eventDetails" columns="2">
-                        <h:outputLabel for="title" value="Title:"/>
+                        <p:outputLabel for="title" value="Title:"/>
                         <p:inputText id="title" value="#{famEventController.event.title}"/>
 
-                        <h:outputLabel for="from" value="From:"/>
+                        <p:outputLabel for="from" value="From:"/>
                         <p:calendar id="from"
                                     value="#{famEventController.event.startDate}"
                                     pattern="dd/MM/yyyy HH:mm"
@@ -73,7 +71,7 @@
 
                                 />
 
-                        <h:outputLabel for="to" value="To:"/>
+                        <p:outputLabel for="to" value="To:"/>
                         <p:calendar id="to"
                                     value="#{famEventController.event.endDate}"
                                     pattern="dd/MM/yyyy HH:mm"
@@ -84,7 +82,7 @@
                                     lang="fr"
                                 />
 
-                        <h:outputLabel for="allDay" value="All Day:"/>
+                        <p:outputLabel for="allDay" value="All Day:"/>
                         <h:selectBooleanCheckbox id="allDay"
                                                  value="#{famEventController.event.allDay}"/>
 

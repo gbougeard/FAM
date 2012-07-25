@@ -16,30 +16,30 @@
         </h:panelGroup>
         <h:form>
             <h:panelGrid columns="2">
-                <h:outputLabel value="#{bundle.CreateFamStaffFunctionLabel_idStaffFunction}" for="idStaffFunction"/>
+                <p:outputLabel value="#{bundle.CreateFamStaffFunctionLabel_idStaffFunction}" for="idStaffFunction"/>
                 <h:inputText id="idStaffFunction" value="#{famStaffFunctionController.selected.idStaffFunction}"
                              title="#{bundle.CreateFamStaffFunctionTitle_idStaffFunction}" required="true"
                              requiredMessage="#{bundle.CreateFamStaffFunctionRequiredMessage_idStaffFunction}"/>
-                <h:outputLabel value="#{bundle.CreateFamStaffFunctionLabel_libStaffFunction}" for="libStaffFunction"/>
+                <p:outputLabel value="#{bundle.CreateFamStaffFunctionLabel_libStaffFunction}" for="libStaffFunction"/>
                 <h:inputText id="libStaffFunction" value="#{famStaffFunctionController.selected.libStaffFunction}"
                              title="#{bundle.CreateFamStaffFunctionTitle_libStaffFunction}" required="true"
                              requiredMessage="#{bundle.CreateFamStaffFunctionRequiredMessage_libStaffFunction}"/>
-                <h:outputLabel value="#{bundle.CreateFamStaffFunctionLabel_codStaffFunction}" for="codStaffFunction"/>
+                <p:outputLabel value="#{bundle.CreateFamStaffFunctionLabel_codStaffFunction}" for="codStaffFunction"/>
                 <h:inputText id="codStaffFunction" value="#{famStaffFunctionController.selected.codStaffFunction}"
                              title="#{bundle.CreateFamStaffFunctionTitle_codStaffFunction}" required="true"
                              requiredMessage="#{bundle.CreateFamStaffFunctionRequiredMessage_codStaffFunction}"/>
-                <h:outputLabel value="#{bundle.CreateFamStaffFunctionLabel_famClub}" for="famClub"/>
+                <p:outputLabel value="#{bundle.CreateFamStaffFunctionLabel_famClub}" for="famClub"/>
                 <h:selectOneMenu id="famClub" value="#{famStaffFunctionController.selected.famClub}"
                                  title="#{bundle.CreateFamStaffFunctionTitle_famClub}">
                     <f:selectItems value="#{famClubController.itemsAvailableSelectOne}"/>
                 </h:selectOneMenu>
-                <h:outputLabel value="#{bundle.CreateFamStaffFunctionLabel_dtCreat}" for="dtCreat"/>
+                <p:outputLabel value="#{bundle.CreateFamStaffFunctionLabel_dtCreat}" for="dtCreat"/>
                 <h:inputText id="dtCreat" value="#{famStaffFunctionController.selected.dtCreat}"
                              title="#{bundle.CreateFamStaffFunctionTitle_dtCreat}" required="true"
                              requiredMessage="#{bundle.CreateFamStaffFunctionRequiredMessage_dtCreat}">
                     <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
                 </h:inputText>
-                <h:outputLabel value="#{bundle.CreateFamStaffFunctionLabel_dtModif}" for="dtModif"/>
+                <p:outputLabel value="#{bundle.CreateFamStaffFunctionLabel_dtModif}" for="dtModif"/>
                 <h:inputText id="dtModif" value="#{famStaffFunctionController.selected.dtModif}"
                              title="#{bundle.CreateFamStaffFunctionTitle_dtModif}">
                     <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>

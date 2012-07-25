@@ -9,7 +9,7 @@
         >
 
     <h:panelGrid columns="3">
-        <!--                    <h:outputLabel value="#{bundle.EditFamTypMatchLabel_idTypMatch}" for="idTypMatch" />
+        <!--                    <p:outputLabel value="#{bundle.EditFamTypMatchLabel_idTypMatch}" for="idTypMatch" />
      <p:inputText id="idTypMatch"
                   value="#{bean.idTypMatch}"
                   title="#{bundle.EditFamTypMatchTitle_idTypMatch}"
@@ -18,7 +18,8 @@
      </p:inputText>
      <p:message id="msg_idTypMatch" for="idTypMatch"/> -->
 
-        <h:outputLabel value="#{bundle.EditFamTypMatchLabel_libTypMatch}" for="libTypMatch"/>
+        <p:outputLabel value="#{bundle.EditFamTypMatchLabel_libTypMatch}" for="libTypMatch"/>
+        <!--@elvariable id="bean" type="org.fam.ejb.model.FamTypMatch"-->
         <p:inputText id="libTypMatch"
                      value="#{bean.libTypMatch}"
                      title="#{bundle.EditFamTypMatchTitle_libTypMatch}"
@@ -27,7 +28,7 @@
         </p:inputText>
         <p:message id="msg_libTypMatch" for="libTypMatch"/>
 
-        <h:outputLabel value="#{bundle.EditFamTypMatchLabel_codTypMatch}" for="codTypMatch"/>
+        <p:outputLabel value="#{bundle.EditFamTypMatchLabel_codTypMatch}" for="codTypMatch"/>
         <p:inputText id="codTypMatch"
                      value="#{bean.codTypMatch}"
                      title="#{bundle.EditFamTypMatchTitle_codTypMatch}"
@@ -36,7 +37,7 @@
         </p:inputText>
         <p:message id="msg_codTypMatch" for="codTypMatch"/>
 
-        <h:outputLabel value="#{bundle.EditFamTypMatchLabel_nbPlayer}" for="nbPlayer"/>
+        <p:outputLabel value="#{bundle.EditFamTypMatchLabel_nbPlayer}" for="nbPlayer"/>
         <p:inputText id="nbPlayer"
                      value="#{bean.nbPlayer}"
                      title="#{bundle.EditFamTypMatchTitle_nbPlayer}"
@@ -45,7 +46,7 @@
         </p:inputText>
         <p:message id="msg_nbPlayer" for="nbPlayer"/>
 
-        <h:outputLabel value="#{bundle.EditFamTypMatchLabel_nbSubstitute}" for="nbSubstitute"/>
+        <p:outputLabel value="#{bundle.EditFamTypMatchLabel_nbSubstitute}" for="nbSubstitute"/>
         <p:inputText id="nbSubstitute"
                      value="#{bean.nbSubstitute}"
                      title="#{bundle.EditFamTypMatchTitle_nbSubstitute}"
@@ -54,14 +55,14 @@
         </p:inputText>
         <p:message id="msg_nbSubstitute" for="nbSubstitute"/>
 
-        <h:outputLabel value="#{bundle.EditFamTypMatchLabel_infiniteSubs}" for="infiniteSubs"/>
+        <p:outputLabel value="#{bundle.EditFamTypMatchLabel_infiniteSubs}" for="infiniteSubs"/>
         <p:selectBooleanCheckbox id="infiniteSubs"
                                  value="#{bean.infiniteSubs}">
             <p:ajax event="blur" update="msg_infiniteSubs"/>
         </p:selectBooleanCheckbox>
         <p:message id="msg_infiniteSubs" for="infiniteSubs"/>
 
-        <h:outputLabel value="#{bundle.EditFamTypMatchLabel_periodDuration}" for="periodDuration"/>
+        <p:outputLabel value="#{bundle.EditFamTypMatchLabel_periodDuration}" for="periodDuration"/>
         <p:inputText id="periodDuration"
                      value="#{bean.periodDuration}"
                      title="#{bundle.EditFamTypMatchTitle_periodDuration}"
@@ -70,7 +71,7 @@
         </p:inputText>
         <p:message id="msg_periodDuration" for="periodDuration"/>
 
-        <h:outputLabel value="#{bundle.EditFamTypMatchLabel_extraTime}" for="extraTime"/>
+        <p:outputLabel value="#{bundle.EditFamTypMatchLabel_extraTime}" for="extraTime"/>
         <p:selectBooleanCheckbox id="extraTime"
                                  value="#{bean.extraTime}"
                                  binding="#{showExtraTime}"
@@ -80,7 +81,7 @@
         <p:message id="msg_extraTime" for="extraTime"/>
 
         <!--                    <h:panelGroup rendered="#{not empty showExtraTime.value and showExtraTime.value}">-->
-        <h:outputLabel value="#{bundle.EditFamTypMatchLabel_extraTimeDuration}"
+        <p:outputLabel value="#{bundle.EditFamTypMatchLabel_extraTimeDuration}"
                        for="extraTimeDuration"
                        rendered="#{not empty showExtraTime.value and showExtraTime.value}"/>
         <p:inputText id="extraTimeDuration"
@@ -94,7 +95,7 @@
                    for="extraTimeDuration"
                    rendered="#{not empty showExtraTime.value and showExtraTime.value}"/>
         <!--                        -->
-        <h:outputLabel value="#{bundle.EditFamTypMatchLabel_penalties}"
+        <p:outputLabel value="#{bundle.EditFamTypMatchLabel_penalties}"
                        for="penalties"/>
         <p:selectBooleanCheckbox id="penalties"
                                  value="#{bean.penalties}"
@@ -103,7 +104,7 @@
         </p:selectBooleanCheckbox>
         <p:message id="msg_penalties" for="penalties"/>
 
-        <h:outputLabel value="#{bundle.EditFamTypMatchLabel_nbPenalties}"
+        <p:outputLabel value="#{bundle.EditFamTypMatchLabel_nbPenalties}"
                        for="nbPenalties"
                        rendered="#{not empty showPenalties.value and showPenalties.value}"/>
         <p:inputText id="nbPenalties"
@@ -115,7 +116,7 @@
         <p:message id="msg_nbPenalties" for="nbPenalties"
                    rendered="#{not empty showPenalties.value and showPenalties.value}"/>
 
-        <!--                    <h:outputLabel value="#{bundle.EditFamTypMatchLabel_dtCreat}" for="dtCreat" />
+        <!--                    <p:outputLabel value="#{bundle.EditFamTypMatchLabel_dtCreat}" for="dtCreat" />
      <p:inputText id="dtCreat"
                   value="#{bean.dtCreat}"
                   title="#{bundle.EditFamTypMatchTitle_dtCreat}"
@@ -125,7 +126,7 @@
      </p:inputText>
      <p:message id="msg_dtCreat" for="dtCreat"/>
 
-     <h:outputLabel value="#{bundle.EditFamTypMatchLabel_dtModif}" for="dtModif" />
+     <p:outputLabel value="#{bundle.EditFamTypMatchLabel_dtModif}" for="dtModif" />
      <p:inputText id="dtModif"
                   value="#{bean.dtModif}"
                   title="#{bundle.EditFamTypMatchTitle_dtModif}"

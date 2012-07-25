@@ -6,7 +6,6 @@
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:c="http://java.sun.com/jsp/jstl/core"
         xmlns:p="http://primefaces.org/ui"
         template="/common/template.xhtml">
 
@@ -17,7 +16,7 @@
         <h:form>
             <p:panel header="#{bundle.EditFamFormationItemTitle}">
                 <h:panelGrid columns="3">
-                    <h:outputLabel value="#{bundle.EditFamFormationItemLabel_idFormationItem}" for="idFormationItem"/>
+                    <p:outputLabel value="#{bundle.EditFamFormationItemLabel_idFormationItem}" for="idFormationItem"/>
                     <p:inputText id="idFormationItem"
                                  value="#{famFormationItemController.selected.idFormationItem}"
                                  title="#{bundle.EditFamFormationItemTitle_idFormationItem}"
@@ -28,7 +27,7 @@
                     </p:inputText>
                     <p:message id="msg_idFormationItem" for="idFormationItem"/>
 
-                    <h:outputLabel value="#{bundle.EditFamFormationItemLabel_famFormation}" for="famFormation"/>
+                    <p:outputLabel value="#{bundle.EditFamFormationItemLabel_famFormation}" for="famFormation"/>
                     <h:selectOneMenu id="famFormation"
                                      value="#{famFormationItemController.selected.famFormation}"
                                      title="#{bundle.EditFamFormationItemTitle_famFormation}"
@@ -38,7 +37,7 @@
                     </h:selectOneMenu>
                     <p:message id="msg_famFormation" for="famFormation"/>
 
-                    <h:outputLabel value="#{bundle.EditFamFormationItemLabel_numItem}" for="numItem"/>
+                    <p:outputLabel value="#{bundle.EditFamFormationItemLabel_numItem}" for="numItem"/>
                     <p:inputText id="numItem"
                                  value="#{famFormationItemController.selected.numItem}"
                                  title="#{bundle.EditFamFormationItemTitle_numItem}"
@@ -49,7 +48,7 @@
                     </p:inputText>
                     <p:message id="msg_numItem" for="numItem"/>
 
-                    <h:outputLabel value="#{bundle.EditFamFormationItemLabel_coord}" for="coord"/>
+                    <p:outputLabel value="#{bundle.EditFamFormationItemLabel_coord}" for="coord"/>
                     <p:inputText id="coord"
                                  value="#{famFormationItemController.selected.coord}"
                                  title="#{bundle.EditFamFormationItemTitle_coord}"
@@ -60,7 +59,7 @@
                     </p:inputText>
                     <p:message id="msg_coord" for="coord"/>
 
-                    <h:outputLabel value="#{bundle.EditFamFormationItemLabel_dtCreat}" for="dtCreat"/>
+                    <p:outputLabel value="#{bundle.EditFamFormationItemLabel_dtCreat}" for="dtCreat"/>
                     <p:inputText id="dtCreat"
                                  value="#{famFormationItemController.selected.dtCreat}"
                                  title="#{bundle.EditFamFormationItemTitle_dtCreat}"
@@ -73,7 +72,7 @@
 
                     <p:message id="msg_dtCreat" for="dtCreat"/>
 
-                    <h:outputLabel value="#{bundle.EditFamFormationItemLabel_dtModif}" for="dtModif"/>
+                    <p:outputLabel value="#{bundle.EditFamFormationItemLabel_dtModif}" for="dtModif"/>
                     <p:inputText id="dtModif"
                                  value="#{famFormationItemController.selected.dtModif}"
                                  title="#{bundle.EditFamFormationItemTitle_dtModif}"

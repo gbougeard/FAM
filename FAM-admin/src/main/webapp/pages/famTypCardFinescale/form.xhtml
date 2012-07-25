@@ -10,7 +10,7 @@
         >
 
     <h:panelGrid columns="3">
-        <!--                     <h:outputLabel value="#{bundle.EditFamTypCardFinescaleLabel_idTypCardFinescale}" for="idTypCardFinescale" />
+        <!--                     <p:outputLabel value="#{bundle.EditFamTypCardFinescaleLabel_idTypCardFinescale}" for="idTypCardFinescale" />
      <p:inputText id="idTypCardFinescale"
                   value="#{bean.idTypCardFinescale}"
                   title="#{bundle.EditFamTypCardFinescaleTitle_idTypCardFinescale}"
@@ -19,7 +19,8 @@
      </p:inputText>
      <p:message id="msg_idTypCardFinescale" for="idTypCardFinescale"/> -->
 
-        <h:outputLabel value="#{bundle.EditFamTypCardFinescaleLabel_libTypCardFinescale}" for="libTypCardFinescale"/>
+        <p:outputLabel value="#{bundle.EditFamTypCardFinescaleLabel_libTypCardFinescale}" for="libTypCardFinescale"/>
+        <!--@elvariable id="bean" type="org.fam.ejb.model.FamTypCardFinescale"-->
         <p:inputText id="libTypCardFinescale"
                      value="#{bean.libTypCardFinescale}"
                      title="#{bundle.EditFamTypCardFinescaleTitle_libTypCardFinescale}"
@@ -28,7 +29,7 @@
         </p:inputText>
         <p:message id="msg_libTypCardFinescale" for="libTypCardFinescale"/>
 
-        <h:outputLabel value="#{bundle.EditFamTypCardFinescaleLabel_codTypCardFinescale}" for="codTypCardFinescale"/>
+        <p:outputLabel value="#{bundle.EditFamTypCardFinescaleLabel_codTypCardFinescale}" for="codTypCardFinescale"/>
         <p:inputText id="codTypCardFinescale"
                      value="#{bean.codTypCardFinescale}"
                      title="#{bundle.EditFamTypCardFinescaleTitle_codTypCardFinescale}"
@@ -37,7 +38,7 @@
         </p:inputText>
         <p:message id="msg_codTypCardFinescale" for="codTypCardFinescale"/>
 
-        <h:outputLabel value="#{bundle.EditFamTypCardFinescaleLabel_famTypCard}" for="famTypCard"/>
+        <p:outputLabel value="#{bundle.EditFamTypCardFinescaleLabel_famTypCard}" for="famTypCard"/>
         <h:selectOneMenu id="famTypCard"
                          value="#{bean.famTypCard}"
                          title="#{bundle.EditFamTypCardFinescaleTitle_famTypCard}"
@@ -53,7 +54,7 @@
         </h:selectOneMenu>
         <p:message id="msg_famTypCard" for="famTypCard"/>
 
-        <h:outputLabel value="#{bundle.EditFamTypCardFinescaleLabel_price}" for="price"/>
+        <p:outputLabel value="#{bundle.EditFamTypCardFinescaleLabel_price}" for="price"/>
         <p:inputText id="price"
                      value="#{bean.price}"
                      title="#{bundle.EditFamTypCardFinescaleTitle_price}"
@@ -62,7 +63,7 @@
         </p:inputText>
         <p:message id="msg_price" for="price"/>
 
-        <!--                    <h:outputLabel value="#{bundle.EditFamTypCardFinescaleLabel_dtCreat}" for="dtCreat" />
+        <!--                    <p:outputLabel value="#{bundle.EditFamTypCardFinescaleLabel_dtCreat}" for="dtCreat" />
      <p:inputText id="dtCreat"
                   value="#{bean.dtCreat}"
                   title="#{bundle.EditFamTypCardFinescaleTitle_dtCreat}"
@@ -72,7 +73,7 @@
      </p:inputText>
      <p:message id="msg_dtCreat" for="dtCreat"/>
 
-     <h:outputLabel value="#{bundle.EditFamTypCardFinescaleLabel_dtModif}" for="dtModif" />
+     <p:outputLabel value="#{bundle.EditFamTypCardFinescaleLabel_dtModif}" for="dtModif" />
      <p:inputText id="dtModif"
                   value="#{bean.dtModif}"
                   title="#{bundle.EditFamTypCardFinescaleTitle_dtModif}"

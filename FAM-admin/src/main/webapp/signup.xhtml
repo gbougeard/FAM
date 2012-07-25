@@ -14,7 +14,7 @@
     </f:metadata>
 
     <ui:define name="title">
-        <h:outputText value="Signup"></h:outputText>
+        <h:outputText value="Signup"/>
     </ui:define>
 
     <ui:define name="body">
@@ -25,13 +25,13 @@
                 <p:tab title="Tab The First">
 
                     <h:panelGrid columns="3">
-                        <h:outputLabel for="mail" value="Email"/>
+                        <p:outputLabel for="mail" value="Email"/>
                         <p:inputText id="mail" value="#{authentificationBean.signupBean.email}">
                             <p:ajax event="blur" update="msg_mail"/>
                         </p:inputText>
                         <p:message id="msg_mail" for="mail"/>
 
-                        <h:outputLabel for="pwd1" value="Password"/>
+                        <p:outputLabel for="pwd1" value="Password"/>
                         <p:password id="pwd1" value="#{authentificationBean.signupBean.password}" feedback="false"
                                     match="pwd2"
                                     label="Password 1"
@@ -40,7 +40,7 @@
                         </p:password>
                         <p:message id="msg_pwd1" for="pwd1"/>
 
-                        <h:outputLabel for="pwd2" value="Confirm password"/>
+                        <p:outputLabel for="pwd2" value="Confirm password"/>
                         <p:password id="pwd2" value="#{authentificationBean.signupBean.password}" feedback="false"
                                     label="Password 2"
                                     required="true">

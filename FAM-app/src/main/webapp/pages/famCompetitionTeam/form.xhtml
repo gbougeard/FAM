@@ -6,12 +6,11 @@
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:c="http://java.sun.com/jsp/jstl/core"
         xmlns:p="http://primefaces.org/ui"
         >
 
     <h:panelGrid columns="3">
-        <!--                    <h:outputLabel value="#{bundle.EditFamCompetitionTeamLabel_idCompetitionTeam}" for="idCompetitionTeam" />
+        <!--                    <p:outputLabel value="#{bundle.EditFamCompetitionTeamLabel_idCompetitionTeam}" for="idCompetitionTeam" />
      <p:inputText id="idCompetitionTeam"
                   value="#{bean.idCompetitionTeam}"
                   title="#{bundle.EditFamCompetitionTeamTitle_idCompetitionTeam}"
@@ -20,7 +19,7 @@
      </p:inputText>
      <p:message id="msg_idCompetitionTeam" for="idCompetitionTeam"/> -->
 
-        <h:outputLabel value="#{bundle.EditFamCompetitionTeamLabel_famSeasonCompetition}" for="famSeasonCompetition"/>
+        <p:outputLabel value="#{bundle.EditFamCompetitionTeamLabel_famSeasonCompetition}" for="famSeasonCompetition"/>
         <h:selectOneMenu id="famSeasonCompetition"
                          value="#{bean.famSeasonCompetition}"
                          title="#{bundle.EditFamCompetitionTeamTitle_famSeasonCompetition}"
@@ -36,7 +35,7 @@
         </h:selectOneMenu>
         <p:message id="msg_famSeasonCompetition" for="famSeasonCompetition"/>
 
-        <h:outputLabel value="#{bundle.EditFamCompetitionTeamLabel_famTeam}" for="famTeam"/>
+        <p:outputLabel value="#{bundle.EditFamCompetitionTeamLabel_famTeam}" for="famTeam"/>
         <h:selectOneMenu id="famTeam"
                          value="#{bean.famTeam}"
                          title="#{bundle.EditFamCompetitionTeamTitle_famTeam}"

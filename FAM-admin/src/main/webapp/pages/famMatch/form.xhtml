@@ -9,11 +9,12 @@
         >
 
     <h:panelGrid columns="3">
-        <!--<h:outputLabel value="#{bundle.CreateFamClubLabel_idClub}" for="idClub" />
+        <!--<p:outputLabel value="#{bundle.CreateFamClubLabel_idClub}" for="idClub" />
 <p:inputText id="idClub" value="#{bean.idClub}"
        title="#{bundle.CreateFamClubTitle_idClub}" />-->
 
-        <h:outputLabel value="#{bundle.CreateFamClubLabel_libClub}" for="libClub"/>
+        <p:outputLabel value="#{bundle.CreateFamClubLabel_libClub}" for="libClub"/>
+        <!--@elvariable id="bean" type="org.fam.ejb.model.FamMatch"-->
         <p:inputText id="libClub" value="#{bean.libClub}"
                      title="#{bundle.CreateFamClubTitle_libClub}"
                 >
@@ -21,7 +22,7 @@
         </p:inputText>
         <p:message id="msg_libClub" for="libClub"/>
 
-        <h:outputLabel value="#{bundle.CreateFamClubLabel_codeFff}" for="codeFff"/>
+        <p:outputLabel value="#{bundle.CreateFamClubLabel_codeFff}" for="codeFff"/>
         <p:inputText id="codeFff"
                      value="#{bean.codeFff}"
                      title="#{bundle.CreateFamClubTitle_codeFff}"
@@ -30,7 +31,7 @@
         </p:inputText>
         <p:message id="msg_codeFff" for="codeFff"/>
 
-        <!--                <h:outputLabel value="#{bundle.CreateFamClubLabel_dtCreat}" for="dtCreat" />
+        <!--                <p:outputLabel value="#{bundle.CreateFamClubLabel_dtCreat}" for="dtCreat" />
       <p:inputText id="dtCreat"
                    value="#{bean.dtCreat}"
                    title="#{bundle.CreateFamClubTitle_dtCreat}"
@@ -40,7 +41,7 @@
       </p:inputText>
       <p:message id="msg_dtCreat" for="dtCreat"/>
 
-      <h:outputLabel value="#{bundle.CreateFamClubLabel_dtModif}" for="dtModif" />
+      <p:outputLabel value="#{bundle.CreateFamClubLabel_dtModif}" for="dtModif" />
       <p:inputText id="dtModif" value="#{bean.dtModif}"
                    title="#{bundle.CreateFamClubTitle_dtModif}"
                    readonly="true">

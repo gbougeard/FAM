@@ -9,7 +9,7 @@
         >
 
     <h:panelGrid columns="3">
-        <!--                    <h:outputLabel value="#{bundle.EditFamTypEventLabel_idTypEvent}" for="idTypEvent" />
+        <!--                    <p:outputLabel value="#{bundle.EditFamTypEventLabel_idTypEvent}" for="idTypEvent" />
      <p:inputText id="idTypEvent"
                   value="#{bean.idTypEvent}"
                   title="#{bundle.EditFamTypEventTitle_idTypEvent}"
@@ -18,7 +18,8 @@
      </p:inputText>
      <p:message id="msg_idTypEvent" for="idTypEvent"/> -->
 
-        <h:outputLabel value="#{bundle.EditFamTypEventLabel_libTypEvent}" for="libTypEvent"/>
+        <p:outputLabel value="#{bundle.EditFamTypEventLabel_libTypEvent}" for="libTypEvent"/>
+        <!--@elvariable id="bean" type="org.fam.ejb.model.FamTypEvent"-->
         <p:inputText id="libTypEvent"
                      value="#{bean.libTypEvent}"
                      title="#{bundle.EditFamTypEventTitle_libTypEvent}">
@@ -26,7 +27,7 @@
         </p:inputText>
         <p:message id="msg_libTypEvent" for="libTypEvent"/>
 
-        <h:outputLabel value="#{bundle.EditFamTypEventLabel_codTypEvent}" for="codTypEvent"/>
+        <p:outputLabel value="#{bundle.EditFamTypEventLabel_codTypEvent}" for="codTypEvent"/>
         <p:inputText id="codTypEvent"
                      value="#{bean.codTypEvent}"
                      title="#{bundle.EditFamTypEventTitle_codTypEvent}"
@@ -35,7 +36,7 @@
         </p:inputText>
         <p:message id="msg_codTypEvent" for="codTypEvent"/>
 
-        <!--                    <h:outputLabel value="#{bundle.EditFamTypEventLabel_dtCreat}" for="dtCreat" />
+        <!--                    <p:outputLabel value="#{bundle.EditFamTypEventLabel_dtCreat}" for="dtCreat" />
      <p:inputText id="dtCreat"
                   value="#{bean.dtCreat}"
                   title="#{bundle.EditFamTypEventTitle_dtCreat}"
@@ -45,7 +46,7 @@
      </p:inputText>
      <p:message id="msg_dtCreat" for="dtCreat"/>
 
-     <h:outputLabel value="#{bundle.EditFamTypEventLabel_dtModif}" for="dtModif" />
+     <p:outputLabel value="#{bundle.EditFamTypEventLabel_dtModif}" for="dtModif" />
      <p:inputText id="dtModif"
                   value="#{bean.dtModif}"
                   title="#{bundle.EditFamTypEventTitle_dtModif}"

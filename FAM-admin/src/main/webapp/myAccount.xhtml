@@ -7,13 +7,13 @@
         template="/common/template.xhtml">
 
     <ui:define name="title">
-        <h:outputText value="Mon compte"></h:outputText>
+        <h:outputText value="Mon compte"/>
     </ui:define>
     <ui:define name="body">
-        <c:if test="${not empty login.currentUser.currentClub}">
-            <style type="text/css"
-                   media="screen">@import "${request.contextPath}/${login.currentUser.currentClub.idClub}/css/default.css";</style>
-        </c:if>
+        <!--<c:if test="${not empty login.currentUser.currentClub}">-->
+        <!--<style type="text/css"-->
+        <!--media="screen">@import "${request.contextPath}/${login.currentUser.currentClub.idClub}/css/default.css";</style>-->
+        <!--</c:if>-->
         <h:form>
             <p:panel header="Mon compte">
                 <!--<p>Hi, <shiro:guest>Guest</shiro:guest>-->
@@ -22,7 +22,7 @@
                 <p:tabView>
                     <p:tab title="User">
                         <h:panelGrid columns="3">
-                            <!--                    <h:outputLabel value="#{bundle.EditFamUserLabel_idUser}" for="idUser" />
+                            <!--                    <p:outputLabel value="#{bundle.EditFamUserLabel_idUser}" for="idUser" />
                          <p:inputText id="idUser"
                                       value="#{login.currentUser.idUser}"
                                       title="#{bundle.EditFamUserTitle_idUser}"
@@ -31,7 +31,7 @@
                          </p:inputText>
                          <p:message id="msg_idUser" for="idUser"/> -->
 
-                            <h:outputLabel value="#{bundle.EditFamUserLabel_firstName}" for="usrFirstName"/>
+                            <p:outputLabel value="#{bundle.EditFamUserLabel_firstName}" for="usrFirstName"/>
                             <p:inplace>
                                 <p:inputText id="usrFirstName"
                                              value="#{login.currentUser.firstName}"
@@ -42,7 +42,7 @@
                             </p:inplace>
                             <p:message id="msg_usrFirstName" for="usrFirstName"/>
 
-                            <h:outputLabel value="#{bundle.EditFamUserLabel_lastName}" for="usrLastName"/>
+                            <p:outputLabel value="#{bundle.EditFamUserLabel_lastName}" for="usrLastName"/>
                             <p:inplace>
                                 <p:inputText id="usrLastName"
                                              value="#{login.currentUser.lastName}"
@@ -54,7 +54,7 @@
                             <p:message id="msg_usrLastName" for="usrLastName"/>
 
 
-                            <!--                    <h:outputLabel value="#{bundle.EditFamUserLabel_password}" for="password" />
+                            <!--                    <p:outputLabel value="#{bundle.EditFamUserLabel_password}" for="password" />
                          <p:password id="password"
                                      value="#{login.currentUser.password}"
                                      feedback="false"
@@ -64,7 +64,7 @@
                          </p:password>
                          <p:message id="msg_password" for="password"/> -->
 
-                            <h:outputLabel value="#{bundle.EditFamUserLabel_email}" for="usrEmail"/>
+                            <p:outputLabel value="#{bundle.EditFamUserLabel_email}" for="usrEmail"/>
                             <p:inplace>
                                 <p:inputText id="usrEmail"
                                              value="#{login.currentUser.email}"
@@ -75,7 +75,7 @@
                             </p:inplace>
                             <p:message id="msg_usrEmail" for="usrEmail"/>
 
-                            <!--                    <h:outputLabel value="#{bundle.EditFamUserLabel_famClub}" for="famClub" />
+                            <!--                    <p:outputLabel value="#{bundle.EditFamUserLabel_famClub}" for="famClub" />
                          <p:inplace >
                              <h:selectOneMenu id="famClub"
                                               value="#{login.currentUser.famClub}"
@@ -102,6 +102,7 @@
                     </p:tab>
                     <!--                    myPlayer-->
                     <p:tab title="MyPlayer">
+                        <!--@elvariable id="cachePlayer" type="org.fam.jsf.cache.CachePlayer"-->
                         <c:if test="${not empty cachePlayer}">
                             <ui:include src="${pageContext.request.servletPath}/pages/famPlayer/view.xhtml">
                                 <ui:param name="bean" value="#{cachePlayer.currentPlayer}"/>

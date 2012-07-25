@@ -6,13 +6,12 @@
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:c="http://java.sun.com/jsp/jstl/core"
         xmlns:p="http://primefaces.org/ui"
         >
 
     <h:panelGrid columns="3">
 
-        <h:outputLabel value="#{bundle.EditFamSeasonLabel_libSeason}" for="libSeason"/>
+        <p:outputLabel value="#{bundle.EditFamSeasonLabel_libSeason}" for="libSeason"/>
         <p:inputText id="libSeason"
                      value="#{bean.libSeason}"
                      title="#{bundle.EditFamSeasonTitle_libSeason}"
@@ -21,7 +20,7 @@
         </p:inputText>
         <p:message id="msg_libSeason" for="libSeason"/>
 
-        <h:outputLabel value="#{bundle.EditFamSeasonLabel_currentSeason}" for="currentSeason"/>
+        <p:outputLabel value="#{bundle.EditFamSeasonLabel_currentSeason}" for="currentSeason"/>
         <p:selectBooleanCheckbox id="currentSeason"
                                  value="#{bean.currentSeason}">
             <p:ajax event="blur" update="msg_currentSeason"/>

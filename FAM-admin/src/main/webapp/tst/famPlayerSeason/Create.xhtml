@@ -16,15 +16,15 @@
         </h:panelGroup>
         <h:form>
             <h:panelGrid columns="2">
-                <h:outputLabel value="#{bundle.CreateFamPlayerSeasonLabel_famPlayer}" for="famPlayer"/>
+                <p:outputLabel value="#{bundle.CreateFamPlayerSeasonLabel_famPlayer}" for="famPlayer"/>
                 <h:selectOneMenu id="famPlayer" value="#{famPlayerSeasonController.selected.famPlayer}"
                                  title="#{bundle.CreateFamPlayerSeasonTitle_famPlayer}">
                     <f:selectItems value="#{famPlayerController.itemsAvailableSelectOne}"/>
                 </h:selectOneMenu>
-                <h:outputLabel value="#{bundle.CreateFamPlayerSeasonLabel_famPlayerProfile}" for="famPlayerProfile"/>
+                <p:outputLabel value="#{bundle.CreateFamPlayerSeasonLabel_famPlayerProfile}" for="famPlayerProfile"/>
                 <h:inputText id="famPlayerProfile" value="#{famPlayerSeasonController.selected.famPlayerProfile}"
                              title="#{bundle.CreateFamPlayerSeasonTitle_famPlayerProfile}"/>
-                <h:outputLabel value="#{bundle.CreateFamPlayerSeasonLabel_famSeason}" for="famSeason"/>
+                <p:outputLabel value="#{bundle.CreateFamPlayerSeasonLabel_famSeason}" for="famSeason"/>
                 <h:selectOneMenu id="famSeason" value="#{famPlayerSeasonController.selected.famSeason}"
                                  title="#{bundle.CreateFamPlayerSeasonTitle_famSeason}">
                     <f:selectItems value="#{famSeasonController.itemsAvailableSelectOne}"/>

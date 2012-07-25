@@ -32,7 +32,7 @@
     <p:fieldset id="fsGoals" legend="Buts">
 
         <h:panelGrid columns="3">
-            <h:outputLabel value="#{bundle.EditFamGoalLabel_famMatchPlayerStriker}" for="famMatchPlayerStriker"/>
+            <p:outputLabel value="#{bundle.EditFamGoalLabel_famMatchPlayerStriker}" for="famMatchPlayerStriker"/>
             <p:selectOneMenu id="famMatchPlayerStriker"
                              value="#{famMatchController.famGoal.famMatchPlayerStriker}"
                              title="#{bundle.EditFamGoalTitle_famMatchPlayerStriker}"
@@ -48,7 +48,7 @@
             </p:selectOneMenu>
             <p:message id="msg_famMatchPlayerStriker" for="famMatchPlayerStriker"/>
 
-            <h:outputLabel value="#{bundle.EditFamGoalLabel_famMatchPlayerAssist}" for="famMatchPlayerAssist"/>
+            <p:outputLabel value="#{bundle.EditFamGoalLabel_famMatchPlayerAssist}" for="famMatchPlayerAssist"/>
             <p:selectOneMenu id="famMatchPlayerAssist"
                              value="#{famMatchController.famGoal.famMatchPlayerAssist}"
                              title="#{bundle.EditFamGoalTitle_famMatchPlayerAssist}"
@@ -65,7 +65,7 @@
             </p:selectOneMenu>
             <p:message id="msg_famMatchPlayerAssist" for="famMatchPlayerAssist"/>
 
-            <h:outputLabel value="#{bundle.EditFamGoalLabel_goalTime}" for="goalTime"/>
+            <p:outputLabel value="#{bundle.EditFamGoalLabel_goalTime}" for="goalTime"/>
             <p:inputText id="goalTime"
                          value="#{famMatchController.famGoal.goalTime}"
                          title="#{bundle.EditFamGoalTitle_goalTime}"
@@ -74,7 +74,7 @@
             </p:inputText>
             <p:message id="msg_goalTime" for="goalTime"/>
 
-            <h:outputLabel value="#{bundle.EditFamGoalLabel_csc}" for="csc"/>
+            <p:outputLabel value="#{bundle.EditFamGoalLabel_csc}" for="csc"/>
             <p:selectBooleanCheckbox id="csc"
                                      value="#{famMatchController.famGoal.csc}"
                                      title="#{bundle.EditFamGoalTitle_csc}"
@@ -83,7 +83,7 @@
             </p:selectBooleanCheckbox>
             <p:message id="msg_csc" for="csc"/>
 
-            <h:outputLabel value="#{bundle.EditFamGoalLabel_penalty}" for="penalty"/>
+            <p:outputLabel value="#{bundle.EditFamGoalLabel_penalty}" for="penalty"/>
             <p:selectBooleanCheckbox id="penalty"
                                      value="#{famMatchController.famGoal.penalty}"
                                      title="#{bundle.EditFamGoalTitle_penalty}"
@@ -114,7 +114,7 @@
 <p:tab id="tabCard" title="Cartons">
     <h:panelGrid columns="3">
 
-        <h:outputLabel value="#{bundle.EditFamCardLabel_famMatchPlayer}" for="famMatchPlayer"/>
+        <p:outputLabel value="#{bundle.EditFamCardLabel_famMatchPlayer}" for="famMatchPlayer"/>
         <p:selectOneMenu id="famMatchPlayer"
                          value="#{famMatchController.famCard.famMatchPlayer}"
                          title="#{bundle.EditFamCardTitle_famMatchPlayer}"
@@ -130,7 +130,7 @@
         </p:selectOneMenu>
         <p:message id="msg_famMatchPlayer" for="famMatchPlayer"/>
 
-        <h:outputLabel value="#{bundle.EditFamCardLabel_famTypCard}" for="famTypCard"/>
+        <p:outputLabel value="#{bundle.EditFamCardLabel_famTypCard}" for="famTypCard"/>
         <p:selectOneMenu id="famTypCard"
                          value="#{famMatchController.famCard.famTypCard}"
                          converter="typCardConverter"
@@ -145,7 +145,7 @@
         </p:selectOneMenu>
         <p:message id="msg_famTypCard" for="famTypCard"/>
 
-        <h:outputLabel value="#{bundle.EditFamCardLabel_cardTime}" for="cardTime"/>
+        <p:outputLabel value="#{bundle.EditFamCardLabel_cardTime}" for="cardTime"/>
         <p:inputText id="cardTime"
                      value="#{famMatchController.famCard.cardTime}"
                      title="#{bundle.EditFamCardTitle_cardTime}"
@@ -172,7 +172,7 @@
 </p:tab>
 <p:tab id="tabSub" title="Remplacements">
     <h:panelGrid columns="3">
-        <h:outputLabel value="#{bundle.EditFamSubstitutionLabel_famMatchPlayerIn}"
+        <p:outputLabel value="#{bundle.EditFamSubstitutionLabel_famMatchPlayerIn}"
                        for="famMatchPlayerIn"/>
         <p:selectOneMenu id="famMatchPlayerIn"
                          value="#{famMatchController.famSubstitution.famMatchPlayerIn}"
@@ -189,7 +189,7 @@
         </p:selectOneMenu>
         <p:message id="msg_famMatchPlayerIn" for="famMatchPlayerIn"/>
 
-        <h:outputLabel value="#{bundle.EditFamSubstitutionLabel_famMatchPlayerOut}"
+        <p:outputLabel value="#{bundle.EditFamSubstitutionLabel_famMatchPlayerOut}"
                        for="famMatchPlayerOut"/>
         <p:selectOneMenu id="famMatchPlayerOut"
                          value="#{famMatchController.famSubstitution.famMatchPlayerOut}"
@@ -206,7 +206,7 @@
         </p:selectOneMenu>
         <p:message id="msg_famMatchPlayerOut" for="famMatchPlayerOut"/>
 
-        <h:outputLabel value="#{bundle.EditFamSubstitutionLabel_substitutionTime}" for="substitutionTime"/>
+        <p:outputLabel value="#{bundle.EditFamSubstitutionLabel_substitutionTime}" for="substitutionTime"/>
         <p:inputText id="substitutionTime"
                      value="#{famMatchController.famSubstitution.substitutionTime}"
                      title="#{bundle.EditFamSubstitutionLabel_substitutionTime}"
@@ -239,24 +239,24 @@
         <p:tab title="#{matchPlayer.num} - #{matchPlayer.famPlayer.displayName}">
             <h:panelGrid columns="2" cellpadding="10" columnClasses="verticalTop,verticalTop">
                 <h:graphicImage library="images/players"
-                        name="#{initParam['org.fam.jsf.DEFAULT_PHOTO']}#{initParam['org.fam.jsf.DEFAULT_IMAGE_EXTENSION']}"
-                        width="60"/>
+                                name="#{initParam['org.fam.jsf.DEFAULT_PHOTO']}#{initParam['org.fam.jsf.DEFAULT_IMAGE_EXTENSION']}"
+                                width="60"/>
 
                 <h:panelGrid columns="3">
-                    <h:outputLabel value="Name: " for="player_name"/>
+                    <p:outputLabel value="Name: " for="player_name"/>
                     <h:outputText id="player_name" value="#{matchPlayer.famPlayer.displayName}"
                                   style="font-weight: bold"/>
                     <p:message id="msg_player_name" for="player_name"/>
 
-                    <h:outputLabel value="Note: " for="player_note"/>
+                    <p:outputLabel value="Note: " for="player_note"/>
                     <p:inputText id="player_note" value="#{matchPlayer.note}"/>
                     <p:message id="msg_player_note" for="player_note"/>
 
-                    <h:outputLabel value="Capitaine " for="player_captain"/>
+                    <p:outputLabel value="Capitaine " for="player_captain"/>
                     <p:selectBooleanCheckbox id="player_captain" value="#{matchPlayer.captain}"/>
                     <p:message id="msg_player_captain" for="player_captain"/>
 
-                    <h:outputLabel value="Commentaire: " for="player_com"/>
+                    <p:outputLabel value="Commentaire: " for="player_com"/>
                     <p:editor id="player_com" value="#{matchPlayer.comments}" width="600" height="150"/>
                     <p:message id="msg_player_com" for="player_com"/>
 

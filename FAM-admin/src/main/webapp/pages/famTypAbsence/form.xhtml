@@ -9,7 +9,7 @@
         >
 
     <h:panelGrid columns="3">
-        <!--                    <h:outputLabel value="#{bundle.EditFamTypAbsenceLabel_idTypAbsence}" for="idTypAbsence" />
+        <!--                    <p:outputLabel value="#{bundle.EditFamTypAbsenceLabel_idTypAbsence}" for="idTypAbsence" />
      <p:inputText id="idTypAbsence"
                   value="#{bean.idTypAbsence}"
                   title="#{bundle.EditFamTypAbsenceTitle_idTypAbsence}"
@@ -18,7 +18,8 @@
      </p:inputText>
      <p:message id="msg_idTypAbsence" for="idTypAbsence"/> -->
 
-        <h:outputLabel value="#{bundle.EditFamTypAbsenceLabel_libTypAbsence}" for="libTypAbsence"/>
+        <p:outputLabel value="#{bundle.EditFamTypAbsenceLabel_libTypAbsence}" for="libTypAbsence"/>
+        <!--@elvariable id="bean" type="org.fam.ejb.model.FamTypAbsence"-->
         <p:inputText id="libTypAbsence"
                      value="#{bean.libTypAbsence}"
                      title="#{bundle.EditFamTypAbsenceTitle_libTypAbsence}"
@@ -27,7 +28,7 @@
         </p:inputText>
         <p:message id="msg_libTypAbsence" for="libTypAbsence"/>
 
-        <h:outputLabel value="#{bundle.EditFamTypAbsenceLabel_codTypAbsence}" for="codTypAbsence"/>
+        <p:outputLabel value="#{bundle.EditFamTypAbsenceLabel_codTypAbsence}" for="codTypAbsence"/>
         <p:inputText id="codTypAbsence"
                      value="#{bean.codTypAbsence}"
                      title="#{bundle.EditFamTypAbsenceTitle_codTypAbsence}"
@@ -36,7 +37,7 @@
         </p:inputText>
         <p:message id="msg_codTypAbsence" for="codTypAbsence"/>
 
-        <!--                    <h:outputLabel value="#{bundle.EditFamTypAbsenceLabel_dtCreat}" for="dtCreat" />
+        <!--                    <p:outputLabel value="#{bundle.EditFamTypAbsenceLabel_dtCreat}" for="dtCreat" />
      <p:inputText id="dtCreat"
                   value="#{bean.dtCreat}"
                   title="#{bundle.EditFamTypAbsenceTitle_dtCreat}"
@@ -46,7 +47,7 @@
      </p:inputText>
      <p:message id="msg_dtCreat" for="dtCreat"/>
 
-     <h:outputLabel value="#{bundle.EditFamTypAbsenceLabel_dtModif}" for="dtModif" />
+     <p:outputLabel value="#{bundle.EditFamTypAbsenceLabel_dtModif}" for="dtModif" />
      <p:inputText id="dtModif"
                   value="#{bean.dtModif}"
                   title="#{bundle.EditFamTypAbsenceTitle_dtModif}"

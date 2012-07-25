@@ -6,7 +6,6 @@
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:c="http://java.sun.com/jsp/jstl/core"
         xmlns:p="http://primefaces.org/ui"
         >
     <f:metadata>
@@ -15,7 +14,7 @@
     <!--    <h:form>-->
     <!--    <h:panelGrid columns="2">-->
     <h:panelGrid columns="6">
-        <h:outputLabel value="Taille" for="height"/>
+        <p:outputLabel value="Taille" for="height"/>
         <h:panelGrid columns="1" style="margin-bottom:10px">
             <p:inputText id="height"
                          value="#{bean.height}">
@@ -26,7 +25,7 @@
         </h:panelGrid>
         <p:message id="msg_height" for="height"/>
 
-        <h:outputLabel value="Poids" for="weight"/>
+        <p:outputLabel value="Poids" for="weight"/>
         <h:panelGrid columns="1" style="margin-bottom:10px">
             <p:inputText id="weight"
                          value="#{bean.weight}">
@@ -39,7 +38,7 @@
 
         <!--                <p:separator/><p:separator/><p:separator/>-->
 
-        <h:outputLabel value="ATT" for="att"/>
+        <p:outputLabel value="ATT" for="att"/>
         <h:panelGrid columns="1" style="margin-bottom:10px">
             <p:inputText id="att"
                          value="#{bean.att}">
@@ -52,7 +51,7 @@
         </h:panelGrid>
         <p:message id="msg_att" for="att"/>
 
-        <h:outputLabel value="DEF" for="def"/>
+        <p:outputLabel value="DEF" for="def"/>
         <h:panelGrid columns="1" style="margin-bottom:10px">
             <p:inputText id="def"
                          value="#{bean.def}">
@@ -65,7 +64,7 @@
         </h:panelGrid>
         <p:message id="msg_def" for="def"/>
 
-        <h:outputLabel value="TEC" for="tec"/>
+        <p:outputLabel value="TEC" for="tec"/>
         <h:panelGrid columns="1" style="margin-bottom:10px">
             <p:inputText id="tec"
                          value="#{bean.tec}">
@@ -77,7 +76,7 @@
         </h:panelGrid>
         <p:message id="msg_tec" for="tec"/>
 
-        <h:outputLabel value="VIT" for="vit"/>
+        <p:outputLabel value="VIT" for="vit"/>
         <h:panelGrid columns="1" style="margin-bottom:10px">
             <p:inputText id="vit"
                          value="#{bean.vit}">
@@ -89,7 +88,7 @@
         </h:panelGrid>
         <p:message id="msg_vit" for="vit"/>
 
-        <h:outputLabel value="PUI" for="pui"/>
+        <p:outputLabel value="PUI" for="pui"/>
         <h:panelGrid columns="1" style="margin-bottom:10px">
             <p:inputText id="pui"
                          value="#{bean.pui}">
@@ -99,7 +98,7 @@
         </h:panelGrid>
         <p:message id="msg_pui" for="pui"/>
 
-        <h:outputLabel value="PHY" for="phy"/>
+        <p:outputLabel value="PHY" for="phy"/>
         <h:panelGrid columns="1" style="margin-bottom:10px">
             <p:inputText id="phy"
                          value="#{bean.phy}">

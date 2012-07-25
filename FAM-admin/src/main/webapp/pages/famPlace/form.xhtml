@@ -13,7 +13,7 @@
     <h:panelGrid columns="2">
         <h:panelGrid columns="3" width="400">
 
-            <h:outputLabel value="#{bundle.EditFamPlaceLabel_libPlace}" for="libPlace"/>
+            <p:outputLabel value="#{bundle.EditFamPlaceLabel_libPlace}" for="libPlace"/>
 
             <p:inputText id="libPlace"
                          value="#{bean.libPlace}"
@@ -23,7 +23,7 @@
             </p:inputText>
             <p:message id="msg_libPlace" for="libPlace"/>
 
-            <h:outputLabel value="#{bundle.EditFamPlaceLabel_address}" for="address"/>
+            <p:outputLabel value="#{bundle.EditFamPlaceLabel_address}" for="address"/>
             <p:inputText id="address"
                          value="#{bean.address}"
                          title="#{bundle.EditFamPlaceTitle_address}"
@@ -32,7 +32,7 @@
             </p:inputText>
             <p:message id="msg_address" for="address"/>
 
-            <h:outputLabel value="#{bundle.EditFamPlaceLabel_zipcode}" for="zipcode"/>
+            <p:outputLabel value="#{bundle.EditFamPlaceLabel_zipcode}" for="zipcode"/>
             <p:inputText id="zipcode"
                          value="#{bean.zipcode}"
                          title="#{bundle.EditFamPlaceTitle_zipcode}"
@@ -41,7 +41,7 @@
             </p:inputText>
             <p:message id="msg_zipcode" for="zipcode"/>
 
-            <h:outputLabel value="#{bundle.EditFamPlaceLabel_city}" for="city"/>
+            <p:outputLabel value="#{bundle.EditFamPlaceLabel_city}" for="city"/>
             <p:inputText id="city"
                          value="#{bean.city}"
                          title="#{bundle.EditFamPlaceTitle_city}"
@@ -50,7 +50,7 @@
             </p:inputText>
             <p:message id="msg_city" for="city"/>
 
-            <h:outputLabel value="#{bundle.EditFamPlaceLabel_latitude}" for="latitude"/>
+            <p:outputLabel value="#{bundle.EditFamPlaceLabel_latitude}" for="latitude"/>
             <p:inputText id="latitude"
                          value="#{bean.latitude}"
                          title="#{bundle.EditFamPlaceTitle_latitude}"
@@ -60,7 +60,7 @@
             </p:inputText>
             <p:message id="msg_latitude" for="latitude"/>
 
-            <h:outputLabel value="#{bundle.EditFamPlaceLabel_longitude}" for="longitude"/>
+            <p:outputLabel value="#{bundle.EditFamPlaceLabel_longitude}" for="longitude"/>
             <p:inputText id="longitude"
                          value="#{bean.longitude}"
                          title="#{bundle.EditFamPlaceTitle_longitude}"
@@ -70,7 +70,7 @@
             </p:inputText>
             <p:message id="msg_longitude" for="longitude"/>
 
-            <h:outputLabel value="#{bundle.EditFamPlaceLabel_famTypPlace}" for="famTypPlace"/>
+            <p:outputLabel value="#{bundle.EditFamPlaceLabel_famTypPlace}" for="famTypPlace"/>
             <p:selectOneMenu id="famTypPlace"
                              value="#{bean.famTypPlace}"
                              title="#{bundle.EditFamPlaceTitle_famTypPlace}"
@@ -101,7 +101,7 @@
                     update="@form" partialSubmit="true"/>
             <p:gmapInfoWindow>
                 <!--<p:graphicImage value="/images/#{mapBean.marker.data.image}" />-->
-                <h:outputText value="#{famPlaceController.marker.data.title}" />
+                <h:outputText value="#{famPlaceController.marker.data.title}"/>
             </p:gmapInfoWindow>
         </p:gmap>
     </h:panelGrid>

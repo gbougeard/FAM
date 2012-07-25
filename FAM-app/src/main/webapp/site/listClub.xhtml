@@ -3,7 +3,6 @@
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:c="http://java.sun.com/jsp/jstl/core"
         xmlns:p="http://primefaces.org/ui"
         template="/common/template.xhtml">
 
@@ -22,7 +21,7 @@
                 </p:ajaxStatus>
 
                 <h:panelGrid columns="3" id="edit">
-                    <h:outputLabel value="Id :" for="lbl_idClub"></h:outputLabel>
+                    <p:outputLabel value="Id :" for="lbl_idClub"></p:outputLabel>
                     <p:inputText id="lbl_idClub"
                                  value="#{clubController.selected.idClub}"
                                  readonly="true">
@@ -30,21 +29,21 @@
                     </p:inputText>
                     <p:message id="msgId" for="lbl_idClub"/>
 
-                    <h:outputLabel value="Libellé :" for="lbl_libClub"></h:outputLabel>
+                    <p:outputLabel value="Libellé :" for="lbl_libClub"></p:outputLabel>
                     <p:inputText id="lbl_libClub"
                                  value="#{clubController.selected.libClub}">
                         <p:ajax event="blur change" update="msgLib"/>
                     </p:inputText>
                     <p:message id="msgLib" for="lbl_libClub"/>
 
-                    <h:outputLabel value="Code :" for="lbl_code"></h:outputLabel>
+                    <p:outputLabel value="Code :" for="lbl_code"></p:outputLabel>
                     <p:inputText id="lbl_code"
                                  value="#{clubController.selected.codeFff}">
                         <p:ajax event="blur" update="msgCode"/>
                     </p:inputText>
                     <p:message id="msgCode" for="lbl_code"/>
 
-                    <h:outputLabel value="Date creat. :" for="lbl_dtCreat"></h:outputLabel>
+                    <p:outputLabel value="Date creat. :" for="lbl_dtCreat"></p:outputLabel>
                     <p:inputText id="lbl_dtCreat"
                                  value="#{clubController.selected.dtCreat}"
                                  readonly="true">
@@ -53,7 +52,7 @@
                     </p:inputText>
                     <p:message id="msgDtCreat" for="lbl_dtCreat"/>
 
-                    <h:outputLabel value="Date modif. :" for="lbl_dtModif"></h:outputLabel>
+                    <p:outputLabel value="Date modif. :" for="lbl_dtModif"></p:outputLabel>
                     <p:inputText id="lbl_dtModif"
                                  value="#{clubController.selected.dtModif}"
                                  readonly="true">

@@ -75,7 +75,7 @@
         <p:panel header="Où et quand?">
             <h:panelGrid columns="3">
 
-                <h:outputLabel value="#{bundle.EditFamEventLabel_dtEvent}" for="dtEvent"/>
+                <p:outputLabel value="#{bundle.EditFamEventLabel_dtEvent}" for="dtEvent"/>
                 <p:calendar id="dtEvent"
                             value="#{famMatchController.famEvent.dtEvent}"
                             pattern="dd/MM/yyyy HH:mm"
@@ -89,7 +89,7 @@
                 </p:calendar>
                 <p:message id="msg_dtEvent" for="dtEvent"/>
 
-                <h:outputLabel value="#{bundle.EditFamEventLabel_famPlace}" for="famPlace"/>
+                <p:outputLabel value="#{bundle.EditFamEventLabel_famPlace}" for="famPlace"/>
                 <h:selectOneMenu id="famPlace"
                                  value="#{famMatchController.famEvent.famPlace}"
                                  title="#{bundle.EditFamEventTitle_famPlace}"
@@ -104,7 +104,7 @@
                 </h:selectOneMenu>
                 <p:message id="msg_famPlace" for="famPlace"/>
 
-                <h:outputLabel value="#{bundle.EditFamEventLabel_comments}" for="comments"/>
+                <p:outputLabel value="#{bundle.EditFamEventLabel_comments}" for="comments"/>
                 <p:editor id="comments"
                           value="#{famMatchController.famEvent.comments}"
                           widgetVar="editor" width="600"/>
@@ -156,7 +156,7 @@
 </p:wizard>
 
 <!--                <h:panelGrid columns="3">
-    <h:outputLabel value="#{bundle.EditFamMatchLabel_idMatch}" for="idMatch" />
+    <p:outputLabel value="#{bundle.EditFamMatchLabel_idMatch}" for="idMatch" />
     <p:inputText id="idMatch"
                  value="#{famMatchController.selected.idMatch}"
                  title="#{bundle.EditFamMatchTitle_idMatch}"
@@ -165,7 +165,7 @@
     </p:inputText>
     <p:message id="msg_idMatch" for="idMatch"/>
 
-    <h:outputLabel value="#{bundle.EditFamMatchLabel_famEvent}" for="famEvent" />
+    <p:outputLabel value="#{bundle.EditFamMatchLabel_famEvent}" for="famEvent" />
     <h:selectOneMenu id="famEvent"
                      value="#{famMatchController.selected.famEvent}"
                      title="#{bundle.EditFamMatchTitle_famEvent}"
@@ -175,7 +175,7 @@
     </h:selectOneMenu>
     <p:message id="msg_famEvent" for="famEvent"/>
 
-    <h:outputLabel value="#{bundle.EditFamMatchLabel_famSeasonCompetition}" for="famSeasonCompetition" />
+    <p:outputLabel value="#{bundle.EditFamMatchLabel_famSeasonCompetition}" for="famSeasonCompetition" />
     <h:selectOneMenu id="famSeasonCompetition"
                      value="#{famMatchController.selected.famSeasonCompetition}"
                      title="#{bundle.EditFamMatchTitle_famSeasonCompetition}"
@@ -185,7 +185,7 @@
     </h:selectOneMenu>
     <p:message id="msg_famSeasonCompetition" for="famSeasonCompetition"/>
 
-    <h:outputLabel value="#{bundle.EditFamMatchLabel_famFixture}" for="famFixture" />
+    <p:outputLabel value="#{bundle.EditFamMatchLabel_famFixture}" for="famFixture" />
     <h:selectOneMenu id="famFixture"
                      value="#{famMatchController.selected.famFixture}"
                      title="#{bundle.EditFamMatchTitle_famFixture}"
@@ -195,7 +195,7 @@
     </h:selectOneMenu>
     <p:message id="msg_famFixture" for="famFixture"/>
 
-    <h:outputLabel value="#{bundle.EditFamMatchLabel_dtCreat}" for="dtCreat" />
+    <p:outputLabel value="#{bundle.EditFamMatchLabel_dtCreat}" for="dtCreat" />
     <p:inputText id="dtCreat"
                  value="#{famMatchController.selected.dtCreat}"
                  title="#{bundle.EditFamMatchTitle_dtCreat}"
@@ -205,7 +205,7 @@
     </p:inputText>
     <p:message id="msg_dtCreat" for="dtCreat"/>
 
-    <h:outputLabel value="#{bundle.EditFamMatchLabel_dtModif}" for="dtModif" />
+    <p:outputLabel value="#{bundle.EditFamMatchLabel_dtModif}" for="dtModif" />
     <p:inputText id="dtModif"
                  value="#{famMatchController.selected.dtModif}"
                  title="#{bundle.EditFamMatchTitle_dtModif}"

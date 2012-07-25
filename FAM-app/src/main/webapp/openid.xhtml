@@ -2,8 +2,6 @@
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:c="http://java.sun.com/jsp/jstl/core"
         xmlns:p="http://primefaces.org/ui"
         template="/common/template.xhtml">
 
@@ -14,16 +12,16 @@
 
                 <h:inputHidden value="#{login.onLoad}"/>
                 <h:panelGrid columns="2">
-                    <h:outputLabel for="userSuppliedId" value="User Supplied Id: "/>
+                    <p:outputLabel for="userSuppliedId" value="User Supplied Id: "/>
                     <h:outputText id="userSuppliedId" value="#{login.userSuppliedId}"/>
 
-                    <h:outputLabel for="email" value="Email "/>
+                    <p:outputLabel for="email" value="Email "/>
                     <h:outputText id="email" value="#{login.openIdEmail}"/>
 
-                    <h:outputLabel for="firstname" value="Firstname: "/>
+                    <p:outputLabel for="firstname" value="Firstname: "/>
                     <h:outputText id="firstname" value="#{login.openIdFirstName}"/>
 
-                    <h:outputLabel for="lastname" value="Lastname: "/>
+                    <p:outputLabel for="lastname" value="Lastname: "/>
                     <h:outputText id="lastname" value="#{login.openIdLastName}"/>
 
                 </h:panelGrid>

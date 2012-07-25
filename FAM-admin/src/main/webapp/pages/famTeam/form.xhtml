@@ -11,7 +11,7 @@
 
     <h:panelGrid columns="3">
 
-        <h:outputLabel value="#{bundle.EditFamTeamLabel_libTeam}" for="libTeam"/>
+        <p:outputLabel value="#{bundle.EditFamTeamLabel_libTeam}" for="libTeam"/>
         <!--@elvariable id="bean" type="org.fam.ejb.model.FamTeam"-->
         <p:inputText id="libTeam"
                      value="#{bean.libTeam}"
@@ -20,7 +20,7 @@
         </p:inputText>
         <p:message id="msg_libTeam" for="libTeam"/>
 
-        <h:outputLabel value="#{bundle.EditFamTeamLabel_codTeam}" for="codTeam"/>
+        <p:outputLabel value="#{bundle.EditFamTeamLabel_codTeam}" for="codTeam"/>
         <p:inputText id="codTeam"
                      value="#{bean.codTeam}"
                      title="#{bundle.EditFamTeamTitle_codTeam}">
@@ -28,7 +28,7 @@
         </p:inputText>
         <p:message id="msg_codTeam" for="codTeam"/>
 
-        <h:outputLabel value="#{bundle.EditFamTeamLabel_famClub}" for="famClub"/>
+        <p:outputLabel value="#{bundle.EditFamTeamLabel_famClub}" for="famClub"/>
         <p:selectOneMenu id="famClub"
                          value="#{bean.famClub}"
                          title="#{bundle.EditFamTeamTitle_famClub}"
@@ -44,7 +44,7 @@
         </p:selectOneMenu>
         <p:message id="msg_famClub" for="famClub"/>
 
-        <h:outputLabel value="#{bundle.EditFamTeamLabel_famCategory}" for="famCategory"/>
+        <p:outputLabel value="#{bundle.EditFamTeamLabel_famCategory}" for="famCategory"/>
         <p:selectOneMenu id="famCategory"
                          value="#{bean.famCategory}"
                          title="#{bundle.EditFamTeamTitle_famCategory}"
@@ -60,7 +60,7 @@
         </p:selectOneMenu>
         <p:message id="msg_famCategory" for="famCategory"/>
 
-        <h:outputLabel value="#{bundle.EditFamTeamLabel_famPlace}" for="famPlace"/>
+        <p:outputLabel value="#{bundle.EditFamTeamLabel_famPlace}" for="famPlace"/>
         <p:selectOneMenu id="famPlace"
                          value="#{bean.famPlace}"
                          title="#{bundle.EditFamEventTitle_famPlace}"

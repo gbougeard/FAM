@@ -10,7 +10,7 @@
         >
 
     <h:panelGrid columns="3">
-        <!--                    <h:outputLabel value="#{bundle.EditFamAbsenceLabel_idAbsence}" for="idAbsence" />
+        <!--                    <p:outputLabel value="#{bundle.EditFamAbsenceLabel_idAbsence}" for="idAbsence" />
      <p:inputText id="idAbsence"
                   value="#{bean.idAbsence}"
                   title="#{bundle.EditFamAbsenceTitle_idAbsence}"
@@ -21,7 +21,8 @@
      </p:inputText>
      <p:message id="msg_idAbsence" for="idAbsence"/> -->
 
-        <h:outputLabel value="#{bundle.EditFamAbsenceLabel_dtBegAbsence}" for="dtBegAbsence"/>
+        <p:outputLabel value="#{bundle.EditFamAbsenceLabel_dtBegAbsence}" for="dtBegAbsence"/>
+        <!--@elvariable id="bean" type="org.fam.ejb.model.FamAbsence"-->
         <p:calendar id="dtBegAbsence"
                     value="#{bean.dtBegAbsence}"
                     title="#{bundle.EditFamAbsenceTitle_dtBegAbsence}"
@@ -32,7 +33,7 @@
         </p:calendar>
         <p:message id="msg_dtBegAbsence" for="dtBegAbsence"/>
 
-        <h:outputLabel value="#{bundle.EditFamAbsenceLabel_dtEndAbsence}" for="dtEndAbsence"/>
+        <p:outputLabel value="#{bundle.EditFamAbsenceLabel_dtEndAbsence}" for="dtEndAbsence"/>
         <p:calendar id="dtEndAbsence"
                     value="#{bean.dtEndAbsence}"
                     title="#{bundle.EditFamAbsenceTitle_dtEndAbsence}"
@@ -43,7 +44,7 @@
         </p:calendar>
         <p:message id="msg_dtEndAbsence" for="dtEndAbsence"/>
 
-        <h:outputLabel value="#{bundle.EditFamAbsenceLabel_comments}" for="comments"/>
+        <p:outputLabel value="#{bundle.EditFamAbsenceLabel_comments}" for="comments"/>
         <p:editor id="comments"
                   value="#{bean.comments}"
                   width="600"
@@ -52,7 +53,7 @@
         </p:editor>
         <p:message id="msg_comments" for="comments"/>
 
-        <!--                    <h:outputLabel value="#{bundle.EditFamAbsenceLabel_dtCreat}" for="dtCreat" />
+        <!--                    <p:outputLabel value="#{bundle.EditFamAbsenceLabel_dtCreat}" for="dtCreat" />
      <p:inputText id="dtCreat"
                   value="#{bean.dtCreat}"
                   title="#{bundle.EditFamAbsenceTitle_dtCreat}"
@@ -62,7 +63,7 @@
      </p:inputText>
      <p:message id="msg_dtCreat" for="dtCreat"/>
 
-     <h:outputLabel value="#{bundle.EditFamAbsenceLabel_dtModif}" for="dtModif" />
+     <p:outputLabel value="#{bundle.EditFamAbsenceLabel_dtModif}" for="dtModif" />
      <p:inputText id="dtModif"
                   value="#{bean.dtModif}"
                   title="#{bundle.EditFamAbsenceTitle_dtModif}"

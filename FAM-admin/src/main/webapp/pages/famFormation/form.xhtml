@@ -18,7 +18,7 @@
     </script>
     <!--@elvariable id="bean" type="org.fam.ejb.model.FamFormation"-->
     <h:panelGrid columns="3">
-        <h:outputLabel value="#{bundle.EditFamFormationLabel_libFormation}" for="libFormation"/>
+        <p:outputLabel value="#{bundle.EditFamFormationLabel_libFormation}" for="libFormation"/>
 
         <p:inputText id="libFormation"
                      value="#{bean.libFormation}"
@@ -28,7 +28,7 @@
         </p:inputText>
         <p:message id="msg_libFormation" for="libFormation"/>
 
-        <h:outputLabel value="#{bundle.EditFamFormationLabel_codFormation}" for="codFormation"/>
+        <p:outputLabel value="#{bundle.EditFamFormationLabel_codFormation}" for="codFormation"/>
         <p:inputText id="codFormation"
                      value="#{bean.codFormation}"
                      title="#{bundle.EditFamFormationTitle_codFormation}"
@@ -37,7 +37,7 @@
         </p:inputText>
         <p:message id="msg_codFormation" for="codFormation"/>
 
-        <h:outputLabel value="#{bundle.EditFamFormationLabel_byDefault}" for="byDefault"/>
+        <p:outputLabel value="#{bundle.EditFamFormationLabel_byDefault}" for="byDefault"/>
         <p:selectBooleanCheckbox id="byDefault"
                                  value="#{bean.byDefault}"
                                  title="#{bundle.EditFamFormationTitle_byDefault}"
@@ -46,7 +46,7 @@
         </p:selectBooleanCheckbox>
         <p:message id="msg_byDefault" for="byDefault"/>
 
-        <h:outputLabel value="#{bundle.EditFamFormationTitlel_typMatch}" for="typMatch"/>
+        <p:outputLabel value="#{bundle.EditFamFormationTitlel_typMatch}" for="typMatch"/>
         <p:selectOneMenu id="typMatch"
                          value="#{bean.famTypMatch}"
                          converter="typMatchConverter"

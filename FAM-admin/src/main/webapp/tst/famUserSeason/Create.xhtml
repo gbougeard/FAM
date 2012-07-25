@@ -16,26 +16,26 @@
         </h:panelGroup>
         <h:form>
             <h:panelGrid columns="2">
-                <h:outputLabel value="#{bundle.CreateFamUserSeasonLabel_famUser}" for="famUser"/>
+                <p:outputLabel value="#{bundle.CreateFamUserSeasonLabel_famUser}" for="famUser"/>
                 <h:selectOneMenu id="famUser" value="#{famUserSeasonController.selected.famUser}"
                                  title="#{bundle.CreateFamUserSeasonTitle_famUser}">
                     <f:selectItems value="#{famUserController.itemsAvailableSelectOne}"/>
                 </h:selectOneMenu>
-                <h:outputLabel value="#{bundle.CreateFamUserSeasonLabel_famSeason}" for="famSeason"/>
+                <p:outputLabel value="#{bundle.CreateFamUserSeasonLabel_famSeason}" for="famSeason"/>
                 <h:selectOneMenu id="famSeason" value="#{famUserSeasonController.selected.famSeason}"
                                  title="#{bundle.CreateFamUserSeasonTitle_famSeason}">
                     <f:selectItems value="#{famSeasonController.itemsAvailableSelectOne}"/>
                 </h:selectOneMenu>
-                <h:outputLabel value="#{bundle.CreateFamUserSeasonLabel_isAdmin}" for="isAdmin"/>
+                <p:outputLabel value="#{bundle.CreateFamUserSeasonLabel_isAdmin}" for="isAdmin"/>
                 <h:inputText id="isAdmin" value="#{famUserSeasonController.selected.isAdmin}"
                              title="#{bundle.CreateFamUserSeasonTitle_isAdmin}"/>
-                <h:outputLabel value="#{bundle.CreateFamUserSeasonLabel_isCoach}" for="isCoach"/>
+                <p:outputLabel value="#{bundle.CreateFamUserSeasonLabel_isCoach}" for="isCoach"/>
                 <h:inputText id="isCoach" value="#{famUserSeasonController.selected.isCoach}"
                              title="#{bundle.CreateFamUserSeasonTitle_isCoach}"/>
-                <h:outputLabel value="#{bundle.CreateFamUserSeasonLabel_isPlayer}" for="isPlayer"/>
+                <p:outputLabel value="#{bundle.CreateFamUserSeasonLabel_isPlayer}" for="isPlayer"/>
                 <h:inputText id="isPlayer" value="#{famUserSeasonController.selected.isPlayer}"
                              title="#{bundle.CreateFamUserSeasonTitle_isPlayer}"/>
-                <h:outputLabel value="#{bundle.CreateFamUserSeasonLabel_isReporter}" for="isReporter"/>
+                <p:outputLabel value="#{bundle.CreateFamUserSeasonLabel_isReporter}" for="isReporter"/>
                 <h:inputText id="isReporter" value="#{famUserSeasonController.selected.isReporter}"
                              title="#{bundle.CreateFamUserSeasonTitle_isReporter}"/>
             </h:panelGrid>

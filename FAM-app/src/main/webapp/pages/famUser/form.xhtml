@@ -6,12 +6,11 @@
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:c="http://java.sun.com/jsp/jstl/core"
         xmlns:p="http://primefaces.org/ui"
         >
 
     <h:panelGrid columns="3">
-        <!--                    <h:outputLabel value="#{bundle.EditFamUserLabel_idUser}" for="idUser" />
+        <!--                    <p:outputLabel value="#{bundle.EditFamUserLabel_idUser}" for="idUser" />
      <p:inputText id="idUser"
                   value="#{bean.idUser}"
                   title="#{bundle.EditFamUserTitle_idUser}"
@@ -20,7 +19,7 @@
      </p:inputText>
      <p:message id="msg_idUser" for="idUser"/> -->
 
-        <h:outputLabel value="#{bundle.EditFamUserLabel_firstName}" for="firstName"/>
+        <p:outputLabel value="#{bundle.EditFamUserLabel_firstName}" for="firstName"/>
         <p:inputText id="firstName"
                      value="#{bean.firstName}"
                      title="#{bundle.EditFamUserTitle_firstName}"
@@ -29,7 +28,7 @@
         </p:inputText>
         <p:message id="msg_firstName" for="firstName"/>
 
-        <h:outputLabel value="#{bundle.EditFamUserLabel_lastName}" for="lastName"/>
+        <p:outputLabel value="#{bundle.EditFamUserLabel_lastName}" for="lastName"/>
         <p:inputText id="lastName"
                      value="#{bean.lastName}"
                      title="#{bundle.EditFamUserTitle_lastName}"
@@ -38,7 +37,7 @@
         </p:inputText>
         <p:message id="msg_lastName" for="lastName"/>
 
-        <h:outputLabel value="#{bundle.EditFamUserLabel_password}" for="password"/>
+        <p:outputLabel value="#{bundle.EditFamUserLabel_password}" for="password"/>
         <p:password id="password"
                     value="#{bean.password}"
                     feedback="false"
@@ -48,7 +47,7 @@
         </p:password>
         <p:message id="msg_password" for="password"/>
 
-        <h:outputLabel value="#{bundle.EditFamUserLabel_email}" for="email"/>
+        <p:outputLabel value="#{bundle.EditFamUserLabel_email}" for="email"/>
         <p:inputText id="email"
                      value="#{bean.email}"
                      title="#{bundle.EditFamUserTitle_email}"
@@ -57,7 +56,7 @@
         </p:inputText>
         <p:message id="msg_email" for="email"/>
 
-        <h:outputLabel value="#{bundle.EditFamUserLabel_famPlayer}" for="famPlayer"/>
+        <p:outputLabel value="#{bundle.EditFamUserLabel_famPlayer}" for="famPlayer"/>
         <p:selectOneMenu id="famPlayer"
                          value="#{bean.famPlayer}"
                          title="#{bundle.EditFamUserTitle_famPlayer}"
@@ -74,7 +73,7 @@
         <p:message id="msg_famPlayer" for="famPlayer"/>
 
 
-        <!--                    <h:outputLabel value="#{bundle.EditFamUserLabel_dtCreat}" for="dtCreat" />
+        <!--                    <p:outputLabel value="#{bundle.EditFamUserLabel_dtCreat}" for="dtCreat" />
      <p:inputText id="dtCreat"
                   value="#{bean.dtCreat}"
                   title="#{bundle.EditFamUserTitle_dtCreat}"
@@ -84,7 +83,7 @@
      </p:inputText>
      <p:message id="msg_dtCreat" for="dtCreat"/>
 
-     <h:outputLabel value="#{bundle.EditFamUserLabel_dtModif}" for="dtModif" />
+     <p:outputLabel value="#{bundle.EditFamUserLabel_dtModif}" for="dtModif" />
      <p:inputText id="dtModif"
                   value="#{bean.dtModif}"
                   title="#{bundle.EditFamUserTitle_dtModif}"

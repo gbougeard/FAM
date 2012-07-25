@@ -6,12 +6,11 @@
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:c="http://java.sun.com/jsp/jstl/core"
         xmlns:p="http://primefaces.org/ui"
         >
 
     <h:panelGrid columns="3">
-        <!--                    <h:outputLabel value="#{bundle.EditFamEventLabel_idEvent}" for="idEvent" />-->
+        <!--                    <p:outputLabel value="#{bundle.EditFamEventLabel_idEvent}" for="idEvent" />-->
         <!--                    <p:inputText id="idEvent" 
                                          value="#{bean.idEvent}" 
                                          title="#{bundle.EditFamEventTitle_idEvent}" 
@@ -20,7 +19,7 @@
         <!--                    </p:inputText>-->
         <!-- <p:message id="msg_idEvent" for="idEvent"/> -->
 
-        <!--        <h:outputLabel value="#{bundle.EditFamEventLabel_famSeason}" for="famSeason" />
+        <!--        <p:outputLabel value="#{bundle.EditFamEventLabel_famSeason}" for="famSeason" />
      <h:selectOneMenu id="famSeason"
                        value="#{bean.famSeason}"
                        title="#{bundle.EditFamEventTitle_famSeason}"
@@ -37,7 +36,7 @@
       </h:selectOneMenu>
       <p:message id="msg_famSeason" for="famSeason"/>-->
         <!--mindate="#{cacheBean.now}"-->
-        <h:outputLabel value="#{bundle.EditFamEventLabel_dtEvent}" for="dtEvent"/>
+        <p:outputLabel value="#{bundle.EditFamEventLabel_dtEvent}" for="dtEvent"/>
         <p:calendar id="dtEvent"
                     value="#{bean.dtEvent}"
                     maxHour="23"
@@ -58,7 +57,7 @@
         </p:inputText>-->
         <p:message id="msg_dtEvent" for="dtEvent"/>
 
-        <h:outputLabel value="#{bundle.EditFamEventLabel_famTypEvent}" for="famTypEvent"
+        <p:outputLabel value="#{bundle.EditFamEventLabel_famTypEvent}" for="famTypEvent"
                        rendered="#{isNotWorkoutOrMatch}"/>
         <p:selectOneMenu id="famTypEvent"
                          value="#{bean.famTypEvent}"
@@ -77,7 +76,7 @@
         <p:message id="msg_famTypEvent" for="famTypEvent"
                    rendered="#{isNotWorkoutOrMatch}"/>
 
-        <h:outputLabel value="#{bundle.EditFamEventLabel_libEvent}" for="libEvent"/>
+        <p:outputLabel value="#{bundle.EditFamEventLabel_libEvent}" for="libEvent"/>
         <p:inputText id="libEvent"
                      value="#{bean.libEvent}"
                      title="#{bundle.EditFamEventTitle_libEvent}"
@@ -86,7 +85,7 @@
         </p:inputText>
         <p:message id="msg_libEvent" for="libEvent"/>
 
-        <h:outputLabel value="#{bundle.EditFamEventLabel_famPlace}" for="famPlace"/>
+        <p:outputLabel value="#{bundle.EditFamEventLabel_famPlace}" for="famPlace"/>
         <p:selectOneMenu id="famPlace"
                          value="#{bean.famPlace}"
                          title="#{bundle.EditFamEventTitle_famPlace}"
@@ -102,7 +101,7 @@
         </p:selectOneMenu>
         <p:message id="msg_famPlace" for="famPlace"/>
 
-        <h:outputLabel value="#{bundle.EditFamEventLabel_famEventStatus}" for="famEventStatus"/>
+        <p:outputLabel value="#{bundle.EditFamEventLabel_famEventStatus}" for="famEventStatus"/>
         <p:selectOneMenu id="famEventStatus"
                          value="#{bean.famEventStatus}"
                          title="#{bundle.EditFamEventTitle_famEventStatus}"
@@ -118,7 +117,7 @@
         </p:selectOneMenu>
         <p:message id="msg_famEventStatus" for="famEventStatus"/>
 
-        <h:outputLabel value="#{bundle.EditFamEventLabel_allDay}" for="allDay"
+        <p:outputLabel value="#{bundle.EditFamEventLabel_allDay}" for="allDay"
                        rendered="#{isNotWorkoutOrMatch}"/>
         <p:selectBooleanCheckbox id="allDay"
                                  value="#{bean.allDay}"
@@ -130,7 +129,7 @@
         <p:message id="msg_allDay" for="allDay"
                    rendered="#{isNotWorkoutOrMatch}"/>
 
-        <h:outputLabel value="#{bundle.EditFamEventLabel_duration}" for="duration"
+        <p:outputLabel value="#{bundle.EditFamEventLabel_duration}" for="duration"
                 />
         <p:inputText id="duration"
                      value="#{bean.duration}"
@@ -140,7 +139,7 @@
         </p:inputText>
         <p:message id="msg_duration" for="duration"/>
 
-        <h:outputLabel value="#{bundle.EditFamEventLabel_comments}" for="comments"/>
+        <p:outputLabel value="#{bundle.EditFamEventLabel_comments}" for="comments"/>
         <p:editor id="comments"
                   value="#{bean.comments}"
                   widgetVar="editor" width="600"/>
@@ -153,7 +152,7 @@
                             </p:inputTextarea>-->
         <p:message id="msg_comments" for="comments"/>
 
-        <h:outputLabel value="Equipes" for="teams"/>
+        <p:outputLabel value="Equipes" for="teams"/>
         <!--                                                <p:pickList id="teams"
       value="#{famEventController.teams}"
       var="t"
@@ -171,7 +170,7 @@
         </p:selectManyMenu>
         <p:message id="msg_teams" for="teams"/>
 
-        <!--                    <h:outputLabel value="#{bundle.EditFamEventLabel_dtCreat}" for="dtCreat" />
+        <!--                    <p:outputLabel value="#{bundle.EditFamEventLabel_dtCreat}" for="dtCreat" />
      <p:inputText id="dtCreat"
                   value="#{bean.dtCreat}"
                   title="#{bundle.EditFamEventTitle_dtCreat}"
@@ -181,7 +180,7 @@
      </p:inputText>
      <p:message id="msg_dtCreat" for="dtCreat"/>
 
-     <h:outputLabel value="#{bundle.EditFamEventLabel_dtModif}" for="dtModif" />
+     <p:outputLabel value="#{bundle.EditFamEventLabel_dtModif}" for="dtModif" />
      <p:inputText id="dtModif"
                   value="#{bean.dtModif}"
                   title="#{bundle.EditFamEventTitle_dtModif}"

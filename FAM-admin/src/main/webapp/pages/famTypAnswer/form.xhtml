@@ -9,7 +9,7 @@
         >
 
     <h:panelGrid columns="3">
-        <!--                    <h:outputLabel value="#{bundle.EditFamTypAnswerLabel_idTypAnswer}" for="idTypAnswer" />
+        <!--                    <p:outputLabel value="#{bundle.EditFamTypAnswerLabel_idTypAnswer}" for="idTypAnswer" />
      <p:inputText id="idTypAnswer"
                   value="#{bean.idTypAnswer}"
                   title="#{bundle.EditFamTypAnswerTitle_idTypAnswer}"
@@ -18,7 +18,8 @@
      </p:inputText>
      <p:message id="msg_idTypAnswer" for="idTypAnswer"/> -->
 
-        <h:outputLabel value="#{bundle.EditFamTypAnswerLabel_libTypAnswer}" for="libTypAnswer"/>
+        <p:outputLabel value="#{bundle.EditFamTypAnswerLabel_libTypAnswer}" for="libTypAnswer"/>
+        <!--@elvariable id="bean" type="org.fam.ejb.model.FamTypAnswer"-->
         <p:inputText id="libTypAnswer"
                      value="#{bean.libTypAnswer}"
                      title="#{bundle.EditFamTypAnswerTitle_libTypAnswer}"
@@ -27,7 +28,7 @@
         </p:inputText>
         <p:message id="msg_libTypAnswer" for="libTypAnswer"/>
 
-        <h:outputLabel value="#{bundle.EditFamTypAnswerLabel_grpTypAnswer}" for="grpTypAnswer"/>
+        <p:outputLabel value="#{bundle.EditFamTypAnswerLabel_grpTypAnswer}" for="grpTypAnswer"/>
         <p:inputText id="grpTypAnswer"
                      value="#{bean.grpTypAnswer}"
                      title="#{bundle.EditFamTypAnswerTitle_grpTypAnswer}"
@@ -36,7 +37,7 @@
         </p:inputText>
         <p:message id="msg_grpTypAnswer" for="grpTypAnswer"/>
 
-        <h:outputLabel value="#{bundle.EditFamTypAnswerLabel_codTypAnswer}" for="codTypAnswer"/>
+        <p:outputLabel value="#{bundle.EditFamTypAnswerLabel_codTypAnswer}" for="codTypAnswer"/>
         <p:inputText id="codTypAnswer"
                      value="#{bean.codTypAnswer}"
                      title="#{bundle.EditFamTypAnswerTitle_codTypAnswer}"
@@ -45,7 +46,7 @@
         </p:inputText>
         <p:message id="msg_codTypAnswer" for="codTypAnswer"/>
 
-        <!--                    <h:outputLabel value="#{bundle.EditFamTypAnswerLabel_dtCreat}" for="dtCreat" />
+        <!--                    <p:outputLabel value="#{bundle.EditFamTypAnswerLabel_dtCreat}" for="dtCreat" />
      <p:inputText id="dtCreat"
                   value="#{bean.dtCreat}"
                   title="#{bundle.EditFamTypAnswerTitle_dtCreat}"
@@ -55,7 +56,7 @@
      </p:inputText>
      <p:message id="msg_dtCreat" for="dtCreat"/>
 
-     <h:outputLabel value="#{bundle.EditFamTypAnswerLabel_dtModif}" for="dtModif" />
+     <p:outputLabel value="#{bundle.EditFamTypAnswerLabel_dtModif}" for="dtModif" />
      <p:inputText id="dtModif"
                   value="#{bean.dtModif}"
                   title="#{bundle.EditFamTypAnswerTitle_dtModif}"

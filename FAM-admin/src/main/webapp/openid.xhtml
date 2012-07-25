@@ -6,26 +6,26 @@
 
     <ui:define name="titre">Openid Result</ui:define>
     <ui:define name="body">
-        <center>
+        <div style="text-align: center;">
             <h:form>
 
                 <h:inputHidden value="#{login.onLoad}"/>
                 <h:panelGrid columns="2">
-                    <h:outputLabel for="userSuppliedId" value="User Supplied Id: "/>
-                    <h:outputText id="userSuppliedId" value="#{login.userSuppliedId}"/>
+                    <h:outputText value="User Supplied Id: "/>
+                    <h:outputText value="#{login.userSuppliedId}"/>
 
-                    <h:outputLabel for="email" value="Email "/>
-                    <h:outputText id="email" value="#{login.openIdEmail}"/>
+                    <h:outputText value="Email "/>
+                    <h:outputText value="#{login.openIdEmail}"/>
 
-                    <h:outputLabel for="firstname" value="Firstname: "/>
-                    <h:outputText id="firstname" value="#{login.openIdFirstName}"/>
+                    <h:outputText value="Firstname: "/>
+                    <h:outputText value="#{login.openIdFirstName}"/>
 
-                    <h:outputLabel for="lastname" value="Lastname: "/>
-                    <h:outputText id="lastname" value="#{login.openIdLastName}"/>
+                    <h:outputText value="Lastname: "/>
+                    <h:outputText value="#{login.openIdLastName}"/>
 
                 </h:panelGrid>
             </h:form>
-        </center>
+        </div>
 
         <!--        <div id="main">
             <div id="text" >

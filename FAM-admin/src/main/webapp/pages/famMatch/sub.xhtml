@@ -20,6 +20,7 @@
         <!--@elvariable id="tc" type="org.fam.jsf.bean.TeamComposition"-->
         <h:panelGrid columns="4" columnClasses="verticalTop,verticalTop,verticalTop,verticalTop">
             <!--Joueurs disponibles-->
+            <!--@elvariable id="item" type="org.fam.ejb.model.FamPlayer"-->
             <p:dataTable binding="#{famMatchController.userListComponent}"
                          styleClass="#{idTeam}"
                          value="#{tc.preselectedLst}"
@@ -44,7 +45,7 @@
 
             <h:panelGrid columns="1" style="vertical-align: top;">
                 <h:panelGrid columns="3">
-                    <h:outputLabel value="Formation" for="formation"/>
+                    <p:outputLabel value="Formation" for="formation"/>
                     <p:selectOneMenu id="formation"
                                      value="#{tc.famMatchTeam.famFormation}"
                                      converter="formationConverter"
