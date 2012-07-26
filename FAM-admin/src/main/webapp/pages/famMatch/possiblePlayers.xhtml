@@ -22,25 +22,32 @@
     <!--@elvariable id="TYP" type="java.lang.Boolean"-->
     <!--@elvariable id="id" type="java.lang.String"-->
     <!--@elvariable id="headerText" type="java.lang.String"-->
-    <p:dataList id="#{id}"
-                value="#{answer.lstAnswer}"
-                var="item"
-                paginator="true"
-                rows="5"
-                pageLinks="1"
-                paginatorPosition="bottom"
-                paginatorAlwaysVisible="false"
-                rowKey="#{TYP ? item.idAnswer :item.idPlayer }"
-                style="height:250px;width:200px;"
-                effectSpeed="fast"
-                paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink}"
-                type="none">
+    <p:dataTable id="#{id}"
+                 value="#{answer.lstAnswer}"
+                 var="item"
+
+                 liveScroll="true"
+                 scrollable="true"
+                 scrollRows="10"
+                 scrollHeight="150"
+                 style="width:250px;"
+                 rowKey="#{TYP ? item.idAnswer :item.idPlayer }"
+            >
+        <!-- style="height:250px;width:250px;"-->
+        <!--effectSpeed="fast"-->
+        <!--paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink}"-->
+        <!--type="none"-->
+        <!--paginator="true"-->
+        <!--rows="5"-->
+        <!--pageLinks="1"-->
+        <!--paginatorPosition="bottom"-->
+        <!--paginatorAlwaysVisible="false"-->
 
         <f:facet name="header">
             <h:outputText value=" #{headerText} (#{fn:length(answer.lstAnswer)}) "/>
         </f:facet>
 
-        <p:column>
+        <p:column width="20">
             <p:commandButton icon="ui-icon-plus"
                              update="@form @(messages) @(preselectedPlayers)"
                              action="#{answer.addSelected}"
@@ -62,7 +69,7 @@
                           rendered="#{not empty item.comments}"/>
         </p:column>
 
-    </p:dataList>
+    </p:dataTable>
 
 </ui:composition>
 

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition
+<html
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:f="http://java.sun.com/jsf/core"
         xmlns:c="http://java.sun.com/jsp/jstl/core"
-        xmlns:p="http://primefaces.org/ui"
-        template="/common/template.xhtml">
+        xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/common/template.xhtml">
 
     <ui:define name="title">
         <h:outputText value="#{bundle.EditFamMatchTitle}"/>
@@ -17,7 +17,7 @@
         <h:form>
             <p:panel header="#{bundle.EditFamMatchTitle}">
                 <h:panelGrid columns="3">
-                    <!--                    <p:outputLabel value="#{bundle.EditFamMatchLabel_idMatch}" for="idMatch" />
+                    <!--                    <h:outputText value="#{bundle.EditFamMatchLabel_idMatch}" for="idMatch" />
                  <p:inputText id="idMatch"
                               value="#{famMatchController.selected.idMatch}"
                               title="#{bundle.EditFamMatchTitle_idMatch}"
@@ -26,7 +26,7 @@
                  </p:inputText>
                  <p:message id="msg_idMatch" for="idMatch"/> -->
 
-                    <p:outputLabel value="#{bundle.EditFamMatchLabel_famEvent}" for="famEvent"/>
+                    <h:outputText value="#{bundle.EditFamMatchLabel_famEvent}"/>
                     <!--                    <h:selectOneMenu id="famEvent" 
                                                          value="#{famMatchController.selected.famEvent.libEvent}" 
                                                          title="#{bundle.EditFamMatchTitle_famEvent}" 
@@ -43,7 +43,7 @@
                                   value="#{famMatchController.selected.famEvent.libEvent}"/>
                     <p:message id="msg_famEvent" for="famEvent"/>
 
-                    <p:outputLabel value="#{bundle.EditFamMatchLabel_famSeasonCompetition}" for="famSeasonCompetition"/>
+                    <h:outputText value="#{bundle.EditFamMatchLabel_famSeasonCompetition}"/>
                     <h:outputText id="famSeasonCompetition"
                                   value="#{famMatchController.selected.famSeasonCompetition.displayName}"/>
                     <!--                    <h:selectOneMenu id="famSeasonCompetition" 
@@ -62,22 +62,22 @@
 
                     <c:if test="${famMatchController.selected.famSeasonCompetition.famTypCompetition.isChampionship}">
                         <p:outputLabel value="#{bundle.EditFamMatchLabel_famFixture}" for="famFixture"/>
-                        <h:selectOneMenu id="famFixture"
+                        <p:selectOneMenu id="famFixture"
                                          value="${famMatchController.selected.famFixture}"
                                          converter="fixtureConverter"
                                 >
                             <f:selectItem itemLabel="Journée"
-                                          noSelectionOption="true"/>
+                                          itemValue=""/>
                             <f:selectItems value="${famMatchController.fixtureList}"
                                            var="f"
                                            itemValue="${f}"
                                            itemLabel="${f.libFixture}"/>
                             <p:ajax event="blur" update="msg_famFixture"/>
-                        </h:selectOneMenu>
+                        </p:selectOneMenu>
                         <p:message id="msg_famFixture" for="famFixture"/>
                     </c:if>
 
-                    <!--                    <p:outputLabel value="#{bundle.EditFamMatchLabel_dtCreat}" for="dtCreat" />
+                    <!--                    <h:outputText value="#{bundle.EditFamMatchLabel_dtCreat}" for="dtCreat" />
                  <p:inputText id="dtCreat"
                               value="#{famMatchController.selected.dtCreat}"
                               title="#{bundle.EditFamMatchTitle_dtCreat}"
@@ -87,7 +87,7 @@
                  </p:inputText>
                  <p:message id="msg_dtCreat" for="dtCreat"/>
 
-                 <p:outputLabel value="#{bundle.EditFamMatchLabel_dtModif}" for="dtModif" />
+                 <h:outputText value="#{bundle.EditFamMatchLabel_dtModif}" for="dtModif" />
                  <p:inputText id="dtModif"
                               value="#{famMatchController.selected.dtModif}"
                               title="#{bundle.EditFamMatchTitle_dtModif}"
@@ -108,4 +108,5 @@
         </h:form>
     </ui:define>
 </ui:composition>
+</html>
 
