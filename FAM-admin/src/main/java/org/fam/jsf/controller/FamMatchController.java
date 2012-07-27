@@ -108,6 +108,8 @@ public class FamMatchController extends AbstractController<FamMatch> {
 
     @NotNull
     private TeamComposition teamComposition;
+    private List<FamMatchPlayer> famMatchPlayerList = new ArrayList<FamMatchPlayer>();
+
     //    private List<FamAnswer> lstYes;
 //    private List<FamAnswer> lstNo;
 //    private List<FamAnswer> lstMaybe;
@@ -260,11 +262,10 @@ public class FamMatchController extends AbstractController<FamMatch> {
         LOGGER.info("Current wizard step:" + event.getOldStep());
         LOGGER.info("Next step:" + event.getNewStep());
 
-        if(skip) {
+        if (skip) {
             skip = false;   //reset in case user goes back
             return "confirm";
-        }
-        else {
+        } else {
             return event.getNewStep();
         }
     }
@@ -441,24 +442,25 @@ public class FamMatchController extends AbstractController<FamMatch> {
 
         for (CanvasFormationItem cfi : lstTarget) {
             if (cfi.getFamFormationItem() != null
-                 && cfi.getFamFormationItem().getNumItem().equals(num)) {
+                    && cfi.getFamFormationItem().getNumItem().equals(num)) {
 
                 cfi.setFamPlayer(player);
                 break;
             }
         }
 
-        if (famMatchTeam == null){
+        if (famMatchTeam == null) {
             famMatchTeam = teamComposition.getFamMatchTeam();
         }
-        if (famMatchTeam.getFamMatchPlayerList().isEmpty()){
-            for (int i =1; i<= nbPlayers;i++){
+        if (famMatchTeam.getFamMatchPlayerList().isEmpty()) {
+            for (int i = 1; i <= nbPlayers; i++) {
                 FamMatchPlayer fmp = new FamMatchPlayer();
                 fmp.setNum(i);
                 fmp.setFamMatchTeam(famMatchTeam);
                 famMatchTeam.getFamMatchPlayerList().add(fmp);
             }
         }
+        famMatchPlayerList = famMatchTeam.getFamMatchPlayerList();
 
         for (FamMatchPlayer fmp : famMatchTeam.getFamMatchPlayerList()) {
             if (fmp.getNum().equals(num)) {
@@ -477,8 +479,8 @@ public class FamMatchController extends AbstractController<FamMatch> {
             }
         }
 
-        for (CanvasFormationItem cfi : lstTarget){
-            if(cfi.getStrIdx().equals(String.valueOf(num))){
+        for (CanvasFormationItem cfi : lstTarget) {
+            if (cfi.getStrIdx().equals(String.valueOf(num))) {
                 cfi.setFamPlayer(player);
                 break;
             }
@@ -555,6 +557,7 @@ public class FamMatchController extends AbstractController<FamMatch> {
     }
 
     public String saveLineup() {
+        LOGGER.debug("saveLineup");
         try {
             for (FamMatchPlayer mp : famMatchTeam.getFamMatchPlayerList()) {
                 if (mp.getFamPlayer() != null) {
