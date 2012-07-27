@@ -6,187 +6,245 @@
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:fn="http://java.sun.com/jsp/jstl/functions"
         xmlns:p="http://primefaces.org/ui"
         >
 <ui:composition>
-    <script type="text/javascript">
-        function handleDrop(event, ui) {
-            var droppedCar = ui.draggable;
+<script type="text/javascript">
+    function handleDrop(event, ui) {
+        var droppedCar = ui.draggable;
 
-            droppedCar.fadeOut('fast');
-        }
-    </script>
-    <h:form>
-        <!--@elvariable id="tc" type="org.fam.jsf.bean.TeamComposition"-->
-        <h:panelGrid columns="4" columnClasses="verticalTop,verticalTop,verticalTop,verticalTop">
-            <!--Joueurs disponibles-->
-            <!--@elvariable id="item" type="org.fam.ejb.model.FamPlayer"-->
-            <p:dataTable binding="#{famMatchController.userListComponent}"
-                         styleClass="#{idTeam}"
-                         value="#{tc.preselectedLst}"
-                         var="item"
-                         selectionMode="single"
-                         emptyMessage="#{bundle.NoDataFound}"
-                         rowKey="#{item.idPlayer}"
+        droppedCar.fadeOut('fast');
+    }
+</script>
 
+
+<!--@elvariable id="tc" type="org.fam.jsf.bean.TeamComposition"-->
+<h:panelGrid columns="6"
+             cellpadding="10"
+             columnClasses="verticalTop,verticalTop,verticalTop,verticalTop,verticalTop,verticalTop"
+             id="grd6">
+<!--<h:panelGrid columns="1" style="vertical-align: top;">-->
+<h:panelGrid columns="3">
+    <p:outputLabel value="Formation" for="formation"/>
+    <p:selectOneListbox id="formation"
+                        value="#{tc.famMatchTeam.famFormation}"
+                        converter="formationConverter"
+                        style="width:300px;">
+        <!--<f:selectItem itemLabel="Formation" itemValue=""/>-->
+        <!--                                        noSelectionOption="true"/>-->
+        <f:selectItems value="#{cacheBean.listFormation}"
+                       var="f"
+                       itemLabel="#{f.libFormation}"
+                       itemValue="#{f}"/>
+        <!--                    <p:ajax event="blur" update="@form"/>-->
+        <!--                                        listener="#{famMatchController.changeFormation}"/>-->
+        <p:ajax event="valueChange" listener="#{tc.genTarget}" update="dgField" partialSubmit="true"/>
+        <!--lst"/>-->
+    </p:selectOneListbox>
+    <p:message id="msg_formation" for="formation"/>
+</h:panelGrid>
+<!--Joueurs disponibles-->
+<!--@elvariable id="item" type="org.fam.ejb.model.FamPlayer"-->
+<!--<h:form id="frmPreSel">-->
+<p:dataTable id="dtbPreSelected"
+             binding="#{famMatchController.userListComponent}"
+             styleClass="#{idTeam}"
+             value="#{tc.preselectedLst}"
+             var="item"
+             selectionMode="single"
+             emptyMessage="#{bundle.NoDataFound}"
+             rowKey="#{item.idPlayer}"
+
+        >
+    <p:column sortBy="#{item.displayName}"
+              headerText="Joueur (#{fn:length(tc.preselectedLst)})">
+        <h:outputText value="#{item.displayName}"/>
+    </p:column>
+
+    <p:column style="width:24px">
+        <h:outputText id="dragIcon"
+                      styleClass="ui-icon ui-icon-arrow-4"/>
+        <p:draggable for="dragIcon" revert="true"/>
+    </p:column>
+</p:dataTable>
+<!---->
+<!--</h:form>-->
+
+<!--Lineup-->
+<!--<p:panel header="Lineup" id="soccer_field">-->
+<!--<h:form id="frmField">-->
+<p:dataGrid id="dgField"
+            value="#{tc.lstTarget}"
+            var="t" columns="5"
+            styleClass="soccer_field"
+        >
+    <!--style="padding-top: 50px;margin-left: 40px;"-->
+    <p:column>
+        <p:panel id="trg"
+                 style="width:50px;height:63px;opacity:0.5;"
+                 rendered="#{!empty t.famFormationItem.numItem}"
+                >
+            <h:outputText value="#{t.famFormationItem.numItem}"
+                          style="text-align:center;font-weight: bolder;"/>
+            <br/>
+            <h:outputText value="#{t.famPlayer.displayName}"
+                          style="text-align:center;font-weight: bolder;"
+                          rendered="#{not empty t.famPlayer}"/>
+
+            <p:droppable tolerance="touch"
+                         activeStyleClass="ui-state-highlight"
+                         datasource="frmCompo:dtbPreSelected"
+                         onDrop="handleDrop"
                     >
-                <p:column sortBy="#{item.displayName}"
-                          headerText="Joueur">
-                    <h:outputText value="#{item.displayName}"/>
-                </p:column>
+                <f:attribute name="num" value="#{t.famFormationItem.numItem}"/>
+                <p:ajax listener="#{famMatchController.onDrop}"
+                        update="trg @(dtbSelected) @(dtbPreSelected)"
+                        />
+            </p:droppable>
+        </p:panel>
 
-                <p:column style="width:24px">
-                    <h:outputText id="dragIcon"
-                                  styleClass="ui-icon ui-icon-arrow-4"/>
-                    <p:draggable for="dragIcon" revert="true"/>
-                </p:column>
-            </p:dataTable>
-            <!---->
 
-            <h:panelGrid columns="1" style="vertical-align: top;">
-                <h:panelGrid columns="3">
-                    <p:outputLabel value="Formation" for="formation"/>
-                    <p:selectOneMenu id="formation"
-                                     value="#{tc.famMatchTeam.famFormation}"
-                                     converter="formationConverter"
-                                     style="width:300px;">
-                        <f:selectItem itemLabel="Formation" itemValue=""/>
-                        <!--                                        noSelectionOption="true"/>-->
-                        <f:selectItems value="#{cacheBean.listFormation}"
-                                       var="f"
-                                       itemLabel="#{f.libFormation}"
-                                       itemValue="#{f}"/>
-                        <!--                    <p:ajax event="blur" update="@form"/>-->
-                        <!--                                        listener="#{famMatchController.changeFormation}"/>-->
-                        <p:ajax event="valueChange" listener="#{tc.genTarget}" update="dgField" partialSubmit="true"/>
-                        <!--lst"/>-->
-                    </p:selectOneMenu>
-                    <p:message id="msg_formation" for="formation"/>
-                </h:panelGrid>
+        <!--datasource="#{famMatchController.userListComponent.clientId}"-->
+        <!--@('#dtbPreSelected') @('#sub') @('#dtbSelected')-->
+    </p:column>
+</p:dataGrid>
+<!--</h:form>-->
+<ui:repeat value="#{famMatchController.lstSubs}" var="toto" id="test">
+    <p:outputPanel id="item" layout="block" style="height:60px;width:40px; border:1px solid #666666;">
+        <h:outputText value="#{toto.strIdx}"/>
 
-                <!--Lineup-->
-                <p:panel header="Lineup" id="soccer_field">
-                    <p:dataGrid id="dgField"
-                                value="#{tc.lstTarget}"
-                                var="t" columns="5"
-                                styleClass="soccer_field"
-                            >
-                        <!--style="padding-top: 50px;margin-left: 40px;"-->
-                        <p:column>
-                            <p:panel id="trg"
-                                     style="width:50px;height:63px;opacity:0.5;"
-                                     rendered="#{!empty t.famFormationItem.numItem}"
-                                    >
-                                <h:outputText value="#{t.famFormationItem.numItem}"
-                                              style="text-align:center;font-weight: bolder;"/>
-                                <br/>
-                                <h:outputText value="#{t.famPlayer.displayName}"
-                                              style="text-align:center;font-weight: bolder;"
-                                              rendered="#{not empty t.famPlayer}"/>
-                                <p:droppable for="trg"
-                                             tolerance="touch"
-                                             activeStyleClass="ui-state-highlight"
-                                             datasource="#{famMatchController.userListComponent.clientId}"
-                                             onDrop="handleDrop"
-                                        >
-                                    <f:attribute name="num" value="#{t.famFormationItem.numItem}"/>
-                                    <p:ajax listener="#{famMatchController.onDrop}"
+    </p:outputPanel>
+    <p:droppable for="item"
+                 tolerance="touch"
+                 activeStyleClass="ui-state-highlight"
+                 datasource=":frmCompo:dtbPreSelected"
+                 onDrop="handleDrop"
+            >
+        <!--<f:attribute name="num" value="#{toto.strIdx}"/>-->
+        <p:ajax listener="#{famMatchController.onDrop}"
+                update=" @(dtbSelected) @(dtbPreSelected)"
+                />
+    </p:droppable>
+</ui:repeat>
 
-                                            />
-                                    <!-- update="trg @(dtMP)" :tabs:dtMP  @(:myForm:tabs:dtMP)-->
-                                </p:droppable>
-                            </p:panel>
+<!--</p:panel>-->
+<!--Eo Lineup-->
+<!--</h:panelGrid>-->
 
-                        </p:column>
-                    </p:dataGrid>
+<!--Substitutes-->
+<h:panelGroup>
+    <h:graphicImage id="imgSub" name="soccer_2_128.png" library="images/dock"/>
+    <p:droppable for="imgSub"
+                 tolerance="touch"
+                 activeStyleClass="ui-state-highlight"
+                 onDrop="handleDrop"
+                 datasource="dtbPreSelected"
+            >
+        <!--datasource="#{famMatchController.userListComponent.clientId}"-->
+        <!--<f:attribute name="num" value="#{sub.strIdx}"/>-->
+        <p:ajax listener="#{famMatchController.onSubDrop}"
+                update="@(dgSubs) @(dtbSelected) @(dtbPreSelected)"
 
-                </p:panel>
-                <!--Eo Lineup-->
-            </h:panelGrid>
+                />
+        <!--@(:myForm:tabs:dtMP)-->
+    </p:droppable>
 
-            <!--Substitutes-->
-            <h:panelGrid columns="1" cellpadding="10">
-                <h:graphicImage id="imgSub" name="soccer_2_128.png" library="images/dock"/>
-                <p:dataGrid id="dgSubs" value="#{famMatchController.lstSubs}"
-                            var="t" columns="2"
-                            style="padding-top: 25px;margin-left: 20px;">
-                    <p:column>
-                        <p:panel id="sub"
-                                 style="width:50px;height:63px;opacity:0.5;margin-left: 5px;"
-                                >
-                            <h:outputText value="#{t.strIdx}"
-                                          style="text-align:center;font-weight: bolder;"/>
-                            <br/>
-                            <h:outputText value="#{t.famPlayer.displayName}"
-                                          style="text-align:center;font-weight: bolder;"
-                                          rendered="#{not empty t.famPlayer}"/>
-                        </p:panel>
-                        <p:droppable for="imgSub"
-                                     tolerance="touch"
-                                     activeStyleClass="ui-state-highlight"
-                                     onDrop="handleDrop"
-                                     datasource="dtPlayers"
+    <!--<p:dataTable id="dgSubs"
+        value="#{famMatchController.lstSubs}"
+        var="mp"
+        emptyMessage="#{bundle.NoDataFound}"
+        rowKey="#{mp.strIdx}"
+        <p:column headerText="Poste">
+            <h:outputText value="#{mp.strIdx}"/>
+        </p:column>
+        <p:column headerText="Joueur">
+            <h:outputText value="#{mp.famPlayer.displayName}"/>
+        </p:column>
+    </p:dataTable>-->
+    <p:dataGrid id="dgSubs"
+                value="#{famMatchController.lstSubs}"
+                var="sub"
+                columns="2"
+                style="padding-top: 25px;margin-left: 20px;">
+        <p:column>
+            <p:panel id="sub"
+                     style="width:50px;height:63px;opacity:0.5;margin-left: 5px;"
+                    >
+                <h:outputText value="#{sub.strIdx}"
+                              style="text-align:center;font-weight: bolder;"/>
+                <br/>
+                <h:outputText value="#{sub.famPlayer.displayName}"
+                              style="text-align:center;font-weight: bolder;"
+                              rendered="#{not empty sub.famPlayer}"/>
 
-                                >
-                            <f:attribute name="num" value="#{t.strIdx}"/>
-                            <p:ajax listener="#{famMatchController.onSubDrop}"
-                                    update=" sub"
+                <p:droppable tolerance="touch"
+                             activeStyleClass="ui-state-highlight"
+                             onDrop="handleDrop"
+                             datasource="#{famMatchController.userListComponent.clientId}"
+                        >
+                    <!--<f:attribute name="num" value="#{sub.strIdx}"/>-->
+                    <p:ajax listener="#{famMatchController.onSubDrop}"
+                            update="dgSubs @(dtbSelected) @(dtbPreSelected)"
 
-                                    />
-                            <!--@(:myForm:tabs:dtMP)-->
-                        </p:droppable>
-                    </p:column>
-                </p:dataGrid>
-            </h:panelGrid>
-            <!--Eo Substitutes-->
+                            />
+                    <!--@(:myForm:tabs:dtMP)-->
+                </p:droppable>
+            </p:panel>
 
-            <!--Lineup final-->
-            <p:dataTable id="dtMP"
-                         value="#{tc.famMatchTeam.famMatchPlayerList}"
-                         var="mp"
-                         emptyMessage="#{bundle.NoDataFound}"
-                         rowKey="#{mp.num}"
-                         rowStyleClass="#{mp.num gt famMatchController.selected.famSeasonCompetition.famTypCompetition.famTypMatch.nbPlayer ? 'row-sub' : null}">
-                <p:column headerText="Poste">
-                    <h:outputText value="#{mp.num}"/>
-                </p:column>
-                <p:column headerText="Joueur">
-                    <h:outputText value="#{mp.famPlayer.displayName}"/>
-                </p:column>
-            </p:dataTable>
-            <!--Eo Lineup final-->
 
-            <!--<p:orderList
-                    value="#{tc.famMatchTeam.famMatchPlayerList}"
-                    var="mp"
-                    iconOnly="true"
-                    effect="clip"
-                    itemValue="#{mp}"
-                    converter="matchPlayerConverter"
-                    controlsLocation="left">
-                <f:facet name="caption">Available</f:facet>
+        </p:column>
 
-                <p:column style="width:25%">
-                    <h:outputText value="#{mp.num}"/>
-                </p:column>
-                <p:column style="width:25%">
-                    <h:graphicImage library="images/players"
-                                    name="#{initParam['org.fam.jsf.DEFAULT_PHOTO']}#{initParam['org.fam.jsf.DEFAULT_IMAGE_EXTENSION']}"
-                                    width="30"/>
-                </p:column>
-                <p:column style="width:50%;">
-                    <h:outputText value="#{mp.famPlayer.displayName}"/>
-                </p:column>
-            </p:orderList>-->
+    </p:dataGrid>
+</h:panelGroup>
+<!--Eo Substitutes-->
 
-        </h:panelGrid>
+<!--Lineup final-->
+<!--@elvariable id="mp" type="org.fam.ejb.model.FamMatchPlayer"-->
+<p:dataTable id="dtbSelected"
+             value="#{tc.famMatchTeam.famMatchPlayerList}"
+             var="mp"
+             emptyMessage="#{bundle.NoDataFound}"
+             rowKey="#{mp.num}"
+             rowStyleClass="#{mp.num gt famMatchController.selected.famSeasonCompetition.famTypCompetition.famTypMatch.nbPlayer ? 'row-sub' : null}">
+    <p:column headerText="Poste">
+        <h:outputText value="#{mp.num}"/>
+    </p:column>
+    <p:column headerText="Joueur">
+        <h:outputText value="#{mp.famPlayer.displayName}"/>
+    </p:column>
+</p:dataTable>
+<!--Eo Lineup final-->
 
-        <p:commandButton value="Enregistrer"
-                         action="#{famMatchController.saveLineup}"
-                         immediate="true"
-                         update="@form"/>
+<!--<p:orderList
+        value="#{tc.famMatchTeam.famMatchPlayerList}"
+        var="mp"
+        iconOnly="true"
+        effect="clip"
+        itemValue="#{mp}"
+        converter="matchPlayerConverter"
+        controlsLocation="left">
+    <f:facet name="caption">Available</f:facet>
 
-    </h:form>
+    <p:column style="width:25%">
+        <h:outputText value="#{mp.num}"/>
+    </p:column>
+    <p:column style="width:25%">
+        <h:graphicImage library="images/players"
+                        name="#{initParam['org.fam.jsf.DEFAULT_PHOTO']}#{initParam['org.fam.jsf.DEFAULT_IMAGE_EXTENSION']}"
+                        width="30"/>
+    </p:column>
+    <p:column style="width:50%;">
+        <h:outputText value="#{mp.famPlayer.displayName}"/>
+    </p:column>
+</p:orderList>-->
+
+</h:panelGrid>
+
+<p:commandButton value="Enregistrer"
+                 action="#{famMatchController.saveLineup}"
+                 immediate="true"
+                 update="@form"/>
 </ui:composition>
 </html>
 

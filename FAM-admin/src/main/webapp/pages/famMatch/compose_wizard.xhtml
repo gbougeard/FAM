@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        >
+<ui:composition
+        template="${pageContext.request.servletPath}/common/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{bundle.EditFamMatchTitle}"/>
+    </ui:define>
+
+    <ui:define name="body">
+
+        <h:form id="frmPrepa">
+            <p:wizard widgetVar="wiz"
+                      flowListener="#{famMatchController.onFlowProcess}">
+                <ui:include src="compose_step1.xhtml"/>
+                <ui:include src="compose_step2.xhtml"/>
+                <ui:include src="compose_step3.xhtml"/>
+            </p:wizard>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
+</html>

@@ -40,30 +40,30 @@
         </script>
         <script type="text/javascript">
             PrimeFaces.locales ['fr'] = {
-                closeText:'Fermer',
-                prevText:'Precedent',
-                nextText:'Suivant',
-                monthNames:['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Decembre' ],
-                monthNamesShort:['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec' ],
-                dayNames:['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
-                dayNamesShort:['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
-                dayNamesMin:['D', 'L', 'M', 'M ', 'J', 'V ', 'S'],
-                weekHeader:'Semaine',
-                FirstDay:1,
-                isRTL:false,
-                showMonthAfterYear:false,
+                closeText: 'Fermer',
+                prevText: 'Précédent',
+                nextText: 'Suivant',
+                monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre' ],
+                monthNamesShort: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc' ],
+                dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+                dayNamesShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+                dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+                weekHeader: 'Semaine',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
                 yearSuffix:'',
-                timeOnlyTitle:'Only Time',
-                timeText:'Heure',
-                hourText:'Heure',
-                minuteText:'Minute',
-                secondText:'Seconde',
-                currentText:'Aujourd\'hui',
-                ampm:false,
-                month:'Mois',
-                week:'Semaine',
-                day:'Jour',
-                allDayText:'Journée'
+                timeOnlyTitle: 'Choisir l\'heure',
+                timeText: 'Heure',
+                hourText: 'Heures',
+                minuteText: 'Minutes',
+                secondText: 'Secondes',
+                currentText: 'Maintenant',
+                ampm: false,
+                month: 'Mois',
+                week: 'Semaine',
+                day: 'Jour',
+                allDayText: 'Toute la journée'
             };
         </script>
         <!--            <f:loadBundle basename="org.brickred.socialauthseam.bundle.MessageResources" var="msg"/>-->
@@ -86,10 +86,8 @@
 
         <ui:insert name="head"/>
     </h:head>
-    <ui:debug/>
     <h:body>
         <!--            <h:messages styleClass="message_erreur" id="message_erreur"/>-->
-        <!--            <ui:debug/>-->
         <!--<style type="text/css" media="screen">@import "${request.contextPath}/css/default.css";</style>-->
         <!--<style type="text/css" media="screen">@import "${request.contextPath}/css/icons.css";</style>-->
         <h:outputStylesheet name="default.css" library="css"/>
@@ -140,7 +138,7 @@
 
         </p:layout>
 
-        <ui:debug/>
+        <ui:debug hotkey="u" rendered="true"/>
     </h:body>
 
 </f:view>

@@ -70,12 +70,13 @@
     </h:panelGrid>
 
     <!--    <p:fieldset legend="Disposition">-->
-    <h:panelGrid columns="1">
+    <h:panelGroup>
 
-        <p:panel header="Field">
+        <p:panel header="Field" width="600">
             <p:dataGrid id="trgField"
                         value="#{famFormationController.lstTarget}"
-                        var="t" columns="5"
+                        var="t"
+                        columns="5"
                         styleClass="soccer_field"
                     >
                 <!--style="padding-top: 25px;margin-left: 20px"-->
@@ -105,7 +106,7 @@
                 </p:column>
             </p:dataGrid>
         </p:panel>
-    </h:panelGrid>
+    </h:panelGroup>
 
 </ui:composition>
 </html>

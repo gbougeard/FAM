@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        >
+<ui:composition>
+    <p:tab id="tabPresel" title="Présélection">
+
+        <p:fieldset legend="Réponses" toggleable="true">
+            <h:panelGrid columns="2" cellpadding="10">
+                <h:graphicImage name="01_messages.png" library="images/icons"/>
+
+                <h:panelGrid columns="4" cellpadding="10"
+                             columnClasses="verticalTop,verticalTop,verticalTop,verticalTop">
+
+                    <ui:include src="possiblePlayers.xhtml">
+                        <ui:param name="id" value="dtYes"/>
+                        <ui:param name="headerText" value="Présents"/>
+                        <ui:param name="TYP" value="#{true}"/>
+
+                        <!--<ui:param name="lst" value="#{famMatchController.teamComposition.lstYes}"/>-->
+                        <ui:param name="selected" value="#{famMatchController.teamComposition.selectedYes}"/>
+                        <ui:param name="addSelected" value="#{famMatchController.teamComposition.addSelectedYes}"/>
+                        <ui:param name="answer" value="#{famMatchController.teamComposition.answerYes}"/>
+                    </ui:include>
+
+                    <ui:include src="possiblePlayers.xhtml">
+                        <ui:param name="id" value="dtMaybe"/>
+                        <ui:param name="headerText" value="Peut-être"/>
+                        <ui:param name="TYP" value="#{true}"/>
+
+                        <!--<ui:param name="lst" value="#{famMatchController.teamComposition.lstMaybe}"/>-->
+                        <ui:param name="selected" value="#{famMatchController.teamComposition.selectedMaybe}"/>
+                        <ui:param name="addSelected" value="#{famMatchController.teamComposition.addSelectedMaybe}"/>
+                        <ui:param name="answer" value="#{famMatchController.teamComposition.answerMaybe}"/>
+                    </ui:include>
+
+                    <ui:include src="possiblePlayers.xhtml">
+                        <ui:param name="id" value="dtNo"/>
+                        <ui:param name="headerText" value="Absents"/>
+                        <ui:param name="TYP" value="#{true}"/>
+
+                        <!--<ui:param name="lst" value="#{famMatchController.teamComposition.lstNo}"/>-->
+                        <ui:param name="selected" value="#{famMatchController.teamComposition.selectedNo}"/>
+                        <ui:param name="addSelected" value="#{famMatchController.teamComposition.addSelectedNo}"/>
+                        <ui:param name="answer" value="#{famMatchController.teamComposition.answerNo}"/>
+                    </ui:include>
+
+
+                    <ui:include src="possiblePlayers.xhtml">
+                        <ui:param name="id" value="dtNSP"/>
+                        <ui:param name="headerText" value="Sans réponse"/>
+                        <ui:param name="TYP" value="#{false}"/>
+
+                        <!--<ui:param name="lst" value="#{famMatchController.teamComposition.lstPlayer}"/>-->
+                        <!--<ui:param name="selected" value="#{famMatchController.teamComposition.selectedPlayers}"/>-->
+                        <ui:param name="answer" value="#{famMatchController.teamComposition.answerUngiven}"/>
+                        <!--<ui:param name="addSelected" value="#{famMatchController.teamComposition.addSelectedPlayers}"/>-->
+                    </ui:include>
+
+
+                </h:panelGrid>
+            </h:panelGrid>
+        </p:fieldset>
+
+        <p:fieldset id="preselection"
+                    legend="Préselection (#{fn:length(famMatchController.teamComposition.preselectedLst)})"
+                    style="margin-top:20px">
+            <!--rendered="#{!empty famMatchController.preselectedLst}">-->
+            <!--                            <p:outputPanel id="dropArea" style="height:100px;">  -->
+
+            <!--                                <h:outputText value="!!!Drop here!!!"
+         rendered="#{empty famMatchController.preselectedLst}"
+         style="font-size:24px;" />  -->
+            <ui:include src="selectedPlayers.xhtml">
+                <ui:param name="list" value="#{famMatchController.teamComposition.preselectedLst}"/>
+                <ui:param name="id" value="preselectedPlayers"/>
+            </ui:include>
+        </p:fieldset>
+        <!--                        <p:droppable for="preselection" tolerance="touch"
+                   datasource="ds"
+                   activeStyleClass="ui-state-highlight"
+                   onDrop="handleDrop"
+                   >
+          <p:ajax listener="#{famMatchController.onPreselectDrop}" update="@form" />
+       </p:droppable> -->
+
+    </p:tab>
+</ui:composition>
+</html>

@@ -387,7 +387,7 @@
 
     <url-mapping id="composeMatch" parentId="listMatch">
         <pattern value="compose/#{ id : famMatchController.id }/team/#{ idTeam : famMatchController.idTeam}"/>
-        <view-id value="/pages/famMatch/compose.xhtml"/>
+        <view-id value="/pages/famMatch/compose_wizard.xhtml"/>
         <action onPostback="false">#{famMatchController.loadForCompose}</action>
     </url-mapping>
 

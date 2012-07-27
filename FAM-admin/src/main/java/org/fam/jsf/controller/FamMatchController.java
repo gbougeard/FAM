@@ -35,6 +35,7 @@ import org.fam.jsf.bean.util.JsfUtil;
 import org.fam.jsf.cache.CacheBean;
 import org.fam.jsf.cache.CachePlayer;
 import org.primefaces.event.DragDropEvent;
+import org.primefaces.event.FlowEvent;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
 import org.primefaces.model.DualListModel;
@@ -47,6 +48,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.event.ValueChangeEvent;
 import javax.inject.Inject;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -103,6 +105,9 @@ public class FamMatchController extends AbstractController<FamMatch> {
     private FamTeam famTeam;
     //
     private List<TeamComposition> lstTeamComposition;
+
+    @NotNull
+    private TeamComposition teamComposition;
     //    private List<FamAnswer> lstYes;
 //    private List<FamAnswer> lstNo;
 //    private List<FamAnswer> lstMaybe;
@@ -135,6 +140,9 @@ public class FamMatchController extends AbstractController<FamMatch> {
     private int nbPlayers;
 
     private UIComponent userListComponent = null;
+    private UIComponent selectedComponent = null;
+
+    private boolean skip;
 
 //    //
 //    private FamPlayerDataModel playerDM;
@@ -248,6 +256,19 @@ public class FamMatchController extends AbstractController<FamMatch> {
         return "pretty:debriefMatch";
     }
 
+    public String onFlowProcess(FlowEvent event) {
+        LOGGER.info("Current wizard step:" + event.getOldStep());
+        LOGGER.info("Next step:" + event.getNewStep());
+
+        if(skip) {
+            skip = false;   //reset in case user goes back
+            return "confirm";
+        }
+        else {
+            return event.getNewStep();
+        }
+    }
+
     public void loadForCompose() {
 
         super.loadAction();
@@ -267,6 +288,16 @@ public class FamMatchController extends AbstractController<FamMatch> {
             teamComposition.setNbSub(nbSub);
             teamComposition.genTarget();
         }
+        for (int i = 1; i <= nbTit; i++) {
+            CanvasFormationItem cfi = new CanvasFormationItem();
+            cfi.setStrIdx(String.valueOf(i));
+            lstTarget.add(cfi);
+        }
+        for (int i = nbTit + 1; i <= nbPlayers; i++) {
+            CanvasFormationItem cfi = new CanvasFormationItem();
+            cfi.setStrIdx(String.valueOf(i));
+            lstSubs.add(cfi);
+        }
 
     }
 
@@ -281,21 +312,13 @@ public class FamMatchController extends AbstractController<FamMatch> {
         }
 
         tc.getAnswerYes().setLstAnswer(ejbAnswer.findAnswerYesByEventAndTeam(current.getFamEvent(), team));
-        if (LOGGER.isInfoEnabled()) {
-            LOGGER.info("yes " + tc.getAnswerYes().getLstAnswer().size());
-        }
+        LOGGER.info("yes " + tc.getAnswerYes().getLstAnswer().size());
         tc.getAnswerNo().setLstAnswer(ejbAnswer.findAnswerNoByEventAndTeam(current.getFamEvent(), team));
-        if (LOGGER.isInfoEnabled()) {
-            LOGGER.info("no " + tc.getAnswerNo().getLstAnswer().size());
-        }
+        LOGGER.info("no " + tc.getAnswerNo().getLstAnswer().size());
         tc.getAnswerMaybe().setLstAnswer(ejbAnswer.findAnswerMaybeByEventAndTeam(current.getFamEvent(), team));
-        if (LOGGER.isInfoEnabled()) {
-            LOGGER.info("maybe " + tc.getAnswerMaybe().getLstAnswer().size());
-        }
+        LOGGER.info("maybe " + tc.getAnswerMaybe().getLstAnswer().size());
         tc.getAnswerUngiven().setLstAnswer(ejbAnswer.findByEventAndNoAnswerAndTeam(current.getFamEvent(), team));
-        if (LOGGER.isInfoEnabled()) {
-            LOGGER.info("nsp " + tc.getAnswerUngiven().getLstAnswer().size());
-        }
+        LOGGER.info("nsp " + tc.getAnswerUngiven().getLstAnswer().size());
 
         tc.setPlayerDM(new FamPlayerDataModel((List<FamPlayer>) tc.getAnswerUngiven().getLstAnswer()));
 
@@ -418,10 +441,22 @@ public class FamMatchController extends AbstractController<FamMatch> {
 
         for (CanvasFormationItem cfi : lstTarget) {
             if (cfi.getFamFormationItem() != null
-                    && cfi.getFamFormationItem().getNumItem().equals(num)) {
+                 && cfi.getFamFormationItem().getNumItem().equals(num)) {
 
                 cfi.setFamPlayer(player);
                 break;
+            }
+        }
+
+        if (famMatchTeam == null){
+            famMatchTeam = teamComposition.getFamMatchTeam();
+        }
+        if (famMatchTeam.getFamMatchPlayerList().isEmpty()){
+            for (int i =1; i<= nbPlayers;i++){
+                FamMatchPlayer fmp = new FamMatchPlayer();
+                fmp.setNum(i);
+                fmp.setFamMatchTeam(famMatchTeam);
+                famMatchTeam.getFamMatchPlayerList().add(fmp);
             }
         }
 
@@ -441,6 +476,13 @@ public class FamMatchController extends AbstractController<FamMatch> {
                 break;
             }
         }
+
+        for (CanvasFormationItem cfi : lstTarget){
+            if(cfi.getStrIdx().equals(String.valueOf(num))){
+                cfi.setFamPlayer(player);
+                break;
+            }
+        }
     }
 
     public void onSubDrop(DragDropEvent ddEvent) {
@@ -448,6 +490,10 @@ public class FamMatchController extends AbstractController<FamMatch> {
         FamPlayer player = ((FamPlayer) ddEvent.getData());
 
         String strNum = (String) ddEvent.getComponent().getAttributes().get("num");
+        if (strNum == null) {
+            JsfUtil.addInfoMessage("Add " + player.getDisplayName() + " as Sub", "TODO!");
+            return;
+        }
         for (CanvasFormationItem cfi : lstSubs) {
             if (cfi.getStrIdx().equals(strNum)) {
 
