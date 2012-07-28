@@ -1,6 +1,3 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -14,18 +11,18 @@
 </ui:define>
 <ui:define name="body">
 <p:panel
-        header="Feuille de match de #{famMatchController.famTeam.libTeam} pour #{famMatchController.selected.famEvent.libEvent}">
+        header="Feuille de match de #{famMatchDebriefWizardController.famTeam.libTeam} pour #{famMatchDebriefWizardController.selected.famEvent.libEvent}">
 <h:form>
 <p:tabView style="height:400px">
 
 
 <p:tab title="Score">
     <h:panelGrid columns="5">
-        <h:outputText value="#{famMatchController.selected.homeTeam.famTeam.libTeam}"/>
-        <p:inputText value="#{famMatchController.selected.homeTeam.goalScored}" size="2"/>
+        <h:outputText value="#{famMatchDebriefWizardController.selected.homeTeam.famTeam.libTeam}"/>
+        <p:inputText value="#{famMatchDebriefWizardController.selected.homeTeam.goalScored}" size="2"/>
         <h:outputText value=" - "/>
-        <p:inputText value="#{famMatchController.selected.awayTeam.goalScored}" size="2"/>
-        <h:outputText value="#{famMatchController.selected.awayTeam.famTeam.libTeam}"/>
+        <p:inputText value="#{famMatchDebriefWizardController.selected.awayTeam.goalScored}" size="2"/>
+        <h:outputText value="#{famMatchDebriefWizardController.selected.awayTeam.famTeam.libTeam}"/>
     </h:panelGrid>
     <br/>
     <br/>
@@ -34,13 +31,13 @@
         <h:panelGrid columns="3">
             <p:outputLabel value="#{bundle.EditFamGoalLabel_famMatchPlayerStriker}" for="famMatchPlayerStriker"/>
             <p:selectOneMenu id="famMatchPlayerStriker"
-                             value="#{famMatchController.famGoal.famMatchPlayerStriker}"
+                             value="#{famMatchDebriefWizardController.famGoal.famMatchPlayerStriker}"
                              title="#{bundle.EditFamGoalTitle_famMatchPlayerStriker}"
                              styleClass="famCombo"
                              converter="matchPlayerConverter"
                     >
                 <f:selectItem itemLabel="Buteur" itemValue=""/>
-                <f:selectItems value="#{famMatchController.famMatchTeam.famMatchPlayerList}"
+                <f:selectItems value="#{famMatchDebriefWizardController.famMatchTeam.famMatchPlayerList}"
                                var="p"
                                itemLabel="#{p.famPlayer.displayName}"
                                itemValue="#{p}"/>
@@ -50,14 +47,14 @@
 
             <p:outputLabel value="#{bundle.EditFamGoalLabel_famMatchPlayerAssist}" for="famMatchPlayerAssist"/>
             <p:selectOneMenu id="famMatchPlayerAssist"
-                             value="#{famMatchController.famGoal.famMatchPlayerAssist}"
+                             value="#{famMatchDebriefWizardController.famGoal.famMatchPlayerAssist}"
                              title="#{bundle.EditFamGoalTitle_famMatchPlayerAssist}"
                              styleClass="famCombo"
                              converter="matchPlayerConverter"
 
                     >
                 <f:selectItem itemLabel="Passeur" itemValue=""/>
-                <f:selectItems value="#{famMatchController.famMatchTeam.famMatchPlayerList}"
+                <f:selectItems value="#{famMatchDebriefWizardController.famMatchTeam.famMatchPlayerList}"
                                var="p"
                                itemLabel="#{p.famPlayer.displayName}"
                                itemValue="#{p}"/>
@@ -67,7 +64,7 @@
 
             <p:outputLabel value="#{bundle.EditFamGoalLabel_goalTime}" for="goalTime"/>
             <p:inputText id="goalTime"
-                         value="#{famMatchController.famGoal.goalTime}"
+                         value="#{famMatchDebriefWizardController.famGoal.goalTime}"
                          title="#{bundle.EditFamGoalTitle_goalTime}"
                     >
                 <p:ajax event="blur" update="msg_goalTime"/>
@@ -76,7 +73,7 @@
 
             <p:outputLabel value="#{bundle.EditFamGoalLabel_csc}" for="csc"/>
             <p:selectBooleanCheckbox id="csc"
-                                     value="#{famMatchController.famGoal.csc}"
+                                     value="#{famMatchDebriefWizardController.famGoal.csc}"
                                      title="#{bundle.EditFamGoalTitle_csc}"
                     >
                 <p:ajax event="blur" update="msg_csc"/>
@@ -85,7 +82,7 @@
 
             <p:outputLabel value="#{bundle.EditFamGoalLabel_penalty}" for="penalty"/>
             <p:selectBooleanCheckbox id="penalty"
-                                     value="#{famMatchController.famGoal.penalty}"
+                                     value="#{famMatchDebriefWizardController.famGoal.penalty}"
                                      title="#{bundle.EditFamGoalTitle_penalty}"
                     >
                 <p:ajax event="blur" update="msg_penalty"/>
@@ -94,14 +91,14 @@
         </h:panelGrid>
 
         <p:commandButton value="Add goal"
-                         action="#{famMatchController.addGoal}"
+                         action="#{famMatchDebriefWizardController.addGoal}"
                          update="fsGoals"
                          process="fsGoals"
                 />
 
-        <p:dataList value="#{famMatchController.lstGoal}"
+        <p:dataList value="#{famMatchDebriefWizardController.lstGoal}"
                     var="g"
-                    rendered="#{not empty famMatchController.lstGoal}">
+                    rendered="#{not empty famMatchDebriefWizardController.lstGoal}">
             <h:outputText value="#{g.goalTime} "/>
             <h:outputText value="(csc) " rendered="#{g.csc}"/>
             <h:outputText value="(sp) " rendered="#{g.penalty}"/>
@@ -116,13 +113,13 @@
 
         <p:outputLabel value="#{bundle.EditFamCardLabel_famMatchPlayer}" for="famMatchPlayer"/>
         <p:selectOneMenu id="famMatchPlayer"
-                         value="#{famMatchController.famCard.famMatchPlayer}"
+                         value="#{famMatchDebriefWizardController.famCard.famMatchPlayer}"
                          title="#{bundle.EditFamCardTitle_famMatchPlayer}"
                          styleClass="famCombo"
                          converter="matchPlayerConverter"
                 >
             <f:selectItem itemLabel="Joueur" itemValue=""/>
-            <f:selectItems value="#{famMatchController.famMatchTeam.famMatchPlayerList}"
+            <f:selectItems value="#{famMatchDebriefWizardController.famMatchTeam.famMatchPlayerList}"
                            var="p"
                            itemLabel="#{p.famPlayer.displayName}"
                            itemValue="#{p}"/>
@@ -132,7 +129,7 @@
 
         <p:outputLabel value="#{bundle.EditFamCardLabel_famTypCard}" for="famTypCard"/>
         <p:selectOneMenu id="famTypCard"
-                         value="#{famMatchController.famCard.famTypCard}"
+                         value="#{famMatchDebriefWizardController.famCard.famTypCard}"
                          converter="typCardConverter"
                          styleClass="famCombo"
                 >
@@ -147,7 +144,7 @@
 
         <p:outputLabel value="#{bundle.EditFamCardLabel_cardTime}" for="cardTime"/>
         <p:inputText id="cardTime"
-                     value="#{famMatchController.famCard.cardTime}"
+                     value="#{famMatchDebriefWizardController.famCard.cardTime}"
                      title="#{bundle.EditFamCardTitle_cardTime}"
                 >
             <p:ajax event="blur" update="msg_cardTime"/>
@@ -156,14 +153,14 @@
     </h:panelGrid>
 
     <p:commandButton value="Add card"
-                     action="#{famMatchController.addCard}"
+                     action="#{famMatchDebriefWizardController.addCard}"
                      update="dlCard"
                      process="tabCard"/>
 
     <p:dataList id="dlCard"
-                value="#{famMatchController.lstCard}"
+                value="#{famMatchDebriefWizardController.lstCard}"
                 var="c"
-                rendered="#{not empty famMatchController.lstCard}">
+                rendered="#{not empty famMatchDebriefWizardController.lstCard}">
         <h:outputText value="#{c.cardTime} "/>
         <h:outputText value="#{c.famTypCard.libTypCard} "/>
         <h:outputText value="#{c.famMatchPlayer.famPlayer.displayName}"/>
@@ -175,13 +172,13 @@
         <p:outputLabel value="#{bundle.EditFamSubstitutionLabel_famMatchPlayerIn}"
                        for="famMatchPlayerIn"/>
         <p:selectOneMenu id="famMatchPlayerIn"
-                         value="#{famMatchController.famSubstitution.famMatchPlayerIn}"
+                         value="#{famMatchDebriefWizardController.famSubstitution.famMatchPlayerIn}"
                          title="#{bundle.EditFamSubstitutionLabel_famMatchPlayerIn}"
                          styleClass="famCombo"
                          converter="matchPlayerConverter"
                 >
             <f:selectItem itemLabel="Entrant" itemValue=""/>
-            <f:selectItems value="#{famMatchController.famMatchTeam.famMatchPlayerList}"
+            <f:selectItems value="#{famMatchDebriefWizardController.famMatchTeam.famMatchPlayerList}"
                            var="p"
                            itemLabel="#{p.famPlayer.displayName}"
                            itemValue="#{p}"/>
@@ -192,13 +189,13 @@
         <p:outputLabel value="#{bundle.EditFamSubstitutionLabel_famMatchPlayerOut}"
                        for="famMatchPlayerOut"/>
         <p:selectOneMenu id="famMatchPlayerOut"
-                         value="#{famMatchController.famSubstitution.famMatchPlayerOut}"
+                         value="#{famMatchDebriefWizardController.famSubstitution.famMatchPlayerOut}"
                          title="#{bundle.EditFamSubstitutionLabel_famMatchPlayerOut}"
                          styleClass="famCombo"
                          converter="matchPlayerConverter"
                 >
             <f:selectItem itemLabel="Sortant" itemValue=""/>
-            <f:selectItems value="#{famMatchController.famMatchTeam.famMatchPlayerList}"
+            <f:selectItems value="#{famMatchDebriefWizardController.famMatchTeam.famMatchPlayerList}"
                            var="p"
                            itemLabel="#{p.famPlayer.displayName}"
                            itemValue="#{p}"/>
@@ -208,7 +205,7 @@
 
         <p:outputLabel value="#{bundle.EditFamSubstitutionLabel_substitutionTime}" for="substitutionTime"/>
         <p:inputText id="substitutionTime"
-                     value="#{famMatchController.famSubstitution.substitutionTime}"
+                     value="#{famMatchDebriefWizardController.famSubstitution.substitutionTime}"
                      title="#{bundle.EditFamSubstitutionLabel_substitutionTime}"
                 >
             <p:ajax event="blur" update="msg_substitutionTime"/>
@@ -218,13 +215,13 @@
     </h:panelGrid>
 
     <p:commandButton value="Add Sub"
-                     action="#{famMatchController.addSubstitution}"
+                     action="#{famMatchDebriefWizardController.addSubstitution}"
                      update="@form"
                      process="tabSub"/>
 
-    <p:dataList value="#{famMatchController.lstSubstitution}"
+    <p:dataList value="#{famMatchDebriefWizardController.lstSubstitution}"
                 var="g"
-                rendered="#{not empty famMatchController.lstSubstitution}">
+                rendered="#{not empty famMatchDebriefWizardController.lstSubstitution}">
         <h:outputText value="#{g.substitutionTime} "/>
         <h:outputText value="#{g.famMatchPlayerIn.famPlayer.displayName}"/>
         <h:outputText value=" remplace #{g.famMatchPlayerOut.famPlayer.displayName}"/>
@@ -232,7 +229,7 @@
 </p:tab>
 
 <p:tab id="tabPlayer" title="Joueurs">
-    <p:accordionPanel value="#{famMatchController.famMatchTeam.famMatchPlayerList}"
+    <p:accordionPanel value="#{famMatchDebriefWizardController.famMatchTeam.famMatchPlayerList}"
                       var="matchPlayer"
                       multiple="true"
             >
@@ -273,7 +270,7 @@
 
 </p:tabView>
 <p:commandButton value="Enregistrer"
-                 action="#{famMatchController.addCard}"
+                 action="#{famMatchDebriefWizardController.addCard}"
                  update="@form"/>
 
 </h:form>

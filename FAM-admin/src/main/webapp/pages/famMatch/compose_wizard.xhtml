@@ -5,26 +5,285 @@
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:fn="http://java.sun.com/jsp/jstl/functions"
         xmlns:p="http://primefaces.org/ui"
         >
 <ui:composition
         template="${pageContext.request.servletPath}/common/template.xhtml">
 
-    <ui:define name="title">
-        <h:outputText value="#{bundle.EditFamMatchTitle}"/>
-    </ui:define>
+<ui:define name="title">
+    <h:outputText value="#{bundle.EditFamMatchTitle}"/>
+</ui:define>
 
-    <ui:define name="body">
+<ui:define name="body">
 
-        <h:form id="frmPrepa">
-            <p:wizard widgetVar="wiz"
-                      flowListener="#{famMatchController.onFlowProcess}">
-                <ui:include src="compose_step1.xhtml"/>
-                <ui:include src="compose_step2.xhtml"/>
-                <ui:include src="compose_step3.xhtml"/>
-            </p:wizard>
-        </h:form>
-    </ui:define>
+<h:form id="frmPrepa">
+<p:wizard widgetVar="wiz"
+          flowListener="#{famMatchComposeWizardController.onFlowProcess}">
+<!--<ui:include src="compose_step1.xhtml"/>-->
+<!--<ui:include src="compose_step2.xhtml"/>-->
+<!--<ui:include src="compose_step3.xhtml"/>-->
+
+<p:tab id="tabTeam" title="Team">
+    <center>
+        <p:selectOneRadio id="options"
+                          value="#{famMatchComposeWizardController.teamComposition}"
+                          converter="teamCompositionConverter"
+                          layout="“pageDirection">
+            <f:selectItems value="#{famMatchComposeWizardController.lstTeamComposition}"
+                           var="tc"
+                           itemLabel="#{tc.famTeam.libTeam} #{tc.famMatchTeam.home ? 'Home' : 'Away'}"
+                           itemValue="#{tc}"/>
+        </p:selectOneRadio>
+    </center>
+
+</p:tab>
+
+<p:tab id="tabPresel" title="Présélection">
+
+    <p:fieldset legend="Réponses" toggleable="true">
+        <h:panelGrid columns="2" cellpadding="10">
+            <h:graphicImage name="01_messages.png" library="images/icons"/>
+
+            <h:panelGrid columns="4" cellpadding="10"
+                         columnClasses="verticalTop,verticalTop,verticalTop,verticalTop">
+
+                <ui:include src="possiblePlayers.xhtml">
+                    <ui:param name="id" value="dtYes"/>
+                    <ui:param name="headerText" value="Présents"/>
+                    <ui:param name="TYP" value="#{true}"/>
+
+                    <!--<ui:param name="lst" value="#{famMatchComposeWizardController.teamComposition.lstYes}"/>-->
+                    <ui:param name="selected" value="#{famMatchComposeWizardController.teamComposition.selectedYes}"/>
+                    <ui:param name="addSelected"
+                              value="#{famMatchComposeWizardController.teamComposition.addSelectedYes}"/>
+                    <ui:param name="answer" value="#{famMatchComposeWizardController.teamComposition.answerYes}"/>
+                </ui:include>
+
+                <ui:include src="possiblePlayers.xhtml">
+                    <ui:param name="id" value="dtMaybe"/>
+                    <ui:param name="headerText" value="Peut-être"/>
+                    <ui:param name="TYP" value="#{true}"/>
+
+                    <!--<ui:param name="lst" value="#{famMatchComposeWizardController.teamComposition.lstMaybe}"/>-->
+                    <ui:param name="selected" value="#{famMatchComposeWizardController.teamComposition.selectedMaybe}"/>
+                    <ui:param name="addSelected"
+                              value="#{famMatchComposeWizardController.teamComposition.addSelectedMaybe}"/>
+                    <ui:param name="answer" value="#{famMatchComposeWizardController.teamComposition.answerMaybe}"/>
+                </ui:include>
+
+                <ui:include src="possiblePlayers.xhtml">
+                    <ui:param name="id" value="dtNo"/>
+                    <ui:param name="headerText" value="Absents"/>
+                    <ui:param name="TYP" value="#{true}"/>
+
+                    <!--<ui:param name="lst" value="#{famMatchComposeWizardController.teamComposition.lstNo}"/>-->
+                    <ui:param name="selected" value="#{famMatchComposeWizardController.teamComposition.selectedNo}"/>
+                    <ui:param name="addSelected"
+                              value="#{famMatchComposeWizardController.teamComposition.addSelectedNo}"/>
+                    <ui:param name="answer" value="#{famMatchComposeWizardController.teamComposition.answerNo}"/>
+                </ui:include>
+
+
+                <ui:include src="possiblePlayers.xhtml">
+                    <ui:param name="id" value="dtNSP"/>
+                    <ui:param name="headerText" value="Sans réponse"/>
+                    <ui:param name="TYP" value="#{false}"/>
+
+                    <!--<ui:param name="lst" value="#{famMatchComposeWizardController.teamComposition.lstPlayer}"/>-->
+                    <!--<ui:param name="selected" value="#{famMatchComposeWizardController.teamComposition.selectedPlayers}"/>-->
+                    <ui:param name="answer" value="#{famMatchComposeWizardController.teamComposition.answerUngiven}"/>
+                    <!--<ui:param name="addSelected" value="#{famMatchComposeWizardController.teamComposition.addSelectedPlayers}"/>-->
+                </ui:include>
+
+
+            </h:panelGrid>
+        </h:panelGrid>
+    </p:fieldset>
+
+    <p:fieldset id="preselection"
+                legend="Préselection (#{fn:length(famMatchComposeWizardController.teamComposition.preselectedLst)})"
+                style="margin-top:20px">
+        <ui:include src="selectedPlayers.xhtml">
+            <ui:param name="list" value="#{famMatchComposeWizardController.teamComposition.preselectedLst}"/>
+            <ui:param name="id" value="preselectedPlayers"/>
+        </ui:include>
+    </p:fieldset>
+
+</p:tab>
+
+<p:tab id="tabCompo" title="Composition">
+    <script type="text/javascript">
+        function handleDrop(event, ui) {
+            var droppedCar = ui.draggable;
+
+            droppedCar.fadeOut('fast');
+        }
+    </script>
+    <!--@elvariable id="tc" type="org.fam.jsf.bean.TeamComposition"-->
+    <h:panelGrid columns="5"
+                 cellpadding="10"
+                 columnClasses="verticalTop,verticalTop,verticalTop,verticalTop,verticalTop"
+                 id="grd6">
+        <!--Formation-->
+        <h:panelGrid columns="3">
+            <p:outputLabel value="Formation" for="formation"/>
+            <p:selectOneListbox id="formation"
+                                value="#{famMatchComposeWizardController.teamComposition.famMatchTeam.famFormation}"
+                                converter="formationConverter"
+                                style="width:200px;">
+                <!--<f:selectItem itemLabel="Formation" itemValue=""/>-->
+                <!--                                        noSelectionOption="true"/>-->
+                <f:selectItems value="#{cacheBean.listFormation}"
+                               var="f"
+                               itemLabel="#{f.libFormation}"
+                               itemValue="#{f}"/>
+                <!--                    <p:ajax event="blur" update="@form"/>-->
+                <!--                                        listener="#{famMatchComposeWizardController.changeFormation}"/>-->
+                <p:ajax event="valueChange" listener="#{famMatchComposeWizardController.teamComposition.genTarget}"
+                        update="dgField"
+                        partialSubmit="true"/>
+            </p:selectOneListbox>
+            <p:message id="msg_formation" for="formation"/>
+        </h:panelGrid>
+
+        <!--Joueurs disponibles-->
+        <!--@elvariable id="item" type="org.fam.ejb.model.FamPlayer"-->
+        <p:dataTable id="dtbPreSelected"
+                     binding="#{famMatchComposeWizardController.userListComponent}"
+                     styleClass="T_#{famMatchComposeWizardController.teamComposition.famTeam.idTeam}"
+                     value="#{famMatchComposeWizardController.teamComposition.preselectedLst}"
+                     var="item"
+                     selectionMode="single"
+                     emptyMessage="#{bundle.NoDataFound}"
+                     rowKey="#{item.idPlayer}"
+
+                >
+            <p:column sortBy="#{item.displayName}"
+                      headerText="Joueur (#{fn:length(famMatchComposeWizardController.teamComposition.preselectedLst)})">
+                <h:outputText value="#{item.displayName}"/>
+            </p:column>
+
+            <p:column style="width:24px">
+                <h:outputText id="dragIcon"
+                              styleClass="ui-icon ui-icon-arrow-4"/>
+                <p:draggable for="dragIcon" revert="true" helper="clone"/>
+            </p:column>
+        </p:dataTable>
+
+        <!--Lineup-->
+        <p:dataGrid id="dgField"
+                    value="#{famMatchComposeWizardController.teamComposition.lstTarget}"
+                    var="t" columns="5"
+                    styleClass="soccer_field"
+                >
+            <!--style="padding-top: 50px;margin-left: 40px;"-->
+            <p:column>
+                <p:panel id="trg"
+                         style="width:50px;height:63px;opacity:0.5;"
+                         rendered="#{!empty t.famFormationItem.numItem}"
+                        >
+                    <h:outputText value="#{t.famFormationItem.numItem}"
+                                  style="text-align:center;font-weight: bolder;"/>
+                    <br/>
+                    <h:outputText value="#{empty t.famPlayer ? t.famPlayer.displayName : bundle.Empty}"
+                                  style="text-align:center;font-weight: bolder;"/>
+                    <!--rendered="#{not empty t.famPlayer}"/>-->
+
+                    <p:droppable tolerance="touch"
+                                 activeStyleClass="ui-state-highlight"
+                                 datasource=":#{famMatchComposeWizardController.userListComponent.clientId}"
+                                 onDrop="handleDrop"
+                            >
+                        <f:attribute name="num" value="#{t.famFormationItem.numItem}"/>
+                        <p:ajax listener="#{famMatchComposeWizardController.onDrop}"
+                                update="dgField :#{famMatchComposeWizardController.selectedComponent.clientId} :#{famMatchComposeWizardController.userListComponent.clientId}"
+                                />
+                    </p:droppable>
+                </p:panel>
+
+            </p:column>
+        </p:dataGrid>
+        <!--Eo Lineup-->
+
+        <!--Substitutes-->
+        <h:panelGroup>
+            <h:graphicImage id="imgSub" name="soccer_2_128.png" library="images/dock"/>
+            <p:dataGrid id="dgSubs"
+                        value="#{famMatchComposeWizardController.lstSubs}"
+                        var="sub"
+                        columns="2"
+                        style="padding-top: 25px;margin-left: 20px;">
+                <p:column>
+                    <p:panel id="sub"
+                             style="width:50px;height:63px;opacity:0.5;margin-left: 5px;"
+                            >
+                        <h:outputText value="#{sub.strIdx}"
+                                      style="text-align:center;font-weight: bolder;"/>
+                        <br/>
+                        <h:outputText value="#{sub.famPlayer.displayName}"
+                                      style="text-align:center;font-weight: bolder;"
+                                      rendered="#{not empty sub.famPlayer}"/>
+
+                        <p:droppable tolerance="touch"
+                                     activeStyleClass="ui-state-highlight"
+                                     onDrop="handleDrop"
+                                     datasource=":#{famMatchComposeWizardController.userListComponent.clientId}"
+                                >
+                            <!--<f:attribute name="num" value="#{sub.strIdx}"/>-->
+                            <p:ajax listener="#{famMatchComposeWizardController.onSubDrop}"
+                                    update="dgSubs :#{famMatchComposeWizardController.selectedComponent.clientId} @(dtbPreSelected)"
+
+                                    />
+                        </p:droppable>
+                    </p:panel>
+
+
+                </p:column>
+
+            </p:dataGrid>
+        </h:panelGroup>
+        <!--Eo Substitutes-->
+
+        <!--Lineup final-->
+        <!--@elvariable id="mp" type="org.fam.ejb.model.FamMatchPlayer"-->
+        <p:dataTable id="dtbSelected"
+                     binding="#{famMatchComposeWizardController.selectedComponent}"
+                     value="#{famMatchComposeWizardController.famMatchPlayerList}"
+                     var="mp"
+                     emptyMessage="#{bundle.NoDataFound}"
+                     rowKey="#{mp.num}"
+                     rowStyleClass="#{mp.num gt famMatchComposeWizardController.selected.famSeasonCompetition.famTypCompetition.famTypMatch.nbPlayer ? 'row-sub' : null}">
+            <p:column headerText="Poste">
+                <h:outputText value="#{mp.num}"/>
+            </p:column>
+            <p:column headerText="Joueur">
+                <h:outputText value="#{mp.famPlayer.displayName}"/>
+            </p:column>
+        </p:dataTable>
+        <!--Eo Lineup final-->
+
+    </h:panelGrid>
+    <!--<h:form id="frmSave">-->
+    <p:commandButton id="saveBtn"
+                     value="Enregistrer"
+                     actionListener="#{famMatchComposeWizardController.save}"
+                     process="@this"
+            />
+    <!--<p:commandLink value="Enregistrer"-->
+    <!--actionListener="#{famMatchComposeWizardController.save}"-->
+    <!--/>-->
+    <p:blockUI block="tabCompo" trigger="saveBtn">
+        SAVING<br/>
+        <h:graphicImage library="images" name="ajax-loader1.gif"
+                        style="margin-right: 12px; vertical-align: middle;"/>
+    </p:blockUI>
+    <!--</h:form>-->
+</p:tab>
+</p:wizard>
+</h:form>
+</ui:define>
 
 </ui:composition>
 </html>

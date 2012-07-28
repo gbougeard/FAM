@@ -36,7 +36,7 @@ import java.util.List;
 @Entity
 @Table(name = FamSeasonCompetition.TABLE_NAME)
 @NamedQueries({
-        @NamedQuery(name = "FamSeasonCompetition.findAll", query = "SELECT f FROM FamSeasonCompetition f"),
+        @NamedQuery(name = "FamSeasonCompetition.findAll", query = "SELECT f FROM FamSeasonCompetition f ORDER BY f.famSeason.libSeason DESC"),
         @NamedQuery(name = "FamSeasonCompetition.findByIdSeasonCompetition", query = "SELECT f FROM FamSeasonCompetition f WHERE f.idSeasonCompetition = :idSeasonCompetition")
 })
 public class FamSeasonCompetition extends FamEntity implements Serializable {

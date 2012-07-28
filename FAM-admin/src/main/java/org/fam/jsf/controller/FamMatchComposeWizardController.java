@@ -54,12 +54,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-@ManagedBean(name = "famMatchController")
+@ManagedBean(name = "famMatchComposeWizardController")
 @ViewScoped
 @Loggable
 @Getter
 @Setter
-public class FamMatchController extends AbstractController<FamMatch> {
+public class FamMatchComposeWizardController extends AbstractController<FamMatch> {
 
     @Inject
     Logger LOGGER;
@@ -150,7 +150,7 @@ public class FamMatchController extends AbstractController<FamMatch> {
 //    //
 //    private FamPlayerDataModel playerDM;
 
-    public FamMatchController() {
+    public FamMatchComposeWizardController() {
     }
 
     @PostConstruct

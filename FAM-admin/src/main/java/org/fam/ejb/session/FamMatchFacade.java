@@ -10,9 +10,9 @@ import org.fam.ejb.model.FamFixture;
 import org.fam.ejb.model.FamMatch;
 import org.fam.ejb.model.FamSeasonCompetition;
 
-import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.interceptor.Interceptors;
 import javax.persistence.Query;
 import java.util.ArrayList;
@@ -28,9 +28,9 @@ public class FamMatchFacade extends AbstractFacade<FamMatch> {
 
     //    @PersistenceContext//(unitName = "FAM-test-ejbPU")
 //    private EntityManager em;
-    @EJB
+    @Inject
     private FamFixtureFacade ejbFixture;
-    @EJB
+    @Inject
     private FamTypEventFacade ejbTypEvent;
 
     /**

@@ -32,8 +32,8 @@
 
         <version.jelastic.plugin>1.6-SNAPSHOT</version.jelastic.plugin>
 
-        <maven.compiler.source>1.6</maven.compiler.source>
-        <maven.compiler.target>1.6</maven.compiler.target>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
 
         <version.primefaces>3.3.1</version.primefaces>
         <!--<version.primefaces>3.4-SNAPSHOT</version.primefaces>-->
@@ -59,7 +59,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <netbeans.hint.deploy.server>gfv3ee6</netbeans.hint.deploy.server>
-        <netbeans.hint.j2eeVersion>1.6</netbeans.hint.j2eeVersion>
+        <netbeans.hint.j2eeVersion>1.7</netbeans.hint.j2eeVersion>
 
         <jelastic.username></jelastic.username>
         <jelastic.password></jelastic.password>

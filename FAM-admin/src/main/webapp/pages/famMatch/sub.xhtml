@@ -38,7 +38,7 @@
                        itemLabel="#{f.libFormation}"
                        itemValue="#{f}"/>
         <!--                    <p:ajax event="blur" update="@form"/>-->
-        <!--                                        listener="#{famMatchController.changeFormation}"/>-->
+        <!--                                        listener="#{famMatchComposeWizardController.changeFormation}"/>-->
         <p:ajax event="valueChange" listener="#{tc.genTarget}" update="dgField" partialSubmit="true"/>
         <!--lst"/>-->
     </p:selectOneListbox>
@@ -48,7 +48,7 @@
 <!--@elvariable id="item" type="org.fam.ejb.model.FamPlayer"-->
 <!--<h:form id="frmPreSel">-->
 <p:dataTable id="dtbPreSelected"
-             binding="#{famMatchController.userListComponent}"
+             binding="#{famMatchComposeWizardController.userListComponent}"
              styleClass="#{idTeam}"
              value="#{tc.preselectedLst}"
              var="item"
@@ -98,19 +98,19 @@
                          onDrop="handleDrop"
                     >
                 <f:attribute name="num" value="#{t.famFormationItem.numItem}"/>
-                <p:ajax listener="#{famMatchController.onDrop}"
+                <p:ajax listener="#{famMatchComposeWizardController.onDrop}"
                         update="trg @(dtbSelected) @(dtbPreSelected)"
                         />
             </p:droppable>
         </p:panel>
 
 
-        <!--datasource="#{famMatchController.userListComponent.clientId}"-->
+        <!--datasource="#{famMatchComposeWizardController.userListComponent.clientId}"-->
         <!--@('#dtbPreSelected') @('#sub') @('#dtbSelected')-->
     </p:column>
 </p:dataGrid>
 <!--</h:form>-->
-<ui:repeat value="#{famMatchController.lstSubs}" var="toto" id="test">
+<ui:repeat value="#{famMatchComposeWizardController.lstSubs}" var="toto" id="test">
     <p:outputPanel id="item" layout="block" style="height:60px;width:40px; border:1px solid #666666;">
         <h:outputText value="#{toto.strIdx}"/>
 
@@ -122,7 +122,7 @@
                  onDrop="handleDrop"
             >
         <!--<f:attribute name="num" value="#{toto.strIdx}"/>-->
-        <p:ajax listener="#{famMatchController.onDrop}"
+        <p:ajax listener="#{famMatchComposeWizardController.onDrop}"
                 update=" @(dtbSelected) @(dtbPreSelected)"
                 />
     </p:droppable>
@@ -141,9 +141,9 @@
                  onDrop="handleDrop"
                  datasource="dtbPreSelected"
             >
-        <!--datasource="#{famMatchController.userListComponent.clientId}"-->
+        <!--datasource="#{famMatchComposeWizardController.userListComponent.clientId}"-->
         <!--<f:attribute name="num" value="#{sub.strIdx}"/>-->
-        <p:ajax listener="#{famMatchController.onSubDrop}"
+        <p:ajax listener="#{famMatchComposeWizardController.onSubDrop}"
                 update="@(dgSubs) @(dtbSelected) @(dtbPreSelected)"
 
                 />
@@ -151,7 +151,7 @@
     </p:droppable>
 
     <!--<p:dataTable id="dgSubs"
-        value="#{famMatchController.lstSubs}"
+        value="#{famMatchComposeWizardController.lstSubs}"
         var="mp"
         emptyMessage="#{bundle.NoDataFound}"
         rowKey="#{mp.strIdx}"
@@ -163,7 +163,7 @@
         </p:column>
     </p:dataTable>-->
     <p:dataGrid id="dgSubs"
-                value="#{famMatchController.lstSubs}"
+                value="#{famMatchComposeWizardController.lstSubs}"
                 var="sub"
                 columns="2"
                 style="padding-top: 25px;margin-left: 20px;">
@@ -181,10 +181,10 @@
                 <p:droppable tolerance="touch"
                              activeStyleClass="ui-state-highlight"
                              onDrop="handleDrop"
-                             datasource="#{famMatchController.userListComponent.clientId}"
+                             datasource="#{famMatchComposeWizardController.userListComponent.clientId}"
                         >
                     <!--<f:attribute name="num" value="#{sub.strIdx}"/>-->
-                    <p:ajax listener="#{famMatchController.onSubDrop}"
+                    <p:ajax listener="#{famMatchComposeWizardController.onSubDrop}"
                             update="dgSubs @(dtbSelected) @(dtbPreSelected)"
 
                             />
@@ -206,7 +206,7 @@
              var="mp"
              emptyMessage="#{bundle.NoDataFound}"
              rowKey="#{mp.num}"
-             rowStyleClass="#{mp.num gt famMatchController.selected.famSeasonCompetition.famTypCompetition.famTypMatch.nbPlayer ? 'row-sub' : null}">
+             rowStyleClass="#{mp.num gt famMatchComposeWizardController.selected.famSeasonCompetition.famTypCompetition.famTypMatch.nbPlayer ? 'row-sub' : null}">
     <p:column headerText="Poste">
         <h:outputText value="#{mp.num}"/>
     </p:column>
@@ -242,7 +242,7 @@
 </h:panelGrid>
 
 <p:commandButton value="Enregistrer"
-                 action="#{famMatchController.saveLineup}"
+                 action="#{famMatchComposeWizardController.saveLineup}"
                  immediate="true"
                  update="@form"/>
 </ui:composition>
