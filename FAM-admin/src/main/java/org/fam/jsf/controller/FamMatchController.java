@@ -38,7 +38,6 @@ import org.primefaces.event.DragDropEvent;
 import org.primefaces.event.FlowEvent;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
-import org.primefaces.model.DualListModel;
 import org.slf4j.Logger;
 
 import javax.annotation.PostConstruct;
@@ -325,7 +324,7 @@ public class FamMatchController extends AbstractController<FamMatch> {
 
         tc.setPlayerDM(new FamPlayerDataModel((List<FamPlayer>) tc.getAnswerUngiven().getLstAnswer()));
 
-        tc.setDlmPlayer(new DualListModel<FamPlayer>(tc.getPreselectedLst(), new ArrayList<FamPlayer>()));
+//        tc.setDlmPlayer(new DualListModel<FamPlayer>(tc.getPreselectedLst(), new ArrayList<FamPlayer>()));
 
 
         if (tc.getFamMatchTeam().getFamMatchPlayerList() == null) {

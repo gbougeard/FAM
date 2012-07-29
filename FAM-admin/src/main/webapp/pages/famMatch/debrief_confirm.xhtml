@@ -1,0 +1,40 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        >
+
+    <p:tab id="confirm" title="Composition finale">
+        <h:outputText value="Formation : #{famMatchDebriefWizardController.famMatchTeam.famFormation.libFormation}"/>
+        <!--Lineup final-->
+        <!--@elvariable id="mp2" type="org.fam.ejb.model.FamMatchPlayer"-->
+        <p:dataTable binding="#{famMatchDebriefWizardController.selectedComponent}"
+                     value="#{famMatchDebriefWizardController.famMatchPlayerList}"
+                     var="mp2"
+                     emptyMessage="#{bundle.NoDataFound}"
+                     rowKey="#{mp2.num}"
+                     rowStyleClass="#{mp2.num gt famMatchDebriefWizardController.selected.famSeasonCompetition.famTypCompetition.famTypMatch.nbPlayer ? 'row-sub' : null}">
+            <p:column headerText="Poste">
+                <h:outputText value="#{mp2.num}"/>
+            </p:column>
+            <p:column headerText="Joueur">
+                <h:outputText value="#{mp2.famPlayer.displayName}"/>
+            </p:column>
+        </p:dataTable>
+        <!--Eo Lineup final-->
+        <!--<h:form id="frmSave">-->
+        <p:commandButton id="saveBtn"
+                         value="Enregistrer"
+                         actionListener="#{famMatchDebriefWizardController.save}"
+                         process="@this"
+                />
+        <p:blockUI block="confirm" trigger="saveBtn">
+            SAVING<br/>
+            <h:graphicImage library="images" name="ajax-loader1.gif"
+                            style="margin-right: 12px; vertical-align: middle;"/>
+        </p:blockUI>
+        <!--</h:form>-->
+    </p:tab>
+
+</ui:composition>

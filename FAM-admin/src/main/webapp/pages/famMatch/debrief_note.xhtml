@@ -1,0 +1,166 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui">
+
+
+    <p:tab id="tabPlayer" title="Joueurs (notes, ...)">
+        <h:form id="form">
+            <!--@elvariable id="matchPlayer" type="org.fam.ejb.model.FamMatchPlayer"-->
+            <p:dataTable id="dtbPlayer"
+                         value="#{famMatchDebriefWizardController.famMatchTeam.famMatchPlayerList}"
+                         var="matchPlayer"
+                         selection="#{famMatchDebriefWizardController.selectedFamMatchPlayer}"
+                         selectionMode="single"
+                         rowKey="#{matchPlayer.num}"
+                    >
+
+                <p:ajax event="rowSelect" update=":#{famMatchDebriefWizardController.userListComponent.clientId}"/>
+                <p:ajax event="rowUnselect" update=":#{famMatchDebriefWizardController.userListComponent.clientId}"/>
+                <!--<f:facet name="header">
+                    <p:menubar id="tb">
+                        <p:menuitem
+                                icon="ui-icon-document-b"
+                                value="#{bundle.ListFamMatchViewLink} #{famMatchDebriefWizardController.selectedFamMatchPlayer.num} "
+                                oncomplete="dlg2.show();"
+                                />
+                    </p:menubar>
+                </f:facet>-->
+                <!-- <p:column style="width:4%">
+                    <p:rowToggler/>
+                </p:column>-->
+                <p:column style="width:4%">
+                    <h:outputText value="#{matchPlayer.num}"/>
+                </p:column>
+
+                <p:column style="width:48%" headerText="Joueur">
+                    <h:outputText value="#{matchPlayer.famPlayer.displayName}"/>
+                </p:column>
+
+                <p:column style="width:20%" headerText="Temps de jeu">
+                    <h:outputText value="#{matchPlayer.timePlayed}"/>
+                </p:column>
+
+                <p:column style="width:10%" headerText="Note">
+                    <h:outputText value="#{matchPlayer.note}"/>
+
+
+                </p:column>
+
+                <p:column style="width:4%" headerText="Capitaine">
+                    <p:selectBooleanCheckbox value="#{matchPlayer.captain}" disabled="true"/>
+                </p:column>
+
+                <p:column headerText="Options" style="width:4%">
+                    <p:commandButton icon="ui-icon-pencil"
+                                     oncomplete="dlg2.show();"
+                                     id="button"
+                                     update=":#{famMatchDebriefWizardController.userListComponent.clientId}">
+                        <f:setPropertyActionListener value="#{matchPlayer}"
+                                                     target="#{famMatchDebriefWizardController.selectedFamMatchPlayer}"/>
+                    </p:commandButton>
+                </p:column>
+
+                <!-- <p:rowExpansion>
+                    <h:panelGrid id="display" columns="2" cellpadding="10" style="width:300px;"
+                                 styleClass=" ui-widget-content grid">
+
+
+                        <h:graphicImage library="images/players"
+                                        name="#{initParam['org.fam.jsf.DEFAULT_PHOTO']}#{initParam['org.fam.jsf.DEFAULT_IMAGE_EXTENSION']}"
+                                        width="60"/>
+                        <h:outputText id="com" value="#{matchPlayer.comments}"/>
+
+                    </h:panelGrid>
+
+                </p:rowExpansion>-->
+            </p:dataTable>
+
+
+            <p:dialog id="modalDialog" header="Notes and co" widgetVar="dlg2" height="400"
+                      resizable="false"
+                      showEffect="fade"
+                      hideEffect="explode">
+                <!--modal="true">-->
+                <h:panelGrid id="pgPlayer" columns="3" binding="#{famMatchDebriefWizardController.userListComponent}">
+                    <h:outputText value="Name: "/>
+                    <h:outputText id="player_name"
+                                  value="#{famMatchDebriefWizardController.selectedFamMatchPlayer.famPlayer.displayName}"
+                                  style="font-weight: bold"/>
+                    <h:outputText value="##{famMatchDebriefWizardController.selectedFamMatchPlayer.num}"/>
+
+                    <p:outputLabel value="Note: " for="player_note"/>
+                    <p:spinner id="player_note"
+                               value="#{famMatchDebriefWizardController.selectedFamMatchPlayer.note}"
+                               stepFactor="0.5"
+                               max="10"
+                               min="0"/>
+                    <!--  <p:inputText id="player_note"
+                    value="#{famMatchDebriefWizardController.selectedFamMatchPlayer.note}"/>-->
+                    <p:message id="msg_player_note" for="player_note"/>
+
+                    <p:outputLabel value="Temps de jeu: " for="timePlayed"/>
+                    <p:spinner id="timePlayed"
+                               value="#{famMatchDebriefWizardController.selectedFamMatchPlayer.timePlayed}"
+                               max="#{famMatchDebriefWizardController.selected.famSeasonCompetition.famTypCompetition.famTypMatch.periodDuration *2}"
+                               min="0"/>
+                    <p:message id="msg_timePlayed" for="timePlayed"/>
+
+                    <p:outputLabel value="Capitaine " for="player_captain"/>
+                    <!--<p:selectBooleanCheckbox id="player_captain"
+                                             value="#{famMatchDebriefWizardController.selectedFamMatchPlayer.captain}"/>-->
+                    <p:inputText id="player_captain"
+                                 value="#{famMatchDebriefWizardController.selectedFamMatchPlayer.captain}"/>
+                    <p:message id="msg_player_captain" for="player_captain"/>
+
+                    <p:outputLabel value="Commentaire: " for="player_com"/>
+                    <p:editor id="player_com" value="#{famMatchDebriefWizardController.selectedFamMatchPlayer.comments}"
+                              width="600" height="250"/>
+                    <p:message id="msg_player_com" for="player_com"/>
+
+                </h:panelGrid>
+                <p:commandButton value="Save"
+                                 action="#{famMatchDebriefWizardController.saveNote}"
+                                 onsuccess="dlg2.hide();"
+                        />
+            </p:dialog>
+        </h:form>
+        <!--<p:accordionPanel value="#{famMatchDebriefWizardController.famMatchTeam.famMatchPlayerList}"
+                          var="matchPlayer"
+                          multiple="true"
+                >
+            <p:tab title="#{matchPlayer.num} - #{matchPlayer.famPlayer.displayName}">
+                <h:panelGrid columns="2" cellpadding="10" columnClasses="verticalTop,verticalTop">
+                    <h:graphicImage library="images/players"
+                                    name="#{initParam['org.fam.jsf.DEFAULT_PHOTO']}#{initParam['org.fam.jsf.DEFAULT_IMAGE_EXTENSION']}"
+                                    width="60"/>
+
+                    <h:panelGrid columns="3">
+                        <h:outputText value="Name: "/>
+                        <h:outputText id="player_name" value="#{matchPlayer.famPlayer.displayName}"
+                                      style="font-weight: bold"/>
+                        <p:message id="msg_player_name" for="player_name"/>
+
+                        <p:outputLabel value="Note: " for="player_note"/>
+                        <p:inputText id="player_note" value="#{matchPlayer.note}"/>
+                        <p:message id="msg_player_note" for="player_note"/>
+
+                        <p:outputLabel value="Capitaine " for="player_captain"/>
+                        <p:selectBooleanCheckbox id="player_captain" value="#{matchPlayer.captain}"/>
+                        <p:message id="msg_player_captain" for="player_captain"/>
+
+                        <p:outputLabel value="Commentaire: " for="player_com"/>
+                        <p:editor id="player_com" value="#{matchPlayer.comments}" width="600" height="150"/>
+                        <p:message id="msg_player_com" for="player_com"/>
+
+                    </h:panelGrid>
+                </h:panelGrid>
+
+            </p:tab>
+        </p:accordionPanel>-->
+
+    </p:tab>
+
+</ui:composition>

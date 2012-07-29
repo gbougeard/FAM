@@ -1,0 +1,21 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui">
+    <p:tab id="tabTeam" title="Team">
+        <center>
+            <p:selectOneRadio id="options"
+                              value="#{famMatchDebriefWizardController.famMatchTeam}"
+                              converter="matchTeamDebriefConverter"
+                              layout="“pageDirection">
+                <f:selectItems value="#{famMatchDebriefWizardController.current.famMatchTeamList}"
+                               var="matchTeam"
+                               itemLabel="#{matchTeam.famTeam.libTeam} #{matchTeam.home ? 'Home' : 'Away'}"
+                               itemValue="#{matchTeam}"/>
+                <p:ajax listener="#{famMatchDebriefWizardController.loadForDebrief}" process="@this"/>
+            </p:selectOneRadio>
+        </center>
+
+    </p:tab>
+</ui:composition>

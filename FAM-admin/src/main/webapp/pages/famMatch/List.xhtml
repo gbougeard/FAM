@@ -28,51 +28,50 @@
                         emptyMessage="#{bundle.NoDataFound}"
                         paginatorAlwaysVisible="false"
                         >
+
                     <p:ajax event="rowSelect" update="tb"/>
                     <p:ajax event="rowUnselect" update="tb"/>
                     <f:facet name="header">
-                        <p:toolbar id="tb">
-                            <p:toolbarGroup align="left">
-                                <p:commandButton type="push"
-                                                 icon="ui-icon-document-b"
-                                                 value="#{bundle.ListFamMatchViewLink}"
-                                                 action="#{famMatchController.prepareView}"
-                                                 disabled="#{empty famMatchController.selected.idMatch}"/>
-                                <p:commandButton type="push"
-                                                 icon="ui-icon-document"
-                                                 value="#{bundle.ListFamMatchCreateLink}"
-                                                 action="#{famMatchController.prepareCreate}"/>
-                                <p:commandButton type="push"
-                                                 icon="ui-icon-pencil"
-                                                 value="#{bundle.ListFamMatchEditLink}"
-                                                 action="#{famMatchController.prepareEdit}"
-                                                 disabled="#{empty famMatchController.selected.idMatch}"/>
-                                <p:commandButton type="push"
-                                                 icon="ui-icon-trash"
-                                                 value="#{bundle.DeleteLink}"
-                                                 action="#{famMatchController.prepareDestroy}"
-                                                 disabled="#{empty famMatchController.selected.idMatch}"/>
-                                <p:commandButton icon="ui-icon-wrench"
-                                                 value="Préparer"
-                                                 action="pretty:composeMatch"
-                                                 disabled="#{empty famMatchController.selected.idMatch}"/>
-                                <p:commandButton type="push"
-                                                 icon="ui-icon-note"
-                                                 value="Débriefer"
-                                                 action="#{famMatchDebriefWizardController.prepareDebrief}"
-                                                 disabled="#{empty famMatchController.selected.idMatch}"/>
-                                <p:commandButton type="push"
-                                                 icon="ui-icon-calendar"
-                                                 value="Reporter"
-                                                 action="#{famMatchController.prepareDelay}"
-                                                 disabled="#{empty famMatchController.selected.idMatch}"/>
-                                <p:commandButton type="push"
-                                                 icon="ui-icon-closethick"
-                                                 value="Annuler"
-                                                 action="#{famMatchController.prepareCancel}"
-                                                 disabled="#{empty famMatchController.selected.idMatch}"/>
-                            </p:toolbarGroup>
-                        </p:toolbar>
+                        <p:menubar id="tb">
+                            <p:menuitem
+                                    icon="ui-icon-document-b"
+                                    value="#{bundle.ListFamMatchViewLink}"
+                                    action="#{famMatchController.prepareView}"
+                                    disabled="#{empty famMatchController.selected.idMatch}"/>
+                            <p:menuitem
+                                    icon="ui-icon-document"
+                                    value="#{bundle.ListFamMatchCreateLink}"
+                                    action="#{famMatchController.prepareCreate}"/>
+                            <p:menuitem
+                                    icon="ui-icon-pencil"
+                                    value="#{bundle.ListFamMatchEditLink}"
+                                    action="#{famMatchController.prepareEdit}"
+                                    disabled="#{empty famMatchController.selected.idMatch}"/>
+                            <p:menuitem
+                                    icon="ui-icon-trash"
+                                    value="#{bundle.DeleteLink}"
+                                    action="#{famMatchController.prepareDestroy}"
+                                    disabled="#{empty famMatchController.selected.idMatch}"/>
+                            <p:menuitem
+                                    value="Préparer"
+                                    url="compose/#{famMatchController.selected.idMatch}"
+                                    disabled="#{empty famMatchController.selected.idMatch}"/>
+                            <p:menuitem
+                                    icon="ui-icon-note"
+                                    value="Débriefer"
+                                    url="debrief/#{famMatchController.selected.idMatch}"
+                                    disabled="#{empty famMatchController.selected.idMatch}"/>
+                            <p:menuitem
+                                    icon="ui-icon-calendar"
+                                    value="Reporter"
+                                    action="#{famMatchController.prepareDelay}"
+                                    disabled="#{empty famMatchController.selected.idMatch}"/>
+                            <p:menuitem
+                                    icon="ui-icon-closethick"
+                                    value="Annuler"
+                                    action="#{famMatchController.prepareCancel}"
+                                    disabled="#{empty famMatchController.selected.idMatch}"/>
+                        </p:menubar>
                     </f:facet>
                     <!--                    <p:column sortBy="#{item.idMatch}"
                               filterBy="#{item.idMatch}"

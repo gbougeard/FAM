@@ -40,30 +40,30 @@
         </script>
         <script type="text/javascript">
             PrimeFaces.locales ['fr'] = {
-                closeText: 'Fermer',
-                prevText: 'Précédent',
-                nextText: 'Suivant',
-                monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre' ],
-                monthNamesShort: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc' ],
-                dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
-                dayNamesShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
-                dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
-                weekHeader: 'Semaine',
-                firstDay: 1,
-                isRTL: false,
-                showMonthAfterYear: false,
+                closeText:'Fermer',
+                prevText:'Précédent',
+                nextText:'Suivant',
+                monthNames:['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre' ],
+                monthNamesShort:['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc' ],
+                dayNames:['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+                dayNamesShort:['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+                dayNamesMin:['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+                weekHeader:'Semaine',
+                firstDay:1,
+                isRTL:false,
+                showMonthAfterYear:false,
                 yearSuffix:'',
-                timeOnlyTitle: 'Choisir l\'heure',
-                timeText: 'Heure',
-                hourText: 'Heures',
-                minuteText: 'Minutes',
-                secondText: 'Secondes',
-                currentText: 'Maintenant',
-                ampm: false,
-                month: 'Mois',
-                week: 'Semaine',
-                day: 'Jour',
-                allDayText: 'Toute la journée'
+                timeOnlyTitle:'Choisir l\'heure',
+                timeText:'Heure',
+                hourText:'Heures',
+                minuteText:'Minutes',
+                secondText:'Secondes',
+                currentText:'Maintenant',
+                ampm:false,
+                month:'Mois',
+                week:'Semaine',
+                day:'Jour',
+                allDayText:'Toute la journée'
             };
         </script>
         <!--            <f:loadBundle basename="org.brickred.socialauthseam.bundle.MessageResources" var="msg"/>-->
@@ -93,7 +93,11 @@
         <h:outputStylesheet name="default.css" library="css"/>
 
         <h:outputStylesheet name="silk-min.css" library="css"/>
-        <h:outputStylesheet name="fugue-min.css" library="css"/>
+        <!--<h:outputStylesheet name="fugue-min.css" library="css"/>-->
+        <f:facet name="last">
+            <link rel="stylesheet" type="text/css"
+                  href="#{facesContext.externalContext.requestContextPath}/resources/css/fugue-min.css.css"/>
+        </f:facet>
 
         <p:layout fullPage="true">
             <p:layoutUnit id="north"

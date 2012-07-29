@@ -15,6 +15,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
@@ -45,9 +46,6 @@ public class FamMatchTeam implements Serializable {
      *
      */
     public static final String COL_ID_MATCH = "id_match";
-    /**
-     *
-     */
     public static final String PROP_MATCH = "famMatch";
     @Id
     @ManyToOne
@@ -141,6 +139,12 @@ public class FamMatchTeam implements Serializable {
     public static final String PROP_DRAFT = "draft";
     @Column(name = PROP_DRAFT)
     private Boolean draft;
+
+    public static final String PROP_RESUME = "resume";
+    @Lob
+    @Basic(optional = false)
+    @Column(name = PROP_RESUME)
+    private String resume;
 
     /**
      *

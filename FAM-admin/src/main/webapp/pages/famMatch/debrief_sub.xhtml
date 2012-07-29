@@ -1,0 +1,76 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui">
+
+
+    <p:tab id="tabSub" title="Remplacements">
+
+        <h:form id="frmSubs">
+            <h:panelGrid columns="3">
+                <p:outputLabel value="#{bundle.EditFamSubstitutionLabel_famMatchPlayerIn}"
+                               for="famMatchPlayerIn"/>
+                <p:selectOneMenu id="famMatchPlayerIn"
+                                 value="#{famMatchDebriefWizardController.famSubstitution.famMatchPlayerIn}"
+                                 title="#{bundle.EditFamSubstitutionLabel_famMatchPlayerIn}"
+                                 styleClass="famCombo"
+                                 converter="matchPlayerDebriefConverter"
+                        >
+                    <f:selectItem itemLabel="Entrant" itemValue=""/>
+                    <f:selectItems value="#{famMatchDebriefWizardController.famMatchTeam.famMatchPlayerList}"
+                                   var="p"
+                                   itemLabel="#{p.num} #{p.famPlayer.displayName}"
+                                   itemValue="#{p}"/>
+                    <p:ajax event="blur" update="msg_famMatchPlayerIn"/>
+                </p:selectOneMenu>
+                <p:message id="msg_famMatchPlayerIn" for="famMatchPlayerIn"/>
+
+                <p:outputLabel value="#{bundle.EditFamSubstitutionLabel_famMatchPlayerOut}"
+                               for="famMatchPlayerOut"/>
+                <p:selectOneMenu id="famMatchPlayerOut"
+                                 value="#{famMatchDebriefWizardController.famSubstitution.famMatchPlayerOut}"
+                                 title="#{bundle.EditFamSubstitutionLabel_famMatchPlayerOut}"
+                                 styleClass="famCombo"
+                                 converter="matchPlayerDebriefConverter"
+                        >
+                    <f:selectItem itemLabel="Sortant" itemValue=""/>
+                    <f:selectItems value="#{famMatchDebriefWizardController.famMatchTeam.famMatchPlayerList}"
+                                   var="p"
+                                   itemLabel="#{p.num} #{p.famPlayer.displayName}"
+                                   itemValue="#{p}"/>
+                    <p:ajax event="blur" update="msg_famMatchPlayerOut"/>
+                </p:selectOneMenu>
+                <p:message id="msg_famMatchPlayerOut" for="famMatchPlayerOut"/>
+
+                <p:outputLabel value="#{bundle.EditFamSubstitutionLabel_substitutionTime}" for="substitutionTime"/>
+                <p:inputText id="substitutionTime"
+                             value="#{famMatchDebriefWizardController.famSubstitution.substitutionTime}"
+                             title="#{bundle.EditFamSubstitutionLabel_substitutionTime}"
+                        >
+                    <p:ajax event="blur" update="msg_substitutionTime"/>
+                </p:inputText>
+                <p:message id="msg_substitutionTime" for="substitutionTime"/>
+
+            </h:panelGrid>
+
+            <p:commandButton value="Add Sub"
+                             action="#{famMatchDebriefWizardController.addSubstitution}"
+                             update="@(dlSubs)"
+                    />
+
+        </h:form>
+
+        <p:dataList id="dlSubs"
+                    value="#{famMatchDebriefWizardController.lstSubstitution}"
+                    var="g"
+                    rendered="#{not empty famMatchDebriefWizardController.lstSubstitution}">
+            <h:outputText value="#{g.substitutionTime} "/>
+            <h:outputText value="#{g.famMatchPlayerIn.famPlayer.displayName}"/>
+            <h:outputText value=" remplace #{g.famMatchPlayerOut.famPlayer.displayName}"/>
+        </p:dataList>
+
+    </p:tab>
+
+</ui:composition>

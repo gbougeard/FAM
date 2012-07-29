@@ -26,7 +26,7 @@ public class UserSettings implements Serializable {
     @Inject
     private Logger LOGGER;
 
-    private static final String DEFAULT_THEME = "home";
+    private static final String DEFAULT_THEME = "aristo";
     private String currentTheme;
 
     public UserSettings() {

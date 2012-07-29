@@ -1,0 +1,73 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui">
+
+
+    <p:tab id="tabCard" title="Cartons">
+
+        <h:form id="frmCards">
+            <h:panelGrid columns="3">
+
+                <p:outputLabel value="#{bundle.EditFamCardLabel_famMatchPlayer}" for="famMatchPlayer"/>
+                <p:selectOneMenu id="famMatchPlayer"
+                                 value="#{famMatchDebriefWizardController.famCard.famMatchPlayer}"
+                                 title="#{bundle.EditFamCardTitle_famMatchPlayer}"
+                                 styleClass="famCombo"
+                                 converter="matchPlayerDebriefConverter"
+                        >
+                    <f:selectItem itemLabel="Joueur" itemValue=""/>
+                    <f:selectItems value="#{famMatchDebriefWizardController.famMatchTeam.famMatchPlayerList}"
+                                   var="p"
+                                   itemLabel="#{p.num} #{p.famPlayer.displayName}"
+                                   itemValue="#{p}"/>
+                    <p:ajax event="blur" update="msg_famMatchPlayer"/>
+                </p:selectOneMenu>
+                <p:message id="msg_famMatchPlayer" for="famMatchPlayer"/>
+
+                <p:outputLabel value="#{bundle.EditFamCardLabel_famTypCard}" for="famTypCard"/>
+                <p:selectOneMenu id="famTypCard"
+                                 value="#{famMatchDebriefWizardController.famCard.famTypCard}"
+                                 converter="typCardConverter"
+                                 styleClass="famCombo"
+                        >
+                    <f:selectItem itemLabel="TypCard " itemValue=""/>
+                    <f:selectItems value="#{cacheBean.listTypCard}"
+                                   var="tc"
+                                   itemLabel="#{tc.libTypCard}"
+                                   itemValue="#{tc}"/>
+                    <p:ajax event="blur" update="msg_famTypCard"/>
+                </p:selectOneMenu>
+                <p:message id="msg_famTypCard" for="famTypCard"/>
+
+                <p:outputLabel value="#{bundle.EditFamCardLabel_cardTime}" for="cardTime"/>
+                <p:inputText id="cardTime"
+                             value="#{famMatchDebriefWizardController.famCard.cardTime}"
+                             title="#{bundle.EditFamCardTitle_cardTime}"
+                        >
+                    <p:ajax event="blur" update="msg_cardTime"/>
+                </p:inputText>
+                <p:message id="msg_cardTime" for="cardTime"/>
+            </h:panelGrid>
+
+            <p:commandButton value="Add card"
+                             action="#{famMatchDebriefWizardController.addCard}"
+                             update="@(dlCard)"
+                    />
+
+        </h:form>
+
+        <p:dataList id="dlCard"
+                    value="#{famMatchDebriefWizardController.lstCard}"
+                    var="c"
+                    rendered="#{not empty famMatchDebriefWizardController.lstCard}">
+            <h:outputText value="#{c.cardTime} "/>
+            <h:outputText value="#{c.famTypCard.libTypCard} "/>
+            <h:outputText value="#{c.famMatchPlayer.famPlayer.displayName}"/>
+        </p:dataList>
+
+    </p:tab>
+
+</ui:composition>

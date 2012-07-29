@@ -400,9 +400,9 @@
 
     <url-mapping id="debriefMatch" parentId="listMatch">
         <pattern
-                value="debrief/#{ id : famMatchDebriefWizardController.id }/team/#{ idTeam : famMatchDebriefWizardController.idTeam}"/>
-        <view-id value="/pages/famMatch/debrief.xhtml"/>
-        <action onPostback="false">#{famMatchDebriefWizardController.loadForDebrief}</action>
+                value="debrief/#{ id : famMatchDebriefWizardController.id }"/>
+        <view-id value="/pages/famMatch/debrief_wizard.xhtml"/>
+        <action onPostback="false">#{famMatchDebriefWizardController.loadForEdit}</action>
     </url-mapping>
 
     <!--    MATCHPLAYER-->

@@ -1,0 +1,28 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="${pageContext.request.servletPath}/common/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{bundle.EditFamMatchTitle}"/>
+    </ui:define>
+
+    <ui:define name="body">
+
+        <h:form id="frmDebrief">
+            <p:wizard widgetVar="wiz"
+                      flowListener="#{famMatchDebriefWizardController.onFlowProcess}">
+                <ui:include src="debrief_step1.xhtml"/>
+                <ui:include src="debrief_goal.xhtml"/>
+                <!--<ui:include src="debrief_card.xhtml"/>-->
+                <ui:include src="debrief_sub.xhtml"/>
+                <ui:include src="debrief_note.xhtml"/>
+                <ui:include src="debrief_resume.xhtml"/>
+                <ui:include src="debrief_confirm.xhtml"/>
+
+            </p:wizard>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
