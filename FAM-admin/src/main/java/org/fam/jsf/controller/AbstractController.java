@@ -56,9 +56,7 @@ public abstract class AbstractController<T> extends AbstractBackingBean {
     }
 
     public void initLazyModel() {
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("initLazyModel");
-        }
+        LOGGER.debug("initLazyModel");
 
         lazyModel = new LazyDataModel<T>() {
 
@@ -69,22 +67,21 @@ public abstract class AbstractController<T> extends AbstractBackingBean {
                                 SortOrder sortOrder,
                                 Map<String, String> filters) {
 
-                if (LOGGER.isDebugEnabled()) {
-                    LOGGER.debug("Loading the lazy data between " + first + " " + pageSize);
-                }
+                LOGGER.debug("Loading the lazy data between " + first + " " + pageSize);
 
                 try {
-                    lazyItems = getFacade().findAllLazy(first, pageSize,
-                            sortField, sortOrder.equals(SortOrder.ASCENDING), filters);
+                    lazyItems = getFacade().findAllLazy(first,
+                                                        pageSize,
+                                                        sortField,
+                                                        sortOrder.equals(SortOrder.ASCENDING),
+                                                        filters);
 
                     /**
                      * In a real application, this number should be resolved by a projection query
                      */
                     int count = getFacade().countLazy(filters);
 
-                    if (LOGGER.isDebugEnabled()) {
-                        LOGGER.debug("nb items " + lazyItems.size() + " count " + count);
-                    }
+                    LOGGER.debug("nb items " + lazyItems.size() + " count " + count);
 
                     lazyModel.setRowCount(count);
 

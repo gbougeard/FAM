@@ -4,13 +4,13 @@ import org.fam.ejb.model.FamSeasonCompetition;
 import org.fam.ejb.model.FamTeam;
 import org.fam.ejb.session.FamFixtureFacade;
 import org.fam.ejb.session.FamSeasonCompetitionFacade;
+import org.fam.ejb.session.FamTeamFacade;
 import org.fam.jsf.bean.util.JsfUtil;
 import org.fam.jsf.cache.CacheBean;
 import org.fam.jsf.cache.CachePlayer;
 import org.primefaces.event.FlowEvent;
 import org.primefaces.model.DualListModel;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -26,10 +26,13 @@ import java.util.List;
 @ViewScoped
 public class FamSeasonCompetitionController extends AbstractController<FamSeasonCompetition> implements Serializable {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(FamSeasonCompetitionController.class);
+    @Inject
+    private Logger LOGGER;
 
     @EJB
     private FamSeasonCompetitionFacade ejbFacade;
+    @EJB
+    private FamTeamFacade ejbTeam;
     //
     private DualListModel<FamTeam> teams;
     @Inject
@@ -48,11 +51,19 @@ public class FamSeasonCompetitionController extends AbstractController<FamSeason
     @PostConstruct
     private void postConstruct() {
         LOGGER.debug(this.getClass() + " - postConstruct");
+
     }
 
     @PreDestroy
     private void preDestroy() {
         LOGGER.debug(this.getClass() + " - preDestroy");
+    }
+
+    @Override
+    public String loadAction() {
+        String str = super.loadAction();
+        loadTeams();
+        return str;
     }
 
     @Override
@@ -90,11 +101,34 @@ public class FamSeasonCompetitionController extends AbstractController<FamSeason
     }
 
     public void setTeams(DualListModel<FamTeam> teams) {
-        LOGGER.debug("setTeams src" + teams.getSource().size());
-        LOGGER.debug("setTeams trg" + teams.getTarget().size());
         if (teams != null) {
             this.teams = teams;
         }
+    }
+
+    @Override
+    public String update() {
+        getTargetTeams();
+        return super.update();    //To change body of overridden methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public String create() {
+        getTargetTeams();
+        return super.create();    //To change body of overridden methods use File | Settings | File Templates.
+    }
+
+    private void getTargetTeams() {
+        List<FamTeam> set = new ArrayList<FamTeam>(teams.getTarget());
+
+//        List<FamPlayerPosition> list = new ArrayList<FamPlayerPosition>();
+        Integer i = 1;
+        if (current.getFamTeamList() == null) {
+            current.setFamTeamList(new ArrayList<FamTeam>());
+        }
+        current.getFamTeamList().clear();
+        current.getFamTeamList().addAll(set);
+//        return list;
     }
 
     public Boolean getWarningExisting() {
@@ -125,6 +159,7 @@ public class FamSeasonCompetitionController extends AbstractController<FamSeason
     @Override
     public String prepareEdit() {
         id = current.getIdSeasonCompetition();
+        loadTeams();
         return "pretty:editSeasonCompetition";
     }
 
@@ -144,6 +179,26 @@ public class FamSeasonCompetitionController extends AbstractController<FamSeason
         current = new FamSeasonCompetition();
         selectedItemIndex = -1;
         return "pretty:createSeasonCompetition";
+    }
+
+    public void loadTeams() {
+        LOGGER.debug("loadTeams");
+        List<FamTeam> source = new ArrayList<FamTeam>();
+        List<FamTeam> target = new ArrayList<FamTeam>();
+        if (current != null) {
+            source.addAll(ejbTeam.findByCategory(current.getFamCategory()));
+
+            if (current.getFamTeamList() != null) {
+                source.removeAll(current.getFamTeamList());
+            }
+
+            if (current.getFamTeamList() != null) {
+                target.addAll(current.getFamTeamList());
+            }
+            LOGGER.debug("teams source : {}", source.size());
+            LOGGER.debug("teams target : {}", target.size());
+        }
+        teams = new DualListModel<FamTeam>(source, target);
     }
 
     public void initForWizard() {

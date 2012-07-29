@@ -8,7 +8,6 @@ import org.fam.ejb.model.FamMatchPlayer;
 import org.fam.ejb.model.FamMatchTeam;
 import org.fam.ejb.model.FamPlayer;
 import org.fam.ejb.model.FamTeam;
-import org.primefaces.model.DualListModel;
 
 import javax.enterprise.inject.Model;
 import java.io.Serializable;
@@ -44,7 +43,7 @@ public class TeamComposition implements Serializable {
     private List<CanvasFormationItem> lstTarget = new ArrayList<CanvasFormationItem>();
     private List<CanvasFormationItem> lstSubs = new ArrayList<CanvasFormationItem>();
     //
-    private DualListModel<FamPlayer> dlmPlayer;
+//    private DualListModel<FamPlayer> dlmPlayer;
     //
     private int nbTit;
     private int nbSub;
@@ -77,9 +76,7 @@ public class TeamComposition implements Serializable {
     public void genTarget() {
         lstTarget.clear();
 
-        for (int i = 1;
-             i <= 30;
-             i++) {
+        for (int i = 1; i <= 30; i++) {
             CanvasFormationItem item = new CanvasFormationItem();
             item.setStrIdx(String.format("%d", i));
 
@@ -94,9 +91,7 @@ public class TeamComposition implements Serializable {
             lstTarget.add(item);
         }
         // Remplaçants
-        for (int i = 1;
-             i <= nbSub;
-             i++) {
+        for (int i = 1; i <= nbSub; i++) {
             CanvasFormationItem item = new CanvasFormationItem();
             item.setStrIdx(String.format("%d", i + nbTit));
 
@@ -119,7 +114,7 @@ public class TeamComposition implements Serializable {
                         // Ajoute aux titulaires
                         for (CanvasFormationItem cfi : lstTarget) {
                             if (cfi.getFamFormationItem() != null
-                                    && cfi.getFamFormationItem().getNumItem().equals(fmp.getNum())) {
+                                 && cfi.getFamFormationItem().getNumItem().equals(fmp.getNum())) {
 
                                 cfi.setFamPlayer(fmp.getFamPlayer());
                                 break;

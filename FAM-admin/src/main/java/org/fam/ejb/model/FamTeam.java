@@ -36,20 +36,22 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = FamTeam.TABLE_NAME,
-        uniqueConstraints = {
-                @UniqueConstraint(columnNames = {FamTeam.COL_COD})
-        })
+       uniqueConstraints = {
+                            @UniqueConstraint(columnNames = {FamTeam.COL_COD})
+       })
 @NamedQueries({
-        @NamedQuery(name = FamTeam.FIND_ALL,
-                query = "SELECT f FROM FamTeam f"),
-        @NamedQuery(name = FamTeam.FIND_BY_ID_TEAM,
-                query = "SELECT f FROM FamTeam f WHERE f.idTeam = :idTeam"),
-        @NamedQuery(name = FamTeam.FIND_BY_LIB_TEAM,
-                query = "SELECT f FROM FamTeam f WHERE f.libTeam = :libTeam"),
-        @NamedQuery(name = FamTeam.FIND_BY_DT_CREAT,
-                query = "SELECT f FROM FamTeam f WHERE f.dtCreat = :dtCreat"),
-        @NamedQuery(name = FamTeam.FIND_BY_DT_MODIF,
-                query = "SELECT f FROM FamTeam f WHERE f.dtModif = :dtModif")
+               @NamedQuery(name = FamTeam.FIND_ALL,
+                           query = "SELECT f FROM FamTeam f"),
+               @NamedQuery(name = FamTeam.FIND_BY_ID_TEAM,
+                           query = "SELECT f FROM FamTeam f WHERE f.idTeam = :idTeam"),
+               @NamedQuery(name = FamTeam.FIND_BY_LIB_TEAM,
+                           query = "SELECT f FROM FamTeam f WHERE f.libTeam = :libTeam"),
+               @NamedQuery(name = FamTeam.FIND_BY_DT_CREAT,
+                           query = "SELECT f FROM FamTeam f WHERE f.dtCreat = :dtCreat"),
+               @NamedQuery(name = FamTeam.FIND_BY_CATEGORY,
+                           query = "SELECT f FROM FamTeam f WHERE f.famCategory = :famCategory"),
+               @NamedQuery(name = FamTeam.FIND_BY_DT_MODIF,
+                           query = "SELECT f FROM FamTeam f WHERE f.dtModif = :dtModif")
 })
 @XmlRootElement
 public class FamTeam extends FamEntity implements Serializable {
@@ -63,6 +65,7 @@ public class FamTeam extends FamEntity implements Serializable {
     public static final String FIND_ALL = "FamTeam.findAll";
     public static final String FIND_BY_ID_TEAM = "FamTeam.findByIdTeam";
     public static final String FIND_BY_LIB_TEAM = "FamTeam.findByLibTeam";
+    public static final String FIND_BY_CATEGORY = "FamTeam.findByFamCategory";
     public static final String FIND_BY_DT_CREAT = "FamTeam.findByDtCreat";
     public static final String FIND_BY_DT_MODIF = "FamTeam.findByDtModif";
     /**
@@ -129,18 +132,18 @@ public class FamTeam extends FamEntity implements Serializable {
     //
     @ManyToMany
     @JoinTable(name = FamCompetitionTeam.TABLE_NAME,
-            joinColumns = {
-                    @JoinColumn(name = COL_ID)},
-            inverseJoinColumns = {
-                    @JoinColumn(name = FamSeasonCompetition.COL_ID)})
+               joinColumns = {
+                              @JoinColumn(name = COL_ID)},
+               inverseJoinColumns = {
+                                     @JoinColumn(name = FamSeasonCompetition.COL_ID)})
     private List<FamSeasonCompetition> famCompetitionList;
     //
     @ManyToMany
     @JoinTable(name = "fam_event_team",
-            joinColumns = {
-                    @JoinColumn(name = COL_ID)},
-            inverseJoinColumns = {
-                    @JoinColumn(name = FamEvent.COL_ID)})
+               joinColumns = {
+                              @JoinColumn(name = COL_ID)},
+               inverseJoinColumns = {
+                                     @JoinColumn(name = FamEvent.COL_ID)})
     private List<FamEvent> famEventList;
     //
     @OneToMany(mappedBy = FamMatchTeam.PROP_TEAM)

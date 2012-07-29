@@ -20,17 +20,18 @@
             <p:panel header="#{bundle.FamSeasonCompetition}">
 
                 <!--@elvariable id="item" type="org.fam.ejb.model.FamSeasonCompetition"-->
-                <p:dataTable
-                        value="#{famSeasonCompetitionController.lazyModel}"
-                        lazy="true"
-                        var="item"
-                        selection="#{famSeasonCompetitionController.selected}"
-                        selectionMode="single"
-                        paginator="true" rows="10"
-                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                        rowsPerPageTemplate="5,10,15"
-                        emptyMessage="#{bundle.NoDataFound}"
-                        paginatorAlwaysVisible="false"
+                <p:dataTable id="dtb"
+                             value="#{famSeasonCompetitionController.lazyModel}"
+                             lazy="true"
+                             var="item"
+                             selection="#{famSeasonCompetitionController.selected}"
+                             selectionMode="single"
+                             paginator="true"
+                             rows="10"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15"
+                             emptyMessage="#{bundle.NoDataFound}"
+                             paginatorAlwaysVisible="false"
                         >
                     <p:ajax event="rowSelect" update="tb"/>
                     <p:ajax event="rowUnselect" update="tb"/>
@@ -80,8 +81,8 @@
                               headerText="#{bundle.ListFamSeasonCompetitionTitle_idSeasonCompetition}" >
                         <h:outputText value="#{item.idSeasonCompetition}"/>
                     </p:column>-->
-                    <p:column sortBy="#{item.displayName}"
-                              filterBy="#{item.displayName}"
+                    <p:column sortBy="#{item.famSeason.libSeason}"
+                              filterBy="#{item.famSeason.libSeason}"
                               headerText="#{bundle.ListFamSeasonCompetitionTitle_displayName}">
                         <h:outputText value="#{item.displayName}"/>
                     </p:column>

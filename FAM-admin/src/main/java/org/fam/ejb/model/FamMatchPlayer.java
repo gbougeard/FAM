@@ -8,7 +8,18 @@ package org.fam.ejb.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -20,10 +31,10 @@ import java.util.List;
 @Entity
 @Table(name = FamMatchPlayer.TABLE_NAME)
 @NamedQueries(value = {
-        @NamedQuery(name = "FamMatchPlayer.findAll", query = "SELECT f FROM FamMatchPlayer f"),
-        @NamedQuery(name = "FamMatchPlayer.findByPlayer", query = "SELECT f FROM FamMatchPlayer f WHERE f.famPlayer = :famPlayer"),
-        @NamedQuery(name = "FamMatchPlayer.findByPlayerAndSeason", query = "SELECT f FROM FamMatchPlayer f WHERE f.famPlayer = :famPlayer "
-                + "AND f.famMatchTeam.famMatch.famSeasonCompetition.famSeason = :famSeason")
+                       @NamedQuery(name = "FamMatchPlayer.findAll", query = "SELECT f FROM FamMatchPlayer f"),
+                       @NamedQuery(name = "FamMatchPlayer.findByPlayer", query = "SELECT f FROM FamMatchPlayer f WHERE f.famPlayer = :famPlayer"),
+                       @NamedQuery(name = "FamMatchPlayer.findByPlayerAndSeason", query = "SELECT f FROM FamMatchPlayer f WHERE f.famPlayer = :famPlayer "
+                                                                                           + "AND f.famMatchTeam.famMatch.famSeasonCompetition.famSeason = :famSeason")
 })
 @IdClass(FamMatchPlayerPK.class)
 @Getter
@@ -35,17 +46,9 @@ public class FamMatchPlayer implements Serializable {
      *
      */
     public static final String TABLE_NAME = "fam_match_player";
-    /**
-     *
-     */
     public static final String COL_ID_TEAM = "id_team";
-    /**
-     *
-     */
+
     public static final String COL_ID_MATCH = "id_match";
-    /**
-     *
-     */
     public static final String PROP_MATCH_TEAM = "famMatchTeam";
     @Id
     @ManyToOne
@@ -54,11 +57,7 @@ public class FamMatchPlayer implements Serializable {
      *
      */
     public static final String COL_ID_PLAYER = "id_player";
-    /**
-     *
-     */
     public static final String PROP_PLAYER = "famPlayer";
-    @Id
     @ManyToOne
     @JoinColumn(name = COL_ID_PLAYER, referencedColumnName = FamPlayer.COL_ID)
     private FamPlayer famPlayer;
@@ -68,6 +67,7 @@ public class FamMatchPlayer implements Serializable {
      */
     public static final String PROP_NUM = "num";
     public static final String COL_NUM = "num";
+    @Id
     @Column(name = COL_NUM)
     private Integer num;
     /**
@@ -136,4 +136,20 @@ public class FamMatchPlayer implements Serializable {
         return hash;
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        sb.append("FamMatchPlayer");
+        sb.append("{famMatchTeam=").append(famMatchTeam);
+        sb.append(", famPlayer=").append(famPlayer == null ? "null" : famPlayer.getDisplayName());
+        sb.append(", num=").append(num);
+        sb.append(", note=").append(note);
+        sb.append(", timePlayed=").append(timePlayed);
+        sb.append(", captain=").append(captain);
+        sb.append(", comments='").append(comments).append('\'');
+//        sb.append(", famGoalList=").append(famGoalList);
+//        sb.append(", famCardList=").append(famCardList);
+        sb.append('}');
+        return sb.toString();
+    }
 }

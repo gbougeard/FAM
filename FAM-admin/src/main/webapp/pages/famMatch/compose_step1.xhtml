@@ -1,12 +1,3 @@
-<!--<?xml version="1.0" encoding="UTF-8" ?>-->
-<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"-->
-<!--"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
-<!--<html-->
-<!--xmlns="http://www.w3.org/1999/xhtml"-->
-<!--xmlns:ui="http://java.sun.com/jsf/facelets"-->
-<!--xmlns:f="http://java.sun.com/jsf/core"-->
-<!--xmlns:p="http://primefaces.org/ui"-->
-<!-->-->
 <ui:composition
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -15,16 +6,16 @@
     <p:tab id="tabTeam" title="Team">
         <center>
             <p:selectOneRadio id="options"
-                              value="#{famMatchComposeWizardController.teamComposition}"
-                              converter="teamCompositionConverter"
+                              value="#{famMatchComposeWizardController.famMatchTeam}"
+                              converter="matchTeamCompositionConverter"
                               layout="“pageDirection">
-                <f:selectItems value="#{famMatchComposeWizardController.lstTeamComposition}"
-                               var="tc"
-                               itemLabel="#{tc.famTeam.libTeam} #{tc.famMatchTeam.home ? 'Home' : 'Away'}"
-                               itemValue="#{tc}"/>
+                <f:selectItems value="#{famMatchComposeWizardController.current.famMatchTeamList}"
+                               var="matchTeam"
+                               itemLabel="#{matchTeam.famTeam.libTeam} #{matchTeam.home ? 'Home' : 'Away'}"
+                               itemValue="#{matchTeam}"/>
+                <p:ajax listener="#{famMatchComposeWizardController.loadTeamComposition}" process="@this"/>
             </p:selectOneRadio>
         </center>
 
     </p:tab>
 </ui:composition>
-        <!--</html>-->

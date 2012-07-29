@@ -1,0 +1,53 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui"
+        >
+
+
+    <p:tab id="wherewhen" title="Event">
+        <p:panel header="Où et quand?">
+            <h:panelGrid columns="3">
+
+                <p:outputLabel value="#{bundle.EditFamEventLabel_dtEvent}" for="dtEvent"/>
+                <p:calendar id="dtEvent"
+                            value="#{famMatchCreateWizardController.famEvent.dtEvent}"
+                            pattern="dd/MM/yyyy HH:mm"
+                            maxHour="23"
+                            minHour="9"
+                            mindate="#{common.now}"
+                            locale="fr"
+                            lang="fr"
+                        >
+                    <p:ajax event="blur" update="msg_dtEvent"/>
+                </p:calendar>
+                <p:message id="msg_dtEvent" for="dtEvent"/>
+
+                <p:outputLabel value="#{bundle.EditFamEventLabel_famPlace}" for="famPlace"/>
+                <p:selectOneMenu id="famPlace"
+                                 value="#{famMatchCreateWizardController.famEvent.famPlace}"
+                                 title="#{bundle.EditFamEventTitle_famPlace}"
+                                 converter="placeConverter"
+                        >
+                    <f:selectItem itemLabel="Place"
+                                  itemValue=""/>
+                    <f:selectItems value="#{cacheBean.listPlace}"
+                                   var="p"
+                                   itemValue="#{p}"
+                                   itemLabel="#{p.libPlace}"/>
+                    <p:ajax event="blur" update="msg_famPlace"/>
+                </p:selectOneMenu>
+                <p:message id="msg_famPlace" for="famPlace"/>
+
+                <p:outputLabel value="#{bundle.EditFamEventLabel_comments}" for="comments"/>
+                <p:editor id="comments"
+                          value="#{famMatchCreateWizardController.famEvent.comments}"
+                          widgetVar="editor" width="600"/>
+                <p:message id="msg_comments" for="comments"/>
+            </h:panelGrid>
+        </p:panel>
+    </p:tab>
+</ui:composition>
+

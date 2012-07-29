@@ -1,14 +1,3 @@
-<!--<?xml version="1.0" encoding="UTF-8" ?>-->
-<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"-->
-<!--"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
-<!--<html-->
-<!--xmlns="http://www.w3.org/1999/xhtml"-->
-<!--xmlns:ui="http://java.sun.com/jsf/facelets"-->
-<!--xmlns:h="http://java.sun.com/jsf/html"-->
-<!--xmlns:f="http://java.sun.com/jsf/core"-->
-<!--xmlns:fn="http://java.sun.com/jsp/jstl/functions"-->
-<!--xmlns:p="http://primefaces.org/ui"-->
-<!-->-->
 <ui:composition
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -30,12 +19,12 @@
         <h:panelGrid columns="5"
                      cellpadding="10"
                      columnClasses="verticalTop,verticalTop,verticalTop,verticalTop,verticalTop"
-                     id="grd6">
+                >
             <!--Formation-->
             <h:panelGrid columns="3">
                 <p:outputLabel value="Formation" for="formation"/>
                 <p:selectOneListbox id="formation"
-                                    value="#{famMatchComposeWizardController.teamComposition.famMatchTeam.famFormation}"
+                                    value="#{famMatchComposeWizardController.famMatchTeam.famFormation}"
                                     converter="formationConverter"
                                     style="width:200px;">
                     <!--<f:selectItem itemLabel="Formation" itemValue=""/>-->
@@ -46,7 +35,8 @@
                                    itemValue="#{f}"/>
                     <!--                    <p:ajax event="blur" update="@form"/>-->
                     <!--                                        listener="#{famMatchComposeWizardController.changeFormation}"/>-->
-                    <p:ajax event="valueChange" listener="#{famMatchComposeWizardController.teamComposition.genTarget}"
+                    <p:ajax event="valueChange"
+                            listener="#{famMatchComposeWizardController.teamComposition.genTarget}"
                             update="dgField"
                             partialSubmit="true"/>
                 </p:selectOneListbox>
@@ -116,7 +106,7 @@
             <h:panelGroup>
                 <h:graphicImage id="imgSub" name="soccer_2_128.png" library="images/dock"/>
                 <p:dataGrid id="dgSubs"
-                            value="#{famMatchComposeWizardController.lstSubs}"
+                            value="#{famMatchComposeWizardController.teamComposition.lstSubs}"
                             var="sub"
                             columns="2"
                             style="padding-top: 25px;margin-left: 20px;">
@@ -171,21 +161,17 @@
 
         </h:panelGrid>
         <!--<h:form id="frmSave">-->
-        <p:commandButton id="saveBtn"
-                         value="Enregistrer"
-                         actionListener="#{famMatchComposeWizardController.save}"
-                         immediate="true"
-                />
-        <p:commandLink value="Enregistrer"
-                       actionListener="#{famMatchComposeWizardController.save}"
-                />
-        <p:blockUI block="tabCompo" trigger="saveBtn">
-            SAVING<br/>
-            <h:graphicImage library="images" name="ajax-loader1.gif"
-                            style="margin-right: 12px; vertical-align: middle;"/>
-        </p:blockUI>
+        <!--<p:commandButton id="saveBtn"-->
+        <!--value="Enregistrer"-->
+        <!--actionListener="#{famMatchComposeWizardController.save}"-->
+        <!--process="@this"-->
+        <!--/>-->
+        <!--<p:blockUI block="tabCompo" trigger="saveBtn">-->
+        <!--SAVING<br/>-->
+        <!--<h:graphicImage library="images" name="ajax-loader1.gif"-->
+        <!--style="margin-right: 12px; vertical-align: middle;"/>-->
+        <!--</p:blockUI>-->
         <!--</h:form>-->
     </p:tab>
 
 </ui:composition>
-        <!--</html>-->

@@ -4,7 +4,7 @@
  */
 package org.fam.jsf.converter;
 
-import org.fam.jsf.bean.TeamComposition;
+import org.fam.ejb.model.FamMatchTeam;
 import org.fam.jsf.controller.FamMatchComposeWizardController;
 
 import javax.faces.component.UIComponent;
@@ -15,8 +15,8 @@ import javax.faces.convert.FacesConverter;
 /**
  * @author mask_hot
  */
-@FacesConverter(forClass = TeamComposition.class, value = "teamCompositionConverter")
-public class TeamCompositionConverter implements Converter {
+@FacesConverter(forClass = FamMatchTeam.class, value = "matchTeamCompositionConverter")
+public class MatchTeamCompositionConverter implements Converter {
 
     @Override
     public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
@@ -25,8 +25,8 @@ public class TeamCompositionConverter implements Converter {
         }
 
         FamMatchComposeWizardController controller = (FamMatchComposeWizardController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null, "famMatchComposeWizardController");
-        return (controller.getLstTeamComposition().get(0).getFamTeam().getLibTeam().equals(value)) ?
-                controller.getLstTeamComposition().get(0) : controller.getLstTeamComposition().get(1);
+        return (controller.getSelected().getFamMatchTeamList().get(0).getFamTeam().getLibTeam().equals(value)) ?
+                controller.getSelected().getFamMatchTeamList().get(0) : controller.getLstTeamComposition().get(1);
     }
 
 
@@ -35,11 +35,11 @@ public class TeamCompositionConverter implements Converter {
         if (object == null || object.equals("")) {
             return null;
         }
-        if (object instanceof TeamComposition) {
-            TeamComposition o = (TeamComposition) object;
+        if (object instanceof FamMatchTeam) {
+            FamMatchTeam o = (FamMatchTeam) object;
             return o.getFamTeam().getLibTeam() == null ? "" : o.getFamTeam().getLibTeam();
         } else {
-            throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: model.TeamComposition");
+            throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: model.FamMatchTeam");
         }
     }
 }

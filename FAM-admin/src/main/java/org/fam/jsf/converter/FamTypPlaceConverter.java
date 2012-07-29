@@ -15,7 +15,7 @@ import javax.faces.convert.FacesConverter;
 /**
  * @author mask_hot
  */
-@FacesConverter(forClass = FamTypPlace.class)
+@FacesConverter(forClass = FamTypPlace.class, value = "typPlaceConverter")
 public class FamTypPlaceConverter implements Converter {
 
     @Override
@@ -24,7 +24,7 @@ public class FamTypPlaceConverter implements Converter {
             return null;
         }
         FamTypPlaceController controller = (FamTypPlaceController) facesContext.getApplication().getELResolver().
-                getValue(facesContext.getELContext(), null, "famTypPlaceController");
+                                                                                                                 getValue(facesContext.getELContext(), null, "famTypPlaceController");
         return controller.getFacade().find(getKey(value));
     }
 

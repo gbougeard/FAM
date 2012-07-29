@@ -1,0 +1,43 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui"
+        >
+
+    <p:tab id="competition" title="Compétition">
+        <!--<p:selectOneMenu id="famCategory"
+                         value="#{famMatchCreateWizardController.selected.famSeasonCompetition}"
+                         title="#{bundle.EditFamMatchTitle_famSeasonCompetition}"
+                         converter="competConverter"
+                         style="width:300px;"
+                >
+            <f:selectItem itemLabel="Competition"
+                          itemValue=""/>
+            <f:selectItems value="#{cacheBean.listSeasonCompetition}"
+                           var="c"
+                           itemValue="#{c}"
+                           itemLabel="#{c.displayName}"/>
+            <p:ajax event="blur" update="msg_famSeasonCompetition" process="@this"/>
+        </p:selectOneMenu>
+        <p:message id="msg_famSeasonCompetition" for="famCompetition"/>
+        -->
+        <p:selectOneMenu id="famCompetition"
+                         value="#{famMatchCreateWizardController.famSeasonCompetition}"
+                         title="#{bundle.EditFamMatchTitle_famSeasonCompetition}"
+                         converter="competConverter"
+                         style="width:300px;"
+                >
+            <f:selectItem itemLabel="Competition"
+                          itemValue=""/>
+            <f:selectItems value="#{cacheBean.listSeasonCompetition}"
+                           var="c"
+                           itemValue="#{c}"
+                           itemLabel="#{c.displayName}"/>
+            <p:ajax update="msg_famSeasonCompetition" process="@this" partialSubmit="true"/>
+        </p:selectOneMenu>
+        <p:message id="msg_famSeasonCompetition" for="famCompetition"/>
+    </p:tab>
+
+</ui:composition>
+

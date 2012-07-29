@@ -36,7 +36,7 @@ public class FamEventEntityListener {
 
     @PrePersist
     void beforeCreate(final Object entity) {
-        LOGGER.trace("FamEventEntityListener::beforeCreate");
+        LOGGER.debug("FamEventEntityListener::beforeCreate");
         if (((FamEvent) entity).getFamEventStatus() == null) {
             ((FamEvent) entity).setFamEventStatus(ejbEventStatus.getScheduled());
         }
@@ -48,7 +48,7 @@ public class FamEventEntityListener {
         }
         DateTime dtStart = new DateTime(((FamEvent) entity).getDtEvent());
         ((FamEvent) entity).setDtEnd((dtStart.plusMinutes(((FamEvent) entity).getDuration())).toDate());
-        LOGGER.trace(((FamEvent) entity).toString());
+        LOGGER.debug(((FamEvent) entity).toString());
     }
 
     @PreUpdate

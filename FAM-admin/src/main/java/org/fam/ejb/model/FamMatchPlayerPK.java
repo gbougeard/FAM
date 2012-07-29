@@ -15,7 +15,7 @@ public class FamMatchPlayerPK implements Serializable {
 
     private static final long serialVersionUID = -8409364271443197745L;
     private FamMatchTeamPK famMatchTeam;
-    private Long famPlayer;
+    private Integer num;
 
     /**
      *
@@ -23,41 +23,48 @@ public class FamMatchPlayerPK implements Serializable {
     public FamMatchPlayerPK() {
     }
 
-    /**
-     * @return
-     */
-    public Long getFamPlayer() {
-        return famPlayer;
+    public FamMatchTeamPK getFamMatchTeam() {
+        return famMatchTeam;
     }
 
-    /**
-     * @param famPlayer
-     */
-    public void setFamPlayer(Long famPlayer) {
-        this.famPlayer = famPlayer;
+    public void setFamMatchTeam(FamMatchTeamPK famMatchTeam) {
+        this.famMatchTeam = famMatchTeam;
+    }
+
+    public Integer getNum() {
+        return num;
+    }
+
+    public void setNum(Integer num) {
+        this.num = num;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+
+        FamMatchPlayerPK that = (FamMatchPlayerPK) o;
+
+        if (famMatchTeam != null ? !famMatchTeam.equals(that.famMatchTeam) : that.famMatchTeam != null) {
             return false;
         }
-        final FamMatchPlayerPK other = (FamMatchPlayerPK) obj;
-        if (this.famMatchTeam != other.famMatchTeam && (this.famMatchTeam == null || !this.famMatchTeam.equals(other.famMatchTeam))) {
+        if (num != null ? !num.equals(that.num) : that.num != null) {
             return false;
         }
-        return !(this.famPlayer != other.famPlayer && (this.famPlayer == null || !this.famPlayer.equals(other.famPlayer)));
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 59 * hash + (this.famMatchTeam != null ? this.famMatchTeam.hashCode() : 0);
-        hash = 59 * hash + (this.famPlayer != null ? this.famPlayer.hashCode() : 0);
-        return hash;
+        int result = famMatchTeam != null ? famMatchTeam.hashCode() : 0;
+        result = 31 * result + (num != null ? num.hashCode() : 0);
+        return result;
     }
 
     @Override
@@ -65,7 +72,7 @@ public class FamMatchPlayerPK implements Serializable {
         final StringBuilder sb = new StringBuilder();
         sb.append("FamMatchPlayerPK");
         sb.append("{famMatchTeam=").append(famMatchTeam);
-        sb.append(", famPlayer=").append(famPlayer);
+        sb.append(", num=").append(num);
         sb.append('}');
         return sb.toString();
     }

@@ -1,6 +1,3 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -48,7 +45,7 @@
                            var="c"
                            itemValue="#{c}"
                            itemLabel="#{c.libCategory}"/>
-            <p:ajax event="blur" update="msg_famCategory"/>
+            <p:ajax event="blur" update="msg_famCategory" listener="#{famSeasonCompetitionController.loadTeams}"/>
         </p:selectOneMenu>
         <p:message id="msg_famCategory" for="famCategory"/>
 
@@ -84,4 +81,21 @@
         <p:message id="msg_famScale" for="famScale"/>
 
     </h:panelGrid>
+
+    <p:commandButton value="#{bundle.AddTeam}"
+                     immediate="true"
+                     actionListener="#{famSeasonCompetitionController.loadTeams}"
+                     onclick="dlg.show()"/>
+
+    <!--<p:dialog widgetVar="dlg" width="625" height="450" >-->
+    <p:pickList id="pickList"
+                value="#{famSeasonCompetitionController.teams}"
+                var="t"
+                itemLabel="#{t.libTeam}"
+                itemValue="#{t}"
+                converter="teamConverter"
+                showTargetControls="true"
+
+            />
+    <!--</p:dialog>-->
 </ui:composition>

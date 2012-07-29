@@ -1,0 +1,49 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui"
+        >
+
+    <p:tab id="equipes" title="Equipes">
+        <p:panel header="Choisir les equipes">
+            <h:panelGrid columns="3">
+
+                <p:outputLabel value="Domicile" for="famTeamHome"/>
+                <p:selectOneMenu id="famTeamHome"
+                                 value="#{famMatchCreateWizardController.matchTeamHome.famTeam}"
+                                 converter="teamConverter"
+                                 style="width:300px;"
+                        >
+                    <f:selectItem itemLabel="Domicile"
+                                  itemValue=""/>
+                    <f:selectItems value="#{famMatchCreateWizardController.famSeasonCompetition.famTeamList}"
+                                   var="d"
+                                   itemValue="#{d}"
+                                   itemLabel="#{d.libTeam}"/>
+                    <p:ajax event="blur" update="msg_famTeamHome"/>
+                </p:selectOneMenu>
+                <p:message id="msg_famTeamHome" for="famTeamHome"/>
+
+                <p:outputLabel value="Visiteur" for="famTeamAway"/>
+                <p:selectOneMenu id="famTeamAway"
+                                 value="#{famMatchCreateWizardController.matchTeamAway.famTeam}"
+                                 converter="teamConverter"
+                                 style="width:300px;"
+                        >
+                    <f:selectItem itemLabel="Visiteur"
+                                  itemValue=""/>
+                    <f:selectItems value="#{famMatchCreateWizardController.famSeasonCompetition.famTeamList}"
+                                   var="v"
+                                   itemValue="#{v}"
+                                   itemLabel="#{v.libTeam}"/>
+                    <p:ajax event="blur" update="msg_famTeamAway"/>
+                </p:selectOneMenu>
+                <p:message id="msg_famTeamAway" for="famTeamAway"/>
+            </h:panelGrid>
+        </p:panel>
+    </p:tab>
+
+</ui:composition>
+

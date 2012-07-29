@@ -8,7 +8,17 @@ package org.fam.ejb.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
@@ -40,7 +50,7 @@ public class FamMatchTeam implements Serializable {
      */
     public static final String PROP_MATCH = "famMatch";
     @Id
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = COL_ID_MATCH, referencedColumnName = FamMatch.COL_ID)
     @NotNull
     private FamMatch famMatch;
@@ -49,12 +59,9 @@ public class FamMatchTeam implements Serializable {
      *
      */
     public static final String COL_ID_TEAM = "id_team";
-    /**
-     *
-     */
     public static final String PROP_TEAM = "famTeam";
     @Id
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = COL_ID_TEAM, referencedColumnName = FamTeam.COL_ID)
     @NotNull
     private FamTeam famTeam;
@@ -112,7 +119,10 @@ public class FamMatchTeam implements Serializable {
     @Column(name = PROP_GOAL_SHIPPED)
     private Integer goalShipped;
     //
-    @OneToMany(mappedBy = FamMatchPlayer.PROP_MATCH_TEAM)
+    /**
+     *
+     */
+    @OneToMany(mappedBy = FamMatchPlayer.PROP_MATCH_TEAM, cascade = CascadeType.ALL)
     @OrderBy(FamMatchPlayer.PROP_NUM)
     private List<FamMatchPlayer> famMatchPlayerList;
     //
@@ -120,11 +130,8 @@ public class FamMatchTeam implements Serializable {
      *
      */
     public static final String COL_ID_FORMATION = "id_formation";
-    /**
-     *
-     */
     public static final String PROP_FORMATION = "famFormation";
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = COL_ID_FORMATION, referencedColumnName = FamFormation.COL_ID)
     private FamFormation famFormation;
     //
@@ -152,14 +159,24 @@ public class FamMatchTeam implements Serializable {
 
         FamMatchTeam that = (FamMatchTeam) o;
 
-        return famMatch.equals(that.famMatch) && famTeam.equals(that.famTeam);
+        if (famMatch != null ? !famMatch.equals(that.famMatch) : that.famMatch != null) {
+            return false;
+        }
+        if (famTeam != null ? !famTeam.equals(that.famTeam) : that.famTeam != null) {
+            return false;
+        }
+        if (!home.equals(that.home)) {
+            return false;
+        }
 
+        return true;
     }
 
     @Override
     public int hashCode() {
-        int result = famMatch.hashCode();
-        result = 31 * result + famTeam.hashCode();
+        int result = famMatch != null ? famMatch.hashCode() : 0;
+        result = 31 * result + (famTeam != null ? famTeam.hashCode() : 0);
+        result = 31 * result + home.hashCode();
         return result;
     }
 
@@ -167,8 +184,8 @@ public class FamMatchTeam implements Serializable {
     public String toString() {
         final StringBuilder sb = new StringBuilder();
         sb.append("FamMatchTeam");
-        sb.append("{famMatch=").append(famMatch.getFamEvent().getLibEvent());
-        sb.append(", famTeam=").append(famTeam.getLibTeam());
+        sb.append("{famMatch=").append(famMatch == null ? "null" : famMatch.getFamEvent().getLibEvent());
+        sb.append(", famTeam=").append(famTeam == null ? "null" : famTeam.getLibTeam());
         sb.append(", home=").append(home);
         sb.append(", points=").append(points);
         sb.append(", victory=").append(victory);
@@ -177,9 +194,7 @@ public class FamMatchTeam implements Serializable {
         sb.append(", goalScored=").append(goalScored);
         sb.append(", goalShipped=").append(goalShipped);
 //        sb.append(", famMatchPlayerList=").append(famMatchPlayerList);
-        if (famFormation != null) {
-            sb.append(", famFormation=").append(famFormation.getLibFormation());
-        }
+        sb.append(", famFormation=").append(famFormation == null ? "null" : famFormation.getLibFormation());
         sb.append(", draft=").append(draft);
         sb.append('}');
         return sb.toString();

@@ -202,6 +202,7 @@ public class FamMatchController extends AbstractController<FamMatch> {
             teams.add(matchTeamHome.getFamTeam());
             teams.add(matchTeamAway.getFamTeam());
             famEvent.setFamTeamList(teams);
+            famEvent.setDuration(current.getFamSeasonCompetition().getFamTypCompetition().getFamTypMatch().getPeriodDuration() * 2);
             current.setFamEvent(famEvent);
 
             List<FamMatchTeam> mt = new ArrayList<FamMatchTeam>();
@@ -443,7 +444,7 @@ public class FamMatchController extends AbstractController<FamMatch> {
 
         for (CanvasFormationItem cfi : lstTarget) {
             if (cfi.getFamFormationItem() != null
-                    && cfi.getFamFormationItem().getNumItem().equals(num)) {
+                 && cfi.getFamFormationItem().getNumItem().equals(num)) {
 
                 cfi.setFamPlayer(player);
                 break;

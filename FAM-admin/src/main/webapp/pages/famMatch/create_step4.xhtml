@@ -1,0 +1,113 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui">
+
+    <p:tab id="confirm" title="Confirmation">
+
+        <h:panelGrid id="confirmation" columns="2">
+            <h:outputText value="Competition "/>
+            <h:outputText styleClass="outputLabel"
+                          value="#{famMatchCreateWizardController.selected.famSeasonCompetition.displayName}"/>
+
+            <h:outputText value="Domicile "/>
+            <h:outputText styleClass="outputLabel"
+                          value="#{famMatchCreateWizardController.matchTeamHome.famTeam.libTeam}"/>
+
+            <h:outputText value="Visiteur "/>
+            <h:outputText styleClass="outputLabel"
+                          value="#{famMatchCreateWizardController.matchTeamAway.famTeam.libTeam}"/>
+
+            <h:outputText value="Date "/>
+            <h:outputText value="#{famMatchCreateWizardController.famEvent.dtEvent}"
+                          title="#{bundle.ViewFamEventTitle_dtEvent}">
+                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="#{cacheBean.timeZone}"/>
+            </h:outputText>
+
+            <h:outputText value="Lieu "/>
+            <h:outputText styleClass="outputLabel"
+                          value="#{famMatchCreateWizardController.famEvent.famPlace.libPlace}"/>
+
+            <h:outputText value="Commentaires "/>
+            <h:outputText styleClass="outputLabel"
+                          value="#{famMatchCreateWizardController.famEvent.comments}"/>
+
+        </h:panelGrid>
+
+        <p:commandButton value="Submit"
+                         actionListener="#{famMatchCreateWizardController.create}"/>
+
+    </p:tab>
+
+    <!--                <h:panelGrid columns="3">
+        <p:outputLabel value="#{bundle.EditFamMatchLabel_idMatch}" for="idMatch" />
+        <p:inputText id="idMatch"
+                     value="#{famMatchCreateWizardController.selected.idMatch}"
+                     title="#{bundle.EditFamMatchTitle_idMatch}"
+                     >
+            <p:ajax event="blur" update="msg_idMatch"/>
+        </p:inputText>
+        <p:message id="msg_idMatch" for="idMatch"/>
+
+        <p:outputLabel value="#{bundle.EditFamMatchLabel_famEvent}" for="famEvent" />
+        <h:selectOneMenu id="famEvent"
+                         value="#{famMatchCreateWizardController.selected.famEvent}"
+                         title="#{bundle.EditFamMatchTitle_famEvent}"
+                         >
+            <f:selectItems value="#{famMatchCreateWizardController.itemsAvailableSelectOne}"/>
+            <p:ajax event="blur" update="msg_famEvent"/>
+        </h:selectOneMenu>
+        <p:message id="msg_famEvent" for="famEvent"/>
+
+        <p:outputLabel value="#{bundle.EditFamMatchLabel_famSeasonCompetition}" for="famSeasonCompetition" />
+        <h:selectOneMenu id="famSeasonCompetition"
+                         value="#{famMatchCreateWizardController.selected.famSeasonCompetition}"
+                         title="#{bundle.EditFamMatchTitle_famSeasonCompetition}"
+                         >
+            <f:selectItems value="#{famSeasonCompetitionController.itemsAvailableSelectOne}"/>
+            <p:ajax event="blur" update="msg_famSeasonCompetition"/>
+        </h:selectOneMenu>
+        <p:message id="msg_famSeasonCompetition" for="famSeasonCompetition"/>
+
+        <p:outputLabel value="#{bundle.EditFamMatchLabel_famFixture}" for="famFixture" />
+        <h:selectOneMenu id="famFixture"
+                         value="#{famMatchCreateWizardController.selected.famFixture}"
+                         title="#{bundle.EditFamMatchTitle_famFixture}"
+                         >
+            <f:selectItems value="#{famFixtureController.itemsAvailableSelectOne}"/>
+            <p:ajax event="blur" update="msg_famFixture"/>
+        </h:selectOneMenu>
+        <p:message id="msg_famFixture" for="famFixture"/>
+
+        <p:outputLabel value="#{bundle.EditFamMatchLabel_dtCreat}" for="dtCreat" />
+        <p:inputText id="dtCreat"
+                     value="#{famMatchCreateWizardController.selected.dtCreat}"
+                     title="#{bundle.EditFamMatchTitle_dtCreat}"
+                     >
+            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+            <p:ajax event="blur" update="msg_dtCreat"/>
+        </p:inputText>
+        <p:message id="msg_dtCreat" for="dtCreat"/>
+
+        <p:outputLabel value="#{bundle.EditFamMatchLabel_dtModif}" for="dtModif" />
+        <p:inputText id="dtModif"
+                     value="#{famMatchCreateWizardController.selected.dtModif}"
+                     title="#{bundle.EditFamMatchTitle_dtModif}"
+                     >
+            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+            <p:ajax event="blur" update="msg_dtModif"/>
+        </p:inputText>
+        <p:message id="msg_dtModif" for="dtModif"/>
+
+    </h:panelGrid>-->
+    <!--<p:commandButton value="#{bundle.EditFamMatchSaveLink}"-->
+    <!--action="#{famMatchCreateWizardController.create}"-->
+    <!--/>-->
+    <!--<p:commandButton value="#{bundle.CancelLink}"-->
+    <!--action="#{famMatchCreateWizardController.prepareList}"-->
+    <!--immediate="true"/>-->
+    <!--</p:panel>-->
+</ui:composition>
+

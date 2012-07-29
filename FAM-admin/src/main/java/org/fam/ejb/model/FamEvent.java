@@ -47,24 +47,24 @@ import java.util.List;
 @Table(name = FamEvent.TABLE_NAME)
 @EntityListeners({FamEventEntityListener.class})
 @NamedQueries({
-        @NamedQuery(name = FamEvent.FIND_ALL,
-                query = "SELECT f FROM FamEvent f"),
-        @NamedQuery(name = FamEvent.FIND_BY_ID_EVENT,
-                query = "SELECT f FROM FamEvent f WHERE f.idEvent = :idEvent"),
-        @NamedQuery(name = FamEvent.FIND_BY_LIB_EVENT,
-                query = "SELECT f FROM FamEvent f WHERE f.libEvent = :libEvent"),
-        @NamedQuery(name = FamEvent.FIND_BY_DT_EVENT,
-                query = "SELECT f FROM FamEvent f WHERE f.dtEvent = :dtEvent"),
-        @NamedQuery(name = FamEvent.FIND_BY_DT_CREAT,
-                query = "SELECT f FROM FamEvent f WHERE f.dtCreat = :dtCreat"),
-        @NamedQuery(name = FamEvent.FIND_BY_DT_MODIF,
-                query = "SELECT f FROM FamEvent f WHERE f.dtModif = :dtModif"),
-        @NamedQuery(name = FamEvent.FIND_BETWEEN,
-                query = "SELECT f FROM FamEvent f WHERE f.dtEvent BETWEEN :dtStart AND :dtEnd"),
-        @NamedQuery(name = FamEvent.FIND_BETWEEN_BY_TEAM,
-                query = "SELECT f FROM FamEvent f WHERE f.dtEvent BETWEEN :dtStart AND :dtEnd AND :team MEMBER OF f.famTeamList"),
-        @NamedQuery(name = FamEvent.FIND_STATUS_BEFORE,
-                query = "SELECT f FROM FamEvent f WHERE f.dtEvent <= :dtEvent AND f.famEventStatus = :famEventStatus")
+               @NamedQuery(name = FamEvent.FIND_ALL,
+                           query = "SELECT f FROM FamEvent f"),
+               @NamedQuery(name = FamEvent.FIND_BY_ID_EVENT,
+                           query = "SELECT f FROM FamEvent f WHERE f.idEvent = :idEvent"),
+               @NamedQuery(name = FamEvent.FIND_BY_LIB_EVENT,
+                           query = "SELECT f FROM FamEvent f WHERE f.libEvent = :libEvent"),
+               @NamedQuery(name = FamEvent.FIND_BY_DT_EVENT,
+                           query = "SELECT f FROM FamEvent f WHERE f.dtEvent = :dtEvent"),
+               @NamedQuery(name = FamEvent.FIND_BY_DT_CREAT,
+                           query = "SELECT f FROM FamEvent f WHERE f.dtCreat = :dtCreat"),
+               @NamedQuery(name = FamEvent.FIND_BY_DT_MODIF,
+                           query = "SELECT f FROM FamEvent f WHERE f.dtModif = :dtModif"),
+               @NamedQuery(name = FamEvent.FIND_BETWEEN,
+                           query = "SELECT f FROM FamEvent f WHERE f.dtEvent BETWEEN :dtStart AND :dtEnd"),
+               @NamedQuery(name = FamEvent.FIND_BETWEEN_BY_TEAM,
+                           query = "SELECT f FROM FamEvent f WHERE f.dtEvent BETWEEN :dtStart AND :dtEnd AND :team MEMBER OF f.famTeamList"),
+               @NamedQuery(name = FamEvent.FIND_STATUS_BEFORE,
+                           query = "SELECT f FROM FamEvent f WHERE f.dtEvent <= :dtEvent AND f.famEventStatus = :famEventStatus")
 })
 @XmlRootElement
 public class FamEvent extends FamEntity implements Serializable {
@@ -154,10 +154,10 @@ public class FamEvent extends FamEntity implements Serializable {
     //
     @ManyToMany
     @JoinTable(name = "fam_event_team",
-            joinColumns = {
-                    @JoinColumn(name = COL_ID)},
-            inverseJoinColumns = {
-                    @JoinColumn(name = FamTeam.COL_ID)})
+               joinColumns = {
+                              @JoinColumn(name = COL_ID)},
+               inverseJoinColumns = {
+                                     @JoinColumn(name = FamTeam.COL_ID)})
     private List<FamTeam> famTeamList;
     //
     /**
@@ -230,14 +230,25 @@ public class FamEvent extends FamEntity implements Serializable {
 
         FamEvent famEvent = (FamEvent) o;
 
-        return idEvent.equals(famEvent.idEvent);
+        if (!dtEvent.equals(famEvent.dtEvent)) {
+            return false;
+        }
+        if (idEvent != null ? !idEvent.equals(famEvent.idEvent) : famEvent.idEvent != null) {
+            return false;
+        }
+        if (!libEvent.equals(famEvent.libEvent)) {
+            return false;
+        }
 
+        return true;
     }
 
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + idEvent.hashCode();
+        result = 31 * result + (idEvent != null ? idEvent.hashCode() : 0);
+        result = 31 * result + libEvent.hashCode();
+        result = 31 * result + dtEvent.hashCode();
         return result;
     }
 

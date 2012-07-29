@@ -385,16 +385,24 @@
         <view-id value="/pages/famMatch/Create.xhtml"/>
     </url-mapping>
 
-    <url-mapping id="composeMatch" parentId="listMatch">
-        <pattern value="compose/#{ id : famMatchController.id }/team/#{ idTeam : famMatchController.idTeam}"/>
+    <!--<url-mapping id="composeMatch" parentId="listMatch">
+        &lt;!&ndash;<pattern value="compose/#{ id : famMatchComposeWizardController.id }/team/#{ idTeam : famMatchComposeWizardController.idTeam}"/>&ndash;&gt;
+        <pattern value="compose/#{ id : famMatchController.id }"/>
         <view-id value="/pages/famMatch/compose_wizard.xhtml"/>
-        <action onPostback="false">#{famMatchController.loadForCompose}</action>
+        <action onPostback="false">#{famMatchComposeWizardController.loadForEdit}</action>
+    </url-mapping>-->
+    <url-mapping id="composeMatchBis" parentId="listMatch">
+        <!--<pattern value="compose/#{ id : famMatchComposeWizardController.id }/team/#{ idTeam : famMatchComposeWizardController.idTeam}"/>-->
+        <pattern value="compose/#{ id : famMatchComposeWizardController.id }"/>
+        <view-id value="/pages/famMatch/compose_wizard.xhtml"/>
+        <action onPostback="false">#{famMatchComposeWizardController.loadForCompose}</action>
     </url-mapping>
 
     <url-mapping id="debriefMatch" parentId="listMatch">
-        <pattern value="debrief/#{ id : famMatchController.id }/team/#{ idTeam : famMatchController.idTeam}"/>
+        <pattern
+                value="debrief/#{ id : famMatchDebriefWizardController.id }/team/#{ idTeam : famMatchDebriefWizardController.idTeam}"/>
         <view-id value="/pages/famMatch/debrief.xhtml"/>
-        <action onPostback="false">#{famMatchController.loadForDebrief}</action>
+        <action onPostback="false">#{famMatchDebriefWizardController.loadForDebrief}</action>
     </url-mapping>
 
     <!--    MATCHPLAYER-->

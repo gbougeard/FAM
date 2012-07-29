@@ -8,7 +8,10 @@ import org.fam.common.interceptor.AuditInterceptor;
 import org.fam.common.interceptor.LoggingInterceptor;
 import org.fam.ejb.model.FamFixture;
 import org.fam.ejb.model.FamMatch;
+import org.fam.ejb.model.FamMatchPlayer;
+import org.fam.ejb.model.FamMatchTeam;
 import org.fam.ejb.model.FamSeasonCompetition;
+import org.slf4j.Logger;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -25,6 +28,9 @@ import java.util.List;
 @LocalBean
 @Interceptors({AuditInterceptor.class, LoggingInterceptor.class})
 public class FamMatchFacade extends AbstractFacade<FamMatch> {
+
+    @Inject
+    private Logger LOGGER;
 
     //    @PersistenceContext//(unitName = "FAM-test-ejbPU")
 //    private EntityManager em;
@@ -106,6 +112,30 @@ public class FamMatchFacade extends AbstractFacade<FamMatch> {
         // Force TypEvent to Match
         entity.getFamEvent().setFamTypEvent(ejbTypEvent.getMatch());
 
+        // Create Free MatchPlayer
+        int nbPlayers = entity.getFamSeasonCompetition().getFamTypCompetition().getFamTypMatch().getNbPlayer()
+                         + entity.getFamSeasonCompetition().getFamTypCompetition().getFamTypMatch().getNbSubstitute();
+
+        for (FamMatchTeam famMatchTeam : entity.getFamMatchTeamList()) {
+            if (famMatchTeam.getFamMatch() == null) {
+                famMatchTeam.setFamMatch(entity);
+            }
+            if (famMatchTeam.getFamMatchPlayerList() == null) {
+                famMatchTeam.setFamMatchPlayerList(new ArrayList<FamMatchPlayer>());
+            }
+            if (famMatchTeam.getFamMatchPlayerList().isEmpty()) {
+                for (int i = 0; i < nbPlayers; i++) {
+                    FamMatchPlayer famMatchPlayer = new FamMatchPlayer();
+                    famMatchPlayer.setFamMatchTeam(famMatchTeam);
+                    famMatchPlayer.setNum(i + 1);
+                    famMatchTeam.getFamMatchPlayerList().add(famMatchPlayer);
+                }
+            } else if (famMatchTeam.getFamMatchPlayerList().size() != nbPlayers) {
+                LOGGER.error("Inconsistent nb of player while create a match");
+            }
+
+        }
+
         // Check si le match est de championnat
         if (entity.getFamSeasonCompetition().getFamTypCompetition().getIsChampionship()) {
             // Check si on est associé à une journée
@@ -121,6 +151,30 @@ public class FamMatchFacade extends AbstractFacade<FamMatch> {
     public void create(FamMatch entity) {
         // Force TypEvent to Match
         entity.getFamEvent().setFamTypEvent(ejbTypEvent.getMatch());
+
+        // Create Free MatchPlayer
+        int nbPlayers = entity.getFamSeasonCompetition().getFamTypCompetition().getFamTypMatch().getNbPlayer()
+                         + entity.getFamSeasonCompetition().getFamTypCompetition().getFamTypMatch().getNbSubstitute();
+
+        for (FamMatchTeam famMatchTeam : entity.getFamMatchTeamList()) {
+            if (famMatchTeam.getFamMatch() == null) {
+                famMatchTeam.setFamMatch(entity);
+            }
+            if (famMatchTeam.getFamMatchPlayerList() == null) {
+                famMatchTeam.setFamMatchPlayerList(new ArrayList<FamMatchPlayer>());
+            }
+            if (famMatchTeam.getFamMatchPlayerList().isEmpty()) {
+                for (int i = 0; i < nbPlayers; i++) {
+                    FamMatchPlayer famMatchPlayer = new FamMatchPlayer();
+                    famMatchPlayer.setFamMatchTeam(famMatchTeam);
+                    famMatchPlayer.setNum(i + 1);
+                    famMatchTeam.getFamMatchPlayerList().add(famMatchPlayer);
+                }
+            } else if (famMatchTeam.getFamMatchPlayerList().size() != nbPlayers) {
+                LOGGER.error("Inconsistent nb of player while create a match");
+            }
+
+        }
         super.create(entity);
     }
 }
