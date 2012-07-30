@@ -21,19 +21,6 @@ USE `fam`;
 -- Table structure for table `fam_season`
 --
 
-DROP TABLE IF EXISTS `fam_season`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `fam_season` (
-  `id_season` bigint(20) NOT NULL,
-  `current_season` tinyint(1) DEFAULT '0',
-  `dt_creat` datetime DEFAULT NULL,
-  `dt_modif` datetime DEFAULT NULL,
-  `lib_season` varchar(255) DEFAULT NULL,
-  `VERSION` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id_season`)
-);
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `fam_season`
@@ -41,7 +28,7 @@ CREATE TABLE `fam_season` (
 
 LOCK TABLES `fam_season` WRITE;
 /*!40000 ALTER TABLE `fam_season` DISABLE KEYS */;
-INSERT INTO `fam_season` VALUES (31,0,'2012-02-25 19:21:55',NULL,'2008/2009',1),(32,1,'2012-02-25 19:21:55',NULL,'2012/2013',1),(33,0,'2012-02-25 19:21:55',NULL,'2010/2011',1),(34,0,'2012-02-25 19:21:55',NULL,'2009/2010',1),(35,0,'2012-02-25 19:21:55',NULL,'2011/2012',1);
+INSERT INTO `fam_season` VALUES (41,0,'2012-02-25 19:21:55',NULL,'2008/2009',1),(42,1,'2012-02-25 19:21:55',NULL,'2012/2013',1),(43,0,'2012-02-25 19:21:55',NULL,'2010/2011',1),(44,0,'2012-02-25 19:21:55',NULL,'2009/2010',1),(35,0,'2012-02-25 19:21:55',NULL,'2011/2012',1);
 /*!40000 ALTER TABLE `fam_season` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

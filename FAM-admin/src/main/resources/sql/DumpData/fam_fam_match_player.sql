@@ -21,21 +21,6 @@ USE `fam`;
 -- Table structure for table `fam_match_player`
 --
 
-DROP TABLE IF EXISTS `fam_match_player`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `fam_match_player` (
-  `captain` tinyint(1) DEFAULT '0',
-  `comments` longtext,
-  `note` decimal(38,0) DEFAULT NULL,
-  `num` int(11) NOT NULL DEFAULT '0',
-  `time_played` int(11) DEFAULT NULL,
-  `id_match` bigint(20) NOT NULL,
-  `id_team` bigint(20) NOT NULL,
-  `id_player` bigint(20) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id_match`,`id_team`,`id_player`,`num`)
-);
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `fam_match_player`

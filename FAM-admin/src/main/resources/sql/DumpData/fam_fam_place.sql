@@ -21,26 +21,6 @@ USE `fam`;
 -- Table structure for table `fam_place`
 --
 
-DROP TABLE IF EXISTS `fam_place`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `fam_place` (
-  `id_place` bigint(20) NOT NULL,
-  `address` varchar(255) DEFAULT NULL,
-  `city` varchar(255) DEFAULT NULL,
-  `dt_creat` datetime DEFAULT NULL,
-  `dt_modif` datetime DEFAULT NULL,
-  `latitude` decimal(10,8) DEFAULT NULL,
-  `lib_place` varchar(255) DEFAULT NULL,
-  `longitude` decimal(10,8) DEFAULT NULL,
-  `VERSION` bigint(20) DEFAULT NULL,
-  `zipcode` varchar(255) DEFAULT NULL,
-  `id_typ_place` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id_place`),
-  KEY `FK_fam_place_id_typ_place` (`id_typ_place`),
-  CONSTRAINT `FK_fam_place_id_typ_place` FOREIGN KEY (`id_typ_place`) REFERENCES `fam_typ_place` (`id_typ_place`)
-);
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `fam_place`

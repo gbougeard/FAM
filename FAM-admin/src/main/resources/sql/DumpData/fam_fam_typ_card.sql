@@ -21,20 +21,6 @@ USE `fam`;
 -- Table structure for table `fam_typ_card`
 --
 
-DROP TABLE IF EXISTS `fam_typ_card`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `fam_typ_card` (
-  `id_typ_card` bigint(20) NOT NULL,
-  `cod_typ_card` varchar(255) DEFAULT NULL,
-  `dt_creat` datetime DEFAULT NULL,
-  `dt_modif` datetime DEFAULT NULL,
-  `lib_typ_card` varchar(255) DEFAULT NULL,
-  `VERSION` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id_typ_card`),
-  UNIQUE KEY `UNQ_fam_typ_card_0` (`cod_typ_card`)
-);
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `fam_typ_card`

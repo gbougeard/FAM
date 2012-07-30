@@ -21,29 +21,6 @@ USE `fam`;
 -- Table structure for table `fam_team`
 --
 
-DROP TABLE IF EXISTS `fam_team`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `fam_team` (
-  `id_team` bigint(20) NOT NULL,
-  `cod_team` varchar(255) DEFAULT NULL,
-  `dt_creat` datetime DEFAULT NULL,
-  `dt_modif` datetime DEFAULT NULL,
-  `lib_team` varchar(255) DEFAULT NULL,
-  `VERSION` bigint(20) DEFAULT NULL,
-  `id_club` bigint(20) DEFAULT NULL,
-  `id_place` bigint(20) DEFAULT NULL,
-  `id_category` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id_team`),
-  UNIQUE KEY `UNQ_fam_team_0` (`cod_team`),
-  KEY `FK_fam_team_id_club` (`id_club`),
-  KEY `FK_fam_team_id_place` (`id_place`),
-  KEY `FK_fam_team_id_category` (`id_category`),
-  CONSTRAINT `FK_fam_team_id_category` FOREIGN KEY (`id_category`) REFERENCES `fam_category` (`id_category`),
-  CONSTRAINT `FK_fam_team_id_club` FOREIGN KEY (`id_club`) REFERENCES `fam_club` (`id_club`),
-  CONSTRAINT `FK_fam_team_id_place` FOREIGN KEY (`id_place`) REFERENCES `fam_place` (`id_place`)
-);
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `fam_team`

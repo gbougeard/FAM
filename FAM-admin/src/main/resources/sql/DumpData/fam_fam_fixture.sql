@@ -21,22 +21,6 @@ USE `fam`;
 -- Table structure for table `fam_fixture`
 --
 
-DROP TABLE IF EXISTS `fam_fixture`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `fam_fixture` (
-  `id_fixture` bigint(20) NOT NULL,
-  `dt_creat` datetime DEFAULT NULL,
-  `dt_fixture` datetime DEFAULT NULL,
-  `dt_modif` datetime DEFAULT NULL,
-  `lib_fixture` varchar(255) DEFAULT NULL,
-  `VERSION` bigint(20) DEFAULT NULL,
-  `id_season_competition` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id_fixture`),
-  KEY `FK_fam_fixture_id_season_competition` (`id_season_competition`),
-  CONSTRAINT `FK_fam_fixture_id_season_competition` FOREIGN KEY (`id_season_competition`) REFERENCES `fam_season_competition` (`id_season_competition`)
-);
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `fam_fixture`

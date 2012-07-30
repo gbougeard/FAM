@@ -21,20 +21,6 @@ USE `fam`;
 -- Table structure for table `fam_group`
 --
 
-DROP TABLE IF EXISTS `fam_group`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `fam_group` (
-  `id_group` bigint(20) NOT NULL,
-  `dt_creat` datetime DEFAULT NULL,
-  `dt_modif` datetime DEFAULT NULL,
-  `groupname` varchar(255) DEFAULT NULL,
-  `login` varchar(255) DEFAULT NULL,
-  `VERSION` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id_group`),
-  UNIQUE KEY `UNQ_fam_group_0` (`login`)
-);
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `fam_group`

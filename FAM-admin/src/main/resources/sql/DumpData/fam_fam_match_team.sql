@@ -21,31 +21,7 @@ USE `fam`;
 -- Table structure for table `fam_match_team`
 --
 
-DROP TABLE IF EXISTS `fam_match_team`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `fam_match_team` (
-  `defeat` int(11) DEFAULT NULL,
-  `draft` tinyint(1) DEFAULT '0',
-  `draw` int(11) DEFAULT NULL,
-  `goal_scored` int(11) DEFAULT NULL,
-  `goal_shipped` int(11) DEFAULT NULL,
-  `home` tinyint(1) DEFAULT '0',
-  `points` int(11) DEFAULT NULL,
-  `victory` int(11) DEFAULT NULL,
-  `id_formation` bigint(20) DEFAULT NULL,
-  `id_match` bigint(20) NOT NULL,
-  `id_team` bigint(20) NOT NULL,
-  PRIMARY KEY (`id_match`,`id_team`),
-  KEY `FK_fam_match_team_id_team` (`id_team`),
-  KEY `FK_fam_match_team_id_formation` (`id_formation`),
-  CONSTRAINT `FK_fam_match_team_id_formation` FOREIGN KEY (`id_formation`) REFERENCES `fam_formation` (`id_formation`),
-  CONSTRAINT `FK_fam_match_team_id_match` FOREIGN KEY (`id_match`) REFERENCES `fam_match` (`idMatch`),
-  CONSTRAINT `FK_fam_match_team_id_team` FOREIGN KEY (`id_team`) REFERENCES `fam_team` (`id_team`)
-);
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
 -- Dumping data for table `fam_match_team`
 --
 

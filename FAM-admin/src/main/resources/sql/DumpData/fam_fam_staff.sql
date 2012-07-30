@@ -21,21 +21,6 @@ USE `fam`;
 -- Table structure for table `fam_staff`
 --
 
-DROP TABLE IF EXISTS `fam_staff`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `fam_staff` (
-  `id_user` bigint(20) NOT NULL,
-  `id_season` bigint(20) NOT NULL,
-  `id_staff_function` bigint(20) NOT NULL,
-  PRIMARY KEY (`id_user`,`id_season`,`id_staff_function`),
-  KEY `FK_fam_staff_id_season` (`id_season`,`id_user`),
-  KEY `FK_fam_staff_id_staff_function` (`id_staff_function`),
-  CONSTRAINT `FK_fam_staff_id_season` FOREIGN KEY (`id_season`, `id_user`) REFERENCES `fam_user_season` (`id_season`, `id_user`),
-  CONSTRAINT `FK_fam_staff_id_staff_function` FOREIGN KEY (`id_staff_function`) REFERENCES `fam_staff_function` (`id_staff_function`),
-  CONSTRAINT `FK_fam_staff_id_user` FOREIGN KEY (`id_user`, `id_season`) REFERENCES `fam_user_season` (`id_user`, `id_season`)
-);
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `fam_staff`

@@ -21,21 +21,6 @@ USE `fam`;
 -- Table structure for table `fam_comment`
 --
 
-DROP TABLE IF EXISTS `fam_comment`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `fam_comment` (
-  `id_comment` bigint(20) NOT NULL,
-  `comments` longtext,
-  `dt_creat` datetime DEFAULT NULL,
-  `dt_modif` datetime DEFAULT NULL,
-  `VERSION` bigint(20) DEFAULT NULL,
-  `id_user` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id_comment`),
-  KEY `FK_fam_comment_id_user` (`id_user`),
-  CONSTRAINT `FK_fam_comment_id_user` FOREIGN KEY (`id_user`) REFERENCES `fam_user` (`id_user`)
-);
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `fam_comment`

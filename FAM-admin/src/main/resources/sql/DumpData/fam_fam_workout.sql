@@ -21,21 +21,6 @@ USE `fam`;
 -- Table structure for table `fam_workout`
 --
 
-DROP TABLE IF EXISTS `fam_workout`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `fam_workout` (
-  `id_workout` bigint(20) NOT NULL,
-  `dt_creat` datetime DEFAULT NULL,
-  `dt_modif` datetime DEFAULT NULL,
-  `VERSION` bigint(20) DEFAULT NULL,
-  `id_event` bigint(20) DEFAULT NULL,
-  `id_club` bigint(20) NOT NULL,
-  PRIMARY KEY (`id_workout`),
-  KEY `FK_fam_workout_id_event` (`id_event`),
-  CONSTRAINT `FK_fam_workout_id_event` FOREIGN KEY (`id_event`) REFERENCES `fam_event` (`id_event`)
-);
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `fam_workout`

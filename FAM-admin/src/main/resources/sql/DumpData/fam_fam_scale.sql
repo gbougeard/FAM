@@ -21,23 +21,6 @@ USE `fam`;
 -- Table structure for table `fam_scale`
 --
 
-DROP TABLE IF EXISTS `fam_scale`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `fam_scale` (
-  `id_scale` bigint(20) NOT NULL,
-  `cod_scale` varchar(255) DEFAULT NULL,
-  `dt_creat` datetime DEFAULT NULL,
-  `dt_modif` datetime DEFAULT NULL,
-  `lib_scale` varchar(255) DEFAULT NULL,
-  `pts_defeat` int(11) DEFAULT NULL,
-  `pts_draw` int(11) DEFAULT NULL,
-  `pts_victory` int(11) DEFAULT NULL,
-  `VERSION` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id_scale`),
-  UNIQUE KEY `UNQ_fam_scale_0` (`cod_scale`)
-);
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `fam_scale`

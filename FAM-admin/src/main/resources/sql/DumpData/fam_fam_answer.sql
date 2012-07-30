@@ -21,27 +21,6 @@ USE `fam`;
 -- Table structure for table `fam_answer`
 --
 
-DROP TABLE IF EXISTS `fam_answer`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `fam_answer` (
-  `id_answer` bigint(20) NOT NULL,
-  `comments` longtext,
-  `dt_creat` datetime DEFAULT NULL,
-  `dt_modif` datetime DEFAULT NULL,
-  `VERSION` bigint(20) DEFAULT NULL,
-  `id_event` bigint(20) DEFAULT NULL,
-  `id_player` bigint(20) DEFAULT NULL,
-  `id_typ_answer` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id_answer`),
-  KEY `FK_fam_answer_id_player` (`id_player`),
-  KEY `FK_fam_answer_id_event` (`id_event`),
-  KEY `FK_fam_answer_id_typ_answer` (`id_typ_answer`),
-  CONSTRAINT `FK_fam_answer_id_typ_answer` FOREIGN KEY (`id_typ_answer`) REFERENCES `fam_typ_answer` (`id_typ_answer`),
-  CONSTRAINT `FK_fam_answer_id_event` FOREIGN KEY (`id_event`) REFERENCES `fam_event` (`id_event`),
-  CONSTRAINT `FK_fam_answer_id_player` FOREIGN KEY (`id_player`) REFERENCES `fam_player` (`id_player`)
-);
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `fam_answer`

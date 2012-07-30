@@ -21,24 +21,6 @@ USE `fam`;
 -- Table structure for table `fam_substitution`
 --
 
-DROP TABLE IF EXISTS `fam_substitution`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `fam_substitution` (
-  `id_substitution` bigint(20) NOT NULL,
-  `dt_creat` datetime DEFAULT NULL,
-  `dt_modif` datetime DEFAULT NULL,
-  `substitution_time` varchar(255) DEFAULT NULL,
-  `VERSION` bigint(20) DEFAULT NULL,
-  `id_player_in` bigint(20) DEFAULT NULL,
-  `id_match` bigint(20) DEFAULT NULL,
-  `id_team` bigint(20) DEFAULT NULL,
-  `id_player_out` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id_substitution`),
-  KEY `FK_fam_substitution_id_match` (`id_match`,`id_team`,`id_player_in`),
-  CONSTRAINT `FK_fam_substitution_id_match` FOREIGN KEY (`id_match`, `id_team`, `id_player_in`) REFERENCES `fam_match_player` (`id_match`, `id_team`, `id_player`)
-);
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `fam_substitution`

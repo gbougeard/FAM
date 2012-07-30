@@ -21,23 +21,6 @@ USE `fam`;
 -- Table structure for table `fam_staff_function`
 --
 
-DROP TABLE IF EXISTS `fam_staff_function`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `fam_staff_function` (
-  `id_staff_function` bigint(20) NOT NULL,
-  `cod_staff_function` varchar(255) DEFAULT NULL,
-  `dt_creat` datetime DEFAULT NULL,
-  `dt_modif` datetime DEFAULT NULL,
-  `lib_staff_function` varchar(255) DEFAULT NULL,
-  `VERSION` bigint(20) DEFAULT NULL,
-  `id_club` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id_staff_function`),
-  UNIQUE KEY `UNQ_fam_staff_function_0` (`cod_staff_function`),
-  KEY `FK_fam_staff_function_id_club` (`id_club`),
-  CONSTRAINT `FK_fam_staff_function_id_club` FOREIGN KEY (`id_club`) REFERENCES `fam_club` (`id_club`)
-);
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `fam_staff_function`

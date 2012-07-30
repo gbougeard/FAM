@@ -21,29 +21,6 @@ USE `fam`;
 -- Table structure for table `fam_typ_match`
 --
 
-DROP TABLE IF EXISTS `fam_typ_match`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `fam_typ_match` (
-  `id_typ_match` bigint(20) NOT NULL,
-  `cod_typ_match` varchar(255) DEFAULT NULL,
-  `dt_creat` datetime DEFAULT NULL,
-  `dt_modif` datetime DEFAULT NULL,
-  `extra_time` tinyint(1) DEFAULT '0',
-  `extra_time_duration` int(11) DEFAULT NULL,
-  `infinite_subs` tinyint(1) DEFAULT '0',
-  `lib_typ_match` varchar(255) DEFAULT NULL,
-  `nb_penalties` int(11) DEFAULT NULL,
-  `nb_player` int(11) DEFAULT NULL,
-  `nb_substitute` int(11) DEFAULT NULL,
-  `nb_substitution` int(11) DEFAULT NULL,
-  `penalties` tinyint(1) DEFAULT '0',
-  `period_duration` int(11) DEFAULT NULL,
-  `VERSION` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id_typ_match`),
-  UNIQUE KEY `UNQ_fam_typ_match_0` (`cod_typ_match`)
-);
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `fam_typ_match`

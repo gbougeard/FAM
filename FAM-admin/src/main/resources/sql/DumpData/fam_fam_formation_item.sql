@@ -21,22 +21,6 @@ USE `fam`;
 -- Table structure for table `fam_formation_item`
 --
 
-DROP TABLE IF EXISTS `fam_formation_item`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `fam_formation_item` (
-  `id_formation_item` bigint(20) NOT NULL,
-  `coord` int(11) DEFAULT NULL,
-  `dt_creat` datetime DEFAULT NULL,
-  `dt_modif` datetime DEFAULT NULL,
-  `num_item` int(11) DEFAULT NULL,
-  `VERSION` bigint(20) DEFAULT NULL,
-  `id_formation` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id_formation_item`),
-  KEY `FK_fam_formation_item_id_formation` (`id_formation`),
-  CONSTRAINT `FK_fam_formation_item_id_formation` FOREIGN KEY (`id_formation`) REFERENCES `fam_formation` (`id_formation`)
-);
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `fam_formation_item`

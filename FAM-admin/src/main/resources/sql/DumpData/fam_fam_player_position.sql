@@ -21,20 +21,6 @@ USE `fam`;
 -- Table structure for table `fam_player_position`
 --
 
-DROP TABLE IF EXISTS `fam_player_position`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `fam_player_position` (
-  `num_order` int(11) NOT NULL,
-  `id_player` bigint(20) NOT NULL,
-  `id_position` bigint(20) NOT NULL,
-  PRIMARY KEY (`num_order`,`id_player`,`id_position`),
-  KEY `FK_fam_player_position_id_position` (`id_position`),
-  KEY `FK_fam_player_position_id_player` (`id_player`),
-  CONSTRAINT `FK_fam_player_position_id_player` FOREIGN KEY (`id_player`) REFERENCES `fam_player` (`id_player`),
-  CONSTRAINT `FK_fam_player_position_id_position` FOREIGN KEY (`id_position`) REFERENCES `fam_position` (`id_position`)
-);
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `fam_player_position`

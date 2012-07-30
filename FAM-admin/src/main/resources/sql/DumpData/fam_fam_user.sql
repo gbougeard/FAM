@@ -21,26 +21,6 @@ USE `fam`;
 -- Table structure for table `fam_user`
 --
 
-DROP TABLE IF EXISTS `fam_user`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `fam_user` (
-  `id_user` bigint(20) NOT NULL,
-  `dt_creat` datetime DEFAULT NULL,
-  `dt_modif` datetime DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `first_name` varchar(255) DEFAULT NULL,
-  `last_name` varchar(255) DEFAULT NULL,
-  `openid` tinyint(1) DEFAULT '0',
-  `password` varchar(255) DEFAULT NULL,
-  `VERSION` bigint(20) DEFAULT NULL,
-  `id_current_club` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id_user`),
-  UNIQUE KEY `UNQ_fam_user_0` (`email`),
-  KEY `FK_fam_user_id_current_club` (`id_current_club`),
-  CONSTRAINT `FK_fam_user_id_current_club` FOREIGN KEY (`id_current_club`) REFERENCES `fam_club` (`id_club`)
-);
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `fam_user`

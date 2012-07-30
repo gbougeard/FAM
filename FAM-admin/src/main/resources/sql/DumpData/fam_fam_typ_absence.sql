@@ -21,20 +21,6 @@ USE `fam`;
 -- Table structure for table `fam_typ_absence`
 --
 
-DROP TABLE IF EXISTS `fam_typ_absence`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `fam_typ_absence` (
-  `id_typ_absence` bigint(20) NOT NULL,
-  `cod_typ_absence` varchar(255) DEFAULT NULL,
-  `dt_creat` datetime DEFAULT NULL,
-  `dt_modif` datetime DEFAULT NULL,
-  `lib_typ_absence` varchar(255) DEFAULT NULL,
-  `VERSION` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id_typ_absence`),
-  UNIQUE KEY `UNQ_fam_typ_absence_0` (`cod_typ_absence`)
-);
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `fam_typ_absence`

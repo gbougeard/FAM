@@ -21,23 +21,6 @@ USE `fam`;
 -- Table structure for table `fam_organization`
 --
 
-DROP TABLE IF EXISTS `fam_organization`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `fam_organization` (
-  `id_organization` bigint(20) NOT NULL,
-  `cod_organization` varchar(255) DEFAULT NULL,
-  `dt_creat` datetime DEFAULT NULL,
-  `dt_modif` datetime DEFAULT NULL,
-  `lib_organization` varchar(255) DEFAULT NULL,
-  `VERSION` bigint(20) DEFAULT NULL,
-  `id_parent` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id_organization`),
-  UNIQUE KEY `UNQ_fam_organization_0` (`cod_organization`),
-  KEY `FK_fam_organization_id_parent` (`id_parent`),
-  CONSTRAINT `FK_fam_organization_id_parent` FOREIGN KEY (`id_parent`) REFERENCES `fam_organization` (`id_organization`)
-);
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `fam_organization`

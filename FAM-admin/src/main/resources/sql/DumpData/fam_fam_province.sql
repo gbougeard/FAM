@@ -21,25 +21,6 @@ USE `fam`;
 -- Table structure for table `fam_province`
 --
 
-DROP TABLE IF EXISTS `fam_province`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `fam_province` (
-  `id_province` bigint(20) NOT NULL,
-  `cod_province` varchar(255) DEFAULT NULL,
-  `dt_creat` datetime DEFAULT NULL,
-  `dt_modif` datetime DEFAULT NULL,
-  `lib_lower` varchar(255) DEFAULT NULL,
-  `lib_province` varchar(255) DEFAULT NULL,
-  `lib_upper` varchar(255) DEFAULT NULL,
-  `VERSION` bigint(20) DEFAULT NULL,
-  `id_state` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id_province`),
-  UNIQUE KEY `UNQ_fam_province_0` (`cod_province`),
-  KEY `FK_fam_province_id_state` (`id_state`),
-  CONSTRAINT `FK_fam_province_id_state` FOREIGN KEY (`id_state`) REFERENCES `fam_state` (`id_state`)
-);
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `fam_province`
