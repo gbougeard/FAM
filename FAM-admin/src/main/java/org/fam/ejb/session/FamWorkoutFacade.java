@@ -4,6 +4,23 @@
  */
 package org.fam.ejb.session;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.interceptor.Interceptors;
+import javax.persistence.LockTimeoutException;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
+import javax.persistence.PersistenceException;
+import javax.persistence.PessimisticLockException;
+import javax.persistence.Query;
+import javax.persistence.QueryTimeoutException;
+import javax.persistence.TransactionRequiredException;
+import javax.persistence.criteria.CriteriaQuery;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.fam.common.cdi.Loggable;
@@ -14,18 +31,10 @@ import org.fam.ejb.model.FamSeason;
 import org.fam.ejb.model.FamWorkout;
 import org.slf4j.Logger;
 
-import javax.ejb.Stateless;
-import javax.inject.Inject;
-import javax.interceptor.Interceptors;
-import javax.persistence.*;
-import javax.persistence.criteria.CriteriaQuery;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 /**
  * @author gbougear
  */
+@Named
 @Stateless
 @Loggable
 @Interceptors({AuditInterceptor.class, LoggingInterceptor.class})
@@ -46,10 +55,12 @@ public class FamWorkoutFacade extends AbstractFacade<FamWorkout> {
      *
      */
     public FamWorkoutFacade() {
+
         super(FamWorkout.class);
     }
 
     public FamWorkout newWorkout() {
+
         FamWorkout res = new FamWorkout();
         FamEvent evt = ejbEvent.newEvent();
 
@@ -65,6 +76,7 @@ public class FamWorkoutFacade extends AbstractFacade<FamWorkout> {
 //    @GET // HTTP's GET verb/operation
 //    @Path("") // specializes the path with a parameter
     public void genData() {
+
     }
 
     @Override
@@ -82,6 +94,7 @@ public class FamWorkoutFacade extends AbstractFacade<FamWorkout> {
     }
 
     public List<FamWorkout> findBySeason(FamSeason season) {
+
         Query query = getEntityManager().createNamedQuery(FamWorkout.FIND_BY_SEASON);
         query.setParameter(FamEvent.PROP_SEASON, season);
 
@@ -111,46 +124,55 @@ public class FamWorkoutFacade extends AbstractFacade<FamWorkout> {
 
     @Override
     public void remove(FamWorkout entity) {
+
         super.remove(entity);    //To change body of overridden methods use File | Settings | File Templates.
     }
 
     @Override
     public FamWorkout find(Object id) {
+
         return super.find(id);    //To change body of overridden methods use File | Settings | File Templates.
     }
 
     @Override
     public List<FamWorkout> findAll() {
+
         return super.findAll();    //To change body of overridden methods use File | Settings | File Templates.
     }
 
     @Override
     public List<FamWorkout> findByAttributes(Map<String, Object> attributes) {
+
         return super.findByAttributes(attributes);    //To change body of overridden methods use File | Settings | File Templates.
     }
 
     @Override
     public List<FamWorkout> findByCriteria(CriteriaQuery cq) {
+
         return super.findByCriteria(cq);    //To change body of overridden methods use File | Settings | File Templates.
     }
 
     @Override
     public List<FamWorkout> findAllLazy(int first, int pageSize, String sortField, boolean sortOrder, Map<String, String> filters) {
+
         return super.findAllLazy(first, pageSize, sortField, sortOrder, filters);    //To change body of overridden methods use File | Settings | File Templates.
     }
 
     @Override
     public int countLazy(Map<String, String> filters) {
+
         return super.countLazy(filters);    //To change body of overridden methods use File | Settings | File Templates.
     }
 
     @Override
     public int count() {
+
         return super.count();    //To change body of overridden methods use File | Settings | File Templates.
     }
 
     @Override
     public List<FamWorkout> findRange(int[] range) {
+
         return super.findRange(range);    //To change body of overridden methods use File | Settings | File Templates.
     }
 }

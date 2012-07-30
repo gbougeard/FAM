@@ -1,0 +1,61 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+        xmlns:p="http://primefaces.org/ui"
+
+        >
+    <p:fieldset legend="Volumétrie BDD">
+        <h:panelGrid columns="1">
+            <h:outputText value="#{famClubFacade.count} clubs"/>
+            <h:outputText value="#{famTeamFacade.count} teams"/>
+            <h:outputText value="#{famPlayerFacade.count} players"/>
+            <h:outputText value="#{famPlayerSeasonFacade.count} playersSeason"/>
+            <h:outputText value="#{famSeasonFacade.count} seasons"/>
+            <h:outputText value="#{famSeasonCompetitionFacade.count} seasonsCompetition"/>
+            <h:outputText value="#{famCategoryFacade.count} categories"/>
+            <h:outputText value="#{famFormationFacade.count} formations"/>
+            <h:outputText value="#{famAbsenceFacade.count} absences"/>
+            <h:outputText value="#{famAnswerFacade.count} réponses"/>
+            <h:outputText value="#{famCardFacade.count} cartons"/>
+            <h:outputText value="#{famCategoryFacade.count} categories"/>
+            <h:outputText value="#{famCityFacade.count} cities"/>
+            <h:outputText value="#{famCountryFacade.count} countries"/>
+            <h:outputText value="#{famEventStatusFacade.count} eventStatuses"/>
+            <h:outputText value="#{famFixtureFacade.count} fixtures"/>
+            <h:outputText value="#{famMatchFacade.count} matches"/>
+            <h:outputText value="#{famMatchTeamFacade.count} matchTeams"/>
+            <h:outputText value="#{famMatchPlayerFacade.count} matchPlayers"/>
+            <h:outputText value="#{famOrganizationFacade.count} organizations"/>
+            <h:outputText value="#{famPlaceFacade.count} places"/>
+            <h:outputText value="#{famPositionFacade.count} positions"/>
+            <h:outputText value="#{famScaleFacade.count} scales"/>
+            <h:outputText value="#{famStaffFunctionFacade.count} staffFunctions"/>
+            <h:outputText value="#{famStateFacade.count} statesFunctions"/>
+            <h:outputText value="#{famSubstitutionFacade.count} substitutions"/>
+            <h:outputText value="#{famTypAbsenceFacade.count} typAbsences"/>
+            <h:outputText value="#{famTypAnswerFacade.count} typAnswers"/>
+            <h:outputText value="#{famTypCardFacade.count} typCards"/>
+            <h:outputText value="#{famTypCardFinescaleFacade.count} typCardFinescales"/>
+            <h:outputText value="#{famTypCompetitionFacade.count} typCompetitions"/>
+            <h:outputText value="#{famTypEventFacade.count} typEvents"/>
+            <h:outputText value="#{famTypMatchFacade.count} typMatchs"/>
+            <h:outputText value="#{famTypPlaceFacade.count} typPlaces"/>
+            <h:outputText value="#{famUserFacade.count} users"/>
+            <h:outputText value="#{famUserSeasonFacade.count} userSeasons"/>
+            <h:outputText value="#{famWorkoutFacade.count} workouts"/>
+        </h:panelGrid>
+
+    </p:fieldset>
+    <p:fieldset legend="Volumétrie Cache Applicatif">
+        <h:panelGrid columns="1">
+            <h:outputText value="#{fn:length(cacheBean.listClub)} clubs"/>
+            <h:outputText value="#{fn:length(cacheBean.listCategory)} categories"/>
+            <h:outputText value="#{fn:length(cacheBean.listSeasonCompetition)} seasonCompetition"/>
+        </h:panelGrid>
+    </p:fieldset>
+
+
+</ui:composition>
+

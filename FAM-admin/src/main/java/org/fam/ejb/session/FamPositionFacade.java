@@ -5,19 +5,21 @@
 
 package org.fam.ejb.session;
 
+import javax.annotation.PostConstruct;
+import javax.ejb.Stateless;
+import javax.inject.Named;
+import javax.interceptor.Interceptors;
+
 import org.fam.common.interceptor.AuditInterceptor;
 import org.fam.common.interceptor.LoggingInterceptor;
 import org.fam.ejb.model.FamPosition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.annotation.PostConstruct;
-import javax.ejb.Stateless;
-import javax.interceptor.Interceptors;
-
 /**
  * @author gbougear
  */
+@Named
 @Stateless
 @Interceptors({AuditInterceptor.class, LoggingInterceptor.class})
 public class FamPositionFacade extends AbstractFacade<FamPosition> {
@@ -39,11 +41,13 @@ public class FamPositionFacade extends AbstractFacade<FamPosition> {
      *
      */
     public FamPositionFacade() {
+
         super(FamPosition.class);
     }
 
     @PostConstruct
     private void init() {
+
         LOGGER.debug("Init");
     }
 
@@ -52,6 +56,7 @@ public class FamPositionFacade extends AbstractFacade<FamPosition> {
      */
     @Override
     public void genData() {
+
         for (int i = 0;
              i < 10;
              i++) {

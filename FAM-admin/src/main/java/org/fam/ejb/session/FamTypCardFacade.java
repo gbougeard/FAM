@@ -4,21 +4,21 @@
  */
 package org.fam.ejb.session;
 
+import javax.ejb.Stateless;
+import javax.inject.Named;
+import javax.interceptor.Interceptors;
+import javax.persistence.Query;
+
 import org.fam.common.constant.FamConstantes;
 import org.fam.common.interceptor.AuditInterceptor;
 import org.fam.common.interceptor.LoggingInterceptor;
 import org.fam.ejb.model.FamTypCard;
 
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
-import javax.interceptor.Interceptors;
-import javax.persistence.Query;
-
 /**
  * @author gbougear
  */
+@Named
 @Stateless
-@LocalBean
 @Interceptors({AuditInterceptor.class, LoggingInterceptor.class})
 public class FamTypCardFacade extends AbstractFacade<FamTypCard> {
 
@@ -37,6 +37,7 @@ public class FamTypCardFacade extends AbstractFacade<FamTypCard> {
      *
      */
     public FamTypCardFacade() {
+
         super(FamTypCard.class);
     }
 
@@ -45,6 +46,7 @@ public class FamTypCardFacade extends AbstractFacade<FamTypCard> {
      */
     @Override
     public void genData() {
+
         for (int i = 0;
              i < 10;
              i++) {
@@ -58,6 +60,7 @@ public class FamTypCardFacade extends AbstractFacade<FamTypCard> {
      *
      */
     public void initData() {
+
         this.truncate();
 
         FamTypCard item = new FamTypCard();
@@ -81,6 +84,7 @@ public class FamTypCardFacade extends AbstractFacade<FamTypCard> {
      * @return
      */
     public FamTypCard findByCod(String cod) {
+
         Query query = getEntityManager().createNamedQuery("FamTypCard.findByCodTypCard");
         query.setParameter(FamTypCard.PROP_COD, cod);
 

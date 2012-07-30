@@ -5,19 +5,19 @@
 
 package org.fam.ejb.session;
 
+import javax.ejb.Stateless;
+import javax.inject.Named;
+import javax.interceptor.Interceptors;
+
 import org.fam.common.interceptor.AuditInterceptor;
 import org.fam.common.interceptor.LoggingInterceptor;
 import org.fam.ejb.model.FamCategory;
 
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
-import javax.interceptor.Interceptors;
-
 /**
  * @author gbougear
  */
+@Named
 @Stateless
-@LocalBean
 @Interceptors({AuditInterceptor.class, LoggingInterceptor.class})
 public class FamCategoryFacade extends AbstractFacade<FamCategory> {
 
@@ -36,6 +36,7 @@ public class FamCategoryFacade extends AbstractFacade<FamCategory> {
      *
      */
     public FamCategoryFacade() {
+
         super(FamCategory.class);
     }
 
@@ -44,6 +45,7 @@ public class FamCategoryFacade extends AbstractFacade<FamCategory> {
      */
     @Override
     public void genData() {
+
         FamCategory item = new FamCategory();
         item.setLibCategory("SENIOR");
         item.setCodCategory("SEN");

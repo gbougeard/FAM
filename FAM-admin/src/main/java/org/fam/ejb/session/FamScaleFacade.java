@@ -4,21 +4,21 @@
  */
 package org.fam.ejb.session;
 
+import javax.ejb.Stateless;
+import javax.inject.Named;
+import javax.interceptor.Interceptors;
+import javax.persistence.Query;
+
 import org.fam.common.constant.FamConstantes;
 import org.fam.common.interceptor.AuditInterceptor;
 import org.fam.common.interceptor.LoggingInterceptor;
 import org.fam.ejb.model.FamScale;
 
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
-import javax.interceptor.Interceptors;
-import javax.persistence.Query;
-
 /**
  * @author gbougear
  */
+@Named
 @Stateless
-@LocalBean
 @Interceptors({AuditInterceptor.class, LoggingInterceptor.class})
 public class FamScaleFacade extends AbstractFacade<FamScale> {
 
@@ -37,6 +37,7 @@ public class FamScaleFacade extends AbstractFacade<FamScale> {
      *
      */
     public FamScaleFacade() {
+
         super(FamScale.class);
     }
 
@@ -45,6 +46,7 @@ public class FamScaleFacade extends AbstractFacade<FamScale> {
      */
     @Override
     public void genData() {
+
         for (int i = 0;
              i < 10;
              i++) {
@@ -58,6 +60,7 @@ public class FamScaleFacade extends AbstractFacade<FamScale> {
      *
      */
     public void initData() {
+
         this.truncate();
 
         FamScale item = new FamScale();
@@ -82,6 +85,7 @@ public class FamScaleFacade extends AbstractFacade<FamScale> {
      * @return
      */
     public FamScale findByCod(String cod) {
+
         Query query = getEntityManager().createNamedQuery("FamScale.findByCodScale");
         query.setParameter(FamScale.PROP_COD, cod);
 
@@ -92,6 +96,7 @@ public class FamScaleFacade extends AbstractFacade<FamScale> {
      * @return
      */
     public FamScale getMatch() {
+
         return findByCod(FamConstantes.EVENT_MATCH_COD);
     }
 
@@ -99,6 +104,7 @@ public class FamScaleFacade extends AbstractFacade<FamScale> {
      * @return
      */
     public FamScale getPractice() {
+
         return findByCod(FamConstantes.EVENT_PRACTICE_COD);
     }
 }

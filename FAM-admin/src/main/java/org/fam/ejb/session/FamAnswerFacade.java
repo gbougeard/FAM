@@ -4,23 +4,38 @@
  */
 package org.fam.ejb.session;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.interceptor.Interceptors;
+import javax.persistence.LockTimeoutException;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
+import javax.persistence.PersistenceException;
+import javax.persistence.PessimisticLockException;
+import javax.persistence.Query;
+import javax.persistence.QueryTimeoutException;
+import javax.persistence.TransactionRequiredException;
+
 import org.fam.common.constant.FamConstantes;
 import org.fam.common.interceptor.AuditInterceptor;
 import org.fam.common.interceptor.LoggingInterceptor;
-import org.fam.ejb.model.*;
+import org.fam.ejb.model.FamAnswer;
+import org.fam.ejb.model.FamEvent;
+import org.fam.ejb.model.FamPlayer;
+import org.fam.ejb.model.FamPlayerSeason;
+import org.fam.ejb.model.FamSeason;
+import org.fam.ejb.model.FamTeam;
+import org.fam.ejb.model.FamTypAnswer;
 import org.fam.jsf.cache.CachePlayer;
 import org.slf4j.Logger;
-
-import javax.ejb.Stateless;
-import javax.inject.Inject;
-import javax.interceptor.Interceptors;
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author gbougear
  */
+@Named
 @Stateless
 @Interceptors({AuditInterceptor.class, LoggingInterceptor.class})
 public class FamAnswerFacade extends AbstractFacade<FamAnswer> {
@@ -41,6 +56,7 @@ public class FamAnswerFacade extends AbstractFacade<FamAnswer> {
      *
      */
     public FamAnswerFacade() {
+
         super(FamAnswer.class);
     }
 
@@ -51,6 +67,7 @@ public class FamAnswerFacade extends AbstractFacade<FamAnswer> {
 //    @GET // HTTP's GET verb/operation
 //    @Path("") // specializes the path with a parameter
     public void genData() {
+
     }
 
     /**
@@ -58,6 +75,7 @@ public class FamAnswerFacade extends AbstractFacade<FamAnswer> {
      * @return
      */
     public List<FamAnswer> findAnswerByEvent(FamEvent event) {
+
         Query query = getEntityManager().createNamedQuery("FamAnswer.findByEvent");
         query.setParameter(FamAnswer.PROP_EVENT, event);
 
@@ -99,6 +117,7 @@ public class FamAnswerFacade extends AbstractFacade<FamAnswer> {
      * @return
      */
     public List<FamAnswer> findAnswerByEventAndTypAnswer(FamEvent event, FamTypAnswer typAnswer) {
+
         Query query = getEntityManager().createNamedQuery("FamAnswer.findByEventAndTypAnswer");
         query.setParameter(FamAnswer.PROP_EVENT, event);
         query.setParameter(FamAnswer.PROP_TYP, typAnswer);
@@ -141,6 +160,7 @@ public class FamAnswerFacade extends AbstractFacade<FamAnswer> {
      * @return
      */
     public List<FamAnswer> findAnswerByEventAndInTypAnswer(FamEvent event, String grpAnswer) {
+
         Query query = getEntityManager().createNamedQuery("FamAnswer.findByEventAndInTypAnswer");
         query.setParameter(FamAnswer.PROP_EVENT, event);
         query.setParameter(FamTypAnswer.PROP_GRP, grpAnswer);
@@ -231,10 +251,12 @@ public class FamAnswerFacade extends AbstractFacade<FamAnswer> {
      * @return
      */
     public List<FamAnswer> findAnswerYesByEvent(FamEvent event) {
+
         return findAnswerByEventAndInTypAnswer(event, FamConstantes.GRP_ANSWER_YES);
     }
 
     private List<FamAnswer> getAnswerForTeam(List<FamAnswer> lstAnswer, FamTeam team) {
+
         if (LOGGER.isInfoEnabled()) {
             LOGGER.info("getAnswerForTeam in " + lstAnswer.size());
         }
@@ -263,14 +285,17 @@ public class FamAnswerFacade extends AbstractFacade<FamAnswer> {
     }
 
     public List<FamAnswer> findAnswerYesByEventAndTeam(FamEvent event, FamTeam team) {
+
         return getAnswerForTeam(findAnswerByEventAndInTypAnswer(event, FamConstantes.GRP_ANSWER_YES), team);
     }
 
     public List<FamAnswer> findAnswerNoByEventAndTeam(FamEvent event, FamTeam team) {
+
         return getAnswerForTeam(findAnswerByEventAndInTypAnswer(event, FamConstantes.GRP_ANSWER_NO), team);
     }
 
     public List<FamAnswer> findAnswerMaybeByEventAndTeam(FamEvent event, FamTeam team) {
+
         return getAnswerForTeam(findAnswerByEventAndInTypAnswer(event, FamConstantes.GRP_ANSWER_MAYBE), team);
     }
 
@@ -279,6 +304,7 @@ public class FamAnswerFacade extends AbstractFacade<FamAnswer> {
      * @return
      */
     public List<FamAnswer> findAnswerNoByEvent(FamEvent event) {
+
         return findAnswerByEventAndInTypAnswer(event, FamConstantes.GRP_ANSWER_NO);
     }
 
@@ -287,6 +313,7 @@ public class FamAnswerFacade extends AbstractFacade<FamAnswer> {
      * @return
      */
     public List<FamAnswer> findAnswerMaybeByEvent(FamEvent event) {
+
         return findAnswerByEventAndInTypAnswer(event, FamConstantes.GRP_ANSWER_MAYBE);
     }
 
@@ -296,6 +323,7 @@ public class FamAnswerFacade extends AbstractFacade<FamAnswer> {
      * @return
      */
     public FamAnswer findAnswerByEventAndPlayer(FamEvent event, FamPlayer player) {
+
         Query query = getEntityManager().createNamedQuery("FamAnswer.findByEventAndPlayer");
         query.setParameter(FamAnswer.PROP_EVENT, event);
         query.setParameter(FamAnswer.PROP_PLAYER, player);
@@ -346,10 +374,12 @@ public class FamAnswerFacade extends AbstractFacade<FamAnswer> {
     }
 
     public void setCachePlayer(CachePlayer cachePlayer) {
+
         this.cachePlayer = cachePlayer;
     }
 
     public void setLOGGER(Logger LOGGER) {
+
         this.LOGGER = LOGGER;
     }
 }

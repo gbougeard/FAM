@@ -4,16 +4,18 @@
  */
 package org.fam.ejb.session;
 
+import javax.ejb.Stateless;
+import javax.inject.Named;
+import javax.interceptor.Interceptors;
+
 import org.fam.common.interceptor.AuditInterceptor;
 import org.fam.common.interceptor.LoggingInterceptor;
 import org.fam.ejb.model.FamClub;
 
-import javax.ejb.Stateless;
-import javax.interceptor.Interceptors;
-
 /**
  * @author gbougear
  */
+@Named
 @Stateless
 @Interceptors({AuditInterceptor.class, LoggingInterceptor.class})
 public class FamClubFacade extends AbstractFacade<FamClub> {
@@ -33,6 +35,7 @@ public class FamClubFacade extends AbstractFacade<FamClub> {
      *
      */
     public FamClubFacade() {
+
         super(FamClub.class);
     }
 
@@ -44,6 +47,7 @@ public class FamClubFacade extends AbstractFacade<FamClub> {
 //    @GET // HTTP's GET verb/operation
 //    @Path("") // specializes the path with a parameter
     public void genData() {
+
         for (int i = 0;
              i < 50;
              i++) {

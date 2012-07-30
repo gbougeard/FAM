@@ -4,22 +4,22 @@
  */
 package org.fam.ejb.session;
 
+import java.util.List;
+import javax.ejb.Stateless;
+import javax.inject.Named;
+import javax.interceptor.Interceptors;
+import javax.persistence.Query;
+
 import org.fam.common.constant.FamConstantes;
 import org.fam.common.interceptor.AuditInterceptor;
 import org.fam.common.interceptor.LoggingInterceptor;
 import org.fam.ejb.model.FamEventStatus;
 
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
-import javax.interceptor.Interceptors;
-import javax.persistence.Query;
-import java.util.List;
-
 /**
  * @author gbougear
  */
+@Named
 @Stateless
-@LocalBean
 @Interceptors({AuditInterceptor.class, LoggingInterceptor.class})
 public class FamEventStatusFacade extends AbstractFacade<FamEventStatus> {
 
@@ -38,6 +38,7 @@ public class FamEventStatusFacade extends AbstractFacade<FamEventStatus> {
      *
      */
     public FamEventStatusFacade() {
+
         super(FamEventStatus.class);
     }
 
@@ -46,6 +47,7 @@ public class FamEventStatusFacade extends AbstractFacade<FamEventStatus> {
      */
     @Override
     public void genData() {
+
         for (int i = 0;
              i < 5;
              i++) {
@@ -59,6 +61,7 @@ public class FamEventStatusFacade extends AbstractFacade<FamEventStatus> {
      *
      */
     public void initData() {
+
         this.truncate();
 
         FamEventStatus item = new FamEventStatus();
@@ -87,6 +90,7 @@ public class FamEventStatusFacade extends AbstractFacade<FamEventStatus> {
      * @return
      */
     public FamEventStatus findByCod(String cod) {
+
         Query query = getEntityManager().createNamedQuery("FamEventStatus.findByCodEventStatus");
         query.setParameter(FamEventStatus.PROP_COD, cod);
         List<FamEventStatus> result = query.getResultList();
@@ -97,6 +101,7 @@ public class FamEventStatusFacade extends AbstractFacade<FamEventStatus> {
      * @return
      */
     public FamEventStatus getScheduled() {
+
         return findByCod(FamConstantes.EVENT_SCHEDULED_COD);
     }
 
@@ -104,6 +109,7 @@ public class FamEventStatusFacade extends AbstractFacade<FamEventStatus> {
      * @return
      */
     public FamEventStatus getDelayed() {
+
         return findByCod(FamConstantes.EVENT_DELAYED_COD);
     }
 
@@ -111,6 +117,7 @@ public class FamEventStatusFacade extends AbstractFacade<FamEventStatus> {
      * @return
      */
     public FamEventStatus getFinished() {
+
         return findByCod(FamConstantes.EVENT_FINISHED_COD);
     }
 
@@ -118,6 +125,7 @@ public class FamEventStatusFacade extends AbstractFacade<FamEventStatus> {
      * @return
      */
     public FamEventStatus getCanceled() {
+
         return findByCod(FamConstantes.EVENT_CANCELED_COD);
     }
 }

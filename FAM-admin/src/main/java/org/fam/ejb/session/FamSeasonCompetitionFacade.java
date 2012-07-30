@@ -4,27 +4,40 @@
  */
 package org.fam.ejb.session;
 
-import org.fam.common.interceptor.AuditInterceptor;
-import org.fam.common.interceptor.LoggingInterceptor;
-import org.fam.ejb.model.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.ejb.EJB;
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
-import javax.interceptor.Interceptors;
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.inject.Named;
+import javax.interceptor.Interceptors;
+import javax.persistence.LockTimeoutException;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
+import javax.persistence.PersistenceException;
+import javax.persistence.PessimisticLockException;
+import javax.persistence.Query;
+import javax.persistence.QueryTimeoutException;
+import javax.persistence.TransactionRequiredException;
+
+import org.fam.common.interceptor.AuditInterceptor;
+import org.fam.common.interceptor.LoggingInterceptor;
+import org.fam.ejb.model.FamEvent;
+import org.fam.ejb.model.FamFixture;
+import org.fam.ejb.model.FamMatch;
+import org.fam.ejb.model.FamMatchTeam;
+import org.fam.ejb.model.FamSeasonCompetition;
+import org.fam.ejb.model.FamTeam;
+import org.fam.ejb.model.FamTypEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author gbougear
  */
+@Named
 @Stateless
-@LocalBean
 @Interceptors({AuditInterceptor.class, LoggingInterceptor.class})
 public class FamSeasonCompetitionFacade extends AbstractFacade<FamSeasonCompetition> {
 
@@ -57,6 +70,7 @@ public class FamSeasonCompetitionFacade extends AbstractFacade<FamSeasonCompetit
      *
      */
     public FamSeasonCompetitionFacade() {
+
         super(FamSeasonCompetition.class);
     }
 
@@ -65,9 +79,11 @@ public class FamSeasonCompetitionFacade extends AbstractFacade<FamSeasonCompetit
      */
     @Override
     public void genData() {
+
     }
 
     public FamFixture findByLibAndCompetition(String lib, FamSeasonCompetition competition) {
+
         Query query = getEntityManager().createNamedQuery("FamFixture.findByLibAndCompetition");
         query.setParameter(FamFixture.PROP_LIB, lib);
         query.setParameter(FamFixture.PROP_SEASON_COMPETITION, competition);
@@ -254,6 +270,7 @@ public class FamSeasonCompetitionFacade extends AbstractFacade<FamSeasonCompetit
     }
 
     private void createMatchForFixture(FamFixture fixture, FamTeam home, FamTeam visitor) {
+
         FamTypEvent typEvent = ejbTypEvent.getMatch();
 //        FamEventStatus status = ejbEventStatus.getScheduled();
 
@@ -328,6 +345,7 @@ public class FamSeasonCompetitionFacade extends AbstractFacade<FamSeasonCompetit
     }
 
     private static String flip(String match) {
+
         String[] components = match.split(" v ");
         return components[1] + " v " + components[0];
     }

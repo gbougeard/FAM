@@ -4,22 +4,31 @@
  */
 package org.fam.ejb.session;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.inject.Named;
+import javax.interceptor.Interceptors;
+import javax.persistence.LockTimeoutException;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
+import javax.persistence.PersistenceException;
+import javax.persistence.PessimisticLockException;
+import javax.persistence.Query;
+import javax.persistence.QueryTimeoutException;
+import javax.persistence.TransactionRequiredException;
+
 import org.fam.common.interceptor.AuditInterceptor;
 import org.fam.common.interceptor.LoggingInterceptor;
 import org.fam.ejb.model.FamSeason;
 import org.fam.ejb.model.FamUser;
 import org.fam.ejb.model.FamUserSeason;
 
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.interceptor.Interceptors;
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @author gbougear
  */
+@Named
 @Stateless
 @Interceptors({AuditInterceptor.class, LoggingInterceptor.class})
 public class FamUserSeasonFacade extends AbstractFacade<FamUserSeason> {
@@ -41,6 +50,7 @@ public class FamUserSeasonFacade extends AbstractFacade<FamUserSeason> {
      *
      */
     public FamUserSeasonFacade() {
+
         super(FamUserSeason.class);
     }
 
@@ -51,6 +61,7 @@ public class FamUserSeasonFacade extends AbstractFacade<FamUserSeason> {
 //    @GET // HTTP's GET verb/operation
 //    @Path("") // specializes the path with a parameter
     public void genData() {
+
     }
 
     /**
@@ -58,6 +69,7 @@ public class FamUserSeasonFacade extends AbstractFacade<FamUserSeason> {
      * @return
      */
     public List<FamUserSeason> findByUser(FamUser user) {
+
         Query query = getEntityManager().createNamedQuery("FamUserSeason.findByUser");
         query.setParameter(FamUserSeason.PROP_USER, user);
 
@@ -90,6 +102,7 @@ public class FamUserSeasonFacade extends AbstractFacade<FamUserSeason> {
      * @return
      */
     public List<FamUserSeason> findBySeason(FamSeason season) {
+
         Query query = getEntityManager().createNamedQuery("FamUserSeason.findBySeason");
         query.setParameter(FamUserSeason.PROP_SEASON, season);
 
@@ -121,6 +134,7 @@ public class FamUserSeasonFacade extends AbstractFacade<FamUserSeason> {
      * @return
      */
     public List<FamUserSeason> findByCurrentSeason() {
+
         Boolean bRes = Boolean.FALSE;
         FamSeason season = ejbSeason.getCurrentSeason();
 

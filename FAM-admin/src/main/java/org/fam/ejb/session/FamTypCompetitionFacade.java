@@ -4,14 +4,20 @@
  */
 package org.fam.ejb.session;
 
-import org.fam.ejb.model.FamTypCompetition;
-
 import javax.ejb.Stateless;
+import javax.inject.Named;
+import javax.interceptor.Interceptors;
+
+import org.fam.common.interceptor.AuditInterceptor;
+import org.fam.common.interceptor.LoggingInterceptor;
+import org.fam.ejb.model.FamTypCompetition;
 
 /**
  * @author gregory.bougeard
  */
+@Named
 @Stateless
+@Interceptors({AuditInterceptor.class, LoggingInterceptor.class})
 public class FamTypCompetitionFacade extends AbstractFacade<FamTypCompetition> {
 
 //    @PersistenceContext//(unitName = "FAM-test-ejbPU")
@@ -30,6 +36,7 @@ public class FamTypCompetitionFacade extends AbstractFacade<FamTypCompetition> {
      *
      */
     public FamTypCompetitionFacade() {
+
         super(FamTypCompetition.class);
     }
 
@@ -38,6 +45,7 @@ public class FamTypCompetitionFacade extends AbstractFacade<FamTypCompetition> {
      */
     @Override
     protected void genData() {
+
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

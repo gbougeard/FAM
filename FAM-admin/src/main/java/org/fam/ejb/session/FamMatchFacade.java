@@ -4,6 +4,14 @@
  */
 package org.fam.ejb.session;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.interceptor.Interceptors;
+import javax.persistence.Query;
+
 import org.fam.common.interceptor.AuditInterceptor;
 import org.fam.common.interceptor.LoggingInterceptor;
 import org.fam.ejb.model.FamFixture;
@@ -13,19 +21,11 @@ import org.fam.ejb.model.FamMatchTeam;
 import org.fam.ejb.model.FamSeasonCompetition;
 import org.slf4j.Logger;
 
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
-import javax.inject.Inject;
-import javax.interceptor.Interceptors;
-import javax.persistence.Query;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @author gbougear
  */
+@Named
 @Stateless
-@LocalBean
 @Interceptors({AuditInterceptor.class, LoggingInterceptor.class})
 public class FamMatchFacade extends AbstractFacade<FamMatch> {
 
@@ -51,6 +51,7 @@ public class FamMatchFacade extends AbstractFacade<FamMatch> {
      *
      */
     public FamMatchFacade() {
+
         super(FamMatch.class);
     }
 
@@ -59,12 +60,14 @@ public class FamMatchFacade extends AbstractFacade<FamMatch> {
      */
     @Override
     public void genData() {
+
     }
 
     /**
      * @param competition
      */
     public void deleteByCompetition(FamSeasonCompetition competition) {
+
         List<FamMatch> list = findByCompetition(competition);
 
         for (FamMatch fixture : list) {
@@ -77,6 +80,7 @@ public class FamMatchFacade extends AbstractFacade<FamMatch> {
      * @return
      */
     public List<FamMatch> findByCompetition(FamSeasonCompetition competition) {
+
         Query query = getEntityManager().createNamedQuery("FamMatch.findByCompetition");
         query.setParameter(FamMatch.PROP_SEASON_COMPETITION, competition);
 
@@ -88,6 +92,7 @@ public class FamMatchFacade extends AbstractFacade<FamMatch> {
      * @param matchSet
      */
     public void linkMatches(FamFixture fixture, List<FamMatch> matchSet) {
+
         FamFixture fix = ejbFixture.find(fixture.getIdFixture());
 
         for (FamMatch item : matchSet) {
@@ -114,7 +119,7 @@ public class FamMatchFacade extends AbstractFacade<FamMatch> {
 
         // Create Free MatchPlayer
         int nbPlayers = entity.getFamSeasonCompetition().getFamTypCompetition().getFamTypMatch().getNbPlayer()
-                         + entity.getFamSeasonCompetition().getFamTypCompetition().getFamTypMatch().getNbSubstitute();
+                            + entity.getFamSeasonCompetition().getFamTypCompetition().getFamTypMatch().getNbSubstitute();
 
         for (FamMatchTeam famMatchTeam : entity.getFamMatchTeamList()) {
             if (famMatchTeam.getFamMatch() == null) {
@@ -154,7 +159,7 @@ public class FamMatchFacade extends AbstractFacade<FamMatch> {
 
         // Create Free MatchPlayer
         int nbPlayers = entity.getFamSeasonCompetition().getFamTypCompetition().getFamTypMatch().getNbPlayer()
-                         + entity.getFamSeasonCompetition().getFamTypCompetition().getFamTypMatch().getNbSubstitute();
+                            + entity.getFamSeasonCompetition().getFamTypCompetition().getFamTypMatch().getNbSubstitute();
 
         for (FamMatchTeam famMatchTeam : entity.getFamMatchTeamList()) {
             if (famMatchTeam.getFamMatch() == null) {

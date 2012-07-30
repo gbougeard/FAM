@@ -4,6 +4,20 @@
  */
 package org.fam.ejb.session;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.ejb.Stateless;
+import javax.inject.Named;
+import javax.interceptor.Interceptors;
+import javax.persistence.LockTimeoutException;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
+import javax.persistence.PersistenceException;
+import javax.persistence.PessimisticLockException;
+import javax.persistence.Query;
+import javax.persistence.QueryTimeoutException;
+import javax.persistence.TransactionRequiredException;
+
 import org.fam.common.interceptor.AuditInterceptor;
 import org.fam.common.interceptor.LoggingInterceptor;
 import org.fam.ejb.model.FamGoal;
@@ -11,15 +25,10 @@ import org.fam.ejb.model.FamMatch;
 import org.fam.ejb.model.FamMatchTeam;
 import org.fam.ejb.model.FamTeam;
 
-import javax.ejb.Stateless;
-import javax.interceptor.Interceptors;
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @author gbougear
  */
+@Named
 @Stateless
 @Interceptors({AuditInterceptor.class, LoggingInterceptor.class})
 public class FamGoalFacade extends AbstractFacade<FamGoal> {
@@ -39,6 +48,7 @@ public class FamGoalFacade extends AbstractFacade<FamGoal> {
      *
      */
     public FamGoalFacade() {
+
         super(FamGoal.class);
     }
 
@@ -50,12 +60,14 @@ public class FamGoalFacade extends AbstractFacade<FamGoal> {
 //    @GET // HTTP's GET verb/operation
 //    @Path("") // specializes the path with a parameter
     public void genData() {
+
     }
 
     /**
      * @return
      */
     public List<FamGoal> findByMatchAndTeam(FamMatch match, FamTeam team) {
+
         Query query = getEntityManager().createNamedQuery("FamGoal.findByMatchAndTeam");
         query.setParameter(FamMatchTeam.PROP_MATCH, match);
         query.setParameter(FamMatchTeam.PROP_TEAM, team);

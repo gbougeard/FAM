@@ -4,24 +4,24 @@
  */
 package org.fam.ejb.session;
 
+import java.util.List;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.inject.Named;
+import javax.interceptor.Interceptors;
+import javax.persistence.Query;
+
 import org.fam.common.interceptor.AuditInterceptor;
 import org.fam.common.interceptor.LoggingInterceptor;
 import org.fam.ejb.model.FamFixture;
 import org.fam.ejb.model.FamMatch;
 import org.fam.ejb.model.FamSeasonCompetition;
 
-import javax.ejb.EJB;
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
-import javax.interceptor.Interceptors;
-import javax.persistence.Query;
-import java.util.List;
-
 /**
  * @author gbougear
  */
+@Named
 @Stateless
-@LocalBean
 @Interceptors({AuditInterceptor.class, LoggingInterceptor.class})
 public class FamFixtureFacade extends AbstractFacade<FamFixture> {
 
@@ -42,6 +42,7 @@ public class FamFixtureFacade extends AbstractFacade<FamFixture> {
      *
      */
     public FamFixtureFacade() {
+
         super(FamFixture.class);
     }
 
@@ -50,6 +51,7 @@ public class FamFixtureFacade extends AbstractFacade<FamFixture> {
      */
     @Override
     public void genData() {
+
         for (int i = 0;
              i < 50;
              i++) {
@@ -63,6 +65,7 @@ public class FamFixtureFacade extends AbstractFacade<FamFixture> {
      * @param competition
      */
     public void deleteByCompetition(FamSeasonCompetition competition) {
+
         List<FamFixture> list = findByCompetition(competition);
 
         for (FamFixture fixture : list) {
@@ -75,6 +78,7 @@ public class FamFixtureFacade extends AbstractFacade<FamFixture> {
      * @return
      */
     public List<FamFixture> findByCompetition(FamSeasonCompetition competition) {
+
         Query query = getEntityManager().createNamedQuery("FamFixture.findByCompetition");
         query.setParameter(FamFixture.PROP_SEASON_COMPETITION, competition);
 
@@ -101,6 +105,7 @@ public class FamFixtureFacade extends AbstractFacade<FamFixture> {
      * @return
      */
     public List<FamFixture> findByCompetitionId(Long idSeasonCompetition) {
+
         FamSeasonCompetition famSeasonCompetition = ejbSeasonCompetition.find(idSeasonCompetition);
         return findByCompetition(famSeasonCompetition);
     }

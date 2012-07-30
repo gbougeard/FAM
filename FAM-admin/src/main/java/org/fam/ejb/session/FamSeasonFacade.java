@@ -4,20 +4,27 @@
  */
 package org.fam.ejb.session;
 
+import javax.ejb.Stateless;
+import javax.inject.Named;
+import javax.interceptor.Interceptors;
+import javax.persistence.LockTimeoutException;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
+import javax.persistence.PersistenceException;
+import javax.persistence.PessimisticLockException;
+import javax.persistence.Query;
+import javax.persistence.QueryTimeoutException;
+import javax.persistence.TransactionRequiredException;
+
 import org.fam.common.interceptor.AuditInterceptor;
 import org.fam.common.interceptor.LoggingInterceptor;
 import org.fam.ejb.model.FamSeason;
 
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
-import javax.interceptor.Interceptors;
-import javax.persistence.*;
-
 /**
  * @author gbougear
  */
+@Named
 @Stateless
-@LocalBean
 @Interceptors({LoggingInterceptor.class, AuditInterceptor.class})
 public class FamSeasonFacade extends AbstractFacade<FamSeason> {
 
@@ -36,6 +43,7 @@ public class FamSeasonFacade extends AbstractFacade<FamSeason> {
      *
      */
     public FamSeasonFacade() {
+
         super(FamSeason.class);
     }
 
@@ -43,6 +51,7 @@ public class FamSeasonFacade extends AbstractFacade<FamSeason> {
      * @return
      */
     public FamSeason getCurrentSeason() {
+
         Query query = getEntityManager().createNamedQuery("FamSeason.findCurrent");
 
         FamSeason result = null;
@@ -74,6 +83,7 @@ public class FamSeasonFacade extends AbstractFacade<FamSeason> {
      */
     @Override
     public void genData() {
+
         for (int i = 0;
              i < 10;
              i++) {

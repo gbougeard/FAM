@@ -4,6 +4,23 @@
  */
 package org.fam.ejb.session;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.persistence.LockTimeoutException;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
+import javax.persistence.PersistenceException;
+import javax.persistence.PessimisticLockException;
+import javax.persistence.Query;
+import javax.persistence.QueryTimeoutException;
+import javax.persistence.TransactionRequiredException;
+import javax.persistence.criteria.CriteriaQuery;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.fam.common.cdi.Loggable;
@@ -14,18 +31,10 @@ import org.fam.ejb.model.FamEventStatus;
 import org.fam.ejb.model.FamPlayer;
 import org.slf4j.Logger;
 
-import javax.ejb.Stateless;
-import javax.inject.Inject;
-import javax.persistence.*;
-import javax.persistence.criteria.CriteriaQuery;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
 /**
  * @author gbougear
  */
+@Named
 @Loggable
 @Stateless
 @Getter
@@ -47,6 +56,7 @@ public class FamEventFacade extends AbstractFacade<FamEvent> {
     private FamPlayer currentPlayer;
 
     public FamEvent newEvent() {
+
         FamEvent evt = new FamEvent();
         evt.setFamSeason(ejbSeason.getCurrentSeason());
         evt.setFamEventStatus(ejbEventStatus.getScheduled());
@@ -58,6 +68,7 @@ public class FamEventFacade extends AbstractFacade<FamEvent> {
      *
      */
     public FamEventFacade() {
+
         super(FamEvent.class);
     }
 
@@ -66,6 +77,7 @@ public class FamEventFacade extends AbstractFacade<FamEvent> {
      */
     @Override
     public void genData() {
+
         for (int i = 0;
              i < 50;
              i++) {
@@ -182,46 +194,55 @@ public class FamEventFacade extends AbstractFacade<FamEvent> {
 
     @Override
     public FamEvent find(Object id) {
+
         return super.find(id);    //To change body of overridden methods use File | Settings | File Templates.
     }
 
     @Override
     public List<FamEvent> findAll() {
+
         return super.findAll();
     }
 
     @Override
     public void remove(FamEvent entity) {
+
         super.remove(entity);    //To change body of overridden methods use File | Settings | File Templates.
     }
 
     @Override
     public void edit(FamEvent entity) {
+
         super.edit(entity);    //To change body of overridden methods use File | Settings | File Templates.
     }
 
     @Override
     public void create(FamEvent entity) {
+
         super.create(entity);    //To change body of overridden methods use File | Settings | File Templates.
     }
 
     @Override
     public List<FamEvent> findByAttributes(Map<String, Object> attributes) {
+
         return super.findByAttributes(attributes);    //To change body of overridden methods use File | Settings | File Templates.
     }
 
     @Override
     public List<FamEvent> findAllLazy(int first, int pageSize, String sortField, boolean sortOrder, Map<String, String> filters) {
+
         return super.findAllLazy(first, pageSize, sortField, sortOrder, filters);    //To change body of overridden methods use File | Settings | File Templates.
     }
 
     @Override
     public int countLazy(Map<String, String> filters) {
+
         return super.countLazy(filters);    //To change body of overridden methods use File | Settings | File Templates.
     }
 
     @Override
     public List<FamEvent> findByCriteria(CriteriaQuery cq) {
+
         return super.findByCriteria(cq);    //To change body of overridden methods use File | Settings | File Templates.
     }
 }

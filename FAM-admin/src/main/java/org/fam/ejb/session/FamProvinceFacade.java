@@ -4,6 +4,24 @@
  */
 package org.fam.ejb.session;
 
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.inject.Named;
+import javax.interceptor.Interceptors;
+import javax.persistence.LockTimeoutException;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
+import javax.persistence.PersistenceException;
+import javax.persistence.PessimisticLockException;
+import javax.persistence.Query;
+import javax.persistence.QueryTimeoutException;
+import javax.persistence.TransactionRequiredException;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
 import org.fam.common.interceptor.AuditInterceptor;
 import org.fam.common.interceptor.LoggingInterceptor;
 import org.fam.ejb.model.FamProvince;
@@ -15,19 +33,10 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.interceptor.Interceptors;
-import javax.persistence.*;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @author gbougear
  */
+@Named
 @Stateless
 @Interceptors({AuditInterceptor.class, LoggingInterceptor.class})
 public class FamProvinceFacade extends AbstractFacade<FamProvince> {
@@ -51,6 +60,7 @@ public class FamProvinceFacade extends AbstractFacade<FamProvince> {
      *
      */
     public FamProvinceFacade() {
+
         super(FamProvince.class);
     }
 
@@ -61,6 +71,7 @@ public class FamProvinceFacade extends AbstractFacade<FamProvince> {
 //    @GET // HTTP's GET verb/operation
 //    @Path("") // specializes the path with a parameter
     public void genData() {
+
         truncate();
         try {
             String strFile = "/META-INF/PaysRegionsDepartementsVilles/provinces.xml";
@@ -139,6 +150,7 @@ public class FamProvinceFacade extends AbstractFacade<FamProvince> {
     }
 
     public FamProvince findByCod(String cod) {
+
         Query query = getEntityManager().createNamedQuery("FamProvince.findByCodProvince");
         query.setParameter(FamProvince.PROP_COD, cod);
 

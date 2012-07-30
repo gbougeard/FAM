@@ -2,7 +2,6 @@
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:fn="http://java.sun.com/jsp/jstl/functions"
         xmlns:p="http://primefaces.org/ui"
         xmlns:pe="http://primefaces.org/ui/extensions"
 
@@ -11,8 +10,6 @@
 <ui:define name="titre">Test</ui:define>
 <ui:define name="body">
 <div style="text-align: center;">
-    <h:outputText value="#{fn:length(cacheBean.listClub)} clubs"/>
-
 
     <h:form id="loginForm">
 
@@ -210,6 +207,8 @@
     <!--</h:form>-->
 
 </div>
+
+<ui:include src="counts.xhtml"/>
 </ui:define>
 </ui:composition>
 

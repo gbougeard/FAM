@@ -4,6 +4,23 @@
  */
 package org.fam.ejb.session;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.interceptor.Interceptors;
+import javax.persistence.LockTimeoutException;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
+import javax.persistence.PersistenceException;
+import javax.persistence.PessimisticLockException;
+import javax.persistence.Query;
+import javax.persistence.QueryTimeoutException;
+import javax.persistence.TransactionRequiredException;
+
 import org.fam.common.interceptor.AuditInterceptor;
 import org.fam.common.interceptor.LoggingInterceptor;
 import org.fam.ejb.model.FamPlayer;
@@ -13,15 +30,6 @@ import org.fam.ejb.model.FamUser;
 import org.fam.ejb.util.ChartUtil;
 import org.slf4j.Logger;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.ejb.Stateless;
-import javax.inject.Inject;
-import javax.interceptor.Interceptors;
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-
 
 /**
  * @author gbougear
@@ -30,6 +38,7 @@ import java.util.List;
 //        className = "org.apache.derby.jdbc.EmbeddedDriver",
 //        url = "jdbc:derby:memory:sampleDB;create=true;user=app;password=app"
 //)
+@Named
 @Stateless
 @Interceptors({AuditInterceptor.class, LoggingInterceptor.class})
 public class FamPlayerFacade extends AbstractFacade<FamPlayer> {
@@ -51,15 +60,18 @@ public class FamPlayerFacade extends AbstractFacade<FamPlayer> {
      *
      */
     public FamPlayerFacade() {
+
         super(FamPlayer.class);
     }
 
     @PostConstruct
     void postConstruct() {
+
     }
 
     @PreDestroy
     void preDestroy() {
+
     }
 
     /**
@@ -67,10 +79,12 @@ public class FamPlayerFacade extends AbstractFacade<FamPlayer> {
      */
     @Override
     public void genData() {
+
     }
 
     @Override
     public void create(FamPlayer entity) {
+
         if (entity.getFamPlayerSeasons() == null) {
             List<FamPlayerSeason> list = new ArrayList<FamPlayerSeason>();
             entity.setFamPlayerSeasons(list);
@@ -91,6 +105,7 @@ public class FamPlayerFacade extends AbstractFacade<FamPlayer> {
 
     @Override
     public void edit(FamPlayer entity) {
+
         entity.getCurrentProfile().setProfileChartUrl(ChartUtil.radarProfile(entity.getCurrentProfile()));
         super.edit(entity);
     }
@@ -100,6 +115,7 @@ public class FamPlayerFacade extends AbstractFacade<FamPlayer> {
      * @return
      */
     public List<FamPlayer> findPossiblePlayers(FamUser user) {
+
         Query query = getEntityManager().createNamedQuery(FamPlayer.FIND_POSSIBLE_PLAYERS);
         query.setParameter(FamPlayer.PROP_EMAIL, user.getEmail());
         query.setParameter(FamPlayer.PROP_FIRST_NAME, user.getFirstName());
@@ -134,6 +150,7 @@ public class FamPlayerFacade extends AbstractFacade<FamPlayer> {
      * @return
      */
     public List<FamPlayer> findByFamUser(FamUser user) {
+
         Query query = getEntityManager().createNamedQuery(FamPlayer.FIND_BY_FAM_USER);
         query.setParameter(FamPlayer.PROP_USER, user);
 
@@ -170,10 +187,12 @@ public class FamPlayerFacade extends AbstractFacade<FamPlayer> {
 //    }
 
     public void setEjbSeason(FamSeasonFacade ejbSeason) {
+
         this.ejbSeason = ejbSeason;
     }
 
     public void setLOGGER(Logger LOGGER) {
+
         this.LOGGER = LOGGER;
     }
 }

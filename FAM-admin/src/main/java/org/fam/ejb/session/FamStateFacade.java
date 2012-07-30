@@ -4,6 +4,14 @@
  */
 package org.fam.ejb.session;
 
+import java.io.InputStream;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.inject.Named;
+import javax.interceptor.Interceptors;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
 import org.fam.common.interceptor.AuditInterceptor;
 import org.fam.common.interceptor.LoggingInterceptor;
 import org.fam.ejb.model.FamCountry;
@@ -15,16 +23,10 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.interceptor.Interceptors;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.InputStream;
-
 /**
  * @author gbougear
  */
+@Named
 @Stateless
 @Interceptors({AuditInterceptor.class, LoggingInterceptor.class})
 public class FamStateFacade extends AbstractFacade<FamState> {
@@ -49,6 +51,7 @@ public class FamStateFacade extends AbstractFacade<FamState> {
      *
      */
     public FamStateFacade() {
+
         super(FamState.class);
     }
 
@@ -59,6 +62,7 @@ public class FamStateFacade extends AbstractFacade<FamState> {
 //    @GET // HTTP's GET verb/operation
 //    @Path("") // specializes the path with a parameter
     public void genData() {
+
         truncate();
         try {
             String strFile = "/META-INF/PaysRegionsDepartementsVilles/states.xml";

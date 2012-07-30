@@ -5,23 +5,30 @@
 
 package org.fam.ejb.session;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.ejb.Stateless;
+import javax.inject.Named;
+import javax.interceptor.Interceptors;
+import javax.persistence.LockTimeoutException;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
+import javax.persistence.PersistenceException;
+import javax.persistence.PessimisticLockException;
+import javax.persistence.Query;
+import javax.persistence.QueryTimeoutException;
+import javax.persistence.TransactionRequiredException;
+
 import org.fam.common.constant.FamConstantes;
 import org.fam.common.interceptor.AuditInterceptor;
 import org.fam.common.interceptor.LoggingInterceptor;
 import org.fam.ejb.model.FamTypAnswer;
 
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
-import javax.interceptor.Interceptors;
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @author gbougear
  */
+@Named
 @Stateless
-@LocalBean
 @Interceptors({AuditInterceptor.class, LoggingInterceptor.class})
 public class FamTypAnswerFacade extends AbstractFacade<FamTypAnswer> {
 
@@ -40,6 +47,7 @@ public class FamTypAnswerFacade extends AbstractFacade<FamTypAnswer> {
      *
      */
     public FamTypAnswerFacade() {
+
         super(FamTypAnswer.class);
     }
 
@@ -48,6 +56,7 @@ public class FamTypAnswerFacade extends AbstractFacade<FamTypAnswer> {
      */
     @Override
     public void genData() {
+
         for (int i = 0;
              i < 10;
              i++) {
@@ -62,6 +71,7 @@ public class FamTypAnswerFacade extends AbstractFacade<FamTypAnswer> {
      * @return
      */
     public List<FamTypAnswer> findTypAnswerByGrp(String grp) {
+
         Query query = getEntityManager().createNamedQuery("FamTypAnswer.findByGrpTypAnswer");
         query.setParameter(FamTypAnswer.PROP_GRP, grp);
 
@@ -93,6 +103,7 @@ public class FamTypAnswerFacade extends AbstractFacade<FamTypAnswer> {
      * @return
      */
     public List<FamTypAnswer> findTypAnswerByGrpYes() {
+
         return findTypAnswerByGrp(FamConstantes.GRP_ANSWER_YES);
     }
 
@@ -100,6 +111,7 @@ public class FamTypAnswerFacade extends AbstractFacade<FamTypAnswer> {
      * @return
      */
     public List<FamTypAnswer> findTypAnswerByGrpNo() {
+
         return findTypAnswerByGrp(FamConstantes.GRP_ANSWER_NO);
     }
 
@@ -107,6 +119,7 @@ public class FamTypAnswerFacade extends AbstractFacade<FamTypAnswer> {
      * @return
      */
     public List<FamTypAnswer> findTypAnswerByGrpMaybe() {
+
         return findTypAnswerByGrp(FamConstantes.GRP_ANSWER_MAYBE);
     }
 }

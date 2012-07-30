@@ -4,6 +4,17 @@
  */
 package org.fam.ejb.session;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.inject.Named;
+import javax.interceptor.Interceptors;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
 import org.fam.common.interceptor.AuditInterceptor;
 import org.fam.common.interceptor.LoggingInterceptor;
 import org.fam.ejb.model.FamCity;
@@ -15,19 +26,10 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.interceptor.Interceptors;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.StringTokenizer;
-
 /**
  * @author gbougear
  */
+@Named
 @Stateless
 @Interceptors({AuditInterceptor.class, LoggingInterceptor.class})
 public class FamCityFacade extends AbstractFacade<FamCity> {
@@ -51,6 +53,7 @@ public class FamCityFacade extends AbstractFacade<FamCity> {
      *
      */
     public FamCityFacade() {
+
         super(FamCity.class);
     }
 
@@ -61,6 +64,7 @@ public class FamCityFacade extends AbstractFacade<FamCity> {
 //    @GET // HTTP's GET verb/operation
 //    @Path("") // specializes the path with a parameter
     public void genData() {
+
         truncate();
 
         try {
@@ -157,6 +161,7 @@ public class FamCityFacade extends AbstractFacade<FamCity> {
     }
 
     public void genDataCSV() {
+
         try {
 
             truncate();
@@ -189,8 +194,8 @@ public class FamCityFacade extends AbstractFacade<FamCity> {
                     String token = st.nextToken();
                     token = token.replaceAll("\"", "");
                     LOGGER.debug("Line # " + lineNumber
-                            + ", Token # " + tokenNumber
-                            + ", Token : " + token);
+                                     + ", Token # " + tokenNumber
+                                     + ", Token : " + token);
                     switch (tokenNumber) {
                         case 1:
 //                            if (token.matches("[0-9][A-Z]")) {

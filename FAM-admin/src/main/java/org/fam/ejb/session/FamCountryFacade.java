@@ -4,6 +4,13 @@
  */
 package org.fam.ejb.session;
 
+import java.io.InputStream;
+import javax.ejb.Stateless;
+import javax.inject.Named;
+import javax.interceptor.Interceptors;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
 import org.fam.common.interceptor.AuditInterceptor;
 import org.fam.common.interceptor.LoggingInterceptor;
 import org.fam.ejb.model.FamCountry;
@@ -14,15 +21,10 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import javax.ejb.Stateless;
-import javax.interceptor.Interceptors;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.InputStream;
-
 /**
  * @author gbougear
  */
+@Named
 @Stateless
 @Interceptors({AuditInterceptor.class, LoggingInterceptor.class})
 public class FamCountryFacade extends AbstractFacade<FamCountry> {
@@ -44,6 +46,7 @@ public class FamCountryFacade extends AbstractFacade<FamCountry> {
      *
      */
     public FamCountryFacade() {
+
         super(FamCountry.class);
     }
 
@@ -84,6 +87,7 @@ public class FamCountryFacade extends AbstractFacade<FamCountry> {
 //    @GET // HTTP's GET verb/operation
 //    @Path("") // specializes the path with a parameter
     public void genData() {
+
         try {
 
             truncate();

@@ -5,19 +5,19 @@
 
 package org.fam.ejb.session;
 
+import javax.ejb.Stateless;
+import javax.inject.Named;
+import javax.interceptor.Interceptors;
+
 import org.fam.common.interceptor.AuditInterceptor;
 import org.fam.common.interceptor.LoggingInterceptor;
 import org.fam.ejb.model.FamTypMatch;
 
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
-import javax.interceptor.Interceptors;
-
 /**
  * @author gbougear
  */
+@Named
 @Stateless
-@LocalBean
 @Interceptors({AuditInterceptor.class, LoggingInterceptor.class})
 public class FamTypMatchFacade extends AbstractFacade<FamTypMatch> {
 
@@ -36,6 +36,7 @@ public class FamTypMatchFacade extends AbstractFacade<FamTypMatch> {
      *
      */
     public FamTypMatchFacade() {
+
         super(FamTypMatch.class);
     }
 
@@ -44,6 +45,7 @@ public class FamTypMatchFacade extends AbstractFacade<FamTypMatch> {
      */
     @Override
     public void genData() {
+
         for (int i = 0;
              i < 50;
              i++) {

@@ -4,27 +4,40 @@
  */
 package org.fam.ejb.session;
 
-import org.fam.common.interceptor.AuditInterceptor;
-import org.fam.common.interceptor.LoggingInterceptor;
-import org.fam.ejb.model.*;
-
-import javax.ejb.EJB;
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
-import javax.inject.Named;
-import javax.interceptor.Interceptors;
-import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.inject.Named;
+import javax.interceptor.Interceptors;
+import javax.persistence.LockTimeoutException;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
+import javax.persistence.PersistenceException;
+import javax.persistence.PessimisticLockException;
+import javax.persistence.Query;
+import javax.persistence.QueryTimeoutException;
+import javax.persistence.TransactionRequiredException;
+
+import org.fam.common.interceptor.AuditInterceptor;
+import org.fam.common.interceptor.LoggingInterceptor;
+import org.fam.ejb.model.FamCard;
+import org.fam.ejb.model.FamClub;
+import org.fam.ejb.model.FamGoal;
+import org.fam.ejb.model.FamMatchPlayer;
+import org.fam.ejb.model.FamPlayer;
+import org.fam.ejb.model.FamPlayerSeason;
+import org.fam.ejb.model.FamSeason;
+import org.fam.ejb.model.FamTeam;
+import org.fam.ejb.model.FamWorkout;
 
 /**
  * @author gbougear
  */
 @Named
 @Stateless
-@LocalBean
 @Interceptors({AuditInterceptor.class, LoggingInterceptor.class})
 public class FamPlayerSeasonFacade extends AbstractFacade<FamPlayerSeason> {
 
@@ -49,6 +62,7 @@ public class FamPlayerSeasonFacade extends AbstractFacade<FamPlayerSeason> {
      *
      */
     public FamPlayerSeasonFacade() {
+
         super(FamPlayerSeason.class);
     }
 
@@ -57,6 +71,7 @@ public class FamPlayerSeasonFacade extends AbstractFacade<FamPlayerSeason> {
      */
     @Override
     public void genData() {
+
     }
 
     /**
@@ -65,6 +80,7 @@ public class FamPlayerSeasonFacade extends AbstractFacade<FamPlayerSeason> {
      * @return
      */
     public FamPlayerSeason findByPlayerAndSeason(FamPlayer player, FamSeason season) {
+
         Query query = getEntityManager().createNamedQuery("FamPlayerSeason.findByPlayerAndSeason");
         query.setParameter(FamPlayerSeason.PROP_PLAYER, player);
         query.setParameter(FamPlayerSeason.PROP_SEASON, season);
@@ -111,6 +127,7 @@ public class FamPlayerSeasonFacade extends AbstractFacade<FamPlayerSeason> {
      * @return
      */
     public List<FamPlayerSeason> findByTeamAndSeason(FamTeam team, FamSeason season) {
+
         Query query = getEntityManager().createNamedQuery("FamPlayerSeason.findByTeamAndSeason");
         query.setParameter(FamPlayerSeason.PROP_TEAM, team);
         query.setParameter(FamPlayerSeason.PROP_SEASON, season);
@@ -145,6 +162,7 @@ public class FamPlayerSeasonFacade extends AbstractFacade<FamPlayerSeason> {
      * @return
      */
     public List<FamPlayerSeason> findByClubAndSeason(FamClub club, FamSeason season) {
+
         Query query = getEntityManager().createNamedQuery("FamPlayerSeason.findByClubAndSeason");
         query.setParameter(FamPlayerSeason.PROP_CLUB, club);
         query.setParameter(FamPlayerSeason.PROP_SEASON, season);
@@ -178,6 +196,7 @@ public class FamPlayerSeasonFacade extends AbstractFacade<FamPlayerSeason> {
      * @return
      */
     public FamPlayerSeason findByPlayerAndCurrentSeason(FamPlayer player) {
+
         FamSeason season = ejbSeason.getCurrentSeason();
 
         return findByPlayerAndSeason(player, season);
@@ -188,6 +207,7 @@ public class FamPlayerSeasonFacade extends AbstractFacade<FamPlayerSeason> {
      * @return
      */
     public List<FamPlayerSeason> findByTeamAndCurrentSeason(FamTeam team) {
+
         FamSeason season = ejbSeason.getCurrentSeason();
 
         return findByTeamAndSeason(team, season);
@@ -198,6 +218,7 @@ public class FamPlayerSeasonFacade extends AbstractFacade<FamPlayerSeason> {
      * @return
      */
     public List<FamPlayerSeason> findByClubAndCurrentSeason(FamClub club) {
+
         FamSeason season = ejbSeason.getCurrentSeason();
 
         return findByClubAndSeason(club, season);
@@ -208,6 +229,7 @@ public class FamPlayerSeasonFacade extends AbstractFacade<FamPlayerSeason> {
      * @return
      */
     public Boolean isEngagedForCurrentSeason(FamPlayer player) {
+
         Boolean bRes = Boolean.FALSE;
         bRes = (findByPlayerAndCurrentSeason(player) != null);
         return bRes;
@@ -219,6 +241,7 @@ public class FamPlayerSeasonFacade extends AbstractFacade<FamPlayerSeason> {
      * @return
      */
     public Boolean isEngagedForSeason(FamPlayer player, FamSeason season) {
+
         Boolean bRes = Boolean.FALSE;
         bRes = (findByPlayerAndSeason(player, season) != null);
         return bRes;
@@ -229,6 +252,7 @@ public class FamPlayerSeasonFacade extends AbstractFacade<FamPlayerSeason> {
      * @return
      */
     public List<FamPlayerSeason> findPlayersForClub(FamClub club) {
+
         Query query = getEntityManager().createNamedQuery("FamPlayerSeason.findByClub");
         query.setParameter(FamPlayerSeason.PROP_CLUB, club);
 
@@ -262,6 +286,7 @@ public class FamPlayerSeasonFacade extends AbstractFacade<FamPlayerSeason> {
      * @return
      */
     public List<FamPlayerSeason> findBySeasonAndClub(FamSeason season, FamClub club) {
+
         Query query = getEntityManager().createNamedQuery(FamPlayerSeason.FIND_BY_CLUB_AND_SEASON);
         query.setParameter(FamPlayerSeason.PROP_CLUB, club);
         query.setParameter(FamPlayerSeason.PROP_SEASON, season);
@@ -296,6 +321,7 @@ public class FamPlayerSeasonFacade extends AbstractFacade<FamPlayerSeason> {
      * @return
      */
     public List<FamPlayerSeason> findByPlayerAndClub(FamPlayer player, FamClub club) {
+
         Query query = getEntityManager().createNamedQuery("FamPlayerSeason.findByPlayerAndClub");
         query.setParameter(FamPlayerSeason.PROP_CLUB, club);
         query.setParameter(FamPlayerSeason.PROP_PLAYER, player);
@@ -329,6 +355,7 @@ public class FamPlayerSeasonFacade extends AbstractFacade<FamPlayerSeason> {
      * @return
      */
     public List<FamPlayerSeason> findByNotSeason(FamSeason season) {
+
         Query query = getEntityManager().createNamedQuery("FamPlayerSeason.findByNotSeason");
         query.setParameter(FamPlayerSeason.PROP_SEASON, season);
 
@@ -360,6 +387,7 @@ public class FamPlayerSeasonFacade extends AbstractFacade<FamPlayerSeason> {
      * @return
      */
     public List<FamPlayerSeason> findByNotCurrentSeason() {
+
         FamSeason season = ejbSeason.getCurrentSeason();
 
         return findByNotSeason(season);
@@ -378,7 +406,7 @@ public class FamPlayerSeasonFacade extends AbstractFacade<FamPlayerSeason> {
 
         // Matches
         List<FamMatchPlayer> listMatch = ejbMatchPlayer.findByPlayerAndSeason(famPlayerSeason.getFamPlayer(),
-                famPlayerSeason.getFamSeason());
+                                                                                 famPlayerSeason.getFamSeason());
         famPlayerSeason.getFamPlayerStat().setNbMatch(listMatch.size());
 
         if (listMatch.isEmpty() == false) {
@@ -425,15 +453,18 @@ public class FamPlayerSeasonFacade extends AbstractFacade<FamPlayerSeason> {
     }
 
     public void calcStatForCurrentSeason() {
+
         FamSeason season = ejbSeason.getCurrentSeason();
 
         calcStatForSeason(season);
     }
 
     public void calcStatForSeason(FamSeason famSeason) {
+
     }
 
     public void calcStatForTeamAndSeason(FamTeam famTeam, FamSeason famSeason) {
+
         List<FamPlayerSeason> psList = findByTeamAndSeason(famTeam, famSeason);
         for (FamPlayerSeason ps : psList) {
             calcStatForPlayerSeason(ps);
@@ -441,23 +472,27 @@ public class FamPlayerSeasonFacade extends AbstractFacade<FamPlayerSeason> {
     }
 
     public void calcStatForTeamAndCurrentSeason(FamTeam famTeam) {
+
         FamSeason season = ejbSeason.getCurrentSeason();
 
         calcStatForTeamAndSeason(famTeam, season);
     }
 
     public void calcStatForPlayerAndSeason(FamPlayer famPlayer, FamSeason famSeason) {
+
         FamPlayerSeason ps = findByPlayerAndSeason(famPlayer, famSeason);
         calcStatForPlayerSeason(ps);
     }
 
     public void calcStatForPlayerAndCurrentSeason(FamPlayer famPlayer) {
+
         FamSeason season = ejbSeason.getCurrentSeason();
 
         calcStatForPlayerAndSeason(famPlayer, season);
     }
 
     public void calcStatForClubAndSeason(FamClub famClub, FamSeason famSeason) {
+
         List<FamPlayerSeason> psList = findByClubAndSeason(famClub, famSeason);
         for (FamPlayerSeason ps : psList) {
             calcStatForPlayerSeason(ps);
@@ -465,6 +500,7 @@ public class FamPlayerSeasonFacade extends AbstractFacade<FamPlayerSeason> {
     }
 
     public void calcStatForClubAndCurrentSeason(FamClub famClub) {
+
         FamSeason season = ejbSeason.getCurrentSeason();
 
         calcStatForClubAndSeason(famClub, season);

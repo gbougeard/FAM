@@ -4,22 +4,22 @@
  */
 package org.fam.ejb.session;
 
+import java.util.List;
+import javax.ejb.Stateless;
+import javax.inject.Named;
+import javax.interceptor.Interceptors;
+import javax.persistence.Query;
+
 import org.fam.common.constant.FamConstantes;
 import org.fam.common.interceptor.AuditInterceptor;
 import org.fam.common.interceptor.LoggingInterceptor;
 import org.fam.ejb.model.FamTypEvent;
 
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
-import javax.interceptor.Interceptors;
-import javax.persistence.Query;
-import java.util.List;
-
 /**
  * @author gbougear
  */
+@Named
 @Stateless
-@LocalBean
 @Interceptors({AuditInterceptor.class, LoggingInterceptor.class})
 public class FamTypEventFacade extends AbstractFacade<FamTypEvent> {
 
@@ -38,6 +38,7 @@ public class FamTypEventFacade extends AbstractFacade<FamTypEvent> {
      *
      */
     public FamTypEventFacade() {
+
         super(FamTypEvent.class);
     }
 
@@ -46,6 +47,7 @@ public class FamTypEventFacade extends AbstractFacade<FamTypEvent> {
      */
     @Override
     public void genData() {
+
         for (int i = 0;
              i < 10;
              i++) {
@@ -59,6 +61,7 @@ public class FamTypEventFacade extends AbstractFacade<FamTypEvent> {
      *
      */
     public void initData() {
+
         this.truncate();
 
         FamTypEvent item = new FamTypEvent();
@@ -77,6 +80,7 @@ public class FamTypEventFacade extends AbstractFacade<FamTypEvent> {
      * @return
      */
     public FamTypEvent findByCod(String cod) {
+
         Query query = getEntityManager().createNamedQuery("FamTypEvent.findByCodTypEvent");
         query.setParameter(FamTypEvent.PROP_COD, cod);
 
@@ -88,6 +92,7 @@ public class FamTypEventFacade extends AbstractFacade<FamTypEvent> {
      * @return
      */
     public FamTypEvent getMatch() {
+
         return findByCod(FamConstantes.EVENT_MATCH_COD);
     }
 
@@ -95,6 +100,7 @@ public class FamTypEventFacade extends AbstractFacade<FamTypEvent> {
      * @return
      */
     public FamTypEvent getPractice() {
+
         return findByCod(FamConstantes.EVENT_PRACTICE_COD);
     }
 }

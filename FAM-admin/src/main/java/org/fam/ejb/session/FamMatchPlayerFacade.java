@@ -4,6 +4,20 @@
  */
 package org.fam.ejb.session;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.ejb.Stateless;
+import javax.inject.Named;
+import javax.interceptor.Interceptors;
+import javax.persistence.LockTimeoutException;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
+import javax.persistence.PersistenceException;
+import javax.persistence.PessimisticLockException;
+import javax.persistence.Query;
+import javax.persistence.QueryTimeoutException;
+import javax.persistence.TransactionRequiredException;
+
 import org.fam.common.interceptor.AuditInterceptor;
 import org.fam.common.interceptor.LoggingInterceptor;
 import org.fam.ejb.model.FamMatchPlayer;
@@ -11,15 +25,10 @@ import org.fam.ejb.model.FamPlayer;
 import org.fam.ejb.model.FamSeason;
 import org.fam.ejb.model.FamSeasonCompetition;
 
-import javax.ejb.Stateless;
-import javax.interceptor.Interceptors;
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @author gbougear
  */
+@Named
 @Stateless
 @Interceptors({AuditInterceptor.class, LoggingInterceptor.class})
 public class FamMatchPlayerFacade extends AbstractFacade<FamMatchPlayer> {
@@ -39,6 +48,7 @@ public class FamMatchPlayerFacade extends AbstractFacade<FamMatchPlayer> {
      *
      */
     public FamMatchPlayerFacade() {
+
         super(FamMatchPlayer.class);
     }
 
@@ -50,9 +60,11 @@ public class FamMatchPlayerFacade extends AbstractFacade<FamMatchPlayer> {
 //    @GET // HTTP's GET verb/operation
 //    @Path("") // specializes the path with a parameter
     public void genData() {
+
     }
 
     public List<FamMatchPlayer> findByPlayer(FamPlayer player) {
+
         Query query = getEntityManager().createNamedQuery("FamMatchPlayer.findByPlayer");
         query.setParameter(FamMatchPlayer.PROP_PLAYER, player);
 
@@ -81,6 +93,7 @@ public class FamMatchPlayerFacade extends AbstractFacade<FamMatchPlayer> {
     }
 
     public List<FamMatchPlayer> findByPlayerAndSeason(FamPlayer player, FamSeason season) {
+
         Query query = getEntityManager().createNamedQuery("FamMatchPlayer.findByPlayerAndSeason");
         query.setParameter(FamMatchPlayer.PROP_PLAYER, player);
         query.setParameter(FamSeasonCompetition.PROP_SEASON, season);

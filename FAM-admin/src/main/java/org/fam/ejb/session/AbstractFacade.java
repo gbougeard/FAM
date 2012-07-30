@@ -4,21 +4,41 @@
  */
 package org.fam.ejb.session;
 
-import org.fam.common.interceptor.AuditInterceptor;
-import org.fam.common.interceptor.LoggingInterceptor;
-import org.fam.ejb.exception.FamException;
-import org.slf4j.Logger;
-
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.StringTokenizer;
+import java.util.logging.Level;
 import javax.annotation.PostConstruct;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.interceptor.Interceptors;
-import javax.persistence.*;
-import javax.persistence.criteria.*;
+import javax.persistence.EntityExistsException;
+import javax.persistence.EntityManager;
+import javax.persistence.LockTimeoutException;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
+import javax.persistence.PessimisticLockException;
+import javax.persistence.Query;
+import javax.persistence.QueryTimeoutException;
+import javax.persistence.TransactionRequiredException;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
-import java.util.*;
-import java.util.logging.Level;
+
+import org.fam.common.interceptor.AuditInterceptor;
+import org.fam.common.interceptor.LoggingInterceptor;
+import org.fam.ejb.exception.FamException;
+import org.slf4j.Logger;
 
 /**
  * @param <T>
@@ -42,6 +62,7 @@ public class AbstractFacade<T> {
      * @return
      */
     protected EntityManager getEntityManager() {
+
         return em;
     }
 
@@ -55,14 +76,17 @@ public class AbstractFacade<T> {
      * @param entityClass
      */
     public AbstractFacade(Class<T> entityClass) {
+
         this.entityClass = entityClass;
     }
 
     protected AbstractFacade() {
+
     }
 
     @PostConstruct
     private void init() {
+
         LOGGER.debug("Init");
     }
 
@@ -75,6 +99,7 @@ public class AbstractFacade<T> {
      * @return
      */
     public CriteriaBuilder getCriteriaBuilder() {
+
         return getEntityManager().getCriteriaBuilder();
     }
 
@@ -92,6 +117,7 @@ public class AbstractFacade<T> {
      * @return
      */
     public Root<T> getRoot() {
+
         return getCriteriaQuery().from(entityClass);
     }
 
@@ -99,12 +125,14 @@ public class AbstractFacade<T> {
      *
      */
     protected void genData() {
+
     }
 
     /**
      * @param entity
      */
     public void create(T entity) {
+
         try {
             getEntityManager().persist(entity);
 
@@ -132,6 +160,7 @@ public class AbstractFacade<T> {
      * @param entity
      */
     public void edit(T entity) {
+
         try {
             getEntityManager().merge(entity);
         } catch (ConstraintViolationException e) {
@@ -148,6 +177,7 @@ public class AbstractFacade<T> {
      * @param entity
      */
     public void remove(T entity) {
+
         try {
             getEntityManager().remove(getEntityManager().merge(entity));
         } catch (IllegalArgumentException e) {
@@ -166,6 +196,7 @@ public class AbstractFacade<T> {
      *
      */
     public void truncate() {
+
         getCriteriaQuery().select(getRoot());
         List<T> list = getEntityManager().createQuery(getCriteriaQuery()).getResultList();
         for (T item : list) {
@@ -178,6 +209,7 @@ public class AbstractFacade<T> {
      * @return
      */
     public T find(Object id) {
+
         T result = null;
         try {
             result = getEntityManager().find(entityClass, id);
@@ -252,6 +284,7 @@ public class AbstractFacade<T> {
      * @return
      */
     public int count() {
+
         CriteriaQuery<Long> cq = getEntityManager().getCriteriaBuilder().createQuery(Long.class);
         cq.select(getCriteriaBuilder().count(getRoot()));
         Query q = getEntityManager().createQuery(cq);
@@ -264,6 +297,7 @@ public class AbstractFacade<T> {
      * @return
      */
     public List<T> findByAttributes(final Map<String, Object> attributes) {
+
         List<T> results;
         //set up the Criteria query
         CriteriaBuilder cb = getCriteriaBuilder();
@@ -288,6 +322,7 @@ public class AbstractFacade<T> {
      * @return
      */
     public Class getEntityClass() {
+
         return entityClass;
     }
 
@@ -295,10 +330,12 @@ public class AbstractFacade<T> {
      * @param entityClass
      */
     public void setEntityClass(Class entityClass) {
+
         this.entityClass = entityClass;
     }
 
     private void handleConstraintViolation(ConstraintViolationException cve) {
+
         LOGGER.error("handleConstraintViolation");
         Set<ConstraintViolation<?>> cvs = cve.getConstraintViolations();
         for (ConstraintViolation<?> cv : cvs) {
@@ -308,7 +345,7 @@ public class AbstractFacade<T> {
             // The violation occurred on a leaf bean (embeddable)
             if (cv.getLeafBean() != null && cv.getRootBean() != cv.getLeafBean()) {
                 System.out.println("Embeddable: "
-                        + cv.getLeafBean().getClass().getSimpleName());
+                                       + cv.getLeafBean().getClass().getSimpleName());
             }
             System.out.println("Attribute: " + cv.getPropertyPath());
             System.out.println("Invalid value: " + cv.getInvalidValue());
@@ -320,6 +357,7 @@ public class AbstractFacade<T> {
      * @return
      */
     public List<T> findByCriteria(CriteriaQuery cq) {
+
         Query q = getEntityManager().createQuery(cq);
         return q.getResultList();
     }
@@ -496,6 +534,12 @@ public class AbstractFacade<T> {
 
 
     public void setLOGGER(Logger LOGGER) {
+
         this.LOGGER = LOGGER;
+    }
+
+    public int getCount() {
+
+        return count();
     }
 }
