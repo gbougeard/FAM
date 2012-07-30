@@ -9,32 +9,34 @@
         <h:outputText value="Formation : #{famMatchComposeWizardController.famMatchTeam.famFormation.libFormation}"/>
         <!--Lineup final-->
         <!--@elvariable id="mp2" type="org.fam.ejb.model.FamMatchPlayer"-->
-        <p:dataTable binding="#{famMatchComposeWizardController.selectedComponent}"
-                     value="#{famMatchComposeWizardController.famMatchPlayerList}"
-                     var="mp2"
-                     emptyMessage="#{bundle.NoDataFound}"
-                     rowKey="#{mp2.num}"
-                     rowStyleClass="#{mp2.num gt famMatchComposeWizardController.selected.famSeasonCompetition.famTypCompetition.famTypMatch.nbPlayer ? 'row-sub' : null}">
-            <p:column headerText="Poste">
-                <h:outputText value="#{mp2.num}"/>
-            </p:column>
-            <p:column headerText="Joueur">
-                <h:outputText value="#{mp2.famPlayer.displayName}"/>
-            </p:column>
-        </p:dataTable>
-        <!--Eo Lineup final-->
-        <!--<h:form id="frmSave">-->
-        <p:commandButton id="saveBtn"
-                         value="Enregistrer"
-                         actionListener="#{famMatchComposeWizardController.save}"
-                         process="@this"
-                />
-        <p:blockUI block="confirm" trigger="saveBtn">
-            SAVING<br/>
-            <h:graphicImage library="images" name="ajax-loader1.gif"
-                            style="margin-right: 12px; vertical-align: middle;"/>
-        </p:blockUI>
-        <!--</h:form>-->
+        <h:form id="frmSave">
+            <p:dataTable id="dtbFinalLineUp"
+                         value="#{famMatchComposeWizardController.famMatchPlayerList}"
+                         var="mp2"
+                         emptyMessage="#{bundle.NoDataFound}"
+                         rowKey="#{mp2.num}"
+                         rowStyleClass="#{mp2.num gt famMatchComposeWizardController.selected.famSeasonCompetition.famTypCompetition.famTypMatch.nbPlayer ? 'row-sub' : null}"
+                         style="width:300px;">
+                <p:column headerText="Poste">
+                    <h:outputText value="#{mp2.num}"/>
+                </p:column>
+                <p:column headerText="Joueur">
+                    <h:outputText value="#{mp2.famPlayer.displayName}"/>
+                </p:column>
+            </p:dataTable>
+            <!--Eo Lineup final-->
+
+            <p:commandButton id="saveBtn"
+                             value="Enregistrer"
+                             actionListener="#{famMatchComposeWizardController.save}"
+                             process="@this"
+                    />
+            <p:blockUI block="confirm" trigger="saveBtn">
+                SAVING<br/>
+                <h:graphicImage library="images" name="ajax-loader1.gif"
+                                style="margin-right: 12px; vertical-align: middle;"/>
+            </p:blockUI>
+        </h:form>
     </p:tab>
 
 </ui:composition>

@@ -82,7 +82,7 @@
                         <h:outputText value="#{t.famFormationItem.numItem}"
                                       style="text-align:center;font-weight: bolder;"/>
                         <br/>
-                        <h:outputText value="#{empty t.famPlayer ? t.famPlayer.displayName : bundle.Empty}"
+                        <h:outputText value="#{empty t.famPlayer ? bundle.Empty :t.famPlayer.displayName }"
                                       style="text-align:center;font-weight: bolder;"/>
                         <!--rendered="#{not empty t.famPlayer}"/>-->
 
