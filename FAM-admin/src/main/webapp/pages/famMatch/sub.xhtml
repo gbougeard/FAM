@@ -164,19 +164,19 @@
     </p:dataTable>-->
     <p:dataGrid id="dgSubs"
                 value="#{famMatchComposeWizardController.lstSubs}"
-                var="sub"
+                var="card"
                 columns="2"
                 style="padding-top: 25px;margin-left: 20px;">
         <p:column>
             <p:panel id="sub"
                      style="width:50px;height:63px;opacity:0.5;margin-left: 5px;"
                     >
-                <h:outputText value="#{sub.strIdx}"
+                <h:outputText value="#{card.strIdx}"
                               style="text-align:center;font-weight: bolder;"/>
                 <br/>
-                <h:outputText value="#{sub.famPlayer.displayName}"
+                <h:outputText value="#{card.famPlayer.displayName}"
                               style="text-align:center;font-weight: bolder;"
-                              rendered="#{not empty sub.famPlayer}"/>
+                              rendered="#{not empty card.famPlayer}"/>
 
                 <p:droppable tolerance="touch"
                              activeStyleClass="ui-state-highlight"

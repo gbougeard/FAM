@@ -4,13 +4,11 @@
  */
 package org.fam.ejb.session;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.StringTokenizer;
-import java.util.logging.Level;
+import org.fam.common.interceptor.AuditInterceptor;
+import org.fam.common.interceptor.LoggingInterceptor;
+import org.fam.ejb.exception.FamException;
+import org.slf4j.Logger;
+
 import javax.annotation.PostConstruct;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
@@ -34,11 +32,13 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
-
-import org.fam.common.interceptor.AuditInterceptor;
-import org.fam.common.interceptor.LoggingInterceptor;
-import org.fam.ejb.exception.FamException;
-import org.slf4j.Logger;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.StringTokenizer;
+import java.util.logging.Level;
 
 /**
  * @param <T>
@@ -213,6 +213,9 @@ public class AbstractFacade<T> {
         T result = null;
         try {
             result = getEntityManager().find(entityClass, id);
+        } catch (ConstraintViolationException e) {
+            handleConstraintViolation(e);
+            LOGGER.error("ConstraintViolationException", e);
         } catch (IllegalArgumentException e) {
             // if the instance is not an entity
             LOGGER.error("IllegalArgumentException");
@@ -238,6 +241,9 @@ public class AbstractFacade<T> {
         List<T> result = new ArrayList<T>();
         try {
             result = query.getResultList();
+        } catch (ConstraintViolationException e) {
+            handleConstraintViolation(e);
+            LOGGER.error("ConstraintViolationException", e);
         } catch (NoResultException e) {
             //- if there is no result}
             LOGGER.error("NoResultException");
@@ -334,22 +340,24 @@ public class AbstractFacade<T> {
         this.entityClass = entityClass;
     }
 
-    private void handleConstraintViolation(ConstraintViolationException cve) {
+    protected void handleConstraintViolation(ConstraintViolationException cve) {
 
         LOGGER.error("handleConstraintViolation");
         Set<ConstraintViolation<?>> cvs = cve.getConstraintViolations();
+        StringBuilder sb = new StringBuilder();
         for (ConstraintViolation<?> cv : cvs) {
-            System.out.println("------------------------------------------------");
-            System.out.println("Violation: " + cv.getMessage());
-            System.out.println("Entity: " + cv.getRootBeanClass().getSimpleName());
+            sb.append("\n------------------------------------------------");
+            sb.append("\nViolation: ").append(cv.getMessage());
+            sb.append("\nEntity: ").append(cv.getRootBeanClass().getSimpleName());
             // The violation occurred on a leaf bean (embeddable)
             if (cv.getLeafBean() != null && cv.getRootBean() != cv.getLeafBean()) {
-                System.out.println("Embeddable: "
-                                       + cv.getLeafBean().getClass().getSimpleName());
+                sb.append("\nEmbeddable: ").append(cv.getLeafBean().getClass().getSimpleName());
             }
-            System.out.println("Attribute: " + cv.getPropertyPath());
-            System.out.println("Invalid value: " + cv.getInvalidValue());
+            sb.append("\nAttribute: ").append(cv.getPropertyPath());
+            sb.append("\nInvalid value: ").append(cv.getInvalidValue());
         }
+
+        LOGGER.error(sb.toString());
     }
 
     /**
@@ -472,10 +480,17 @@ public class AbstractFacade<T> {
         q.setFirstResult(first);
         q.setMaxResults(pageSize);
 
-        List<T> list = q.getResultList();
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("nb result " + list.size());
+        List<T> list = new ArrayList<T>();
+        try {
+            list = q.getResultList();
+        } catch (ConstraintViolationException e) {
+            handleConstraintViolation(e);
+            LOGGER.error("ConstraintViolationException", e);
+        } catch (Exception e) {
+            LOGGER.error("OUCH!", e);
         }
+
+        LOGGER.debug("nb result " + list.size());
 
         return list;
     }

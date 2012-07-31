@@ -58,7 +58,47 @@
             <p:commandButton value="Add Sub"
                              action="#{famMatchDebriefWizardController.addSubstitution}"
                              update="@(dlSubs)"
-                    />
+                    >
+                <p:collector value="#{famMatchDebriefWizardController.famSubstitution}"
+                             addTo="#{famMatchDebriefWizardController.lstSubstitution}"/>
+            </p:commandButton>
+
+            <p:outputPanel id="subs">
+                <p:dataTable id="dtbSub" value="#{famMatchDebriefWizardController.lstSubstitution}" var="card">
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Temps"/>
+                        </f:facet>
+                        <h:outputText value="#{card.substitutionTime}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="IN"/>
+                        </f:facet>
+                        <h:outputText value="#{card.famMatchPlayerIn.famPlayer.displayName}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="OUT"/>
+                        </f:facet>
+                        <h:outputText value="#{card.famMatchPlayerOut.famPlayer.displayName}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Operation"/>
+                        </f:facet>
+                        <p:commandLink value="Remove" update="@(subs)" process="@(subs)">
+                            <p:collector value="#{card}"
+                                         removeFrom="#{famMatchDebriefWizardController.lstSubstitution}"/>
+                        </p:commandLink>
+                    </p:column>
+
+                </p:dataTable>
+            </p:outputPanel>
 
         </h:form>
 

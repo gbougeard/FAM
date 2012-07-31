@@ -115,6 +115,10 @@
                                          action="#{famPlayerSeasonFacade.calcStatForPlayerAndCurrentSeason(cachePlayer.currentPlayer)}"
                                          immediate="true"
                                          update="@form"/>
+                        <!--<p:commandButton value="#{bundle.EditMyAccountCalcStatLink}"
+                                         action="#{famPlayerSeasonFacade.calcStatForPlayerAndSeason(cachePlayer.currentPlayer,cacheBean.listSeason[2])}"
+                                         immediate="true"
+                                         update="@form"/>-->
                     </p:tab>
                     <p:tab title="MyClub"
                            rendered="#{not empty login.currentUser.currentClub}">

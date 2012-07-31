@@ -4,23 +4,6 @@
  */
 package org.fam.ejb.session;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.inject.Named;
-import javax.interceptor.Interceptors;
-import javax.persistence.LockTimeoutException;
-import javax.persistence.NoResultException;
-import javax.persistence.NonUniqueResultException;
-import javax.persistence.PersistenceException;
-import javax.persistence.PessimisticLockException;
-import javax.persistence.Query;
-import javax.persistence.QueryTimeoutException;
-import javax.persistence.TransactionRequiredException;
-
 import org.fam.common.interceptor.AuditInterceptor;
 import org.fam.common.interceptor.LoggingInterceptor;
 import org.fam.ejb.model.FamEvent;
@@ -31,7 +14,25 @@ import org.fam.ejb.model.FamSeasonCompetition;
 import org.fam.ejb.model.FamTeam;
 import org.fam.ejb.model.FamTypEvent;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.interceptor.Interceptors;
+import javax.persistence.LockTimeoutException;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
+import javax.persistence.PersistenceException;
+import javax.persistence.PessimisticLockException;
+import javax.persistence.Query;
+import javax.persistence.QueryTimeoutException;
+import javax.persistence.TransactionRequiredException;
+import javax.validation.ConstraintViolationException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 
 /**
  * @author gbougear
@@ -41,7 +42,8 @@ import org.slf4j.LoggerFactory;
 @Interceptors({AuditInterceptor.class, LoggingInterceptor.class})
 public class FamSeasonCompetitionFacade extends AbstractFacade<FamSeasonCompetition> {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(FamSeasonCompetitionFacade.class);
+    @Inject
+    private Logger LOGGER;
 
     //    @PersistenceContext//(unitName = "FAM-test-ejbPU")
 //    private EntityManager em;
@@ -91,6 +93,9 @@ public class FamSeasonCompetitionFacade extends AbstractFacade<FamSeasonCompetit
         List<FamFixture> result = new ArrayList<FamFixture>();
         try {
             result = query.getResultList();
+        } catch (ConstraintViolationException e) {
+            handleConstraintViolation(e);
+            LOGGER.error("ConstraintViolationException", e);
         } catch (NoResultException e) {
             //- if there is no result}
         } catch (NonUniqueResultException e) {

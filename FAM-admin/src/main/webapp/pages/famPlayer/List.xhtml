@@ -81,6 +81,11 @@
                               headerText="#{bundle.ListFamPlayerTitle_numLicense}">
                         <h:outputText value="#{item.numLicense}"/>
                     </p:column>
+                    <p:column sortBy="#{item.email}"
+                              filterBy="#{item.email}"
+                              headerText="#{bundle.ListFamPlayerTitle_email}">
+                        <h:outputText value="#{item.email}"/>
+                    </p:column>
                     <!--                    <p:column sortBy="#{item.address}"
           filterBy="#{item.address}"
           headerText="#{bundle.ListFamUserTitle_address}" >

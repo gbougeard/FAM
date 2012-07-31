@@ -4,10 +4,16 @@
  */
 package org.fam.ejb.session;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.fam.common.interceptor.AuditInterceptor;
+import org.fam.common.interceptor.LoggingInterceptor;
+import org.fam.ejb.model.FamSeason;
+import org.fam.ejb.model.FamUser;
+import org.fam.ejb.model.FamUserSeason;
+import org.slf4j.Logger;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.interceptor.Interceptors;
 import javax.persistence.LockTimeoutException;
@@ -18,12 +24,9 @@ import javax.persistence.PessimisticLockException;
 import javax.persistence.Query;
 import javax.persistence.QueryTimeoutException;
 import javax.persistence.TransactionRequiredException;
-
-import org.fam.common.interceptor.AuditInterceptor;
-import org.fam.common.interceptor.LoggingInterceptor;
-import org.fam.ejb.model.FamSeason;
-import org.fam.ejb.model.FamUser;
-import org.fam.ejb.model.FamUserSeason;
+import javax.validation.ConstraintViolationException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author gbougear
@@ -32,6 +35,9 @@ import org.fam.ejb.model.FamUserSeason;
 @Stateless
 @Interceptors({AuditInterceptor.class, LoggingInterceptor.class})
 public class FamUserSeasonFacade extends AbstractFacade<FamUserSeason> {
+
+    @Inject
+    private Logger LOGGER;
 
     //    @PersistenceContext ////(unitName = "FAM-test-ejbPU")
 //    private EntityManager em;
@@ -76,6 +82,9 @@ public class FamUserSeasonFacade extends AbstractFacade<FamUserSeason> {
         List<FamUserSeason> result = new ArrayList<FamUserSeason>();
         try {
             result = query.getResultList();
+        } catch (ConstraintViolationException e) {
+            handleConstraintViolation(e);
+            LOGGER.error("ConstraintViolationException", e);
         } catch (NoResultException e) {
             //- if there is no result}
         } catch (NonUniqueResultException e) {

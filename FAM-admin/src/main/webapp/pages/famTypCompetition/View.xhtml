@@ -1,6 +1,3 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -8,7 +5,7 @@
         xmlns:p="http://primefaces.org/ui"
         template="/common/template.xhtml">
     <ui:define name="title">
-        <h:outputText value="#{bundle.ViewFamTypCompetitionTitle}"></h:outputText>
+        <h:outputText value="#{bundle.ViewFamTypCompetitionTitle}"/>
     </ui:define>
     <ui:define name="body">
         <p:panel header="#{bundle.ViewFamTypCompetitionTitle}">
@@ -19,21 +16,20 @@
                     title="#{bundle.ViewFamTypCompetitionTitle_idCompetition}"/>-->
 
                     <h:outputText value="#{bundle.ViewFamTypCompetitionLabel_libCompetition}"/>
-                    <h:outputText value="#{famTypCompetitionController.selected.libCompetition}"
+                    <h:outputText value="#{famTypCompetitionController.selected.libTypCompetition}"
                                   title="#{bundle.ViewFamTypCompetitionTitle_libCompetition}"/>
 
                     <h:outputText value="#{bundle.ViewFamTypCompetitionLabel_codCompetition}"/>
-                    <h:outputText value="#{famTypCompetitionController.selected.codCompetition}"
+                    <h:outputText value="#{famTypCompetitionController.selected.codTypCompetition}"
                                   title="#{bundle.ViewFamTypCompetitionTitle_codCompetition}"/>
 
                     <h:outputText value="#{bundle.ViewFamTypCompetitionLabel_isChampionship}"/>
                     <p:selectBooleanCheckbox value="#{famTypCompetitionController.selected.isChampionship}"/>
 
                     <h:outputText value="#{bundle.ViewFamTypCompetitionLabel_typMatch}"/>
-                    <h:outputText value="#{famTypCompetitionController.selected.typMatch}"
+                    <h:outputText value="#{famTypCompetitionController.selected.famTypMatch.libTypMatch}"
                                   title="#{bundle.ViewFamTypCompetitionTitle_typMatch}"/>
 
-                    />
 
                     <!--                    <h:outputText value="#{bundle.ViewFamTypCompetitionLabel_dtCreat}"/>
                     <h:outputText value="#{famTypCompetitionController.selected.dtCreat}"

@@ -4,10 +4,16 @@
  */
 package org.fam.ejb.session;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import lombok.Getter;
+import lombok.Setter;
+import org.fam.common.cdi.Loggable;
+import org.fam.common.cdi.Player;
+import org.fam.common.constant.FamConstantes;
+import org.fam.ejb.model.FamEvent;
+import org.fam.ejb.model.FamEventStatus;
+import org.fam.ejb.model.FamPlayer;
+import org.slf4j.Logger;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -20,16 +26,11 @@ import javax.persistence.Query;
 import javax.persistence.QueryTimeoutException;
 import javax.persistence.TransactionRequiredException;
 import javax.persistence.criteria.CriteriaQuery;
-
-import lombok.Getter;
-import lombok.Setter;
-import org.fam.common.cdi.Loggable;
-import org.fam.common.cdi.Player;
-import org.fam.common.constant.FamConstantes;
-import org.fam.ejb.model.FamEvent;
-import org.fam.ejb.model.FamEventStatus;
-import org.fam.ejb.model.FamPlayer;
-import org.slf4j.Logger;
+import javax.validation.ConstraintViolationException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author gbougear
@@ -78,9 +79,7 @@ public class FamEventFacade extends AbstractFacade<FamEvent> {
     @Override
     public void genData() {
 
-        for (int i = 0;
-             i < 50;
-             i++) {
+        for (int i = 0; i < 50; i++) {
             FamEvent item = new FamEvent();
             item.setLibEvent("Event_" + i);
             item.setComments("<b>test</b>");
@@ -103,14 +102,18 @@ public class FamEventFacade extends AbstractFacade<FamEvent> {
 //
 //        Query q = getEntityManager().createQuery(cq);
 //        return q.getResultList();
-        Query query = getEntityManager().createNamedQuery(FamEvent.FIND_BETWEEN_BY_TEAM);
+//        Query query = getEntityManager().createNamedQuery(FamEvent.FIND_BETWEEN_BY_TEAM);
+        Query query = getEntityManager().createNamedQuery(FamEvent.FIND_BETWEEN);
         query.setParameter("dtStart", startDate);
         query.setParameter("dtEnd", endDate);
-        query.setParameter("team", currentPlayer.getCurrentTeam());
+        //query.setParameter("team", currentPlayer.getCurrentTeam());
 
         List<FamEvent> result = new ArrayList<FamEvent>();
         try {
             result = query.getResultList();
+        } catch (ConstraintViolationException e) {
+            handleConstraintViolation(e);
+            LOGGER.error("ConstraintViolationException", e);
         } catch (NoResultException e) {
             //- if there is no result}
         } catch (NonUniqueResultException e) {
@@ -160,6 +163,9 @@ public class FamEventFacade extends AbstractFacade<FamEvent> {
         List<FamEvent> results = new ArrayList<FamEvent>();
         try {
             results = query.getResultList();
+        } catch (ConstraintViolationException e) {
+            handleConstraintViolation(e);
+            LOGGER.error("ConstraintViolationException", e);
         } catch (NoResultException e) {
             //- if there is no result}
         } catch (NonUniqueResultException e) {

@@ -9,7 +9,22 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.PostLoad;
+import javax.persistence.PostPersist;
+import javax.persistence.PostUpdate;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
@@ -24,16 +39,16 @@ import java.util.List;
 @Entity
 @Table(name = FamPlace.TABLE_NAME)
 @NamedQueries({
-        @NamedQuery(name = FamPlace.FIND_ALL,
-                query = "SELECT f FROM FamPlace f"),
-        @NamedQuery(name = FamPlace.FIND_BY_ID_PLACE,
-                query = "SELECT f FROM FamPlace f WHERE f.idPlace = :idPlace"),
-        @NamedQuery(name = FamPlace.FIND_BY_LIB_PLACE,
-                query = "SELECT f FROM FamPlace f WHERE f.libPlace = :libPlace"),
-        @NamedQuery(name = FamPlace.FIND_BY_DT_CREAT,
-                query = "SELECT f FROM FamPlace f WHERE f.dtCreat = :dtCreat"),
-        @NamedQuery(name = FamPlace.FIND_BY_DT_MODIF,
-                query = "SELECT f FROM FamPlace f WHERE f.dtModif = :dtModif")
+               @NamedQuery(name = FamPlace.FIND_ALL,
+                           query = "SELECT f FROM FamPlace f"),
+               @NamedQuery(name = FamPlace.FIND_BY_ID_PLACE,
+                           query = "SELECT f FROM FamPlace f WHERE f.idPlace = :idPlace"),
+               @NamedQuery(name = FamPlace.FIND_BY_LIB_PLACE,
+                           query = "SELECT f FROM FamPlace f WHERE f.libPlace = :libPlace"),
+               @NamedQuery(name = FamPlace.FIND_BY_DT_CREAT,
+                           query = "SELECT f FROM FamPlace f WHERE f.dtCreat = :dtCreat"),
+               @NamedQuery(name = FamPlace.FIND_BY_DT_MODIF,
+                           query = "SELECT f FROM FamPlace f WHERE f.dtModif = :dtModif")
 })
 @XmlRootElement
 public class FamPlace extends FamEntity implements Serializable {
@@ -206,7 +221,7 @@ public class FamPlace extends FamEntity implements Serializable {
         sb.append(", longitude=").append(longitude);
         sb.append(", latitude=").append(latitude);
 //        sb.append(", famTeamList=").append(famTeamList);
-        sb.append(", famTypPlace=").append(famTypPlace.getLibTypPlace());
+        sb.append(", famTypPlace=").append(famTypPlace == null ? "nulll" : famTypPlace.getLibTypPlace());
         sb.append(", fullAddress='").append(fullAddress).append('\'');
         sb.append('}');
         return sb.toString();

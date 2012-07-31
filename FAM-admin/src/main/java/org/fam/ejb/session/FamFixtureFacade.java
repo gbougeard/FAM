@@ -4,18 +4,18 @@
  */
 package org.fam.ejb.session;
 
-import java.util.List;
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.inject.Named;
-import javax.interceptor.Interceptors;
-import javax.persistence.Query;
-
 import org.fam.common.interceptor.AuditInterceptor;
 import org.fam.common.interceptor.LoggingInterceptor;
 import org.fam.ejb.model.FamFixture;
 import org.fam.ejb.model.FamMatch;
 import org.fam.ejb.model.FamSeasonCompetition;
+
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.inject.Named;
+import javax.interceptor.Interceptors;
+import javax.persistence.Query;
+import java.util.List;
 
 /**
  * @author gbougear
@@ -52,9 +52,7 @@ public class FamFixtureFacade extends AbstractFacade<FamFixture> {
     @Override
     public void genData() {
 
-        for (int i = 0;
-             i < 50;
-             i++) {
+        for (int i = 0; i < 50; i++) {
             FamFixture item = new FamFixture();
             item.setLibFixture("Fixture_" + i);
             this.create(item);

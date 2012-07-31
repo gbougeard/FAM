@@ -1,7 +1,10 @@
 package org.fam.jsf.controller;
 
 import org.fam.ejb.model.FamClub;
+import org.fam.ejb.model.FamSeason;
 import org.fam.ejb.session.FamClubFacade;
+import org.fam.ejb.session.FamPlayerSeasonFacade;
+import org.fam.jsf.cache.CacheBean;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -19,10 +22,14 @@ import java.io.Serializable;
 //    @URLMapping(id = "clubEdit", pattern = "/club/e/#{ FamClubController.id }/", viewId = "/ok/famClub/Edit.jsf" )
 //})
 public class FamClubController extends AbstractController<FamClub>
-        implements Serializable {
+ implements Serializable {
 
     @Inject
     private FamClubFacade ejbFacade;
+    @Inject
+    private FamPlayerSeasonFacade ejbPlayerSeason;
+    @Inject
+    private CacheBean cacheBean;
 
     public FamClubController() {
     }
@@ -74,6 +81,13 @@ public class FamClubController extends AbstractController<FamClub>
         id = null;
         selectedItemIndex = -1;
         return "pretty:createClub";
+    }
+
+    public String calcStats() {
+        for (FamSeason season : cacheBean.getListSeason()) {
+            ejbPlayerSeason.calcStatForClubAndSeason(current, season);
+        }
+        return "";
     }
 
 //    @Override

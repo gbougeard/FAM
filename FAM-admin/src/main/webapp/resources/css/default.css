@@ -20,7 +20,7 @@ Pour effacer la bordure des layout
 }
 
 .famCombo {
-    width: 150px;
+    width: 250px;
 }
 
 .row-sub {
@@ -29,7 +29,7 @@ Pour effacer la bordure des layout
     color: black !important;
 }
 
-.soccer_field .ui-datagrid-content{
+.soccer_field .ui-datagrid-content {
     height: 512px;
     width: 384px;
     background-image: url(#{resource[ 'images/Soccer.Field_Transparant.png' ]}) !important;

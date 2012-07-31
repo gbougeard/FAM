@@ -9,7 +9,17 @@ package org.fam.ejb.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
@@ -22,18 +32,18 @@ import java.io.Serializable;
 @Entity
 @Table(name = FamCard.TABLE_NAME)
 @NamedQueries({
-        @NamedQuery(name = FamCard.FIND_ALL,
-                query = "SELECT f FROM FamCard f"),
-        @NamedQuery(name = FamCard.FIND_BY_ID_CARD,
-                query = "SELECT f FROM FamCard f WHERE f.idCard = :idCard"),
-        @NamedQuery(name = FamCard.FIND_BY_CARD_TIME,
-                query = "SELECT f FROM FamCard f WHERE f.cardTime = :cardTime"),
-        @NamedQuery(name = FamCard.FIND_BY_MATCH_AND_TEAM,
-                query = "SELECT f FROM FamCard f WHERE f.famMatchPlayer.famMatchTeam.famMatch = :famMatch AND f.famMatchPlayer.famMatchTeam.famTeam = :famTeam"),
-        @NamedQuery(name = FamCard.FIND_BY_DT_CREAT,
-                query = "SELECT f FROM FamCard f WHERE f.dtCreat = :dtCreat"),
-        @NamedQuery(name = FamCard.FIND_BY_DT_MODIF,
-                query = "SELECT f FROM FamCard f WHERE f.dtModif = :dtModif")
+               @NamedQuery(name = FamCard.FIND_ALL,
+                           query = "SELECT f FROM FamCard f"),
+               @NamedQuery(name = FamCard.FIND_BY_ID_CARD,
+                           query = "SELECT f FROM FamCard f WHERE f.idCard = :idCard"),
+               @NamedQuery(name = FamCard.FIND_BY_CARD_TIME,
+                           query = "SELECT f FROM FamCard f WHERE f.cardTime = :cardTime"),
+               @NamedQuery(name = FamCard.FIND_BY_MATCH_AND_TEAM,
+                           query = "SELECT f FROM FamCard f WHERE f.famMatchPlayer.famMatchTeam.famMatch = :famMatch AND f.famMatchPlayer.famMatchTeam.famTeam = :famTeam"),
+               @NamedQuery(name = FamCard.FIND_BY_DT_CREAT,
+                           query = "SELECT f FROM FamCard f WHERE f.dtCreat = :dtCreat"),
+               @NamedQuery(name = FamCard.FIND_BY_DT_MODIF,
+                           query = "SELECT f FROM FamCard f WHERE f.dtModif = :dtModif")
 })
 @XmlRootElement
 public class FamCard extends FamEntity implements Serializable {
@@ -88,7 +98,7 @@ public class FamCard extends FamEntity implements Serializable {
     public static final String PROP_TYP = "famTypCard";
     @JoinColumn(name = COL_ID_TYP, referencedColumnName = FamTypCard.COL_ID)
     @ManyToOne(optional = false)
-    @NotNull
+//    @NotNull
     private FamTypCard famTypCard;
     //
     /**
@@ -109,9 +119,9 @@ public class FamCard extends FamEntity implements Serializable {
     public static final String PROP_MATCH_PLAYER = "famMatchPlayer";
     @ManyToOne
     @JoinColumns({
-            @JoinColumn(name = COL_ID_MATCH, referencedColumnName = FamMatchPlayer.COL_ID_MATCH),
-            @JoinColumn(name = COL_ID_TEAM, referencedColumnName = FamMatchPlayer.COL_ID_TEAM),
-            @JoinColumn(name = COL_ID_PLAYER, referencedColumnName = FamMatchPlayer.COL_ID_PLAYER)})
+                  @JoinColumn(name = COL_ID_MATCH, referencedColumnName = FamMatchPlayer.COL_ID_MATCH),
+                  @JoinColumn(name = COL_ID_TEAM, referencedColumnName = FamMatchPlayer.COL_ID_TEAM),
+                  @JoinColumn(name = COL_ID_PLAYER, referencedColumnName = FamMatchPlayer.COL_ID_PLAYER)})
     @NotNull
     private FamMatchPlayer famMatchPlayer;
     //

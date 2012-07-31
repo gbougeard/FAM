@@ -4,21 +4,6 @@
  */
 package org.fam.ejb.session;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.ejb.Stateless;
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.interceptor.Interceptors;
-import javax.persistence.LockTimeoutException;
-import javax.persistence.NoResultException;
-import javax.persistence.NonUniqueResultException;
-import javax.persistence.PersistenceException;
-import javax.persistence.PessimisticLockException;
-import javax.persistence.Query;
-import javax.persistence.QueryTimeoutException;
-import javax.persistence.TransactionRequiredException;
-
 import org.fam.common.constant.FamConstantes;
 import org.fam.common.interceptor.AuditInterceptor;
 import org.fam.common.interceptor.LoggingInterceptor;
@@ -31,6 +16,22 @@ import org.fam.ejb.model.FamTeam;
 import org.fam.ejb.model.FamTypAnswer;
 import org.fam.jsf.cache.CachePlayer;
 import org.slf4j.Logger;
+
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.interceptor.Interceptors;
+import javax.persistence.LockTimeoutException;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
+import javax.persistence.PersistenceException;
+import javax.persistence.PessimisticLockException;
+import javax.persistence.Query;
+import javax.persistence.QueryTimeoutException;
+import javax.persistence.TransactionRequiredException;
+import javax.validation.ConstraintViolationException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author gbougear
@@ -82,6 +83,9 @@ public class FamAnswerFacade extends AbstractFacade<FamAnswer> {
         List<FamAnswer> result = new ArrayList<FamAnswer>();
         try {
             result = query.getResultList();
+        } catch (ConstraintViolationException e) {
+            handleConstraintViolation(e);
+            LOGGER.error("ConstraintViolationException", e);
         } catch (NoResultException e) {
             //- if there is no result}
             LOGGER.error("findAnswerByEvent", e);
@@ -125,6 +129,9 @@ public class FamAnswerFacade extends AbstractFacade<FamAnswer> {
         List<FamAnswer> result = new ArrayList<FamAnswer>();
         try {
             result = query.getResultList();
+        } catch (ConstraintViolationException e) {
+            handleConstraintViolation(e);
+            LOGGER.error("ConstraintViolationException", e);
         } catch (NoResultException e) {
             //- if there is no result}
             LOGGER.error("findAnswerByEventAndTypAnswer", e);
@@ -168,6 +175,9 @@ public class FamAnswerFacade extends AbstractFacade<FamAnswer> {
         List<FamAnswer> result = new ArrayList<FamAnswer>();
         try {
             result = query.getResultList();
+        } catch (ConstraintViolationException e) {
+            handleConstraintViolation(e);
+            LOGGER.error("ConstraintViolationException", e);
         } catch (NoResultException e) {
             //- if there is no result}
             LOGGER.error("findAnswerByEventAndInTypAnswer", e);
@@ -331,6 +341,9 @@ public class FamAnswerFacade extends AbstractFacade<FamAnswer> {
         List<FamAnswer> result = new ArrayList<FamAnswer>();
         try {
             result = query.getResultList();
+        } catch (ConstraintViolationException e) {
+            handleConstraintViolation(e);
+            LOGGER.error("ConstraintViolationException", e);
         } catch (NoResultException e) {
             //- if there is no result}
             LOGGER.error("findAnswerByEventAndPlayer", e);

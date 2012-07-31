@@ -1,6 +1,3 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -22,7 +19,7 @@
         <p:outputLabel value="#{bundle.EditFamTypCompetitionLabel_libCompetition}" for="libCompetition"/>
         <!--@elvariable id="bean" type="org.fam.ejb.model.FamTypCompetition"-->
         <p:inputText id="libCompetition"
-                     value="#{bean.libCompetition}"
+                     value="#{bean.libTypCompetition}"
                      title="#{bundle.EditFamTypCompetitionTitle_libCompetition}"
                 >
             <p:ajax event="blur" update="msg_libCompetition"/>
@@ -31,7 +28,7 @@
 
         <p:outputLabel value="#{bundle.EditFamTypCompetitionLabel_codCompetition}" for="codCompetition"/>
         <p:inputText id="codCompetition"
-                     value="#{bean.codCompetition}"
+                     value="#{bean.codTypCompetition}"
                      title="#{bundle.EditFamTypCompetitionTitle_codCompetition}"
                 >
             <p:ajax event="blur" update="msg_codCompetition"/>
@@ -47,14 +44,15 @@
         <p:message id="msg_isChampionship" for="isChampionship"/>
 
         <p:outputLabel value="#{bundle.EditFamTypCompetitionLabel_typMatch}" for="typMatch"/>
-        <h:selectOneMenu id="typMatch"
-                         value="#{bean.famTypMatch}">
+        <p:selectOneMenu id="typMatch"
+                         value="#{bean.famTypMatch}"
+                         converter="typMatchConverter">
             <f:selectItems value="#{cacheBean.listTypMatch}"
                            var="t"
                            itemLabel="#{t.libTypMatch}"
                            itemValue="#{t}"/>
             <p:ajax event="blur" update="msg_typMatch"/>
-        </h:selectOneMenu>
+        </p:selectOneMenu>
         <p:message id="msg_typMatch" for="typMatch"/>
 
 

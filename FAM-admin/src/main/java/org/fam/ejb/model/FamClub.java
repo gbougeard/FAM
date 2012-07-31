@@ -9,8 +9,21 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.*;
-import javax.validation.constraints.Max;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
@@ -23,30 +36,30 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = FamClub.TABLE_NAME,
-        uniqueConstraints = {
-                @UniqueConstraint(columnNames = {FamClub.COL_COD})
-        })
+       uniqueConstraints = {
+                            @UniqueConstraint(columnNames = {FamClub.COL_COD})
+       })
 @NamedQueries({
-        @NamedQuery(name = FamClub.FIND_ALL,
-                query = "SELECT f FROM FamClub f"),
-        @NamedQuery(name = FamClub.FIND_BY_ID_CLUB,
-                query = "SELECT f FROM FamClub f WHERE f.idClub = :idClub"),
-        @NamedQuery(name = FamClub.FIND_BY_LIB_CLUB,
-                query = "SELECT f FROM FamClub f WHERE f.libClub = :libClub"),
-        @NamedQuery(name = FamClub.FIND_BY_CODE_FFF,
-                query = "SELECT f FROM FamClub f WHERE f.codeFff = :codeFff"),
-        @NamedQuery(name = FamClub.FIND_BY_COUNTRY,
-                query = "SELECT f FROM FamClub f WHERE f.famCountry = :famCountry"),
-        @NamedQuery(name = FamClub.FIND_BY_PROVINCE,
-                query = "SELECT f FROM FamClub f WHERE f.famProvince = :famProvince"),
-        @NamedQuery(name = FamClub.FIND_BY_STATE,
-                query = "SELECT f FROM FamClub f WHERE f.famState = :famState"),
-        @NamedQuery(name = FamClub.FIND_BY_CITY,
-                query = "SELECT f FROM FamClub f WHERE f.famCity = :famCity"),
-        @NamedQuery(name = FamClub.FIND_BY_DT_CREAT,
-                query = "SELECT f FROM FamClub f WHERE f.dtCreat = :dtCreat"),
-        @NamedQuery(name = FamClub.FIND_BY_DT_MODIF,
-                query = "SELECT f FROM FamClub f WHERE f.dtModif = :dtModif")
+               @NamedQuery(name = FamClub.FIND_ALL,
+                           query = "SELECT f FROM FamClub f"),
+               @NamedQuery(name = FamClub.FIND_BY_ID_CLUB,
+                           query = "SELECT f FROM FamClub f WHERE f.idClub = :idClub"),
+               @NamedQuery(name = FamClub.FIND_BY_LIB_CLUB,
+                           query = "SELECT f FROM FamClub f WHERE f.libClub = :libClub"),
+               @NamedQuery(name = FamClub.FIND_BY_CODE_FFF,
+                           query = "SELECT f FROM FamClub f WHERE f.codeFff = :codeFff"),
+               @NamedQuery(name = FamClub.FIND_BY_COUNTRY,
+                           query = "SELECT f FROM FamClub f WHERE f.famCountry = :famCountry"),
+               @NamedQuery(name = FamClub.FIND_BY_PROVINCE,
+                           query = "SELECT f FROM FamClub f WHERE f.famProvince = :famProvince"),
+               @NamedQuery(name = FamClub.FIND_BY_STATE,
+                           query = "SELECT f FROM FamClub f WHERE f.famState = :famState"),
+               @NamedQuery(name = FamClub.FIND_BY_CITY,
+                           query = "SELECT f FROM FamClub f WHERE f.famCity = :famCity"),
+               @NamedQuery(name = FamClub.FIND_BY_DT_CREAT,
+                           query = "SELECT f FROM FamClub f WHERE f.dtCreat = :dtCreat"),
+               @NamedQuery(name = FamClub.FIND_BY_DT_MODIF,
+                           query = "SELECT f FROM FamClub f WHERE f.dtModif = :dtModif")
 })
 @XmlRootElement
 public class FamClub extends FamEntity implements Serializable {
@@ -92,7 +105,6 @@ public class FamClub extends FamEntity implements Serializable {
     @Basic(optional = false)
     @NotNull(message = "Code FFF obligatoire")
     @Column(name = COL_COD)
-    @Max(value = 200, message = "#{bundle.testBV_JPA}")//"Valeur maxi {value}.")
     private Integer codeFff;
     //
     public static final String PROP_COUNTRY = "famCountry";

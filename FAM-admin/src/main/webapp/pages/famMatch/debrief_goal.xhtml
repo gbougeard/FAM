@@ -7,103 +7,170 @@
 
     <p:tab id="tabGoal" title="Score et Buts">
         <h:form id="frmScore">
-            <h:panelGrid columns="6">
-                <p:outputLabel value="#{famMatchDebriefWizardController.selected.homeTeam.famTeam.libTeam}"
-                               for="homeScore"/>
-                <p:inputText id="homeScore" value="#{famMatchDebriefWizardController.selected.homeTeam.goalScored}"
-                             size="2"/>
-                <h:outputText value=" - "/>
-                <p:inputText id="awayScore" value="#{famMatchDebriefWizardController.selected.awayTeam.goalScored}"
-                             size="2"/>
-                <p:outputLabel value="#{famMatchDebriefWizardController.selected.awayTeam.famTeam.libTeam}"
-                               for="awayScore"/>
+            <p:fieldset legend="Score">
+                <center>
+                    <h:panelGrid columns="5" cellpadding="5">
+                        <p:outputLabel value="#{famMatchDebriefWizardController.selected.homeTeam.famTeam.libTeam}"
+                                       for="homeScore"/>
+                        <p:inputText id="homeScore"
+                                     value="#{famMatchDebriefWizardController.selected.homeTeam.goalScored}"
+                                     size="2"/>
+                        <h:outputText value=" - "/>
+                        <p:inputText id="awayScore"
+                                     value="#{famMatchDebriefWizardController.selected.awayTeam.goalScored}"
+                                     size="2"/>
+                        <p:outputLabel value="#{famMatchDebriefWizardController.selected.awayTeam.famTeam.libTeam}"
+                                       for="awayScore"/>
 
-                <p:commandButton value="Save"
-                                 action="#{famMatchDebriefWizardController.saveScore}"
-                                 update="@(frmGoals)"
-                        />
-            </h:panelGrid>
-
+                    </h:panelGrid>
+                    <p:commandButton value="Save"
+                                     action="#{famMatchDebriefWizardController.saveScore}"
+                                     update="@(frmGoals)"/>
+                </center>
+            </p:fieldset>
         </h:form>
 
         <h:form id="frmGoals">
-            <h:panelGrid columns="3">
-                <p:outputLabel value="#{bundle.EditFamGoalLabel_famMatchPlayerStriker}" for="famMatchPlayerStriker"/>
-                <p:selectOneMenu id="famMatchPlayerStriker"
-                                 value="#{famMatchDebriefWizardController.famGoal.famMatchPlayerStriker}"
-                                 title="#{bundle.EditFamGoalTitle_famMatchPlayerStriker}"
-                                 styleClass="famCombo"
-                                 converter="matchPlayerDebriefConverter"
-                        >
-                    <f:selectItem itemLabel="Buteur" itemValue=""/>
-                    <f:selectItems value="#{famMatchDebriefWizardController.famMatchTeam.famMatchPlayerList}"
-                                   var="s"
-                                   itemLabel="#{s.num} #{not empty s.famPlayer ? s.famPlayer.displayName : bundle.Save}"
-                                   itemValue="#{s}"/>
-                    <p:ajax event="blur" update="msg_famMatchPlayerStriker"/>
-                </p:selectOneMenu>
-                <p:message id="msg_famMatchPlayerStriker" for="famMatchPlayerStriker"/>
+            <p:fieldset legend="But">
+                <center>
+                    <h:panelGrid columns="3">
+                        <h:panelGroup>
+                            <h:panelGrid columns="3">
+                                <p:outputLabel value="#{bundle.EditFamGoalLabel_famMatchPlayerStriker}"
+                                               for="famMatchPlayerStriker"/>
+                                <p:selectOneMenu id="famMatchPlayerStriker"
+                                                 value="#{famMatchDebriefWizardController.famGoal.famMatchPlayerStriker}"
+                                                 title="#{bundle.EditFamGoalTitle_famMatchPlayerStriker}"
+                                                 styleClass="famCombo"
+                                                 converter="matchPlayerDebriefConverter"
+                                        >
+                                    <f:selectItem itemLabel="Buteur" itemValue=""/>
+                                    <f:selectItems
+                                            value="#{famMatchDebriefWizardController.famMatchTeam.famMatchPlayerList}"
+                                            var="s"
+                                            itemLabel="#{s.num} #{not empty s.famPlayer ? s.famPlayer.displayName : bundle.Save}"
+                                            itemValue="#{s}"/>
+                                    <p:ajax event="blur" update="msg_famMatchPlayerStriker"/>
+                                </p:selectOneMenu>
+                                <p:message id="msg_famMatchPlayerStriker" for="famMatchPlayerStriker"/>
 
-                <p:outputLabel value="#{bundle.EditFamGoalLabel_famMatchPlayerAssist}" for="famMatchPlayerAssist"/>
-                <p:selectOneMenu id="famMatchPlayerAssist"
-                                 value="#{famMatchDebriefWizardController.famGoal.famMatchPlayerAssist}"
-                                 title="#{bundle.EditFamGoalTitle_famMatchPlayerAssist}"
-                                 styleClass="famCombo"
-                                 converter="matchPlayerDebriefConverter"
+                                <p:outputLabel value="#{bundle.EditFamGoalLabel_famMatchPlayerAssist}"
+                                               for="famMatchPlayerAssist"/>
+                                <p:selectOneMenu id="famMatchPlayerAssist"
+                                                 value="#{famMatchDebriefWizardController.famGoal.famMatchPlayerAssist}"
+                                                 title="#{bundle.EditFamGoalTitle_famMatchPlayerAssist}"
+                                                 styleClass="famCombo"
+                                                 converter="matchPlayerDebriefConverter"
 
-                        >
-                    <f:selectItem itemLabel="Passeur" itemValue=""/>
-                    <f:selectItems value="#{famMatchDebriefWizardController.famMatchTeam.famMatchPlayerList}"
-                                   var="p"
-                                   itemLabel="#{p.num} #{p.famPlayer.displayName}"
-                                   itemValue="#{p}"/>
-                    <p:ajax event="blur" update="msg_famMatchPlayerAssist"/>
-                </p:selectOneMenu>
-                <p:message id="msg_famMatchPlayerAssist" for="famMatchPlayerAssist"/>
+                                        >
+                                    <f:selectItem itemLabel="Passeur" itemValue=""/>
+                                    <f:selectItems
+                                            value="#{famMatchDebriefWizardController.famMatchTeam.famMatchPlayerList}"
+                                            var="p"
+                                            itemLabel="#{p.num} #{p.famPlayer.displayName}"
+                                            itemValue="#{p}"/>
+                                    <p:ajax event="blur" update="msg_famMatchPlayerAssist"/>
+                                </p:selectOneMenu>
+                                <p:message id="msg_famMatchPlayerAssist" for="famMatchPlayerAssist"/>
+                            </h:panelGrid>
+                        </h:panelGroup>
+                        <h:panelGroup>
+                            <h:panelGrid columns="3">
 
-                <p:outputLabel value="#{bundle.EditFamGoalLabel_goalTime}" for="goalTime"/>
-                <p:inputText id="goalTime"
-                             value="#{famMatchDebriefWizardController.famGoal.goalTime}"
-                             title="#{bundle.EditFamGoalTitle_goalTime}"
-                        >
-                    <p:ajax event="blur" update="msg_goalTime"/>
-                </p:inputText>
-                <p:message id="msg_goalTime" for="goalTime"/>
+                                <p:outputLabel value="#{bundle.EditFamGoalLabel_csc}" for="csc"/>
+                                <p:selectBooleanCheckbox id="csc"
+                                                         value="#{famMatchDebriefWizardController.famGoal.csc}"
+                                                         title="#{bundle.EditFamGoalTitle_csc}"
+                                        >
+                                    <p:ajax event="blur" update="msg_csc"/>
+                                </p:selectBooleanCheckbox>
+                                <p:message id="msg_csc" for="csc"/>
 
-                <p:outputLabel value="#{bundle.EditFamGoalLabel_csc}" for="csc"/>
-                <p:selectBooleanCheckbox id="csc"
-                                         value="#{famMatchDebriefWizardController.famGoal.csc}"
-                                         title="#{bundle.EditFamGoalTitle_csc}"
-                        >
-                    <p:ajax event="blur" update="msg_csc"/>
-                </p:selectBooleanCheckbox>
-                <p:message id="msg_csc" for="csc"/>
+                                <p:outputLabel value="#{bundle.EditFamGoalLabel_penalty}" for="penalty"/>
+                                <p:selectBooleanCheckbox id="penalty"
+                                                         value="#{famMatchDebriefWizardController.famGoal.penalty}"
+                                                         title="#{bundle.EditFamGoalTitle_penalty}"
+                                        >
+                                    <p:ajax event="blur" update="msg_penalty"/>
+                                </p:selectBooleanCheckbox>
+                                <p:message id="msg_penalty" for="penalty"/>
+                            </h:panelGrid>
+                        </h:panelGroup>
+                        <h:panelGroup>
+                            <h:panelGrid columns="3">
+                                <p:outputLabel value="#{bundle.EditFamGoalLabel_goalTime}" for="goalTime"/>
+                                <p:inputText id="goalTime"
+                                             value="#{famMatchDebriefWizardController.famGoal.goalTime}"
+                                             title="#{bundle.EditFamGoalTitle_goalTime}"
+                                        >
+                                    <p:ajax event="blur" update="msg_goalTime"/>
+                                </p:inputText>
+                                <p:message id="msg_goalTime" for="goalTime"/>
 
-                <p:outputLabel value="#{bundle.EditFamGoalLabel_penalty}" for="penalty"/>
-                <p:selectBooleanCheckbox id="penalty"
-                                         value="#{famMatchDebriefWizardController.famGoal.penalty}"
-                                         title="#{bundle.EditFamGoalTitle_penalty}"
-                        >
-                    <p:ajax event="blur" update="msg_penalty"/>
-                </p:selectBooleanCheckbox>
-                <p:message id="msg_penalty" for="penalty"/>
-            </h:panelGrid>
+                            </h:panelGrid>
+                            <p:commandButton value="Add goal"
+                                             action="#{famMatchDebriefWizardController.addGoal}"
+                                             update="@(goals)"
+                                    >
+                                <p:collector value="#{famMatchDebriefWizardController.famGoal}"
+                                             addTo="#{famMatchDebriefWizardController.lstGoal}"/>
+                            </p:commandButton>
+                        </h:panelGroup>
+                    </h:panelGrid>
 
-            <p:commandButton value="Add goal"
-                             action="#{famMatchDebriefWizardController.addGoal}"
-                             update="@(dlGoals)"
-                    />
+
+                </center>
+
+                <p:outputPanel id="goals">
+                    <p:dataTable id="dtbGoal" value="#{famMatchDebriefWizardController.lstGoal}" var="card">
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Temps"/>
+                            </f:facet>
+                            <h:outputText value="#{card.goalTime}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Buteur"/>
+                            </f:facet>
+                            <h:outputText value="#{card.famMatchPlayerStriker.famPlayer.displayName}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Passeur"/>
+                            </f:facet>
+                            <h:outputText value="#{card.famMatchPlayerAssist.famPlayer.displayName}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Operation"/>
+                            </f:facet>
+                            <p:commandLink value="Remove" update="@(goals)" process="@(goals)">
+                                <p:collector value="#{card}"
+                                             removeFrom="#{famMatchDebriefWizardController.lstGoal}"/>
+                            </p:commandLink>
+                        </p:column>
+
+                    </p:dataTable>
+                </p:outputPanel>
+            </p:fieldset>
         </h:form>
 
         <p:dataList id="dlGoals"
                     value="#{famMatchDebriefWizardController.lstGoal}"
                     var="g"
                     rendered="#{not empty famMatchDebriefWizardController.lstGoal}">
-            <h:outputText value="#{g.goalTime} "/>
-            <h:outputText value="(csc) " rendered="#{g.csc}"/>
-            <h:outputText value="(sp) " rendered="#{g.penalty}"/>
-            <h:outputText value="But de #{g.famMatchPlayerStriker.famPlayer.displayName} "/>
-            <h:outputText value="sur une passe de #{g.famMatchPlayerAssist.famPlayer.displayName}"/>
+            <h:panelGrid columns="5">
+                <h:outputText value="#{g.goalTime} "/>
+                <h:outputText value="(csc) " rendered="#{g.csc}"/>
+                <h:outputText value="(sp) " rendered="#{g.penalty}"/>
+                <h:outputText value="But de #{g.famMatchPlayerStriker.famPlayer.displayName} "/>
+                <h:outputText value="sur une passe de #{g.famMatchPlayerAssist.famPlayer.displayName}"/>
+            </h:panelGrid>
         </p:dataList>
 
     </p:tab>

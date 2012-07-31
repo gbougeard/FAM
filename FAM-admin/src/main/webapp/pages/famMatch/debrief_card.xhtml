@@ -55,18 +55,61 @@
             <p:commandButton value="Add card"
                              action="#{famMatchDebriefWizardController.addCard}"
                              update="@(dlCard)"
-                    />
+                    > <p:collector value="#{famMatchDebriefWizardController.famCard}"
+                                   addTo="#{famMatchDebriefWizardController.famCard}"/>
+            </p:commandButton>
+
+            <p:outputPanel id="cards">
+                <p:dataTable id="dtbCard" value="#{famMatchDebriefWizardController.lstCard}" var="card">
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Temps"/>
+                        </f:facet>
+                        <h:outputText value="#{card.cardTime}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Carton"/>
+                        </f:facet>
+                        <h:outputText value="#{card.famTypCard.libTypCard}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Joueur"/>
+                        </f:facet>
+                        <h:outputText value="#{card.famMatchPlayer.famPlayer.displayName}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Operation"/>
+                        </f:facet>
+                        <p:commandLink value="Remove" update="@(cards)" process="@(cards)">
+                            <p:collector value="#{card}"
+                                         removeFrom="#{famMatchDebriefWizardController.lstCard}"/>
+                        </p:commandLink>
+                    </p:column>
+
+                </p:dataTable>
+            </p:outputPanel>
+
+            <p:dataList id="dlCard"
+                        value="#{famMatchDebriefWizardController.lstCard}"
+                        var="c"
+                        rendered="#{not empty famMatchDebriefWizardController.lstCard}">
+                <h:outputText value="#{c.cardTime} "/>
+                <h:outputText value="#{c.famTypCard.libTypCard} "/>
+                <h:outputText value="#{c.famMatchPlayer.famPlayer.displayName}"/>
+            </p:dataList>
+
+            <h:outputText value="Skip to next : "/>
+            <h:selectBooleanCheckbox value="#{famMatchDebriefWizardController.skip}"/>
 
         </h:form>
 
-        <p:dataList id="dlCard"
-                    value="#{famMatchDebriefWizardController.lstCard}"
-                    var="c"
-                    rendered="#{not empty famMatchDebriefWizardController.lstCard}">
-            <h:outputText value="#{c.cardTime} "/>
-            <h:outputText value="#{c.famTypCard.libTypCard} "/>
-            <h:outputText value="#{c.famMatchPlayer.famPlayer.displayName}"/>
-        </p:dataList>
 
     </p:tab>
 

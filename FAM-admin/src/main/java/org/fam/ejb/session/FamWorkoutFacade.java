@@ -4,9 +4,16 @@
  */
 package org.fam.ejb.session;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import lombok.Getter;
+import lombok.Setter;
+import org.fam.common.cdi.Loggable;
+import org.fam.common.interceptor.AuditInterceptor;
+import org.fam.common.interceptor.LoggingInterceptor;
+import org.fam.ejb.model.FamEvent;
+import org.fam.ejb.model.FamSeason;
+import org.fam.ejb.model.FamWorkout;
+import org.slf4j.Logger;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -19,17 +26,9 @@ import javax.persistence.PessimisticLockException;
 import javax.persistence.Query;
 import javax.persistence.QueryTimeoutException;
 import javax.persistence.TransactionRequiredException;
-import javax.persistence.criteria.CriteriaQuery;
-
-import lombok.Getter;
-import lombok.Setter;
-import org.fam.common.cdi.Loggable;
-import org.fam.common.interceptor.AuditInterceptor;
-import org.fam.common.interceptor.LoggingInterceptor;
-import org.fam.ejb.model.FamEvent;
-import org.fam.ejb.model.FamSeason;
-import org.fam.ejb.model.FamWorkout;
-import org.slf4j.Logger;
+import javax.validation.ConstraintViolationException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author gbougear
@@ -101,6 +100,9 @@ public class FamWorkoutFacade extends AbstractFacade<FamWorkout> {
         List<FamWorkout> result = new ArrayList<FamWorkout>();
         try {
             result = query.getResultList();
+        } catch (ConstraintViolationException e) {
+            handleConstraintViolation(e);
+            LOGGER.error("ConstraintViolationException", e);
         } catch (NoResultException e) {
             //- if there is no result}
         } catch (NonUniqueResultException e) {
@@ -122,57 +124,4 @@ public class FamWorkoutFacade extends AbstractFacade<FamWorkout> {
         return result;
     }
 
-    @Override
-    public void remove(FamWorkout entity) {
-
-        super.remove(entity);    //To change body of overridden methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public FamWorkout find(Object id) {
-
-        return super.find(id);    //To change body of overridden methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public List<FamWorkout> findAll() {
-
-        return super.findAll();    //To change body of overridden methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public List<FamWorkout> findByAttributes(Map<String, Object> attributes) {
-
-        return super.findByAttributes(attributes);    //To change body of overridden methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public List<FamWorkout> findByCriteria(CriteriaQuery cq) {
-
-        return super.findByCriteria(cq);    //To change body of overridden methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public List<FamWorkout> findAllLazy(int first, int pageSize, String sortField, boolean sortOrder, Map<String, String> filters) {
-
-        return super.findAllLazy(first, pageSize, sortField, sortOrder, filters);    //To change body of overridden methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public int countLazy(Map<String, String> filters) {
-
-        return super.countLazy(filters);    //To change body of overridden methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public int count() {
-
-        return super.count();    //To change body of overridden methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public List<FamWorkout> findRange(int[] range) {
-
-        return super.findRange(range);    //To change body of overridden methods use File | Settings | File Templates.
-    }
 }

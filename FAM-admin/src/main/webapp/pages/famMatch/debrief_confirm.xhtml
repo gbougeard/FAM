@@ -2,27 +2,132 @@
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:p="http://primefaces.org/ui"
+        xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core"
         >
 
     <p:tab id="confirm" title="Composition finale">
-        <h:outputText value="Formation : #{famMatchDebriefWizardController.famMatchTeam.famFormation.libFormation}"/>
-        <!--Lineup final-->
-        <!--@elvariable id="mp2" type="org.fam.ejb.model.FamMatchPlayer"-->
-        <p:dataTable binding="#{famMatchDebriefWizardController.selectedComponent}"
-                     value="#{famMatchDebriefWizardController.famMatchPlayerList}"
-                     var="mp2"
-                     emptyMessage="#{bundle.NoDataFound}"
-                     rowKey="#{mp2.num}"
-                     rowStyleClass="#{mp2.num gt famMatchDebriefWizardController.selected.famSeasonCompetition.famTypCompetition.famTypMatch.nbPlayer ? 'row-sub' : null}">
-            <p:column headerText="Poste">
-                <h:outputText value="#{mp2.num}"/>
-            </p:column>
-            <p:column headerText="Joueur">
-                <h:outputText value="#{mp2.famPlayer.displayName}"/>
-            </p:column>
-        </p:dataTable>
-        <!--Eo Lineup final-->
+
+        <h:panelGrid columns="5" cellpadding="10"
+                     columnClasses="verticalTop,verticalTop,verticalTop,verticalTop,verticalTop">
+            <!--Lineup final-->
+            <!--@elvariable id="mp2" type="org.fam.ejb.model.FamGoal"-->
+            <p:dataTable value="#{famMatchDebriefWizardController.lstGoal}"
+                         var="mp2"
+                         emptyMessage="#{bundle.NoDataFound}"
+                         rowKey="#{mp2.idGoal}">
+                <f:facet name="header"><h:outputText value="Buteurs"/> </f:facet>
+                <p:column headerText="Tmps">
+                    <h:outputText value="#{mp2.goalTime}"/>
+                </p:column>
+                <p:column headerText="Buteur">
+                    <h:outputText value="#{mp2.famMatchPlayerStriker.famPlayer.displayName}"/>
+                </p:column>
+                <p:column headerText="Passeur">
+                    <h:outputText value="#{mp2.famMatchPlayerAssist.famPlayer.displayName}"/>
+                </p:column>
+            </p:dataTable>
+            <!--Eo Lineup final-->
+
+            <!--Lineup final-->
+            <!--@elvariable id="c" type="org.fam.ejb.model.FamCard"-->
+            <p:dataTable value="#{famMatchDebriefWizardController.lstCard}"
+                         var="c"
+                         emptyMessage="#{bundle.NoDataFound}"
+                         rowKey="#{c.idCard}">
+                <f:facet name="header"><h:outputText value="Cartons"/> </f:facet>
+                <p:column headerText="Tmps">
+                    <h:outputText value="#{c.cardTime}"/>
+                </p:column>
+                <p:column headerText="Carton">
+                    <h:outputText value="#{c.famTypCard.libTypCard}"/>
+                </p:column>
+                <p:column headerText="Joueur">
+                    <h:outputText value="#{c.famMatchPlayer.famPlayer.displayName}"/>
+                </p:column>
+            </p:dataTable>
+            <!--Eo Lineup final-->
+
+            <!--Lineup final-->
+            <!--@elvariable id="s" type="org.fam.ejb.model.FamSubstitution"-->
+            <p:dataTable value="#{famMatchDebriefWizardController.lstSubstitution}"
+                         var="s"
+                         emptyMessage="#{bundle.NoDataFound}"
+                         rowKey="#{s.idSubstitution}">
+                <f:facet name="header"><h:outputText value="Remplacements"/> </f:facet>
+                <p:column headerText="Tmps">
+                    <h:outputText value="#{s.substitutionTime}"/>
+                </p:column>
+                <p:column headerText="OUT">
+                    <h:outputText value="#{s.famMatchPlayerOut.famPlayer.displayName}"/>
+                </p:column>
+                <p:column headerText="IN">
+                    <h:outputText value="#{s.famMatchPlayerIn.famPlayer.displayName}"/>
+                </p:column>
+            </p:dataTable>
+            <!--Eo Lineup final-->
+
+            <!--@elvariable id="matchPlayer" type="org.fam.ejb.model.FamMatchPlayer"-->
+            <p:dataTable id="dtbPlayer"
+                         value="#{famMatchDebriefWizardController.famMatchTeam.famMatchPlayerList}"
+                         var="matchPlayer"
+                         rowKey="#{matchPlayer.num}"
+                    >
+                <f:facet name="header"><h:outputText value="Notes"/> </f:facet>
+                <!--<f:facet name="header">
+                    <p:menubar id="tb">
+                        <p:menuitem
+                                icon="ui-icon-document-b"
+                                value="#{bundle.ListFamMatchViewLink} #{famMatchDebriefWizardController.selectedFamMatchPlayer.num} "
+                                oncomplete="dlg2.show();"
+                                />
+                    </p:menubar>
+                </f:facet>-->
+                <p:column style="width:4%">
+                    <p:rowToggler/>
+                </p:column>
+                <p:column style="width:4%">
+                    <h:outputText value="#{matchPlayer.num}"/>
+                </p:column>
+
+                <p:column style="width:48%" headerText="Joueur">
+                    <h:outputText value="#{matchPlayer.famPlayer.displayName}"/>
+                </p:column>
+
+                <p:column style="width:20%" headerText="Temps de jeu">
+                    <h:outputText value="#{matchPlayer.timePlayed}"/>
+                </p:column>
+
+                <p:column style="width:10%" headerText="Note">
+                    <h:outputText value="#{matchPlayer.note}"/>
+
+
+                </p:column>
+
+                <p:column style="width:4%" headerText="Capitaine">
+                    <p:selectBooleanCheckbox value="#{matchPlayer.captain}" disabled="true"/>
+                </p:column>
+
+
+                <p:rowExpansion>
+                    <h:panelGrid id="display" columns="2" cellpadding="10" style="width:300px;"
+                                 styleClass=" ui-widget-content grid">
+
+
+                        <h:graphicImage library="images/players"
+                                        name="#{initParam['org.fam.jsf.DEFAULT_PHOTO']}#{initParam['org.fam.jsf.DEFAULT_IMAGE_EXTENSION']}"
+                                        width="60"/>
+                        <h:outputText id="com" value="#{matchPlayer.comments}"/>
+
+                    </h:panelGrid>
+
+                </p:rowExpansion>
+            </p:dataTable>
+
+            <p:outputPanel style="width:400px;">
+                <h:outputText escape="false" value="#{famMatchDebriefWizardController.famMatchTeam.resume}"/>
+            </p:outputPanel>
+        </h:panelGrid>
+
         <!--<h:form id="frmSave">-->
         <p:commandButton id="saveBtn"
                          value="Enregistrer"

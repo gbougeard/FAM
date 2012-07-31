@@ -4,8 +4,15 @@
  */
 package org.fam.ejb.session;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.fam.common.interceptor.AuditInterceptor;
+import org.fam.common.interceptor.LoggingInterceptor;
+import org.fam.ejb.model.FamPlayer;
+import org.fam.ejb.model.FamPlayerProfile;
+import org.fam.ejb.model.FamPlayerSeason;
+import org.fam.ejb.model.FamUser;
+import org.fam.ejb.util.ChartUtil;
+import org.slf4j.Logger;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.ejb.Stateless;
@@ -20,15 +27,9 @@ import javax.persistence.PessimisticLockException;
 import javax.persistence.Query;
 import javax.persistence.QueryTimeoutException;
 import javax.persistence.TransactionRequiredException;
-
-import org.fam.common.interceptor.AuditInterceptor;
-import org.fam.common.interceptor.LoggingInterceptor;
-import org.fam.ejb.model.FamPlayer;
-import org.fam.ejb.model.FamPlayerProfile;
-import org.fam.ejb.model.FamPlayerSeason;
-import org.fam.ejb.model.FamUser;
-import org.fam.ejb.util.ChartUtil;
-import org.slf4j.Logger;
+import javax.validation.ConstraintViolationException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -124,6 +125,9 @@ public class FamPlayerFacade extends AbstractFacade<FamPlayer> {
         List<FamPlayer> result = new ArrayList<FamPlayer>();
         try {
             result = query.getResultList();
+        } catch (ConstraintViolationException e) {
+            handleConstraintViolation(e);
+            LOGGER.error("ConstraintViolationException", e);
         } catch (NoResultException e) {
             //- if there is no result}
         } catch (NonUniqueResultException e) {
@@ -157,6 +161,9 @@ public class FamPlayerFacade extends AbstractFacade<FamPlayer> {
         List<FamPlayer> result = new ArrayList<FamPlayer>();
         try {
             result = query.getResultList();
+        } catch (ConstraintViolationException e) {
+            handleConstraintViolation(e);
+            LOGGER.error("ConstraintViolationException", e);
         } catch (NoResultException e) {
             //- if there is no result}
         } catch (NonUniqueResultException e) {

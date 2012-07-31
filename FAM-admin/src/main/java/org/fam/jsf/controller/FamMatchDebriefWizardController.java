@@ -236,15 +236,25 @@ public class FamMatchDebriefWizardController extends AbstractController<FamMatch
     }
 
     public String onFlowProcess(FlowEvent event) {
-        LOGGER.info("Current wizard step:" + event.getOldStep());
-        LOGGER.info("Next step:" + event.getNewStep());
+        String currentStepId = event.getOldStep();
+        String stepToGo = event.getNewStep();
+        LOGGER.info("Current wizard step:" + currentStepId);
+        LOGGER.info("Next step:" + stepToGo);
 
-        if (skip) {
-            skip = false;   //reset in case user goes back
-            return "confirm";
+
+        if (skip && currentStepId.equals("tabCard")) {
+//            return "confirm";
+            return stepToGo;
         } else {
-            return event.getNewStep();
+            return stepToGo;
         }
+
+//        if (skip) {
+//            skip = false;   //reset in case user goes back
+//            return "confirm";
+//        } else {
+//            return event.getNewStep();
+//        }
     }
 
 

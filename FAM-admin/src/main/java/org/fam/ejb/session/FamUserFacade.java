@@ -4,9 +4,11 @@
  */
 package org.fam.ejb.session;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import org.fam.common.interceptor.AuditInterceptor;
+import org.fam.common.interceptor.LoggingInterceptor;
+import org.fam.ejb.model.FamUser;
+import org.slf4j.Logger;
+
 import javax.ejb.Stateless;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
@@ -21,11 +23,10 @@ import javax.persistence.PessimisticLockException;
 import javax.persistence.Query;
 import javax.persistence.QueryTimeoutException;
 import javax.persistence.TransactionRequiredException;
-
-import org.fam.common.interceptor.AuditInterceptor;
-import org.fam.common.interceptor.LoggingInterceptor;
-import org.fam.ejb.model.FamUser;
-import org.slf4j.Logger;
+import javax.validation.ConstraintViolationException;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -76,9 +77,7 @@ public class FamUserFacade extends AbstractFacade<FamUser> implements Serializab
     @Override
     public void genData() {
 
-        for (int i = 0;
-             i < 50;
-             i++) {
+        for (int i = 0; i < 50; i++) {
             FamUser item = new FamUser();
             item.setPassword("user_" + i);
             item.setFirstName("prenom_" + i);
@@ -100,6 +99,9 @@ public class FamUserFacade extends AbstractFacade<FamUser> implements Serializab
         List<FamUser> result = new ArrayList<FamUser>();
         try {
             result = query.getResultList();
+        } catch (ConstraintViolationException e) {
+            handleConstraintViolation(e);
+            LOGGER.error("ConstraintViolationException", e);
         } catch (NoResultException e) {
             //- if there is no result}
         } catch (NonUniqueResultException e) {
@@ -138,6 +140,9 @@ public class FamUserFacade extends AbstractFacade<FamUser> implements Serializab
         List<FamUser> results = new ArrayList<FamUser>();
         try {
             results = query.getResultList();
+        } catch (ConstraintViolationException e) {
+            handleConstraintViolation(e);
+            LOGGER.error("ConstraintViolationException", e);
         } catch (NoResultException e) {
             //- if there is no result}
             LOGGER.error("NoResultException", e);

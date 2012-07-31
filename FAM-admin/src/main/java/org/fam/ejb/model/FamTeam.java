@@ -10,6 +10,7 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -149,7 +150,7 @@ public class FamTeam extends FamEntity implements Serializable {
     @OneToMany(mappedBy = FamMatchTeam.PROP_TEAM)
     private List<FamMatchTeam> famMatchTeamList;
     //
-    @OneToMany(mappedBy = FamPlayerSeason.PROP_TEAM)
+    @OneToMany(mappedBy = FamPlayerSeason.PROP_TEAM, cascade = CascadeType.REFRESH)
     private List<FamPlayerSeason> famPlayerSeasonList;
 
     /**

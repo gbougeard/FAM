@@ -4,12 +4,23 @@
  */
 package org.fam.ejb.session;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import org.fam.common.interceptor.AuditInterceptor;
+import org.fam.common.interceptor.LoggingInterceptor;
+import org.fam.ejb.model.FamCard;
+import org.fam.ejb.model.FamClub;
+import org.fam.ejb.model.FamGoal;
+import org.fam.ejb.model.FamMatchPlayer;
+import org.fam.ejb.model.FamPlayer;
+import org.fam.ejb.model.FamPlayerSeason;
+import org.fam.ejb.model.FamPlayerStat;
+import org.fam.ejb.model.FamSeason;
+import org.fam.ejb.model.FamTeam;
+import org.fam.ejb.model.FamWorkout;
+import org.slf4j.Logger;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.interceptor.Interceptors;
 import javax.persistence.LockTimeoutException;
@@ -20,18 +31,11 @@ import javax.persistence.PessimisticLockException;
 import javax.persistence.Query;
 import javax.persistence.QueryTimeoutException;
 import javax.persistence.TransactionRequiredException;
-
-import org.fam.common.interceptor.AuditInterceptor;
-import org.fam.common.interceptor.LoggingInterceptor;
-import org.fam.ejb.model.FamCard;
-import org.fam.ejb.model.FamClub;
-import org.fam.ejb.model.FamGoal;
-import org.fam.ejb.model.FamMatchPlayer;
-import org.fam.ejb.model.FamPlayer;
-import org.fam.ejb.model.FamPlayerSeason;
-import org.fam.ejb.model.FamSeason;
-import org.fam.ejb.model.FamTeam;
-import org.fam.ejb.model.FamWorkout;
+import javax.validation.ConstraintViolationException;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * @author gbougear
@@ -40,6 +44,9 @@ import org.fam.ejb.model.FamWorkout;
 @Stateless
 @Interceptors({AuditInterceptor.class, LoggingInterceptor.class})
 public class FamPlayerSeasonFacade extends AbstractFacade<FamPlayerSeason> {
+
+    @Inject
+    private Logger LOGGER;
 
     //    @PersistenceContext//(unitName = "FAM-test-ejbPU")
 //    private EntityManager em;
@@ -88,6 +95,9 @@ public class FamPlayerSeasonFacade extends AbstractFacade<FamPlayerSeason> {
         List<FamPlayerSeason> result = new ArrayList<FamPlayerSeason>();
         try {
             result = query.getResultList();
+        } catch (ConstraintViolationException e) {
+            handleConstraintViolation(e);
+            LOGGER.error("ConstraintViolationException", e);
         } catch (NoResultException e) {
             //- if there is no result}
         } catch (NonUniqueResultException e) {
@@ -135,6 +145,9 @@ public class FamPlayerSeasonFacade extends AbstractFacade<FamPlayerSeason> {
         List<FamPlayerSeason> result = new ArrayList<FamPlayerSeason>();
         try {
             result = query.getResultList();
+        } catch (ConstraintViolationException e) {
+            handleConstraintViolation(e);
+            LOGGER.error("ConstraintViolationException", e);
         } catch (NoResultException e) {
             //- if there is no result}
         } catch (NonUniqueResultException e) {
@@ -170,6 +183,9 @@ public class FamPlayerSeasonFacade extends AbstractFacade<FamPlayerSeason> {
         List<FamPlayerSeason> result = new ArrayList<FamPlayerSeason>();
         try {
             result = query.getResultList();
+        } catch (ConstraintViolationException e) {
+            handleConstraintViolation(e);
+            LOGGER.error("ConstraintViolationException", e);
         } catch (NoResultException e) {
             //- if there is no result}
         } catch (NonUniqueResultException e) {
@@ -259,6 +275,9 @@ public class FamPlayerSeasonFacade extends AbstractFacade<FamPlayerSeason> {
         List<FamPlayerSeason> result = new ArrayList<FamPlayerSeason>();
         try {
             result = query.getResultList();
+        } catch (ConstraintViolationException e) {
+            handleConstraintViolation(e);
+            LOGGER.error("ConstraintViolationException", e);
         } catch (NoResultException e) {
             //- if there is no result}
         } catch (NonUniqueResultException e) {
@@ -294,6 +313,9 @@ public class FamPlayerSeasonFacade extends AbstractFacade<FamPlayerSeason> {
         List<FamPlayerSeason> result = new ArrayList<FamPlayerSeason>();
         try {
             result = query.getResultList();
+        } catch (ConstraintViolationException e) {
+            handleConstraintViolation(e);
+            LOGGER.error("ConstraintViolationException", e);
         } catch (NoResultException e) {
             //- if there is no result}
         } catch (NonUniqueResultException e) {
@@ -329,6 +351,9 @@ public class FamPlayerSeasonFacade extends AbstractFacade<FamPlayerSeason> {
         List<FamPlayerSeason> result = new ArrayList<FamPlayerSeason>();
         try {
             result = query.getResultList();
+        } catch (ConstraintViolationException e) {
+            handleConstraintViolation(e);
+            LOGGER.error("ConstraintViolationException", e);
         } catch (NoResultException e) {
             //- if there is no result}
         } catch (NonUniqueResultException e) {
@@ -362,6 +387,9 @@ public class FamPlayerSeasonFacade extends AbstractFacade<FamPlayerSeason> {
         List<FamPlayerSeason> result = new ArrayList<FamPlayerSeason>();
         try {
             result = query.getResultList();
+        } catch (ConstraintViolationException e) {
+            handleConstraintViolation(e);
+            LOGGER.error("ConstraintViolationException", e);
         } catch (NoResultException e) {
             //- if there is no result}
         } catch (NonUniqueResultException e) {
@@ -402,14 +430,17 @@ public class FamPlayerSeasonFacade extends AbstractFacade<FamPlayerSeason> {
                 nbWorkout++;
             }
         }
+        if (famPlayerSeason.getFamPlayerStat() == null) {
+            famPlayerSeason.setFamPlayerStat(new FamPlayerStat());
+        }
         famPlayerSeason.getFamPlayerStat().setNbWorkout(nbWorkout);
 
         // Matches
         List<FamMatchPlayer> listMatch = ejbMatchPlayer.findByPlayerAndSeason(famPlayerSeason.getFamPlayer(),
-                                                                                 famPlayerSeason.getFamSeason());
+                                                                              famPlayerSeason.getFamSeason());
         famPlayerSeason.getFamPlayerStat().setNbMatch(listMatch.size());
 
-        if (listMatch.isEmpty() == false) {
+        if (!listMatch.isEmpty()) {
             Integer nbCaptain = 0;
             Integer nbNote = 0;
             BigDecimal sumNote = new BigDecimal(0);
@@ -424,18 +455,20 @@ public class FamPlayerSeasonFacade extends AbstractFacade<FamPlayerSeason> {
                     nbCaptain++;
                 }
                 // Note
-                if (m.getNote() != new BigDecimal(0)) {
+                if (m.getNote() != null && !m.getNote().equals(new BigDecimal(0))) {
                     nbNote++;
                     sumNote.add(m.getNote());
                 }
                 // Temps de jeu
-                time += m.getTimePlayed();
+                if (m.getTimePlayed() != null) {
+                    time += m.getTimePlayed();
+                }
                 // Goals && Assist
                 for (FamGoal g : m.getFamGoalList()) {
-                    if (g.getFamMatchPlayerAssist().getFamPlayer().equals(famPlayerSeason.getFamPlayer())) {
+                    if (g.getFamMatchPlayerAssist() != null && g.getFamMatchPlayerAssist().getFamPlayer().equals(famPlayerSeason.getFamPlayer())) {
                         nbAssist++;
                     }
-                    if (g.getFamMatchPlayerStriker().getFamPlayer().equals(famPlayerSeason.getFamPlayer())) {
+                    if (g.getFamMatchPlayerStriker() != null && g.getFamMatchPlayerStriker().getFamPlayer().equals(famPlayerSeason.getFamPlayer())) {
                         nbGoal++;
                     }
                 }

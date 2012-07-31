@@ -60,7 +60,7 @@ public class FamMatch extends FamEntity implements Serializable {
     public static final String FIND_BY_DT_CREAT = "FamMatch.findByDtCreat";
     public static final String FIND_BY_DT_MODIF = "FamMatch.findByDtModif";
     /**
-     *
+     * TODO : interverser PROP & COL
      */
     public static final String PROP_ID = "id_match";
     public static final String COL_ID = "idMatch";

@@ -9,7 +9,13 @@ import lombok.Setter;
 import org.fam.common.cdi.Loggable;
 import org.fam.common.cdi.LoggedIn;
 import org.fam.common.cdi.Player;
-import org.fam.ejb.model.*;
+import org.fam.ejb.model.FamCity;
+import org.fam.ejb.model.FamCountry;
+import org.fam.ejb.model.FamPlayer;
+import org.fam.ejb.model.FamProvince;
+import org.fam.ejb.model.FamState;
+import org.fam.ejb.model.FamTeam;
+import org.fam.ejb.model.FamUser;
 import org.fam.ejb.session.FamPlayerFacade;
 import org.fam.ejb.session.FamTeamFacade;
 import org.fam.ejb.session.FamUserFacade;
@@ -76,11 +82,11 @@ public class CachePlayer implements Serializable {
         }
         currentPlayer = ejbPlayer.findByFamUser(currentUser).get(0);
         // TEAMS
-        loadAllTeams();
+//        loadAllTeams();
         //PLAYER
-        loadAllPlayers();
+//        loadAllPlayers();
         //USER
-        loadAllUsers();
+//        loadAllUsers();
     }
 
     private void loadAllTeams() {

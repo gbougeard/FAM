@@ -4,7 +4,13 @@
  */
 package org.fam.ejb.session;
 
+import org.fam.common.interceptor.AuditInterceptor;
+import org.fam.common.interceptor.LoggingInterceptor;
+import org.fam.ejb.model.FamSeason;
+import org.slf4j.Logger;
+
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.interceptor.Interceptors;
 import javax.persistence.LockTimeoutException;
@@ -15,10 +21,7 @@ import javax.persistence.PessimisticLockException;
 import javax.persistence.Query;
 import javax.persistence.QueryTimeoutException;
 import javax.persistence.TransactionRequiredException;
-
-import org.fam.common.interceptor.AuditInterceptor;
-import org.fam.common.interceptor.LoggingInterceptor;
-import org.fam.ejb.model.FamSeason;
+import javax.validation.ConstraintViolationException;
 
 /**
  * @author gbougear
@@ -27,6 +30,9 @@ import org.fam.ejb.model.FamSeason;
 @Stateless
 @Interceptors({LoggingInterceptor.class, AuditInterceptor.class})
 public class FamSeasonFacade extends AbstractFacade<FamSeason> {
+
+    @Inject
+    private Logger LOGGER;
 
 //    @PersistenceContext//(unitName = "FAM-test-ejbPU")
 //    private EntityManager em;
@@ -57,6 +63,9 @@ public class FamSeasonFacade extends AbstractFacade<FamSeason> {
         FamSeason result = null;
         try {
             result = (FamSeason) query.getSingleResult();
+        } catch (ConstraintViolationException e) {
+            handleConstraintViolation(e);
+            LOGGER.error("ConstraintViolationException", e);
         } catch (NoResultException e) {
             //- if there is no result}
         } catch (NonUniqueResultException e) {
@@ -84,9 +93,7 @@ public class FamSeasonFacade extends AbstractFacade<FamSeason> {
     @Override
     public void genData() {
 
-        for (int i = 0;
-             i < 10;
-             i++) {
+        for (int i = 0; i < 10; i++) {
             FamSeason item = new FamSeason();
             item.setLibSeason("Saison_" + i);
             this.create(item);
