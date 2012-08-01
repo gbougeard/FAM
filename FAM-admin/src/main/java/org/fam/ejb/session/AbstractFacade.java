@@ -32,6 +32,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -45,7 +46,7 @@ import java.util.logging.Level;
  * @author gbougear
  */
 @Interceptors({AuditInterceptor.class, LoggingInterceptor.class})
-public class AbstractFacade<T> {
+public class AbstractFacade<T> implements Serializable {
 
     @Inject
     private Logger LOGGER;

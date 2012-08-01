@@ -1,20 +1,28 @@
 <ui:composition
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
         xmlns:p="http://primefaces.org/ui"
-        template="/common/template.xhtml">
+        >
 
-    <ui:define name="titre">Login</ui:define>
-    <ui:define name="centre">
-        <p:panel header="Login">
-            <form method="POST" action="j_security_check">
-                Username: <input type="text" name="j_username"/>
-                Password: <input type="password" name="j_password"/>
-                <br/>
-                <input type="submit" value="Login"/>
-                <input type="reset" value="Reset"/>
-            </form>
+    <h:form>
+        <center>
+            <h:messages errorClass="errorMessage" infoClass="infoMessage"
+                        warnClass="warnMessage"/>
+            <h:panelGrid columns="2">
+                <p:outputLabel value="Username : " for="username"/>
+                <p:inputText id="username" value="#{loginBean.username}"/>
 
-        </p:panel>
-    </ui:define>
+                <p:outputLabel value="Password : " for="password"/>
+                <p:password id="password" value="#{loginBean.password}"/>
+
+                <p:commandButton value="Submit" action="#{loginBean.login}"
+                                 type="submit"/>
+                <p:commandButton value="Clear" type="reset"/>
+
+                <!--<h:commandLink value="Register" action="Registration.xhtml"/>
+             <h:commandLink value="Forgot Your Password?"/>-->
+            </h:panelGrid>
+        </center>
+    </h:form>
 </ui:composition>

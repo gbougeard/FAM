@@ -48,18 +48,18 @@ import java.util.List;
 @Entity
 @Table(name = FamPlayer.TABLE_NAME)
 @NamedQueries({
-        @NamedQuery(name = FamPlayer.FIND_ALL,
-                query = "SELECT f FROM FamPlayer f"),
-        @NamedQuery(name = FamPlayer.FIND_BY_ID_PLAYER,
-                query = "SELECT f FROM FamPlayer f WHERE f.idPlayer = :idPlayer"),
-        @NamedQuery(name = FamPlayer.FIND_POSSIBLE_PLAYERS,
-                query = "SELECT f FROM FamPlayer f WHERE (f.email = :email) OR (f.lastName = :lastName AND f.firstName = :firstName)"),
-        @NamedQuery(name = FamPlayer.FIND_BY_FAM_USER,
-                query = "SELECT f FROM FamPlayer f WHERE f.famUser = :famUser"),
-        @NamedQuery(name = FamPlayer.FIND_BY_DT_CREAT,
-                query = "SELECT f FROM FamPlayer f WHERE f.dtCreat = :dtCreat"),
-        @NamedQuery(name = FamPlayer.FIND_BY_DT_MODIF,
-                query = "SELECT f FROM FamPlayer f WHERE f.dtModif = :dtModif")
+               @NamedQuery(name = FamPlayer.FIND_ALL,
+                           query = "SELECT f FROM FamPlayer f"),
+               @NamedQuery(name = FamPlayer.FIND_BY_ID_PLAYER,
+                           query = "SELECT f FROM FamPlayer f WHERE f.idPlayer = :idPlayer"),
+               @NamedQuery(name = FamPlayer.FIND_POSSIBLE_PLAYERS,
+                           query = "SELECT f FROM FamPlayer f WHERE (f.email = :email) OR (f.lastName = :lastName AND f.firstName = :firstName)"),
+               @NamedQuery(name = FamPlayer.FIND_BY_FAM_USER,
+                           query = "SELECT f FROM FamPlayer f WHERE f.famUser = :famUser"),
+               @NamedQuery(name = FamPlayer.FIND_BY_DT_CREAT,
+                           query = "SELECT f FROM FamPlayer f WHERE f.dtCreat = :dtCreat"),
+               @NamedQuery(name = FamPlayer.FIND_BY_DT_MODIF,
+                           query = "SELECT f FROM FamPlayer f WHERE f.dtModif = :dtModif")
 })
 @XmlRootElement
 public class FamPlayer extends FamEntity implements Serializable {
@@ -376,6 +376,7 @@ public class FamPlayer extends FamEntity implements Serializable {
             return famPlayerPositionList.get(0).getFamPosition();
         }
     }
+
 
     @PostLoad
     @PostPersist

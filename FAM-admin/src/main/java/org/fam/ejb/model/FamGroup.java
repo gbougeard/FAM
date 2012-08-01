@@ -5,26 +5,40 @@ package org.fam.ejb.model;
  * and open the template in the editor.
  */
 
-import javax.persistence.*;
+import lombok.Data;
+
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author gbougear
  */
+@Data
 @Entity
 @Table(name = FamGroup.TABLE_NAME,
-        uniqueConstraints = {
-                @UniqueConstraint(columnNames = {FamGroup.COL_LOGIN})
-        })
+       uniqueConstraints = {
+                            @UniqueConstraint(columnNames = {FamGroup.COL_LIB})
+       })
 @NamedQueries({
-        @NamedQuery(name = "FamGroup.findAll", query = "SELECT f FROM FamGroup f"),
-        @NamedQuery(name = "FamGroup.findByIdGroup", query = "SELECT f FROM FamGroup f WHERE f.idGroup = :idGroup"),
-        @NamedQuery(name = "FamGroup.findByGroupname", query = "SELECT f FROM FamGroup f WHERE f.groupname = :groupname"),
-        @NamedQuery(name = "FamGroup.findByLogin", query = "SELECT f FROM FamGroup f WHERE f.login = :login"),
-        @NamedQuery(name = "FamGroup.findByDtCreat", query = "SELECT f FROM FamGroup f WHERE f.dtCreat = :dtCreat"),
-        @NamedQuery(name = "FamGroup.findByDtModif", query = "SELECT f FROM FamGroup f WHERE f.dtModif = :dtModif")})
+               @NamedQuery(name = "FamGroup.findAll", query = "SELECT f FROM FamGroup f"),
+               @NamedQuery(name = "FamGroup.findByIdGroup", query = "SELECT f FROM FamGroup f WHERE f.idGroup = :idGroup"),
+               @NamedQuery(name = "FamGroup.findByLibGroup", query = "SELECT f FROM FamGroup f WHERE f.groupname = :libGroup"),
+               @NamedQuery(name = "FamGroup.findByDtCreat", query = "SELECT f FROM FamGroup f WHERE f.dtCreat = :dtCreat"),
+               @NamedQuery(name = "FamGroup.findByDtModif", query = "SELECT f FROM FamGroup f WHERE f.dtModif = :dtModif")})
 @XmlRootElement
 public class FamGroup extends FamEntity implements Serializable {
 
@@ -38,9 +52,6 @@ public class FamGroup extends FamEntity implements Serializable {
      *
      */
     public static final String PROP_ID = "idGroup";
-    /**
-     *
-     */
     public static final String COL_ID = "id_group";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,11 +61,8 @@ public class FamGroup extends FamEntity implements Serializable {
     /**
      *
      */
-    public static final String PROP_LIB = "groupname";
-    /**
-     *
-     */
-    public static final String COL_LIB = "groupname";
+    public static final String PROP_LIB = "libGroup";
+    public static final String COL_LIB = "lib_group";
     @Basic(optional = false)
     @NotNull(message = "Libellé obligatoire")
     @Column(name = COL_LIB)
@@ -63,16 +71,17 @@ public class FamGroup extends FamEntity implements Serializable {
     /**
      *
      */
-    public static final String PROP_LOGIN = "login";
-    /**
-     *
-     */
-    public static final String COL_LOGIN = "login";
+    public static final String PROP_DESCRIPTION = "description";
+    public static final String COL_DESCRIPTION = "description";
+    @Lob
     @Basic(optional = false)
-    @NotNull(message = "Login obligatoire")
-    @Column(name = COL_LOGIN)
-    private String login;
+    @Column(name = COL_DESCRIPTION)
+    private String description;
     //
+
+    //bi-directional many-to-many association to User
+    @ManyToMany(mappedBy = "groups")
+    private List<FamUser> users;
 
     /**
      *
@@ -80,54 +89,6 @@ public class FamGroup extends FamEntity implements Serializable {
     public FamGroup() {
     }
 
-    /**
-     * @param idGroup
-     */
-    public FamGroup(Long idGroup) {
-        this.idGroup = idGroup;
-    }
-
-    /**
-     * @return
-     */
-    public Long getIdGroup() {
-        return idGroup;
-    }
-
-    /**
-     * @param idGroup
-     */
-    public void setIdGroup(Long idGroup) {
-        this.idGroup = idGroup;
-    }
-
-    /**
-     * @return
-     */
-    public String getGroupname() {
-        return groupname;
-    }
-
-    /**
-     * @param groupname
-     */
-    public void setGroupname(String groupname) {
-        this.groupname = groupname;
-    }
-
-    /**
-     * @return
-     */
-    public String getLogin() {
-        return login;
-    }
-
-    /**
-     * @param login
-     */
-    public void setLogin(String login) {
-        this.login = login;
-    }
 
     @Override
     public int hashCode() {

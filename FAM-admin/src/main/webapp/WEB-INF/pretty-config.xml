@@ -21,7 +21,7 @@
 
     <url-mapping id="login">
         <pattern value="/login/"/>
-        <view-id value="/login.xhtml"/>
+        <view-id value="/auth/loginForm.xhtml"/>
     </url-mapping>
 
     <url-mapping id="signup">

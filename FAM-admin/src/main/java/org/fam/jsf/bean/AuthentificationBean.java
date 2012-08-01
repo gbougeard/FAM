@@ -86,7 +86,7 @@ public class AuthentificationBean implements Serializable {
     }
 
     public String navLogin() {
-        return "/auth/login?faces-redirect=true";
+        return "pretty:login";
     }
 
     public String doSignup() {

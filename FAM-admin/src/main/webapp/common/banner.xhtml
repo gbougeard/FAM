@@ -12,6 +12,10 @@
     <p:layout style="min-width:400px;min-height:200px;">
 
         <p:layoutUnit position="west">
+            <!--<h:outputText value="Hello, #{loginBean.sessionContext.callerPrincipal}"/>
+            <h:outputText value="ADMIN? #{loginBean.sessionContext.isCallerInRole('ADMIN')}"/>
+            <h:outputText value="COACH? #{loginBean.sessionContext.isCallerInRole('COACH')}"/>
+            <h:outputText value="PLAYER? #{loginBean.sessionContext.isCallerInRole('PLAYER')}"/>-->
             <h:outputText value="Hello, #{login.currentUser.displayName}"
                           rendered="#{login.loggedIn}"/>
             <h:form id="navSignup">
@@ -23,7 +27,8 @@
                                rendered="#{!login.loggedIn}">
                     S'identifier
                 </h:commandLink>
-                **#{p:remoteUser()}**
+                <h:outputText value="Welcome: #{p:remoteUser()}"/>
+                <h:outputText value="Welcome: #{p:userPrincipal()}"/>
                 <p:commandButton action="#{cacheBean.initCache()}" value="Refresh Cache"/>
 
             </h:form>

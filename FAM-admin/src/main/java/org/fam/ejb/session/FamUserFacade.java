@@ -24,7 +24,6 @@ import javax.persistence.Query;
 import javax.persistence.QueryTimeoutException;
 import javax.persistence.TransactionRequiredException;
 import javax.validation.ConstraintViolationException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +34,7 @@ import java.util.List;
 @Named
 @Stateless
 @Interceptors({LoggingInterceptor.class, AuditInterceptor.class})
-public class FamUserFacade extends AbstractFacade<FamUser> implements Serializable {
+public class FamUserFacade extends AbstractFacade<FamUser> {
 
     @Inject
     private Logger LOGGER;
@@ -92,9 +91,45 @@ public class FamUserFacade extends AbstractFacade<FamUser> implements Serializab
      */
     public List<FamUser> findByEmailAndOpenid(String email) {
 
-        Query query = getEntityManager().createNamedQuery("FamUser.findByEmailAndOpenid");
+        Query query = getEntityManager().createNamedQuery(FamUser.FIND_BY_EMAIL_AND_OPENID);
         query.setParameter(FamUser.PROP_EMAIL, email);
         query.setParameter(FamUser.PROP_OPENID, Boolean.TRUE);
+
+        List<FamUser> result = new ArrayList<FamUser>();
+        try {
+            result = query.getResultList();
+        } catch (ConstraintViolationException e) {
+            handleConstraintViolation(e);
+            LOGGER.error("ConstraintViolationException", e);
+        } catch (NoResultException e) {
+            //- if there is no result}
+        } catch (NonUniqueResultException e) {
+            //- if more than one result
+        } catch (IllegalStateException e) {
+            //- if called for a Java Persistence query language UPDATE or DELETE statement
+        } catch (QueryTimeoutException e) {
+            // - if the query execution exceeds the query timeout value set and only the statement is rolled back
+        } catch (TransactionRequiredException e) {
+            // - if a lock mode has been set and there is no transaction
+        } catch (PessimisticLockException e) {
+            //- if pessimistic locking fails and the transaction is rolled back
+        } catch (LockTimeoutException e) {
+            // - if pessimistic locking fails and only the statement is rolled back
+        } catch (PersistenceException e) {
+            // - if the query execution exceeds the query timeout value set and the transaction is rolled back
+        }
+
+        return result;
+    }
+
+    /**
+     * @param email
+     * @return
+     */
+    public List<FamUser> findByEmail(String email) {
+
+        Query query = getEntityManager().createNamedQuery(FamUser.FIND_BY_EMAIL);
+        query.setParameter(FamUser.PROP_EMAIL, email);
 
         List<FamUser> result = new ArrayList<FamUser>();
         try {

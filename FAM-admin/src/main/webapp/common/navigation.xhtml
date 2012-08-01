@@ -6,9 +6,9 @@
       xmlns:p="http://primefaces.org/ui">
 <ui:component>
     <h:form id="frmNav">
-        <p:toolbar id="tbPrincipal"
-                   rendered="#{login.loggedIn}"
-                >
+        <p:toolbar id="tbPrincipal">
+            <!--rendered="#{login.loggedIn}"-->
+            <!-->-->
             <p:toolbarGroup align="left">
                 <p:commandButton action="pretty:myAccount"
                                  rendered="#{login.loggedIn}"
@@ -161,7 +161,7 @@
                 </c:if>-->
             </p:toolbarGroup>
             <p:toolbarGroup align="right">
-                <p:commandButton action="#{login.logout}" value="Logout"/>
+                <p:commandButton action="#{loginBean.logout}" value="Logout"/>
             </p:toolbarGroup>
         </p:toolbar>
     </h:form>

@@ -48,7 +48,6 @@
     </context-param>
 
 
-
     <filter>
         <filter-name>Pretty Filter</filter-name>
         <filter-class>com.ocpsoft.pretty.PrettyFilter</filter-class>
@@ -132,6 +131,33 @@
             60
         </session-timeout>
     </session-config>
+
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>famRealm</realm-name>
+        <form-login-config>
+            <form-login-page>/auth/loginForm.xhtml</form-login-page>
+            <form-error-page>/auth/loginForm.xhtml</form-error-page>
+        </form-login-config>
+    </login-config>
+
+    <security-role>
+        <role-name>Administrator</role-name>
+    </security-role>
+    <security-role>
+        <role-name>Manager</role-name>
+    </security-role>
+    <security-role>
+        <role-name>Guest</role-name>
+    </security-role>
+    <security-role>
+        <role-name>Coach</role-name>
+    </security-role>
+    <security-role>
+        <role-name>Player</role-name>
+    </security-role>
+
+
     <!-- definir les acces securises -->
     <!--    <security-constraint>
         <display-name>Authentification</display-name>

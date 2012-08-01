@@ -7,24 +7,17 @@ package org.fam.jsf.cache;
 import lombok.Getter;
 import lombok.Setter;
 import org.fam.common.cdi.Loggable;
-import org.fam.common.cdi.LoggedIn;
-import org.fam.common.cdi.Player;
 import org.fam.ejb.model.FamCity;
 import org.fam.ejb.model.FamCountry;
-import org.fam.ejb.model.FamPlayer;
 import org.fam.ejb.model.FamProvince;
 import org.fam.ejb.model.FamState;
-import org.fam.ejb.model.FamTeam;
 import org.fam.ejb.model.FamUser;
-import org.fam.ejb.session.FamPlayerFacade;
-import org.fam.ejb.session.FamTeamFacade;
 import org.fam.ejb.session.FamUserFacade;
 import org.primefaces.event.SelectEvent;
 import org.slf4j.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
-import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -53,20 +46,20 @@ public class CachePlayer implements Serializable {
     private List<FamProvince> lstProvince = new ArrayList<FamProvince>();
     private List<FamCity> lstCity = new ArrayList<FamCity>();
 
-    @Inject
-    @LoggedIn
-    private FamUser currentUser;
+//    @Inject
+//    @LoggedIn
+//    private FamUser currentUser;
 
-    private FamPlayer currentPlayer;
+//    private FamPlayer currentPlayer;
 
     // TEAMS
-    @Inject
-    private FamTeamFacade ejbTeam;
-    private List<FamTeam> listTeam = new ArrayList<FamTeam>();
-    // PLAYER
-    @Inject
-    private FamPlayerFacade ejbPlayer;
-    private List<FamPlayer> listPlayer = new ArrayList<FamPlayer>();
+//    @Inject
+//    private FamTeamFacade ejbTeam;
+////    private List<FamTeam> listTeam = new ArrayList<FamTeam>();
+//    // PLAYER
+//    @Inject
+//    private FamPlayerFacade ejbPlayer;
+//    private List<FamPlayer> listPlayer = new ArrayList<FamPlayer>();
     // USER
     @Inject
     private FamUserFacade ejbUser;
@@ -77,10 +70,11 @@ public class CachePlayer implements Serializable {
 
     @PostConstruct
     void postConstruct() {
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("CurrentUser " + currentUser);
-        }
-        currentPlayer = ejbPlayer.findByFamUser(currentUser).get(0);
+//            LOGGER.debug("CurrentUser " + currentUser);
+//        List<FamPlayer> players = ejbPlayer.findByFamUser(currentUser);
+//        if (!players.isEmpty()) {
+//            currentPlayer = players.get(0);
+//        }
         // TEAMS
 //        loadAllTeams();
         //PLAYER
@@ -89,44 +83,37 @@ public class CachePlayer implements Serializable {
 //        loadAllUsers();
     }
 
-    private void loadAllTeams() {
-        listTeam.clear();
+//    private void loadAllTeams() {
+//        listTeam.clear();
+//
+//        for (FamTeam o : ejbTeam.findAll()) {
+//            listTeam.add(o);
+//        }
+//    }
+//
+//    private void loadAllPlayers() {
+//        listPlayer.clear();
+//
+//        for (FamPlayer o : ejbPlayer.findAll()) {
+//            listPlayer.add(o);
+//        }
+//    }
 
-        for (FamTeam o : ejbTeam.findAll()) {
-            listTeam.add(o);
-        }
-    }
-
-    private void loadAllPlayers() {
-        listPlayer.clear();
-
-        for (FamPlayer o : ejbPlayer.findAll()) {
-            listPlayer.add(o);
-        }
-    }
-
-    private void loadAllUsers() {
-        listUser.clear();
-
-        for (FamUser o : ejbUser.findAll()) {
-            listUser.add(o);
-        }
-    }
+//    private void loadAllUsers() {
+//        listUser.clear();
+//
+//        for (FamUser o : ejbUser.findAll()) {
+//            listUser.add(o);
+//        }
+//    }
 
     public void filterState(FamCountry country) {
-        if (LOGGER.isInfoEnabled()) {
-            LOGGER.info("CachePlayer:filterState");
-        }
+        LOGGER.debug("CachePlayer:filterState search " + country.getLibCountry());
         lstState.clear();
         lstProvince.clear();
         lstCity.clear();
-        if (LOGGER.isInfoEnabled()) {
-            LOGGER.info("CachePlayer:filterState search " + country.getLibCountry());
-        }
         for (FamState item : cacheBean.getListState()) {
-            if (LOGGER.isInfoEnabled()) {
-                LOGGER.info("item " + item.getFamCountry().getLibCountry());
-            }
+            LOGGER.info("item " + item.getFamCountry().getLibCountry());
             if (item.getFamCountry().equals(country)) {
                 lstState.add(item);
 //                LOGGER.info("added");
@@ -135,14 +122,9 @@ public class CachePlayer implements Serializable {
     }
 
     public void filterProvince(FamState state) {
-        if (LOGGER.isInfoEnabled()) {
-            LOGGER.info("CachePlayer:filterProvince");
-        }
+        LOGGER.debug("CachePlayer:filterProvince search " + state.getLibState());
         lstProvince.clear();
         lstCity.clear();
-        if (LOGGER.isInfoEnabled()) {
-            LOGGER.info("CachePlayer:filterProvince search " + state.getLibState());
-        }
         for (FamProvince item : cacheBean.getListProvince()) {
 //            LOGGER.info("item " + item.getFamState().getLibState());
             if (item.getFamState().equals(state)) {
@@ -153,13 +135,8 @@ public class CachePlayer implements Serializable {
     }
 
     public void filterCity(FamProvince province) {
-        if (LOGGER.isInfoEnabled()) {
-            LOGGER.info("CachePlayer:filterCity");
-        }
+        LOGGER.debug("CachePlayer:filterCity search " + province.getLibProvince());
         lstCity.clear();
-        if (LOGGER.isInfoEnabled()) {
-            LOGGER.info("CachePlayer:filterCity search " + province.getLibProvince());
-        }
 
         for (FamCity item : cacheBean.getListCity()) {
             if (item.getFamProvince().equals(province)) {
@@ -218,9 +195,7 @@ public class CachePlayer implements Serializable {
     }
 
     public void onChangeValue(SelectEvent event) {
-        if (LOGGER.isInfoEnabled()) {
-            LOGGER.info("CachePlayer:onChangeValue");
-        }
+        LOGGER.debug("CachePlayer:onChangeValue");
 
         if (event.getObject().getClass().equals(FamCountry.class)) {
             filterState((FamCountry) event.getObject());
@@ -236,10 +211,10 @@ public class CachePlayer implements Serializable {
 
     }
 
-    @Produces
-    @Player
-    @Named(value = "currentPlayer")
-    public FamPlayer getCurrentPlayer() {
-        return currentPlayer;
-    }
+//    @Produces
+//    @Player
+//    @Named(value = "currentPlayer")
+//    public FamPlayer getCurrentPlayer() {
+//        return currentPlayer;
+//    }
 }

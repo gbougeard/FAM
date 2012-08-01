@@ -6,10 +6,28 @@ package org.fam.ejb.model;
  */
 
 import lombok.Data;
+import org.fam.ejb.util.Util;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
+import javax.persistence.PostLoad;
+import javax.persistence.PostPersist;
+import javax.persistence.PostUpdate;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
@@ -22,22 +40,24 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = FamUser.TABLE_NAME,
-        uniqueConstraints = {
-                @UniqueConstraint(columnNames = {FamUser.COL_EMAIL})
-        })
+       uniqueConstraints = {
+                            @UniqueConstraint(columnNames = {FamUser.COL_EMAIL})
+       })
 @NamedQueries({
-        @NamedQuery(name = FamUser.FIND_ALL,
-                query = "SELECT f FROM FamUser f"),
-        @NamedQuery(name = FamUser.FIND_BY_ID_USER,
-                query = "SELECT f FROM FamUser f WHERE f.idUser = :idUser"),
-        @NamedQuery(name = FamUser.FIND_BY_EMAIL_AND_OPENID,
-                query = "SELECT f FROM FamUser f WHERE f.email = :email AND f.openid = :openid"),
-        @NamedQuery(name = FamUser.LOGIN,
-                query = "SELECT f FROM FamUser f WHERE f.email = :email AND f.password = :password"),
-        @NamedQuery(name = FamUser.FIND_BY_DT_CREAT,
-                query = "SELECT f FROM FamUser f WHERE f.dtCreat = :dtCreat"),
-        @NamedQuery(name = FamUser.FIND_BY_DT_MODIF,
-                query = "SELECT f FROM FamUser f WHERE f.dtModif = :dtModif")
+               @NamedQuery(name = FamUser.FIND_ALL,
+                           query = "SELECT f FROM FamUser f"),
+               @NamedQuery(name = FamUser.FIND_BY_ID_USER,
+                           query = "SELECT f FROM FamUser f WHERE f.idUser = :idUser"),
+               @NamedQuery(name = FamUser.FIND_BY_EMAIL_AND_OPENID,
+                           query = "SELECT f FROM FamUser f WHERE f.email = :email AND f.openid = :openid"),
+               @NamedQuery(name = FamUser.FIND_BY_EMAIL,
+                           query = "SELECT f FROM FamUser f WHERE f.email = :email"),
+               @NamedQuery(name = FamUser.LOGIN,
+                           query = "SELECT f FROM FamUser f WHERE f.email = :email AND f.password = :password"),
+               @NamedQuery(name = FamUser.FIND_BY_DT_CREAT,
+                           query = "SELECT f FROM FamUser f WHERE f.dtCreat = :dtCreat"),
+               @NamedQuery(name = FamUser.FIND_BY_DT_MODIF,
+                           query = "SELECT f FROM FamUser f WHERE f.dtModif = :dtModif")
 })
 public class FamUser extends FamEntity implements Serializable {
 
@@ -50,6 +70,7 @@ public class FamUser extends FamEntity implements Serializable {
     public static final String FIND_ALL = "FamUser.findAll";
     public static final String FIND_BY_ID_USER = "FamUser.findByIdUser";
     public static final String FIND_BY_EMAIL_AND_OPENID = "FamUser.findByEmailAndOpenid";
+    public static final String FIND_BY_EMAIL = "FamUser.findByEmail";
     public static final String LOGIN = "FamUser.login";
     public static final String FIND_BY_DT_CREAT = "FamUser.findByDtCreat";
     public static final String FIND_BY_DT_MODIF = "FamUser.findByDtModif";
@@ -57,12 +78,7 @@ public class FamUser extends FamEntity implements Serializable {
      *
      */
     public static final String PROP_ID = "idUser";
-    /**
-     *
-     */
     public static final String COL_ID = "id_user";
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = COL_ID)
@@ -129,18 +145,6 @@ public class FamUser extends FamEntity implements Serializable {
     /**
      *
      */
-//    public static final String COL_ID_PLAYER = "id_player";
-    /**
-     *
-     */
-//    public static final String PROP_PLAYER = "famPlayer";
-//    @OneToOne(fetch = FetchType.LAZY)//(optional = false)
-//    @JoinColumn(name = COL_ID_PLAYER, referencedColumnName = FamPlayer.COL_ID)
-////    @NotNull
-//    private FamPlayer famPlayer;
-    /**
-     *
-     */
     public static final String COL_ID_CURRENT_CLUB = "id_current_club";
     public static final String PROP_CURRENT_CLUB = "currentClub";
 
@@ -151,17 +155,28 @@ public class FamUser extends FamEntity implements Serializable {
     //
     @ManyToMany
     @JoinTable(name = FamUserSeason.TABLE_NAME,
-            joinColumns = {
-                    @JoinColumn(name = COL_ID)},
-            inverseJoinColumns = {
-                    @JoinColumn(name = FamSeason.COL_ID)})
+               joinColumns = {@JoinColumn(name = COL_ID)},
+               inverseJoinColumns = {@JoinColumn(name = FamSeason.COL_ID)})
     private List<FamSeason> famSeasonList;
+
+    //bi-directional many-to-many association to Group
+    @ManyToMany
+    @JoinTable(name = "fam_user_group",
+               joinColumns = {@JoinColumn(name = COL_ID)},
+               inverseJoinColumns = {@JoinColumn(name = FamGroup.COL_ID)}
+    )
+    private List<FamGroup> groups;
 
     /**
      *
      */
     public FamUser() {
     }
+
+    public void setPassword(String password) {
+        this.password = Util.hash(password);
+    }
+
 
     @PostLoad
     @PostPersist

@@ -16,20 +16,9 @@
         <!--</c:if>-->
         <h:form>
             <p:panel header="Mon compte">
-                <!--<p>Hi, <shiro:guest>Guest</shiro:guest>-->
-                <!--<shiro:user><shiro:principal/></shiro:user>!-->
-                <!--</p>-->
                 <p:tabView>
                     <p:tab title="User">
                         <h:panelGrid columns="3">
-                            <!--                    <p:outputLabel value="#{bundle.EditFamUserLabel_idUser}" for="idUser" />
-                         <p:inputText id="idUser"
-                                      value="#{login.currentUser.idUser}"
-                                      title="#{bundle.EditFamUserTitle_idUser}"
-                                      >
-                             <p:ajax event="blur" update="msg_idUser"/>
-                         </p:inputText>
-                         <p:message id="msg_idUser" for="idUser"/> -->
 
                             <p:outputLabel value="#{bundle.EditFamUserLabel_firstName}" for="usrFirstName"/>
                             <p:inplace>
@@ -102,17 +91,16 @@
                     </p:tab>
                     <!--                    myPlayer-->
                     <p:tab title="MyPlayer">
-                        <!--@elvariable id="cachePlayer" type="org.fam.jsf.cache.CachePlayer"-->
-                        <c:if test="${not empty cachePlayer}">
+                        <c:if test="${not empty currentPlayer}">
                             <ui:include src="${pageContext.request.servletPath}/pages/famPlayer/view.xhtml">
-                                <ui:param name="bean" value="#{cachePlayer.currentPlayer}"/>
+                                <ui:param name="bean" value="#{currentPlayer}"/>
                             </ui:include>
                         </c:if>
-                        <c:if test="${empty cachePlayer}">
+                        <c:if test="${empty currentPlayer}">
                             <h1>Pas de joueur encore sélectionné</h1>
                         </c:if>
                         <p:commandButton value="#{bundle.EditMyAccountCalcStatLink}"
-                                         action="#{famPlayerSeasonFacade.calcStatForPlayerAndCurrentSeason(cachePlayer.currentPlayer)}"
+                                         action="#{famPlayerSeasonFacade.calcStatForPlayerAndCurrentSeason(currentPlayer)}"
                                          immediate="true"
                                          update="@form"/>
                         <!--<p:commandButton value="#{bundle.EditMyAccountCalcStatLink}"
@@ -121,9 +109,9 @@
                                          update="@form"/>-->
                     </p:tab>
                     <p:tab title="MyClub"
-                           rendered="#{not empty login.currentUser.currentClub}">
+                           rendered="#{not empty currentUser.currentClub}">
                         <ui:include src="${pageContext.request.servletPath}/pages/famClub/view.xhtml">
-                            <ui:param name="bean" value="#{login.currentUser.currentClub}"/>
+                            <ui:param name="bean" value="#{currentUser.currentClub}"/>
                         </ui:include>
 
                         <!--                        <c:if test="#{not empty login.currentUser.famPlayer}">

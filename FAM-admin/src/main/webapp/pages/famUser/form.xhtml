@@ -5,7 +5,6 @@
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:f="http://java.sun.com/jsf/core"
         xmlns:p="http://primefaces.org/ui"
         >
 <ui:composition>
@@ -58,21 +57,21 @@
         </p:inputText>
         <p:message id="msg_email" for="email"/>
 
-        <p:outputLabel value="#{bundle.EditFamUserLabel_famPlayer}" for="famPlayer"/>
+        <!--<p:outputLabel value="#{bundle.EditFamUserLabel_famPlayer}" for="famPlayer"/>
         <p:selectOneMenu id="famPlayer"
                          value="#{bean.famPlayer}"
                          title="#{bundle.EditFamUserTitle_famPlayer}"
                          converter="playerConverter"
                 >
             <f:selectItem itemLabel="Player" itemValue=""/>
-            <!--                          noSelectionOption="true"/>-->
+            &lt;!&ndash;                          noSelectionOption="true"/>&ndash;&gt;
             <f:selectItems value="#{cacheBean.listPlayer}"
                            var="n"
                            itemValue="#{n}"
                            itemLabel="#{n.displayName}"/>
             <p:ajax event="blur" update="msg_famPlayer" partialSubmit="true"/>
         </p:selectOneMenu>
-        <p:message id="msg_famPlayer" for="famPlayer"/>
+        <p:message id="msg_famPlayer" for="famPlayer"/>-->
 
 
         <!--                    <p:outputLabel value="#{bundle.EditFamUserLabel_dtCreat}" for="dtCreat" />

@@ -6,7 +6,6 @@ package org.fam.jsf.bean;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.fam.common.cdi.LoggedIn;
 import org.fam.ejb.model.FamUser;
 import org.fam.ejb.session.FamUserFacade;
 import org.fam.jsf.bean.util.JsfUtil;
@@ -25,7 +24,6 @@ import org.openid4java.message.ax.FetchResponse;
 import org.slf4j.Logger;
 
 import javax.enterprise.context.SessionScoped;
-import javax.enterprise.inject.Produces;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -108,9 +106,9 @@ public class Login implements Serializable {
         return currentUser != null;
     }
 
-    @Produces
-    @LoggedIn
-    @Named(value = "currentUser")
+    //    @Produces
+//    @LoggedIn
+//    @Named(value = "currentUser")
     public FamUser getCurrentUser() {
         return currentUser;
     }
@@ -366,7 +364,7 @@ public class Login implements Serializable {
     public String authRequest(String userSuppliedString,
                               HttpServletRequest httpReq,
                               HttpServletResponse httpResp)
-            throws IOException {
+     throws IOException {
         try {
             // configure the return_to URL where your application will receive
             // the authentication responses from the OpenID provider
@@ -394,9 +392,9 @@ public class Login implements Serializable {
             // Attribute Exchange example: fetching the 'email' attribute
             FetchRequest fetch = FetchRequest.createFetchRequest();
             fetch.addAttribute("email",
-                    // attribute alias
-                    "http://schema.openid.net/contact/email",   // type URI
-                    true);                                      // required
+                               // attribute alias
+                               "http://schema.openid.net/contact/email",   // type URI
+                               true);                                      // required
 
             // attach the extension to the authentication request
             authReq.addExtension(fetch);
@@ -433,11 +431,11 @@ public class Login implements Serializable {
             // extract the parameters from the authentication response
             // (which comes in as a HTTP request from the OpenID provider)
             ParameterList response =
-                    new ParameterList(httpReq.getParameterMap());
+             new ParameterList(httpReq.getParameterMap());
 
             // retrieve the previously stored discovery information
             DiscoveryInformation discovered = (DiscoveryInformation)
-                    httpReq.getSession().getAttribute("openid-disc");
+                                               httpReq.getSession().getAttribute("openid-disc");
 
             // extract the receiving URL from the HTTP request
             StringBuffer receivingURL = httpReq.getRequestURL();
@@ -449,7 +447,7 @@ public class Login implements Serializable {
             // verify the response; ConsumerManager needs to be the same
             // (static) instance used to place the authentication request
             VerificationResult verification = manager.verify(receivingURL.toString(),
-                    response, discovered);
+                                                             response, discovered);
 
             // examine the verification result and extract the verified identifier
             Identifier verified = verification.getVerifiedId();
