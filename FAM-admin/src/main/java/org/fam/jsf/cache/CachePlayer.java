@@ -11,7 +11,9 @@ import org.fam.ejb.model.FamCity;
 import org.fam.ejb.model.FamCountry;
 import org.fam.ejb.model.FamProvince;
 import org.fam.ejb.model.FamState;
+import org.fam.ejb.model.FamTeam;
 import org.fam.ejb.model.FamUser;
+import org.fam.ejb.session.FamTeamFacade;
 import org.fam.ejb.session.FamUserFacade;
 import org.primefaces.event.SelectEvent;
 import org.slf4j.Logger;
@@ -53,10 +55,10 @@ public class CachePlayer implements Serializable {
 //    private FamPlayer currentPlayer;
 
     // TEAMS
-//    @Inject
-//    private FamTeamFacade ejbTeam;
-////    private List<FamTeam> listTeam = new ArrayList<FamTeam>();
-//    // PLAYER
+    @Inject
+    private FamTeamFacade ejbTeam;
+    private List<FamTeam> listTeam = new ArrayList<FamTeam>();
+    //    // PLAYER
 //    @Inject
 //    private FamPlayerFacade ejbPlayer;
 //    private List<FamPlayer> listPlayer = new ArrayList<FamPlayer>();
@@ -76,20 +78,20 @@ public class CachePlayer implements Serializable {
 //            currentPlayer = players.get(0);
 //        }
         // TEAMS
-//        loadAllTeams();
+        loadAllTeams();
         //PLAYER
 //        loadAllPlayers();
         //USER
 //        loadAllUsers();
     }
 
-//    private void loadAllTeams() {
-//        listTeam.clear();
-//
-//        for (FamTeam o : ejbTeam.findAll()) {
-//            listTeam.add(o);
-//        }
-//    }
+    private void loadAllTeams() {
+        listTeam.clear();
+
+        for (FamTeam o : ejbTeam.findAll()) {
+            listTeam.add(o);
+        }
+    }
 //
 //    private void loadAllPlayers() {
 //        listPlayer.clear();
