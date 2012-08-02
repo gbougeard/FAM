@@ -1,21 +1,27 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html
-        xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:ui="http://java.sun.com/jsf/facelets"
-        xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-        xmlns:p="http://primefaces.org/ui">
-<ui:composition template="/common/template.xhtml">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:p="http://primefaces.org/ui"
+                template="/common/template.xhtml">
 
 <f:metadata>
     <f:viewParam name="id" value="#{appointmentBean.id}"/>
-    <!--                     required="true"
- requiredMessage="Event id is required"/>-->
     <f:event type="preRenderView" listener="#{appointmentBean.loadAction}"/>
 </f:metadata>
+
+<ui:define name="head">
+    <style type="text/css">
+        .ui-datalist {
+            width: 200px;
+        }
+
+        .ui-datalist-item {
+            padding: 3px;
+        }
+    </style>
+</ui:define>
 
 <ui:define name="title">
     <h:outputText value="#{bundle.ViewFamEventTitle}"/>
@@ -24,17 +30,16 @@
 <ui:define name="body">
 <p:panel header="#{appointmentBean.currentEvent.famTypEvent.libTypEvent} - #{appointmentBean.currentEvent.libEvent}">
 <h:form>
-<!--                <h:outputText value="ProductId: #{appointmentBean.id}" />-->
 <h:panelGrid columns="1" width="100%">
-<!--                    <h:outputText value="#{bundle.ViewFamEventLabel_idEvent}"/>
+<!--                   <h:outputText value="#{bundle.ViewFamEventLabel_idEvent}"/>
 <h:outputText value="#{appointmentBean.currentEvent.idEvent}"
-title="#{bundle.ViewFamEventTitle_idEvent}"/>-->
+title="#{bundle.ViewFamEventTitle_idEvent}"/>&ndash;&gt;
 
-<!--                    <h:outputText value="#{bundle.ViewFamEventLabel_famEventStatus}"/>-->
-<!--                    <h:panelGrid columns="2" cellpadding="10">
+&lt;!&ndash;                    <h:outputText value="#{bundle.ViewFamEventLabel_famEventStatus}"/>&ndash;&gt;
+&lt;!&ndash;                    <h:panelGrid columns="2" cellpadding="10">
     <h:graphicImage library="images/dock" name="soccer_1_128.png" />
 
-</h:panelGrid>-->
+</h:panelGrid>&ndash;&gt;-->
 
 <p:fieldset legend="Date et lieu">
     <h:panelGrid columns="4" cellpadding="10">
@@ -121,6 +126,8 @@ title="#{bundle.ViewFamEventTitle_idEvent}"/>-->
                                  value="#{appointmentBean.currentUserAnswer.famTypAnswer}"
                                  title="#{bundle.EditFamEventTitle_famTypAnswer}"
                                  converter="typAnswerConverter"
+                                 style="width:200px;"
+
                         >
                     <f:selectItem itemLabel="TypAnswer" itemValue=""/>
                     <!--                                                  noSelectionOption="true"/>-->
@@ -161,121 +168,99 @@ title="#{bundle.ViewFamEventTitle_idEvent}"/>-->
         <h:panelGrid columns="2" cellpadding="10">
             <!--<p:graphicImage value="#{resource['images/icons:']}"/>-->
             <h:graphicImage name="01_messages.png" library="images/icons"/>
-            <h:panelGrid columns="4" columnClasses="cols_4,cols_4,cols_4,cols_4">
+            <h:panelGrid columns="4" columnClasses="verticalTop,verticalTop,verticalTop,verticalTop">
                 <!--@elvariable id="y" type="org.fam.ejb.model.FamAnswer"-->
-                <p:dataTable id="dtbYes"
-                             value="#{appointmentBean.lstYes}"
-                             var="y"
-                             paginator="true"
-                             rows="5"
-                             pageLinks="3"
-                             paginatorPosition="bottom"
-                             paginatorAlwaysVisible="false"
-                             rowKey="#{y.idAnswer}"
-                             style="height:200px;width:180px;"
+                <p:dataList id="dtbYes"
+                            value="#{appointmentBean.lstYes}"
+                            var="y"
+                            type="definition"
+                            rowKey="#{y.idAnswer}"
+
+                            style="width:250px;"
                         >
-                    <p:column headerText="Présents (#{fn:length(appointmentBean.lstYes)})">
-                        <h:outputText value="#{y.famPlayer.displayName}"/>
-                    </p:column>
-                    <p:column>
-                        <p:graphicImage styleClass="icon-balloon"/>
-                        <h:outputText id="com"
-                                      styleClass="icon-balloon-box"
-                                      value="com"
-                                      title="#{y.comments}"
-                                      rendered="#{not empty y.comments}"/>
-                        <p:overlayPanel id="imgPanel" for="com"
-                                        showEffect="blind" hideEffect="explode"
-                                        showEvent="mouseover" hideEvent="mousedown">
-                            <h:outputText value="#{y.comments}"
-                                          rendered="#{not empty y.comments}"/>
-                        </p:overlayPanel>
-                    </p:column>
-                </p:dataTable>
+                    <f:facet name="header">
+                        <h:outputText value="Présents (#{fn:length(appointmentBean.lstYes)})"/>
+                    </f:facet>
+                    <h:graphicImage library="images/fugue/icons"
+                                    name="#{y.famTypAnswer.codTypAnswer}"/>
+                    <h:outputText value="#{y.famPlayer.displayName}"/>
+                    <h:graphicImage library="images/silk"
+                                    name="comment.png"
+                                    title="#{y.comments}"
+                                    rendered="#{not empty y.comments}"/>
+                    <f:facet name="description">
+                        <h:outputText/>
+                    </f:facet>
+                </p:dataList>
 
                 <!--@elvariable id="m" type="org.fam.ejb.model.FamAnswer"-->
-                <p:dataTable id="dtbMaybe"
-                             value="#{appointmentBean.lstMaybe}"
-                             var="m"
-                             paginator="true"
-                             rows="5"
-                             pageLinks="3"
-                             paginatorPosition="bottom"
-                             paginatorAlwaysVisible="false"
-                             rowKey="#{m.idAnswer}"
-                             style="height:200px;width:180px;"
+                <p:dataList id="dtbMaybe"
+                            value="#{appointmentBean.lstMaybe}"
+                            var="m"
+                            rowKey="#{m.idAnswer}"
+                            style="width:250px;"
                         >
-                    <p:column headerText="Ne savent pas (#{fn:length(appointmentBean.lstMaybe)})">
-                        <h:outputText value="#{m.famPlayer.displayName}"/>
-                    </p:column>
-                    <p:column>
-                        <h:outputText value="com"
-                                      title="#{m.comments}"
-                                      rendered="#{not empty m.comments}"/>
-                    </p:column>
-                </p:dataTable>
+                    <f:facet name="header">
+                        <h:outputText value="Ne savent pas (#{fn:length(appointmentBean.lstMaybe)})"/>
+                    </f:facet>
+                    <h:graphicImage library="images/fugue/icons"
+                                    name="#{m.famTypAnswer.codTypAnswer}"/>
+                    <h:outputText value="#{m.famPlayer.displayName}"/>
+                    <h:graphicImage library="images/silk"
+                                    name="comment.png"
+                                    title="#{m.comments}"
+                                    rendered="#{not empty m.comments}"/>
+                    <f:facet name="description">
+                        <h:outputText/>
+                    </f:facet>
+                </p:dataList>
 
                 <!--@elvariable id="n" type="org.fam.ejb.model.FamAnswer"-->
-                <p:dataTable id="dtbNo"
-                             value="#{appointmentBean.lstNo}"
-                             var="n"
-                             paginator="true"
-                             rows="5"
-                             pageLinks="3"
-                             paginatorPosition="bottom"
-                             paginatorAlwaysVisible="false"
-                             rowKey="#{n.idAnswer}"
-                             style="height:200px;width:180px;">
-                    <p:column headerText="Absents (#{fn:length(appointmentBean.lstNo)})">
-                        <h:outputText value="#{n.famPlayer.displayName}"/>
-                    </p:column>
-                    <p:column>
-                        <h:outputText styleClass="icon-balloon"
-                                      title="#{n.comments}"
-                                      rendered="#{not empty n.comments}"/>
-                    </p:column>
-                </p:dataTable>
+                <p:dataList id="dtbNo"
+                            value="#{appointmentBean.lstNo}"
+                            var="n"
+                            rowKey="#{n.idAnswer}"
+                            type="definition"
+                            style="width:250px;">
+                    <f:facet name="header">
+                        <h:outputText value="Absents (#{fn:length(appointmentBean.lstNo)})"/>
+                    </f:facet>
+                    <h:graphicImage library="images/fugue/icons"
+                                    name="#{n.famTypAnswer.codTypAnswer}"/>
+                    <h:outputText value="#{n.famPlayer.displayName}"/>
+                    <h:graphicImage library="images/silk"
+                                    name="comment.png"
+                                    title="#{n.comments}"
+                                    rendered="#{not empty n.comments}"/>
+                    <f:facet name="description">
+                        <h:outputText/>
+                    </f:facet>
+                </p:dataList>
 
                 <!--@elvariable id="nsp" type="org.fam.ejb.model.FamPlayer"-->
-                <p:dataTable id="dtbNsp"
-                             value="#{appointmentBean.lstNsp}"
-                             lazy="true"
-                             var="nsp"
-
-                             scrollRows="20"
-                             scrollable="true" liveScroll="true" scrollHeight="150"
-                             rowKey="#{nsp.idPlayer}"
-                             style="height:200px;width:180px;">
-                    <!--rows="5"-->
-                    <!--paginator="true"-->
-                    <!--pageLinks="1"-->
-                    <!--paginatorPosition="bottom"-->
-                    <!--paginatorAlwaysVisible="false"-->
-                    <p:column headerText="Ne se prononcent pas (#{fn:length(appointmentBean.lstNsp)})">
-                        <h:outputText value="#{nsp.displayName}"/>
-                    </p:column>
+                <p:dataList id="dtbNsp"
+                            value="#{appointmentBean.lstNsp}"
+                            var="nsp"
+                            rowKey="#{nsp.idPlayer}"
+                            style="width:250px;">
+                    <f:facet name="header">
+                        <h:outputText value="Ne se prononcent pas (#{fn:length(appointmentBean.lstNsp)})"/>
+                    </f:facet>
+                    <h:outputText value="#{nsp.displayName}"/>
+                    <f:facet name="description">
+                        <h:outputText/>
+                    </f:facet>
                     <!--                                        <h:outputText value="#{nsp.displayName}"/>-->
-                </p:dataTable>
+                </p:dataList>
 
             </h:panelGrid>
         </h:panelGrid>
     </h:form>
 </p:fieldset>
 
-<!--                    <h:outputText value="#{bundle.ViewFamEventLabel_dtCreat}"/>
-<h:outputText value="#{appointmentBean.currentEvent.dtCreat}"
-              title="#{bundle.ViewFamEventTitle_dtCreat}">
-    <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
-</h:outputText>
-<h:outputText value="#{bundle.ViewFamEventLabel_dtModif}"/>
-<h:outputText value="#{appointmentBean.currentEvent.dtModif}"
-              title="#{bundle.ViewFamEventTitle_dtModif}">
-    <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
-</h:outputText>-->
 </h:panelGrid>
 </h:form>
 </p:panel>
 </ui:define>
 </ui:composition>
-</html>
 

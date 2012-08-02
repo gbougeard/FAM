@@ -160,12 +160,12 @@ public class FamPlaceController extends AbstractController<FamPlace> {
 
             simpleModel = new DefaultMapModel();
         }
-        simpleModel.addOverlay(new Marker(coord, "Test"));
+        simpleModel.addOverlay(new Marker(coord, current.getLibPlace()));
 
 //        String msg = "OK!";
 //        FacesContext.getCurrentInstance().addMessage(null, 
 //                    new FacesMessage(FacesMessage.SEVERITY_INFO, this.getClass().getName(), msg));
-        return null;//"map";
+        return PRETTY_PREFIX;//"map";
     }
 
 }

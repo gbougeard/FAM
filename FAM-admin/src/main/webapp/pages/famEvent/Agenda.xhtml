@@ -4,9 +4,13 @@
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:p="http://primefaces.org/ui"
         template="/common/template.xhtml">
-    <ui:define name="title">Agenda</ui:define>
+
+    <ui:define name="title">
+        <h:outputText value="#{bundle.Agenda}"/>
+    </ui:define>
+
     <ui:define name="body">
-        <div style="text-align: center;">
+        <center>
             <h:form>
                 <p:toolbar>
 
@@ -54,7 +58,10 @@
                 <p:dialog widgetVar="eventDialog"
                           header="Event Details"
                           showEffect="clip"
-                          hideEffect="clip">
+                          hideEffect="clip"
+                          width="300"
+                          height="200"
+                        >
                     <h:panelGrid id="eventDetails" columns="2">
                         <p:outputLabel for="title" value="Title:"/>
                         <p:inputText id="title" value="#{famEventController.event.title}"/>
@@ -97,6 +104,6 @@
                     </h:panelGrid>
                 </p:dialog>
             </h:form>
-        </div>
+        </center>
     </ui:define>
 </ui:composition>

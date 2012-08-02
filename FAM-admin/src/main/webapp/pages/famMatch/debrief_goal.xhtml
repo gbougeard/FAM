@@ -119,44 +119,46 @@
                     </h:panelGrid>
 
 
+                    <p:outputPanel id="goals">
+                        <p:dataTable id="dtbGoal"
+                                     value="#{famMatchDebriefWizardController.lstGoal}"
+                                     var="card"
+                                     style="width:500px;">
+
+                            <p:column>
+                                <f:facet style="width:10%;" name="header">
+                                    <h:outputText value="Temps"/>
+                                </f:facet>
+                                <h:outputText value="#{card.goalTime}"/>
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Buteur"/>
+                                </f:facet>
+                                <h:outputText value="#{card.famMatchPlayerStriker.famPlayer.displayName}"/>
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Passeur"/>
+                                </f:facet>
+                                <h:outputText value="#{card.famMatchPlayerAssist.famPlayer.displayName}"/>
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+
+                                </f:facet>
+                                <p:commandLink value="Remove" update="@(goals)" process="@(goals)">
+                                    <p:collector value="#{card}"
+                                                 removeFrom="#{famMatchDebriefWizardController.lstGoal}"/>
+                                </p:commandLink>
+                            </p:column>
+
+                        </p:dataTable>
+                    </p:outputPanel>
                 </center>
-
-                <p:outputPanel id="goals">
-                    <p:dataTable id="dtbGoal" value="#{famMatchDebriefWizardController.lstGoal}" var="card">
-
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Temps"/>
-                            </f:facet>
-                            <h:outputText value="#{card.goalTime}"/>
-                        </p:column>
-
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Buteur"/>
-                            </f:facet>
-                            <h:outputText value="#{card.famMatchPlayerStriker.famPlayer.displayName}"/>
-                        </p:column>
-
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Passeur"/>
-                            </f:facet>
-                            <h:outputText value="#{card.famMatchPlayerAssist.famPlayer.displayName}"/>
-                        </p:column>
-
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Operation"/>
-                            </f:facet>
-                            <p:commandLink value="Remove" update="@(goals)" process="@(goals)">
-                                <p:collector value="#{card}"
-                                             removeFrom="#{famMatchDebriefWizardController.lstGoal}"/>
-                            </p:commandLink>
-                        </p:column>
-
-                    </p:dataTable>
-                </p:outputPanel>
             </p:fieldset>
         </h:form>
 

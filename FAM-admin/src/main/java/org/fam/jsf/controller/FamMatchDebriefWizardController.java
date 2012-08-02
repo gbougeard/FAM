@@ -116,7 +116,7 @@ public class FamMatchDebriefWizardController extends AbstractController<FamMatch
     private FamSubstitution famSubstitution;
     //
     private FamMatchTeam famMatchTeam;
-    private FamMatchPlayer selectedFamMatchPlayer;
+    private FamMatchPlayer selectedFamMatchPlayer = new FamMatchPlayer();
     //
     private int nbTit;
     private int nbSub;

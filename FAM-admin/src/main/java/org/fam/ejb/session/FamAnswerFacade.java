@@ -218,6 +218,7 @@ public class FamAnswerFacade extends AbstractFacade<FamAnswer> {
 
         List<FamPlayer> players = new ArrayList<FamPlayer>();
         for (FamTeam team : event.getFamTeamList()) {
+            //TODO find by Category & Club instead of team
             List<FamPlayerSeason> playerSeasonList = ejbPlayerSeason.findByTeamAndSeason(team, event.getFamSeason());
 
             for (FamPlayerSeason ps : playerSeasonList) {
