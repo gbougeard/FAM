@@ -28,6 +28,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.validation.ConstraintViolation;
@@ -54,10 +55,6 @@ public class AbstractFacade<T> implements Serializable {
     @PersistenceContext//(unitName = "FAM-test-ejbPU")
     private EntityManager em;
     //
-//    @Inject
-//    @LoggedIn
-//    protected FamUser currentUser;
-
 
     /**
      * @return
@@ -385,24 +382,9 @@ public class AbstractFacade<T> implements Serializable {
                                final boolean sortOrder,
                                final Map<String, String> filters) {
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("first ").append(first).append(" pageSize ").append(pageSize);
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug(sb.toString());
-        }
-        sb = new StringBuilder();
-        sb.append("sortField ").append(sortField).append(" sortOrder ").append(sortOrder);
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug(sb.toString());
-        }
-        for (String s : filters.keySet()) {
-            sb = new StringBuilder();
-            sb.append("filtre ").append(s).append(" value ").append(filters.get(s));
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug(sb.toString());
-            }
-        }
+        LOGGER.debug("pagination first {} pageSize {}", first, pageSize);
 
+        boolean bJoined = false;
         CriteriaBuilder cb = getCriteriaBuilder();
         CriteriaQuery<T> cq = getCriteriaQuery();
 //        cq.select(cq.from(entityClass));
@@ -411,68 +393,49 @@ public class AbstractFacade<T> implements Serializable {
         List<Predicate> predicates = new ArrayList<Predicate>();
         Predicate criteria = cb.conjunction();
         for (String s : filters.keySet()) {
-//            sb.append("filtre ").append(s).append(" type ").append(root.get(s).getJavaType());
-//           LOGGER.debug(sb.toString());
-            sb = new StringBuilder();
-            sb.append("filtre ").append(s).append(" value ").append(filters.get(s));
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug(sb.toString());
-            }
+            LOGGER.debug("filtreField {} valeur {}", s, filters.get(s));
 
-            sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder();
             sb.append("%").append(filters.get(s).toUpperCase()).append("%");
 //            Expression<String> literal = cb.upper(cb.literal(sb.toString()));
 
             if (s.contains(".")) {
-                if (LOGGER.isDebugEnabled()) {
-                    LOGGER.debug("filtre  avec . " + sb.toString());
-                }
+                bJoined = true;
                 String[] splitted = s.split(".");
-                if (LOGGER.isDebugEnabled()) {
-                    LOGGER.debug("splitted " + Arrays.toString(splitted));
-                }
+                LOGGER.debug("splitted " + Arrays.toString(splitted));
                 StringTokenizer token = new StringTokenizer(s);
-                if (LOGGER.isDebugEnabled()) {
-                    LOGGER.debug("tokens " + token.countTokens());
-                }
+                LOGGER.debug("tokens " + token.countTokens());
 //                predicates.add(cb.like(cb.upper(cb.literal(s)), str));
                 predicates.add(cb.like(cb.upper(root.get(token.nextToken(".")).get(token.nextToken("."))), sb.toString()));
 
 
             } else {
                 if (root.get(s) != null) {
-                    if (LOGGER.isDebugEnabled()) {
-                        LOGGER.debug("filtre " + s + " - " + sb.toString());
-                    }
                     predicates.add(cb.like(cb.upper(root.get(s)), sb.toString()));
 
                 }
             }
         }
         cq.where(predicates.toArray(new Predicate[predicates.size()]));
-//        for (String s : filters.keySet()) {
-//            sb = new StringBuilder();
-//            
-//            if (s.contains(".")) {
-//                sb.append("%").append(filters.get(s).toUpperCase()).append("%");
-//                String[] splitted = s.split(".");
-//                
-//                ParameterExpression<String> p = cb.parameter(String.class, filters.get(s));
-//                criteria = cb.and(criteria, cb.like(cb.upper(root.get(splitted[0]).get(splitted[1])), p));
-//                
-//            } else {
-//                sb.append("%").append(filters.get(s).toUpperCase()).append("%");
-//                ParameterExpression<String> p = cb.parameter(String.class, filters.get(s));
-//                criteria = cb.and(criteria, cb.like(cb.upper(root.get(s)), p));
-//            }
-//
-//        }
 
         if ((sortField != null) && (!sortField.isEmpty())) {
-            if (sortOrder) {
-                cq.orderBy(cb.asc(root.get(sortField)));
+            LOGGER.debug("sort Field {} Order {} ", sortField, sortOrder ? "ASC" : "DESC");
+            Path path;
+            if (sortField.contains(".") && !bJoined) {
+                String[] splitted = sortField.split(".");
+                LOGGER.debug("splitted " + Arrays.toString(splitted));
+                StringTokenizer token = new StringTokenizer(sortField);
+                LOGGER.debug("tokens " + token.countTokens());
+                path = root.get(token.nextToken(".")).get(token.nextToken("."));
+
             } else {
-                cq.orderBy(cb.desc(root.get(sortField)));
+                path = root.get(sortField);
+            }
+
+            if (sortOrder) {
+                cq.orderBy(cb.asc(path));
+            } else {
+                cq.orderBy(cb.desc(path));
             }
         }
 
@@ -512,23 +475,18 @@ public class AbstractFacade<T> implements Serializable {
 //            if (root.get(s) != null) {
 //                predicates.add(cb.like((Expression) root.get(s), "%" + filters.get(s) + "%"));
 //            }
-
             StringBuilder sb = new StringBuilder();
+//            LOGGER.debug("filtre  avec . " + sb.toString());
+
+
             sb.append("%").append(filters.get(s).toUpperCase()).append("%");
             Expression<String> literal = cb.upper(cb.literal(sb.toString()));
 
             if (s.contains(".")) {
-                if (LOGGER.isDebugEnabled()) {
-                    LOGGER.debug("filtre  avec . " + sb.toString());
-                }
                 String[] splitted = s.split(".");
-                if (LOGGER.isDebugEnabled()) {
-                    LOGGER.debug("splitted " + Arrays.toString(splitted));
-                }
+//                LOGGER.debug("splitted " + Arrays.toString(splitted));
                 StringTokenizer token = new StringTokenizer(s);
-                if (LOGGER.isDebugEnabled()) {
-                    LOGGER.debug("tokens " + token.countTokens());
-                }
+//                LOGGER.debug("tokens " + token.countTokens());
 //                predicates.add(cb.like(cb.upper(cb.literal(s)), str));
                 predicates.add(cb.like(cb.upper(root.get(token.nextToken(".")).get(token.nextToken("."))), sb.toString()));
 
