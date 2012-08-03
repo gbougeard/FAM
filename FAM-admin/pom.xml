@@ -64,5 +64,26 @@
     </build>
     <properties>
         <netbeans.hint.deploy.server>gfv3ee6</netbeans.hint.deploy.server>
+        <javax.faces.PROJECT_STAGE>Development</javax.faces.PROJECT_STAGE>
     </properties>
+
+    <profiles>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <javax.faces.PROJECT_STAGE>Production</javax.faces.PROJECT_STAGE>
+            </properties>
+            <!--<build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <configuration>
+                            <outputDirectory>deployments</outputDirectory>
+                            <warName>ROOT</warName>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>-->
+        </profile>
+    </profiles>
 </project>
