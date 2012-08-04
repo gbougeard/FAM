@@ -182,7 +182,8 @@ title="#{bundle.ViewFamEventTitle_idEvent}"/>&ndash;&gt;
                         <h:outputText value="Présents (#{fn:length(appointmentBean.lstYes)})"/>
                     </f:facet>
                     <h:graphicImage library="images/fugue/icons"
-                                    name="#{y.famTypAnswer.codTypAnswer}"/>
+                                    name="#{y.famTypAnswer.codTypAnswer}"
+                                    title="#{y.famTypAnswer.libTypAnswer}"/>
                     <h:outputText value="#{y.famPlayer.displayName}"/>
                     <h:graphicImage library="images/silk"
                                     name="comment.png"
@@ -204,7 +205,8 @@ title="#{bundle.ViewFamEventTitle_idEvent}"/>&ndash;&gt;
                         <h:outputText value="Ne savent pas (#{fn:length(appointmentBean.lstMaybe)})"/>
                     </f:facet>
                     <h:graphicImage library="images/fugue/icons"
-                                    name="#{m.famTypAnswer.codTypAnswer}"/>
+                                    name="#{m.famTypAnswer.codTypAnswer}"
+                                    title="#{m.famTypAnswer.libTypAnswer}"/>
                     <h:outputText value="#{m.famPlayer.displayName}"/>
                     <h:graphicImage library="images/silk"
                                     name="comment.png"
@@ -226,7 +228,8 @@ title="#{bundle.ViewFamEventTitle_idEvent}"/>&ndash;&gt;
                         <h:outputText value="Absents (#{fn:length(appointmentBean.lstNo)})"/>
                     </f:facet>
                     <h:graphicImage library="images/fugue/icons"
-                                    name="#{n.famTypAnswer.codTypAnswer}"/>
+                                    name="#{n.famTypAnswer.codTypAnswer}"
+                                    title="#{n.famTypAnswer.libTypAnswer}"/>
                     <h:outputText value="#{n.famPlayer.displayName}"/>
                     <h:graphicImage library="images/silk"
                                     name="comment.png"

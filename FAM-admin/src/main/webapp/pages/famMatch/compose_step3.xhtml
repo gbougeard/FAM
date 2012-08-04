@@ -55,8 +55,12 @@
                          rowKey="#{item.idPlayer}"
 
                     >
+                <f:facet name="header">
+                    <h:outputText
+                            value="Joueurs disponibles (#{fn:length(famMatchComposeWizardController.teamComposition.preselectedLst)}) "/>
+                </f:facet>
                 <p:column sortBy="#{item.displayName}"
-                          headerText="Joueur (#{fn:length(famMatchComposeWizardController.teamComposition.preselectedLst)})">
+                          headerText="Joueur ">
                     <h:outputText value="#{item.displayName}"/>
                 </p:column>
 
@@ -71,8 +75,14 @@
             <p:dataGrid id="dgField"
                         value="#{famMatchComposeWizardController.teamComposition.lstTarget}"
                         var="t" columns="5"
+                        binding="#{famMatchComposeWizardController.fieldComponent}"
                         styleClass="soccer_field"
                     >
+                <f:facet name="header">
+                    <p:commandButton value="Refresh"
+                                     action="#{famMatchComposeWizardController.teamComposition.genTarget}"
+                                     immediate="true" update="@parent"/>
+                </f:facet>
                 <!--style="padding-top: 50px;margin-left: 40px;"-->
                 <p:column>
                     <p:panel id="trg"
@@ -93,7 +103,7 @@
                                 >
                             <f:attribute name="num" value="#{t.famFormationItem.numItem}"/>
                             <p:ajax listener="#{famMatchComposeWizardController.onDrop}"
-                                    update="dgField :#{famMatchComposeWizardController.selectedComponent.clientId} :#{famMatchComposeWizardController.userListComponent.clientId}"
+                                    update="@parent @this :#{famMatchComposeWizardController.selectedComponent.clientId} :#{famMatchComposeWizardController.userListComponent.clientId}"
                                     />
                         </p:droppable>
                     </p:panel>
@@ -107,28 +117,27 @@
                 <h:graphicImage id="imgSub" name="soccer_2_128.png" library="images/dock"/>
                 <p:dataGrid id="dgSubs"
                             value="#{famMatchComposeWizardController.teamComposition.lstSubs}"
-                            var="card"
+                            var="sub"
                             columns="2"
                             style="padding-top: 25px;margin-left: 20px;">
                     <p:column>
-                        <p:panel id="sub"
-                                 style="width:50px;height:63px;opacity:0.5;margin-left: 5px;"
+                        <p:panel style="width:50px;height:63px;opacity:0.5;margin-left: 5px;"
                                 >
-                            <h:outputText value="#{card.strIdx}"
+                            <h:outputText value="#{sub.strIdx}"
                                           style="text-align:center;font-weight: bolder;"/>
                             <br/>
-                            <h:outputText value="#{card.famPlayer.displayName}"
+                            <h:outputText value="#{sub.famPlayer.displayName}"
                                           style="text-align:center;font-weight: bolder;"
-                                          rendered="#{not empty card.famPlayer}"/>
+                                          rendered="#{not empty sub.famPlayer}"/>
 
                             <p:droppable tolerance="touch"
                                          activeStyleClass="ui-state-highlight"
                                          onDrop="handleDrop"
                                          datasource=":#{famMatchComposeWizardController.userListComponent.clientId}"
                                     >
-                                <!--<f:attribute name="num" value="#{sub.strIdx}"/>-->
+                                <f:attribute name="num" value="#{sub.strIdx}"/>
                                 <p:ajax listener="#{famMatchComposeWizardController.onSubDrop}"
-                                        update="dgSubs :#{famMatchComposeWizardController.selectedComponent.clientId} @(dtbPreSelected)"
+                                        update="@parent :#{famMatchComposeWizardController.selectedComponent.clientId} :#{famMatchComposeWizardController.userListComponent.clientId}"
 
                                         />
                             </p:droppable>
@@ -150,7 +159,10 @@
                          emptyMessage="#{bundle.NoDataFound}"
                          rowKey="#{mp.num}"
                          rowStyleClass="#{mp.num gt famMatchComposeWizardController.selected.famSeasonCompetition.famTypCompetition.famTypMatch.nbPlayer ? 'row-sub' : null}">
-                <p:column headerText="Poste">
+                <f:facet name="header">
+                    <h:outputText value="Compo temporaire"/>
+                </f:facet>
+                <p:column headerText="#" style="width:5%">
                     <h:outputText value="#{mp.num}"/>
                 </p:column>
                 <p:column headerText="Joueur">

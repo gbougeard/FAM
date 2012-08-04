@@ -67,28 +67,28 @@
                 <center>
                     <p:dataTable id="dtbSub"
                                  value="#{famMatchDebriefWizardController.lstSubstitution}"
-                                 var="card"
+                                 var="sub"
                                  style="width:500px;">
 
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Temps"/>
                             </f:facet>
-                            <h:outputText value="#{card.substitutionTime}"/>
+                            <h:outputText value="#{sub.substitutionTime}"/>
                         </p:column>
 
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="IN"/>
                             </f:facet>
-                            <h:outputText value="#{card.famMatchPlayerIn.famPlayer.displayName}"/>
+                            <h:outputText value="#{sub.famMatchPlayerIn.famPlayer.displayName}"/>
                         </p:column>
 
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="OUT"/>
                             </f:facet>
-                            <h:outputText value="#{card.famMatchPlayerOut.famPlayer.displayName}"/>
+                            <h:outputText value="#{sub.famMatchPlayerOut.famPlayer.displayName}"/>
                         </p:column>
 
                         <p:column>
@@ -96,7 +96,7 @@
                                 <h:outputText value="Operation"/>
                             </f:facet>
                             <p:commandLink value="Remove" update="@(subs)" process="@(subs)">
-                                <p:collector value="#{card}"
+                                <p:collector value="#{sub}"
                                              removeFrom="#{famMatchDebriefWizardController.lstSubstitution}"/>
                             </p:commandLink>
                         </p:column>

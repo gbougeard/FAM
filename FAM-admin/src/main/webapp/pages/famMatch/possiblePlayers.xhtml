@@ -18,57 +18,55 @@
         xmlns:p="http://primefaces.org/ui"
         >
 <ui:composition>
-    <!--@elvariable id="answer" type="org.fam.jsf.bean.Answer"-->
+
+    <!--@elvariable id="answers" type="org.fam.jsf.bean.Answer"-->
     <!--@elvariable id="TYP" type="java.lang.Boolean"-->
     <!--@elvariable id="id" type="java.lang.String"-->
     <!--@elvariable id="headerText" type="java.lang.String"-->
     <p:dataTable id="#{id}"
-                 value="#{answer.lstAnswer}"
+                 value="#{answers.lstAnswer}"
                  var="item"
+                 type="definition"
+                 effectSpeed="fast"
 
-                 liveScroll="true"
-                 scrollable="true"
-                 scrollRows="10"
-                 scrollHeight="150"
-                 style="width:250px;"
+                 paginator="true"
+                 paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink}"
+                 rows="10"
+                 pageLinks="1"
+                 paginatorPosition="bottom"
+                 paginatorAlwaysVisible="false"
+                 style="width:200px;"
                  rowKey="#{TYP ? item.idAnswer :item.idPlayer }"
             >
-        <!-- style="height:250px;width:250px;"-->
-        <!--effectSpeed="fast"-->
-        <!--paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink}"-->
-        <!--type="none"-->
-        <!--paginator="true"-->
-        <!--rows="5"-->
-        <!--pageLinks="1"-->
-        <!--paginatorPosition="bottom"-->
-        <!--paginatorAlwaysVisible="false"-->
 
         <f:facet name="header">
-            <h:outputText value=" #{headerText} (#{fn:length(answer.lstAnswer)}) "/>
+            <h:outputText value=" #{headerText} (#{fn:length(answers.lstAnswer)})"/>
         </f:facet>
-
-        <p:column width="20" >
-            <p:commandButton icon="ui-icon-plus"
-                             update="@form @(messages) @(preselectedPlayers)"
-                             action="#{answer.addSelected}"
-                             immediate="true"
-                             title="View Detail">
-                <f:setPropertyActionListener value="#{item}" target="#{answer.selected}"/>
-            </p:commandButton>
-        </p:column>
-
         <p:column>
+            <p:commandButton icon="ui-icon-plus"
+                             update=":#{famMatchComposeWizardController.preselectedComponent.clientId} "
+                             action="#{answers.addSelected}"
+                             immediate="true"
+                             title="Add">
+                <f:setPropertyActionListener value="#{item}" target="#{answers.selected}"/>
+            </p:commandButton>
+
+            <h:graphicImage library="images/fugue/icons"
+                            name="#{item.famTypAnswer.codTypAnswer}"
+                            title="#{item.famTypAnswer.libTypAnswer}"
+                            rendered="#{TYP}"/>
             <h:outputText value="#{TYP ? item.famPlayer.displayName : item.displayName}"/>
-            <br/>
-        </p:column>
+            <h:graphicImage library="images/silk"
+                            name="comment.png"
+                            title="#{item.comments}"
+                            rendered="#{TYP and not empty item.comments}"/>
 
-        <p:column rendered="#{TYP}">
-            <!--<h:outputText id="com"-->
-                          <!--value="com"-->
-                          <!--title="#{item.comments}"-->
-                          <!--rendered="#{not empty item.comments}"/>-->
+            <f:facet name="description">
+                <div/>
+                <!--<h:outputText value="#{item.comments}"
+            rendered="#{TYP and not empty item.comments}"/>-->
+            </f:facet>
         </p:column>
-
     </p:dataTable>
 
 </ui:composition>

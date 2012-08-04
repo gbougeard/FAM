@@ -16,80 +16,81 @@
         xmlns:p="http://primefaces.org/ui"
         >
     <p:tab id="tabPresel" title="Présélection">
+        <h:panelGrid columns="2" cellpadding="10" columnClasses="verticalTop,verticalTop">
+            <p:fieldset legend="Réponses">
+                <h:panelGrid columns="2" cellpadding="10" columnClasses="verticalTop,verticalTop">
+                    <h:graphicImage name="01_messages.png" library="images/icons"/>
 
-        <p:fieldset legend="Réponses" toggleable="true">
-            <h:panelGrid columns="2" cellpadding="10">
-                <h:graphicImage name="01_messages.png" library="images/icons"/>
+                    <h:panelGrid columns="4" cellpadding="10"
+                                 columnClasses="verticalTop,verticalTop,verticalTop,verticalTop">
+                        <ui:include src="possiblePlayers.xhtml">
+                            <ui:param name="id" value="dtYes"/>
+                            <ui:param name="headerText" value="Présents"/>
+                            <ui:param name="TYP" value="#{true}"/>
 
-                <h:panelGrid columns="4" cellpadding="10"
-                             columnClasses="verticalTop,verticalTop,verticalTop,verticalTop">
+                            <!--<ui:param name="lst" value="#{famMatchComposeWizardController.teamComposition.lstYes}"/>-->
+                            <!-- <ui:param name="selected"
+                            value="#{famMatchComposeWizardController.teamComposition.selectedYes}"/>
+                  <ui:param name="addSelected"
+                            value="#{famMatchComposeWizardController.teamComposition.addSelectedYes}"/>-->
+                            <ui:param name="answers"
+                                      value="#{famMatchComposeWizardController.teamComposition.answerYes}"/>
+                        </ui:include>
+                        <ui:include src="possiblePlayers.xhtml">
+                            <ui:param name="id" value="dtMaybe"/>
+                            <ui:param name="headerText" value="Peut-être"/>
+                            <ui:param name="TYP" value="#{true}"/>
 
-                    <ui:include src="possiblePlayers.xhtml">
-                        <ui:param name="id" value="dtYes"/>
-                        <ui:param name="headerText" value="Présents"/>
-                        <ui:param name="TYP" value="#{true}"/>
+                            <!--<ui:param name="lst" value="#{famMatchComposeWizardController.teamComposition.lstMaybe}"/>-->
+                            <!-- <ui:param name="selected"
+                            value="#{famMatchComposeWizardController.teamComposition.selectedMaybe}"/>
+                  <ui:param name="addSelected"
+                            value="#{famMatchComposeWizardController.teamComposition.addSelectedMaybe}"/>-->
+                            <ui:param name="answers"
+                                      value="#{famMatchComposeWizardController.teamComposition.answerMaybe}"/>
+                        </ui:include>
 
-                        <!--<ui:param name="lst" value="#{famMatchComposeWizardController.teamComposition.lstYes}"/>-->
-                        <ui:param name="selected"
-                                  value="#{famMatchComposeWizardController.teamComposition.selectedYes}"/>
-                        <ui:param name="addSelected"
-                                  value="#{famMatchComposeWizardController.teamComposition.addSelectedYes}"/>
-                        <ui:param name="answer" value="#{famMatchComposeWizardController.teamComposition.answerYes}"/>
-                    </ui:include>
+                        <ui:include src="possiblePlayers.xhtml">
+                            <ui:param name="id" value="dtNo"/>
+                            <ui:param name="headerText" value="Absents"/>
+                            <ui:param name="TYP" value="#{true}"/>
 
-                    <ui:include src="possiblePlayers.xhtml">
-                        <ui:param name="id" value="dtMaybe"/>
-                        <ui:param name="headerText" value="Peut-être"/>
-                        <ui:param name="TYP" value="#{true}"/>
-
-                        <!--<ui:param name="lst" value="#{famMatchComposeWizardController.teamComposition.lstMaybe}"/>-->
-                        <ui:param name="selected"
-                                  value="#{famMatchComposeWizardController.teamComposition.selectedMaybe}"/>
-                        <ui:param name="addSelected"
-                                  value="#{famMatchComposeWizardController.teamComposition.addSelectedMaybe}"/>
-                        <ui:param name="answer" value="#{famMatchComposeWizardController.teamComposition.answerMaybe}"/>
-                    </ui:include>
-
-                    <ui:include src="possiblePlayers.xhtml">
-                        <ui:param name="id" value="dtNo"/>
-                        <ui:param name="headerText" value="Absents"/>
-                        <ui:param name="TYP" value="#{true}"/>
-
-                        <!--<ui:param name="lst" value="#{famMatchComposeWizardController.teamComposition.lstNo}"/>-->
-                        <ui:param name="selected"
-                                  value="#{famMatchComposeWizardController.teamComposition.selectedNo}"/>
-                        <ui:param name="addSelected"
-                                  value="#{famMatchComposeWizardController.teamComposition.addSelectedNo}"/>
-                        <ui:param name="answer" value="#{famMatchComposeWizardController.teamComposition.answerNo}"/>
-                    </ui:include>
-
-
-                    <ui:include src="possiblePlayers.xhtml">
-                        <ui:param name="id" value="dtNSP"/>
-                        <ui:param name="headerText" value="Sans réponse"/>
-                        <ui:param name="TYP" value="#{false}"/>
-
-                        <!--<ui:param name="lst" value="#{famMatchComposeWizardController.teamComposition.lstPlayer}"/>-->
-                        <!--<ui:param name="selected" value="#{famMatchComposeWizardController.teamComposition.selectedPlayers}"/>-->
-                        <ui:param name="answer"
-                                  value="#{famMatchComposeWizardController.teamComposition.answerUngiven}"/>
-                        <!--<ui:param name="addSelected" value="#{famMatchComposeWizardController.teamComposition.addSelectedPlayers}"/>-->
-                    </ui:include>
+                            <!--<ui:param name="lst" value="#{famMatchComposeWizardController.teamComposition.lstNo}"/>-->
+                            <!--<ui:param name="selected"
+                                      value="#{famMatchComposeWizardController.teamComposition.selectedNo}"/>
+                            <ui:param name="addSelected"
+                                      value="#{famMatchComposeWizardController.teamComposition.addSelectedNo}"/>-->
+                            <ui:param name="answers"
+                                      value="#{famMatchComposeWizardController.teamComposition.answerNo}"/>
+                        </ui:include>
 
 
+                        <ui:include src="possiblePlayers.xhtml">
+                            <ui:param name="id" value="dtNSP"/>
+                            <ui:param name="headerText" value="Sans réponse"/>
+                            <ui:param name="TYP" value="#{false}"/>
+
+                            <!--<ui:param name="lst" value="#{famMatchComposeWizardController.teamComposition.lstPlayer}"/>-->
+                            <!--<ui:param name="selected" value="#{famMatchComposeWizardController.teamComposition.selectedPlayers}"/>-->
+                            <ui:param name="answers"
+                                      value="#{famMatchComposeWizardController.teamComposition.answerUngiven}"/>
+                            <!--<ui:param name="addSelected" value="#{famMatchComposeWizardController.teamComposition.addSelectedPlayers}"/>-->
+                        </ui:include>
+
+
+                    </h:panelGrid>
                 </h:panelGrid>
-            </h:panelGrid>
-        </p:fieldset>
+            </p:fieldset>
 
-        <p:fieldset id="preselection"
-                    legend="Préselection (#{fn:length(famMatchComposeWizardController.teamComposition.preselectedLst)})"
-                    style="margin-top:20px">
-            <ui:include src="selectedPlayers.xhtml">
-                <ui:param name="list" value="#{famMatchComposeWizardController.teamComposition.preselectedLst}"/>
-                <ui:param name="id" value="preselectedPlayers"/>
-            </ui:include>
-        </p:fieldset>
-
+            <p:fieldset id="preselection"
+                        legend="Préselection (#{fn:length(famMatchComposeWizardController.teamComposition.preselectedLst)})"
+                        binding="#{famMatchComposeWizardController.preselectedComponent}">
+                <ui:include src="selectedPlayers.xhtml">
+                    <ui:param name="list" value="#{famMatchComposeWizardController.teamComposition.preselectedLst}"/>
+                    <ui:param name="id" value="preselectedPlayers"/>
+                </ui:include>
+            </p:fieldset>
+        </h:panelGrid>
     </p:tab>
 </ui:composition>
         <!--</html>-->

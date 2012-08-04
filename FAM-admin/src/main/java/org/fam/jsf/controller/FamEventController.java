@@ -5,7 +5,11 @@ import lombok.Setter;
 import org.fam.common.cdi.Loggable;
 import org.fam.common.cdi.LoggedIn;
 import org.fam.common.cdi.Player;
-import org.fam.ejb.model.*;
+import org.fam.ejb.model.FamAnswer;
+import org.fam.ejb.model.FamEvent;
+import org.fam.ejb.model.FamPlayer;
+import org.fam.ejb.model.FamTeam;
+import org.fam.ejb.model.FamUser;
 import org.fam.ejb.session.FamAnswerFacade;
 import org.fam.ejb.session.FamEventFacade;
 import org.fam.jsf.bean.util.JsfUtil;
@@ -16,7 +20,11 @@ import org.primefaces.event.DateSelectEvent;
 import org.primefaces.event.ScheduleEntryMoveEvent;
 import org.primefaces.event.ScheduleEntryResizeEvent;
 import org.primefaces.event.ScheduleEntrySelectEvent;
-import org.primefaces.model.*;
+import org.primefaces.model.DefaultScheduleEvent;
+import org.primefaces.model.DualListModel;
+import org.primefaces.model.LazyScheduleModel;
+import org.primefaces.model.ScheduleEvent;
+import org.primefaces.model.ScheduleModel;
 import org.slf4j.Logger;
 
 import javax.annotation.PostConstruct;
@@ -159,16 +167,12 @@ public class FamEventController extends AbstractController<FamEvent> implements 
                     e.setAllDay(evt.getAllDay());
                     e.setData(evt);
                     if (evt.getFamTypEvent().getCodTypEvent().equals("M")) {
-                        if (LOGGER.isDebugEnabled()) {
-                            LOGGER.debug("MatchEvent");
-                        }
+                        LOGGER.debug("MatchEvent");
                         e.setStyleClass("redEvent");
                     } else {
                         e.setStyleClass("greenEvent");
                     }
-                    if (LOGGER.isInfoEnabled()) {
-                        LOGGER.info("dayofWeek " + dtS.getDayOfWeek());
-                    }
+                    LOGGER.info("dayofWeek " + dtS.getDayOfWeek());
 
                     addEvent(e);
                 }

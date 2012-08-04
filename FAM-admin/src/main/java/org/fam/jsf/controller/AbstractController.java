@@ -43,7 +43,9 @@ public abstract class AbstractController<T> extends AbstractBackingBean {
     private List<T> lazyItems = new ArrayList<T>();
     //
 //    @URLQueryParameter("id")
-    Long id;
+    protected Long id;
+    //    @URLQueryParameter("page")
+    protected Integer page;
 
     public AbstractController() {
 //        init();
@@ -66,7 +68,9 @@ public abstract class AbstractController<T> extends AbstractBackingBean {
                                 String sortField,
                                 SortOrder sortOrder,
                                 Map<String, String> filters) {
-
+                if (first != 0) {
+                    page = (first / pageSize) + 1;
+                }
                 LOGGER.debug("Loading the lazy data between " + first + " " + pageSize);
 
                 try {
@@ -218,8 +222,9 @@ public abstract class AbstractController<T> extends AbstractBackingBean {
 
     //    @URLAction(phaseId = PhaseId.RENDER_RESPONSE, onPostback = false)
     public String loadAction() {
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug(this.getClass() + " - loadAction " + id);
+        LOGGER.debug(this.getClass() + " - loadAction " + id);
+        if (page == null) {
+            page = 1;
         }
         if (id != null) {
 
@@ -230,13 +235,14 @@ public abstract class AbstractController<T> extends AbstractBackingBean {
             } catch (Exception e) {
                 LOGGER.error("Load Action", e);
                 JsfUtil.addErrorMessage(e, "Load Action id=" + id);
-                return "pretty:";
+                return PRETTY_PREFIX;
             }
 
         } else {
             JsfUtil.addErrorMessage("Load Action id NULL");
-            return "pretty:";
+            return PRETTY_PREFIX;
         }
+
     }
 
     public String destroyAndView() {

@@ -89,9 +89,6 @@ public class FamEvent extends FamEntity implements Serializable {
      *
      */
     public static final String PROP_ID = "idEvent";
-    /**
-     *
-     */
     public static final String COL_ID = "id_event";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -191,14 +188,19 @@ public class FamEvent extends FamEntity implements Serializable {
      *
      */
     public static final String COL_ID_SEASON = "id_season";
-    /**
-     *
-     */
     public static final String PROP_SEASON = "famSeason";
     @JoinColumn(name = COL_ID_SEASON, referencedColumnName = FamSeason.COL_ID)
     @ManyToOne
     @NotNull
     private FamSeason famSeason;
+
+    @ManyToMany
+    @JoinTable(name = "fam_event_category",
+               joinColumns = {
+                              @JoinColumn(name = COL_ID)},
+               inverseJoinColumns = {
+                                     @JoinColumn(name = FamCategory.COL_ID)})
+    private List<FamCategory> famCategoryList;
 
     /**
      *

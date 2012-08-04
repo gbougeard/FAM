@@ -8,6 +8,8 @@ import org.fam.common.constant.FamConstantes;
 import org.fam.common.interceptor.AuditInterceptor;
 import org.fam.common.interceptor.LoggingInterceptor;
 import org.fam.ejb.model.FamAnswer;
+import org.fam.ejb.model.FamCategory;
+import org.fam.ejb.model.FamClub;
 import org.fam.ejb.model.FamEvent;
 import org.fam.ejb.model.FamPlayer;
 import org.fam.ejb.model.FamPlayerSeason;
@@ -240,7 +242,7 @@ public class FamAnswerFacade extends AbstractFacade<FamAnswer> {
 
         List<FamPlayer> players = new ArrayList<FamPlayer>();
 
-        if (event.getFamTeamList().contains(team) == false) {
+        if (!event.getFamTeamList().contains(team)) {
             throw new IllegalArgumentException("The team is not concerned by this event");
         }
 
@@ -248,6 +250,35 @@ public class FamAnswerFacade extends AbstractFacade<FamAnswer> {
 
         for (FamPlayerSeason ps : playerSeasonList) {
             players.add(ps.getFamPlayer());
+        }
+
+        for (FamAnswer a : answerList) {
+            players.remove(a.getFamPlayer());
+        }
+
+        return players;
+    }
+
+    public List<FamPlayer> findByEventAndNoAnswerAndClub(FamEvent event, FamClub club) {
+
+        List<FamAnswer> answerList = findAnswerByEvent(event);
+
+        List<FamPlayer> players = new ArrayList<FamPlayer>();
+
+        for (FamTeam team : event.getFamTeamList()) {
+            if (!(team.getFamClub().equals(club))) {
+                throw new IllegalArgumentException("The team is not concerned by this event");
+            }
+        }
+
+        List<FamPlayerSeason> playerSeasonList = ejbPlayerSeason.findByClubAndSeason(club, event.getFamSeason());
+
+        for (FamPlayerSeason ps : playerSeasonList) {
+            for (FamCategory category : event.getFamCategoryList()) {
+                if (ps.getFamCategoryList().contains(category)) {
+                    players.add(ps.getFamPlayer());
+                }
+            }
         }
 
         for (FamAnswer a : answerList) {
@@ -283,7 +314,7 @@ public class FamAnswerFacade extends AbstractFacade<FamAnswer> {
                 // il faut que pour la meme saison que l'event, l'équipe corresponde
                 // a celle recherchee
                 for (FamPlayerSeason ps : a.getFamPlayer().getFamPlayerSeasons()) {
-                    if (ps.getFamSeason().equals(season) && ps.getFamTeam().equals(team)) {
+                    if (ps.getFamSeason().equals(season)) {// && ps.getFamTeam().equals(team)) {
                         list.add(a);
                     }
                 }
@@ -295,19 +326,46 @@ public class FamAnswerFacade extends AbstractFacade<FamAnswer> {
         return list;
     }
 
+    private List<FamAnswer> getAnswerForClub(List<FamAnswer> lstAnswer, FamClub club) {
+
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info("getAnswerForTeam in " + lstAnswer.size());
+        }
+        List<FamAnswer> list = new ArrayList<FamAnswer>();
+
+        if (lstAnswer == null || lstAnswer.isEmpty()) {
+            return list;
+        } else {
+            FamEvent evt = lstAnswer.get(0).getFamEvent();
+            FamSeason season = evt.getFamSeason();
+            // On parcourt les reponses
+            for (FamAnswer a : lstAnswer) {
+                // il faut que pour la meme saison que l'event, l'équipe corresponde
+                // a celle recherchee
+                for (FamPlayerSeason ps : a.getFamPlayer().getFamPlayerSeasons()) {
+                    if (ps.getFamSeason().equals(season) && ps.getFamClub().equals(club)) {
+                        list.add(a);
+                    }
+                }
+            }
+        }
+        LOGGER.info(list.size() + "answers found for " + club);
+        return list;
+    }
+
     public List<FamAnswer> findAnswerYesByEventAndTeam(FamEvent event, FamTeam team) {
 
-        return getAnswerForTeam(findAnswerByEventAndInTypAnswer(event, FamConstantes.GRP_ANSWER_YES), team);
+        return getAnswerForClub(findAnswerByEventAndInTypAnswer(event, FamConstantes.GRP_ANSWER_YES), team.getFamClub());
     }
 
     public List<FamAnswer> findAnswerNoByEventAndTeam(FamEvent event, FamTeam team) {
 
-        return getAnswerForTeam(findAnswerByEventAndInTypAnswer(event, FamConstantes.GRP_ANSWER_NO), team);
+        return getAnswerForClub(findAnswerByEventAndInTypAnswer(event, FamConstantes.GRP_ANSWER_NO), team.getFamClub());
     }
 
     public List<FamAnswer> findAnswerMaybeByEventAndTeam(FamEvent event, FamTeam team) {
 
-        return getAnswerForTeam(findAnswerByEventAndInTypAnswer(event, FamConstantes.GRP_ANSWER_MAYBE), team);
+        return getAnswerForClub(findAnswerByEventAndInTypAnswer(event, FamConstantes.GRP_ANSWER_MAYBE), team.getFamClub());
     }
 
     /**

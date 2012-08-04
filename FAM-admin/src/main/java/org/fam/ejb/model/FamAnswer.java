@@ -8,7 +8,17 @@ package org.fam.ejb.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
@@ -21,22 +31,24 @@ import java.io.Serializable;
 @Entity
 @Table(name = FamAnswer.TABLE_NAME)
 @NamedQueries({
-        @NamedQuery(name = FamAnswer.FIND_ALL,
-                query = "SELECT f FROM FamAnswer f"),
-        @NamedQuery(name = FamAnswer.FIND_BY_ID_ANSWER,
-                query = "SELECT f FROM FamAnswer f WHERE f.idAnswer = :idAnswer"),
-        @NamedQuery(name = FamAnswer.FIND_BY_EVENT,
-                query = "SELECT f FROM FamAnswer f WHERE f.famEvent = :famEvent"),
-        @NamedQuery(name = FamAnswer.FIND_BY_EVENT_AND_TYP_ANSWER,
-                query = "SELECT f FROM FamAnswer f WHERE f.famEvent = :famEvent AND f.famTypAnswer = :famTypAnswer"),
-        @NamedQuery(name = FamAnswer.FIND_BY_EVENT_AND_IN_TYP_ANSWER,
-                query = "SELECT f FROM FamAnswer f JOIN f.famTypAnswer t WHERE f.famEvent = :famEvent AND t.grpTypAnswer = :grpTypAnswer "),
-        @NamedQuery(name = FamAnswer.FIND_BY_EVENT_AND_PLAYER,
-                query = "SELECT f FROM FamAnswer f WHERE f.famEvent = :famEvent AND f.famPlayer = :famPlayer"),
-        @NamedQuery(name = FamAnswer.FIND_BY_DT_CREAT,
-                query = "SELECT f FROM FamAnswer f WHERE f.dtCreat = :dtCreat"),
-        @NamedQuery(name = FamAnswer.FIND_BY_DT_MODIF,
-                query = "SELECT f FROM FamAnswer f WHERE f.dtModif = :dtModif")
+               @NamedQuery(name = FamAnswer.FIND_ALL,
+                           query = "SELECT f FROM FamAnswer f"),
+               @NamedQuery(name = FamAnswer.FIND_BY_ID_ANSWER,
+                           query = "SELECT f FROM FamAnswer f WHERE f.idAnswer = :idAnswer"),
+               @NamedQuery(name = FamAnswer.FIND_BY_EVENT,
+                           query = "SELECT f FROM FamAnswer f WHERE f.famEvent = :famEvent"),
+               @NamedQuery(name = FamAnswer.FIND_BY_EVENT_AND_TYP_ANSWER,
+                           query = "SELECT f FROM FamAnswer f WHERE f.famEvent = :famEvent AND f.famTypAnswer = :famTypAnswer" +
+                                    " ORDER BY f.famTypAnswer.libTypAnswer, f.famPlayer.lastName, f.famPlayer.firstName"),
+               @NamedQuery(name = FamAnswer.FIND_BY_EVENT_AND_IN_TYP_ANSWER,
+                           query = "SELECT f FROM FamAnswer f JOIN f.famTypAnswer t WHERE f.famEvent = :famEvent AND t.grpTypAnswer = :grpTypAnswer" +
+                                    " ORDER BY f.famTypAnswer.libTypAnswer, f.famPlayer.lastName, f.famPlayer.firstName"),
+               @NamedQuery(name = FamAnswer.FIND_BY_EVENT_AND_PLAYER,
+                           query = "SELECT f FROM FamAnswer f WHERE f.famEvent = :famEvent AND f.famPlayer = :famPlayer"),
+               @NamedQuery(name = FamAnswer.FIND_BY_DT_CREAT,
+                           query = "SELECT f FROM FamAnswer f WHERE f.dtCreat = :dtCreat"),
+               @NamedQuery(name = FamAnswer.FIND_BY_DT_MODIF,
+                           query = "SELECT f FROM FamAnswer f WHERE f.dtModif = :dtModif")
 })
 @XmlRootElement
 // @NamedQuery(name = "FamAnswer.findNotAnsweredByEventAndClub", 

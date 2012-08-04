@@ -117,7 +117,7 @@ public class LoginBean implements Serializable {
 
     public String login() {
         String message = "";
-        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        HttpServletRequest request = getRequest();
         try {
 
             //Login via the Servlet Context
@@ -157,6 +157,19 @@ public class LoginBean implements Serializable {
         }
         currentUser = null;
         FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "/index.xhtml");
+    }
+
+    public boolean isUserAdmin() {
+        return getRequest().isUserInRole("ADMIN");
+    }
+
+    public String logOut() {
+        getRequest().getSession().invalidate();
+        return "logout";
+    }
+
+    private HttpServletRequest getRequest() {
+        return (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
     }
 
 

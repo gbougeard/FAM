@@ -55,9 +55,23 @@ public class TeamComposition implements Serializable {
 
     public List<FamPlayer> getPreselectedLst() {
         preselectedLst.clear();
+
+        // On ajoute les joueurs déjà enregistrés :
+        for (FamMatchPlayer fmp : famMatchTeam.getFamMatchPlayerList()) {
+            if (fmp.getFamPlayer() != null) {
+                preselectedLst.add(fmp.getFamPlayer());
+
+            }
+        }
+        /* // On supprime maintenant des réponses
+        for(FamPlayer player : preselectedLst){
+            if (answerYes.)
+        }*/
         // Add selected Players from Yes
         for (FamAnswer answer : answerYes.getLstSelected()) {
-            preselectedLst.add(answer.getFamPlayer());
+            if (!preselectedLst.contains(answer.getFamPlayer())) {
+                preselectedLst.add(answer.getFamPlayer());
+            }
         }
         // Add selected Players from Maybe
         for (FamAnswer answer : answerMaybe.getLstSelected()) {

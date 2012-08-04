@@ -7,6 +7,8 @@ package org.fam.ejb.session;
 import org.fam.common.interceptor.AuditInterceptor;
 import org.fam.common.interceptor.LoggingInterceptor;
 import org.fam.ejb.exception.FamException;
+import org.fam.ejb.model.FamClub_;
+import org.fam.ejb.model.FamTeam_;
 import org.slf4j.Logger;
 
 import javax.annotation.PostConstruct;
@@ -426,8 +428,8 @@ public class AbstractFacade<T> implements Serializable {
                 LOGGER.debug("splitted " + Arrays.toString(splitted));
                 StringTokenizer token = new StringTokenizer(sortField);
                 LOGGER.debug("tokens " + token.countTokens());
-                path = root.get(token.nextToken(".")).get(token.nextToken("."));
-
+//                path = root.get(token.nextToken(".")).get(token.nextToken("."));
+                path = root.get(FamTeam_.famClub).get(FamClub_.libClub);
             } else {
                 path = root.get(sortField);
             }

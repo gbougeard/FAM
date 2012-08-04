@@ -5,7 +5,6 @@ import lombok.Setter;
 import org.fam.common.cdi.Loggable;
 import org.fam.common.cdi.LoggedIn;
 import org.fam.common.cdi.Player;
-import org.fam.ejb.model.FamAnswer;
 import org.fam.ejb.model.FamCard;
 import org.fam.ejb.model.FamEvent;
 import org.fam.ejb.model.FamFixture;
@@ -95,18 +94,6 @@ public class FamMatchComposeWizardController extends AbstractController<FamMatch
     private TeamComposition teamComposition;
     private List<FamMatchPlayer> famMatchPlayerList = new ArrayList<FamMatchPlayer>();
 
-    //    private List<FamAnswer> lstYes;
-//    private List<FamAnswer> lstNo;
-//    private List<FamAnswer> lstMaybe;
-//    private List<FamPlayer> lstPlayer;
-//    private FamAnswer[] selectedYes;
-//    private List<FamAnswer> selectedNo;
-//    private List<FamAnswer> selectedMaybe;
-//    private FamPlayer[] selectedPlayers;
-//    //
-//    private FamPlayer selectedPlayer;
-//    private List<FamPlayer> players;
-//    private List<FamPlayer> preselectedLst;
     //
     private List<FamGoal> lstGoal;
     private FamGoal famGoal;
@@ -117,17 +104,14 @@ public class FamMatchComposeWizardController extends AbstractController<FamMatch
     //
     private FamMatchTeam famMatchTeam;
     //
-//    private List<CanvasFormationItem> lstTarget = new ArrayList<CanvasFormationItem>();
-//    private List<CanvasFormationItem> lstSubs = new ArrayList<CanvasFormationItem>();
-    //    //
-//    private DualListModel<FamPlayer> dlmPlayer;
-//    //
     private int nbTit;
     private int nbSub;
     private int nbPlayers;
 
     private UIComponent userListComponent = null;
+    private UIComponent preselectedComponent = null;
     private UIComponent selectedComponent = null;
+    private UIComponent fieldComponent = null;
 
     private boolean skip;
 
@@ -251,36 +235,7 @@ public class FamMatchComposeWizardController extends AbstractController<FamMatch
     }
 
     public void loadForCompose() {
-
         super.loadAction();
-        //findTeam();
-
-//        lstTeamComposition = new ArrayList<TeamComposition>();
-//
-//        for (FamMatchTeam fmt : current.getFamMatchTeamList()) {
-//            lstTeamComposition.add(loadTeamComposition(fmt.getFamTeam()));
-//        }
-//        nbTit = current.getFamSeasonCompetition().getFamTypCompetition().getFamTypMatch().getNbPlayer();
-//        nbSub = current.getFamSeasonCompetition().getFamTypCompetition().getFamTypMatch().getNbSubstitute();
-//        nbPlayers = nbTit + nbSub;
-//        for (TeamComposition teamComposition : lstTeamComposition) {
-//            teamComposition.setNbPlayers(nbPlayers);
-//            teamComposition.setNbTit(nbTit);
-//            teamComposition.setNbSub(nbSub);
-//            teamComposition.genTarget();
-//        }
-
-//        for (int i = 1; i <= nbTit; i++) {
-//            CanvasFormationItem cfi = new CanvasFormationItem();
-//            cfi.setStrIdx(String.valueOf(i));
-//            lstTarget.add(cfi);
-//        }
-//        for (int i = nbTit + 1; i <= nbPlayers; i++) {
-//            CanvasFormationItem cfi = new CanvasFormationItem();
-//            cfi.setStrIdx(String.valueOf(i));
-//            lstSubs.add(cfi);
-//        }
-
     }
 
     public void loadTeamComposition() {
@@ -309,7 +264,8 @@ public class FamMatchComposeWizardController extends AbstractController<FamMatch
         LOGGER.info("no " + teamComposition.getAnswerNo().getLstAnswer().size());
         teamComposition.getAnswerMaybe().setLstAnswer(ejbAnswer.findAnswerMaybeByEventAndTeam(current.getFamEvent(), famTeam));
         LOGGER.info("maybe " + teamComposition.getAnswerMaybe().getLstAnswer().size());
-        teamComposition.getAnswerUngiven().setLstAnswer(ejbAnswer.findByEventAndNoAnswerAndTeam(current.getFamEvent(), famTeam));
+        teamComposition.getAnswerUngiven().setLstAnswer(ejbAnswer.findByEventAndNoAnswerAndClub(current.getFamEvent(), famTeam.getFamClub()));
+//        teamComposition.getAnswerUngiven().setLstAnswer(ejbAnswer.findByEventAndNoAnswerAndTeam(current.getFamEvent(), famTeam));
         LOGGER.info("nsp " + teamComposition.getAnswerUngiven().getLstAnswer().size());
 
         teamComposition.setPlayerDM(new FamPlayerDataModel((List<FamPlayer>) teamComposition.getAnswerUngiven().getLstAnswer()));
@@ -352,26 +308,8 @@ public class FamMatchComposeWizardController extends AbstractController<FamMatch
 
     public void onSelectTeam(SelectEvent event) {
         loadTeamComposition();
-//        int i = 1;
-//        for (FamPlayer p : dlmPlayer.getTarget()) {
-//            for (CanvasFormationItem cfi : lstTarget) {
-//                if (cfi.getStrIdx().equals(String.format("%d", i))) {
-//
-//                    cfi.setFamPlayer(p);
-//                    break;
-//                }
-//            }
-//            i++;
-//        }
     }
 
-    public void onPreselectDrop(DragDropEvent ddEvent) {
-
-//        FamPlayer player = ((FamPlayer) ddEvent.getData());
-//
-//        preselectedLst.add(player);
-//        lstPlayer.remove(player);
-    }
 
     public int coord(int coord) {
         return coord / 5;
@@ -383,14 +321,14 @@ public class FamMatchComposeWizardController extends AbstractController<FamMatch
         LOGGER.info("player");
         Integer num = (Integer) ddEvent.getComponent().getAttributes().get("num");
 
-        for (CanvasFormationItem cfi : teamComposition.getLstTarget()) {
+        /*for (CanvasFormationItem cfi : teamComposition.getLstTarget()) {
             if (cfi.getFamFormationItem() != null
                  && cfi.getFamFormationItem().getNumItem().equals(num)) {
 
                 cfi.setFamPlayer(player);
                 break;
             }
-        }
+        }*/
 //
 //        if (famMatchTeam == null) {
 //            famMatchTeam = teamComposition.getFamMatchTeam();
@@ -405,6 +343,15 @@ public class FamMatchComposeWizardController extends AbstractController<FamMatch
 //        }
 //        famMatchPlayerList = famMatchTeam.getFamMatchPlayerList();
 
+        // Le joueur est il deja dans la compo?
+        FamMatchPlayer fmpTemp = null;
+        for (FamMatchPlayer fmp : famMatchTeam.getFamMatchPlayerList()) {
+            if (fmp.getFamPlayer() != null && fmp.getFamPlayer().equals(player)) {
+                fmpTemp = fmp;
+                break;
+            }
+        }
+
         for (FamMatchPlayer fmp : famMatchTeam.getFamMatchPlayerList()) {
             if (fmp.getNum().equals(num)) {
                 if (fmp.getFamPlayer() == null) {
@@ -416,18 +363,23 @@ public class FamMatchComposeWizardController extends AbstractController<FamMatch
                         // Un autre joueur est deja a ce poste
                         FamPlayer tmp = fmp.getFamPlayer();
                         fmp.setFamPlayer(player);
+                        // Si le nouveau joueur etait déjà dans la compo on les intervertit
+                        if (fmpTemp != null) {
+                            fmpTemp.setFamPlayer(tmp);
+                        }
                     }
                 }
                 break;
             }
         }
 
-        for (CanvasFormationItem cfi : teamComposition.getLstTarget()) {
+        /*for (CanvasFormationItem cfi : teamComposition.getLstTarget()) {
             if (cfi.getStrIdx().equals(String.valueOf(num))) {
                 cfi.setFamPlayer(player);
                 break;
             }
-        }
+        }*/
+        teamComposition.genTarget();
     }
 
     public void onSubDrop(DragDropEvent ddEvent) {
@@ -447,6 +399,15 @@ public class FamMatchComposeWizardController extends AbstractController<FamMatch
             }
         }
 
+        // Le joueur est il deja dans la compo?
+        FamMatchPlayer fmpTemp = null;
+        for (FamMatchPlayer fmp : famMatchTeam.getFamMatchPlayerList()) {
+            if (fmp.getFamPlayer() != null && fmp.getFamPlayer().equals(player)) {
+                fmpTemp = fmp;
+                break;
+            }
+        }
+
         Integer num = Integer.parseInt(strNum);
         for (FamMatchPlayer fmp : famMatchTeam.getFamMatchPlayerList()) {
             if (fmp.getNum().equals(num)) {
@@ -459,6 +420,10 @@ public class FamMatchComposeWizardController extends AbstractController<FamMatch
                         // Un autre joueur est deja a ce poste
                         FamPlayer tmp = fmp.getFamPlayer();
                         fmp.setFamPlayer(player);
+                        // Si le nouveau joueur etait déjà dans la compo on les intervertit
+                        if (fmpTemp != null) {
+                            fmpTemp.setFamPlayer(tmp);
+                        }
                     }
                 }
                 break;
@@ -469,17 +434,7 @@ public class FamMatchComposeWizardController extends AbstractController<FamMatch
 
     public void deselect(FamPlayer player) {
 
-
     }
-
-    public void onPreselectYesDrop(DragDropEvent ddEvent) {
-
-        FamAnswer answer = ((FamAnswer) ddEvent.getData());
-
-//        preselectedLst.add(answer.getFamPlayer());
-//        lstYes.remove(answer);
-    }
-
 
     public void save(ActionEvent actionEvent) {
         //Persist user
@@ -503,7 +458,7 @@ public class FamMatchComposeWizardController extends AbstractController<FamMatch
             LOGGER.error("saveLineup", e);
             JsfUtil.addErrorMessage(e.getMessage(), "saveLineup");
         }
-        return "pretty:";
+        return PRETTY_PREFIX;
     }
 
 
