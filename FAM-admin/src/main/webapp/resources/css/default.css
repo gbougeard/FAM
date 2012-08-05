@@ -89,6 +89,10 @@ Pour effacer la bordure des layout
     font-weight: bold;
 }
 
+.winner {
+    font-weight: bold;
+}
+
 body {
     margin: 0px;
     padding: 0;

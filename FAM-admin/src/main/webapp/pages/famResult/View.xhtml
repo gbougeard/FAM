@@ -1,0 +1,121 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+    <ui:define name="title">
+        <h:outputText value="#{bundle.Results}"/>
+    </ui:define>
+    <ui:define name="body">
+        <p:panel header="#{bundle.Results}">
+            <h:form id="frmResult">
+                <h:panelGrid columns="2" cellpadding="10" columnClasses="verticalTop,verticalTop">
+                    <!--@elvariable id="node" type="org.fam.ejb.model.FamSeasonCompetition"-->
+                    <p:selectOneListbox id="formation"
+                                        value="#{famResultController.selectedCompetition}"
+                                        converter="competConverter"
+                                        style="width:200px;">
+                        <!--<f:selectItem itemLabel="Formation" itemValue=""/>-->
+                        <!--                                        noSelectionOption="true"/>-->
+                        <f:selectItems value="#{cacheBean.listSeasonCompetition}"
+                                       var="f"
+                                       itemLabel="#{f.displayName}"
+                                       itemValue="#{f}"/>
+                        <!--                    <p:ajax event="blur" update="@form"/>-->
+                        <!--                                        listener="#{famMatchComposeWizardController.changeFormation}"/>-->
+                        <p:ajax event="valueChange"
+                                listener="#{famResultController.onSelect}"
+                                update="dtb"
+                                partialSubmit="true"/>
+                    </p:selectOneListbox>
+
+                    <!--@elvariable id="item" type="org.fam.ejb.model.FamMatch"-->
+                    <p:dataTable id="dtb"
+                                 value="#{famResultController.lstMatch}"
+                                 lazy="true"
+                                 var="item"
+                                 emptyMessage="#{bundle.NoDataFound}"
+                            >
+
+                        <f:facet name="header">
+
+                        </f:facet>
+                        <!--                    <p:column sortBy="#{item.idMatch}"
+                                  filterBy="#{item.idMatch}"
+                                  headerText="#{bundle.ListFamMatchTitle_idMatch}" >
+                            <h:outputText value="#{item.idMatch}"/>
+                        </p:column>-->
+                        <p:column sortBy="#{item.famEvent.dtEvent}"
+                                  filterBy="#{item.famEvent.dtEvent}"
+                                  headerText="#{bundle.ListFamMatchTitle_famEvent}">
+                            <h:outputText value="#{item.famEvent.dtEvent}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="#{cacheBean.timeZone}"/>
+                            </h:outputText>
+                        </p:column>
+
+                        <!-- <p:column sortBy="#{item.famEvent.libEvent}"
+                                  filterBy="#{item.famEvent.libEvent}"
+                                  headerText="#{bundle.ListFamMatchTitle_famEvent}">
+                            <h:outputText value="#{item.famEvent.libEvent}"/>
+                        </p:column>
+                        <p:column sortBy="#{item.famEvent.famEventStatus.libEventStatus}"
+                                  filterBy="#{item.famEvent.famEventStatus.libEventStatus}"
+                                  headerText="#{bundle.ListFamMatchTitle_famEvent}"
+                                  styleClass="#{item.famEvent.famEventStatus.libEventStatus}">
+                            <h:outputText value="#{item.famEvent.famEventStatus.libEventStatus}"/>
+                        </p:column>-->
+                        <!-- <p:column sortBy="#{item.famSeasonCompetition.displayName}"
+                                  filterBy="#{item.famSeasonCompetition.displayName}"
+                                  headerText="#{bundle.ListFamMatchTitle_famSeasonCompetition}">
+                            <h:outputText value="#{item.famSeasonCompetition.displayName}"/>
+                        </p:column>-->
+                        <p:column sortBy="#{item.famFixture.libFixture}"
+                                  filterBy="#{item.famFixture.libFixture}"
+                                  headerText="#{bundle.ListFamMatchTitle_famFixture}">
+                            <h:outputText value="#{item.famFixture.libFixture}"/>
+                        </p:column>
+                        <p:column headerText="#{bundle.ListFamMatchTitle_famHomeTeam}">
+                            <h:outputText value="#{item.homeTeam.famTeam.libTeam}"
+                                          styleClass="#{item.homeTeam.goalScored > item.awayTeam.goalScored ? 'winner' : item.homeTeam.goalScored == item.awayTeam.goalScored ? 'draw' : 'loser'}"/>
+                        </p:column>
+                        <p:column>
+                            <h:outputText value="#{item.homeTeam.goalScored}"/>
+                        </p:column>
+                        <p:column>
+                            <h:outputText value="#{item.awayTeam.goalScored}"/>
+                        </p:column>
+                        <p:column headerText="#{bundle.ListFamMatchTitle_famAwayTeam}">
+                            <h:outputText value="#{item.awayTeam.famTeam.libTeam}"
+                                          styleClass="#{item.awayTeam.goalScored > item.homeTeam.goalScored ? 'winner' : item.homeTeam.goalScored == item.awayTeam.goalScored ? 'draw' : 'loser'}"/>
+                        </p:column>
+                        <!--                    <p:column sortBy="#{item.dtCreat}"
+                                  filterBy="#{item.dtCreat}"
+                                  headerText="#{bundle.ListFamMatchTitle_dtCreat}" >
+                            <h:outputText value="#{item.dtCreat}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column sortBy="#{item.dtModif}"
+                                  filterBy="#{item.dtModif}"
+                                  headerText="#{bundle.ListFamMatchTitle_dtModif}" >
+                            <h:outputText value="#{item.dtModif}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>-->
+                        <f:facet name="footer">
+
+                        </f:facet>
+                    </p:dataTable>
+
+                    <!-- <p:commandButton value="Display Selected"
+                    actionListener="#{competitionSelectController.displaySelectedSingle}"
+                    id="btnDisplay"/>-->
+
+                </h:panelGrid>
+            </h:form>
+        </p:panel>
+    </ui:define>
+</ui:composition>
+

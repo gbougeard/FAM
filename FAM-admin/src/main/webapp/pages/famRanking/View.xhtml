@@ -1,0 +1,67 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="/common/template.xhtml">
+    <ui:define name="title">
+        <h:outputText value="#{bundle.Rankings}"/>
+    </ui:define>
+    <ui:define name="body">
+        <p:panel header="#{bundle.Rankings}">
+            <h:form>
+                <h:panelGrid columns="2" cellpadding="10" columnClasses="verticalTop,verticalTop">
+                    <!--@elvariable id="node" type="org.fam.ejb.model.FamSeasonCompetition"-->
+                    <p:selectOneListbox id="formation"
+                                        value="#{famRankingController.selectedCompetition}"
+                                        converter="competConverter"
+                                        style="width:200px;height:300px;">
+                        <!--<f:selectItem itemLabel="Formation" itemValue=""/>-->
+                        <!--                                        noSelectionOption="true"/>-->
+                        <f:selectItems value="#{cacheBean.listSeasonCompetition}"
+                                       var="f"
+                                       itemLabel="#{f.displayName}"
+                                       itemValue="#{f}"
+                                       itemDisabled="#{not f.famTypCompetition.isChampionship}"
+                                />
+                        <!--                    <p:ajax event="blur" update="@form"/>-->
+                        <!--                                        listener="#{famMatchComposeWizardController.changeFormation}"/>-->
+                        <p:ajax event="valueChange"
+                                listener="#{famRankingController.onSelect}"
+                                update="dtb"
+                                partialSubmit="true"/>
+                    </p:selectOneListbox>
+
+                    <!--@elvariable id="item" type="org.fam.ejb.model.VRankings"-->
+                    <p:dataTable id="dtb"
+                                 value="#{famRankingController.lstRanking}"
+                                 var="item"
+                                 type="ordered"
+                                 rowIndexVar="rowIndex"
+                            >
+                        <p:column> <h:outputText value="#{rowIndex+1} "/></p:column>
+                        <p:column headerText="Equipe"> <h:outputText value="#{item.famTeam.libTeam} "/></p:column>
+                        <p:column headerText="Pts"> <h:outputText value="#{item.points}"/></p:column>
+                        <p:column headerText="J."> <h:outputText value="#{item.played}"/></p:column>
+                        <p:column headerText="G."><h:outputText value="#{item.victory}"/></p:column>
+                        <p:column headerText="N."><h:outputText value=" #{item.draw}"/></p:column>
+                        <p:column headerText="P"> <h:outputText value=" #{item.defeat}"/></p:column>
+                        <p:column headerText="p."><h:outputText value=" #{item.goalScored}"/></p:column>
+                        <p:column headerText="c."> <h:outputText value="#{item.goalShipped}"/></p:column>
+                        <p:column headerText="Diff."> <h:outputText
+                                value="#{item.goalScored - item.goalShipped}"/></p:column>
+
+
+                    </p:dataTable>
+
+                    <!-- <p:commandButton value="Display Selected"
+                    actionListener="#{competitionSelectController.displaySelectedSingle}"
+                    id="btnDisplay"/>-->
+
+                </h:panelGrid>
+            </h:form>
+        </p:panel>
+    </ui:define>
+</ui:composition>
+

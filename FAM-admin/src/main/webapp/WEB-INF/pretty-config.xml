@@ -29,6 +29,17 @@
         <view-id value="/signup.xhtml"/>
     </url-mapping>
 
+    <url-mapping id="rankings">
+        <pattern value="/rankings/"/>
+        <view-id value="/pages/famRanking/View.xhtml"/>
+        <!--<action>#{login.reloadUser}</action>-->
+    </url-mapping>
+
+    <url-mapping id="results">
+        <pattern value="/results/"/>
+        <view-id value="/pages/famResult/View.xhtml"/>
+        <!--<action>#{login.reloadUser}</action>-->
+    </url-mapping>
     <url-mapping id="myAccount">
         <pattern value="/auth/myAccount/"/>
         <view-id value="/myAccount.xhtml"/>

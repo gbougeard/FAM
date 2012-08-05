@@ -10,7 +10,7 @@
         >
 <ui:composition>
 <!--@elvariable id="bean" type="org.fam.ejb.model.FamPlayer"-->
-<h:panelGrid columns="2">
+<h:panelGrid columns="3" columnClasses="verticalTop,verticalTop,verticalTop">
 
     <h:graphicImage id="photo"
                     library="images/players"
@@ -19,7 +19,6 @@
                     width="120"
                     style="border: 4px double #6F6E6E;"
             />
-
     <h:panelGrid columns="3">
         <p:outputLabel value="#{bundle.EditFamUserLabel_firstName}" for="firstName"/>
         <p:inputText id="firstName"
@@ -52,44 +51,43 @@
             <p:ajax event="blur" update="msg_dtBirth" partialSubmit="true"/>
         </p:calendar>
         <p:message id="msg_dtBirth" for="dtBirth"/>
+    </h:panelGrid>
+    <h:panelGrid columns="3" rendered="#{not empty bean.idPlayer}">
+        <p:outputLabel value="Club actuel" for="famClub"/>
+        <p:selectOneMenu id="famClub"
+                         value="#{bean.currentClub}"
+                         style="width:200px;"
+                         converter="clubConverter"
+                >
+            <f:selectItem itemLabel="Club" itemValue=""/>
+            <!--                              noSelectionOption="true"/>-->
+            <f:selectItems value="#{cacheBean.listClub}"
+                           var="n"
+                           itemValue="#{n}"
+                           itemLabel="#{n.libClub}"/>
+            <p:ajax process="@this" update="msg_famClub famTeam" partialSubmit="true"/>
+        </p:selectOneMenu>
+        <p:message id="msg_famClub" for="famClub"/>
 
-        <h:panelGrid columns="3" rendered="#{not empty bean.idPlayer}">
-            <p:outputLabel value="Club actuel" for="famClub"/>
-            <p:selectOneMenu id="famClub"
-                             value="#{bean.currentClub}"
-                             style="width:200px;"
-                             converter="clubConverter"
-                    >
-                <f:selectItem itemLabel="Club" itemValue=""/>
-                <!--                              noSelectionOption="true"/>-->
-                <f:selectItems value="#{cacheBean.listClub}"
-                               var="n"
-                               itemValue="#{n}"
-                               itemLabel="#{n.libClub}"/>
-                <p:ajax process="@this" update="msg_famClub famTeam" partialSubmit="true"/>
-            </p:selectOneMenu>
-            <p:message id="msg_famClub" for="famClub"/>
 
-
-            <p:outputLabel value="Equipe actuelle" for="famTeam"
-                    />
-            <p:selectOneMenu id="famTeam"
-                             value="#{bean.currentTeam}"
-                             converter="teamConverter"
-                             style="width:200px;"
-                    >
-                <f:selectItem itemLabel="Team"
-                              itemValue=""/>
-                <!--                              noSelectionOption="true"/>-->
-                <f:selectItems value="#{bean.currentClub.famTeamList}"
-                               var="t"
-                               itemValue="#{t}"
-                               itemLabel="#{t.libTeam}"/>
-                <p:ajax event="blur" update="msg_famTeam" partialSubmit="true"/>
-            </p:selectOneMenu>
-            <p:message id="msg_famTeam" for="famTeam"
-                    />
-        </h:panelGrid>
+        <p:outputLabel value="Equipe actuelle" for="famTeam"
+                />
+        <p:selectOneMenu id="famTeam"
+                         value="#{bean.currentTeam}"
+                         converter="teamConverter"
+                         style="width:200px;"
+                >
+            <f:selectItem itemLabel="Team"
+                          itemValue=""/>
+            <!--                              noSelectionOption="true"/>-->
+            <f:selectItems value="#{bean.currentClub.famTeamList}"
+                           var="t"
+                           itemValue="#{t}"
+                           itemLabel="#{t.libTeam}"/>
+            <p:ajax event="blur" update="msg_famTeam" partialSubmit="true"/>
+        </p:selectOneMenu>
+        <p:message id="msg_famTeam" for="famTeam"
+                />
     </h:panelGrid>
 </h:panelGrid>
 

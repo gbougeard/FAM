@@ -36,8 +36,10 @@ import java.util.List;
 @Entity
 @Table(name = FamSeasonCompetition.TABLE_NAME)
 @NamedQueries({
-        @NamedQuery(name = "FamSeasonCompetition.findAll", query = "SELECT f FROM FamSeasonCompetition f ORDER BY f.famSeason.libSeason DESC"),
-        @NamedQuery(name = "FamSeasonCompetition.findByIdSeasonCompetition", query = "SELECT f FROM FamSeasonCompetition f WHERE f.idSeasonCompetition = :idSeasonCompetition")
+               @NamedQuery(name = "FamSeasonCompetition.findAll",
+                           query = "SELECT f FROM FamSeasonCompetition f ORDER BY f.famSeason.libSeason DESC"),
+               @NamedQuery(name = "FamSeasonCompetition.findByIdSeasonCompetition",
+                           query = "SELECT f FROM FamSeasonCompetition f WHERE f.idSeasonCompetition = :idSeasonCompetition")
 })
 public class FamSeasonCompetition extends FamEntity implements Serializable {
 
@@ -92,10 +94,10 @@ public class FamSeasonCompetition extends FamEntity implements Serializable {
     //
     @ManyToMany
     @JoinTable(name = FamCompetitionTeam.TABLE_NAME,
-            joinColumns = {
-                    @JoinColumn(name = COL_ID)},
-            inverseJoinColumns = {
-                    @JoinColumn(name = FamTeam.COL_ID)})
+               joinColumns = {
+                              @JoinColumn(name = COL_ID)},
+               inverseJoinColumns = {
+                                     @JoinColumn(name = FamTeam.COL_ID)})
     private List<FamTeam> famTeamList;
     //
     /**
