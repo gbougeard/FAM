@@ -98,11 +98,11 @@
         <!--<style type="text/css" media="screen">@import "${request.contextPath}/css/icons.css";</style>-->
         <h:outputStylesheet name="default.css" library="css"/>
 
-        <!--<h:outputStylesheet name="silk-min.css" library="css"/>-->
+        <h:outputStylesheet name="silk-min.css" library="css"/>
         <!--<h:outputStylesheet name="fugue-min.css" library="css"/>-->
         <f:facet name="last">
-            <link rel="stylesheet" type="text/css"
-                  href="#{facesContext.externalContext.requestContextPath}/resources/css/silk-min.css"/>
+            <!--<link rel="stylesheet" type="text/css"
+                  href="#{facesContext.externalContext.requestContextPath}/resources/css/silk-min.css"/>-->
             <link rel="stylesheet" type="text/css"
                   href="#{facesContext.externalContext.requestContextPath}/resources/css/fugue-min.css"/>
         </f:facet>
@@ -112,7 +112,6 @@
                           position="north"
                           size="80">
                 <ui:include src="banner.xhtml"/>
-
 
                 <!--                    <p:separator/>-->
                 <!--                menu-->
