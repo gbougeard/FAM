@@ -1,0 +1,183 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.fam</groupId>
+        <artifactId>FAM-parent</artifactId>
+        <version>1.0</version>
+    </parent>
+
+    <groupId>org.fam</groupId>
+    <artifactId>FAM-atdd</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>Tests fonctionnels</name>
+
+    <properties>
+
+        <version.slf4j>1.6.5</version.slf4j>
+        <version.junit>4.8.2</version.junit>
+        <version.guava>12.0.1</version.guava>
+        <version.datafactory>0.8</version.datafactory>
+        <version.thucydides>0.9.12</version.thucydides>
+        <thucydides.easyb.version>0.4.0</thucydides.easyb.version>
+        <thucydides.jira.version>0.9.12</thucydides.jira.version>
+        <!--<thucydides.outputDirectory>./reports</thucydides.outputDirectory>-->
+
+        <!--<webdriver.driver>firefox</webdriver.driver>-->
+        <!--<webdriver.base.url>http://localhost:8080/FAM-admin/</webdriver.base.url>-->
+        <!--<refuse.untrusted.certificates>false</refuse.untrusted.certificates>-->
+        <!--<firefox.profile.path>./firefox.profile</firefox.profile.path>-->
+
+
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${version.guava}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-all</artifactId>
+            <version>1.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.thucydides</groupId>
+            <artifactId>thucydides-junit</artifactId>
+            <version>${version.thucydides}</version>
+        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>net.thucydides.easyb</groupId>-->
+        <!--<artifactId>thucydides-easyb-plugin</artifactId>-->
+        <!--<version>${version.thucydides}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>net.thucydides.plugins.jira</groupId>-->
+        <!--<artifactId>thucydides-jira-plugin</artifactId>-->
+        <!--<version>${thucydides.jira.version}</version>-->
+        <!--<scope>test</scope>-->
+        <!--</dependency>-->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${version.slf4j}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${version.slf4j}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${version.junit}</version>
+            <scope>test</scope>
+        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>org.seleniumhq.selenium</groupId>-->
+        <!--<artifactId>selenium-java</artifactId>-->
+        <!--<version>${version.selenium}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>mysql</groupId>-->
+        <!--<artifactId>mysql-connector-java</artifactId>-->
+        <!--<scope>provided</scope>-->
+        <!--</dependency>-->
+        <dependency>
+            <groupId>org.fluttercode.datafactory</groupId>
+            <artifactId>datafactory</artifactId>
+            <version>${version.datafactory}</version>
+            <type>jar</type>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>net.thucydides.maven.plugins</groupId>
+                <artifactId>maven-thucydides-plugin</artifactId>
+                <version>${version.thucydides}</version>
+                <!--<configuration>-->
+                    <!--<jiraUrl>http://backlog</jiraUrl>-->
+                <!--</configuration>-->
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${version.maven.surefire.plugin}</version>
+                <configuration>
+                    <!--<includes>
+                        <include>**/*StoryTest.java</include>
+                    </includes>-->
+                    <!--<argLine>-Xmx1024m</argLine>-->
+                    <systemPropertyVariables>
+                        <!--<webdriver.driver>${webdriver.driver}</webdriver.driver>-->
+                        <thucydides.browser.width>1200</thucydides.browser.width>
+                        <!--<thucydides.outputDirectory>${thucydides.outputDirectory}</thucydides.outputDirectory>-->
+                        <!--<webdriver.firefox.profile>${firefox.profile.path}</webdriver.firefox.profile>-->
+                        <!--<webdriver.base.url>${webdriver.base.url}</webdriver.base.url>-->
+                        <!--<refuse.untrusted.certificates>${refuse.untrusted.certificates}</refuse.untrusted.certificates>-->
+                        <!--<jira.url>http://backlog</jira.url>
+                        <jira.username>${jira.demo.user}</jira.username>
+                        <jira.password>${jira.demo.password}</jira.password>
+                        <thucydides.public.url>http://localhost:9000</thucydides.public.url>-->
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
+
+            <!--<plugin>-->
+            <!--<groupId>org.easyb</groupId>-->
+            <!--<artifactId>maven-easyb-plugin</artifactId>-->
+            <!--<version>1.4</version>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<goals>-->
+            <!--<goal>test</goal>-->
+            <!--</goals>-->
+            <!--</execution>-->
+            <!--</executions>-->
+            <!--<dependencies>-->
+            <!--<dependency>-->
+            <!--<groupId>org.codehaus.groovy</groupId>-->
+            <!--<artifactId>groovy-all</artifactId>-->
+            <!--<version>1.8.5</version>-->
+            <!--</dependency>-->
+            <!--</dependencies>-->
+            <!--<configuration>-->
+            <!--<storyType>html</storyType>-->
+            <!--<storyReport>target/easyb/easyb.html</storyReport>-->
+            <!--<easybTestDirectory>src/test/stories</easybTestDirectory>-->
+            <!--<jvmArguments>-Dwebdriver.driver=${webdriver.driver}</jvmArguments>-->
+            <!--</configuration>-->
+            <!--</plugin>-->
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>maven2</id>
+            <activation>
+                <file>
+                    <missing>${basedir}</missing>
+                </file>
+            </activation>
+            <reporting>
+                <plugins>
+                    <plugin>
+                        <groupId>net.thucydides.maven.plugins</groupId>
+                        <artifactId>maven-thucydides-plugin</artifactId>
+                        <version>${version.thucydides}</version>
+                    </plugin>
+                </plugins>
+            </reporting>
+        </profile>
+    </profiles>
+
+</project>
