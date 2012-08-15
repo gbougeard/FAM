@@ -25,7 +25,7 @@
         <!--<thucydides.outputDirectory>./reports</thucydides.outputDirectory>-->
 
         <!--<webdriver.driver>firefox</webdriver.driver>-->
-        <!--<webdriver.base.url>http://localhost:8080/FAM-admin/</webdriver.base.url>-->
+        <webdriver.base.url>http://localhost:8080/</webdriver.base.url>
         <!--<refuse.untrusted.certificates>false</refuse.untrusted.certificates>-->
         <!--<firefox.profile.path>./firefox.profile</firefox.profile.path>-->
 
@@ -122,7 +122,7 @@
                         <thucydides.browser.width>1200</thucydides.browser.width>
                         <!--<thucydides.outputDirectory>${thucydides.outputDirectory}</thucydides.outputDirectory>-->
                         <!--<webdriver.firefox.profile>${firefox.profile.path}</webdriver.firefox.profile>-->
-                        <!--<webdriver.base.url>${webdriver.base.url}</webdriver.base.url>-->
+                        <webdriver.base.url>${webdriver.base.url}</webdriver.base.url>
                         <!--<refuse.untrusted.certificates>${refuse.untrusted.certificates}</refuse.untrusted.certificates>-->
                         <!--<jira.url>http://backlog</jira.url>
                         <jira.username>${jira.demo.user}</jira.username>

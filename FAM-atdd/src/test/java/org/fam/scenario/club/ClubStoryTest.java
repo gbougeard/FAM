@@ -48,7 +48,7 @@ public class ClubStoryTest {
     @Managed
     public WebDriver webdriver;
 
-    @ManagedPages(defaultUrl = "http://ks305091.kimsufi.com/FAM-admin/")
+    @ManagedPages(defaultUrl = "#HOST/FAM-admin/")
     public Pages pages;
 
     @Steps
@@ -57,8 +57,13 @@ public class ClubStoryTest {
     public CommonSteps commonSteps;
 
     @Test
+    public void open_agenda(){
+        commonSteps.click_menu_agenda();
+    }
+
+    @Test
     public void test1() {
-        commonSteps.open_home_page();
+//        commonSteps.open_home_page();
         commonSteps.click_menu_club();
 
 

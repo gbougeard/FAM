@@ -35,7 +35,7 @@ public class CommonSteps extends ScenarioSteps {
     @Step
     public void open_home_page() {
 
-        onHomePage().open("home");
+        onHomePage().open();
     }
 
 
@@ -43,6 +43,11 @@ public class CommonSteps extends ScenarioSteps {
     public void click_menu_club() {
 
         onHomePage().clickMenuClub();
+    }
+ @Step
+    public void click_menu_agenda() {
+
+        onHomePage().clickMenuAgenda();
     }
 
 }

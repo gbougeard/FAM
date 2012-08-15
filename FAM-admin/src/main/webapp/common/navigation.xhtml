@@ -12,7 +12,8 @@
                                  rendered="#{login.loggedIn}"
                                  icon="ui-icon icon-home"
                                  value=" My Account"/>
-                <p:commandButton value="Agenda"
+                <p:commandButton id="btnAgenda"
+                                 value="Agenda"
                                  action="pretty:agenda"
                                  icon="ui-icon icon-date"
                                  immediate="true"/>
@@ -25,8 +26,10 @@
                                  icon="ui-icon"
                                  immediate="true"/>
                 <!--                <p:submenu label="Generated">-->
-                <p:menuButton value="Commun">
-                    <p:menuitem value="FamClub"
+                <p:menuButton id="btnCommon"
+                              value="Commun">
+                    <p:menuitem id="btnClub"
+                                value="FamClub"
                                 immediate="true"
                                 icon="ui-icon ui-icon-close"
                                 action="pretty:listClub"/>
